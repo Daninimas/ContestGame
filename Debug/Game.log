@@ -1,0 +1,3 @@
+﻿  GameEngine.cpp
+D:\ContestGame\Game\src\eng\GameEngine.cpp(22,15): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+  Game.vcxproj -> D:\ContestGame\Game\Debug\Game.exe

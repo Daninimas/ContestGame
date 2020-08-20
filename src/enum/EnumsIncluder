@@ -1,0 +1,3 @@
+#include <enum/GameState.hpp>
+#include <enum/GameObjectType.hpp>
+#include <enum/EntityType.hpp>

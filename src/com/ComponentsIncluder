@@ -1,0 +1,3 @@
+//DONT FORGET INCLUDE NEW COMPONENT IN ERASE ENTITY (entityManager.cpp)
+
+#include <com/SituationComponent.hpp>
