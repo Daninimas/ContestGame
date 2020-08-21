@@ -33,22 +33,31 @@ EntityManager::~EntityManager() {}
 
 
 
-/*
-int EntityManager::createEntity (GameEngine &gameContext, EntityType eType, float x, float y, float z, GameObjectType goType) {
-    int entityId = 0;
-    switch(eType) {
-    case PLAYER: {
-        entityId = createPlayer(gameContext, x, y, z, goType);
-        break;
-    }
-    case ENEMY: {
-        entityId = createEnemy(gameContext, x, y, z, goType);
-        break;
-    }
-    }//END SWITCH
+
+int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float r, GameObjectType goType) {
+    int entityId = Entity::getCurrentId();
+    //gameContext.playerId = entityId;
+
+
+    SituationComponent& situation = createComponent<SituationComponent>(entityId);
+    DrawableComponent& drawableComp = createComponent<DrawableComponent>(entityId);
+
+    //######### DATA ########//
+    situation.x = x;
+    situation.y = y;
+    situation.rotation = r;
+
+    drawableComp.sprite = "./TaOmA.png";
+
+    //######### RENDER ########//
+    gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
+
+
+    //######### CREATE ########//
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(PLAYER, goType));
     return entityId;
 }
-*/
+
 
 
 Entity &EntityManager::getEntity(int id) {

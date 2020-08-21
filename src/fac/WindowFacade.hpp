@@ -23,4 +23,6 @@ public:
     virtual void addColorToEntity(int id, std::array<float, 3> color) = 0;
     virtual size_t countRenderNodes() const = 0;
     virtual bool existsNode(int id) const = 0;
+    virtual bool existsImage(std::string path) const = 0;
+    virtual void addImage(std::string path) = 0;
 };

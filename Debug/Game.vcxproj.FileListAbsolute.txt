@@ -1,2 +1,4 @@
 D:\ContestGame\Game\Debug\Game.exe
 D:\ContestGame\Game\Debug\Game.pdb
+D:\ContestGame\Debug\Game.exe
+D:\ContestGame\Debug\Game.pdb

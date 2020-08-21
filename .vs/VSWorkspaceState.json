@@ -2,8 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\enum"
+    "\\src\\com",
+    "\\src\\enum",
+    "\\src\\man",
+    "\\src\\sys"
   ],
-  "SelectedNode": "\\src\\enum\\EnumsIncluder",
+  "SelectedNode": "\\src\\com\\SituationComponent.hpp",
   "PreviewInSolutionExplorer": false
 }

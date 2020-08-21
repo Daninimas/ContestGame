@@ -5,6 +5,7 @@ class GameEngine;
 
 #include <tools/Storage.hpp>
 #include <com/ComponentsIncluder>
+#include <enum/EnumsIncluder>
 #include <ent/Entity.hpp>
 
 
@@ -70,7 +71,7 @@ public:
     //                ENTITY CREATION               //
     //////////////////////////////////////////////////
 
-    //int createEntity           (GameEngine &gameContext, EntityType eType, float x, float y, float z, GameObjectType goType = NONE);
+    int createPlayer(GameEngine& gameContext, float x, float y, float r, GameObjectType goType = NONE);
 
 
     //////////////////////////////////////////////////

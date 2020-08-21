@@ -26,10 +26,14 @@ public:
     void addColorToEntity(int id, std::array<float, 3> color) override;
     size_t countRenderNodes() const override;
     bool existsNode(int id) const override;
+    bool existsImage(std::string path) const override;
+    void addImage(std::string path) override;
 
 private:
-    std::unique_ptr<sf::Window> device;
-    //std::unordered_map<int, pap::SceneNode*> nodeMap;
+    std::unique_ptr<sf::RenderWindow> device;
+    std::unordered_map<int, sf::Sprite> nodeMap;
+    std::unordered_map<std::string, sf::Image> imageMap;
+    //std::unordered_map<std::string, sf::Texture> textureMap;
 
     bool fullscreen = true;
 };
