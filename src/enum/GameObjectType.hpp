@@ -1,6 +1,6 @@
 #pragma once
 
-enum GameObjectType {
+enum class GameObjectType {
     NONE,
     PLAYER_GENERAL
 };

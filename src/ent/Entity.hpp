@@ -5,7 +5,7 @@
 
 class Entity {
 public:
-    Entity(EntityType t, GameObjectType goT = NONE);
+    Entity(EntityType t, GameObjectType goT = GameObjectType::NONE);
     // Entity(Entity& e) = delete;
     ~Entity();
 

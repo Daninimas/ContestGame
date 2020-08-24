@@ -2,3 +2,4 @@
 
 
 //#include <sys/InputSystem.hpp>
+#include <sys/StaticEntitiesSystem.hpp>

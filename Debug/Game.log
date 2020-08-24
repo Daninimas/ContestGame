@@ -6,4 +6,6 @@ D:\ContestGame\src\eng\GameEngine.cpp(22,15): warning C4244: 'argumento': conver
   StaticEntitiesSystem.cpp
   Utils.cpp
   Generando código...
-  Game.vcxproj -> D:\ContestGame\Debug\Game.exe
+SFMLEngine.obj : error LNK2001: símbolo externo "public: static class sf::RenderStates const sf::RenderStates::Default" (?Default@RenderStates@sf@@2V12@B) sin resolver
+SFMLEngine.obj : error LNK2001: símbolo externo "public: static class sf::Color const sf::Color::Black" (?Black@Color@sf@@2V12@B) sin resolver
+D:\ContestGame\Debug\Game.exe : fatal error LNK1120: 2 externos sin resolver

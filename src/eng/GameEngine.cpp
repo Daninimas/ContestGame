@@ -5,7 +5,6 @@
 #include <cstdint>
 
 #include <iostream>
-using namespace std;
 
 
 #include <sys/SystemsIncluder>
@@ -48,7 +47,10 @@ void GameEngine::reset() {
 }
 
 void GameEngine::init() {
-    setGameState(PLAYING);
+    setGameState(GameState::PLAYING);
+
+    StaticEntitiesSystem staticSystem{};
+    staticSystem.init(*this);
 
     //systems.emplace_back(std::make_unique<TimeSystem>());                   //#00
 }
@@ -64,11 +66,11 @@ void GameEngine::run() {
             // State reciently changed. Systems vector must be updated
             systems.clear();
             switch (gameState) {
-            case GAMEOVER:
+            case GameState::GAMEOVER:
                 //systems.emplace_back(std::make_unique<GameOverSystem>());
                 break;
 
-            case PLAYING:
+            case GameState::PLAYING:
                 init();
                 break;
             }

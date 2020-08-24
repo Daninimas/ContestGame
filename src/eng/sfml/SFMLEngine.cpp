@@ -29,6 +29,25 @@ std::array<float, 2> SFMLEngine::getWindowDimensions() const {
 }
 
 void SFMLEngine::render(GameEngine& gameContext) const {
+	sf::Event event;
+    while (device.get()->pollEvent(event))
+    {
+        // "close requested" event: we close the window
+        if (event.type == sf::Event::Closed)
+			device.get()->close();
+    }
+
+    // clear the window with black color
+	device.get()->clear(sf::Color::Black);
+
+    // draw everything here...
+	for (auto node : nodeMap)
+	{
+		device.get()->draw(node.second);
+	}
+
+    // end the current frame
+	device.get()->display();
 }
 
 void SFMLEngine::updateEntities(GameEngine& gameContext, std::vector<int> entitiesId) {
@@ -39,7 +58,7 @@ void SFMLEngine::updateTextures(GameEngine& gameContext, std::vector<int> entiti
 
 void SFMLEngine::createEntity(GameEngine& gameContext, int id) {
 	DrawableComponent drawable    = gameContext.entityMan.getComponent<DrawableComponent>(id);
-	SituationComponent situation = gameContext.entityMan.getComponent<SituationComponent>(id);
+	SituationComponent situation  = gameContext.entityMan.getComponent<SituationComponent>(id);
 
 	if (!existsImage(drawable.sprite)) {
 		addImage(drawable.sprite);
@@ -49,6 +68,11 @@ void SFMLEngine::createEntity(GameEngine& gameContext, int id) {
 	texture.loadFromImage(imageMap[drawable.sprite]);
 
 	nodeMap.emplace(std::piecewise_construct, std::forward_as_tuple(id), std::forward_as_tuple(texture));
+
+	sf::Sprite& node = nodeMap.end()->second;
+	node.setPosition(situation.x, situation.y);
+	node.setRotation(situation.rotation);
+	node.setScale(situation.scaleX, situation.scaleY);
 }
 
 void SFMLEngine::eraseEntity(int id) {
@@ -75,7 +99,7 @@ bool SFMLEngine::existsImage(std::string path) const {
 
 void SFMLEngine::addImage(std::string path) {
 	imageMap.emplace(std::piecewise_construct, std::forward_as_tuple(path), std::forward_as_tuple(  ) );
-	if (!imageMap.end()->second.loadFromFile("background.jpg")) {
+	if (!imageMap.end()->second.loadFromFile(path)) {
 		std::cout << "Error loading image " << path << "\n";
 		imageMap.erase(imageMap.end()); // IF error creating, delete the node
 	}

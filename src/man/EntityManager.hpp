@@ -71,7 +71,7 @@ public:
     //                ENTITY CREATION               //
     //////////////////////////////////////////////////
 
-    int createPlayer(GameEngine& gameContext, float x, float y, float r, GameObjectType goType = NONE);
+    int createPlayer(GameEngine& gameContext, float x, float y, float r, GameObjectType goType = GameObjectType::NONE);
 
 
     //////////////////////////////////////////////////

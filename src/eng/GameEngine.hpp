@@ -76,7 +76,7 @@ private:
     const uint8_t MAX_TIMES = 25;
 
     bool        playing     {true};
-    GameState   gameState   {PLAYING};
-    GameState   lastState   {NOSTATE};
+    GameState   gameState   {GameState::PLAYING};
+    GameState   lastState   {GameState::NOSTATE};
 
 };

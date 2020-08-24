@@ -1,6 +1,6 @@
 #pragma once
 
-enum EntityType {
+enum class EntityType {
     PLAYER,         //00        
     ENEMY           //01
 };

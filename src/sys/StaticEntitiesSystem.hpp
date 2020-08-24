@@ -9,6 +9,7 @@ public:
     ~StaticEntitiesSystem();
 
     void 	init(GameEngine &gameContext) const;
+    void 	update(GameEngine& gameContext) const override;
 
 private:
     void    createPlayer(GameEngine &gameContext) const;

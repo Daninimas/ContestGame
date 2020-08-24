@@ -1,1 +1,2 @@
 D:\ContestGame\Game\Release\Game.exe
+D:\ContestGame\Release\Game.exe
