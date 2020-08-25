@@ -154,6 +154,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\sys\InputSystem.cpp" />
     <ClCompile Include="src\com\DrawableComponent.cpp" />
     <ClCompile Include="src\eng\sfml\SFMLEngine.cpp" />
     <ClCompile Include="src\com\SituationComponent.cpp" />
@@ -178,6 +179,7 @@
     <ClInclude Include="src\fac\WindowFacade.hpp" />
     <ClInclude Include="src\Main.hpp" />
     <ClInclude Include="src\man\EntityManager.hpp" />
+    <ClInclude Include="src\sys\InputSystem.hpp" />
     <ClInclude Include="src\sys\StaticEntitiesSystem.hpp" />
     <ClInclude Include="src\sys\System.hpp" />
     <ClInclude Include="src\tools\linearMap.hpp" />

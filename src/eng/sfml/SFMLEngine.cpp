@@ -60,16 +60,14 @@ void SFMLEngine::createEntity(GameEngine& gameContext, int id) {
 	DrawableComponent drawable    = gameContext.entityMan.getComponent<DrawableComponent>(id);
 	SituationComponent situation  = gameContext.entityMan.getComponent<SituationComponent>(id);
 
-	if (!existsImage(drawable.sprite)) {
-		addImage(drawable.sprite);
+
+	if (!existsTexture(drawable.sprite)) {
+		addTexture(drawable.sprite);
 	}
 
-	sf::Texture texture;
-	texture.loadFromImage(imageMap[drawable.sprite]);
+	nodeMap.emplace(std::piecewise_construct, std::forward_as_tuple(id), std::forward_as_tuple(textureMap[drawable.sprite]));
 
-	nodeMap.emplace(std::piecewise_construct, std::forward_as_tuple(id), std::forward_as_tuple(texture));
-
-	sf::Sprite& node = nodeMap.end()->second;
+	sf::Sprite& node = nodeMap[id];
 	node.setPosition(situation.x, situation.y);
 	node.setRotation(situation.rotation);
 	node.setScale(situation.scaleX, situation.scaleY);
@@ -91,6 +89,7 @@ bool SFMLEngine::existsNode(int id) const {
 	return true;
 }
 
+
 bool SFMLEngine::existsImage(std::string path) const {
 	if (imageMap.find(path) == imageMap.end())
 		return false;
@@ -99,12 +98,12 @@ bool SFMLEngine::existsImage(std::string path) const {
 
 void SFMLEngine::addImage(std::string path) {
 	imageMap.emplace(std::piecewise_construct, std::forward_as_tuple(path), std::forward_as_tuple(  ) );
-	if (!imageMap.end()->second.loadFromFile(path)) {
+	if (!imageMap[path].loadFromFile(path)) {
 		std::cout << "Error loading image " << path << "\n";
-		imageMap.erase(imageMap.end()); // IF error creating, delete the node
+		imageMap.erase( prev(imageMap.end()) ); // IF error creating, delete the node
 	}
 }
-/*
+
 bool SFMLEngine::existsTexture(std::string path) const {
 	if (textureMap.find(path) == textureMap.end())
 		return false;
@@ -112,9 +111,14 @@ bool SFMLEngine::existsTexture(std::string path) const {
 }
 
 void SFMLEngine::addTexture(std::string path) {
-	textureMap.emplace(std::piecewise_construct, std::forward_as_tuple(path), std::forward_as_tuple());
-	if (!textureMap.end()->second.loadFromFile("background.jpg")) {
-		std::cout << "Error loading image " << path << "\n";
-		imageMap.erase(imageMap.end()); // IF error creating, delete the node
+	// Check if the image has been created
+	if (!existsImage(path)) {
+		addImage(path);
 	}
-}*/
+
+	textureMap.emplace(std::piecewise_construct, std::forward_as_tuple(path), std::forward_as_tuple());
+	if (!textureMap[path].loadFromImage( imageMap[path] )) {
+		std::cout << "Error loading texture " << path << "\n";
+		textureMap.erase( prev(textureMap.end()) ); // IF error creating, delete the node
+	}
+}

@@ -28,12 +28,14 @@ public:
     bool existsNode(int id) const override;
     bool existsImage(std::string path) const override;
     void addImage(std::string path) override;
+    bool existsTexture(std::string path) const override;
+    void addTexture(std::string path) override;
 
 private:
     std::unique_ptr<sf::RenderWindow> device;
     std::unordered_map<int, sf::Sprite> nodeMap;
     std::unordered_map<std::string, sf::Image> imageMap;
-    //std::unordered_map<std::string, sf::Texture> textureMap;
+    std::unordered_map<std::string, sf::Texture> textureMap;
 
     bool fullscreen = true;
 };

@@ -52,7 +52,7 @@ void GameEngine::init() {
     StaticEntitiesSystem staticSystem{};
     staticSystem.init(*this);
 
-    //systems.emplace_back(std::make_unique<TimeSystem>());                   //#00
+    systems.emplace_back(std::make_unique<InputSystem>());                   //#00
 }
 
 void GameEngine::run() {

@@ -51,7 +51,6 @@ int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float
     //######### RENDER ########//
     gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
 
-    std::cout << "Creo jugador\n";
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::PLAYER, goType));
     return entityId;
