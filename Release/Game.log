@@ -1,14 +1,7 @@
-﻿  Main.cpp
-  GameEngine.cpp
-D:\ContestGame\src\eng\GameEngine.cpp(21,15): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
-  SFMLEngine.cpp
-  EntityManager.cpp
-  InputSystem.cpp
-  StaticEntitiesSystem.cpp
-  Utils.cpp
+﻿  InputSystem.cpp
   Generando código
-  54 of 1335 functions ( 4.0%) were compiled, the rest were copied from previous compilation.
-    23 functions were new in current compilation
-    4 functions had inline decision re-evaluated but remain unchanged
+  2 of 1502 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
   Generación de código finalizada
   Game.vcxproj -> D:\ContestGame\Release\Game.exe

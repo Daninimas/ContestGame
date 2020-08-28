@@ -38,15 +38,20 @@ int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float
     //gameContext.playerId = entityId;
 
 
-    SituationComponent& situation = createComponent<SituationComponent>(entityId);
+    SituationComponent& situation   = createComponent<SituationComponent>(entityId);
     DrawableComponent& drawableComp = createComponent<DrawableComponent>(entityId);
+    VelocityComponent& velocityComp = createComponent<VelocityComponent>(entityId);
 
     //######### DATA ########//
     situation.x = x;
     situation.y = y;
     situation.rotation = r;
 
+    velocityComp.speed = 30.f;
+
     drawableComp.sprite = "./TaOmA.png";
+
+    gameContext.playerId = entityId;
 
     //######### RENDER ########//
     gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
@@ -74,12 +79,13 @@ std::unordered_map<int, Entity> &EntityManager::getEntities() {
     return entityMap;
 }
 
-std::vector<int> &EntityManager::getEntitiesToUpdate() {
+const std::vector<int> &EntityManager::getEntitiesToUpdate() {
     return entitiesToUpdate;
 }
 
-void EntityManager::addEntityToUpdate(const int id) {
-    entitiesToUpdate.emplace_back(id);
+void EntityManager::addEntityToUpdate(const int id) { 
+    if (std::find(entitiesToUpdate.begin(), entitiesToUpdate.end(), id) == entitiesToUpdate.end()) // if not found, insert
+        entitiesToUpdate.emplace_back(id);
 }
 
 void EntityManager::clearEntitiesToUpdate() {

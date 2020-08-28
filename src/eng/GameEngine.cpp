@@ -21,6 +21,7 @@ GameEngine::GameEngine()
     srand(time(NULL)); // initialize the random seed
     //init();
     systems.reserve(MAX_SYSTEMS);
+    systemsLate.reserve(MAX_SYSTEMS);
 
     if(SHOW_TIMERS) {
         //TO SYSTEMS
@@ -42,6 +43,7 @@ void GameEngine::reset() {
 
     //ResetGame
     systems.clear();
+    systemsLate.clear();
     init();
 
 }
@@ -53,6 +55,10 @@ void GameEngine::init() {
     staticSystem.init(*this);
 
     systems.emplace_back(std::make_unique<InputSystem>());                   //#00
+
+
+
+    systemsLate.emplace_back(std::make_unique<PhysicsSystem>());               //#00
 }
 
 void GameEngine::run() {
@@ -65,6 +71,7 @@ void GameEngine::run() {
         if (lastState != gameState) {
             // State reciently changed. Systems vector must be updated
             systems.clear();
+            systemsLate.clear();
             switch (gameState) {
             case GameState::GAMEOVER:
                 //systems.emplace_back(std::make_unique<GameOverSystem>());
@@ -220,6 +227,13 @@ void GameEngine::update() {
             cout << "System: " << (int)i << "... " << endl;
         systems[i]->update(*this);
     }
+
+    for (size_t i = 0; i < systemsLate.size(); ++i) {
+
+        if (CHECK_SYSTEMS)
+            cout << "System Late update: " << (int)i << "... " << endl;
+        systemsLate[i]->update(*this);
+    }
 }
 
 void GameEngine::updateSound() {
@@ -287,7 +301,7 @@ std::unordered_map<int, Entity> &GameEngine::getEntities() {
     return entityMan.getEntities();
 }
 
-
+/*
 std::vector<int> &GameEngine::getEntitiesToUpdate() {
     return entityMan.getEntitiesToUpdate();
 }
@@ -298,7 +312,7 @@ void GameEngine::addEntityToUpdate(const int id) {
 
 void GameEngine::clearEntitiesToUpdate() {
     entityMan.clearEntitiesToUpdate();
-}
+}*/
 
 GameState GameEngine::getGameState() const {
     return gameState;

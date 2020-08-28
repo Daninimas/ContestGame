@@ -51,6 +51,16 @@ void SFMLEngine::render(GameEngine& gameContext) const {
 }
 
 void SFMLEngine::updateEntities(GameEngine& gameContext, std::vector<int> entitiesId) {
+
+	for (int id : entitiesId) {
+		SituationComponent& situation = gameContext.entityMan.getComponent<SituationComponent>(id);
+		DrawableComponent& drawable = gameContext.entityMan.getComponent<DrawableComponent>(id);
+
+		sf::Sprite& node = nodeMap[id];
+		node.setPosition(situation.x, situation.y);
+		node.setRotation(situation.rotation);
+		node.setScale(situation.scaleX, situation.scaleY);
+	}
 }
 
 void SFMLEngine::updateTextures(GameEngine& gameContext, std::vector<int> entitiesId) {

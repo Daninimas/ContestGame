@@ -38,15 +38,20 @@ public:
     Entity                               &getEntity(int id);
     std::unordered_map<int, Entity> &getEntities();
     void eraseEntityByID                 (int id);
-    std::vector<int> &getEntitiesToUpdate();
+
+    /*std::vector<int> &getEntitiesToUpdate();
     void addEntityToUpdate(const int id);
-    void clearEntitiesToUpdate();
+    void clearEntitiesToUpdate();*/
 
     GameState getGameState() const;
     void setGameState(const GameState gs);
     void setLastState(const GameState gs);
 
     EntityManager   entityMan;
+
+    // Change place
+    int playerId;
+    // Change place
 
 private:
     void update();
@@ -55,6 +60,7 @@ private:
     void render();
 
     std::vector<std::unique_ptr<System>> systems;
+    std::vector<std::unique_ptr<System>> systemsLate;
 
     SFMLEngine windowFacade;
     //VibrateEngine soundFacade;

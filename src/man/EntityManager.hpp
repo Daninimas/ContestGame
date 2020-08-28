@@ -90,7 +90,7 @@ public:
     //////////////////////////////////////////////////
     //                UPDATE ENTITY                 //
     //////////////////////////////////////////////////
-    std::vector<int>   &getEntitiesToUpdate();
+    const std::vector<int>   &getEntitiesToUpdate();
     void addEntityToUpdate(const int id);
     void clearEntitiesToUpdate();
 

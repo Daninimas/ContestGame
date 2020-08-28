@@ -2,3 +2,5 @@
 
 #include <com/SituationComponent.hpp>
 #include <com/DrawableComponent.hpp>
+#include <com/InputComponent.hpp>
+#include <com/VelocityComponent.hpp>

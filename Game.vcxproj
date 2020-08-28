@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -154,6 +154,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\com\InputComponent.cpp" />
+    <ClCompile Include="src\com\VelocityComponent.cpp" />
     <ClCompile Include="src\sys\InputSystem.cpp" />
     <ClCompile Include="src\com\DrawableComponent.cpp" />
     <ClCompile Include="src\eng\sfml\SFMLEngine.cpp" />
@@ -162,11 +164,14 @@
     <ClCompile Include="src\ent\Entity.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\man\EntityManager.cpp" />
+    <ClCompile Include="src\sys\PhysicsSystem.cpp" />
     <ClCompile Include="src\sys\StaticEntitiesSystem.cpp" />
     <ClCompile Include="src\tools\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\com\DrawableComponent.hpp" />
+    <ClInclude Include="src\com\InputComponent.hpp" />
+    <ClInclude Include="src\com\VelocityComponent.hpp" />
     <ClInclude Include="src\eng\sfml\SFMLEngine.hpp" />
     <ClInclude Include="src\com\Component.hpp" />
     <ClInclude Include="src\com\SituationComponent.hpp" />
@@ -180,6 +185,7 @@
     <ClInclude Include="src\Main.hpp" />
     <ClInclude Include="src\man\EntityManager.hpp" />
     <ClInclude Include="src\sys\InputSystem.hpp" />
+    <ClInclude Include="src\sys\PhysicsSystem.hpp" />
     <ClInclude Include="src\sys\StaticEntitiesSystem.hpp" />
     <ClInclude Include="src\sys\System.hpp" />
     <ClInclude Include="src\tools\linearMap.hpp" />
