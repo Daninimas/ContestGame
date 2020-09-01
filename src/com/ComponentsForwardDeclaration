@@ -1,1 +1,6 @@
 class SituationComponent;
+class DrawableComponent;
+class InputComponent;
+class VelocityComponent;
+class HeathComponent;
+class BoundingComponent;

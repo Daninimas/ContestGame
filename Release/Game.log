@@ -1,7 +1,9 @@
-﻿  InputSystem.cpp
-  Generando código
-  2 of 1502 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
+﻿  BoundingComponent.cpp
+  HeathComponent.cpp
+  DeathSystem.cpp
+  Generating code
+  1617 of 1617 functions (100.0%) were compiled.
+    98 functions were new in current compilation
     0 functions had inline decision re-evaluated but remain unchanged
-  Generación de código finalizada
-  Game.vcxproj -> D:\ContestGame\Release\Game.exe
+  Finished generating code
+  Game.vcxproj -> C:\Users\Roberto\Desktop\Game\ContestGame\Release\Game.exe

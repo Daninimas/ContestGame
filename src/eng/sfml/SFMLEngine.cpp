@@ -84,9 +84,13 @@ void SFMLEngine::createEntity(GameEngine& gameContext, int id) {
 }
 
 void SFMLEngine::eraseEntity(int id) {
+	nodeMap.erase(id);
+
+	// Delete the texture and image?
 }
 
 void SFMLEngine::addColorToEntity(int id, std::array<float, 3> color) {
+	nodeMap[id].setColor( sf::Color(color[0], color[1], color[2]) );
 }
 
 size_t SFMLEngine::countRenderNodes() const {

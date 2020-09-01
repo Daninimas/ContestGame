@@ -6,24 +6,13 @@
 #include <random>
 #include <eng/GameEngine.hpp>
 
-//#include <tools/json.hpp>
-//#include <json/value.h>
-//#include <json/reader.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <string>
 
 #include <iostream>
-//using nlohmann::json;
 
-
-
-const bool SHOW_MELEEATTACKS     = false;
-
-const bool DISABLED_VISIBLE_ZONE = false;
-
-const bool ENABLED_AMBIENT_MUSIC = true;
 
 EntityManager::EntityManager() {
 }
@@ -31,16 +20,15 @@ EntityManager::EntityManager() {
 EntityManager::~EntityManager() {}
 
 
-
-
 int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float r, GameObjectType goType) {
     int entityId = Entity::getCurrentId();
     //gameContext.playerId = entityId;
 
 
-    SituationComponent& situation   = createComponent<SituationComponent>(entityId);
-    DrawableComponent& drawableComp = createComponent<DrawableComponent>(entityId);
-    VelocityComponent& velocityComp = createComponent<VelocityComponent>(entityId);
+    SituationComponent& situation      = createComponent<SituationComponent>(entityId);
+    DrawableComponent&  drawableComp   = createComponent<DrawableComponent>(entityId);
+    VelocityComponent&  velocityComp   = createComponent<VelocityComponent>(entityId);
+    HeathComponent&     heathComp      = createComponent<HeathComponent>(entityId);
 
     //######### DATA ########//
     situation.x = x;
