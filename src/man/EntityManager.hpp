@@ -67,12 +67,6 @@ public:
         storage.erase(id);
     }
 
-    //////////////////////////////////////////////////
-    //                ENTITY CREATION               //
-    //////////////////////////////////////////////////
-
-    int createPlayer(GameEngine& gameContext, float x, float y, float r, GameObjectType goType = GameObjectType::NONE);
-
 
     //////////////////////////////////////////////////
     //                GET ENTITY                    //
@@ -93,6 +87,12 @@ public:
     const std::vector<int>   &getEntitiesToUpdate();
     void addEntityToUpdate(const int id);
     void clearEntitiesToUpdate();
+
+    //////////////////////////////////////////////////
+    //                ENTITY CREATION               //
+    //////////////////////////////////////////////////
+    int createPlayer(GameEngine& gameContext, float x, float y, float r, GameObjectType goType = GameObjectType::NONE);
+    int createAttack(GameEngine& gameContext, float x, float y, float r, GameObjectType goType = GameObjectType::NONE);
 
 private:
 

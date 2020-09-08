@@ -1,9 +1,8 @@
-﻿  BoundingComponent.cpp
-  HeathComponent.cpp
-  DeathSystem.cpp
+﻿  InputSystem.cpp
+  PhysicsSystem.cpp
   Generating code
-  1617 of 1617 functions (100.0%) were compiled.
-    98 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+  42 of 1852 functions ( 2.3%) were compiled, the rest were copied from previous compilation.
+    15 functions were new in current compilation
+    19 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Game.vcxproj -> C:\Users\Roberto\Desktop\Game\ContestGame\Release\Game.exe

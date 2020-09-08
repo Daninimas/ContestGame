@@ -15,7 +15,7 @@ public:
     enum class LayerMasc
     {
         NoLayer = 0x00,
-        Player  = 0x01
+        Walls   = 0x01
     };
 
     LayerMasc layer{0xFF};

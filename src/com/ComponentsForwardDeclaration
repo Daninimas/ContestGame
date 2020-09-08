@@ -4,3 +4,6 @@ class InputComponent;
 class VelocityComponent;
 class HeathComponent;
 class BoundingComponent;
+class MeleeWeaponComponent;
+class WeaponComponent;
+class AttackComponent;

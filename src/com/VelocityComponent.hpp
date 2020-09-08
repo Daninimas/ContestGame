@@ -13,4 +13,6 @@ public:
     float	velocityY{ 0 };
 
     float	speed{ 70 };
+
+    float   gravity{ 10 };
 };

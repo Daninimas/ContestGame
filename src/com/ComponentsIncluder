@@ -6,3 +6,6 @@
 #include <com/VelocityComponent.hpp>
 #include <com/HeathComponent.hpp>
 #include <com/BoundingComponent.hpp>
+#include <com/MeleeWeaponComponent.hpp>
+#include <com/WeaponComponent.hpp>
+#include <com/AttackComponent.hpp>

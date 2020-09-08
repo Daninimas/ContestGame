@@ -10,7 +10,6 @@ InputSystem::~InputSystem() {}
 void InputSystem::update(GameEngine& gameContext) const {
     InputComponent    &playerInput = gameContext.entityMan.getComponent<InputComponent>(gameContext.playerId);
     VelocityComponent &playerVel   = gameContext.entityMan.getComponent<VelocityComponent>(gameContext.playerId);
-    bool moved = false;
 
     // Reset actions
     playerInput.resetActions();
@@ -20,28 +19,41 @@ void InputSystem::update(GameEngine& gameContext) const {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
     {
         playerInput.movingUp = true;
-        moved = true;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
     {
         playerInput.movingDown = true;
-        moved = true;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
     {
         playerInput.movingLeft = true;
         playerVel.velocityX = -playerVel.speed;
-        moved = true;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
     {
         playerInput.movingRight = true;
         playerVel.velocityX = playerVel.speed;
-        moved = true;
     }
 
-    // Mark to update in physics system
-    if (moved) {
-        gameContext.entityMan.addEntityToUpdate(gameContext.playerId);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::N))
+    {
+        playerInput.attacking = true;
+    }
+    /*if (sf::Keyboard::isKeyPressed(sf::Keyboard::N))
+    {
+        // This is obligates the player to release the key and press again
+        if (playerInput.canAttack) {
+            playerInput.attacking = true;
+            playerInput.canAttack = false;
+        }
+    }
+    else if (!sf::Keyboard::isKeyPressed(sf::Keyboard::N)) {
+        playerInput.canAttack = true;
+    }*/
+
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::M))
+    {
+        playerInput.jumping = true;
     }
 }

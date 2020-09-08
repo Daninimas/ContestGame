@@ -13,5 +13,9 @@ public:
     bool movingRight { false };
     bool movingUp    { false };
     bool movingDown  { false };
+
+    bool attacking   { false };
+    //bool canAttack   { true };
+    bool jumping     { false };
 };
 

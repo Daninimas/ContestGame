@@ -23,12 +23,15 @@ void PhysicsSystem::update(GameEngine& gameContext) const {
 void PhysicsSystem::updateSituations(GameEngine& gameContext) const {
     //Use the deltaTime for interpolation
     const float deltaTime = gameContext.getDeltaTime();
-    std::vector<int> entitiesToUpdate = gameContext.entityMan.getEntitiesToUpdate();
-    for (int id : entitiesToUpdate) {
-        SituationComponent& situation = gameContext.entityMan.getComponent<SituationComponent>(id);
-        VelocityComponent& velocity = gameContext.entityMan.getComponent<VelocityComponent>(id);
+    auto& velocities = gameContext.entityMan.getComponents<VelocityComponent>();
+
+
+    for (VelocityComponent velocity : velocities) {
+        SituationComponent& situation = gameContext.entityMan.getComponent<SituationComponent>(velocity.id);
 
         situation.x = situation.x + velocity.velocityX * deltaTime;
-        situation.y = situation.y + velocity.velocityY * deltaTime;
+        situation.y = situation.y + (velocity.velocityY + velocity.gravity) * deltaTime;
+
+        gameContext.entityMan.addEntityToUpdate(velocity.id);
     }
 }

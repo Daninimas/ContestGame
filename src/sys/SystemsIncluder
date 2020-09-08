@@ -4,3 +4,5 @@
 #include <sys/InputSystem.hpp>
 #include <sys/StaticEntitiesSystem.hpp>
 #include <sys/PhysicsSystem.hpp>
+#include <sys/AttackSystem.hpp>
+#include <sys/DeathSystem.hpp>

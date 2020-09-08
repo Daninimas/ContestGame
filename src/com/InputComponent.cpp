@@ -10,4 +10,7 @@ void InputComponent::resetActions() {
     movingRight = false ;
     movingUp    = false ;
     movingDown  = false ;
+
+    jumping     = false;
+    attacking   = false;
 }

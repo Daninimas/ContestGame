@@ -154,9 +154,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\com\AttackComponent.cpp" />
+    <ClCompile Include="src\com\WeaponComponent.cpp" />
+    <ClCompile Include="src\sys\AttackSystem.cpp" />
     <ClCompile Include="src\com\BoundingComponent.cpp" />
     <ClCompile Include="src\com\HeathComponent.cpp" />
     <ClCompile Include="src\com\InputComponent.cpp" />
+    <ClCompile Include="src\com\MeleeWeaponComponent.cpp" />
     <ClCompile Include="src\com\VelocityComponent.cpp" />
     <ClCompile Include="src\sys\DeathSystem.cpp" />
     <ClCompile Include="src\sys\InputSystem.cpp" />
@@ -172,11 +176,14 @@
     <ClCompile Include="src\tools\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\com\AttackComponent.hpp" />
     <ClInclude Include="src\com\BoundingComponent.hpp" />
     <ClInclude Include="src\com\DrawableComponent.hpp" />
     <ClInclude Include="src\com\HeathComponent.hpp" />
     <ClInclude Include="src\com\InputComponent.hpp" />
+    <ClInclude Include="src\com\MeleeWeaponComponent.hpp" />
     <ClInclude Include="src\com\VelocityComponent.hpp" />
+    <ClInclude Include="src\com\WeaponComponent.hpp" />
     <ClInclude Include="src\eng\sfml\SFMLEngine.hpp" />
     <ClInclude Include="src\com\Component.hpp" />
     <ClInclude Include="src\com\SituationComponent.hpp" />
@@ -189,6 +196,7 @@
     <ClInclude Include="src\fac\WindowFacade.hpp" />
     <ClInclude Include="src\Main.hpp" />
     <ClInclude Include="src\man\EntityManager.hpp" />
+    <ClInclude Include="src\sys\AttackSystem.hpp" />
     <ClInclude Include="src\sys\DeathSystem.hpp" />
     <ClInclude Include="src\sys\InputSystem.hpp" />
     <ClInclude Include="src\sys\PhysicsSystem.hpp" />

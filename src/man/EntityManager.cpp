@@ -20,37 +20,6 @@ EntityManager::EntityManager() {
 EntityManager::~EntityManager() {}
 
 
-int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float r, GameObjectType goType) {
-    int entityId = Entity::getCurrentId();
-    //gameContext.playerId = entityId;
-
-
-    SituationComponent& situation      = createComponent<SituationComponent>(entityId);
-    DrawableComponent&  drawableComp   = createComponent<DrawableComponent>(entityId);
-    VelocityComponent&  velocityComp   = createComponent<VelocityComponent>(entityId);
-    HeathComponent&     heathComp      = createComponent<HeathComponent>(entityId);
-
-    //######### DATA ########//
-    situation.x = x;
-    situation.y = y;
-    situation.rotation = r;
-
-    velocityComp.speed = 30.f;
-
-    drawableComp.sprite = "./TaOmA.png";
-
-    gameContext.playerId = entityId;
-
-    //######### RENDER ########//
-    gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
-
-    //######### CREATE ########//
-    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::PLAYER, goType));
-    return entityId;
-}
-
-
-
 Entity &EntityManager::getEntity(int id) {
     return entityMap.at(id);
 }
@@ -80,3 +49,66 @@ void EntityManager::clearEntitiesToUpdate() {
     entitiesToUpdate.clear();
 }
 
+
+
+
+// ------------------------------ GAME OBJECTS FACTORY
+
+int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float r, GameObjectType goType) {
+    int entityId = Entity::getCurrentId();
+    //gameContext.playerId = entityId;
+
+
+    SituationComponent& situation = createComponent<SituationComponent>(entityId);
+    DrawableComponent& drawableComp = createComponent<DrawableComponent>(entityId);
+    VelocityComponent& velocityComp = createComponent<VelocityComponent>(entityId);
+    HeathComponent& heathComp = createComponent<HeathComponent>(entityId);
+    MeleeWeaponComponent& meleWeaponComp = createComponent<MeleeWeaponComponent>(entityId);
+
+    //######### DATA ########//
+    situation.x = x;
+    situation.y = y;
+    situation.rotation = r;
+
+    velocityComp.speed = 30.f;
+
+    drawableComp.sprite = "./TaOmA.png";
+
+    gameContext.playerId = entityId;
+
+    //######### RENDER ########//
+    gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
+
+    //######### CREATE ########//
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::PLAYER, goType));
+    return entityId;
+}
+
+
+int EntityManager::createAttack(GameEngine& gameContext, float x, float y, float r, GameObjectType goType) {
+    int entityId = Entity::getCurrentId();
+    //gameContext.playerId = entityId;
+
+    SituationComponent& situation = createComponent<SituationComponent>(entityId);
+    createComponent<BoundingComponent>(entityId);
+    createComponent<AttackComponent>(entityId);
+
+    //######### DATA ########//
+    situation.x = x;
+    situation.y = y;
+    situation.rotation = r;
+
+    switch (goType)
+    {
+    case GameObjectType::MELEE_ATTACK:
+
+        break;
+    case GameObjectType::DISTANCE_ATTACK:
+        createComponent<VelocityComponent>(entityId);
+        break;
+    }
+
+    //######### CREATE ########//
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::ATTACK, goType));
+    return entityId;
+}

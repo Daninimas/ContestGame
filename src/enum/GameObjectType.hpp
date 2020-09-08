@@ -2,5 +2,7 @@
 
 enum class GameObjectType {
     NONE,
-    PLAYER_GENERAL
+    PLAYER_GENERAL,
+    MELEE_ATTACK,
+    DISTANCE_ATTACK
 };

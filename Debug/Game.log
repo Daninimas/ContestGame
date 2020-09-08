@@ -1,11 +1,39 @@
-﻿  Main.cpp
-  GameEngine.cpp
-D:\ContestGame\src\eng\GameEngine.cpp(22,15): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+﻿  WeaponComponent.cpp
+  AttackSystem.cpp
+  BoundingComponent.cpp
+  HeathComponent.cpp
+  InputComponent.cpp
+  MeleeWeaponComponent.cpp
+  VelocityComponent.cpp
+  DeathSystem.cpp
+  InputSystem.cpp
+  DrawableComponent.cpp
   SFMLEngine.cpp
+C:\Users\Roberto\Desktop\Game\ContestGame\src\eng\sfml\SFMLEngine.cpp(93,61): warning C4244: 'argument': conversion from '_Ty' to 'sf::Uint8', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\Roberto\Desktop\Game\ContestGame\src\eng\sfml\SFMLEngine.cpp(93,51): warning C4244: 'argument': conversion from '_Ty' to 'sf::Uint8', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\Roberto\Desktop\Game\ContestGame\src\eng\sfml\SFMLEngine.cpp(93,41): warning C4244: 'argument': conversion from '_Ty' to 'sf::Uint8', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+  SituationComponent.cpp
+  GameEngine.cpp
+C:\Users\Roberto\Desktop\Game\ContestGame\src\eng\GameEngine.cpp(21,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Entity.cpp
+  Main.cpp
   EntityManager.cpp
+  PhysicsSystem.cpp
   StaticEntitiesSystem.cpp
   Utils.cpp
-  Generando código...
-SFMLEngine.obj : error LNK2001: símbolo externo "public: static class sf::RenderStates const sf::RenderStates::Default" (?Default@RenderStates@sf@@2V12@B) sin resolver
-SFMLEngine.obj : error LNK2001: símbolo externo "public: static class sf::Color const sf::Color::Black" (?Black@Color@sf@@2V12@B) sin resolver
-D:\ContestGame\Debug\Game.exe : fatal error LNK1120: 2 externos sin resolver
+  Generating Code...
+SFMLEngine.obj : error LNK2001: unresolved external symbol "public: static class sf::RenderStates const sf::RenderStates::Default" (?Default@RenderStates@sf@@2V12@B)
+SFMLEngine.obj : error LNK2001: unresolved external symbol "public: static class sf::Color const sf::Color::Black" (?Black@Color@sf@@2V12@B)
+C:\Users\Roberto\Desktop\Game\ContestGame\Debug\Game.exe : fatal error LNK1120: 2 unresolved externals
