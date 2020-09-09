@@ -13,7 +13,7 @@ void InputSystem::update(GameEngine& gameContext) const {
 
     // Reset actions
     playerInput.resetActions();
-    playerVel.resetAllVelocities();
+    playerVel.velocityX = 0.f; // reset the movement
 
     // Set new actions
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
@@ -27,12 +27,12 @@ void InputSystem::update(GameEngine& gameContext) const {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
     {
         playerInput.movingLeft = true;
-        playerVel.velocityX = -playerVel.speed;
+        playerVel.velocityX = -playerVel.speedX;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
     {
         playerInput.movingRight = true;
-        playerVel.velocityX = playerVel.speed;
+        playerVel.velocityX = playerVel.speedX;
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::N))

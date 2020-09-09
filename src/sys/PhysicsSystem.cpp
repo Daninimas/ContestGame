@@ -2,6 +2,8 @@
 
 #include <eng/GameEngine.hpp>
 
+#include <iostream>
+
 PhysicsSystem::PhysicsSystem() {}
 
 PhysicsSystem::~PhysicsSystem() {}
@@ -26,11 +28,18 @@ void PhysicsSystem::updateSituations(GameEngine& gameContext) const {
     auto& velocities = gameContext.entityMan.getComponents<VelocityComponent>();
 
 
-    for (VelocityComponent velocity : velocities) {
+    for (VelocityComponent& velocity : velocities) {
         SituationComponent& situation = gameContext.entityMan.getComponent<SituationComponent>(velocity.id);
 
+        // Gravity
+        velocity.velocityY += velocity.gravity;
+        velocity.velocityY = std::clamp(velocity.velocityY, velocity.minVy, velocity.maxVy);
+
+        std::cout << "Velocity Y: " << velocity.velocityY << "\n";
+
+        // Update positions
         situation.x = situation.x + velocity.velocityX * deltaTime;
-        situation.y = situation.y + (velocity.velocityY + velocity.gravity) * deltaTime;
+        situation.y = situation.y + velocity.velocityY * deltaTime;
 
         gameContext.entityMan.addEntityToUpdate(velocity.id);
     }

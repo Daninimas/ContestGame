@@ -155,6 +155,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\com\AttackComponent.cpp" />
+    <ClCompile Include="src\com\JumpComponent.cpp" />
     <ClCompile Include="src\com\WeaponComponent.cpp" />
     <ClCompile Include="src\sys\AttackSystem.cpp" />
     <ClCompile Include="src\com\BoundingComponent.cpp" />
@@ -181,6 +182,7 @@
     <ClInclude Include="src\com\DrawableComponent.hpp" />
     <ClInclude Include="src\com\HeathComponent.hpp" />
     <ClInclude Include="src\com\InputComponent.hpp" />
+    <ClInclude Include="src\com\JumpComponent.hpp" />
     <ClInclude Include="src\com\MeleeWeaponComponent.hpp" />
     <ClInclude Include="src\com\VelocityComponent.hpp" />
     <ClInclude Include="src\com\WeaponComponent.hpp" />

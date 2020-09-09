@@ -70,7 +70,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float
     situation.y = y;
     situation.rotation = r;
 
-    velocityComp.speed = 30.f;
+    velocityComp.speedX = 30.f;
 
     drawableComp.sprite = "./TaOmA.png";
 

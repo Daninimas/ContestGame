@@ -12,7 +12,10 @@ public:
     float	velocityX{ 0 };
     float	velocityY{ 0 };
 
-    float	speed{ 70 };
+    float	speedX{ 70 }; // this is the default velocity when walking (velocity constant)
+
+    float minVy{ 0 }; // this is for making the entities acelerate with gravity
+    float maxVy{ 200 };
 
     float   gravity{ 10 };
 };
