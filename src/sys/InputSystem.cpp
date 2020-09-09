@@ -55,7 +55,7 @@ void InputSystem::update(GameEngine& gameContext) const {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::M))
     {
         auto& jumpComp = gameContext.entityMan.getComponent<JumpComponent>(gameContext.playerId);
-        if (jumpComp.jumpIndex == jumpComp.jumptable.size()) { // if has ended jumping
+        if (jumpComp.jumpIndex == jumpComp.jumptable.size() && jumpComp.cooldow > jumpComp.maxCooldown) { // if has ended jumping && has cooldown on floor
             jumpComp.jumpIndex = 0;
         }
     }

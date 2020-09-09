@@ -27,9 +27,18 @@ void PhysicsSystem::updateJumps(GameEngine& gameContext) const {
     auto& jumpsComponents = gameContext.entityMan.getComponents<JumpComponent>();
 
     for (JumpComponent& jump : jumpsComponents) {
+        VelocityComponent& velocity = gameContext.entityMan.getComponent<VelocityComponent>(jump.id);
+        // Manage cooldown to make it not jump on air
+        // Count time than you are on the floor
+        if (velocity.velocityY == 0.f) {
+            jump.cooldow += gameContext.getDeltaTime();
+        }
+        else {
+            jump.cooldow = 0.f;
+        }
+
 
         if (jump.jumpIndex < jump.jumptable.size()) {
-            VelocityComponent& velocity = gameContext.entityMan.getComponent<VelocityComponent>(jump.id);
 
             velocity.velocityY -= jump.jumptable[jump.jumpIndex];
             ++jump.jumpIndex;
