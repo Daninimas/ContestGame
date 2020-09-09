@@ -209,6 +209,7 @@
     <ClInclude Include="src\tools\Utils.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".gitignore" />
     <None Include="src\com\ComponentsForwardDeclaration" />
     <None Include="src\com\ComponentsIncluder" />
     <None Include="src\enum\EnumsIncluder" />

@@ -54,6 +54,9 @@ void InputSystem::update(GameEngine& gameContext) const {
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::M))
     {
-        playerInput.jumping = true;
+        auto& jumpComp = gameContext.entityMan.getComponent<JumpComponent>(gameContext.playerId);
+        if (jumpComp.jumpIndex == jumpComp.jumptable.size()) { // if has ended jumping
+            jumpComp.jumpIndex = 0;
+        }
     }
 }

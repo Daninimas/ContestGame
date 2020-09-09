@@ -9,3 +9,4 @@
 #include <com/MeleeWeaponComponent.hpp>
 #include <com/WeaponComponent.hpp>
 #include <com/AttackComponent.hpp>
+#include <com/JumpComponent.hpp>

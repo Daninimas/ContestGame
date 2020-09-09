@@ -7,3 +7,4 @@ class BoundingComponent;
 class MeleeWeaponComponent;
 class WeaponComponent;
 class AttackComponent;
+class JumpComponent;

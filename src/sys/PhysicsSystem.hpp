@@ -12,4 +12,6 @@ public:
 
 private:
     void updateSituations(GameEngine& gameContext) const;
+    void updateJumps(GameEngine& gameContext) const;
+
 };

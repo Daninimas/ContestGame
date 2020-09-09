@@ -176,5 +176,6 @@
     <None Include="src\com\ComponentsForwardDeclaration" />
     <None Include="src\com\ComponentsIncluder" />
     <None Include="src\sys\SystemsIncluder" />
+    <None Include=".gitignore" />
   </ItemGroup>
 </Project>

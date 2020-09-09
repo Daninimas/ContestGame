@@ -10,6 +10,8 @@ PhysicsSystem::~PhysicsSystem() {}
 
 
 void PhysicsSystem::update(GameEngine& gameContext) const {
+    // Update the vel of the jumping entities
+    updateJumps(gameContext);
 
     //Change the SituationComponent of the entities that moves
     updateSituations(gameContext);
@@ -19,6 +21,20 @@ void PhysicsSystem::update(GameEngine& gameContext) const {
 
     // Reset entities to update
     gameContext, gameContext.entityMan.clearEntitiesToUpdate();
+}
+
+void PhysicsSystem::updateJumps(GameEngine& gameContext) const {
+    auto& jumpsComponents = gameContext.entityMan.getComponents<JumpComponent>();
+
+    for (JumpComponent& jump : jumpsComponents) {
+
+        if (jump.jumpIndex < jump.jumptable.size()) {
+            VelocityComponent& velocity = gameContext.entityMan.getComponent<VelocityComponent>(jump.id);
+
+            velocity.velocityY -= jump.jumptable[jump.jumpIndex];
+            ++jump.jumpIndex;
+        }
+    }
 }
 
 
