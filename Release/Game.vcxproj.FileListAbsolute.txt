@@ -1,3 +1,0 @@
-D:\ContestGame\Game\Release\Game.exe
-D:\ContestGame\Release\Game.exe
-C:\Users\Roberto\Desktop\Game\ContestGame\Release\Game.exe
