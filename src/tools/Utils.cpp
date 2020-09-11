@@ -65,3 +65,15 @@ float Utils::radToDeg(float angle) {
     ret = angle * 180.f / 3.14159f;
     return ret;
 }
+
+
+BoundingBox Utils::moveToWorldCoords(BoundingBox& bounding, SituationComponent& situation) {
+    BoundingBox worldCoords{
+            bounding.xLeft  + situation.x
+        ,   bounding.xRight + situation.x
+        ,   bounding.yUp    + situation.y
+        ,   bounding.yDown  + situation.y
+    };
+
+    return worldCoords;
+}

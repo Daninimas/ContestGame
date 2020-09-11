@@ -3,7 +3,7 @@ class DrawableComponent;
 class InputComponent;
 class VelocityComponent;
 class HeathComponent;
-class BoundingComponent;
+class ColliderComponent;
 class MeleeWeaponComponent;
 class WeaponComponent;
 class AttackComponent;

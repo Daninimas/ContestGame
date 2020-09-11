@@ -2,7 +2,6 @@
 
 #include <eng/GameEngine.hpp>
 
-#include <iostream>
 
 PhysicsSystem::PhysicsSystem() {}
 
@@ -59,8 +58,6 @@ void PhysicsSystem::updateSituations(GameEngine& gameContext) const {
         // Gravity
         velocity.velocityY += velocity.gravity;
         velocity.velocityY = std::clamp(velocity.velocityY, velocity.minVy, velocity.maxVy);
-
-        std::cout << "Velocity Y: " << velocity.velocityY << "\n";
 
         // Update positions
         situation.x = situation.x + velocity.velocityX * deltaTime;

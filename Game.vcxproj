@@ -158,11 +158,12 @@
     <ClCompile Include="src\com\JumpComponent.cpp" />
     <ClCompile Include="src\com\WeaponComponent.cpp" />
     <ClCompile Include="src\sys\AttackSystem.cpp" />
-    <ClCompile Include="src\com\BoundingComponent.cpp" />
+    <ClCompile Include="src\com\ColliderComponent.cpp" />
     <ClCompile Include="src\com\HeathComponent.cpp" />
     <ClCompile Include="src\com\InputComponent.cpp" />
     <ClCompile Include="src\com\MeleeWeaponComponent.cpp" />
     <ClCompile Include="src\com\VelocityComponent.cpp" />
+    <ClCompile Include="src\sys\CollisionSystem.cpp" />
     <ClCompile Include="src\sys\DeathSystem.cpp" />
     <ClCompile Include="src\sys\InputSystem.cpp" />
     <ClCompile Include="src\com\DrawableComponent.cpp" />
@@ -178,7 +179,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\com\AttackComponent.hpp" />
-    <ClInclude Include="src\com\BoundingComponent.hpp" />
+    <ClInclude Include="src\com\ColliderComponent.hpp" />
     <ClInclude Include="src\com\DrawableComponent.hpp" />
     <ClInclude Include="src\com\HeathComponent.hpp" />
     <ClInclude Include="src\com\InputComponent.hpp" />
@@ -199,11 +200,13 @@
     <ClInclude Include="src\Main.hpp" />
     <ClInclude Include="src\man\EntityManager.hpp" />
     <ClInclude Include="src\sys\AttackSystem.hpp" />
+    <ClInclude Include="src\sys\CollisionSystem.hpp" />
     <ClInclude Include="src\sys\DeathSystem.hpp" />
     <ClInclude Include="src\sys\InputSystem.hpp" />
     <ClInclude Include="src\sys\PhysicsSystem.hpp" />
     <ClInclude Include="src\sys\StaticEntitiesSystem.hpp" />
     <ClInclude Include="src\sys\System.hpp" />
+    <ClInclude Include="src\tools\BoundingBox.hpp" />
     <ClInclude Include="src\tools\linearMap.hpp" />
     <ClInclude Include="src\tools\Storage.hpp" />
     <ClInclude Include="src\tools\Utils.hpp" />

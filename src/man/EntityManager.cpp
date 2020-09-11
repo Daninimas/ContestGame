@@ -64,6 +64,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float
     VelocityComponent& velocityComp = createComponent<VelocityComponent>(entityId);
     HeathComponent& heathComp = createComponent<HeathComponent>(entityId);
     MeleeWeaponComponent& meleWeaponComp = createComponent<MeleeWeaponComponent>(entityId);
+    ColliderComponent& colliderComp = createComponent<ColliderComponent>(entityId);
 
     //######### DATA ########//
     situation.x = x;
@@ -75,6 +76,11 @@ int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float
     drawableComp.sprite = "./TaOmA.png";
 
     gameContext.playerId = entityId;
+
+    // Collider
+    colliderComp.boundingRoot.bounding = { 0.f, 30.f, 0.f, 30.f };
+    colliderComp.boundingRoot.childs.emplace_back( 10.f, 20.f, 0.f, 10.f ); //Head
+
 
     //######### RENDER ########//
     gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
@@ -90,7 +96,7 @@ int EntityManager::createAttack(GameEngine& gameContext, float x, float y, float
     //gameContext.playerId = entityId;
 
     SituationComponent& situation = createComponent<SituationComponent>(entityId);
-    createComponent<BoundingComponent>(entityId);
+    createComponent<ColliderComponent>(entityId);
     createComponent<AttackComponent>(entityId);
 
     //######### DATA ########//
