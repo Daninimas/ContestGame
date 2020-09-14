@@ -6,6 +6,8 @@
 
 #include <iostream>
 
+#include <thread>
+
 
 #include <sys/SystemsIncluder>
 
@@ -56,7 +58,7 @@ void GameEngine::init() {
 
     systems.emplace_back(std::make_unique<InputSystem>());                   //#00
     systems.emplace_back(std::make_unique<AttackSystem>());                   //#01
-    systems.emplace_back(std::make_unique<CollisionSystem>());                   //#01
+    systems.emplace_back(std::make_unique<CollisionSystem>());                   //#02
 
 
 
@@ -236,6 +238,8 @@ void GameEngine::update() {
             cout << "System Late update: " << (int)i << "... " << endl;
         systemsLate[i]->update(*this);
     }
+
+    std::this_thread::sleep_for(500ms);
 }
 
 void GameEngine::updateSound() {

@@ -82,6 +82,8 @@ bool CollisionSystem::checkCollisionAB(BoundingBoxNode& boundingA, SituationComp
 
     if(    checkIntervals(bA.xLeft, bA.xRight, bB.xLeft, bB.xRight)
         && checkIntervals(bA.yUp, bA.yDown, bB.yUp, bB.yDown) ) {
+        cout << "Colisionaaaa\n";
+
         // They are colliding
         if (boundingA.childs.size() > 0) {
             for (auto& b : boundingA.childs) {
@@ -97,6 +99,8 @@ bool CollisionSystem::checkCollisionAB(BoundingBoxNode& boundingA, SituationComp
             // TODO si no uso en el futuro para nada los entitiesCollifind IDs, borrarlos y usar un BOOL (OPTIMIZACION)
             boundingA.bounding.entitiesColliding.push_back(situationB.id);
             boundingB.bounding.entitiesColliding.push_back(situationA.id);
+
+            cout << "Colisionaaaa con la cabeza\n";
         }
     }
     return false;

@@ -32,10 +32,16 @@ public:
     void addTexture(std::string path) override;
 
 private:
+    void renderColliders(GameEngine& gameContext) const;
+    void drawBoundingTree(BoundingBoxNode boundingNode, SituationComponent& sit) const;
+
+
+
     std::unique_ptr<sf::RenderWindow> device;
     std::unordered_map<int, sf::Sprite> nodeMap;
     std::unordered_map<std::string, sf::Image> imageMap;
     std::unordered_map<std::string, sf::Texture> textureMap;
 
     bool fullscreen = true;
+    bool renderCollidables = true;
 };

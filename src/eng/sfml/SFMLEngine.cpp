@@ -46,8 +46,42 @@ void SFMLEngine::render(GameEngine& gameContext) const {
 		device.get()->draw(node.second);
 	}
 
+	// Render collidables
+	if (renderCollidables) {
+		renderColliders(gameContext);
+	}
+
     // end the current frame
 	device.get()->display();
+}
+
+void SFMLEngine::renderColliders(GameEngine& gameContext) const {
+	auto& colliders = gameContext.entityMan.getComponents<ColliderComponent>();
+
+	for (ColliderComponent& c : colliders) {
+		SituationComponent& sit = gameContext.entityMan.getComponent<SituationComponent>(c.id);
+		BoundingBoxNode& b = c.boundingRoot;
+		drawBoundingTree(b, sit);
+	}
+}
+
+void SFMLEngine::drawBoundingTree(BoundingBoxNode boundingNode, SituationComponent& sit) const {
+	// Draw this bounding box
+	sf::RectangleShape rectangle(sf::Vector2f(boundingNode.bounding.xRight - boundingNode.bounding.xLeft, boundingNode.bounding.yDown - boundingNode.bounding.yUp));
+	rectangle.setFillColor(sf::Color(0, 0, 0, 0));
+	if (boundingNode.bounding.entitiesColliding.size() != 0) {
+		rectangle.setFillColor(sf::Color(255, 0, 0));
+	}
+	rectangle.setOutlineThickness(2);
+	rectangle.setOutlineColor(sf::Color(250, 150, 100));
+	rectangle.setPosition(sit.x + boundingNode.bounding.xLeft, sit.y + boundingNode.bounding.yUp);
+	device.get()->draw(rectangle);
+
+
+	// Chall children to draw
+	for (auto& b : boundingNode.childs) {
+		drawBoundingTree(b, sit);
+	}
 }
 
 void SFMLEngine::updateEntities(GameEngine& gameContext, std::vector<int> entitiesId) {

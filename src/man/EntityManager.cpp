@@ -78,8 +78,8 @@ int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float
     gameContext.playerId = entityId;
 
     // Collider
-    colliderComp.boundingRoot.bounding = { 0.f, 30.f, 0.f, 30.f };
-    colliderComp.boundingRoot.childs.emplace_back( 10.f, 20.f, 0.f, 10.f ); //Head
+    colliderComp.boundingRoot.bounding = { 0.f, 500.f, 0.f, 30.f };
+    colliderComp.boundingRoot.childs.emplace_back( 20.f, 450.f, 10.f, 20.f ); //Head
 
 
     //######### RENDER ########//
@@ -113,6 +113,26 @@ int EntityManager::createAttack(GameEngine& gameContext, float x, float y, float
         createComponent<VelocityComponent>(entityId);
         break;
     }
+
+    //######### CREATE ########//
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::ATTACK, goType));
+    return entityId;
+}
+
+
+int EntityManager::createFloor(GameEngine& gameContext, float x, float y, float r, GameObjectType goType) {
+    int entityId = Entity::getCurrentId();
+    //gameContext.playerId = entityId;
+
+    SituationComponent& situation = createComponent<SituationComponent>(entityId);
+    ColliderComponent& collider = createComponent<ColliderComponent>(entityId);
+
+    //######### DATA ########//
+    situation.x = x;
+    situation.y = y;
+    situation.rotation = r;
+
+    collider.boundingRoot.bounding = { 0.f, 100.f, 0.f, 70.f };
 
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::ATTACK, goType));

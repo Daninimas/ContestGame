@@ -93,6 +93,8 @@ public:
     //////////////////////////////////////////////////
     int createPlayer(GameEngine& gameContext, float x, float y, float r, GameObjectType goType = GameObjectType::NONE);
     int createAttack(GameEngine& gameContext, float x, float y, float r, GameObjectType goType = GameObjectType::NONE);
+    int createFloor (GameEngine& gameContext, float x, float y, float r, GameObjectType goType = GameObjectType::NONE);
+
 
 private:
 
