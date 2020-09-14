@@ -18,7 +18,5 @@ public:
 
     LayerMasc layer{0xFF};
 
-    std::vector<int> entitiesColliding;
-
     BoundingBoxNode boundingRoot;
 };

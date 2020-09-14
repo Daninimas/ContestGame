@@ -13,5 +13,6 @@ public:
 private:
     void calculateCollisions(GameEngine& gameContext) const;
     void insertCollidersIdWithVelocity(GameEngine& gameContext, std::vector<int>& idCollidersWithVelocity) const;
-    bool checkCollisionAB(GameEngine& gameContext, ColliderComponent& colliderA, SituationComponent& situationA, ColliderComponent& colliderB, SituationComponent& situationB) const;
+    bool checkCollisionAB(BoundingBoxNode& boundingA, SituationComponent& situationA, BoundingBoxNode& boundingB, SituationComponent& situationB) const;
+    void clearCollisions(ColliderComponent& collider) const;
 };

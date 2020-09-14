@@ -6,6 +6,8 @@ struct BoundingBox {
     float xRight{ 0.f };
     float yUp{ 0.f };
     float yDown{ 0.f };
+
+    std::vector<int> entitiesColliding;
 };
 
 

@@ -4,6 +4,7 @@
 #include <tools/BoundingBox.hpp>
 #include <tools/Utils.hpp>
 #include <iostream>
+#include <functional>
 
 /*
  ###### OPTIMIZATION V.1 #######
@@ -39,13 +40,17 @@ void CollisionSystem::calculateCollisions(GameEngine& gameContext) const {
         for (auto& colliderB : colliders) {
             int idB = colliderB.id;
 
+            // clear collisions
+            clearCollisions(colliderA);
+            clearCollisions(colliderB);
+
             if (idA == idB) {
                 // Do nothing. Ask Fran (FOR OPTIMIZATION)
             }
             else {
                 SituationComponent& situationB = gameContext.entityMan.getComponent<SituationComponent>(idB);
                 
-                checkCollisionAB(gameContext, colliderA, situationA, colliderB, situationB);
+                checkCollisionAB(colliderA.boundingRoot, situationA, colliderB.boundingRoot, situationB);
             }
         }
     }
@@ -65,9 +70,9 @@ void CollisionSystem::insertCollidersIdWithVelocity(GameEngine& gameContext, std
 }
 
 
-bool CollisionSystem::checkCollisionAB(GameEngine& gameContext, ColliderComponent& colliderA, SituationComponent& situationA, ColliderComponent& colliderB, SituationComponent& situationB) const {
-    BoundingBox boundingA = Utils::moveToWorldCoords(colliderA.boundingRoot.bounding, situationA);
-    BoundingBox boundingB = Utils::moveToWorldCoords(colliderB.boundingRoot.bounding, situationB);
+bool CollisionSystem::checkCollisionAB(BoundingBoxNode& boundingA, SituationComponent& situationA, BoundingBoxNode& boundingB, SituationComponent& situationB) const {
+    BoundingBox bA = Utils::moveToWorldCoords(boundingA.bounding, situationA);
+    BoundingBox bB = Utils::moveToWorldCoords(boundingB.bounding, situationB);
 
     auto checkIntervals = [](float L1, float R1, float L2, float R2) {
         if (L2 > R1) return false;
@@ -75,9 +80,37 @@ bool CollisionSystem::checkCollisionAB(GameEngine& gameContext, ColliderComponen
         return true;
     };
 
-    if(    checkIntervals(boundingA.xLeft, boundingA.xRight, boundingB.xLeft, boundingB.xRight)
-        && checkIntervals(boundingA.yUp, boundingA.yDown, boundingB.yUp, boundingB.yDown) ) {
+    if(    checkIntervals(bA.xLeft, bA.xRight, bB.xLeft, bB.xRight)
+        && checkIntervals(bA.yUp, bA.yDown, bB.yUp, bB.yDown) ) {
         // They are colliding
+        if (boundingA.childs.size() > 0) {
+            for (auto& b : boundingA.childs) {
+                checkCollisionAB(b, situationA, boundingB, situationB);
+            }
+        }
+        else if(boundingB.childs.size() > 0){
+            for (auto& b : boundingB.childs) {
+                checkCollisionAB(boundingA, situationA, b, situationB);
+            }
+        }
+        else {
+            // TODO si no uso en el futuro para nada los entitiesCollifind IDs, borrarlos y usar un BOOL (OPTIMIZACION)
+            boundingA.bounding.entitiesColliding.push_back(situationB.id);
+            boundingB.bounding.entitiesColliding.push_back(situationA.id);
+        }
     }
     return false;
+}
+
+
+void CollisionSystem::clearCollisions(ColliderComponent& collider) const {
+    
+    std::function<void(BoundingBoxNode&)> clearCollidersID = [&](BoundingBoxNode& b) {
+        b.bounding.entitiesColliding.clear();
+        for (auto& c : b.childs) {
+            clearCollidersID(c);
+        }
+    };
+
+    clearCollidersID(collider.boundingRoot);
 }
