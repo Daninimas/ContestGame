@@ -182,6 +182,9 @@ void GameEngine::run() {
             }
 
             render();
+
+            //std::this_thread::sleep_for(500ms);
+
         }
     }//PLAYING
 
@@ -238,8 +241,6 @@ void GameEngine::update() {
             cout << "System Late update: " << (int)i << "... " << endl;
         systemsLate[i]->update(*this);
     }
-
-    std::this_thread::sleep_for(500ms);
 }
 
 void GameEngine::updateSound() {
