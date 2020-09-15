@@ -7,8 +7,9 @@
 #include <functional>
 
 /*
- ###### OPTIMIZATION V.1 #######
+ ###### OPTIMIZATION V.2 #######
    Calculate collision entity with (velocity-all collidables)
+   Collision calculate when they can collide with the layerMasc
 */
 
 CollisionSystem::CollisionSystem() {}
@@ -44,10 +45,7 @@ void CollisionSystem::calculateCollisions(GameEngine& gameContext) const {
             clearCollisions(colliderA);
             clearCollisions(colliderB);
 
-            if (idA == idB) {
-                // Do nothing. Ask Fran (FOR OPTIMIZATION)
-            }
-            else {
+            if (idA != idB && colliderA.layerMasc & colliderB.collisionLayer) {
                 SituationComponent& situationB = gameContext.entityMan.getComponent<SituationComponent>(idB);
                 
                 checkCollisionAB(colliderA.boundingRoot, situationA, colliderB.boundingRoot, situationB);

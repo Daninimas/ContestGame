@@ -78,6 +78,8 @@ int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float
     gameContext.playerId = entityId;
 
     // Collider
+    colliderComp.collisionLayer = ColliderComponent::Player;
+    colliderComp.layerMasc = 0xFF; //Collides with everything
     colliderComp.boundingRoot.bounding = { 0.f, 500.f, 0.f, 30.f };
     colliderComp.boundingRoot.childs.emplace_back( 20.f, 450.f, 10.f, 20.f ); //Head
 
@@ -125,14 +127,17 @@ int EntityManager::createFloor(GameEngine& gameContext, float x, float y, float 
     //gameContext.playerId = entityId;
 
     SituationComponent& situation = createComponent<SituationComponent>(entityId);
-    ColliderComponent& collider = createComponent<ColliderComponent>(entityId);
+    ColliderComponent& colliderComp = createComponent<ColliderComponent>(entityId);
 
     //######### DATA ########//
     situation.x = x;
     situation.y = y;
     situation.rotation = r;
 
-    collider.boundingRoot.bounding = { 0.f, 100.f, 0.f, 70.f };
+    // Collider
+    colliderComp.collisionLayer = ColliderComponent::Wall;
+    colliderComp.layerMasc = ColliderComponent::Wall | ColliderComponent::Player; //Collides with everything
+    colliderComp.boundingRoot.bounding = { 0.f, 100.f, 0.f, 70.f };
 
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::ATTACK, goType));

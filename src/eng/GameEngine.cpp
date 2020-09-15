@@ -62,7 +62,8 @@ void GameEngine::init() {
 
 
 
-    systemsLate.emplace_back(std::make_unique<PhysicsSystem>());               //#00
+    systemsLate.emplace_back(std::make_unique<DeathSystem>());               //#00
+    systemsLate.emplace_back(std::make_unique<PhysicsSystem>());               //#01
 }
 
 void GameEngine::run() {

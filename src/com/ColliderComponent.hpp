@@ -10,13 +10,17 @@ public:
     explicit ColliderComponent(const int id);
     ~ColliderComponent() override;
 
-    enum class LayerMasc
+    // Estas son las capas a las que se colisiona con cada tipo de objetos, luego, al crear una entidad tendremos que poner a 1 todas las capas con las que queremos que colisione (layerMasc indica con que CollisionLayr va a colisionar este objeto)
+    //  Ejemplo: Enemigo colisiona muro (0x01) y player (0x02) -> enemigo layermasc = (0x01 + 0x02 = 0x03)
+    enum
     {
         NoLayer = 0x00,
-        Walls   = 0x01
+        Wall   = 0x01,
+        Player  = 0x02
     };
 
-    LayerMasc layer{0xFF};
+    uint8_t collisionLayer{ NoLayer }; // Este siempre tiene que ser con un tipo de collisionLayer
+    uint8_t layerMasc{0xFF}; // Este es libre, es con que collisionLayers va a colisionar
 
     BoundingBoxNode boundingRoot;
 };
