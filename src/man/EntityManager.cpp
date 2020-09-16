@@ -79,6 +79,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float
 
     // Collider
     colliderComp.collisionLayer = ColliderComponent::Player;
+    colliderComp.type = ColliderType::DYNAMIC;
     colliderComp.layerMasc = 0xFF; //Collides with everything
     colliderComp.boundingRoot.bounding = { 0.f, 500.f, 0.f, 30.f };
     colliderComp.boundingRoot.childs.emplace_back( 20.f, 450.f, 10.f, 20.f ); //Head

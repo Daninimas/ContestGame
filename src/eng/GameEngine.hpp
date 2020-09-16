@@ -59,6 +59,9 @@ private:
     void updateSound();
     void render();
 
+    void updateEntitiesInWindow();
+
+
     std::vector<std::unique_ptr<System>> systems;
     std::vector<std::unique_ptr<System>> systemsLate;
 

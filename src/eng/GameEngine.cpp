@@ -242,6 +242,8 @@ void GameEngine::update() {
             cout << "System Late update: " << (int)i << "... " << endl;
         systemsLate[i]->update(*this);
     }
+
+    updateEntitiesInWindow();
 }
 
 void GameEngine::updateSound() {
@@ -252,6 +254,14 @@ void GameEngine::render() {
     windowFacade.render(*this);
 }
 
+
+void GameEngine::updateEntitiesInWindow() {
+    // Update situation in engine
+    windowFacade.updateEntities(*this, entityMan.getEntitiesToUpdate());
+
+    // Reset entities to update
+    entityMan.clearEntitiesToUpdate();
+}
 
 void GameEngine::setPlaying(const bool p) {
     playing = p;

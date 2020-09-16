@@ -3,6 +3,7 @@
 #include "Component.hpp"
 
 #include <tools/BoundingBox.hpp>
+#include <enum/ColliderType.hpp>
 #include <vector>
 
 class ColliderComponent : public Component {
@@ -19,8 +20,13 @@ public:
         Player  = 0x02
     };
 
+
     uint8_t collisionLayer{ NoLayer }; // Este siempre tiene que ser con un tipo de collisionLayer
     uint8_t layerMasc{0xFF}; // Este es libre, es con que collisionLayers va a colisionar
+
+    ColliderType type{ ColliderType::STATIC };
+    //Puedo hacer collidable type si necesito: Dinamic, kinematic, static
+
 
     BoundingBoxNode boundingRoot;
 };

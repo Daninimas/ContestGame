@@ -14,12 +14,6 @@ void PhysicsSystem::update(GameEngine& gameContext) const {
 
     //Change the SituationComponent of the entities that moves
     updateSituations(gameContext);
-
-    // Update situation in engine
-    gameContext.getWindowFacadeRef().updateEntities(gameContext, gameContext.entityMan.getEntitiesToUpdate());
-
-    // Reset entities to update
-    gameContext, gameContext.entityMan.clearEntitiesToUpdate();
 }
 
 void PhysicsSystem::updateJumps(GameEngine& gameContext) const {

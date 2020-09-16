@@ -179,6 +179,9 @@
     <ClInclude Include="src\sys\CollisionSystem.hpp">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="src\enum\ColliderType.hpp">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\enum\EnumsIncluder" />
