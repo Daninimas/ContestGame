@@ -49,15 +49,18 @@ void CollisionSystem::calculateCollisions(GameEngine& gameContext) const {
                 
                 bool collided = checkCollisionAB(colliderA.boundingRoot, situationA, colliderB.boundingRoot, situationB);
 
-                // Check who is the static and the dinamic
-                if (colliderA.type == ColliderType::DYNAMIC) {
-                    undoCollision(gameContext, colliderB, colliderA);
+                if (collided) {
+                    // Check who is the static and the dinamic
+                    if (colliderA.type == ColliderType::DYNAMIC) {
+                        undoCollision(gameContext, colliderB, colliderA);
+                    }
+                    else if (colliderB.type == ColliderType::DYNAMIC) {
+                        undoCollision(gameContext, colliderA, colliderB);
+                    }
+                    // No one is dynamic, don't need to resolve                
+
                 }
-                else if (colliderB.type == ColliderType::DYNAMIC) {
-                    undoCollision(gameContext, colliderA, colliderB);
-                }
-                    
-                // No one is dynamic, don't need to resolve                
+
             }
         }
     }
@@ -91,25 +94,25 @@ bool CollisionSystem::checkCollisionAB(BoundingBoxNode& boundingA, SituationComp
     if(    checkIntervals(bA.xLeft, bA.xRight, bB.xLeft, bB.xRight)
         && checkIntervals(bA.yUp, bA.yDown, bB.yUp, bB.yDown) ) {
 
+        collide = true;
         // They are colliding
         if (boundingA.childs.size() > 0) {
             for (auto& b : boundingA.childs) {
-                collide = checkCollisionAB(b, situationA, boundingB, situationB);
+                checkCollisionAB(b, situationA, boundingB, situationB);
             }
         }
         else if(boundingB.childs.size() > 0){
             for (auto& b : boundingB.childs) {
-                collide = checkCollisionAB(boundingA, situationA, b, situationB);
+                checkCollisionAB(boundingA, situationA, b, situationB);
             }
         }
         else {
             // TODO si no uso en el futuro para nada los entitiesCollifind IDs, borrarlos y usar un BOOL (OPTIMIZACION)
             boundingA.bounding.entitiesColliding.push_back(situationB.id);
             boundingB.bounding.entitiesColliding.push_back(situationA.id);
-
-            collide = true;
         }
     }
+
     return collide;
 }
 
