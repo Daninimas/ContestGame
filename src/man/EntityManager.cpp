@@ -65,6 +65,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float
     HeathComponent& heathComp = createComponent<HeathComponent>(entityId);
     MeleeWeaponComponent& meleWeaponComp = createComponent<MeleeWeaponComponent>(entityId);
     ColliderComponent& colliderComp = createComponent<ColliderComponent>(entityId);
+    JumpComponent& jumpComp = createComponent<JumpComponent>(entityId);
 
     //######### DATA ########//
     situation.x = x;
@@ -84,6 +85,8 @@ int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float
     colliderComp.boundingRoot.bounding = { 0.f, 500.f, 0.f, 30.f };
     colliderComp.boundingRoot.childs.emplace_back( 20.f, 450.f, 10.f, 20.f ); //Head
 
+    // Jump
+    jumpComp.jumptable[ 5.f, 5.f, 4.f, 4.f, 3.f, 3.f, 2.f, 1.f ];
 
     //######### RENDER ########//
     gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);

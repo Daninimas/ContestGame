@@ -2,6 +2,8 @@
 
 #include <eng/GameEngine.hpp>
 
+#include <iostream>
+
 
 PhysicsSystem::PhysicsSystem() {}
 
@@ -32,7 +34,7 @@ void PhysicsSystem::updateJumps(GameEngine& gameContext) const {
 
 
         if (jump.jumpIndex < jump.jumptable.size()) {
-
+            cout << "Holaaaa 2\n";
             velocity.velocityY -= jump.jumptable[jump.jumpIndex];
             ++jump.jumpIndex;
         }

@@ -11,7 +11,7 @@ public:
 
     std::array<float, 8> jumptable;
 
-    size_t jumpIndex{ jumptable.size() }; // if index is ar the end of the jumptable, the entitiy is not jumping
+    size_t jumpIndex{ jumptable.size() }; // if index is at the end of the jumptable, the entitiy is not jumping
 
     float maxCooldown{ 0.7f };
     float cooldow{ 0.f };
