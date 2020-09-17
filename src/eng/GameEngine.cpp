@@ -56,9 +56,9 @@ void GameEngine::init() {
     StaticEntitiesSystem staticSystem{};
     staticSystem.init(*this);
 
-    systems.emplace_back(std::make_unique<InputSystem>());                   //#00
-    systems.emplace_back(std::make_unique<AttackSystem>());                   //#01
-    systems.emplace_back(std::make_unique<CollisionSystem>());                   //#02
+    systems.emplace_back(std::make_unique<CollisionSystem>());                   //#00
+    systems.emplace_back(std::make_unique<InputSystem>());                   //#01
+    systems.emplace_back(std::make_unique<AttackSystem>());                   //#02
 
 
 

@@ -1,6 +1,6 @@
 #include "JumpComponent.hpp"
 
 JumpComponent::JumpComponent(const int id)
-    : Component(id), jumptable{} {}
+    : Component(id) {}
 
 JumpComponent::~JumpComponent() {}

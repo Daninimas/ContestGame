@@ -86,7 +86,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float
     colliderComp.boundingRoot.childs.emplace_back( 20.f, 450.f, 10.f, 20.f ); //Head
 
     // Jump
-    jumpComp.jumptable[ 5.f, 5.f, 4.f, 4.f, 3.f, 3.f, 2.f, 1.f ];
+    jumpComp.jumptable = { 500.f, 500.f, 400.f, 400.f, 300.f, 300.f, 200.f, 100.f };
 
     //######### RENDER ########//
     gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);

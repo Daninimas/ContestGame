@@ -32,9 +32,7 @@ void PhysicsSystem::updateJumps(GameEngine& gameContext) const {
             jump.cooldow = 0.f;
         }
 
-
         if (jump.jumpIndex < jump.jumptable.size()) {
-            cout << "Holaaaa 2\n";
             velocity.velocityY -= jump.jumptable[jump.jumpIndex];
             ++jump.jumpIndex;
         }
