@@ -15,9 +15,12 @@ public:
     //  Ejemplo: Enemigo colisiona muro (0x01) y player (0x02) -> enemigo layermasc = (0x01 + 0x02 = 0x03)
     enum
     {
-        NoLayer = 0x00,
-        Wall   = 0x01,
-        Player  = 0x02
+        NoLayer       = 0x00,
+        Wall          = 0x01,
+        Player        = 0x02, 
+        PlayerAttack  = 0x04,
+        Attack        = 0x08,
+        Enemy         = 0x10
     };
 
 
@@ -27,6 +30,7 @@ public:
     ColliderType type{ ColliderType::STATIC };
     //Puedo hacer collidable type si necesito: Dinamic, kinematic, static
 
+    bool collide{ false };
 
     BoundingBoxNode boundingRoot;
 };

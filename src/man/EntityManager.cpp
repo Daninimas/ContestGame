@@ -26,8 +26,18 @@ Entity &EntityManager::getEntity(int id) {
 
 
 void EntityManager::eraseEntityByID(int id) {
-    // TODO Modifie this to not add news component all times
-    eraseComponent<SituationComponent>              (id); //1
+    // TODO Modifie this to not add new components all times
+    eraseComponent<SituationComponent>(id);
+    eraseComponent<DrawableComponent>(id);
+    eraseComponent<InputComponent>(id);
+    eraseComponent<VelocityComponent>(id);
+    eraseComponent<HeathComponent>(id);
+    eraseComponent<ColliderComponent>(id);
+    eraseComponent<MeleeWeaponComponent>(id);
+    eraseComponent<WeaponComponent>(id);
+    eraseComponent<AttackComponent>(id);
+    eraseComponent<JumpComponent>(id);
+
 
     entityMap           .erase(id);
 }
@@ -81,7 +91,9 @@ int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float
     // Collider
     colliderComp.collisionLayer = ColliderComponent::Player;
     colliderComp.type = ColliderType::DYNAMIC;
-    colliderComp.layerMasc = 0xFF; //Collides with everything
+    //cout << (int)(0xFF & static_cast<uint8_t>(-ColliderComponent::PlayerAttack));
+    //colliderComp.layerMasc = ColliderComponent::Wall | ColliderComponent::Enemy | ColliderComponent::Attack; //Collides with everything except PlayerAttacks
+    colliderComp.layerMasc = 0xFF - ColliderComponent::PlayerAttack; //Collides with everything except PlayerAttacks
     colliderComp.boundingRoot.bounding = { 0.f, 500.f, 0.f, 30.f };
     colliderComp.boundingRoot.childs.emplace_back( 20.f, 450.f, 10.f, 20.f ); //Head
 
@@ -102,7 +114,8 @@ int EntityManager::createAttack(GameEngine& gameContext, float x, float y, float
     //gameContext.playerId = entityId;
 
     SituationComponent& situation = createComponent<SituationComponent>(entityId);
-    createComponent<ColliderComponent>(entityId);
+    ColliderComponent& collider = createComponent<ColliderComponent>(entityId);
+    createComponent<VelocityComponent>(entityId);
     createComponent<AttackComponent>(entityId);
 
     //######### DATA ########//
@@ -115,8 +128,15 @@ int EntityManager::createAttack(GameEngine& gameContext, float x, float y, float
     case GameObjectType::MELEE_ATTACK:
 
         break;
+
     case GameObjectType::DISTANCE_ATTACK:
-        createComponent<VelocityComponent>(entityId);
+        break;
+
+    case GameObjectType::PLAYER_MELEE_ATTACK:
+        collider.collisionLayer = ColliderComponent::PlayerAttack;
+        collider.layerMasc = ColliderComponent::Enemy + ColliderComponent::Wall;  // Collides with enemys only
+        collider.boundingRoot.bounding = { 0.f, 10.f, 0.f, 10.f };
+
         break;
     }
 
@@ -126,7 +146,7 @@ int EntityManager::createAttack(GameEngine& gameContext, float x, float y, float
 }
 
 
-int EntityManager::createFloor(GameEngine& gameContext, float x, float y, float r, GameObjectType goType) {
+int EntityManager::createWall(GameEngine& gameContext, float x, float y, float r, GameObjectType goType) {
     int entityId = Entity::getCurrentId();
     //gameContext.playerId = entityId;
 
@@ -140,7 +160,7 @@ int EntityManager::createFloor(GameEngine& gameContext, float x, float y, float 
 
     // Collider
     colliderComp.collisionLayer = ColliderComponent::Wall;
-    colliderComp.layerMasc = ColliderComponent::Wall | ColliderComponent::Player; //Collides with everything
+    colliderComp.layerMasc = ColliderComponent::Enemy + ColliderComponent::Player + ColliderComponent::PlayerAttack; //Collides with player and enemy
     colliderComp.boundingRoot.bounding = { 0.f, 100.f, 0.f, 70.f };
 
     //######### CREATE ########//

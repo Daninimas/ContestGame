@@ -50,6 +50,9 @@ void CollisionSystem::calculateCollisions(GameEngine& gameContext) const {
                 bool collided = checkCollisionAB(colliderA.boundingRoot, situationA, colliderB.boundingRoot, situationB);
 
                 if (collided) {
+                    colliderA.collide = true;
+                    colliderB.collide = true;
+
                     // Check who is the static and the dinamic
                     if (colliderA.type == ColliderType::DYNAMIC) {
                         undoCollision(gameContext, colliderB, colliderA);
@@ -158,7 +161,8 @@ void CollisionSystem::undoCollision(GameEngine& gameContext, ColliderComponent& 
 
 
 void CollisionSystem::clearCollisions(ColliderComponent& collider) const {
-    
+    collider.collide = false;
+
     std::function<void(BoundingBoxNode&)> clearCollidersID = [&](BoundingBoxNode& b) {
         b.bounding.entitiesColliding.clear();
         for (auto& c : b.childs) {

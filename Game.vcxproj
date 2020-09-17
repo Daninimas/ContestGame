@@ -192,6 +192,7 @@
     <ClInclude Include="src\com\SituationComponent.hpp" />
     <ClInclude Include="src\eng\GameEngine.hpp" />
     <ClInclude Include="src\ent\Entity.hpp" />
+    <ClInclude Include="src\enum\AttackType.hpp" />
     <ClInclude Include="src\enum\ColliderType.hpp" />
     <ClInclude Include="src\enum\EntityType.hpp" />
     <ClInclude Include="src\enum\GameObjectType.hpp" />

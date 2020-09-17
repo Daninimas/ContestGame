@@ -11,8 +11,14 @@ public:
     void update(GameEngine& gameContext) const override;
 
 private:
+    void deleteMeleeAttacks(GameEngine& gameContext) const;
     void addCooldownTimeToWeapons(GameEngine& gameContext) const;
     void checkPlayerAttacking(GameEngine& gameContext) const;
     void createMeleeAttack(GameEngine& gameContext, int attackerID) const;
+    void checkAttacksHits(GameEngine& gameContext) const;
+
+    void resolveAttackHit(GameEngine& gameContext, ColliderComponent& attackCol, AttackComponent& attack, std::vector<int>& attacksToDelete) const;
+    void damageEntity(GameEngine& gameContext, AttackComponent& attack, int entityHitId) const;
+
 };
 
