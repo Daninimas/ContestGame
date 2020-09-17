@@ -18,7 +18,18 @@ CollisionSystem::~CollisionSystem() {}
 
 
 void CollisionSystem::update(GameEngine& gameContext) const {
+    clearAllCollisions(gameContext);
+
 	calculateCollisions(gameContext);
+}
+
+
+void CollisionSystem::clearAllCollisions(GameEngine& gameContext) const {
+    auto& colliders = gameContext.entityMan.getComponents<ColliderComponent>();
+
+    for (auto& collider : colliders) {
+        clearCollisions(collider);
+    }
 }
 
 
@@ -40,11 +51,7 @@ void CollisionSystem::calculateCollisions(GameEngine& gameContext) const {
         for (auto& colliderB : colliders) {
             int idB = colliderB.id;
 
-            // clear collisions
-            clearCollisions(colliderA);
-            clearCollisions(colliderB);
-
-            if (idA != idB && colliderA.layerMasc & colliderB.collisionLayer) {
+            if (idA != idB && ( colliderA.layerMasc & colliderB.collisionLayer && colliderB.layerMasc & colliderA.collisionLayer) ) {
                 SituationComponent& situationB = gameContext.entityMan.getComponent<SituationComponent>(idB);
                 
                 bool collided = checkCollisionAB(colliderA.boundingRoot, situationA, colliderB.boundingRoot, situationB);

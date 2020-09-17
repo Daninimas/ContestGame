@@ -101,8 +101,8 @@ void SFMLEngine::updateTextures(GameEngine& gameContext, std::vector<int> entiti
 }
 
 void SFMLEngine::createEntity(GameEngine& gameContext, int id) {
-	DrawableComponent drawable    = gameContext.entityMan.getComponent<DrawableComponent>(id);
-	SituationComponent situation  = gameContext.entityMan.getComponent<SituationComponent>(id);
+	DrawableComponent& drawable    = gameContext.entityMan.getComponent<DrawableComponent>(id);
+	SituationComponent& situation  = gameContext.entityMan.getComponent<SituationComponent>(id);
 
 
 	if (!existsTexture(drawable.sprite)) {
