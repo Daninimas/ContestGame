@@ -1,5 +1,4 @@
 class SituationComponent;
-class DrawableComponent;
 class InputComponent;
 class VelocityComponent;
 class HeathComponent;
@@ -8,3 +7,4 @@ class MeleeWeaponComponent;
 class WeaponComponent;
 class AttackComponent;
 class JumpComponent;
+class RenderComponent;

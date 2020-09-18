@@ -51,7 +51,11 @@ public:
     template <typename T>
     T &createComponent(const int id) {
         auto &storage = getComponents<T>();
+        if (typeid(T).name() == typeid(RenderComponent).name())
+            cout << "holaaa" << "\n";
         storage.emplace(id);
+        if (typeid(T).name() == typeid(RenderComponent).name())
+            cout << "holaaa" << "\n";
         //return storage.at(storage.at(id));
         return storage[storage[id]];
     }
@@ -63,7 +67,12 @@ public:
 
     template <typename T>
     void eraseComponent(const int id) {
-        auto &storage = getComponents<T>();
+        Storage<T> &storage = getComponents<T>();
+        cout << "Desde el erase: "<< typeid(T).name() << "\n";
+
+        if(typeid(T).name() == typeid(RenderComponent).name())
+            cout << "holaaa" << "\n";
+
         storage.erase(id);
     }
 

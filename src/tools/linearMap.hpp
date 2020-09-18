@@ -37,7 +37,7 @@ struct linearMap {
     }
 
     T &at(N id) {
-        uint32_t index = 0;
+        int index = 0;
         //try {
         index = map.at(id);
         //} catch(std::exception e) {
@@ -50,11 +50,11 @@ struct linearMap {
 
 
     void erase(N id) {
-
+        std::cout << "ID a borrar " << id << std::endl;
         if (map.find(id) != map.end()) {
             if(id != vec[vec.size() - 1].first) {
                 //get index to delete
-                int32_t index = map.at(id);
+                uint32_t index = map.at(id);
                 //swap index element with last element
                 vec[index] = vec[vec.size() - 1]; //swap pair
                 //delete last element

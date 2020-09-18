@@ -73,9 +73,7 @@ void AttackSystem::checkAttacksHits(GameEngine& gameContext) const{
 
 	for (AttackComponent& attack : attacks) {
 		ColliderComponent& attackCol = gameContext.entityMan.getComponent<ColliderComponent>(attack.id);
-
-		cout << attackCol.boundingRoot.bounding.entitiesColliding[0] << "\n";
-
+		
 		if (attackCol.collide) {
 			resolveAttackHit(gameContext, attackCol, attack, attacksToDelete);
 		}
@@ -91,14 +89,12 @@ void AttackSystem::resolveAttackHit(GameEngine& gameContext, ColliderComponent& 
 	// I assume that the attack will only have one boundingBox
 	std::vector<int>& entitiesColliding = attackCol.boundingRoot.bounding.entitiesColliding;
 
-	cout << "Holaaaaa\n";
-
 	for (int entityHitId : entitiesColliding) {
 		damageEntity(gameContext, attack, entityHitId);
 	}
 
 	// After hit, delete attack
-	attacksToDelete.emplace_back(attack.id);
+	attacksToDelete.push_back(attack.id);
 }
 
 void AttackSystem::damageEntity(GameEngine& gameContext, AttackComponent& attack, int entityHitId) const {

@@ -26,15 +26,20 @@ Entity &EntityManager::getEntity(int id) {
 
 
 void EntityManager::eraseEntityByID(int id) {
+    cout << "BORRO id:" << id <<"\n";
+    cout << getComponents<RenderComponent>().size() << "\n";
+    for (auto& render : getComponents<RenderComponent>()) {
+        cout << "ID: " << render.id << " sprite: " << render.sprite << " Existe? " << existsComponent<RenderComponent>(id) << endl;
+    }
     // TODO Modifie this to not add new components all times
     eraseComponent<SituationComponent>(id);
-    eraseComponent<DrawableComponent>(id);
     eraseComponent<InputComponent>(id);
     eraseComponent<VelocityComponent>(id);
     eraseComponent<HeathComponent>(id);
     eraseComponent<ColliderComponent>(id);
     eraseComponent<MeleeWeaponComponent>(id);
     eraseComponent<WeaponComponent>(id);
+    eraseComponent<RenderComponent>(id);
     eraseComponent<AttackComponent>(id);
     eraseComponent<JumpComponent>(id);
 
@@ -70,12 +75,12 @@ int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float
 
 
     SituationComponent& situation = createComponent<SituationComponent>(entityId);
-    DrawableComponent& drawableComp = createComponent<DrawableComponent>(entityId);
     VelocityComponent& velocityComp = createComponent<VelocityComponent>(entityId);
     HeathComponent& heathComp = createComponent<HeathComponent>(entityId);
     MeleeWeaponComponent& meleWeaponComp = createComponent<MeleeWeaponComponent>(entityId);
     ColliderComponent& colliderComp = createComponent<ColliderComponent>(entityId);
     JumpComponent& jumpComp = createComponent<JumpComponent>(entityId);
+    RenderComponent& renderComp = createComponent<RenderComponent>(entityId);
 
     //######### DATA ########//
     situation.x = x;
@@ -83,8 +88,6 @@ int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float
     situation.rotation = r;
 
     velocityComp.speedX = 30.f;
-
-    drawableComp.sprite = "./TaOmA.png";
 
     gameContext.playerId = entityId;
 
@@ -152,6 +155,9 @@ int EntityManager::createWall(GameEngine& gameContext, float x, float y, float r
 
     SituationComponent& situation = createComponent<SituationComponent>(entityId);
     ColliderComponent& colliderComp = createComponent<ColliderComponent>(entityId);
+
+    RenderComponent& renderComp = createComponent<RenderComponent>(entityId);
+
 
     //######### DATA ########//
     situation.x = x;

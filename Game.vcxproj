@@ -156,6 +156,7 @@
   <ItemGroup>
     <ClCompile Include="src\com\AttackComponent.cpp" />
     <ClCompile Include="src\com\JumpComponent.cpp" />
+    <ClCompile Include="src\com\RenderComponent.cpp" />
     <ClCompile Include="src\com\WeaponComponent.cpp" />
     <ClCompile Include="src\sys\AttackSystem.cpp" />
     <ClCompile Include="src\com\ColliderComponent.cpp" />
@@ -166,7 +167,6 @@
     <ClCompile Include="src\sys\CollisionSystem.cpp" />
     <ClCompile Include="src\sys\DeathSystem.cpp" />
     <ClCompile Include="src\sys\InputSystem.cpp" />
-    <ClCompile Include="src\com\DrawableComponent.cpp" />
     <ClCompile Include="src\eng\sfml\SFMLEngine.cpp" />
     <ClCompile Include="src\com\SituationComponent.cpp" />
     <ClCompile Include="src\eng\GameEngine.cpp" />
@@ -180,11 +180,11 @@
   <ItemGroup>
     <ClInclude Include="src\com\AttackComponent.hpp" />
     <ClInclude Include="src\com\ColliderComponent.hpp" />
-    <ClInclude Include="src\com\DrawableComponent.hpp" />
     <ClInclude Include="src\com\HeathComponent.hpp" />
     <ClInclude Include="src\com\InputComponent.hpp" />
     <ClInclude Include="src\com\JumpComponent.hpp" />
     <ClInclude Include="src\com\MeleeWeaponComponent.hpp" />
+    <ClInclude Include="src\com\RenderComponent.hpp" />
     <ClInclude Include="src\com\VelocityComponent.hpp" />
     <ClInclude Include="src\com\WeaponComponent.hpp" />
     <ClInclude Include="src\eng\sfml\SFMLEngine.hpp" />

@@ -1,7 +1,6 @@
 //DONT FORGET INCLUDE NEW COMPONENT IN ERASE ENTITY (entityManager.cpp)
 
 #include <com/SituationComponent.hpp>
-#include <com/DrawableComponent.hpp>
 #include <com/InputComponent.hpp>
 #include <com/VelocityComponent.hpp>
 #include <com/HeathComponent.hpp>
@@ -10,3 +9,4 @@
 #include <com/WeaponComponent.hpp>
 #include <com/AttackComponent.hpp>
 #include <com/JumpComponent.hpp>
+#include <com/RenderComponent.hpp>
