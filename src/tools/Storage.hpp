@@ -1,11 +1,9 @@
 #pragma once
 
 #include <iterator>
-#include <com/ComponentsIncluder>
 #include <stdint.h>
 #include <vector>
 #include <unordered_map>
-#include <iostream>
 using namespace std;
 
 template <class T>
@@ -122,22 +120,10 @@ public:
     //////////////////////////////////////////////////
 
     void emplace(const int id) noexcept {
-        if (typeid(T).name() == typeid(RenderComponent).name()) {
-            cout << "meto la entidad " << id << "\n";
-        }
         if (inner_vector.size() < inner_vector.capacity()) {
             if (!inner_map.count(id)) {
                 inner_map.emplace(std::piecewise_construct, std::forward_as_tuple(id), std::forward_as_tuple(inner_vector.size()));
                 inner_vector.emplace_back(id);
-                if (typeid(T).name() == typeid(RenderComponent).name()) {
-                    cout << "he metido la entidad " << inner_vector.back().id << "\n";
-
-                    cout << "Inner map IDs\n";
-                    for (auto& element : inner_map) {
-                        cout << element.first << " en la posicion: " << element.second << "\n";
-                    }
-                }
-
             } //else
                 //throw "";
         }//else
@@ -145,12 +131,6 @@ public:
     }
 
     void erase(const int id) noexcept {
-        cout << "Id a borrar: " << id << " tipo " << typeid(T).name() << "\n";
-
-        for (auto& element : inner_vector) {
-            cout << "ID ELEMENTO: " << element.id << "\n";
-        }
-
         if (inner_map.count(id)) {
             size_t index = inner_map[id];
             inner_vector[index] = inner_vector.back();

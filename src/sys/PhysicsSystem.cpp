@@ -12,12 +12,10 @@ PhysicsSystem::~PhysicsSystem() {}
 
 void PhysicsSystem::update(GameEngine& gameContext) const {
     // Update the vel of the jumping entities
-    cout << "DENTRO DE physics 0 Map size: " << gameContext.entityMan.getComponents<RenderComponent>().sizeMap() << "\n";
     updateJumps(gameContext);
 
     //Change the SituationComponent of the entities that moves
     updateSituations(gameContext);
-    cout << "DENTRO DE physics 1 Map size: " << gameContext.entityMan.getComponents<RenderComponent>().sizeMap() << "\n";
 }
 
 void PhysicsSystem::updateJumps(GameEngine& gameContext) const {

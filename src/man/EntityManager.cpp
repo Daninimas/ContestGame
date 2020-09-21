@@ -26,20 +26,15 @@ Entity &EntityManager::getEntity(int id) {
 
 
 void EntityManager::eraseEntityByID(int id) {
-    cout << "BORRO id:" << id <<"\n";
-    cout << getComponents<RenderComponent>().size() << "\n";
-    for (auto& render : getComponents<RenderComponent>()) {
-        cout << "ID: " << render.id << " sprite: " << render.sprite << " Existe? " << existsComponent<RenderComponent>(id) << endl;
-    }
     // TODO Modifie this to not add new components all times
     eraseComponent<SituationComponent>(id);
+    eraseComponent<RenderComponent>(id);
     eraseComponent<InputComponent>(id);
     eraseComponent<VelocityComponent>(id);
     eraseComponent<HeathComponent>(id);
     eraseComponent<ColliderComponent>(id);
     eraseComponent<MeleeWeaponComponent>(id);
     eraseComponent<WeaponComponent>(id);
-    eraseComponent<RenderComponent>(id);
     eraseComponent<AttackComponent>(id);
     eraseComponent<JumpComponent>(id);
 
@@ -58,6 +53,10 @@ const std::vector<int> &EntityManager::getEntitiesToUpdate() {
 void EntityManager::addEntityToUpdate(const int id) { 
     if (std::find(entitiesToUpdate.begin(), entitiesToUpdate.end(), id) == entitiesToUpdate.end()) // if not found, insert
         entitiesToUpdate.emplace_back(id);
+}
+
+void EntityManager::removeEntityToUpdate(const int id) {
+    entitiesToUpdate.erase(std::remove(entitiesToUpdate.begin(), entitiesToUpdate.end(), id), entitiesToUpdate.end());
 }
 
 void EntityManager::clearEntitiesToUpdate() {
@@ -155,8 +154,7 @@ int EntityManager::createWall(GameEngine& gameContext, float x, float y, float r
 
     SituationComponent& situation = createComponent<SituationComponent>(entityId);
     ColliderComponent& colliderComp = createComponent<ColliderComponent>(entityId);
-
-    RenderComponent& renderComp = createComponent<RenderComponent>(entityId);
+    //RenderComponent& renderComp = createComponent<RenderComponent>(entityId);
 
 
     //######### DATA ########//
@@ -168,6 +166,9 @@ int EntityManager::createWall(GameEngine& gameContext, float x, float y, float r
     colliderComp.collisionLayer = ColliderComponent::Wall;
     colliderComp.layerMasc = ColliderComponent::Enemy + ColliderComponent::Player + ColliderComponent::PlayerAttack; //Collides with player and enemy
     colliderComp.boundingRoot.bounding = { 0.f, 100.f, 0.f, 70.f };
+
+    //######### RENDER ########//
+    //gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
 
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::ATTACK, goType));

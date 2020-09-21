@@ -8,11 +8,9 @@ DeathSystem::DeathSystem() {}
 DeathSystem::~DeathSystem() {}
 
 void DeathSystem::update(GameEngine& gameContext) const {
-    cout << "DENTRO DE Death 0 Map size: " << gameContext.entityMan.getComponents<RenderComponent>().sizeMap() << "\n";
-    std::vector <int> deadEntities = getDeadEntities(gameContext);
+	std::vector <int> deadEntities = getDeadEntities(gameContext);
 
     deleteEntities(gameContext, deadEntities);
-    cout << "DENTRO DE Death 1 Map size: " << gameContext.entityMan.getComponents<RenderComponent>().sizeMap() << "\n";
 }
 
 std::vector<int> DeathSystem::getDeadEntities(GameEngine& gameContext) const {

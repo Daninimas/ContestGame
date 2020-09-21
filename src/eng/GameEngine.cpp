@@ -176,17 +176,13 @@ void GameEngine::run() {
 
         } else {
             deltaFromLastUpdate += deltaTime;
-            //if (deltaFromLastUpdate >= DELTA_TO_UPDATE) {
+            if (deltaFromLastUpdate >= DELTA_TO_UPDATE) {
                 update();
-                cout << "DESPUES DE UPDATE Map size: " << entityMan.getComponents<RenderComponent>().sizeMap() << "\n";
                 updateSound();
-                cout << "DESPUES DE SOUND Map size: " << entityMan.getComponents<RenderComponent>().sizeMap() << "\n";
                 deltaFromLastUpdate = 0;
-            //}
+            }
 
-            cout << "ANTES DE RENDER Map size: " << entityMan.getComponents<RenderComponent>().sizeMap() << "\n";
             render();
-            cout << "DESPUES DE RENDER Map size: " << entityMan.getComponents<RenderComponent>().sizeMap() << "\n";
 
             //std::this_thread::sleep_for(500ms);
 
@@ -235,22 +231,19 @@ void GameEngine::update() {
 
     for (size_t i = 0; i < systems.size(); ++i) {
 
-        
+        if (CHECK_SYSTEMS)
             cout << "System: " << (int)i << "... " << endl;
         systems[i]->update(*this);
-        cout << "Map size: " << entityMan.getComponents<RenderComponent>().sizeMap() << "\n";
     }
 
     for (size_t i = 0; i < systemsLate.size(); ++i) {
 
-        
-            cout << "System Late update: " << (int)i + systems.size() << "... " << endl;
+        if (CHECK_SYSTEMS)
+            cout << "System Late update: " << (int)i << "... " << endl;
         systemsLate[i]->update(*this);
-        cout << "Map size: " << entityMan.getComponents<RenderComponent>().sizeMap() << "\n";
     }
 
     updateEntitiesInWindow();
-
 }
 
 void GameEngine::updateSound() {
@@ -310,6 +303,7 @@ Entity &GameEngine::getEntity(int id) {
 
 
 void GameEngine::eraseEntityByID(int id) {
+    entityMan.removeEntityToUpdate(id);
     windowFacade.eraseEntity(id);
 
 

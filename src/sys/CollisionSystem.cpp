@@ -18,11 +18,9 @@ CollisionSystem::~CollisionSystem() {}
 
 
 void CollisionSystem::update(GameEngine& gameContext) const {
-    cout << "DENTRO DE COLLISION 0 Map size: " << gameContext.entityMan.getComponents<RenderComponent>().sizeMap() << "\n";
     clearAllCollisions(gameContext);
-    cout << "DENTRO DE COLLISION 1 Map size: " << gameContext.entityMan.getComponents<RenderComponent>().sizeMap() << "\n";
+
 	calculateCollisions(gameContext);
-    cout << "DENTRO DE COLLISION 2 Map size: " << gameContext.entityMan.getComponents<RenderComponent>().sizeMap() << "\n";
 }
 
 

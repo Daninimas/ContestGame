@@ -87,13 +87,15 @@ void SFMLEngine::drawBoundingTree(BoundingBoxNode boundingNode, SituationCompone
 void SFMLEngine::updateEntities(GameEngine& gameContext, std::vector<int> entitiesId) {
 
 	for (int id : entitiesId) {
-		SituationComponent& situation = gameContext.entityMan.getComponent<SituationComponent>(id);
-		RenderComponent& drawable = gameContext.entityMan.getComponent<RenderComponent>(id);
+		if (existsNode(id)) {
+			SituationComponent& situation = gameContext.entityMan.getComponent<SituationComponent>(id);
+			RenderComponent& drawable = gameContext.entityMan.getComponent<RenderComponent>(id);
 
-		sf::Sprite& node = nodeMap[id];
-		node.setPosition(situation.x, situation.y);
-		node.setRotation(situation.rotation);
-		node.setScale(situation.scaleX, situation.scaleY);
+			sf::Sprite& node = nodeMap[id];
+			node.setPosition(situation.x, situation.y);
+			node.setRotation(situation.rotation);
+			node.setScale(situation.scaleX, situation.scaleY);
+		}
 	}
 }
 
