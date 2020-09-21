@@ -76,7 +76,8 @@ int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float
     SituationComponent& situation = createComponent<SituationComponent>(entityId);
     VelocityComponent& velocityComp = createComponent<VelocityComponent>(entityId);
     HeathComponent& heathComp = createComponent<HeathComponent>(entityId);
-    MeleeWeaponComponent& meleWeaponComp = createComponent<MeleeWeaponComponent>(entityId);
+    MeleeWeaponComponent& meleeWeaponComp = createComponent<MeleeWeaponComponent>(entityId);
+    DistanceWeaponComponent& distanceWeaponComp = createComponent<DistanceWeaponComponent>(entityId);
     ColliderComponent& colliderComp = createComponent<ColliderComponent>(entityId);
     JumpComponent& jumpComp = createComponent<JumpComponent>(entityId);
     RenderComponent& renderComp = createComponent<RenderComponent>(entityId);
@@ -93,11 +94,20 @@ int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float
     // Collider
     colliderComp.collisionLayer = ColliderComponent::Player;
     colliderComp.type = ColliderType::DYNAMIC;
-    //cout << (int)(0xFF & static_cast<uint8_t>(-ColliderComponent::PlayerAttack));
-    //colliderComp.layerMasc = ColliderComponent::Wall | ColliderComponent::Enemy | ColliderComponent::Attack; //Collides with everything except PlayerAttacks
     colliderComp.layerMasc = 0xFF - ColliderComponent::PlayerAttack; //Collides with everything except PlayerAttacks
     colliderComp.boundingRoot.bounding = { 0.f, 500.f, 0.f, 30.f };
     colliderComp.boundingRoot.childs.emplace_back( 20.f, 450.f, 10.f, 20.f ); //Head
+
+    // Melee
+    meleeWeaponComp.attackBounding = { 0.f, 10.f, 0.f, 10.f };
+    meleeWeaponComp.damage = 2;
+
+    // Distance
+    distanceWeaponComp.attackBounding = { 0.f, 5.f, 0.f, 10.f };
+    distanceWeaponComp.damage = 1;
+    distanceWeaponComp.attackVelocity = 50.f;
+    distanceWeaponComp.attackGravity = 0.f;
+    distanceWeaponComp.maxCooldown = 0.3f;
 
     // Jump
     jumpComp.jumptable = { 500.f, 500.f, 400.f, 400.f, 300.f, 300.f, 200.f, 100.f };
@@ -117,8 +127,7 @@ int EntityManager::createAttack(GameEngine& gameContext, float x, float y, float
 
     SituationComponent& situation = createComponent<SituationComponent>(entityId);
     ColliderComponent& collider = createComponent<ColliderComponent>(entityId);
-    createComponent<VelocityComponent>(entityId);
-    createComponent<AttackComponent>(entityId);
+    AttackComponent& attack = createComponent<AttackComponent>(entityId);
 
     //######### DATA ########//
     situation.x = x;
@@ -132,13 +141,24 @@ int EntityManager::createAttack(GameEngine& gameContext, float x, float y, float
         break;
 
     case GameObjectType::DISTANCE_ATTACK:
+        createComponent<VelocityComponent>(entityId);
         break;
 
     case GameObjectType::PLAYER_MELEE_ATTACK:
         collider.collisionLayer = ColliderComponent::PlayerAttack;
-        collider.layerMasc = ColliderComponent::Enemy + ColliderComponent::Wall;  // Collides with enemys only
-        collider.boundingRoot.bounding = { 0.f, 10.f, 0.f, 10.f };
+        collider.layerMasc = ColliderComponent::Enemy;  // Collides with enemys only
 
+        attack.type = AttackType::MELEE;
+
+        break;
+
+    case GameObjectType::PLAYER_DISTANCE_ATTACK:
+        createComponent<VelocityComponent>(entityId);
+
+        collider.collisionLayer = ColliderComponent::PlayerAttack;
+        collider.layerMasc = ColliderComponent::Enemy + ColliderComponent::Wall;  // Collides with enemys and walls
+
+        attack.type = AttackType::DISTANCE;
         break;
     }
 

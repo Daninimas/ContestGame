@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Component.hpp"
+#include <tools/BoundingBox.hpp>
 
 class WeaponComponent : public Component {
 public:
@@ -9,9 +10,8 @@ public:
 
     uint16_t damage{ 1 };
 
-    float maxCooldown{ 0.5f };
+    float maxCooldown{ 0.7f };
     float cooldown{ 0.f };
 
-    float attackWidth{ 1.f };
-    float attacHeight{ 1.f };
+    BoundingBox attackBounding;
 };

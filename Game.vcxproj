@@ -155,6 +155,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\com\AttackComponent.cpp" />
+    <ClCompile Include="src\com\DistanceWeaponComponent.cpp" />
     <ClCompile Include="src\com\JumpComponent.cpp" />
     <ClCompile Include="src\com\RenderComponent.cpp" />
     <ClCompile Include="src\com\WeaponComponent.cpp" />
@@ -180,6 +181,7 @@
   <ItemGroup>
     <ClInclude Include="src\com\AttackComponent.hpp" />
     <ClInclude Include="src\com\ColliderComponent.hpp" />
+    <ClInclude Include="src\com\DistanceWeaponComponent.hpp" />
     <ClInclude Include="src\com\HeathComponent.hpp" />
     <ClInclude Include="src\com\InputComponent.hpp" />
     <ClInclude Include="src\com\JumpComponent.hpp" />

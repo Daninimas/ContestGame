@@ -14,7 +14,8 @@ private:
     void deleteMeleeAttacks(GameEngine& gameContext) const;
     void addCooldownTimeToWeapons(GameEngine& gameContext) const;
     void checkPlayerAttacking(GameEngine& gameContext) const;
-    void createMeleeAttack(GameEngine& gameContext, int attackerID) const;
+    void createMeleeAttack(GameEngine& gameContext, MeleeWeaponComponent& meleeAttacker) const;
+    void createDistanceAttack(GameEngine& gameContext, DistanceWeaponComponent& distanceWeaponAttacker) const;
     void checkAttacksHits(GameEngine& gameContext) const;
 
     void resolveAttackHit(GameEngine& gameContext, ColliderComponent& attackCol, AttackComponent& attack, std::vector<int>& attacksToDelete) const;

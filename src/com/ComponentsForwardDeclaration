@@ -8,3 +8,4 @@ class WeaponComponent;
 class AttackComponent;
 class JumpComponent;
 class RenderComponent;
+class DistanceWeaponComponent;

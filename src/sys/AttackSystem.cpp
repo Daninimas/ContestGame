@@ -10,7 +10,7 @@ AttackSystem::~AttackSystem() {}
 
 void AttackSystem::update(GameEngine& gameContext) const {
 	// Delete previous melee attacks
-	//deleteMeleeAttacks(gameContext);
+	deleteMeleeAttacks(gameContext);
 
 	//manage COOLDOWN for all attacks
 	addCooldownTimeToWeapons(gameContext);
@@ -33,11 +33,20 @@ void AttackSystem::deleteMeleeAttacks(GameEngine& gameContext) const {
 
 
 void AttackSystem::addCooldownTimeToWeapons(GameEngine& gameContext) const {
+
+	// FOR THE MELEE WEAPONS
 	auto& meleeWeapons = gameContext.entityMan.getComponents<MeleeWeaponComponent>();
 	float deltaTime = gameContext.getDeltaTime();
 
 	for (auto& meleeWeap : meleeWeapons) {
 		meleeWeap.cooldown += deltaTime;
+	}
+
+	// FOR THE DISTANCE WEAPONS
+	auto& distanceWeapons = gameContext.entityMan.getComponents<DistanceWeaponComponent>();
+
+	for (auto& distanceWeap : distanceWeapons) {
+		distanceWeap.cooldown += deltaTime;
 	}
 }
 
@@ -49,19 +58,57 @@ void AttackSystem::checkPlayerAttacking(GameEngine& gameContext) const {
 
 	if (playerInput.attacking) {
 		// TODO attack mele or distance
-		createMeleeAttack(gameContext, gameContext.playerId);
+		
+		//createMeleeAttack(gameContext, gameContext.entityMan.getComponent<MeleeWeaponComponent>(gameContext.playerId));
+
+		createDistanceAttack(gameContext, gameContext.entityMan.getComponent<DistanceWeaponComponent>(gameContext.playerId));
 	}
 }
 
-void AttackSystem::createMeleeAttack(GameEngine& gameContext, int attackerID) const {
-	MeleeWeaponComponent& meleeWeapon = gameContext.entityMan.getComponent<MeleeWeaponComponent>(attackerID);
+void AttackSystem::createMeleeAttack(GameEngine& gameContext, MeleeWeaponComponent& meleeAttacker) const {
 
-	if (meleeWeapon.cooldown > meleeWeapon.maxCooldown) {
-		SituationComponent& attackerSit = gameContext.entityMan.getComponent<SituationComponent>(attackerID);
+	if (meleeAttacker.cooldown > meleeAttacker.maxCooldown) {
+		SituationComponent& attackerSit = gameContext.entityMan.getComponent<SituationComponent>(meleeAttacker.id);
 
-		int attackId = gameContext.entityMan.createAttack(gameContext, attackerSit.x, attackerSit.y+50, 0.f, GameObjectType::PLAYER_MELEE_ATTACK);
+		GameObjectType attackGOtype = GameObjectType::MELEE_ATTACK;
+		if (meleeAttacker.id == gameContext.playerId) {
+			attackGOtype = GameObjectType::PLAYER_MELEE_ATTACK;
+		}
 
-		meleeWeapon.cooldown = 0.f;
+		int attackId = gameContext.entityMan.createAttack(gameContext, attackerSit.x, attackerSit.y + 50, 0.f, attackGOtype);
+
+		ColliderComponent& colliderComp = gameContext.entityMan.getComponent<ColliderComponent>(attackId);
+		AttackComponent& attackComp     = gameContext.entityMan.getComponent<AttackComponent>(attackId);
+
+		colliderComp.boundingRoot.bounding = meleeAttacker.attackBounding;
+		attackComp.damage = meleeAttacker.damage;
+
+		meleeAttacker.cooldown = 0.f;
+	}
+}
+
+void AttackSystem::createDistanceAttack(GameEngine& gameContext, DistanceWeaponComponent& distanceWeaponAttacker) const{
+
+	if (distanceWeaponAttacker.cooldown > distanceWeaponAttacker.maxCooldown) {
+		SituationComponent& attackerSit = gameContext.entityMan.getComponent<SituationComponent>(distanceWeaponAttacker.id);
+
+		GameObjectType attackGOtype = GameObjectType::DISTANCE_ATTACK;
+		if (distanceWeaponAttacker.id == gameContext.playerId) {
+			attackGOtype = GameObjectType::PLAYER_DISTANCE_ATTACK;
+		}
+
+		int attackId = gameContext.entityMan.createAttack(gameContext, attackerSit.x, attackerSit.y, 0.f, attackGOtype);
+
+		ColliderComponent& colliderComp = gameContext.entityMan.getComponent<ColliderComponent>(attackId);
+		AttackComponent& attackComp = gameContext.entityMan.getComponent<AttackComponent>(attackId);
+		VelocityComponent& attackVel = gameContext.entityMan.getComponent<VelocityComponent>(attackId);
+
+		colliderComp.boundingRoot.bounding = distanceWeaponAttacker.attackBounding;
+		attackComp.damage = distanceWeaponAttacker.damage;
+		attackVel.velocityX = distanceWeaponAttacker.attackVelocity;
+		attackVel.gravity = distanceWeaponAttacker.attackGravity;
+
+		distanceWeaponAttacker.cooldown = 0.f;
 	}
 }
 
