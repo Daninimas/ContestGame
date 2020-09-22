@@ -11,7 +11,7 @@ public:
     explicit RenderComponent(const int id);
     ~RenderComponent() override;
 
-    const char* sprite = "TaOmA.png";
+    std::string sprite = "";
 
     BoundingBox spriteRect{ 0.f, 10.f, 0.f, 10.f };
 

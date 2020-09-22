@@ -108,6 +108,19 @@ void SFMLEngine::updateNode(GameEngine& gameContext, int id) {
 }
 
 void SFMLEngine::updateTextures(GameEngine& gameContext, std::vector<int> entitiesId) {
+	for (int id : entitiesId) {
+		if (existsNode(id)) {
+			updateTexture(gameContext, id);
+		}
+	}
+}
+
+void SFMLEngine::updateTexture(GameEngine& gameContext, int id) {
+	RenderComponent& drawable = gameContext.entityMan.getComponent<RenderComponent>(id);
+	sf::Sprite& node = nodeMap[id];
+	BoundingBox& drawableRect = drawable.spriteRect;
+
+	node.setTextureRect(sf::IntRect(drawableRect.xLeft, drawableRect.yUp, drawableRect.xRight - drawableRect.xLeft, drawableRect.yDown - drawableRect.yUp));
 }
 
 void SFMLEngine::createEntity(GameEngine& gameContext, int id) {
@@ -122,6 +135,7 @@ void SFMLEngine::createEntity(GameEngine& gameContext, int id) {
 
 	// Set the position and data
 	updateNode(gameContext, id);
+	updateTexture(gameContext, id);
 }
 
 void SFMLEngine::eraseEntity(int id) {

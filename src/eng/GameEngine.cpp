@@ -56,14 +56,12 @@ void GameEngine::init() {
     StaticEntitiesSystem staticSystem{};
     staticSystem.init(*this);
 
+    systems.emplace_back(std::make_unique<PhysicsSystem>());               //#01
     systems.emplace_back(std::make_unique<CollisionSystem>());                   //#00
     systems.emplace_back(std::make_unique<InputSystem>());                   //#01
     systems.emplace_back(std::make_unique<AttackSystem>());                   //#02
 
-
-
     systemsLate.emplace_back(std::make_unique<DeathSystem>());               //#00
-    systemsLate.emplace_back(std::make_unique<PhysicsSystem>());               //#01
 }
 
 void GameEngine::run() {

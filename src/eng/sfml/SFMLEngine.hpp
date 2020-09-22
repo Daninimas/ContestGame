@@ -36,6 +36,7 @@ private:
     void drawBoundingTree(BoundingBoxNode boundingNode, SituationComponent& sit) const;
 
     void updateNode(GameEngine& gameContext, int id);
+    void updateTexture(GameEngine& gameContext, int id);
 
     std::unique_ptr<sf::RenderWindow> device;
     std::unordered_map<int, sf::Sprite> nodeMap;

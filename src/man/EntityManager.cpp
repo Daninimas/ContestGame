@@ -109,6 +109,10 @@ int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float
     distanceWeaponComp.attackGravity = 0.f;
     distanceWeaponComp.maxCooldown = 0.3f;
 
+    // Render component
+    renderComp.sprite = "TaOmA.png";
+    renderComp.spriteRect = { 247, 350, 127, 165 };
+
     // Jump
     //jumpComp.jumptable = { 500.f, 500.f, 400.f, 400.f, 300.f, 300.f, 200.f, 100.f };
 
