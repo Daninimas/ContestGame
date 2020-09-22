@@ -105,7 +105,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float
     // Distance
     distanceWeaponComp.attackBounding = { 0.f, 5.f, 0.f, 10.f };
     distanceWeaponComp.damage = 1;
-    distanceWeaponComp.attackVelocity = 50.f;
+    distanceWeaponComp.attackGeneralVelociy = 50.f;
     distanceWeaponComp.attackGravity = 0.f;
     distanceWeaponComp.maxCooldown = 0.3f;
 

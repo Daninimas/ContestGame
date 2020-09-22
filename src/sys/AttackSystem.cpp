@@ -55,13 +55,32 @@ void AttackSystem::addCooldownTimeToWeapons(GameEngine& gameContext) const {
 void AttackSystem::checkPlayerAttacking(GameEngine& gameContext) const {
 	InputComponent& playerInput = gameContext.entityMan.getComponent<InputComponent>(gameContext.playerId);
 
-
 	if (playerInput.attacking) {
 		// TODO attack mele or distance
 		
 		//createMeleeAttack(gameContext, gameContext.entityMan.getComponent<MeleeWeaponComponent>(gameContext.playerId));
 
-		createDistanceAttack(gameContext, gameContext.entityMan.getComponent<DistanceWeaponComponent>(gameContext.playerId));
+
+		DistanceWeaponComponent& playerDistanceWeap = gameContext.entityMan.getComponent<DistanceWeaponComponent>(gameContext.playerId);
+		VelocityComponent& playerVel = gameContext.entityMan.getComponent<VelocityComponent>(gameContext.playerId);
+
+		playerDistanceWeap.attackVelX = playerDistanceWeap.attackGeneralVelociy;
+		playerDistanceWeap.attackVelY = 0.f;
+		if (playerInput.movingUp)
+		{
+			playerDistanceWeap.attackVelX = 0.f;
+			playerDistanceWeap.attackVelY = -playerDistanceWeap.attackGeneralVelociy;
+		}
+		if (playerInput.movingDown)
+		{
+			if (playerVel.velocityY != 0) {
+				// if the player is on air
+				// shoot down
+				playerDistanceWeap.attackVelX = 0.f;
+				playerDistanceWeap.attackVelY = playerDistanceWeap.attackGeneralVelociy;
+			}
+		}
+		createDistanceAttack(gameContext, playerDistanceWeap);
 	}
 }
 
@@ -105,7 +124,8 @@ void AttackSystem::createDistanceAttack(GameEngine& gameContext, DistanceWeaponC
 
 		colliderComp.boundingRoot.bounding = distanceWeaponAttacker.attackBounding;
 		attackComp.damage = distanceWeaponAttacker.damage;
-		attackVel.velocityX = distanceWeaponAttacker.attackVelocity;
+		attackVel.velocityX = distanceWeaponAttacker.attackVelX;
+		attackVel.velocityY = distanceWeaponAttacker.attackVelY;
 		attackVel.gravity = distanceWeaponAttacker.attackGravity;
 
 		distanceWeaponAttacker.cooldown = 0.f;

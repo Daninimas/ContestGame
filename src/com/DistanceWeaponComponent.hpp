@@ -7,6 +7,9 @@ public:
     explicit DistanceWeaponComponent(const int id);
     ~DistanceWeaponComponent() override;
 
-    float attackVelocity{ 10.f };
+    float attackGeneralVelociy{ 10.f }; // the max velocity for setting the attack
+
+    float attackVelX{ 0.f };
+    float attackVelY{ 0.f };
     float attackGravity{ 0.f };
 };
