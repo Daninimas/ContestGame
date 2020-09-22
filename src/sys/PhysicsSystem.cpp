@@ -49,6 +49,16 @@ void PhysicsSystem::updateSituations(GameEngine& gameContext) const {
     for (VelocityComponent& velocity : velocities) {
         SituationComponent& situation = gameContext.entityMan.getComponent<SituationComponent>(velocity.id);
 
+        // Set the facing
+        if (velocity.velocityX > 0) {
+            situation.facing = SituationComponent::Right;
+        }
+        else if(velocity.velocityX < 0) {
+            situation.facing = SituationComponent::Left;
+        }
+        // if == 0, is the same as before
+
+
         // Gravity
         velocity.velocityY += velocity.gravity * deltaTime;
         velocity.velocityY = std::clamp(velocity.velocityY, velocity.minVy, velocity.maxVy);

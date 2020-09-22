@@ -88,14 +88,22 @@ void SFMLEngine::updateEntities(GameEngine& gameContext, std::vector<int> entiti
 
 	for (int id : entitiesId) {
 		if (existsNode(id)) {
-			SituationComponent& situation = gameContext.entityMan.getComponent<SituationComponent>(id);
-			RenderComponent& drawable = gameContext.entityMan.getComponent<RenderComponent>(id);
-
-			sf::Sprite& node = nodeMap[id];
-			node.setPosition(situation.x, situation.y);
-			node.setRotation(situation.rotation);
-			node.setScale(situation.scaleX, situation.scaleY);
+			updateNode(gameContext, id);
 		}
+	}
+}
+
+void SFMLEngine::updateNode(GameEngine& gameContext, int id) {
+	SituationComponent& situation = gameContext.entityMan.getComponent<SituationComponent>(id);
+	RenderComponent& drawable = gameContext.entityMan.getComponent<RenderComponent>(id);
+	sf::Sprite& node = nodeMap[id];
+
+	node.setPosition(situation.x, situation.y);
+	node.setRotation(situation.rotation);
+	node.setScale(situation.scaleX, situation.scaleY);
+	if (situation.facing == SituationComponent::Left) {
+		node.move(node.getLocalBounds().width, 0.f);
+		node.scale(-1.f, 1.f);
 	}
 }
 
@@ -104,7 +112,6 @@ void SFMLEngine::updateTextures(GameEngine& gameContext, std::vector<int> entiti
 
 void SFMLEngine::createEntity(GameEngine& gameContext, int id) {
 	RenderComponent& drawable    = gameContext.entityMan.getComponent<RenderComponent>(id);
-	SituationComponent& situation  = gameContext.entityMan.getComponent<SituationComponent>(id);
 
 
 	if (!existsTexture(drawable.sprite)) {
@@ -113,10 +120,8 @@ void SFMLEngine::createEntity(GameEngine& gameContext, int id) {
 
 	nodeMap.emplace(std::piecewise_construct, std::forward_as_tuple(id), std::forward_as_tuple(textureMap[drawable.sprite]));
 
-	sf::Sprite& node = nodeMap[id];
-	node.setPosition(situation.x, situation.y);
-	node.setRotation(situation.rotation);
-	node.setScale(situation.scaleX, situation.scaleY);
+	// Set the position and data
+	updateNode(gameContext, id);
 }
 
 void SFMLEngine::eraseEntity(int id) {

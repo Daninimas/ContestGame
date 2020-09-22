@@ -13,4 +13,10 @@ public:
 
     float	scaleX     { 1.f };
     float	scaleY     { 1.f };
+
+    enum {
+        Left,
+        Right
+    };
+    uint8_t facing{ Right };
 };
