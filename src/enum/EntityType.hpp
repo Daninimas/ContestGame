@@ -3,5 +3,6 @@
 enum class EntityType {
     PLAYER,             
     ENEMY,           
-    ATTACK
+    ATTACK, 
+    WALL
 };

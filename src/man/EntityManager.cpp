@@ -88,6 +88,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float
     situation.rotation = r;
 
     velocityComp.speedX = 30.f;
+    velocityComp.gravity = 50.f;
 
     gameContext.playerId = entityId;
 
@@ -95,8 +96,8 @@ int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float
     colliderComp.collisionLayer = ColliderComponent::Player;
     colliderComp.type = ColliderType::DYNAMIC;
     colliderComp.layerMasc = 0xFF - ColliderComponent::PlayerAttack; //Collides with everything except PlayerAttacks
-    colliderComp.boundingRoot.bounding = { 0.f, 500.f, 0.f, 30.f };
-    colliderComp.boundingRoot.childs.emplace_back( 20.f, 450.f, 10.f, 20.f ); //Head
+    colliderComp.boundingRoot.bounding = { 0.f, 50.f, 0.f, 50.f };
+    colliderComp.boundingRoot.childs.emplace_back( 20.f, 30.f, 10.f, 20.f ); //Head
 
     // Melee
     meleeWeaponComp.attackBounding = { 0.f, 10.f, 0.f, 10.f };
@@ -105,9 +106,9 @@ int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float
     // Distance
     distanceWeaponComp.attackBounding = { 0.f, 5.f, 0.f, 10.f };
     distanceWeaponComp.damage = 1;
-    distanceWeaponComp.attackGeneralVelociy = 50.f;
-    distanceWeaponComp.attackGravity = 0.f;
-    distanceWeaponComp.maxCooldown = 0.3f;
+    distanceWeaponComp.attackGeneralVelociy = 500.f;
+    distanceWeaponComp.attackGravity = 0.01f;
+    distanceWeaponComp.maxCooldown = 0.5f;
 
     // Render component
     renderComp.sprite = "TaOmA.png";
@@ -189,12 +190,54 @@ int EntityManager::createWall(GameEngine& gameContext, float x, float y, float r
     // Collider
     colliderComp.collisionLayer = ColliderComponent::Wall;
     colliderComp.layerMasc = ColliderComponent::Enemy + ColliderComponent::Player + ColliderComponent::PlayerAttack; //Collides with player and enemy
-    colliderComp.boundingRoot.bounding = { 0.f, 100.f, 0.f, 70.f };
+    colliderComp.boundingRoot.bounding = { 0.f, 100.f, 0.f, 10.f };
 
     //######### RENDER ########//
     //gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
 
     //######### CREATE ########//
-    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::ATTACK, goType));
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::WALL, goType));
+    return entityId;
+}
+
+
+int EntityManager::createEnemy(GameEngine& gameContext, float x, float y, float r, GameObjectType goType) {
+    int entityId = Entity::getCurrentId();
+    //gameContext.playerId = entityId;
+
+    SituationComponent& situation = createComponent<SituationComponent>(entityId);
+    ColliderComponent& colliderComp = createComponent<ColliderComponent>(entityId);
+    RenderComponent& renderComp = createComponent<RenderComponent>(entityId);
+    VelocityComponent& velocityComp = createComponent<VelocityComponent>(entityId);
+    HeathComponent& healthComp = createComponent<HeathComponent>(entityId);
+
+
+    //######### DATA ########//
+    situation.x = x;
+    situation.y = y;
+    situation.rotation = r;
+
+    // Collider
+    colliderComp.collisionLayer = ColliderComponent::Enemy;
+    colliderComp.layerMasc = ColliderComponent::Player + ColliderComponent::PlayerAttack + ColliderComponent::Wall; //Collides with player and enemy
+    colliderComp.boundingRoot.bounding = { 0.f, 50.f, 0.f, 50.f };
+    colliderComp.type = ColliderType::DYNAMIC;
+
+    // Render component
+    renderComp.sprite = "TaOmA.png";
+    renderComp.spriteRect = { 400, 450, 200, 250 };
+
+    // Velocity
+    velocityComp.gravity = 20.f;
+
+    // HeathComponent
+    healthComp.maxHealth = 5;
+
+
+    //######### RENDER ########//
+    gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
+
+    //######### CREATE ########//
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::ENEMY, goType));
     return entityId;
 }

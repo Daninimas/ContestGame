@@ -7,3 +7,4 @@
 #include <sys/AttackSystem.hpp>
 #include <sys/DeathSystem.hpp>
 #include <sys/CollisionSystem.hpp>
+#include <sys/HealthSystem.hpp>

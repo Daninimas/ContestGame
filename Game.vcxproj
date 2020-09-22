@@ -167,6 +167,7 @@
     <ClCompile Include="src\com\VelocityComponent.cpp" />
     <ClCompile Include="src\sys\CollisionSystem.cpp" />
     <ClCompile Include="src\sys\DeathSystem.cpp" />
+    <ClCompile Include="src\sys\HealthSystem.cpp" />
     <ClCompile Include="src\sys\InputSystem.cpp" />
     <ClCompile Include="src\eng\sfml\SFMLEngine.cpp" />
     <ClCompile Include="src\com\SituationComponent.cpp" />
@@ -206,6 +207,7 @@
     <ClInclude Include="src\sys\AttackSystem.hpp" />
     <ClInclude Include="src\sys\CollisionSystem.hpp" />
     <ClInclude Include="src\sys\DeathSystem.hpp" />
+    <ClInclude Include="src\sys\HealthSystem.hpp" />
     <ClInclude Include="src\sys\InputSystem.hpp" />
     <ClInclude Include="src\sys\PhysicsSystem.hpp" />
     <ClInclude Include="src\sys\StaticEntitiesSystem.hpp" />
