@@ -32,10 +32,10 @@ void PhysicsSystem::updateJumps(GameEngine& gameContext) const {
             jump.cooldow = 0.f;
         }
 
-        if (jump.jumpIndex < jump.jumptable.size()) {
+        /*if (jump.jumpIndex < jump.jumptable.size()) {
             velocity.velocityY -= jump.jumptable[jump.jumpIndex];
             ++jump.jumpIndex;
-        }
+        }*/
     }
 }
 
@@ -50,7 +50,7 @@ void PhysicsSystem::updateSituations(GameEngine& gameContext) const {
         SituationComponent& situation = gameContext.entityMan.getComponent<SituationComponent>(velocity.id);
 
         // Gravity
-        velocity.velocityY += velocity.gravity;
+        velocity.velocityY += velocity.gravity * deltaTime;
         velocity.velocityY = std::clamp(velocity.velocityY, velocity.minVy, velocity.maxVy);
 
         // Update positions

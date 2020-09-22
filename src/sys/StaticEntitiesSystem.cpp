@@ -17,8 +17,8 @@ void StaticEntitiesSystem::update(GameEngine& gameContext) const {}
 void StaticEntitiesSystem::init(GameEngine &gameContext) const {
     createPlayer(gameContext);
 
-    gameContext.entityMan.createWall(gameContext, 0.f, 50.f, 0.f, GameObjectType::WALL);
-    gameContext.entityMan.createWall(gameContext, 100.f, 0.f, 0.f, GameObjectType::WALL);
+    gameContext.entityMan.createWall(gameContext, 0.f, 400.f, 0.f, GameObjectType::WALL);
+    gameContext.entityMan.createWall(gameContext, 100.f, 380.f, 0.f, GameObjectType::WALL);
 
 }
 

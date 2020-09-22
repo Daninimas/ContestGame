@@ -49,7 +49,7 @@ public:
 
     EntityManager   entityMan;
 
-    // Change place
+    // Change place to worldComponent?
     int playerId;
     // Change place
 

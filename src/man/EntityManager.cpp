@@ -110,7 +110,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float
     distanceWeaponComp.maxCooldown = 0.3f;
 
     // Jump
-    jumpComp.jumptable = { 500.f, 500.f, 400.f, 400.f, 300.f, 300.f, 200.f, 100.f };
+    //jumpComp.jumptable = { 500.f, 500.f, 400.f, 400.f, 300.f, 300.f, 200.f, 100.f };
 
     //######### RENDER ########//
     gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
