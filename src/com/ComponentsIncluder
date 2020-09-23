@@ -11,3 +11,4 @@
 #include <com/JumpComponent.hpp>
 #include <com/RenderComponent.hpp>
 #include <com/DistanceWeaponComponent.hpp>
+#include <com/SensorComponent.hpp>

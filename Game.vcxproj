@@ -154,6 +154,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\sys\SensorSystem.cpp" />
+    <ClCompile Include="src\com\SensorComponent.cpp" />
     <ClCompile Include="src\com\AttackComponent.cpp" />
     <ClCompile Include="src\com\DistanceWeaponComponent.cpp" />
     <ClCompile Include="src\com\JumpComponent.cpp" />
@@ -180,6 +182,8 @@
     <ClCompile Include="src\tools\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\sys\SensorSystem.hpp" />
+    <ClInclude Include="src\com\SensorComponent.hpp" />
     <ClInclude Include="src\com\AttackComponent.hpp" />
     <ClInclude Include="src\com\ColliderComponent.hpp" />
     <ClInclude Include="src\com\DistanceWeaponComponent.hpp" />

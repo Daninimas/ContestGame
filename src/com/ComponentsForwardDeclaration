@@ -9,3 +9,4 @@ class AttackComponent;
 class JumpComponent;
 class RenderComponent;
 class DistanceWeaponComponent;
+class SensorComponent;

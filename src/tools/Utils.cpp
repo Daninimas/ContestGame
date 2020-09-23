@@ -77,3 +77,17 @@ BoundingBox Utils::moveToWorldCoords(BoundingBox& bounding, SituationComponent& 
 
     return worldCoords;
 }
+
+
+void Utils::insertCollidersIdWithVelocity(GameEngine& gameContext, std::vector<int>& idCollidersWithVelocity) {
+    auto& velocitiesComps = gameContext.entityMan.getComponents<VelocityComponent>();
+    auto& colliders = gameContext.entityMan.getComponents<ColliderComponent>();
+    for (auto& velComp : velocitiesComps) {
+        int idVelEnt = velComp.id;
+
+        if (colliders.exists(idVelEnt)) {
+            // has the two components
+            idCollidersWithVelocity.emplace_back(idVelEnt);
+        }
+    }
+}

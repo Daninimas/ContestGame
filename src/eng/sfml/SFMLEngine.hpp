@@ -33,6 +33,7 @@ public:
 
 private:
     void renderColliders(GameEngine& gameContext) const;
+    void renderAllSensors(GameEngine& gameContext) const;
     void drawBoundingTree(BoundingBoxNode boundingNode, SituationComponent& sit) const;
 
     void updateNode(GameEngine& gameContext, int id);
@@ -45,4 +46,5 @@ private:
 
     bool fullscreen = true;
     bool renderCollidables = true;
+    bool renderSensors = true;
 };

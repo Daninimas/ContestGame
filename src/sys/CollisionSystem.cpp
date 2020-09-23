@@ -40,7 +40,7 @@ void CollisionSystem::calculateCollisions(GameEngine& gameContext) const {
 
     // Prepare data for the collision calculation
     idCollidersWithVelocity.reserve(velocitiesSize); // Reserve the size of the velocities component storage
-    insertCollidersIdWithVelocity(gameContext, idCollidersWithVelocity);
+    Utils::insertCollidersIdWithVelocity(gameContext, idCollidersWithVelocity);
 
     // Calculate collision
     for (std::size_t i = 0; i < idCollidersWithVelocity.size(); ++i) {
@@ -72,19 +72,6 @@ void CollisionSystem::calculateCollisions(GameEngine& gameContext) const {
                 }
 
             }
-        }
-    }
-}
-
-void CollisionSystem::insertCollidersIdWithVelocity(GameEngine& gameContext, std::vector<int>& idCollidersWithVelocity) const {
-    auto& velocitiesComps = gameContext.entityMan.getComponents<VelocityComponent>();
-    auto& colliders = gameContext.entityMan.getComponents<ColliderComponent>();
-    for (auto& velComp : velocitiesComps) {
-        int idVelEnt = velComp.id;
-
-        if (colliders.exists(idVelEnt)) {
-            // has the two components
-            idCollidersWithVelocity.emplace_back(idVelEnt);
         }
     }
 }

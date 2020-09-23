@@ -81,6 +81,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float
     ColliderComponent& colliderComp = createComponent<ColliderComponent>(entityId);
     JumpComponent& jumpComp = createComponent<JumpComponent>(entityId);
     RenderComponent& renderComp = createComponent<RenderComponent>(entityId);
+    SensorComponent& sensorComp = createComponent<SensorComponent>(entityId);
 
     //######### DATA ########//
     situation.x = x;
@@ -107,7 +108,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float
     distanceWeaponComp.attackBounding = { 0.f, 5.f, 0.f, 10.f };
     distanceWeaponComp.damage = 1;
     distanceWeaponComp.attackGeneralVelociy = 500.f;
-    distanceWeaponComp.attackGravity = 0.01f;
+    distanceWeaponComp.attackGravity = 50.f;
     distanceWeaponComp.maxCooldown = 0.5f;
 
     // Render component
@@ -115,7 +116,12 @@ int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float
     renderComp.spriteRect = { 247, 350, 127, 165 };
 
     // Jump
+    jumpComp.impulse = -100.f;
     //jumpComp.jumptable = { 500.f, 500.f, 400.f, 400.f, 300.f, 300.f, 200.f, 100.f };
+    
+    // Sensor
+    sensorComp.sensorBounding = {25.f, 30.f, 0.f, 50.f};
+
 
     //######### RENDER ########//
     gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);

@@ -17,6 +17,7 @@ public:
 
     static BoundingBox moveToWorldCoords(BoundingBox& bounding, SituationComponent& situation);
 
+    static void insertCollidersIdWithVelocity(GameEngine& gameContext, std::vector<int>& idCollidersWithVelocity);
 
 private:
 

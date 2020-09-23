@@ -50,6 +50,10 @@ void SFMLEngine::render(GameEngine& gameContext) const {
 	if (renderCollidables) {
 		renderColliders(gameContext);
 	}
+	// Render sensors
+	if (renderSensors) {
+		renderAllSensors(gameContext);
+	}
 
     // end the current frame
 	device.get()->display();
@@ -70,7 +74,7 @@ void SFMLEngine::drawBoundingTree(BoundingBoxNode boundingNode, SituationCompone
 	sf::RectangleShape rectangle(sf::Vector2f(boundingNode.bounding.xRight - boundingNode.bounding.xLeft, boundingNode.bounding.yDown - boundingNode.bounding.yUp));
 	rectangle.setFillColor(sf::Color(0, 0, 0, 0));
 	if (boundingNode.bounding.entitiesColliding.size() != 0) {
-		rectangle.setFillColor(sf::Color(255, 0, 0));
+		rectangle.setFillColor(sf::Color(255, 0, 0, 100));
 	}
 	rectangle.setOutlineThickness(2);
 	rectangle.setOutlineColor(sf::Color(250, 150, 100));
@@ -83,6 +87,33 @@ void SFMLEngine::drawBoundingTree(BoundingBoxNode boundingNode, SituationCompone
 		drawBoundingTree(b, sit);
 	}
 }
+
+void SFMLEngine::renderAllSensors(GameEngine& gameContext) const {
+	auto& sensors = gameContext.entityMan.getComponents<SensorComponent>();
+
+	for (SensorComponent& s : sensors) {
+		SituationComponent& sit = gameContext.entityMan.getComponent<SituationComponent>(s.id);
+		BoundingBox& b = s.sensorBounding;
+
+		// Draw the sensor rectangle
+		sf::RectangleShape rectangle(sf::Vector2f(b.xRight - b.xLeft, b.yDown - b.yUp));
+
+		rectangle.setFillColor(sf::Color(0, 0, 0, 0));
+		rectangle.setOutlineThickness(1);
+		rectangle.setOutlineColor(sf::Color(0, 255, 0));
+
+		if (sit.facing == SituationComponent::Right) {
+			rectangle.setPosition(sit.x + b.xLeft, sit.y + b.yUp);
+		}
+		else {
+			rectangle.setPosition(sit.x + b.xLeft - (b.xRight - b.xLeft), sit.y + b.yUp);
+
+		}
+		device.get()->draw(rectangle);
+	}
+}
+
+
 
 void SFMLEngine::updateEntities(GameEngine& gameContext, std::vector<int> entitiesId) {
 
