@@ -96,8 +96,8 @@ bool CollisionSystem::checkCollisionAB(BoundingBoxNode& boundingA, SituationComp
     BoundingBox bB = Utils::moveToWorldCoords(boundingB.bounding, situationB);
 
     auto checkIntervals = [](float L1, float R1, float L2, float R2) {
-        if (L2 > R1) return false;
-        if (L1 > R2) return false;
+        if (L2 >= R1) return false;
+        if (L1 >= R2) return false;
         return true;
     };
 
@@ -145,13 +145,14 @@ void CollisionSystem::undoCollision(GameEngine& gameContext, ColliderComponent& 
         else if (mobRight > solRight) {
             return solRight - mobLeft;
         }
+
         return 0.f;
     };
 
     float overlapX = calculateIntersection(mobileBounding.xLeft, mobileBounding.xRight, solidBounding.xLeft, solidBounding.xRight);
     float overlapY = calculateIntersection(mobileBounding.yUp, mobileBounding.yDown, solidBounding.yUp, solidBounding.yDown);
    
-    
+
     if ( overlapX == 0 || (overlapY != 0 && std::abs(overlapY) <= std::abs(overlapX)) ) {
         sitMobile.y += overlapY;
         mobileVel.velocityY = 0.f;
@@ -163,8 +164,6 @@ void CollisionSystem::undoCollision(GameEngine& gameContext, ColliderComponent& 
 
     gameContext.entityMan.addEntityToUpdate(mobileCol.id);
 }
-
-
 
 
 void CollisionSystem::clearCollisions(ColliderComponent& collider) const {

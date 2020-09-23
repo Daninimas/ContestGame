@@ -87,7 +87,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float
     situation.y = y;
     situation.rotation = r;
 
-    velocityComp.speedX = 30.f;
+    velocityComp.speedX = 70.f;
     velocityComp.gravity = 50.f;
 
     gameContext.playerId = entityId;
