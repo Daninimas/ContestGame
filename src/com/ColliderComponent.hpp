@@ -20,7 +20,8 @@ public:
         Player        = 0x02, 
         PlayerAttack  = 0x04,
         Attack        = 0x08,
-        Enemy         = 0x10
+        Enemy         = 0x10,
+        Weapon        = 0x20
     };
 
 

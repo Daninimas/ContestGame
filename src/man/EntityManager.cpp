@@ -248,3 +248,62 @@ int EntityManager::createEnemy(GameEngine& gameContext, float x, float y, float 
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::ENEMY, goType));
     return entityId;
 }
+
+
+int EntityManager::createWeapon(GameEngine& gameContext, float x, float y, float r, GameObjectType goType) {
+    int entityId = Entity::getCurrentId();
+
+
+    SituationComponent& situation = createComponent<SituationComponent>(entityId);
+    ColliderComponent& colliderComp = createComponent<ColliderComponent>(entityId);
+    RenderComponent& renderComp = createComponent<RenderComponent>(entityId);
+    VelocityComponent& velocityComp = createComponent<VelocityComponent>(entityId); // To add gravity
+
+
+    //######### DATA ########//
+    situation.x = x;
+    situation.y = y;
+    situation.rotation = r;
+
+    // Collider
+    colliderComp.collisionLayer = ColliderComponent::Weapon;
+    colliderComp.layerMasc = ColliderComponent::Player + ColliderComponent::Wall; //Collides with player and enemy
+    colliderComp.boundingRoot.bounding = { 0.f, 10.f, 0.f, 10.f };
+    colliderComp.type = ColliderType::NO_SOLID;
+
+    // Render component
+    renderComp.sprite = "TaOmA.png";
+    renderComp.spriteRect = { 400, 450, 200, 250 };
+
+    // Velocity
+    velocityComp.gravity = 20.f;
+    velocityComp.speedX  = 0.f;
+
+
+    switch (goType)
+    {
+    case GameObjectType::M4:
+        DistanceWeaponComponent& distanceWeaponComp = createComponent<DistanceWeaponComponent>(entityId);
+
+        distanceWeaponComp.attackBounding = { 0.f, 5.f, 0.f, 10.f };
+        distanceWeaponComp.damage = 1;
+        distanceWeaponComp.attackGeneralVelociy = 900.f;
+        distanceWeaponComp.attackGravity = 0.f;
+        distanceWeaponComp.maxCooldown = 0.2f;
+        break;
+
+    case GameObjectType::KNIFE:
+        MeleeWeaponComponent& meleeWeaponComp = createComponent<MeleeWeaponComponent>(entityId);
+
+        meleeWeaponComp.attackBounding = { 0.f, 20.f, 10.f, 40.f };
+        meleeWeaponComp.damage = 4;
+        break;
+    }
+
+    //######### RENDER ########//
+    gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
+
+    //######### CREATE ########//
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::WEAPON, goType));
+    return entityId;
+}

@@ -6,5 +6,11 @@ enum class GameObjectType {
     PLAYER_MELEE_ATTACK,
     MELEE_ATTACK,
     DISTANCE_ATTACK,
-    PLAYER_DISTANCE_ATTACK
+    PLAYER_DISTANCE_ATTACK,
+
+
+    // Weapons
+    PISTOL,
+    M4,
+    KNIFE
 };

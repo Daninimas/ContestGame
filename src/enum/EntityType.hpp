@@ -5,5 +5,6 @@ enum class EntityType {
     ENEMY,           
     ATTACK, 
     WALL,
-    WOLRD
+    WOLRD,
+    WEAPON
 };
