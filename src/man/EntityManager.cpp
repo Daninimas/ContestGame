@@ -146,6 +146,8 @@ int EntityManager::createAttack(GameEngine& gameContext, float x, float y, float
     situation.y = y;
     situation.rotation = r;
 
+    collider.type = ColliderType::NO_SOLID;
+
     switch (goType)
     {
     case GameObjectType::MELEE_ATTACK:

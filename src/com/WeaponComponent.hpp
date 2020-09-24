@@ -15,7 +15,9 @@ public:
 
     BoundingBox attackBounding;
 
+    /*
     // Position where the attack is created from player
     float spawnX{ 0.f };
     float spawnY{ 0.f };
+    */
 };

@@ -60,14 +60,16 @@ void CollisionSystem::calculateCollisions(GameEngine& gameContext) const {
                     colliderA.collide = true;
                     colliderB.collide = true;
 
-                    // Check who is the static and the dinamic
-                    if (colliderA.type == ColliderType::DYNAMIC) {
-                        undoCollision(gameContext, colliderB, colliderA);
+                    if (!(colliderA.type == ColliderType::NO_SOLID) && !(colliderB.type == ColliderType::NO_SOLID)) {
+                        // Check who is the static and the dinamic
+                        if (colliderA.type == ColliderType::DYNAMIC) {
+                            undoCollision(gameContext, colliderB, colliderA);
+                        }
+                        else if (colliderB.type == ColliderType::DYNAMIC) {
+                            undoCollision(gameContext, colliderA, colliderB);
+                        }
+                        // No one is dynamic, don't need to resolve
                     }
-                    else if (colliderB.type == ColliderType::DYNAMIC) {
-                        undoCollision(gameContext, colliderA, colliderB);
-                    }
-                    // No one is dynamic, don't need to resolve                
 
                 }
 
@@ -105,8 +107,17 @@ bool CollisionSystem::checkCollisionAB(BoundingBoxNode& boundingA, SituationComp
         }
         else {
             // TODO si no uso en el futuro para nada los entitiesCollifind IDs, borrarlos y usar un BOOL (OPTIMIZACION)
-            boundingA.bounding.entitiesColliding.push_back(situationB.id);
-            boundingB.bounding.entitiesColliding.push_back(situationA.id);
+
+            //comprobar que no lo meta dos veces
+            if (std::find(boundingA.bounding.entitiesColliding.begin(), boundingA.bounding.entitiesColliding.end(), situationB.id) == boundingA.bounding.entitiesColliding.end()) {
+                // someName not in name, add it
+                boundingA.bounding.entitiesColliding.push_back(situationB.id);
+            }
+            if (std::find(boundingB.bounding.entitiesColliding.begin(), boundingB.bounding.entitiesColliding.end(), situationA.id) == boundingB.bounding.entitiesColliding.end()) {
+                // someName not in name, add it
+                boundingB.bounding.entitiesColliding.push_back(situationA.id);
+            }
+            
         }
     }
 

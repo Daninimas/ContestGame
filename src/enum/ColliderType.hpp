@@ -2,5 +2,6 @@
 enum class ColliderType
 {
     STATIC,
-    DYNAMIC
+    DYNAMIC, 
+    NO_SOLID
 };

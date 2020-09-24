@@ -26,7 +26,10 @@ void AttackSystem::deleteMeleeAttacks(GameEngine& gameContext) const {
 
 	for (AttackComponent& attack : attacks) {
 		if (attack.type == AttackType::MELEE) {
-			gameContext.eraseEntityByID(attack.id);
+			--attack.attackLifetime;
+
+			if(attack.attackLifetime == 0)
+				gameContext.eraseEntityByID(attack.id);
 		}
 	}
 }
@@ -74,12 +77,7 @@ void AttackSystem::checkPlayerAttacking(GameEngine& gameContext) const {
 		else {
 			DistanceWeaponComponent& playerDistanceWeap = gameContext.entityMan.getComponent<DistanceWeaponComponent>(gameContext.playerId);
 			VelocityComponent& playerVel = gameContext.entityMan.getComponent<VelocityComponent>(gameContext.playerId);
-			SituationComponent& playerSit = gameContext.entityMan.getComponent<SituationComponent>(gameContext.playerId);
 
-			playerDistanceWeap.attackVelX = playerDistanceWeap.attackGeneralVelociy;
-			if (playerSit.facing == SituationComponent::Left) {
-				playerDistanceWeap.attackVelX *= -1;
-			}
 			playerDistanceWeap.attackVelY = 0.f;
 			if (playerInput.movingUp)
 			{
@@ -105,13 +103,29 @@ void AttackSystem::createMeleeAttack(GameEngine& gameContext, MeleeWeaponCompone
 
 	if (meleeAttacker.cooldown > meleeAttacker.maxCooldown) {
 		SituationComponent& attackerSit = gameContext.entityMan.getComponent<SituationComponent>(meleeAttacker.id);
+		float attackX = attackerSit.x;
+		float attackY = attackerSit.y;
 
 		GameObjectType attackGOtype = GameObjectType::MELEE_ATTACK;
 		if (meleeAttacker.id == gameContext.playerId) {
 			attackGOtype = GameObjectType::PLAYER_MELEE_ATTACK;
 		}
 
-		int attackId = gameContext.entityMan.createAttack(gameContext, attackerSit.x, attackerSit.y + 50, 0.f, attackGOtype);
+		// Calculate attack spawn situation outside of the attacker collidable
+		if (gameContext.entityMan.existsComponent<ColliderComponent>(attackerSit.id)) {
+			BoundingBox& attackerBounding = gameContext.entityMan.getComponent<ColliderComponent>(attackerSit.id).boundingRoot.bounding;
+
+			if (attackerSit.facing == SituationComponent::Right) {
+				attackX += attackerBounding.xRight;
+			}
+			else {
+				// Left
+				attackX -= (meleeAttacker.attackBounding.xRight - meleeAttacker.attackBounding.xLeft);
+			}
+		}
+
+
+		int attackId = gameContext.entityMan.createAttack(gameContext, attackX, attackY, 0.f, attackGOtype);
 
 		ColliderComponent& colliderComp = gameContext.entityMan.getComponent<ColliderComponent>(attackId);
 		AttackComponent& attackComp     = gameContext.entityMan.getComponent<AttackComponent>(attackId);
@@ -127,6 +141,11 @@ void AttackSystem::createDistanceAttack(GameEngine& gameContext, DistanceWeaponC
 
 	if (distanceWeaponAttacker.cooldown > distanceWeaponAttacker.maxCooldown) {
 		SituationComponent& attackerSit = gameContext.entityMan.getComponent<SituationComponent>(distanceWeaponAttacker.id);
+
+		distanceWeaponAttacker.attackVelX = distanceWeaponAttacker.attackGeneralVelociy;
+		if (attackerSit.facing == SituationComponent::Left) {
+			distanceWeaponAttacker.attackVelX *= -1;
+		}
 
 		GameObjectType attackGOtype = GameObjectType::DISTANCE_ATTACK;
 		if (distanceWeaponAttacker.id == gameContext.playerId) {
