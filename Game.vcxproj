@@ -179,9 +179,12 @@
     <ClCompile Include="src\man\EntityManager.cpp" />
     <ClCompile Include="src\sys\PhysicsSystem.cpp" />
     <ClCompile Include="src\sys\StaticEntitiesSystem.cpp" />
+    <ClCompile Include="src\sys\WorldSystem.cpp" />
     <ClCompile Include="src\tools\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\sys\WorldSystem.hpp" />
+    <ClInclude Include="src\tools\WorldData.hpp" />
     <ClInclude Include="src\sys\SensorSystem.hpp" />
     <ClInclude Include="src\com\SensorComponent.hpp" />
     <ClInclude Include="src\com\AttackComponent.hpp" />

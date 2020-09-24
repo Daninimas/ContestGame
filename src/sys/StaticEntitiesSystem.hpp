@@ -12,5 +12,6 @@ public:
     void 	update(GameEngine& gameContext) const override;
 
 private:
-    void    createPlayer(GameEngine &gameContext) const;
+    void    createPlayer(GameEngine& gameContext) const;
+    void    createWorld(GameEngine &gameContext) const;
 };

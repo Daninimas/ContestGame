@@ -1,6 +1,7 @@
 #include "EntityManager.hpp"
 
 #include <tools/Utils.hpp>
+#include <tools/WorldData.hpp>
 
 #include <math.h>
 #include <random>
@@ -70,7 +71,6 @@ void EntityManager::clearEntitiesToUpdate() {
 
 int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float r, GameObjectType goType) {
     int entityId = Entity::getCurrentId();
-    //gameContext.playerId = entityId;
 
 
     SituationComponent& situation = createComponent<SituationComponent>(entityId);
@@ -91,7 +91,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float
     velocityComp.speedX = 70.f;
     velocityComp.gravity = 50.f;
 
-    gameContext.playerId = entityId;
+    WorldData::playerId = entityId;
 
     // Collider
     colliderComp.collisionLayer = ColliderComponent::Player;
@@ -135,7 +135,6 @@ int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float
 
 int EntityManager::createAttack(GameEngine& gameContext, float x, float y, float r, GameObjectType goType) {
     int entityId = Entity::getCurrentId();
-    //gameContext.playerId = entityId;
 
     SituationComponent& situation = createComponent<SituationComponent>(entityId);
     ColliderComponent& collider = createComponent<ColliderComponent>(entityId);
@@ -184,7 +183,6 @@ int EntityManager::createAttack(GameEngine& gameContext, float x, float y, float
 
 int EntityManager::createWall(GameEngine& gameContext, float x, float y, float r, GameObjectType goType) {
     int entityId = Entity::getCurrentId();
-    //gameContext.playerId = entityId;
 
     SituationComponent& situation = createComponent<SituationComponent>(entityId);
     ColliderComponent& colliderComp = createComponent<ColliderComponent>(entityId);
@@ -212,7 +210,7 @@ int EntityManager::createWall(GameEngine& gameContext, float x, float y, float r
 
 int EntityManager::createEnemy(GameEngine& gameContext, float x, float y, float r, GameObjectType goType) {
     int entityId = Entity::getCurrentId();
-    //gameContext.playerId = entityId;
+
 
     SituationComponent& situation = createComponent<SituationComponent>(entityId);
     ColliderComponent& colliderComp = createComponent<ColliderComponent>(entityId);

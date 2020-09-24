@@ -49,10 +49,6 @@ public:
 
     EntityManager   entityMan;
 
-    // Change place to worldComponent?
-    int playerId;
-    // Change place
-
 private:
     void update();
     void updateWithTimers();

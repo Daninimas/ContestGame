@@ -8,8 +8,8 @@ InputSystem::InputSystem() {}
 InputSystem::~InputSystem() {}
 
 void InputSystem::update(GameEngine& gameContext) const {
-    InputComponent    &playerInput = gameContext.entityMan.getComponent<InputComponent>(gameContext.playerId);
-    VelocityComponent &playerVel   = gameContext.entityMan.getComponent<VelocityComponent>(gameContext.playerId);
+    InputComponent    &playerInput = gameContext.entityMan.getComponent<InputComponent>(WorldData::playerId);
+    VelocityComponent &playerVel   = gameContext.entityMan.getComponent<VelocityComponent>(WorldData::playerId);
 
     // Reset actions
     playerInput.resetActions();
@@ -54,7 +54,7 @@ void InputSystem::update(GameEngine& gameContext) const {
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::M))
     {
-        auto& jumpComp = gameContext.entityMan.getComponent<JumpComponent>(gameContext.playerId);
+        auto& jumpComp = gameContext.entityMan.getComponent<JumpComponent>(WorldData::playerId);
         if (jumpComp.cooldow > jumpComp.maxCooldown) { // if has cooldown on floor
             playerVel.velocityY = jumpComp.impulse;
         }

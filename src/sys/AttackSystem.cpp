@@ -56,10 +56,10 @@ void AttackSystem::addCooldownTimeToWeapons(GameEngine& gameContext) const {
 
 
 void AttackSystem::checkPlayerAttacking(GameEngine& gameContext) const {
-	InputComponent& playerInput = gameContext.entityMan.getComponent<InputComponent>(gameContext.playerId);
+	InputComponent& playerInput = gameContext.entityMan.getComponent<InputComponent>(WorldData::playerId);
 
 	if (playerInput.attacking) {
-		SensorComponent& playerSensor = gameContext.entityMan.getComponent<SensorComponent>(gameContext.playerId);
+		SensorComponent& playerSensor = gameContext.entityMan.getComponent<SensorComponent>(WorldData::playerId);
 		bool createMelee = false;
 		//Decides if needs to use melee or distance weapon
 
@@ -72,11 +72,11 @@ void AttackSystem::checkPlayerAttacking(GameEngine& gameContext) const {
 		}
 
 		if (createMelee) {
-			createMeleeAttack(gameContext, gameContext.entityMan.getComponent<MeleeWeaponComponent>(gameContext.playerId));
+			createMeleeAttack(gameContext, gameContext.entityMan.getComponent<MeleeWeaponComponent>(WorldData::playerId));
 		}
 		else {
-			DistanceWeaponComponent& playerDistanceWeap = gameContext.entityMan.getComponent<DistanceWeaponComponent>(gameContext.playerId);
-			VelocityComponent& playerVel = gameContext.entityMan.getComponent<VelocityComponent>(gameContext.playerId);
+			DistanceWeaponComponent& playerDistanceWeap = gameContext.entityMan.getComponent<DistanceWeaponComponent>(WorldData::playerId);
+			VelocityComponent& playerVel = gameContext.entityMan.getComponent<VelocityComponent>(WorldData::playerId);
 
 			playerDistanceWeap.attackVelY = 0.f;
 			if (playerInput.movingUp)
@@ -107,7 +107,7 @@ void AttackSystem::createMeleeAttack(GameEngine& gameContext, MeleeWeaponCompone
 		float attackY = attackerSit.y;
 
 		GameObjectType attackGOtype = GameObjectType::MELEE_ATTACK;
-		if (meleeAttacker.id == gameContext.playerId) {
+		if (meleeAttacker.id == WorldData::playerId) {
 			attackGOtype = GameObjectType::PLAYER_MELEE_ATTACK;
 		}
 
@@ -148,7 +148,7 @@ void AttackSystem::createDistanceAttack(GameEngine& gameContext, DistanceWeaponC
 		}
 
 		GameObjectType attackGOtype = GameObjectType::DISTANCE_ATTACK;
-		if (distanceWeaponAttacker.id == gameContext.playerId) {
+		if (distanceWeaponAttacker.id == WorldData::playerId) {
 			attackGOtype = GameObjectType::PLAYER_DISTANCE_ATTACK;
 		}
 
