@@ -13,5 +13,7 @@ public:
     std::vector<int> entitiesSensoring;
 
     BoundingBox sensorBounding{ 0.f, 0.f, 0.f, 0.f };
+
+    uint8_t sensorLayerMasc{ 0xFF };
 };
 

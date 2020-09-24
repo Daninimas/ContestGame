@@ -56,35 +56,48 @@ void AttackSystem::checkPlayerAttacking(GameEngine& gameContext) const {
 	InputComponent& playerInput = gameContext.entityMan.getComponent<InputComponent>(gameContext.playerId);
 
 	if (playerInput.attacking) {
-		// TODO attack mele or distance
-		
-		//createMeleeAttack(gameContext, gameContext.entityMan.getComponent<MeleeWeaponComponent>(gameContext.playerId));
+		SensorComponent& playerSensor = gameContext.entityMan.getComponent<SensorComponent>(gameContext.playerId);
+		bool createMelee = false;
+		//Decides if needs to use melee or distance weapon
 
+		for (int sensoredId : playerSensor.entitiesSensoring) {
+			EntityType sensoredType = gameContext.entityMan.getEntity(sensoredId).getType();
 
-		DistanceWeaponComponent& playerDistanceWeap = gameContext.entityMan.getComponent<DistanceWeaponComponent>(gameContext.playerId);
-		VelocityComponent&  playerVel = gameContext.entityMan.getComponent<VelocityComponent>(gameContext.playerId);
-		SituationComponent& playerSit = gameContext.entityMan.getComponent<SituationComponent>(gameContext.playerId);
-
-		playerDistanceWeap.attackVelX = playerDistanceWeap.attackGeneralVelociy;
-		if (playerSit.facing == SituationComponent::Left) {
-			playerDistanceWeap.attackVelX *= -1;
-		}
-		playerDistanceWeap.attackVelY = 0.f;
-		if (playerInput.movingUp)
-		{
-			playerDistanceWeap.attackVelX = 0.f;
-			playerDistanceWeap.attackVelY = -playerDistanceWeap.attackGeneralVelociy;
-		}
-		if (playerInput.movingDown)
-		{
-			if (playerVel.velocityY != 0) {
-				// if the player is on air
-				// shoot down
-				playerDistanceWeap.attackVelX = 0.f;
-				playerDistanceWeap.attackVelY = playerDistanceWeap.attackGeneralVelociy;
+			if (sensoredType == EntityType::ENEMY) {
+				createMelee = true;
 			}
 		}
-		createDistanceAttack(gameContext, playerDistanceWeap);
+
+		if (createMelee) {
+			createMeleeAttack(gameContext, gameContext.entityMan.getComponent<MeleeWeaponComponent>(gameContext.playerId));
+		}
+		else {
+			DistanceWeaponComponent& playerDistanceWeap = gameContext.entityMan.getComponent<DistanceWeaponComponent>(gameContext.playerId);
+			VelocityComponent& playerVel = gameContext.entityMan.getComponent<VelocityComponent>(gameContext.playerId);
+			SituationComponent& playerSit = gameContext.entityMan.getComponent<SituationComponent>(gameContext.playerId);
+
+			playerDistanceWeap.attackVelX = playerDistanceWeap.attackGeneralVelociy;
+			if (playerSit.facing == SituationComponent::Left) {
+				playerDistanceWeap.attackVelX *= -1;
+			}
+			playerDistanceWeap.attackVelY = 0.f;
+			if (playerInput.movingUp)
+			{
+				playerDistanceWeap.attackVelX = 0.f;
+				playerDistanceWeap.attackVelY = -playerDistanceWeap.attackGeneralVelociy;
+			}
+			if (playerInput.movingDown)
+			{
+				if (playerVel.velocityY != 0) {
+					// if the player is on air
+					// shoot down
+					playerDistanceWeap.attackVelX = 0.f;
+					playerDistanceWeap.attackVelY = playerDistanceWeap.attackGeneralVelociy;
+				}
+			}
+			createDistanceAttack(gameContext, playerDistanceWeap);
+		}
+		
 	}
 }
 
