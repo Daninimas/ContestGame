@@ -154,6 +154,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\sys\PickWeaponsSystem.cpp" />
     <ClCompile Include="src\sys\SensorSystem.cpp" />
     <ClCompile Include="src\com\SensorComponent.cpp" />
     <ClCompile Include="src\com\AttackComponent.cpp" />
@@ -183,6 +184,7 @@
     <ClCompile Include="src\tools\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\sys\PickWeaponsSystem.hpp" />
     <ClInclude Include="src\sys\WorldSystem.hpp" />
     <ClInclude Include="src\tools\WorldData.hpp" />
     <ClInclude Include="src\sys\SensorSystem.hpp" />

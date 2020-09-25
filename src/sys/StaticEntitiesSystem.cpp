@@ -28,10 +28,13 @@ void StaticEntitiesSystem::init(GameEngine &gameContext) const {
 
 
     gameContext.entityMan.createEnemy(gameContext, 400.f, 300.f, 0.f, GameObjectType::NONE);
+
+    gameContext.entityMan.createWeapon(gameContext, 0, 320.f, 0.f, GameObjectType::M4);
+
 }
 
 void StaticEntitiesSystem::createPlayer(GameEngine &gameContext) const {
-    gameContext.entityMan.createPlayer(gameContext, 0.f, 0.f, 0.f, GameObjectType::PLAYER_GENERAL);
+    gameContext.entityMan.createPlayer(gameContext, 0.f, 300.f, 0.f, GameObjectType::PLAYER_GENERAL);
 }
 
 void StaticEntitiesSystem::createWorld(GameEngine& gameContext) const {

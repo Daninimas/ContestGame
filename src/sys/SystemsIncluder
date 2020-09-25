@@ -10,3 +10,4 @@
 #include <sys/HealthSystem.hpp>
 #include <sys/SensorSystem.hpp>
 #include <sys/WorldSystem.hpp>
+#include <sys/PickWeaponsSystem.hpp>

@@ -61,6 +61,7 @@ void GameEngine::init() {
     systems.emplace_back(std::make_unique<InputSystem>());                   //#02
     systems.emplace_back(std::make_unique<PhysicsSystem>());               //#00
     systems.emplace_back(std::make_unique<AttackSystem>());                   //#03
+    systems.emplace_back(std::make_unique<PickWeaponsSystem>());                   //#03
 
 
     systemsLate.emplace_back(std::make_unique<CollisionSystem>());                   //#01

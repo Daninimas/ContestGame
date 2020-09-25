@@ -196,7 +196,7 @@ int EntityManager::createWall(GameEngine& gameContext, float x, float y, float r
 
     // Collider
     colliderComp.collisionLayer = ColliderComponent::Wall;
-    colliderComp.layerMasc = ColliderComponent::Enemy + ColliderComponent::Player + ColliderComponent::PlayerAttack; //Collides with player and enemy
+    colliderComp.layerMasc = ColliderComponent::Enemy + ColliderComponent::Player + ColliderComponent::PlayerAttack + ColliderComponent::Weapon; //Collides with player and enemy
     colliderComp.boundingRoot.bounding = { 0.f, 100.f, 0.f, 10.f };
 
     //######### RENDER ########//
@@ -267,9 +267,9 @@ int EntityManager::createWeapon(GameEngine& gameContext, float x, float y, float
 
     // Collider
     colliderComp.collisionLayer = ColliderComponent::Weapon;
-    colliderComp.layerMasc = ColliderComponent::Player + ColliderComponent::Wall; //Collides with player and enemy
+    colliderComp.layerMasc = ColliderComponent::Player + ColliderComponent::Wall; //Collides with player and wall
     colliderComp.boundingRoot.bounding = { 0.f, 10.f, 0.f, 10.f };
-    colliderComp.type = ColliderType::NO_SOLID;
+    colliderComp.type = ColliderType::DYNAMIC;
 
     // Render component
     renderComp.sprite = "TaOmA.png";
@@ -280,9 +280,8 @@ int EntityManager::createWeapon(GameEngine& gameContext, float x, float y, float
     velocityComp.speedX  = 0.f;
 
 
-    switch (goType)
-    {
-    case GameObjectType::M4:
+
+    if (goType == GameObjectType::M4) {
         DistanceWeaponComponent& distanceWeaponComp = createComponent<DistanceWeaponComponent>(entityId);
 
         distanceWeaponComp.attackBounding = { 0.f, 5.f, 0.f, 10.f };
@@ -290,14 +289,17 @@ int EntityManager::createWeapon(GameEngine& gameContext, float x, float y, float
         distanceWeaponComp.attackGeneralVelociy = 900.f;
         distanceWeaponComp.attackGravity = 0.f;
         distanceWeaponComp.maxCooldown = 0.2f;
-        break;
 
-    case GameObjectType::KNIFE:
+        WorldData::worldDistanceWeapons.push_back(entityId);
+    }
+
+    else if (goType == GameObjectType::KNIFE) {
         MeleeWeaponComponent& meleeWeaponComp = createComponent<MeleeWeaponComponent>(entityId);
 
         meleeWeaponComp.attackBounding = { 0.f, 20.f, 10.f, 40.f };
         meleeWeaponComp.damage = 4;
-        break;
+
+        WorldData::worldMeleeWeapons.push_back(entityId);
     }
 
     //######### RENDER ########//
