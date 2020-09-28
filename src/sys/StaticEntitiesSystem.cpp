@@ -29,7 +29,8 @@ void StaticEntitiesSystem::init(GameEngine &gameContext) const {
 
     gameContext.entityMan.createEnemy(gameContext, 400.f, 300.f, 0.f, GameObjectType::NONE);
 
-    gameContext.entityMan.createWeapon(gameContext, 0, 320.f, 0.f, GameObjectType::M4);
+    gameContext.entityMan.createWeapon(gameContext, 250, 310.f, 0.f, GameObjectType::KNIFE);
+    gameContext.entityMan.createWeapon(gameContext, 250, 360.f, 0.f, GameObjectType::M4);
 
 }
 

@@ -35,9 +35,10 @@ void EntityManager::eraseEntityByID(int id) {
     eraseComponent<HeathComponent>(id);
     eraseComponent<ColliderComponent>(id);
     eraseComponent<MeleeWeaponComponent>(id);
-    eraseComponent<WeaponComponent>(id);
+    eraseComponent<DistanceWeaponComponent>(id);
     eraseComponent<AttackComponent>(id);
     eraseComponent<JumpComponent>(id);
+    eraseComponent<SensorComponent>(id);
 
 
     entityMap           .erase(id);
@@ -298,6 +299,7 @@ int EntityManager::createWeapon(GameEngine& gameContext, float x, float y, float
 
         meleeWeaponComp.attackBounding = { 0.f, 20.f, 10.f, 40.f };
         meleeWeaponComp.damage = 4;
+        meleeWeaponComp.maxCooldown = 1.f;
 
         WorldData::worldMeleeWeapons.push_back(entityId);
     }
