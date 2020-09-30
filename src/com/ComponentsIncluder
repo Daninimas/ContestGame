@@ -12,3 +12,4 @@
 #include <com/RenderComponent.hpp>
 #include <com/DistanceWeaponComponent.hpp>
 #include <com/SensorComponent.hpp>
+#include <com/CameraComponent.hpp>

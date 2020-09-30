@@ -65,6 +65,7 @@ void GameEngine::init() {
 
 
     systemsLate.emplace_back(std::make_unique<CollisionSystem>());                   //#01
+    systemsLate.emplace_back(std::make_unique<CameraSystem>());                   //#01
     systemsLate.emplace_back(std::make_unique<HealthSystem>());                   //#00
     systemsLate.emplace_back(std::make_unique<DeathSystem>());               //#01
 }

@@ -97,6 +97,7 @@ public:
     int createWall(GameEngine& gameContext, float x, float y, float r, GameObjectType goType = GameObjectType::NONE);
     int createEnemy(GameEngine& gameContext, float x, float y, float r, GameObjectType goType = GameObjectType::NONE);
     int createWeapon(GameEngine& gameContext, float x, float y, float r, GameObjectType goType = GameObjectType::NONE);
+    int createCamera(GameEngine& gameContext, float x, float y, float r, GameObjectType goType = GameObjectType::NONE);
 
 
 private:

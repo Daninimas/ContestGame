@@ -11,3 +11,4 @@
 #include <sys/SensorSystem.hpp>
 #include <sys/WorldSystem.hpp>
 #include <sys/PickWeaponsSystem.hpp>
+#include <sys/CameraSystem.hpp>

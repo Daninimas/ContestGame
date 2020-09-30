@@ -311,3 +311,29 @@ int EntityManager::createWeapon(GameEngine& gameContext, float x, float y, float
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::WEAPON, goType));
     return entityId;
 }
+
+
+int EntityManager::createCamera(GameEngine& gameContext, float x, float y, float r, GameObjectType goType) {
+    int entityId = Entity::getCurrentId();
+
+    SituationComponent& situation = createComponent<SituationComponent>(entityId);
+    CameraComponent& cameraComp   = createComponent<CameraComponent>(entityId);
+
+
+    //######### DATA ########//
+    situation.x = x;
+    situation.y = y;
+    situation.rotation = r;
+
+    // Camera
+    cameraComp.viewRect = { 0.f, 600, 0, 400 };
+    cameraComp.zoom = 1.f;
+
+
+    //######### RENDER ########//
+    gameContext.getWindowFacadeRef().createCamera(gameContext, entityId);
+
+    //######### CREATE ########//
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::CAMERA, goType));
+    return entityId;
+}

@@ -35,6 +35,7 @@ void StaticEntitiesSystem::init(GameEngine &gameContext) const {
     gameContext.entityMan.createWeapon(gameContext, 450, 360.f, 0.f, GameObjectType::M4);
 
 
+    gameContext.entityMan.createCamera(gameContext, 0, 0, 0.f, GameObjectType::NONE);
 
 }
 

@@ -1,6 +1,7 @@
 #include "SFMLEngine.hpp"
 
 #include <eng/GameEngine.hpp>
+#include <tools/Utils.hpp>
 #include <iostream>
 
 SFMLEngine::SFMLEngine(int width, int height, bool fullscreen) {
@@ -40,7 +41,25 @@ void SFMLEngine::render(GameEngine& gameContext) const {
     // clear the window with black color
 	device.get()->clear(sf::Color::Black);
 
-    // draw everything here...
+	for (auto& cameraPair : cameraMap) {
+		// Change the view to the camera view
+		device.get()->setView(cameraPair.second);
+
+		// Render scene from the view perspective
+		drawScene(gameContext);
+	}
+
+	if (cameraMap.size() == 0) {
+		// Render the scene without cameras
+		drawScene(gameContext);
+	}
+
+    // end the current frame
+	device.get()->display();
+}
+
+void SFMLEngine::drawScene(GameEngine& gameContext) const {
+	// draw everything here...
 	for (auto node : nodeMap)
 	{
 		device.get()->draw(node.second);
@@ -54,9 +73,6 @@ void SFMLEngine::render(GameEngine& gameContext) const {
 	if (renderSensors) {
 		renderAllSensors(gameContext);
 	}
-
-    // end the current frame
-	device.get()->display();
 }
 
 void SFMLEngine::renderColliders(GameEngine& gameContext) const {
@@ -169,6 +185,17 @@ void SFMLEngine::createEntity(GameEngine& gameContext, int id) {
 	updateTexture(gameContext, id);
 }
 
+void SFMLEngine::createCamera(GameEngine& gameContext, int id) {
+	CameraComponent& cameraComp   = gameContext.entityMan.getComponent<CameraComponent>(id);
+	SituationComponent& situation = gameContext.entityMan.getComponent<SituationComponent>(id);
+
+	BoundingBox worldViewRect = Utils::moveToWorldCoords(cameraComp.viewRect, situation);
+
+	cameraMap.emplace( std::piecewise_construct, std::forward_as_tuple(id), std::forward_as_tuple(sf::FloatRect(worldViewRect.xLeft, worldViewRect.yUp, worldViewRect.xRight, worldViewRect.yDown)) );
+
+	cameraMap[id].zoom(cameraComp.zoom);
+}
+
 void SFMLEngine::eraseEntity(int id) {
 	nodeMap.erase(id);
 
@@ -185,6 +212,12 @@ size_t SFMLEngine::countRenderNodes() const {
 
 bool SFMLEngine::existsNode(int id) const {
 	if (nodeMap.find(id) == nodeMap.end())
+		return false;
+	return true;
+}
+
+bool SFMLEngine::existsCamera(int id) const {
+	if (cameraMap.find(id) == cameraMap.end())
 		return false;
 	return true;
 }
