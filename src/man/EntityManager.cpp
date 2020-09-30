@@ -89,8 +89,8 @@ int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float
     situation.y = y;
     situation.rotation = r;
 
-    velocityComp.speedX = 70.f;
-    velocityComp.gravity = 50.f;
+    velocityComp.speedX = 100.f;
+    velocityComp.gravity = 250.f;
 
     WorldData::playerId = entityId;
 
@@ -113,11 +113,11 @@ int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float
     distanceWeaponComp.maxCooldown = 0.5f;
 
     // Render component
-    renderComp.sprite = "TaOmA.png";
-    renderComp.spriteRect = { 247, 350, 127, 165 };
+    renderComp.sprite = "YellowDuck.png";
+    renderComp.spriteRect = { 4, 34, 4, 34 };
 
     // Jump
-    jumpComp.impulse = -100.f;
+    jumpComp.impulse = -200.f;
     //jumpComp.jumptable = { 500.f, 500.f, 400.f, 400.f, 300.f, 300.f, 200.f, 100.f };
     
     // Sensor
