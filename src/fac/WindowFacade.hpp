@@ -18,6 +18,7 @@ public:
     virtual void render(GameEngine &gameContext) const = 0;
     virtual void updateEntities(GameEngine &gameContext, std::vector<int> entitiesId) = 0;
     virtual void updateTextures(GameEngine &gameContext, std::vector<int> entitiesId) = 0;
+    virtual void updateCamera(GameEngine& gameContext, int id) = 0;
     virtual void createEntity(GameEngine& gameContext, int id) = 0;
     virtual void createCamera(GameEngine &gameContext, int id) = 0;
     virtual void eraseEntity(int id) = 0;

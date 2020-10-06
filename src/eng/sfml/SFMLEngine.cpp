@@ -170,6 +170,18 @@ void SFMLEngine::updateTexture(GameEngine& gameContext, int id) {
 	node.setTextureRect(sf::IntRect(drawableRect.xLeft, drawableRect.yUp, drawableRect.xRight - drawableRect.xLeft, drawableRect.yDown - drawableRect.yUp));
 }
 
+void SFMLEngine::updateCamera(GameEngine& gameContext, int id) {
+	CameraComponent& cameraComp = gameContext.entityMan.getComponent<CameraComponent>(id);
+	SituationComponent& situation = gameContext.entityMan.getComponent<SituationComponent>(id);
+
+	//BoundingBox worldViewRect = Utils::moveToWorldCoords(cameraComp.viewRect, situation);
+
+	cameraMap[id].setCenter(situation.x, situation.y);
+
+	cameraMap[id].zoom(cameraComp.zoom);
+}
+
+
 void SFMLEngine::createEntity(GameEngine& gameContext, int id) {
 	RenderComponent& drawable    = gameContext.entityMan.getComponent<RenderComponent>(id);
 

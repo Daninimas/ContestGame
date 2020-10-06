@@ -21,6 +21,7 @@ public:
     void render(GameEngine& gameContext) const override;
     void updateEntities(GameEngine& gameContext, std::vector<int> entitiesId) override;
     void updateTextures(GameEngine& gameContext, std::vector<int> entitiesId) override;
+    void updateCamera(GameEngine& gameContext, int id) override;
     void createEntity(GameEngine& gameContext, int id) override;
     void createCamera(GameEngine& gameContext, int id) override;
     void eraseEntity(int id) override;

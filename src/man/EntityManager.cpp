@@ -109,7 +109,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float
     distanceWeaponComp.attackBounding = { 0.f, 5.f, 0.f, 10.f };
     distanceWeaponComp.damage = 1;
     distanceWeaponComp.attackGeneralVelociy = 500.f;
-    distanceWeaponComp.attackGravity = 50.f;
+    distanceWeaponComp.attackGravity = 100.f;
     distanceWeaponComp.maxCooldown = 0.5f;
 
     // Render component
@@ -315,6 +315,8 @@ int EntityManager::createWeapon(GameEngine& gameContext, float x, float y, float
 
 int EntityManager::createCamera(GameEngine& gameContext, float x, float y, float r, GameObjectType goType) {
     int entityId = Entity::getCurrentId();
+
+    WorldData::activeCameraId = entityId;
 
     SituationComponent& situation = createComponent<SituationComponent>(entityId);
     CameraComponent& cameraComp   = createComponent<CameraComponent>(entityId);
