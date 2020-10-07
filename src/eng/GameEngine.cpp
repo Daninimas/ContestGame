@@ -17,7 +17,7 @@ const bool CHECK_SYSTEMS    = false;
 const float DELTA_TO_UPDATE = 1.f / 60.f;
 
 GameEngine::GameEngine()
-    : windowFacade(800, 600, false)/*, soundFacade()*/ {
+    : windowFacade(800, 600, false), soundFacade()/*, soundFacade()*/ {
 
 
     srand(time(NULL)); // initialize the random seed
@@ -293,10 +293,10 @@ void GameEngine::calculateDeltaTime(std::chrono::time_point<std::chrono::system_
 WindowFacade &GameEngine::getWindowFacadeRef() {
     return windowFacade;
 }
-/*
+
 SoundFacade &GameEngine::getSoundFacadeRef() {
-    //return soundFacade;
-}*/
+    return soundFacade;
+}
 
 
 

@@ -113,7 +113,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float
     distanceWeaponComp.maxCooldown = 0.5f;
 
     // Render component
-    renderComp.sprite = "YellowDuck.png";
+    renderComp.sprite = "Media/Images/YellowDuck.png";
     renderComp.spriteRect = { 4, 34, 4, 34 };
 
     // Jump
@@ -232,7 +232,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, float x, float y, float 
     colliderComp.type = ColliderType::DYNAMIC;
 
     // Render component
-    renderComp.sprite = "TaOmA.png";
+    renderComp.sprite = "Media/Images/TaOmA.png";
     renderComp.spriteRect = { 400, 450, 200, 250 };
 
     // Velocity
@@ -273,7 +273,7 @@ int EntityManager::createWeapon(GameEngine& gameContext, float x, float y, float
     colliderComp.type = ColliderType::DYNAMIC;
 
     // Render component
-    renderComp.sprite = "TaOmA.png";
+    renderComp.sprite = "Media/Images/TaOmA.png";
     renderComp.spriteRect = { 400, 450, 200, 250 };
 
     // Velocity

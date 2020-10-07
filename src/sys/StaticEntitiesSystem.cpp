@@ -37,6 +37,13 @@ void StaticEntitiesSystem::init(GameEngine &gameContext) const {
 
     gameContext.entityMan.createCamera(gameContext, 0, 0, 0.f, GameObjectType::NONE);
 
+
+    // Prueba crear sonido
+    //gameContext.getSoundFacadeRef().loadSound("Media/Sound/GE_KF7_Soviet.wav");
+    //gameContext.getSoundFacadeRef().playSound("Media/Sound/GE_KF7_Soviet.wav");
+
+    gameContext.getSoundFacadeRef().loadMusic("Media/Sound/delayscape_planet.ogg");
+    gameContext.getSoundFacadeRef().playMusic("Media/Sound/delayscape_planet.ogg");
 }
 
 void StaticEntitiesSystem::createPlayer(GameEngine &gameContext) const {

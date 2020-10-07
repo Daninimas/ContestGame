@@ -12,6 +12,7 @@
 #include <fac/SoundFacade.hpp>
 
 #include <eng/sfml/SFMLEngine.hpp>
+#include <eng/sound/SoundSFMLEngine.hpp>
 
 #include <enum/EnumsIncluder>
 
@@ -62,7 +63,7 @@ private:
     std::vector<std::unique_ptr<System>> systemsLate;
 
     SFMLEngine windowFacade;
-    //VibrateEngine soundFacade;
+    SoundSFMLEngine soundFacade;
 
     const uint8_t MAX_SYSTEMS       { 255 };
 
