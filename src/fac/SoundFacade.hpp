@@ -2,8 +2,8 @@
 
 
 
-#include <string>
 #include <unordered_map>
+#include <tools/Sound.hpp>
 
 
 class GameEngine;
@@ -13,8 +13,8 @@ public:
 
     virtual ~SoundFacade() = default;
 
-    virtual void playSound(std::string) = 0;
-    virtual void playMusic(std::string) = 0;
+    virtual void playSound(Sound&) = 0;
+    virtual void playMusic(Sound&) = 0;
 
 
     virtual void loadSound(std::string) = 0;

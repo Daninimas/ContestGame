@@ -189,9 +189,11 @@
   <ItemGroup>
     <ClInclude Include="src\com\CameraComponent.hpp" />
     <ClInclude Include="src\eng\sound\SoundSFMLEngine.hpp" />
+    <ClInclude Include="src\enum\WorldEnum.hpp" />
     <ClInclude Include="src\sys\CameraSystem.hpp" />
     <ClInclude Include="src\sys\PickWeaponsSystem.hpp" />
     <ClInclude Include="src\sys\WorldSystem.hpp" />
+    <ClInclude Include="src\tools\Sound.hpp" />
     <ClInclude Include="src\tools\WorldData.hpp" />
     <ClInclude Include="src\sys\SensorSystem.hpp" />
     <ClInclude Include="src\com\SensorComponent.hpp" />

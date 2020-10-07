@@ -1,6 +1,7 @@
 #include "EntityManager.hpp"
 
 #include <tools/Utils.hpp>
+#include <tools/Sound.hpp>
 #include <tools/WorldData.hpp>
 
 #include <math.h>
@@ -68,7 +69,7 @@ void EntityManager::clearEntitiesToUpdate() {
 
 
 
-// ------------------------------ GAME OBJECTS FACTORY
+// ------------------------------ GAME OBJECTS FACTORY ------------------------------
 
 int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float r, GameObjectType goType) {
     int entityId = Entity::getCurrentId();
@@ -291,6 +292,8 @@ int EntityManager::createWeapon(GameEngine& gameContext, float x, float y, float
         distanceWeaponComp.attackGravity = 0.f;
         distanceWeaponComp.maxCooldown = 0.2f;
 
+        distanceWeaponComp.attackSound.soundPath = "Media/Sound/GE_KF7_Soviet.wav";
+
         WorldData::worldDistanceWeapons.push_back(entityId);
     }
 
@@ -300,6 +303,9 @@ int EntityManager::createWeapon(GameEngine& gameContext, float x, float y, float
         meleeWeaponComp.attackBounding = { 0.f, 20.f, 10.f, 40.f };
         meleeWeaponComp.damage = 4;
         meleeWeaponComp.maxCooldown = 1.f;
+
+        meleeWeaponComp.attackSound.soundPath = "Media/Sound/GE_KF7_Soviet.wav";
+
 
         WorldData::worldMeleeWeapons.push_back(entityId);
     }
@@ -338,4 +344,28 @@ int EntityManager::createCamera(GameEngine& gameContext, float x, float y, float
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::CAMERA, goType));
     return entityId;
+}
+
+
+
+// ------------------------------ WORLD CREATION ------------------------------
+
+void EntityManager::createWorld(GameEngine& gameContext, WorldEnum worldName) {
+
+    switch (worldName)
+    {
+    case WorldEnum::DEBUG:
+        // World limits
+        WorldData::worldLimits = { 0.f, 1000.f, 0.f, 500.f };
+
+        // World music
+        WorldData::worldMusic.soundPath = "Media/Sound/delayscape_planet.ogg";
+        WorldData::worldMusic.pitch = 2.f;
+        WorldData::worldMusic.volume = 100.f;
+
+        gameContext.getSoundFacadeRef().loadMusic(WorldData::worldMusic.soundPath);
+        gameContext.getSoundFacadeRef().playMusic(WorldData::worldMusic);
+
+        break;
+    }
 }

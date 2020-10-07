@@ -12,8 +12,8 @@ public:
 	SoundSFMLEngine();
 	~SoundSFMLEngine();
 
-	void playSound(std::string soundPath) override;
-	void playMusic(std::string musicPath) override;
+	void playSound(Sound& soundPath) override;
+	void playMusic(Sound& musicPath) override;
 
 
 	void loadSound(std::string soundPath) override;

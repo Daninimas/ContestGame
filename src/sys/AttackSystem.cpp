@@ -134,6 +134,10 @@ void AttackSystem::createMeleeAttack(GameEngine& gameContext, MeleeWeaponCompone
 		attackComp.damage = meleeAttacker.damage;
 
 		meleeAttacker.cooldown = 0.f;
+
+		// Play attack sound
+		gameContext.getSoundFacadeRef().loadSound(meleeAttacker.attackSound.soundPath);
+		gameContext.getSoundFacadeRef().playSound(meleeAttacker.attackSound);
 	}
 }
 
@@ -165,6 +169,10 @@ void AttackSystem::createDistanceAttack(GameEngine& gameContext, DistanceWeaponC
 		attackVel.gravity = distanceWeaponAttacker.attackGravity;
 
 		distanceWeaponAttacker.cooldown = 0.f;
+
+		// Play shoot sound
+		gameContext.getSoundFacadeRef().loadSound(distanceWeaponAttacker.attackSound.soundPath);
+		gameContext.getSoundFacadeRef().playSound(distanceWeaponAttacker.attackSound);
 	}
 }
 

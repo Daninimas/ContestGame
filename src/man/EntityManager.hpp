@@ -99,6 +99,10 @@ public:
     int createWeapon(GameEngine& gameContext, float x, float y, float r, GameObjectType goType = GameObjectType::NONE);
     int createCamera(GameEngine& gameContext, float x, float y, float r, GameObjectType goType = GameObjectType::NONE);
 
+    //////////////////////////////////////////////////
+    //                WORLD CREATION               //
+    //////////////////////////////////////////////////
+    void createWorld(GameEngine& gameContext, WorldEnum worldName);
 
 private:
 

@@ -35,21 +35,13 @@ void StaticEntitiesSystem::init(GameEngine &gameContext) const {
     gameContext.entityMan.createWeapon(gameContext, 450, 360.f, 0.f, GameObjectType::M4);
 
 
-    gameContext.entityMan.createCamera(gameContext, 0, 0, 0.f, GameObjectType::NONE);
-
-
-    // Prueba crear sonido
-    //gameContext.getSoundFacadeRef().loadSound("Media/Sound/GE_KF7_Soviet.wav");
-    //gameContext.getSoundFacadeRef().playSound("Media/Sound/GE_KF7_Soviet.wav");
-
-    gameContext.getSoundFacadeRef().loadMusic("Media/Sound/delayscape_planet.ogg");
-    gameContext.getSoundFacadeRef().playMusic("Media/Sound/delayscape_planet.ogg");
+    gameContext.entityMan.createCamera(gameContext, 0, 0, 0.f, GameObjectType::NONE);    
 }
 
 void StaticEntitiesSystem::createPlayer(GameEngine &gameContext) const {
-    gameContext.entityMan.createPlayer(gameContext, 0.f, 300.f, 0.f, GameObjectType::PLAYER_GENERAL);
+    gameContext.entityMan.createPlayer(gameContext, 0.f, 200.f, 0.f, GameObjectType::PLAYER_GENERAL);
 }
 
 void StaticEntitiesSystem::createWorld(GameEngine& gameContext) const {
-    WorldData::worldLimits = {0.f, 1000.f, 0.f, 500.f};
+    gameContext.entityMan.createWorld(gameContext, WorldEnum::DEBUG);
 }

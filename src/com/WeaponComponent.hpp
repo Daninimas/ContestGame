@@ -2,6 +2,7 @@
 
 #include "Component.hpp"
 #include <tools/BoundingBox.hpp>
+#include <tools/Sound.hpp>
 
 class WeaponComponent : public Component {
 public:
@@ -14,6 +15,8 @@ public:
     float cooldown{ 0.f };
 
     BoundingBox attackBounding;
+
+    Sound attackSound{};
 
     /*
     // Position where the attack is created from player

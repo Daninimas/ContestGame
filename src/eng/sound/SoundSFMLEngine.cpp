@@ -11,15 +11,27 @@ SoundSFMLEngine::~SoundSFMLEngine() {
 
 }
 
-void SoundSFMLEngine::playSound(std::string soundPath) {
-	if (existsSound(soundPath)) {
-		soundMap[soundPath].play();
+void SoundSFMLEngine::playSound(Sound& sound) {
+	if (existsSound(sound.soundPath)) {
+		sf::Sound& SFMLsound = soundMap[sound.soundPath];
+		// Set sound data
+		SFMLsound.setLoop(sound.repeat);
+		SFMLsound.setPitch(sound.pitch);
+		SFMLsound.setVolume(sound.volume);
+		
+		SFMLsound.play();
 	}
 }
 
-void SoundSFMLEngine::playMusic(std::string musicPath) {
-	if (existsMusic(musicPath)) {
-		musicMap[musicPath].play();
+void SoundSFMLEngine::playMusic(Sound& music) {
+	if (existsMusic(music.soundPath)) {
+		sf::Music& SFMLmusic = musicMap[music.soundPath];
+		// Set sound data
+		SFMLmusic.setLoop(music.repeat);
+		SFMLmusic.setPitch(music.pitch);
+		SFMLmusic.setVolume(music.volume);
+
+		SFMLmusic.play();
 	}
 }
 
@@ -28,7 +40,7 @@ void SoundSFMLEngine::playMusic(std::string musicPath) {
 
 void SoundSFMLEngine::loadSound(std::string soundPath) {
 
-	if (!existsSound(soundPath)) {
+	if (soundPath != "" && !existsSound(soundPath)) {
 		if (!existsSoundBuffer(soundPath)) {
 			loadSoundBuffer(soundPath);
 		}
@@ -38,7 +50,7 @@ void SoundSFMLEngine::loadSound(std::string soundPath) {
 }
 
 void SoundSFMLEngine::loadSoundBuffer(std::string soundBufferPath) {
-	if (!existsSoundBuffer(soundBufferPath)) {
+	if (soundBufferPath != "" && !existsSoundBuffer(soundBufferPath)) {
 		soundBufferMap.emplace( std::piecewise_construct, std::forward_as_tuple(soundBufferPath), std::forward_as_tuple() );  // Creates the buffer object
 
 		// Load the data to the buffer
@@ -50,7 +62,7 @@ void SoundSFMLEngine::loadSoundBuffer(std::string soundBufferPath) {
 }
 
 void SoundSFMLEngine::loadMusic(std::string musicPath) {
-	if (!existsMusic(musicPath)) {
+	if (musicPath != "" && !existsMusic(musicPath)) {
 		musicMap.emplace(std::piecewise_construct, std::forward_as_tuple(musicPath), std::forward_as_tuple());  // Creates the buffer object
 
 		if (!musicMap[musicPath].openFromFile(musicPath)) {
