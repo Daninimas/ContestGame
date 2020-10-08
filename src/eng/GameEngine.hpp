@@ -58,9 +58,9 @@ private:
     void render();
 
     void setPauseSystems();
+    void setPlayingSystems();
 
     void updateEntitiesInWindow();
-
 
     std::vector<std::unique_ptr<System>> systems;
     std::vector<std::unique_ptr<System>> systemsLate;

@@ -3,6 +3,7 @@
 int main () {
 
     GameEngine gameEngine{};
+    gameEngine.init();
     gameEngine.run();
 
     return 0;

@@ -56,6 +56,10 @@ void GameEngine::init() {
     StaticEntitiesSystem staticSystem{};
     staticSystem.init(*this);
 
+    setPlayingSystems();
+}
+
+void GameEngine::setPlayingSystems() {
     systems.emplace_back(std::make_unique<WorldSystem>());                   //#02
     systems.emplace_back(std::make_unique<SensorSystem>());                   //#02
     systems.emplace_back(std::make_unique<InputSystem>());                   //#02
@@ -94,7 +98,7 @@ void GameEngine::run() {
                 break;
 
             case GameState::PLAYING:
-                init();
+                setPlayingSystems();
                 break;
 
             case GameState::PAUSE:
