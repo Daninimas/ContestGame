@@ -12,5 +12,11 @@ enum class GameObjectType {
     // Weapons
     PISTOL,
     M4,
-    KNIFE
+    KNIFE,
+
+
+    //  Menu types
+    PAUSE,
+    MAINMENU,
+    OPTIONS_CONTROLS
 };

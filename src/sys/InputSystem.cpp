@@ -8,8 +8,19 @@ InputSystem::InputSystem() {}
 InputSystem::~InputSystem() {}
 
 void InputSystem::update(GameEngine& gameContext) const {
-    InputComponent    &playerInput = gameContext.entityMan.getComponent<InputComponent>(WorldData::playerId);
-    VelocityComponent &playerVel   = gameContext.entityMan.getComponent<VelocityComponent>(WorldData::playerId);
+
+    if (gameContext.getGameState() == GameState::PLAYING) {
+        inputPlaying(gameContext);
+    }
+    else {
+        inputMenus(gameContext);
+    }
+}
+
+
+void InputSystem::inputPlaying(GameEngine& gameContext) const {
+    InputComponent& playerInput = gameContext.entityMan.getComponent<InputComponent>(WorldData::playerId);
+    VelocityComponent& playerVel = gameContext.entityMan.getComponent<VelocityComponent>(WorldData::playerId);
 
     // Reset actions
     playerInput.resetActions();
@@ -58,9 +69,44 @@ void InputSystem::update(GameEngine& gameContext) const {
         if (jumpComp.cooldow > jumpComp.maxCooldown) { // if has cooldown on floor
             playerVel.velocityY = jumpComp.impulse;
         }
-        
+
         /*if (jumpComp.jumpIndex == jumpComp.jumptable.size() && jumpComp.cooldow > jumpComp.maxCooldown) { // if has ended jumping && has cooldown on floor
             jumpComp.jumpIndex = 0;
         }*/
+    }
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+        gameContext.setGameState(GameState::PAUSE);
+    }
+}
+
+
+void InputSystem::inputMenus(GameEngine& gameContext) const {
+    InputComponent& playerInput = gameContext.entityMan.getComponent<InputComponent>(WorldData::playerId);
+
+    // Reset actions
+    playerInput.resetActions();
+
+    // Set new actions
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+    {
+        playerInput.movingUp = true;
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+    {
+        playerInput.movingDown = true;
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+    {
+        playerInput.movingLeft = true;
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+    {
+        playerInput.movingRight = true;
+    }
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+    {
+        playerInput.select = true;
     }
 }

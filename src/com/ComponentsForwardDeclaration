@@ -11,3 +11,4 @@ class RenderComponent;
 class DistanceWeaponComponent;
 class SensorComponent;
 class CameraComponent;
+class MenuComponent;

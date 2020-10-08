@@ -12,4 +12,6 @@ void InputComponent::resetActions() {
     movingDown  = false ;
 
     attacking   = false;
+    jumping     = false;
+    select      = false;
 }

@@ -7,5 +7,6 @@ enum class EntityType {
     WALL,
     WOLRD,
     WEAPON, 
-    CAMERA
+    CAMERA, 
+    MENU
 };

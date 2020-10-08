@@ -17,5 +17,7 @@ public:
     bool attacking   { false };
     //bool canAttack   { true };
     bool jumping     { false };
+
+    bool select      { false };
 };
 

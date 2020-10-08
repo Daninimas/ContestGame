@@ -104,6 +104,11 @@ public:
     //////////////////////////////////////////////////
     void createWorld(GameEngine& gameContext, WorldEnum worldName);
 
+    //////////////////////////////////////////////////
+    //                MENU CREATION               //
+    //////////////////////////////////////////////////
+    int createMenu(GameEngine& gameContext, GameObjectType menuType);
+
 private:
 
     std::unordered_map<int, Entity> entityMap;

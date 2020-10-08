@@ -70,6 +70,13 @@ void GameEngine::init() {
     systemsLate.emplace_back(std::make_unique<DeathSystem>());               //#01
 }
 
+void GameEngine::setPauseSystems() {
+    entityMan.createMenu(*this, GameObjectType::PAUSE);
+
+    systems.emplace_back(std::make_unique<InputSystem>());
+    systems.emplace_back(std::make_unique<MenuSystem>());
+}
+
 void GameEngine::run() {
     // For the interpolation
     std::chrono::time_point<std::chrono::system_clock> then;
@@ -88,6 +95,10 @@ void GameEngine::run() {
 
             case GameState::PLAYING:
                 init();
+                break;
+
+            case GameState::PAUSE:
+                setPauseSystems();
                 break;
             }
 
@@ -339,6 +350,10 @@ void GameEngine::clearEntitiesToUpdate() {
 
 GameState GameEngine::getGameState() const {
     return gameState;
+}
+
+GameState GameEngine::getLastGameState() const {
+    return lastState;
 }
 
 void GameEngine::setGameState(const GameState gs) {

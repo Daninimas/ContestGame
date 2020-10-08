@@ -369,3 +369,25 @@ void EntityManager::createWorld(GameEngine& gameContext, WorldEnum worldName) {
         break;
     }
 }
+
+
+// ------------------------------ MENUS CREATION ------------------------------
+
+int EntityManager::createMenu(GameEngine& gameContext, GameObjectType menuType) {
+    int entityId = Entity::getCurrentId();
+
+    MenuComponent& menuComp = createComponent<MenuComponent>(entityId);
+
+    switch (menuType)
+    {
+    case GameObjectType::PAUSE:
+        menuComp.options.emplace_back(MenuOptions::PLAY);
+        menuComp.options.emplace_back(MenuOptions::EXIT);
+
+        break;
+    }
+
+    //######### CREATE ########//
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::MENU, menuType));
+    return entityId;
+}

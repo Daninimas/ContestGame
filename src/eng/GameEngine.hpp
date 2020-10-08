@@ -45,6 +45,7 @@ public:
     void clearEntitiesToUpdate();*/
 
     GameState getGameState() const;
+    GameState getLastGameState() const;
     void setGameState(const GameState gs);
     void setLastState(const GameState gs);
 
@@ -55,6 +56,8 @@ private:
     void updateWithTimers();
     void updateSound();
     void render();
+
+    void setPauseSystems();
 
     void updateEntitiesInWindow();
 
