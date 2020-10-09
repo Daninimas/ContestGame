@@ -84,25 +84,32 @@ void InputSystem::inputPlaying(GameEngine& gameContext) const {
 void InputSystem::inputMenus(GameEngine& gameContext) const {
     InputComponent& playerInput = gameContext.entityMan.getComponent<InputComponent>(WorldData::playerId);
 
+    playerInput.cooldown += gameContext.getDeltaTime();
+
     // Reset actions
     playerInput.resetActions();
 
-    // Set new actions
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-    {
-        playerInput.movingUp = true;
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-    {
-        playerInput.movingDown = true;
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-    {
-        playerInput.movingLeft = true;
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-    {
-        playerInput.movingRight = true;
+    if (playerInput.cooldown > playerInput.maxCooldown) {
+
+        // Set new actions
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+        {
+            playerInput.movingUp = true;
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+        {
+            playerInput.movingDown = true;
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+        {
+            playerInput.movingLeft = true;
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+        {
+            playerInput.movingRight = true;
+        }
+
+        playerInput.cooldown = 0.f;
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))

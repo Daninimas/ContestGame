@@ -19,5 +19,8 @@ public:
     bool jumping     { false };
 
     bool select      { false };
+
+    float cooldown{ 0.f };
+    float maxCooldown{ 0.3f };
 };
 
