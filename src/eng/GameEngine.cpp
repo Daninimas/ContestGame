@@ -51,12 +51,12 @@ void GameEngine::reset() {
 }
 
 void GameEngine::init() {
-    setGameState(GameState::PLAYING);
+    setGameState(GameState::PAUSE);
 
     StaticEntitiesSystem staticSystem{};
     staticSystem.init(*this);
 
-    setPlayingSystems();
+    //setPlayingSystems();
 }
 
 void GameEngine::setPlayingSystems() {
@@ -66,8 +66,8 @@ void GameEngine::setPlayingSystems() {
     systems.emplace_back(std::make_unique<PhysicsSystem>());               //#00
     systems.emplace_back(std::make_unique<AttackSystem>());                   //#03
     systems.emplace_back(std::make_unique<PickWeaponsSystem>());                   //#03
-
-
+    
+    
     systemsLate.emplace_back(std::make_unique<CollisionSystem>());                   //#01
     systemsLate.emplace_back(std::make_unique<CameraSystem>());                   //#01
     systemsLate.emplace_back(std::make_unique<HealthSystem>());                   //#00

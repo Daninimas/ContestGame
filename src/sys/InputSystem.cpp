@@ -86,25 +86,42 @@ void InputSystem::inputMenus(GameEngine& gameContext) const {
 
     // Reset actions
     playerInput.resetActions();
+    playerInput.coolDown += gameContext.getDeltaTime();
 
-    // Set new actions
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-    {
-        playerInput.movingUp = true;
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-    {
-        playerInput.movingDown = true;
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-    {
-        playerInput.movingLeft = true;
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-    {
-        playerInput.movingRight = true;
-    }
+    std::cout << "playerInput.coolDown: " << playerInput.coolDown << " playerInput.maxCoolDown: " << playerInput.maxCoolDown << " id "<< WorldData::playerId <<  "\n";
 
+    if (playerInput.coolDown > playerInput.maxCoolDown) {
+        bool buttonPressed = false;
+
+        // Set new actions
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+        {
+            playerInput.movingUp = true;
+            buttonPressed = true;
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+        {
+            playerInput.movingDown = true;
+            buttonPressed = true;
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+        {
+            playerInput.movingLeft = true;
+            buttonPressed = true;
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+        {
+            playerInput.movingRight = true;
+            buttonPressed = true;
+        }
+
+
+        // Reset cooldown
+        if (buttonPressed) {
+            playerInput.coolDown = 0.f;
+        }
+    }
+    
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
     {
         playerInput.select = true;

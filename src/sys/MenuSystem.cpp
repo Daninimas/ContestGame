@@ -75,6 +75,7 @@ void MenuSystem::acceptOption(GameEngine& gameContext, MenuComponent& menuComp) 
 		std::cout << "Accedo a OPTIONS\n";
 		break;
 	case MenuOptions::PLAY:
+		std::cout << "Jugando...\n";
 		gameContext.setGameState(GameState::PLAYING);
 		break;
 	}

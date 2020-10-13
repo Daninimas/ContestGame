@@ -19,5 +19,8 @@ public:
     bool jumping     { false };
 
     bool select      { false };
+
+    float coolDown    { 0.f }; // used on the menus
+    float maxCoolDown { 0.5f };
 };
 
