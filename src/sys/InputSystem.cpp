@@ -84,13 +84,13 @@ void InputSystem::inputPlaying(GameEngine& gameContext) const {
 void InputSystem::inputMenus(GameEngine& gameContext) const {
     InputComponent& playerInput = gameContext.entityMan.getComponent<InputComponent>(WorldData::playerId);
 
+    playerInput.cooldown += gameContext.getDeltaTime();
+
     // Reset actions
     playerInput.resetActions();
-    playerInput.coolDown += gameContext.getDeltaTime();
+    playerInput.cooldown += gameContext.getDeltaTime();
 
-    std::cout << "playerInput.coolDown: " << playerInput.coolDown << " playerInput.maxCoolDown: " << playerInput.maxCoolDown << " id "<< WorldData::playerId <<  "\n";
-
-    if (playerInput.coolDown > playerInput.maxCoolDown) {
+    if (playerInput.cooldown > playerInput.maxCooldown) {
         bool buttonPressed = false;
 
         // Set new actions
@@ -118,7 +118,7 @@ void InputSystem::inputMenus(GameEngine& gameContext) const {
 
         // Reset cooldown
         if (buttonPressed) {
-            playerInput.coolDown = 0.f;
+            playerInput.cooldown = 0.f;
         }
     }
     

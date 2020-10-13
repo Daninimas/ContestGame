@@ -40,6 +40,9 @@ void EntityManager::eraseEntityByID(int id) {
     eraseComponent<AttackComponent>(id);
     eraseComponent<JumpComponent>(id);
     eraseComponent<SensorComponent>(id);
+    eraseComponent<CameraComponent>(id);
+    eraseComponent<MenuComponent>(id);
+    eraseComponent<WeaponComponent>(id);
 
 
     entityMap           .erase(id);
@@ -84,6 +87,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float
     JumpComponent& jumpComp = createComponent<JumpComponent>(entityId);
     RenderComponent& renderComp = createComponent<RenderComponent>(entityId);
     SensorComponent& sensorComp = createComponent<SensorComponent>(entityId);
+    InputComponent& inputComp = createComponent<InputComponent>(entityId);
 
     //######### DATA ########//
     situation.x = x;
