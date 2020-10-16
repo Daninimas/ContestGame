@@ -237,8 +237,8 @@ int EntityManager::createEnemy(GameEngine& gameContext, float x, float y, float 
     colliderComp.type = ColliderType::DYNAMIC;
 
     // Render component
-    renderComp.sprite = "Media/Images/TaOmA.png";
-    renderComp.spriteRect = { 400, 450, 200, 250 };
+    renderComp.sprite = "Media/Images/Elfo del Bosque.jpg";
+    renderComp.spriteRect = { 1020, 1080, 1080, 1153 };
 
     // Velocity
     velocityComp.gravity = 20.f;
