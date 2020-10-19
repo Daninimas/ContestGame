@@ -73,6 +73,11 @@ void AttackSystem::checkPlayerAttacking(GameEngine& gameContext) const {
 
 		if (createMelee) {
 			createMeleeAttack(gameContext, gameContext.entityMan.getComponent<MeleeWeaponComponent>(WorldData::playerId));
+
+			// Reset the distance cooldown too
+			if (gameContext.entityMan.existsComponent<DistanceWeaponComponent>(WorldData::playerId)) {
+				gameContext.entityMan.getComponent<DistanceWeaponComponent>(WorldData::playerId).cooldown = 0.f;
+			}
 		}
 		else {
 			DistanceWeaponComponent& playerDistanceWeap = gameContext.entityMan.getComponent<DistanceWeaponComponent>(WorldData::playerId);
@@ -95,6 +100,11 @@ void AttackSystem::checkPlayerAttacking(GameEngine& gameContext) const {
 				}
 			}
 			createDistanceAttack(gameContext, playerDistanceWeap);
+
+			/*// Reset the melee cooldown too
+			if (gameContext.entityMan.existsComponent<MeleeWeaponComponent>(WorldData::playerId)) {
+				gameContext.entityMan.getComponent<MeleeWeaponComponent>(WorldData::playerId).cooldown = 0.f;
+			}*/
 		}
 		
 	}
