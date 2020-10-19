@@ -63,8 +63,8 @@ void GameEngine::setPlayingSystems() {
     systems.emplace_back(std::make_unique<WorldSystem>());                   //#02
     systems.emplace_back(std::make_unique<SensorSystem>());                   //#02
     systems.emplace_back(std::make_unique<InputSystem>());                   //#02
-    systems.emplace_back(std::make_unique<PhysicsSystem>());               //#00
     systems.emplace_back(std::make_unique<AttackSystem>());                   //#03
+    systems.emplace_back(std::make_unique<PhysicsSystem>());               //#00
     systems.emplace_back(std::make_unique<PickWeaponsSystem>());                   //#03
     
     
@@ -75,6 +75,7 @@ void GameEngine::setPlayingSystems() {
 }
 
 void GameEngine::setPauseSystems() {
+    std::cout << "EN PAUSA...\n";
     entityMan.createMenu(*this, GameObjectType::PAUSE);
 
     systems.emplace_back(std::make_unique<InputSystem>());

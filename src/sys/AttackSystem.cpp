@@ -79,6 +79,7 @@ void AttackSystem::checkPlayerAttacking(GameEngine& gameContext) const {
 			VelocityComponent& playerVel = gameContext.entityMan.getComponent<VelocityComponent>(WorldData::playerId);
 
 			playerDistanceWeap.attackVelY = 0.f;
+			playerDistanceWeap.attackVelX = playerDistanceWeap.attackGeneralVelociy;
 			if (playerInput.movingUp)
 			{
 				playerDistanceWeap.attackVelX = 0.f;
@@ -146,7 +147,6 @@ void AttackSystem::createDistanceAttack(GameEngine& gameContext, DistanceWeaponC
 	if (distanceWeaponAttacker.cooldown > distanceWeaponAttacker.maxCooldown) {
 		SituationComponent& attackerSit = gameContext.entityMan.getComponent<SituationComponent>(distanceWeaponAttacker.id);
 
-		distanceWeaponAttacker.attackVelX = distanceWeaponAttacker.attackGeneralVelociy;
 		if (attackerSit.facing == SituationComponent::Left) {
 			distanceWeaponAttacker.attackVelX *= -1;
 		}
