@@ -44,6 +44,8 @@ void EntityManager::eraseEntityByID(int id) {
     eraseComponent<MenuComponent>(id);
     eraseComponent<WeaponComponent>(id);
 
+    // AI
+    eraseComponent<AIChaseComponent>(id);
 
     entityMap           .erase(id);
 }
@@ -246,6 +248,20 @@ int EntityManager::createEnemy(GameEngine& gameContext, float x, float y, float 
     // HeathComponent
     healthComp.maxHealth = 5;
 
+
+    switch (goType)
+    {
+    case GameObjectType::CHASER:
+        velocityComp.speedX = 70.f;
+        renderComp.color = { 255, 100, 30, 255 };
+        healthComp.maxHealth = 1;
+
+        createComponent<AIChaseComponent>(entityId);
+
+        break;
+    }
+
+    healthComp.resetHealth(); // Reset health to set the current health the same as maxHealth
 
     //######### RENDER ########//
     gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);

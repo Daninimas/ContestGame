@@ -12,3 +12,4 @@ class DistanceWeaponComponent;
 class SensorComponent;
 class CameraComponent;
 class MenuComponent;
+class AIChaseComponent;

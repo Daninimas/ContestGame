@@ -148,6 +148,9 @@ void SFMLEngine::updateNode(GameEngine& gameContext, int id) {
 	node.setPosition(situation.x, situation.y);
 	node.setRotation(situation.rotation);
 	node.setScale(situation.scaleX, situation.scaleY);
+
+	node.setColor(sf::Color(drawable.color[0], drawable.color[1], drawable.color[2], drawable.color[3]));
+
 	if (situation.facing == SituationComponent::Left) {
 		node.move(node.getLocalBounds().width, 0.f);
 		node.scale(-1.f, 1.f);

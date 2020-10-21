@@ -15,8 +15,12 @@ enum class GameObjectType {
     KNIFE,
 
 
-    //  Menu types
+    // Menu types
     PAUSE,
     MAINMENU,
-    OPTIONS_CONTROLS
+    OPTIONS_CONTROLS,
+
+
+    // Enemy types
+    CHASER
 };

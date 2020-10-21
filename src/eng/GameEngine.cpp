@@ -60,18 +60,19 @@ void GameEngine::init() {
 }
 
 void GameEngine::setPlayingSystems() {
-    systems.emplace_back(std::make_unique<WorldSystem>());                   //#02
-    systems.emplace_back(std::make_unique<SensorSystem>());                   //#02
-    systems.emplace_back(std::make_unique<InputSystem>());                   //#02
-    systems.emplace_back(std::make_unique<AttackSystem>());                   //#03
-    systems.emplace_back(std::make_unique<PhysicsSystem>());               //#00
-    systems.emplace_back(std::make_unique<PickWeaponsSystem>());                   //#03
+    systems.emplace_back(std::make_unique<WorldSystem>());
+    systems.emplace_back(std::make_unique<SensorSystem>());
+    systems.emplace_back(std::make_unique<InputSystem>());
+    systems.emplace_back(std::make_unique<AttackSystem>());
+    systems.emplace_back(std::make_unique<PickWeaponsSystem>());
+    systems.emplace_back(std::make_unique<AIChaseSystem>());
     
     
-    systemsLate.emplace_back(std::make_unique<CollisionSystem>());                   //#01
-    systemsLate.emplace_back(std::make_unique<CameraSystem>());                   //#01
-    systemsLate.emplace_back(std::make_unique<HealthSystem>());                   //#00
-    systemsLate.emplace_back(std::make_unique<DeathSystem>());               //#01
+    systemsLate.emplace_back(std::make_unique<PhysicsSystem>());
+    systemsLate.emplace_back(std::make_unique<CollisionSystem>());
+    systemsLate.emplace_back(std::make_unique<CameraSystem>());
+    systemsLate.emplace_back(std::make_unique<HealthSystem>());
+    systemsLate.emplace_back(std::make_unique<DeathSystem>());
 }
 
 void GameEngine::setPauseSystems() {
