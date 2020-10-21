@@ -133,10 +133,12 @@ public:
     void erase(const int id) noexcept {
         if (inner_map.count(id)) {
             size_t index = inner_map[id];
+            // Me guardo el id del elemento ultimo, que se va a mover para luego cambiarlo en el mapa, esto lo hago porque si en algun momento el elemento movido es el mismo que el borrado, dara un core dumped, ya que se intenta acceder al id de un elemento borrado
+            // Al final borro la posicion del vector al final para que no intente acceder en la linea de inner_map[inner_vector[index].id] = index; a una posicion no existente
             inner_vector[index] = inner_vector.back();
-            inner_vector.pop_back();
             inner_map[inner_vector[index].id] = index;
             inner_map.erase(id);
+            inner_vector.pop_back();
         }
     }
 
