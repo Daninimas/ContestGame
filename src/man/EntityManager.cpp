@@ -243,7 +243,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, float x, float y, float 
     renderComp.spriteRect = { 1020, 1080, 1080, 1153 };
 
     // Velocity
-    velocityComp.gravity = 20.f;
+    velocityComp.gravity = 230.f;
 
     // HeathComponent
     healthComp.maxHealth = 5;
@@ -254,9 +254,24 @@ int EntityManager::createEnemy(GameEngine& gameContext, float x, float y, float 
     case GameObjectType::CHASER:
         velocityComp.speedX = 70.f;
         renderComp.color = { 255, 100, 30, 255 };
-        healthComp.maxHealth = 1;
+        healthComp.maxHealth = 3;
 
         createComponent<AIChaseComponent>(entityId);
+
+        break;
+    case GameObjectType::CHASERJUMPER:
+        velocityComp.speedX = 50.f;
+        renderComp.color = { 10, 20, 255, 255 };
+        healthComp.maxHealth = 3;
+
+        createComponent<AIChaseComponent>(entityId);
+        JumpComponent& jumpComp     = createComponent<JumpComponent>(entityId);
+        SensorComponent& sensorComp = createComponent<SensorComponent>(entityId);
+
+        sensorComp.sensorLayerMasc = ColliderComponent::Player + ColliderComponent::Wall;
+        sensorComp.sensorBounding = { 25.f, 75.f, 2.f, 48.f };
+
+        jumpComp.impulse = -150.f;
 
         break;
     }

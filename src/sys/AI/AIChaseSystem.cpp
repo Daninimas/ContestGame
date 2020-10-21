@@ -33,4 +33,20 @@ void AIChaseSystem::chaseObjective(GameEngine& gameContext, AIChaseComponent& ch
 	else {
 		chaserVel.velocityX = -chaserVel.speedX;
 	}
+
+	// For the CHASERJUMPERS
+	if (gameContext.entityMan.existsComponent<JumpComponent>(chaseComp.id)) {
+		JumpComponent& chaserJump   = gameContext.entityMan.getComponent<JumpComponent>(chaseComp.id);
+		SensorComponent& chaserSens = gameContext.entityMan.getComponent<SensorComponent>(chaseComp.id);
+
+		// Search if colliding with Wall and jump to advance
+		for (int sensoredEnt : chaserSens.entitiesSensoring) {
+			if (gameContext.entityMan.getEntity(sensoredEnt).getType() == EntityType::WALL) {
+				// Jump
+				if (chaserJump.cooldow > chaserJump.maxCooldown) { // if has cooldown on floor
+					chaserVel.velocityY = chaserJump.impulse;
+				}
+			}
+		}
+	}
 }

@@ -28,7 +28,7 @@ void StaticEntitiesSystem::init(GameEngine &gameContext) const {
     gameContext.entityMan.createWall(gameContext, 600.f, 390.f, 0.f, GameObjectType::NONE);
 
 
-    int chaserId = gameContext.entityMan.createEnemy(gameContext, 300.f, 300.f, 0.f, GameObjectType::CHASER);
+    int chaserId = gameContext.entityMan.createEnemy(gameContext, 300.f, 300.f, 0.f, GameObjectType::CHASERJUMPER);
     gameContext.entityMan.getComponent<AIChaseComponent>(chaserId).objectiveId = WorldData::playerId;
     gameContext.entityMan.createEnemy(gameContext, 650.f, 300.f, 0.f, GameObjectType::NONE);
 

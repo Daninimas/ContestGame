@@ -22,5 +22,6 @@ enum class GameObjectType {
 
 
     // Enemy types
-    CHASER
+    CHASER,
+    CHASERJUMPER
 };

@@ -26,7 +26,8 @@ void SensorSystem::resetSensors(GameEngine& gameContext) const {
 	}
 }
 
-void SensorSystem::checkSensorsCollisions(GameEngine& gameContext) const {
+	// ------------------------ COLLIDES ONLY WITH VELOCITY ENTITIES ----------------------------------------- 
+/*void SensorSystem::checkSensorsCollisions(GameEngine& gameContext) const {
 	auto& sensors = gameContext.entityMan.getComponents<SensorComponent>();
 	std::vector<int> idCollidersWithVelocity;
 
@@ -44,10 +45,29 @@ void SensorSystem::checkSensorsCollisions(GameEngine& gameContext) const {
 				SituationComponent& entitySituation = gameContext.entityMan.getComponent<SituationComponent>(velEntityID);
 				BoundingBox& entityBounding = entityCollider.boundingRoot.bounding;
 
-				if (calculateSensorCollision(gameContext, sensor, entityBounding, entitySituation)) {
-					//cout << "Sensor: " << sensor.id << " is colliding with: " << velEntityID;
-				}
+				calculateSensorCollision(gameContext, sensor, entityBounding, entitySituation);
 
+
+			}
+		}
+	}
+}*/
+
+	// -------------------------- COLLIDES WITH ALL COLLIDERS ---------------------------------------------
+void SensorSystem::checkSensorsCollisions(GameEngine& gameContext) const {
+	auto& sensors   = gameContext.entityMan.getComponents<SensorComponent>();
+	auto& colliders = gameContext.entityMan.getComponents<ColliderComponent>();
+
+	for (SensorComponent& sensor : sensors) {
+		// Check this sensor with all the colliders with VELOCITY
+
+		for (ColliderComponent& colliderEnt : colliders) {
+
+			if (colliderEnt.id != sensor.id && sensor.sensorLayerMasc & colliderEnt.collisionLayer) { // don't calculate the collision in the same entity
+				SituationComponent& entitySituation = gameContext.entityMan.getComponent<SituationComponent>(colliderEnt.id);
+				BoundingBox& entityBounding = colliderEnt.boundingRoot.bounding;
+
+				calculateSensorCollision(gameContext, sensor, entityBounding, entitySituation);
 			}
 		}
 	}
