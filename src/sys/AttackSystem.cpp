@@ -23,14 +23,21 @@ void AttackSystem::update(GameEngine& gameContext) const {
 
 void AttackSystem::deleteMeleeAttacks(GameEngine& gameContext) const {
 	auto& attacks = gameContext.entityMan.getComponents<AttackComponent>();
+	std::vector<int> attacksToDelete;
+	attacksToDelete.reserve(attacks.size());
 
 	for (AttackComponent& attack : attacks) {
 		if (attack.type == AttackType::MELEE) {
 			--attack.attackLifetime;
 
-			if(attack.attackLifetime == 0)
-				gameContext.eraseEntityByID(attack.id);
+			if (attack.attackLifetime == 0)
+				attacksToDelete.push_back(attack.id);
 		}
+	}
+
+	//Delete collided attacks
+	for (size_t i = 0; i < attacksToDelete.size(); ++i) {
+		gameContext.eraseEntityByID(attacksToDelete[i]);
 	}
 }
 
