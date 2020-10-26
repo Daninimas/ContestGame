@@ -16,6 +16,7 @@ void AttackSystem::update(GameEngine& gameContext) const {
 	addCooldownTimeToWeapons(gameContext);
 
 	checkPlayerAttacking(gameContext);
+	checkEnemiesAttacking(gameContext);
 
 	// Manage hits
 	checkAttacksHits(gameContext);
@@ -116,6 +117,18 @@ void AttackSystem::checkPlayerAttacking(GameEngine& gameContext) const {
 		
 	}
 }
+
+void AttackSystem::checkEnemiesAttacking(GameEngine& gameContext) const {
+	auto& AIMeleeComponents = gameContext.entityMan.getComponents<AIMeleeComponent>();
+
+	for (AIMeleeComponent& AIMeleeComp : AIMeleeComponents) {
+		if (AIMeleeComp.createAttack) {
+			createMeleeAttack(gameContext, gameContext.entityMan.getComponent<MeleeWeaponComponent>(AIMeleeComp.id));
+		}
+	}
+}
+
+
 
 void AttackSystem::createMeleeAttack(GameEngine& gameContext, MeleeWeaponComponent& meleeAttacker) const {
 

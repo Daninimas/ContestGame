@@ -3,6 +3,8 @@
 #include <eng/GameEngine.hpp>
 #include <enum/EntityType.hpp>
 
+#include <iostream>
+
 DeathSystem::DeathSystem() {}
 
 DeathSystem::~DeathSystem() {}
@@ -35,6 +37,9 @@ void DeathSystem::deleteEntities(GameEngine& gameContext, std::vector<int>& dead
         EntityType entityTypeToDelete = gameContext.entityMan.getEntity(entityId).getType();
         if (entityTypeToDelete != EntityType::PLAYER) {
             gameContext.eraseEntityByID(entityId); // Delete the entity
+        }
+        else {
+            std::cout << "Has muerto\n";
         }
     }
 }

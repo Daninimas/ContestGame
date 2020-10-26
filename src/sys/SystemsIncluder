@@ -14,3 +14,4 @@
 #include <sys/CameraSystem.hpp>
 #include <sys/MenuSystem.hpp>
 #include <sys/AI/AIChaseSystem.hpp>
+#include <sys/AI/AIMeleeSystem.hpp>

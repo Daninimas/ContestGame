@@ -30,6 +30,8 @@ void StaticEntitiesSystem::init(GameEngine &gameContext) const {
 
     int chaserId = gameContext.entityMan.createEnemy(gameContext, 300.f, 300.f, 0.f, GameObjectType::CHASERJUMPER);
     gameContext.entityMan.getComponent<AIChaseComponent>(chaserId).objectiveId = WorldData::playerId;
+    gameContext.entityMan.getComponent<AIMeleeComponent>(chaserId).objectiveId = WorldData::playerId;
+
     gameContext.entityMan.createEnemy(gameContext, 650.f, 300.f, 0.f, GameObjectType::NONE);
 
     gameContext.entityMan.createWeapon(gameContext, 250, 310.f, 0.f, GameObjectType::KNIFE);

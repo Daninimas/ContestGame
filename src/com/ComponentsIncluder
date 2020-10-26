@@ -16,3 +16,4 @@
 #include <com/MenuComponent.hpp>
 
 #include <com/AI/AIChaseComponent.hpp>
+#include <com/AI/AIMeleeComponent.hpp>

@@ -46,6 +46,7 @@ void EntityManager::eraseEntityByID(int id) {
 
     // AI
     eraseComponent<AIChaseComponent>(id);
+    eraseComponent<AIMeleeComponent>(id);
 
     entityMap           .erase(id);
 }
@@ -158,26 +159,32 @@ int EntityManager::createAttack(GameEngine& gameContext, float x, float y, float
     switch (goType)
     {
     case GameObjectType::MELEE_ATTACK:
+        collider.collisionLayer = ColliderComponent::Attack;
+        collider.layerMasc = ColliderComponent::Player;  // Collides with player only
 
+        attack.type = AttackType::MELEE;
         break;
 
     case GameObjectType::DISTANCE_ATTACK:
         createComponent<VelocityComponent>(entityId);
+        collider.collisionLayer = ColliderComponent::Attack;
+        collider.layerMasc = ColliderComponent::Player + ColliderComponent::Wall;  // Collides with player and walls
+
+        attack.type = AttackType::DISTANCE;
         break;
 
     case GameObjectType::PLAYER_MELEE_ATTACK:
         collider.collisionLayer = ColliderComponent::PlayerAttack;
-        collider.layerMasc = ColliderComponent::Enemy;  // Collides with enemys only
+        collider.layerMasc = ColliderComponent::Enemy;  // Collides with enemies only
 
         attack.type = AttackType::MELEE;
-
         break;
 
     case GameObjectType::PLAYER_DISTANCE_ATTACK:
         createComponent<VelocityComponent>(entityId);
 
         collider.collisionLayer = ColliderComponent::PlayerAttack;
-        collider.layerMasc = ColliderComponent::Enemy + ColliderComponent::Wall;  // Collides with enemys and walls
+        collider.layerMasc = ColliderComponent::Enemy + ColliderComponent::Wall;  // Collides with enemies and walls
 
         attack.type = AttackType::DISTANCE;
         break;
@@ -265,6 +272,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, float x, float y, float 
         healthComp.maxHealth = 3;
 
         createComponent<AIChaseComponent>(entityId);
+        createComponent<AIMeleeComponent>(entityId);
         JumpComponent& jumpComp     = createComponent<JumpComponent>(entityId);
         SensorComponent& sensorComp = createComponent<SensorComponent>(entityId);
 
@@ -272,6 +280,12 @@ int EntityManager::createEnemy(GameEngine& gameContext, float x, float y, float 
         sensorComp.sensorBounding = { 25.f, 75.f, 2.f, 48.f };
 
         jumpComp.impulse = -150.f;
+
+
+        MeleeWeaponComponent& meleeWeaponComp = createComponent<MeleeWeaponComponent>(entityId);
+        meleeWeaponComp.attackBounding = { 0.f, 20.f, 10.f, 40.f };
+        meleeWeaponComp.damage = 2;
+        meleeWeaponComp.maxCooldown = 1.5f;
 
         break;
     }
