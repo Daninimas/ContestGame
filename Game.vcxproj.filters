@@ -120,10 +120,16 @@
     <ClCompile Include="src\com\AI\AIChaseComponent.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="src\com\AI\AIMeleeComponent.cpp">
+    <ClCompile Include="src\sys\AI\AIMeleeSystem.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="src\sys\AI\AIMeleeSystem.cpp">
+    <ClCompile Include="src\com\AI\AIMeleeAtkComponent.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\com\AI\AIDistanceAtkComponent.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sys\AI\AIDistanceSystem.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
@@ -281,10 +287,16 @@
     <ClInclude Include="src\com\AI\AIChaseComponent.hpp">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="src\com\AI\AIMeleeComponent.hpp">
+    <ClInclude Include="src\sys\AI\AIMeleeSystem.hpp">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="src\sys\AI\AIMeleeSystem.hpp">
+    <ClInclude Include="src\com\AI\AIMeleeAtkComponent.hpp">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="src\com\AI\AIDistanceAtkComponent.hpp">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sys\AI\AIDistanceSystem.hpp">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

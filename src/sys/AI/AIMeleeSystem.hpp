@@ -11,5 +11,5 @@ public:
     void update(GameEngine& gameContext) const override;
 
 private:
-    void manageAttacksGeneration(GameEngine& gameContext, AIMeleeComponent& AImeleeComp) const;
+    void manageAttacksGeneration(GameEngine& gameContext, AIMeleeAtkComponent& AImeleeComp) const;
 };

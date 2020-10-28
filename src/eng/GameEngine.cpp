@@ -63,6 +63,7 @@ void GameEngine::setPlayingSystems() {
     systems.emplace_back(std::make_unique<WorldSystem>());
     systems.emplace_back(std::make_unique<SensorSystem>());
     systems.emplace_back(std::make_unique<AIMeleeSystem>());
+    systems.emplace_back(std::make_unique<AIDistanceSystem>());
     systems.emplace_back(std::make_unique<InputSystem>());
     systems.emplace_back(std::make_unique<AttackSystem>());
     systems.emplace_back(std::make_unique<PickWeaponsSystem>());

@@ -10,9 +10,9 @@ AIMeleeSystem::~AIMeleeSystem() {}
 
 void AIMeleeSystem::update(GameEngine& gameContext) const {
 
-	auto& AImeleeComponents = gameContext.entityMan.getComponents<AIMeleeComponent>();
+	auto& AIMeleeAtkComponents = gameContext.entityMan.getComponents<AIMeleeAtkComponent>();
 
-	for (AIMeleeComponent& AImeleeComp : AImeleeComponents)
+	for (AIMeleeAtkComponent& AImeleeComp : AIMeleeAtkComponents)
 	{
 		AImeleeComp.createAttack = false;
 
@@ -22,7 +22,7 @@ void AIMeleeSystem::update(GameEngine& gameContext) const {
 }
 
 
-void AIMeleeSystem::manageAttacksGeneration(GameEngine& gameContext, AIMeleeComponent& AImeleeComp) const {
+void AIMeleeSystem::manageAttacksGeneration(GameEngine& gameContext, AIMeleeAtkComponent& AImeleeComp) const {
 	SensorComponent& attackerSensor = gameContext.entityMan.getComponent<SensorComponent>(AImeleeComp.id);
 
 	for (int& sensoredEntId : attackerSensor.entitiesSensoring) {

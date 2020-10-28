@@ -89,7 +89,8 @@ void AttackSystem::checkPlayerAttacking(GameEngine& gameContext) const {
 		}
 		else {
 			DistanceWeaponComponent& playerDistanceWeap = gameContext.entityMan.getComponent<DistanceWeaponComponent>(WorldData::playerId);
-			VelocityComponent& playerVel = gameContext.entityMan.getComponent<VelocityComponent>(WorldData::playerId);
+			VelocityComponent& playerVel  = gameContext.entityMan.getComponent<VelocityComponent>(WorldData::playerId);
+			SituationComponent& playerSit = gameContext.entityMan.getComponent<SituationComponent>(WorldData::playerId);
 
 			playerDistanceWeap.attackVelY = 0.f;
 			playerDistanceWeap.attackVelX = playerDistanceWeap.attackGeneralVelociy;
@@ -107,6 +108,11 @@ void AttackSystem::checkPlayerAttacking(GameEngine& gameContext) const {
 					playerDistanceWeap.attackVelY = playerDistanceWeap.attackGeneralVelociy;
 				}
 			}
+
+			if (playerSit.facing == SituationComponent::Left) {
+				playerDistanceWeap.attackVelX *= -1;
+			}
+
 			createDistanceAttack(gameContext, playerDistanceWeap);
 
 			/*// Reset the melee cooldown too
@@ -119,11 +125,21 @@ void AttackSystem::checkPlayerAttacking(GameEngine& gameContext) const {
 }
 
 void AttackSystem::checkEnemiesAttacking(GameEngine& gameContext) const {
-	auto& AIMeleeComponents = gameContext.entityMan.getComponents<AIMeleeComponent>();
+	// For the melee attacks
+	auto& AIMeleeAtkComponents = gameContext.entityMan.getComponents<AIMeleeAtkComponent>();
 
-	for (AIMeleeComponent& AIMeleeComp : AIMeleeComponents) {
+	for (AIMeleeAtkComponent& AIMeleeComp : AIMeleeAtkComponents) {
 		if (AIMeleeComp.createAttack) {
 			createMeleeAttack(gameContext, gameContext.entityMan.getComponent<MeleeWeaponComponent>(AIMeleeComp.id));
+		}
+	}
+
+	// For the distance attacks
+	auto& AIDistanceAtkComponents = gameContext.entityMan.getComponents<AIDistanceAtkComponent>();
+
+	for (AIDistanceAtkComponent& AIDistanceComp : AIDistanceAtkComponents) {
+		if (AIDistanceComp.createAttack) {
+			createDistanceAttack(gameContext, gameContext.entityMan.getComponent<DistanceWeaponComponent>(AIDistanceComp.id));
 		}
 	}
 }
@@ -176,10 +192,6 @@ void AttackSystem::createDistanceAttack(GameEngine& gameContext, DistanceWeaponC
 
 	if (distanceWeaponAttacker.cooldown > distanceWeaponAttacker.maxCooldown) {
 		SituationComponent& attackerSit = gameContext.entityMan.getComponent<SituationComponent>(distanceWeaponAttacker.id);
-
-		if (attackerSit.facing == SituationComponent::Left) {
-			distanceWeaponAttacker.attackVelX *= -1;
-		}
 
 		GameObjectType attackGOtype = GameObjectType::DISTANCE_ATTACK;
 		if (distanceWeaponAttacker.id == WorldData::playerId) {

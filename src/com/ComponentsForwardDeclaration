@@ -13,4 +13,5 @@ class SensorComponent;
 class CameraComponent;
 class MenuComponent;
 class AIChaseComponent;
-class AIMeleeComponent;
+class AIMeleeAtkComponent;
+class AIDistanceAtkComponent;

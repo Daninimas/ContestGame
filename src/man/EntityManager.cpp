@@ -46,7 +46,8 @@ void EntityManager::eraseEntityByID(int id) {
 
     // AI
     eraseComponent<AIChaseComponent>(id);
-    eraseComponent<AIMeleeComponent>(id);
+    eraseComponent<AIMeleeAtkComponent>(id);
+    eraseComponent<AIDistanceAtkComponent>(id);
 
     entityMap           .erase(id);
 }
@@ -256,24 +257,22 @@ int EntityManager::createEnemy(GameEngine& gameContext, float x, float y, float 
     healthComp.maxHealth = 5;
 
 
-    switch (goType)
-    {
-    case GameObjectType::CHASER:
+    if (goType == GameObjectType::CHASER) {
         velocityComp.speedX = 70.f;
         renderComp.color = { 255, 100, 30, 255 };
         healthComp.maxHealth = 3;
 
         createComponent<AIChaseComponent>(entityId);
+    }
 
-        break;
-    case GameObjectType::CHASERJUMPER:
+    else if (goType == GameObjectType::CHASERJUMPER) {
         velocityComp.speedX = 50.f;
         renderComp.color = { 10, 20, 255, 255 };
         healthComp.maxHealth = 3;
 
         createComponent<AIChaseComponent>(entityId);
-        createComponent<AIMeleeComponent>(entityId);
-        JumpComponent& jumpComp     = createComponent<JumpComponent>(entityId);
+        createComponent<AIMeleeAtkComponent>(entityId);
+        JumpComponent& jumpComp = createComponent<JumpComponent>(entityId);
         SensorComponent& sensorComp = createComponent<SensorComponent>(entityId);
 
         sensorComp.sensorLayerMasc = ColliderComponent::Player + ColliderComponent::Wall;
@@ -286,8 +285,24 @@ int EntityManager::createEnemy(GameEngine& gameContext, float x, float y, float 
         meleeWeaponComp.attackBounding = { 0.f, 20.f, 10.f, 40.f };
         meleeWeaponComp.damage = 2;
         meleeWeaponComp.maxCooldown = 1.5f;
+    }
+    
+    else if(goType == GameObjectType::DISTANCE_ENEMY) {
+        velocityComp.speedX = 0.f;
+        renderComp.color = { 10, 255, 20, 255 };
+        healthComp.maxHealth = 7;
 
-        break;
+        AIDistanceAtkComponent& distanceAIComp = createComponent<AIDistanceAtkComponent>(entityId);
+        distanceAIComp.rangeX = 200.f;
+        distanceAIComp.rangeY = 40.f;
+
+        DistanceWeaponComponent& distanceWeaponComp = createComponent<DistanceWeaponComponent>(entityId);
+        // Distance
+        distanceWeaponComp.attackBounding = { 0.f, 5.f, 0.f, 10.f };
+        distanceWeaponComp.damage = 1;
+        distanceWeaponComp.attackGeneralVelociy = 300.f;
+        distanceWeaponComp.attackGravity = 100.f;
+        distanceWeaponComp.maxCooldown = 1.f;
     }
 
     healthComp.resetHealth(); // Reset health to set the current health the same as maxHealth
