@@ -19,6 +19,11 @@ public:
 
     static void insertCollidersIdWithVelocity(GameEngine& gameContext, std::vector<int>& idCollidersWithVelocity);
 
+    template <typename T> 
+    static int sign(T val) {
+        return (T(0) < val) - (val < T(0));
+    }
+
 private:
 
 };

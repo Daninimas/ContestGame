@@ -14,4 +14,9 @@ public:
     BoundingBox viewRect;
 
     float zoom{1.f};
+
+
+    // Offset from the center where the player can be without moveng the camera
+    float offsetX{100.f};
+    float offsetY{100.f};
 };

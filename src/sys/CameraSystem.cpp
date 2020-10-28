@@ -2,6 +2,8 @@
 
 #include <eng/GameEngine.hpp>
 #include <iostream>
+#include <math.h>
+#include <tools/Utils.hpp>
 
 CameraSystem::CameraSystem() {}
 
@@ -18,9 +20,22 @@ void CameraSystem::setCameraLookingPlayer(GameEngine& gameContext) const {
 	SituationComponent& cameraSit = gameContext.entityMan.getComponent<SituationComponent>(WorldData::activeCameraId);
 	CameraComponent&   cameraComp = gameContext.entityMan.getComponent<CameraComponent>(WorldData::activeCameraId);
 
-	cameraSit.x = playerSit.x;
-	cameraSit.y = playerSit.y;
+	auto moveCamera = [](float posPlayer, float& posCamera, float offset) {
+		// Calculate distance from player to camera
+		float dis = posPlayer - posCamera;
+		// Check if distance is inside offset
+		float diff = abs(dis) - offset;
+		if (diff > 0.f) {
+			// Add to the camera that possition
 
-	// Update position on engine
+			posCamera += (Utils::sign(dis) * diff);
+		}
+	};
+
+
+	moveCamera(playerSit.x, cameraSit.x, cameraComp.offsetX);
+	moveCamera(playerSit.y, cameraSit.y, cameraComp.offsetY);
+
+	// Update position on engine, the situation of the camera is its center
 	gameContext.getWindowFacadeRef().updateCamera(gameContext, WorldData::activeCameraId);
 }
