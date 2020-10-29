@@ -1,6 +1,7 @@
 #pragma once
 #include "Component.hpp"
 #include <com/WeaponComponent.hpp>
+#include <enum/AttackType.hpp>
 
 class DistanceWeaponComponent : public WeaponComponent {
 public:
@@ -12,4 +13,13 @@ public:
     float attackVelX{ 0.f };
     float attackVelY{ 0.f };
     float attackGravity{ 0.f };
+
+    enum
+    {
+        BULLET,
+        BOMB, 
+        LASER
+    };
+
+    uint8_t attackGeneratedType{ BULLET };
 };

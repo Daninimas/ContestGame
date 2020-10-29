@@ -16,6 +16,7 @@ enum class GameObjectType {
     PISTOL,
     M4,
     KNIFE,
+    GRENADE_LAUNCHER,
 
 
     // Menu types
@@ -27,5 +28,9 @@ enum class GameObjectType {
     // Enemy types
     CHASER,
     CHASERJUMPER,
-    DISTANCE_ENEMY
+    DISTANCE_ENEMY,
+
+    // Bombs
+    BOMB,
+    PLAYER_BOMB
 };

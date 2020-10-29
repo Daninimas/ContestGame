@@ -192,37 +192,92 @@ void AttackSystem::createMeleeAttack(GameEngine& gameContext, MeleeWeaponCompone
 	}
 }
 
-void AttackSystem::createDistanceAttack(GameEngine& gameContext, DistanceWeaponComponent& distanceWeaponAttacker) const{
 
+
+void AttackSystem::createDistanceAttack(GameEngine& gameContext, DistanceWeaponComponent& distanceWeaponAttacker) const {
+	// Chooses the type of disatance attack that has to be generated
 	if (distanceWeaponAttacker.cooldown > distanceWeaponAttacker.maxCooldown) {
-		SituationComponent& attackerSit = gameContext.entityMan.getComponent<SituationComponent>(distanceWeaponAttacker.id);
 
-		GameObjectType attackGOtype = GameObjectType::DISTANCE_ATTACK;
-		if (distanceWeaponAttacker.id == WorldData::playerId) {
-			attackGOtype = GameObjectType::PLAYER_DISTANCE_ATTACK;
+		switch (distanceWeaponAttacker.attackGeneratedType)
+		{
+		case DistanceWeaponComponent::BULLET:
+			createBulletAttack(gameContext, distanceWeaponAttacker);
+			break;
+
+		case DistanceWeaponComponent::BOMB:
+			createBombEntity(gameContext, distanceWeaponAttacker);
+			break;
+
+		case DistanceWeaponComponent::LASER:
+
+			break;
 		}
-
-		int attackId = gameContext.entityMan.createAttack(gameContext, attackerSit.x, attackerSit.y, 0.f, attackGOtype);
-
-		ColliderComponent& colliderComp = gameContext.entityMan.getComponent<ColliderComponent>(attackId);
-		AttackComponent& attackComp = gameContext.entityMan.getComponent<AttackComponent>(attackId);
-		VelocityComponent& attackVel = gameContext.entityMan.getComponent<VelocityComponent>(attackId);
-
-		colliderComp.boundingRoot.bounding = distanceWeaponAttacker.attackBounding;
-		attackComp.damage = distanceWeaponAttacker.damage;
-		attackComp.maxLifetime = distanceWeaponAttacker.attackLifetime;
-		attackVel.velocityX = distanceWeaponAttacker.attackVelX;
-		attackVel.velocityY = distanceWeaponAttacker.attackVelY;
-		attackVel.gravity = distanceWeaponAttacker.attackGravity;
-
-
-		distanceWeaponAttacker.cooldown = 0.f;
-
-		// Play shoot sound
-		gameContext.getSoundFacadeRef().loadSound(distanceWeaponAttacker.attackSound.soundPath);
-		gameContext.getSoundFacadeRef().playSound(distanceWeaponAttacker.attackSound);
 	}
+
 }
+void AttackSystem::createBulletAttack(GameEngine& gameContext, DistanceWeaponComponent& distanceWeaponAttacker) const{
+
+	SituationComponent& attackerSit = gameContext.entityMan.getComponent<SituationComponent>(distanceWeaponAttacker.id);
+
+	GameObjectType attackGOtype = GameObjectType::DISTANCE_ATTACK;
+	if (distanceWeaponAttacker.id == WorldData::playerId) {
+		attackGOtype = GameObjectType::PLAYER_DISTANCE_ATTACK;
+	}
+
+	int attackId = gameContext.entityMan.createAttack(gameContext, attackerSit.x, attackerSit.y, 0.f, attackGOtype);
+
+	ColliderComponent& colliderComp = gameContext.entityMan.getComponent<ColliderComponent>(attackId);
+	AttackComponent& attackComp = gameContext.entityMan.getComponent<AttackComponent>(attackId);
+	VelocityComponent& attackVel = gameContext.entityMan.getComponent<VelocityComponent>(attackId);
+
+	colliderComp.boundingRoot.bounding = distanceWeaponAttacker.attackBounding;
+	attackComp.damage = distanceWeaponAttacker.damage;
+	attackComp.maxLifetime = distanceWeaponAttacker.attackLifetime;
+	attackVel.velocityX = distanceWeaponAttacker.attackVelX;
+	attackVel.velocityY = distanceWeaponAttacker.attackVelY;
+	attackVel.gravity = distanceWeaponAttacker.attackGravity;
+
+
+	distanceWeaponAttacker.cooldown = 0.f;
+
+	// Play shoot sound
+	gameContext.getSoundFacadeRef().loadSound(distanceWeaponAttacker.attackSound.soundPath);
+	gameContext.getSoundFacadeRef().playSound(distanceWeaponAttacker.attackSound);
+}
+
+void AttackSystem::createBombEntity(GameEngine& gameContext, DistanceWeaponComponent& distanceWeaponAttacker) const {
+	SituationComponent& attackerSit = gameContext.entityMan.getComponent<SituationComponent>(distanceWeaponAttacker.id);
+
+	GameObjectType attackGOtype = GameObjectType::BOMB;
+	if (distanceWeaponAttacker.id == WorldData::playerId) {
+		attackGOtype = GameObjectType::PLAYER_BOMB;
+	}
+
+	int bombId = gameContext.entityMan.createBomb(gameContext, attackerSit.x, attackerSit.y, 0.f, attackGOtype);
+
+	ColliderComponent& colliderComp = gameContext.entityMan.getComponent<ColliderComponent>(bombId);
+	VelocityComponent& bombVel = gameContext.entityMan.getComponent<VelocityComponent>(bombId);
+	BombComponent& bombComp = gameContext.entityMan.getComponent<BombComponent>(bombId);
+
+	colliderComp.boundingRoot.bounding = distanceWeaponAttacker.attackBounding;
+
+	bombComp.damageExplosion = distanceWeaponAttacker.damage;
+	bombComp.explosionLifetime = distanceWeaponAttacker.attackLifetime;
+	bombComp.activated = false;
+	bombComp.explosionTime = 0.f;
+
+	bombVel.velocityX = distanceWeaponAttacker.attackVelX;
+	bombVel.velocityY = distanceWeaponAttacker.attackVelY;
+	bombVel.gravity = distanceWeaponAttacker.attackGravity;
+
+
+	distanceWeaponAttacker.cooldown = 0.f;
+
+	// Play shoot sound
+	gameContext.getSoundFacadeRef().loadSound(distanceWeaponAttacker.attackSound.soundPath);
+	gameContext.getSoundFacadeRef().playSound(distanceWeaponAttacker.attackSound);
+}
+
 
 
 
@@ -231,6 +286,7 @@ void AttackSystem::animateExplosions(GameEngine& gameContext) const {
 	
 	for (AttackComponent& attack : attacks) {
 		if (attack.type == AttackType::EXPLOSION && gameContext.entityMan.existsComponent<ExplosionAttackComponent>(attack.id) ) {
+			std::cout << "holaaaaaaaaaaa\n";
 			ColliderComponent& attackCol = gameContext.entityMan.getComponent<ColliderComponent>(attack.id);
 			ExplosionAttackComponent& explosionComp = gameContext.entityMan.getComponent<ExplosionAttackComponent>(attack.id);
 			BoundingBox& attackBound = attackCol.boundingRoot.bounding;

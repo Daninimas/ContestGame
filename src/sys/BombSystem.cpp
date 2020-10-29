@@ -68,4 +68,8 @@ void BombSystem::explodeBomb(GameEngine& gameContext, int bombId) const {
 	// AttackComponent
 	explosionAttack.damage		= bombComp.damageExplosion;
 	explosionAttack.maxLifetime = bombComp.explosionLifetime;
+
+
+	// DELETE BOMB
+	gameContext.eraseEntityByID(bombId);
 }

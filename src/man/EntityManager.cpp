@@ -123,6 +123,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float
     distanceWeaponComp.attackGeneralVelociy = 500.f;
     distanceWeaponComp.attackGravity = 100.f;
     distanceWeaponComp.maxCooldown = 0.5f;
+    distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BULLET;
 
     // Render component
     renderComp.sprite = "Media/Images/YellowDuck.png";
@@ -194,7 +195,7 @@ int EntityManager::createAttack(GameEngine& gameContext, float x, float y, float
         break;
 
     case GameObjectType::EXPLOSION:
-
+        createComponent<ExplosionAttackComponent>(entityId);
         attack.type = AttackType::EXPLOSION;
         break;
     }
@@ -350,7 +351,7 @@ int EntityManager::createWeapon(GameEngine& gameContext, float x, float y, float
     renderComp.spriteRect = { 400, 450, 200, 250 };
 
     // Velocity
-    velocityComp.gravity = 20.f;
+    velocityComp.gravity = 80.f;
     velocityComp.speedX  = 0.f;
 
 
@@ -364,6 +365,7 @@ int EntityManager::createWeapon(GameEngine& gameContext, float x, float y, float
         distanceWeaponComp.attackGravity = 0.f;
         distanceWeaponComp.maxCooldown = 0.2f;
         distanceWeaponComp.attackLifetime = 1.5f;
+        distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BULLET;
 
         distanceWeaponComp.attackSound.soundPath = "Media/Sound/GE_KF7_Soviet.wav";
 
@@ -384,6 +386,22 @@ int EntityManager::createWeapon(GameEngine& gameContext, float x, float y, float
         WorldData::worldMeleeWeapons.push_back(entityId);
     }
 
+    else if (goType == GameObjectType::GRENADE_LAUNCHER) {
+        DistanceWeaponComponent& distanceWeaponComp = createComponent<DistanceWeaponComponent>(entityId);
+
+        distanceWeaponComp.attackBounding = { 0.f, 20.f, 0.f, 20.f };
+        distanceWeaponComp.damage = 10;
+        distanceWeaponComp.attackGeneralVelociy = 100.f;
+        distanceWeaponComp.attackGravity = 100.f;
+        distanceWeaponComp.maxCooldown = 0.5f;
+        distanceWeaponComp.attackLifetime = 0.5f;
+        distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BOMB;
+
+        distanceWeaponComp.attackSound.soundPath = "Media/Sound/GE_KF7_Soviet.wav";
+
+        WorldData::worldDistanceWeapons.push_back(entityId);
+    }
+
     //######### RENDER ########//
     gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
 
@@ -400,6 +418,7 @@ int EntityManager::createCamera(GameEngine& gameContext, float x, float y, float
 
     SituationComponent& situation = createComponent<SituationComponent>(entityId);
     CameraComponent& cameraComp   = createComponent<CameraComponent>(entityId);
+    VelocityComponent& velocityComp = createComponent<VelocityComponent>(entityId);
 
 
     //######### DATA ########//
@@ -422,6 +441,39 @@ int EntityManager::createCamera(GameEngine& gameContext, float x, float y, float
     return entityId;
 }
 
+
+int EntityManager::createBomb(GameEngine& gameContext, float x, float y, float r, GameObjectType goType) {
+    int entityId = Entity::getCurrentId();
+
+    SituationComponent& situation = createComponent<SituationComponent>(entityId);
+    ColliderComponent& colliderComp = createComponent<ColliderComponent>(entityId);
+    BombComponent& bombComp = createComponent<BombComponent>(entityId);
+    createComponent<VelocityComponent>(entityId);
+
+    //######### DATA ########//
+    situation.x = x;
+    situation.y = y;
+    situation.rotation = r;
+
+    colliderComp.type = ColliderType::DYNAMIC;
+
+    switch (goType) {
+        case GameObjectType::BOMB:
+        colliderComp.collisionLayer = ColliderComponent::Attack;
+        colliderComp.layerMasc = ColliderComponent::Player + ColliderComponent::Wall;
+            break;
+
+        case GameObjectType::PLAYER_BOMB:
+            colliderComp.collisionLayer = ColliderComponent::PlayerAttack;
+            colliderComp.layerMasc = ColliderComponent::Enemy + ColliderComponent::Wall;
+            break;
+    }
+    
+
+    //######### CREATE ########//
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::BOMB, goType));
+    return entityId;
+}
 
 
 // ------------------------------ WORLD CREATION ------------------------------
