@@ -44,7 +44,7 @@ void EntityManager::eraseEntityByID(int id) {
     eraseComponent<MenuComponent>(id);
     eraseComponent<WeaponComponent>(id);
     eraseComponent<ExplosionAttackComponent>(id);
-    eraseComponent<BombWeaponComponent>(id);
+    eraseComponent<BombComponent>(id);
 
     // AI
     eraseComponent<AIChaseComponent>(id);

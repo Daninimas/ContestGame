@@ -138,7 +138,7 @@
     <ClCompile Include="src\sys\BombSystem.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="src\com\BombWeaponComponent.cpp">
+    <ClCompile Include="src\com\BombComponent.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
@@ -314,7 +314,7 @@
     <ClInclude Include="src\sys\BombSystem.hpp">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="src\com\BombWeaponComponent.hpp">
+    <ClInclude Include="src\com\BombComponent.hpp">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

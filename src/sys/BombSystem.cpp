@@ -9,11 +9,11 @@ BombSystem::BombSystem() {}
 BombSystem::~BombSystem() {}
 
 void BombSystem::update(GameEngine& gameContext) const {
-	auto& BombWeaponComponents = gameContext.entityMan.getComponents<BombWeaponComponent>();
+	auto& BombComponents = gameContext.entityMan.getComponents<BombComponent>();
 	std::vector<int> bombsToExplode;
-	bombsToExplode.reserve(BombWeaponComponents.size());
+	bombsToExplode.reserve(BombComponents.size());
 
-	for (BombWeaponComponent& bombComp : BombWeaponComponents) {
+	for (BombComponent& bombComp : BombComponents) {
 		// Update timer if is activated
 		if (bombComp.activated) {
 			updateBombTimers(gameContext, bombComp, bombsToExplode);
@@ -30,7 +30,7 @@ void BombSystem::update(GameEngine& gameContext) const {
 }
 
 
-void BombSystem::updateBombTimers(GameEngine& gameContext, BombWeaponComponent& bombComp, std::vector<int>& bombsToExplode) const {
+void BombSystem::updateBombTimers(GameEngine& gameContext, BombComponent& bombComp, std::vector<int>& bombsToExplode) const {
 	bombComp.currentTime += gameContext.getDeltaTime();
 
 	if (bombComp.currentTime > bombComp.explosionTime) {
@@ -38,7 +38,7 @@ void BombSystem::updateBombTimers(GameEngine& gameContext, BombWeaponComponent& 
 	}
 }
 
-void BombSystem::checkBombCollision(GameEngine& gameContext, BombWeaponComponent& bombComp) const {
+void BombSystem::checkBombCollision(GameEngine& gameContext, BombComponent& bombComp) const {
 	ColliderComponent& collider = gameContext.entityMan.getComponent<ColliderComponent>(bombComp.id);
 
 	bombComp.activated = collider.collide;
@@ -46,7 +46,7 @@ void BombSystem::checkBombCollision(GameEngine& gameContext, BombWeaponComponent
 
 void BombSystem::explodeBomb(GameEngine& gameContext, int bombId) const {
 	SituationComponent& bombSit   = gameContext.entityMan.getComponent<SituationComponent>(bombId);
-	BombWeaponComponent& bombWeap = gameContext.entityMan.getComponent<BombWeaponComponent>(bombId);
+	BombComponent& bombComp       = gameContext.entityMan.getComponent<BombComponent>(bombId);
 	ColliderComponent& bombColl   = gameContext.entityMan.getComponent<ColliderComponent>(bombId);
 
 	// Creates the explosion attack entity
@@ -57,7 +57,7 @@ void BombSystem::explodeBomb(GameEngine& gameContext, int bombId) const {
 	AttackComponent& explosionAttack        = gameContext.entityMan.getComponent<AttackComponent>(explosionId);
 
 	// ExplosionAttackComponent
-	explosionComp.expansionVelocity = bombWeap.explosionExpansion;
+	explosionComp.expansionVelocity = bombComp.explosionExpansion;
 
 	// ColliderComponent
 	BoundingBox& bombBounding = bombColl.boundingRoot.bounding;
@@ -66,6 +66,6 @@ void BombSystem::explodeBomb(GameEngine& gameContext, int bombId) const {
 	explosionCollider.layerMasc             = bombColl.layerMasc;
 
 	// AttackComponent
-	explosionAttack.damage		= bombWeap.damage;
-	explosionAttack.maxLifetime = bombWeap.explosionLifetime;
+	explosionAttack.damage		= bombComp.damageExplosion;
+	explosionAttack.maxLifetime = bombComp.explosionLifetime;
 }

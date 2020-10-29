@@ -15,7 +15,7 @@
 #include <com/CameraComponent.hpp>
 #include <com/MenuComponent.hpp>
 #include <com/ExplosionAttackComponent.hpp>
-#include <com/BombWeaponComponent.hpp>
+#include <com/BombComponent.hpp>
 
 #include <com/AI/AIChaseComponent.hpp>
 #include <com/AI/AIMeleeAtkComponent.hpp>

@@ -1,13 +1,12 @@
 #pragma once
 
 #include "Component.hpp"
-#include <com/WeaponComponent.hpp>
 
 
-class BombWeaponComponent : public WeaponComponent {
+class BombComponent : public Component {
 public:
-    explicit BombWeaponComponent(const int id);
-    ~BombWeaponComponent() override;
+    explicit BombComponent(const int id);
+    ~BombComponent() override;
     
     bool activated{ false };
 
@@ -16,4 +15,6 @@ public:
 
     float explosionExpansion;
     float explosionLifetime;
+
+    uint16_t damageExplosion{ 1 };
 };
