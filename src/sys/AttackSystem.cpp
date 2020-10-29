@@ -16,10 +16,14 @@ void AttackSystem::update(GameEngine& gameContext) const {
 	//manage COOLDOWN for all attacks
 	addCooldownTimeToWeapons(gameContext);
 
+	//manage attack creation
 	checkPlayerAttacking(gameContext);
 	checkEnemiesAttacking(gameContext);
 
-	// Manage hits
+	//manage attacks special effects
+	animateExplosions(gameContext);
+
+	//manage hits
 	checkAttacksHits(gameContext);
 }
 
@@ -219,6 +223,29 @@ void AttackSystem::createDistanceAttack(GameEngine& gameContext, DistanceWeaponC
 		gameContext.getSoundFacadeRef().playSound(distanceWeaponAttacker.attackSound);
 	}
 }
+
+
+
+void AttackSystem::animateExplosions(GameEngine& gameContext) const {
+	auto& attacks = gameContext.entityMan.getComponents<AttackComponent>();
+	
+	for (AttackComponent& attack : attacks) {
+		if (attack.type == AttackType::EXPLOSION) {
+			ColliderComponent& attackCol = gameContext.entityMan.getComponent<ColliderComponent>(attack.id);
+			ExplosionAttackComponent& explosionComp = gameContext.entityMan.getComponent<ExplosionAttackComponent>(attack.id);
+			BoundingBox& attackBound = attackCol.boundingRoot.bounding;
+
+			// Do bigger the collider
+			attackBound.xLeft  -= explosionComp.expansionVelocity;
+			attackBound.xRight += explosionComp.expansionVelocity;
+			attackBound.yDown  += explosionComp.expansionVelocity;
+			attackBound.yUp    -= explosionComp.expansionVelocity;
+		}
+	}
+}
+
+
+
 
 
 void AttackSystem::checkAttacksHits(GameEngine& gameContext) const{

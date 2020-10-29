@@ -16,6 +16,7 @@ private:
     void checkPlayerAttacking(GameEngine& gameContext) const;
     void checkEnemiesAttacking(GameEngine& gameContext) const;
     void createMeleeAttack(GameEngine& gameContext, MeleeWeaponComponent& meleeAttacker) const;
+    void animateExplosions(GameEngine& gameContext) const;
     void createDistanceAttack(GameEngine& gameContext, DistanceWeaponComponent& distanceWeaponAttacker) const;
     void checkAttacksHits(GameEngine& gameContext) const;
 

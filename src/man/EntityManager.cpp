@@ -43,6 +43,7 @@ void EntityManager::eraseEntityByID(int id) {
     eraseComponent<CameraComponent>(id);
     eraseComponent<MenuComponent>(id);
     eraseComponent<WeaponComponent>(id);
+    eraseComponent<ExplosionAttackComponent>(id);
 
     // AI
     eraseComponent<AIChaseComponent>(id);
