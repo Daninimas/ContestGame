@@ -13,6 +13,8 @@
 #include <sys/PickWeaponsSystem.hpp>
 #include <sys/CameraSystem.hpp>
 #include <sys/MenuSystem.hpp>
+#include <sys/BombSystem.hpp>
+
 #include <sys/AI/AIChaseSystem.hpp>
 #include <sys/AI/AIMeleeSystem.hpp>
 #include <sys/AI/AIDistanceSystem.hpp>

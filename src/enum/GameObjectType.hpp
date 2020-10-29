@@ -3,10 +3,13 @@
 enum class GameObjectType {
     NONE,
     PLAYER_GENERAL,
+
+    // Attacks
     PLAYER_MELEE_ATTACK,
     MELEE_ATTACK,
     DISTANCE_ATTACK,
     PLAYER_DISTANCE_ATTACK,
+    EXPLOSION,
 
 
     // Weapons

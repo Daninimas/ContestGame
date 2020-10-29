@@ -44,6 +44,7 @@ void EntityManager::eraseEntityByID(int id) {
     eraseComponent<MenuComponent>(id);
     eraseComponent<WeaponComponent>(id);
     eraseComponent<ExplosionAttackComponent>(id);
+    eraseComponent<BombWeaponComponent>(id);
 
     // AI
     eraseComponent<AIChaseComponent>(id);
@@ -190,6 +191,11 @@ int EntityManager::createAttack(GameEngine& gameContext, float x, float y, float
         collider.layerMasc = ColliderComponent::Enemy + ColliderComponent::Wall;  // Collides with enemies and walls
 
         attack.type = AttackType::DISTANCE;
+        break;
+
+    case GameObjectType::EXPLOSION:
+
+        attack.type = AttackType::EXPLOSION;
         break;
     }
 

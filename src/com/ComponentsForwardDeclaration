@@ -16,3 +16,4 @@ class AIChaseComponent;
 class AIMeleeAtkComponent;
 class AIDistanceAtkComponent;
 class ExplosionAttackComponent;
+class BombWeaponComponent;

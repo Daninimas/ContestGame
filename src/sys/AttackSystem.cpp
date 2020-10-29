@@ -230,7 +230,7 @@ void AttackSystem::animateExplosions(GameEngine& gameContext) const {
 	auto& attacks = gameContext.entityMan.getComponents<AttackComponent>();
 	
 	for (AttackComponent& attack : attacks) {
-		if (attack.type == AttackType::EXPLOSION) {
+		if (attack.type == AttackType::EXPLOSION && gameContext.entityMan.existsComponent<ExplosionAttackComponent>(attack.id) ) {
 			ColliderComponent& attackCol = gameContext.entityMan.getComponent<ColliderComponent>(attack.id);
 			ExplosionAttackComponent& explosionComp = gameContext.entityMan.getComponent<ExplosionAttackComponent>(attack.id);
 			BoundingBox& attackBound = attackCol.boundingRoot.bounding;
