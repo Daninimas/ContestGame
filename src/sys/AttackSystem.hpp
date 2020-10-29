@@ -11,7 +11,7 @@ public:
     void update(GameEngine& gameContext) const override;
 
 private:
-    void deleteMeleeAttacks(GameEngine& gameContext) const;
+    void deleteAttacksByTime(GameEngine& gameContext) const;
     void addCooldownTimeToWeapons(GameEngine& gameContext) const;
     void checkPlayerAttacking(GameEngine& gameContext) const;
     void checkEnemiesAttacking(GameEngine& gameContext) const;

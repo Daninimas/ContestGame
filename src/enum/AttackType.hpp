@@ -2,5 +2,6 @@
 enum class AttackType
 {
     MELEE,
-    DISTANCE
+    DISTANCE,
+    EXPLOSION
 };

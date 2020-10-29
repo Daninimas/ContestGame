@@ -18,6 +18,8 @@ public:
 
     Sound attackSound{};
 
+    float attackLifetime{ 0.5f };
+
     /*
     // Position where the attack is created from player
     float spawnX{ 0.f };

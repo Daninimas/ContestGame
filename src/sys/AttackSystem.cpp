@@ -2,6 +2,7 @@
 
 #include <eng/GameEngine.hpp>
 #include <iostream>
+#include <algorithm>
 
 AttackSystem::AttackSystem() {}
 
@@ -10,7 +11,7 @@ AttackSystem::~AttackSystem() {}
 
 void AttackSystem::update(GameEngine& gameContext) const {
 	// Delete previous melee attacks
-	deleteMeleeAttacks(gameContext);
+	deleteAttacksByTime(gameContext);
 
 	//manage COOLDOWN for all attacks
 	addCooldownTimeToWeapons(gameContext);
@@ -22,18 +23,16 @@ void AttackSystem::update(GameEngine& gameContext) const {
 	checkAttacksHits(gameContext);
 }
 
-void AttackSystem::deleteMeleeAttacks(GameEngine& gameContext) const {
+void AttackSystem::deleteAttacksByTime(GameEngine& gameContext) const {
 	auto& attacks = gameContext.entityMan.getComponents<AttackComponent>();
 	std::vector<int> attacksToDelete;
 	attacksToDelete.reserve(attacks.size());
 
 	for (AttackComponent& attack : attacks) {
-		if (attack.type == AttackType::MELEE) {
-			--attack.attackLifetime;
+		attack.lifetime += gameContext.getDeltaTime();
 
-			if (attack.attackLifetime == 0)
-				attacksToDelete.push_back(attack.id);
-		}
+		if (attack.lifetime > attack.maxLifetime)
+			attacksToDelete.push_back(attack.id);
 	}
 
 	//Delete collided attacks
@@ -179,6 +178,7 @@ void AttackSystem::createMeleeAttack(GameEngine& gameContext, MeleeWeaponCompone
 
 		colliderComp.boundingRoot.bounding = meleeAttacker.attackBounding;
 		attackComp.damage = meleeAttacker.damage;
+		attackComp.maxLifetime = meleeAttacker.attackLifetime;
 
 		meleeAttacker.cooldown = 0.f;
 
@@ -206,9 +206,11 @@ void AttackSystem::createDistanceAttack(GameEngine& gameContext, DistanceWeaponC
 
 		colliderComp.boundingRoot.bounding = distanceWeaponAttacker.attackBounding;
 		attackComp.damage = distanceWeaponAttacker.damage;
+		attackComp.maxLifetime = distanceWeaponAttacker.attackLifetime;
 		attackVel.velocityX = distanceWeaponAttacker.attackVelX;
 		attackVel.velocityY = distanceWeaponAttacker.attackVelY;
 		attackVel.gravity = distanceWeaponAttacker.attackGravity;
+
 
 		distanceWeaponAttacker.cooldown = 0.f;
 
@@ -243,11 +245,15 @@ void AttackSystem::resolveAttackHit(GameEngine& gameContext, ColliderComponent& 
 	std::vector<int>& entitiesColliding = attackCol.boundingRoot.bounding.entitiesColliding;
 
 	for (int entityHitId : entitiesColliding) {
-		damageEntity(gameContext, attack, entityHitId);
+
+		if (!(std::find(attack.entitiesDamaged.begin(), attack.entitiesDamaged.end(), entityHitId) != attack.entitiesDamaged.end())) { //if this entity isn't already hitted
+			damageEntity(gameContext, attack, entityHitId);
+		}
 	}
 
-	// After hit, delete attack
-	attacksToDelete.push_back(attack.id);
+	// After hit, delete attack if is a distance atack
+	if(attack.type == AttackType::DISTANCE)
+		attacksToDelete.push_back(attack.id);
 }
 
 void AttackSystem::damageEntity(GameEngine& gameContext, AttackComponent& attack, int entityHitId) const {
@@ -258,4 +264,6 @@ void AttackSystem::damageEntity(GameEngine& gameContext, AttackComponent& attack
 		hittedHealth.damageReceived += attack.damage;
 		hittedHealth.damaged = true;
 	}
+
+	attack.entitiesDamaged.push_back(entityHitId);
 }

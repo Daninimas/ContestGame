@@ -113,6 +113,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float
     // Melee
     meleeWeaponComp.attackBounding = { 0.f, 10.f, 0.f, 10.f };
     meleeWeaponComp.damage = 2;
+    meleeWeaponComp.attackLifetime = 0.15f;
 
     // Distance
     distanceWeaponComp.attackBounding = { 0.f, 5.f, 0.f, 10.f };
@@ -355,6 +356,7 @@ int EntityManager::createWeapon(GameEngine& gameContext, float x, float y, float
         distanceWeaponComp.attackGeneralVelociy = 900.f;
         distanceWeaponComp.attackGravity = 0.f;
         distanceWeaponComp.maxCooldown = 0.2f;
+        distanceWeaponComp.attackLifetime = 1.5f;
 
         distanceWeaponComp.attackSound.soundPath = "Media/Sound/GE_KF7_Soviet.wav";
 
@@ -367,6 +369,7 @@ int EntityManager::createWeapon(GameEngine& gameContext, float x, float y, float
         meleeWeaponComp.attackBounding = { 0.f, 20.f, 10.f, 40.f };
         meleeWeaponComp.damage = 4;
         meleeWeaponComp.maxCooldown = 1.f;
+        meleeWeaponComp.attackLifetime = 0.1f;
 
         meleeWeaponComp.attackSound.soundPath = "Media/Sound/GE_KF7_Soviet.wav";
 
