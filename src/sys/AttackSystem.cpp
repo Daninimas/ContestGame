@@ -265,6 +265,7 @@ void AttackSystem::createBombEntity(GameEngine& gameContext, DistanceWeaponCompo
 	bombComp.explosionLifetime = distanceWeaponAttacker.attackLifetime;
 	bombComp.activated = false;
 	bombComp.explosionTime = 0.f;
+	bombComp.explosionExpansion = 10.f;
 
 	bombVel.velocityX = distanceWeaponAttacker.attackVelX;
 	bombVel.velocityY = distanceWeaponAttacker.attackVelY;
@@ -286,7 +287,6 @@ void AttackSystem::animateExplosions(GameEngine& gameContext) const {
 	
 	for (AttackComponent& attack : attacks) {
 		if (attack.type == AttackType::EXPLOSION && gameContext.entityMan.existsComponent<ExplosionAttackComponent>(attack.id) ) {
-			std::cout << "holaaaaaaaaaaa\n";
 			ColliderComponent& attackCol = gameContext.entityMan.getComponent<ColliderComponent>(attack.id);
 			ExplosionAttackComponent& explosionComp = gameContext.entityMan.getComponent<ExplosionAttackComponent>(attack.id);
 			BoundingBox& attackBound = attackCol.boundingRoot.bounding;
