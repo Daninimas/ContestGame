@@ -20,3 +20,4 @@
 #include <com/AI/AIChaseComponent.hpp>
 #include <com/AI/AIMeleeAtkComponent.hpp>
 #include <com/AI/AIDistanceAtkComponent.hpp>
+#include <com/AI/AITransformationComponent.hpp>

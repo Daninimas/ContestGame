@@ -145,6 +145,8 @@ void SFMLEngine::updateNode(GameEngine& gameContext, int id) {
 	RenderComponent& drawable = gameContext.entityMan.getComponent<RenderComponent>(id);
 	sf::Sprite& node = nodeMap[id];
 
+	node.setOrigin(0,0);
+
 	node.setPosition(situation.x, situation.y);
 	node.setRotation(situation.rotation);
 	node.setScale(situation.scaleX, situation.scaleY);
@@ -161,6 +163,10 @@ void SFMLEngine::updateTextures(GameEngine& gameContext, std::vector<int> entiti
 	for (int id : entitiesId) {
 		if (existsNode(id)) {
 			updateTexture(gameContext, id);
+		}
+		else {
+			// if dont exists, create node
+			createEntity(gameContext, id);
 		}
 	}
 }

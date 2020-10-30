@@ -22,4 +22,13 @@ public:
     };
 
     uint8_t attackGeneratedType{ BULLET };
+
+
+    // Only for bombs generation
+
+    bool startActivated{ false };
+    float explosionTime{0.f};
+    float explosionExpansion{1.f};
+
+    // Only for bombs generation
 };

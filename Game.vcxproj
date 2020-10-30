@@ -154,6 +154,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\com\AI\AITransformationComponent.cpp" />
     <ClCompile Include="src\com\AI\AIChaseComponent.cpp" />
     <ClCompile Include="src\com\AI\AIDistanceAtkComponent.cpp" />
     <ClCompile Include="src\com\AI\AIMeleeAtkComponent.cpp" />
@@ -165,6 +166,7 @@
     <ClCompile Include="src\sys\AI\AIChaseSystem.cpp" />
     <ClCompile Include="src\sys\AI\AIDistanceSystem.cpp" />
     <ClCompile Include="src\sys\AI\AIMeleeSystem.cpp" />
+    <ClCompile Include="src\sys\AI\AITransformationSystem.cpp" />
     <ClCompile Include="src\sys\BombSystem.cpp" />
     <ClCompile Include="src\sys\CameraSystem.cpp" />
     <ClCompile Include="src\sys\MenuSystem.cpp" />
@@ -198,6 +200,7 @@
     <ClCompile Include="src\tools\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\com\AI\AITransformationComponent.hpp" />
     <ClInclude Include="src\com\AI\AIChaseComponent.hpp" />
     <ClInclude Include="src\com\AI\AIDistanceAtkComponent.hpp" />
     <ClInclude Include="src\com\AI\AIMeleeAtkComponent.hpp" />
@@ -211,6 +214,7 @@
     <ClInclude Include="src\sys\AI\AIChaseSystem.hpp" />
     <ClInclude Include="src\sys\AI\AIDistanceSystem.hpp" />
     <ClInclude Include="src\sys\AI\AIMeleeSystem.hpp" />
+    <ClInclude Include="src\sys\AI\AITransformationSystem.hpp" />
     <ClInclude Include="src\sys\BombSystem.hpp" />
     <ClInclude Include="src\sys\CameraSystem.hpp" />
     <ClInclude Include="src\sys\MenuSystem.hpp" />

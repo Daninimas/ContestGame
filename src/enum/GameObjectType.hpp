@@ -29,6 +29,7 @@ enum class GameObjectType {
     CHASER,
     CHASERJUMPER,
     DISTANCE_ENEMY,
+    TRANSFORM_ENEMY,
 
     // Bombs
     BOMB,

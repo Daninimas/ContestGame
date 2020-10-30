@@ -1,6 +1,7 @@
 #include "AIDistanceSystem.hpp"
 
 #include <eng/GameEngine.hpp>
+#include <tools/Utils.hpp>
 #include <iostream>
 #include <stdlib.h>
 #include <math.h>
@@ -30,14 +31,9 @@ void AIDistanceSystem::manageAttackGeneration(GameEngine& gameContext, AIDistanc
 	SituationComponent&   objectiveSit = gameContext.entityMan.getComponent<SituationComponent>(AImeleeComp.objectiveId);
 	DistanceWeaponComponent& distWeap  = gameContext.entityMan.getComponent<DistanceWeaponComponent>(AImeleeComp.id);
 
-	auto objectiveInsideRange = [](SituationComponent& attackerSit, SituationComponent& objectiveSit, float rangeX, float rangeY) {
-		if (abs(attackerSit.x - objectiveSit.x) < rangeX && abs(attackerSit.y - objectiveSit.y) < rangeY) {
-			return true;
-		}
-		return false;
-	};
+	
 
-	if (objectiveInsideRange(attackerSit, objectiveSit, AImeleeComp.rangeX, AImeleeComp.rangeY) && distWeap.cooldown > distWeap.maxCooldown) {
+	if (Utils::objectiveInsideRange(attackerSit, objectiveSit, AImeleeComp.rangeX, AImeleeComp.rangeY) && distWeap.cooldown > distWeap.maxCooldown) {
 		AImeleeComp.createAttack = true;
 
 		setAttackDirection(gameContext, attackerSit, objectiveSit, distWeap);

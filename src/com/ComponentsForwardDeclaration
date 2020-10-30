@@ -17,3 +17,4 @@ class AIMeleeAtkComponent;
 class AIDistanceAtkComponent;
 class ExplosionAttackComponent;
 class BombComponent;
+class AITransformationComponent;

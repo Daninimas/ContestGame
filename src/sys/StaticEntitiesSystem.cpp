@@ -26,6 +26,12 @@ void StaticEntitiesSystem::init(GameEngine &gameContext) const {
     gameContext.entityMan.createWall(gameContext, 400.f, 390.f, 0.f, GameObjectType::NONE);
     gameContext.entityMan.createWall(gameContext, 200.f, 320.f, 0.f, GameObjectType::NONE);
     gameContext.entityMan.createWall(gameContext, 600.f, 390.f, 0.f, GameObjectType::NONE);
+    gameContext.entityMan.createWall(gameContext, 700.f, 390.f, 0.f, GameObjectType::NONE);
+    gameContext.entityMan.createWall(gameContext, 800.f, 400.f, 0.f, GameObjectType::NONE);
+    gameContext.entityMan.createWall(gameContext, 900.f, 400.f, 0.f, GameObjectType::NONE);
+    gameContext.entityMan.createWall(gameContext, 1000.f, 410.f, 0.f, GameObjectType::NONE);
+    gameContext.entityMan.createWall(gameContext, 1100.f, 410.f, 0.f, GameObjectType::NONE);
+
 
 
     int chaserId = gameContext.entityMan.createEnemy(gameContext, 300.f, 300.f, 0.f, GameObjectType::CHASERJUMPER);
@@ -34,6 +40,9 @@ void StaticEntitiesSystem::init(GameEngine &gameContext) const {
 
     int distanceEnemId = gameContext.entityMan.createEnemy(gameContext, 650.f, 300.f, 0.f, GameObjectType::DISTANCE_ENEMY);
     gameContext.entityMan.getComponent<AIDistanceAtkComponent>(distanceEnemId).objectiveId = WorldData::playerId;
+
+    int transformEnemId = gameContext.entityMan.createEnemy(gameContext, 1100.f, 350.f, 0.f, GameObjectType::TRANSFORM_ENEMY);
+    gameContext.entityMan.getComponent<AITransformationComponent>(transformEnemId).objectiveId = WorldData::playerId;
 
     gameContext.entityMan.createWeapon(gameContext, 250, 310.f, 0.f, GameObjectType::KNIFE);
     gameContext.entityMan.createWeapon(gameContext, 450, 360.f, 0.f, GameObjectType::M4);

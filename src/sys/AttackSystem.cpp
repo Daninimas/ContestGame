@@ -263,9 +263,9 @@ void AttackSystem::createBombEntity(GameEngine& gameContext, DistanceWeaponCompo
 
 	bombComp.damageExplosion = distanceWeaponAttacker.damage;
 	bombComp.explosionLifetime = distanceWeaponAttacker.attackLifetime;
-	bombComp.activated = false;
-	bombComp.explosionTime = 0.f;
-	bombComp.explosionExpansion = 10.f;
+	bombComp.activated = distanceWeaponAttacker.startActivated;
+	bombComp.explosionTime = distanceWeaponAttacker.explosionTime;
+	bombComp.explosionExpansion = distanceWeaponAttacker.explosionExpansion;
 
 	bombVel.velocityX = distanceWeaponAttacker.attackVelX;
 	bombVel.velocityY = distanceWeaponAttacker.attackVelY;

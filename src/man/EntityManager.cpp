@@ -50,6 +50,7 @@ void EntityManager::eraseEntityByID(int id) {
     eraseComponent<AIChaseComponent>(id);
     eraseComponent<AIMeleeAtkComponent>(id);
     eraseComponent<AIDistanceAtkComponent>(id);
+    eraseComponent<AITransformationComponent>(id);
 
     entityMap           .erase(id);
 }
@@ -314,6 +315,35 @@ int EntityManager::createEnemy(GameEngine& gameContext, float x, float y, float 
         distanceWeaponComp.maxCooldown = 1.f;
     }
 
+    else if (goType == GameObjectType::TRANSFORM_ENEMY) {
+        velocityComp.speedX = 100.f;
+        renderComp.color = { 255, 255, 255, 255 };
+        healthComp.maxHealth = 5;
+
+        JumpComponent& jumpComp = createComponent<JumpComponent>(entityId);
+        SensorComponent& sensorComp = createComponent<SensorComponent>(entityId);
+
+        sensorComp.sensorLayerMasc = ColliderComponent::Player + ColliderComponent::Wall;
+        sensorComp.sensorBounding = { 25.f, 75.f, 2.f, 48.f };
+
+        jumpComp.impulse = -150.f;
+
+        MeleeWeaponComponent& meleeWeaponComp = createComponent<MeleeWeaponComponent>(entityId);
+        meleeWeaponComp.attackBounding = { 0.f, 20.f, 10.f, 40.f };
+        meleeWeaponComp.damage = 2;
+        meleeWeaponComp.maxCooldown = 0.5f;
+
+        AITransformationComponent& transformComp = createComponent<AITransformationComponent>(entityId);
+        transformComp.newBoundingRoot.bounding = { 0.f, 100.f, 0.f, 100.f };
+        transformComp.newColor = { 255, 10, 10, 255 };
+        transformComp.newScaleX = 2.f;
+        transformComp.newScaleY = 2.f;
+        transformComp.newSprite = "Media/Images/Elfo del Bosque.jpg";
+        transformComp.newSpriteRect = { 1020, 1080, 1080, 1153 };
+        transformComp.rangeX = 150.f;
+        transformComp.rangeY = 150.f;
+    }
+
     healthComp.resetHealth(); // Reset health to set the current health the same as maxHealth
 
     //######### RENDER ########//
@@ -398,6 +428,10 @@ int EntityManager::createWeapon(GameEngine& gameContext, float x, float y, float
         distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BOMB;
 
         distanceWeaponComp.attackSound.soundPath = "Media/Sound/GE_KF7_Soviet.wav";
+
+        distanceWeaponComp.explosionExpansion = 2.f;
+        distanceWeaponComp.explosionTime = 0.2f;
+        distanceWeaponComp.startActivated = false;
 
         WorldData::worldDistanceWeapons.push_back(entityId);
     }
@@ -484,7 +518,7 @@ void EntityManager::createWorld(GameEngine& gameContext, WorldEnum worldName) {
     {
     case WorldEnum::DEBUG:
         // World limits
-        WorldData::worldLimits = { 0.f, 1000.f, 0.f, 500.f };
+        WorldData::worldLimits = { 0.f, 10000.f, 0.f, 500.f };
 
         // World music
         WorldData::worldMusic.soundPath = "Media/Sound/delayscape_planet.ogg";
