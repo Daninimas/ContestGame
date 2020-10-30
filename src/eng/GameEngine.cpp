@@ -8,6 +8,7 @@
 
 #include <thread>
 
+#include <tools/Utils.hpp>
 
 #include <sys/SystemsIncluder>
 
@@ -333,6 +334,10 @@ void GameEngine::eraseEntityByID(int id) {
 
 
     // Removing the entity ID on Components
+    auto& colliders = entityMan.getComponents<ColliderComponent>();
+    for (ColliderComponent& collider : colliders) {
+        Utils::deleteCollidingWithObjective(collider.boundingRoot, id) // deletes the id from the colliding entites
+    }
     //getSoundFacadeRef().setParameterEventByID(id, STOP_SOUND);
 
     entityMan.eraseEntityByID(id);
