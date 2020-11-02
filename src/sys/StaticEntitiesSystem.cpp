@@ -44,6 +44,9 @@ void StaticEntitiesSystem::init(GameEngine &gameContext) const {
     int transformEnemId = gameContext.entityMan.createEnemy(gameContext, 1100.f, 350.f, 0.f, GameObjectType::TRANSFORM_ENEMY);
     gameContext.entityMan.getComponent<AITransformationComponent>(transformEnemId).objectiveId = WorldData::playerId;
 
+    int bomber = gameContext.entityMan.createEnemy(gameContext, 300.f, 70, 0.f, GameObjectType::BOMBER_ENEMY);
+    gameContext.entityMan.getComponent<AIChaseComponent>(bomber).objectiveId = WorldData::playerId;
+
     gameContext.entityMan.createWeapon(gameContext, 250, 310.f, 0.f, GameObjectType::KNIFE);
     gameContext.entityMan.createWeapon(gameContext, 450, 360.f, 0.f, GameObjectType::M4);
     gameContext.entityMan.createWeapon(gameContext, 100.f, 200.f, 0.f, GameObjectType::GRENADE_LAUNCHER);

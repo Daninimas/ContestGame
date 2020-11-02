@@ -34,7 +34,7 @@ void CameraSystem::setCameraLookingPlayer(GameEngine& gameContext) const {
 
 
 	moveCamera(playerSit.x, cameraSit.x, cameraComp.offsetX);
-	moveCamera(playerSit.y, cameraSit.y, cameraComp.offsetY);
+	moveCamera(playerSit.y - 100.f, cameraSit.y, cameraComp.offsetY);
 
 	// Update position on engine, the situation of the camera is its center
 	gameContext.getWindowFacadeRef().updateCamera(gameContext, WorldData::activeCameraId);

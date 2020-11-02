@@ -344,6 +344,15 @@ int EntityManager::createEnemy(GameEngine& gameContext, float x, float y, float 
         transformComp.rangeY = 150.f;
     }
 
+    else if (goType == GameObjectType::BOMBER_ENEMY) {
+        velocityComp.speedX = 70.f;
+        velocityComp.gravity = 0.f;
+        renderComp.color = { 255, 100, 30, 255 };
+        healthComp.maxHealth = 10;
+
+        createComponent<AIChaseComponent>(entityId);
+    }
+
     healthComp.resetHealth(); // Reset health to set the current health the same as maxHealth
 
     //######### RENDER ########//

@@ -26,12 +26,17 @@ void AIChaseSystem::chaseObjective(GameEngine& gameContext, AIChaseComponent& ch
 	SituationComponent& chaserSit    = gameContext.entityMan.getComponent<SituationComponent>(chaseComp.id);
 	VelocityComponent& chaserVel     = gameContext.entityMan.getComponent<VelocityComponent>(chaseComp.id);
 
-	//Do the movement
-	if (chaserSit.x < objectiveSit.x) {
-		chaserVel.velocityX = chaserVel.speedX;
+	if (abs(chaserSit.x - objectiveSit.x) > chaseComp.minDistanceX) {
+		//Do the movement
+		if (chaserSit.x < objectiveSit.x) {
+			chaserVel.velocityX = chaserVel.speedX;
+		}
+		else {
+			chaserVel.velocityX = -chaserVel.speedX;
+		}
 	}
 	else {
-		chaserVel.velocityX = -chaserVel.speedX;
+		chaserVel.velocityX = 0.f;
 	}
 
 	// For the CHASERJUMPERS

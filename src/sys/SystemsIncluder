@@ -19,3 +19,4 @@
 #include <sys/AI/AIMeleeSystem.hpp>
 #include <sys/AI/AIDistanceSystem.hpp>
 #include <sys/AI/AITransformationSystem.hpp>
+#include <sys/AI/AIBombDropSystem.hpp>

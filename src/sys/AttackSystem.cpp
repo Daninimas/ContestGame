@@ -137,12 +137,23 @@ void AttackSystem::checkEnemiesAttacking(GameEngine& gameContext) const {
 		}
 	}
 
+
 	// For the distance attacks
 	auto& AIDistanceAtkComponents = gameContext.entityMan.getComponents<AIDistanceAtkComponent>();
 
 	for (AIDistanceAtkComponent& AIDistanceComp : AIDistanceAtkComponents) {
 		if (AIDistanceComp.createAttack) {
 			createDistanceAttack(gameContext, gameContext.entityMan.getComponent<DistanceWeaponComponent>(AIDistanceComp.id));
+		}
+	}
+
+
+	// For the drop bomb enemies
+	auto& AIDropBombComponents = gameContext.entityMan.getComponents<AIDropBombComponent>();
+
+	for (AIDropBombComponent& AIDropBombComp : AIDropBombComponents) {
+		if (AIDropBombComp.createBomb) {
+			createDistanceAttack(gameContext, gameContext.entityMan.getComponent<DistanceWeaponComponent>(AIDropBombComp.id));
 		}
 	}
 }

@@ -9,4 +9,6 @@ public:
 
 
     int objectiveId;
+
+    float minDistanceX{ 1.f };
 };

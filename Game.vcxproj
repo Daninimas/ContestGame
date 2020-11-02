@@ -154,6 +154,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\com\AI\AIDropBombComponent.cpp" />
     <ClCompile Include="src\com\AI\AITransformationComponent.cpp" />
     <ClCompile Include="src\com\AI\AIChaseComponent.cpp" />
     <ClCompile Include="src\com\AI\AIDistanceAtkComponent.cpp" />
@@ -163,6 +164,7 @@
     <ClCompile Include="src\com\ExplosionAttackComponent.cpp" />
     <ClCompile Include="src\com\MenuComponent.cpp" />
     <ClCompile Include="src\eng\sound\SoundSFMLEngine.cpp" />
+    <ClCompile Include="src\sys\AI\AIBombDropSystem.cpp" />
     <ClCompile Include="src\sys\AI\AIChaseSystem.cpp" />
     <ClCompile Include="src\sys\AI\AIDistanceSystem.cpp" />
     <ClCompile Include="src\sys\AI\AIMeleeSystem.cpp" />
@@ -200,6 +202,7 @@
     <ClCompile Include="src\tools\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\com\AI\AIDropBombComponent.hpp" />
     <ClInclude Include="src\com\AI\AITransformationComponent.hpp" />
     <ClInclude Include="src\com\AI\AIChaseComponent.hpp" />
     <ClInclude Include="src\com\AI\AIDistanceAtkComponent.hpp" />
@@ -211,6 +214,7 @@
     <ClInclude Include="src\eng\sound\SoundSFMLEngine.hpp" />
     <ClInclude Include="src\enum\MenuOptions.hpp" />
     <ClInclude Include="src\enum\WorldEnum.hpp" />
+    <ClInclude Include="src\sys\AI\AIBombDropSystem.hpp" />
     <ClInclude Include="src\sys\AI\AIChaseSystem.hpp" />
     <ClInclude Include="src\sys\AI\AIDistanceSystem.hpp" />
     <ClInclude Include="src\sys\AI\AIMeleeSystem.hpp" />
