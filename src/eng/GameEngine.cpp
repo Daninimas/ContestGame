@@ -71,6 +71,7 @@ void GameEngine::setPlayingSystems() {
     systems.emplace_back(std::make_unique<PickWeaponsSystem>());
     systems.emplace_back(std::make_unique<AIChaseSystem>());
     systems.emplace_back(std::make_unique<BombSystem>());
+    systems.emplace_back(std::make_unique<AIBombDropSystem>());
     
     
     systemsLate.emplace_back(std::make_unique<PhysicsSystem>());

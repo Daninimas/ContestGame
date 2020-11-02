@@ -222,7 +222,7 @@ int EntityManager::createWall(GameEngine& gameContext, float x, float y, float r
 
     // Collider
     colliderComp.collisionLayer = ColliderComponent::Wall;
-    colliderComp.layerMasc = ColliderComponent::Enemy + ColliderComponent::Player + ColliderComponent::PlayerAttack + ColliderComponent::Weapon; //Collides with player and enemy
+    colliderComp.layerMasc = ColliderComponent::Enemy + ColliderComponent::Player + ColliderComponent::PlayerAttack + ColliderComponent::Weapon + ColliderComponent::Attack; //Collides with player and enemy
     colliderComp.boundingRoot.bounding = { 0.f, 100.f, 0.f, 10.f };
 
     //######### RENDER ########//
@@ -351,6 +351,26 @@ int EntityManager::createEnemy(GameEngine& gameContext, float x, float y, float 
         healthComp.maxHealth = 10;
 
         createComponent<AIChaseComponent>(entityId);
+
+        DistanceWeaponComponent& distanceWeaponComp = createComponent<DistanceWeaponComponent>(entityId);
+
+        distanceWeaponComp.attackBounding = { 0.f, 20.f, 0.f, 20.f };
+        distanceWeaponComp.damage = 3;
+        distanceWeaponComp.attackGeneralVelociy = 0.f;
+        distanceWeaponComp.attackGravity = 100.f;
+        distanceWeaponComp.maxCooldown = 0.5f;
+        distanceWeaponComp.attackLifetime = 0.3f;
+        distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BOMB;
+
+        distanceWeaponComp.attackSound.soundPath = "Media/Sound/GE_KF7_Soviet.wav";
+
+        distanceWeaponComp.explosionExpansion = 1.3f;
+        distanceWeaponComp.explosionTime = 0.5f;
+        distanceWeaponComp.startActivated = false;
+
+        AIDropBombComponent& dropBombComp = createComponent<AIDropBombComponent>(entityId);
+        dropBombComp.maxCooldown = 2.f;
+
     }
 
     healthComp.resetHealth(); // Reset health to set the current health the same as maxHealth
