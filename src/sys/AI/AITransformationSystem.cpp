@@ -15,7 +15,7 @@ void AITransformationSystem::update(GameEngine& gameContext) const {
 	transformsCompToDelete.reserve(transformComponents.size());
 
 	for (AITransformationComponent& transformComp : transformComponents) {
-		if (hasToTransform(gameContext, transformComp)) {
+		if (gameContext.entityMan.existsComponent<SituationComponent>(transformComp.objectiveId) && hasToTransform(gameContext, transformComp)) {
 			transform(gameContext, transformComp, transformsCompToDelete);
 		}
 	}

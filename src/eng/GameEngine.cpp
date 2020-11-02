@@ -65,11 +65,11 @@ void GameEngine::setPlayingSystems() {
     systems.emplace_back(std::make_unique<SensorSystem>());
     systems.emplace_back(std::make_unique<AIMeleeSystem>());
     systems.emplace_back(std::make_unique<AIDistanceSystem>());
+    systems.emplace_back(std::make_unique<AITransformationSystem>());
     systems.emplace_back(std::make_unique<InputSystem>());
     systems.emplace_back(std::make_unique<AttackSystem>());
     systems.emplace_back(std::make_unique<PickWeaponsSystem>());
     systems.emplace_back(std::make_unique<AIChaseSystem>());
-    systems.emplace_back(std::make_unique<AITransformationSystem>());
     systems.emplace_back(std::make_unique<BombSystem>());
     
     
@@ -336,7 +336,12 @@ void GameEngine::eraseEntityByID(int id) {
     // Removing the entity ID on Components
     auto& colliders = entityMan.getComponents<ColliderComponent>();
     for (ColliderComponent& collider : colliders) {
-        Utils::deleteCollidingWithObjective(collider.boundingRoot, id) // deletes the id from the colliding entites
+        Utils::deleteCollidingWithObjective(collider.boundingRoot, id); // deletes the id from the colliding entites
+    }
+
+    auto& sensors = entityMan.getComponents<SensorComponent>();
+    for (SensorComponent& sensor : sensors) {
+        sensor.entitiesSensoring.erase(std::remove(sensor.entitiesSensoring.begin(), sensor.entitiesSensoring.end(), id), sensor.entitiesSensoring.end());
     }
     //getSoundFacadeRef().setParameterEventByID(id, STOP_SOUND);
 

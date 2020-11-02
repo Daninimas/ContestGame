@@ -118,3 +118,16 @@ bool Utils::checkCollidingWithObjective(BoundingBoxNode& boundingNode, int objId
 
     return collide;
 }
+
+
+void Utils::deleteCollidingWithObjective(BoundingBoxNode& boundingNode, int objId) {
+    std::vector<int>& entitiesColliding = boundingNode.bounding.entitiesColliding;
+
+    if (boundingNode.childs.size() > 0) {
+        for (auto& b : boundingNode.childs) {
+            deleteCollidingWithObjective(b, objId);
+        }
+    }
+
+    entitiesColliding.erase(std::remove(entitiesColliding.begin(), entitiesColliding.end(), objId), entitiesColliding.end());
+}

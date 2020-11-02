@@ -22,6 +22,7 @@ public:
     static bool objectiveInsideRange(SituationComponent& attackerSit, SituationComponent& objectiveSit, float rangeX, float rangeY);
 
     static bool checkCollidingWithObjective(BoundingBoxNode& boundingNode, int objId);
+    static void deleteCollidingWithObjective(BoundingBoxNode& boundingNode, int objId);
 
     template <typename T> 
     static int sign(T val) {
