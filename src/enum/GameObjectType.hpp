@@ -10,6 +10,8 @@ enum class GameObjectType {
     DISTANCE_ATTACK,
     PLAYER_DISTANCE_ATTACK,
     EXPLOSION,
+    PLAYER_LASER,
+    LASER,
 
 
     // Weapons
@@ -17,6 +19,7 @@ enum class GameObjectType {
     M4,
     KNIFE,
     GRENADE_LAUNCHER,
+    LASER_GUN,
 
 
     // Menu types

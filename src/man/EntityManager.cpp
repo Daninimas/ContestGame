@@ -199,6 +199,23 @@ int EntityManager::createAttack(GameEngine& gameContext, float x, float y, float
         createComponent<ExplosionAttackComponent>(entityId);
         attack.type = AttackType::EXPLOSION;
         break;
+
+    case GameObjectType::PLAYER_LASER:
+        createComponent<VelocityComponent>(entityId);
+
+        collider.collisionLayer = ColliderComponent::PlayerAttack;
+        collider.layerMasc = ColliderComponent::Enemy + ColliderComponent::Wall;  // Collides with enemies and walls
+
+        attack.type = AttackType::LASER;
+        break;
+
+    case GameObjectType::LASER:
+        createComponent<VelocityComponent>(entityId);
+        collider.collisionLayer = ColliderComponent::Attack;
+        collider.layerMasc = ColliderComponent::Player + ColliderComponent::Wall;  // Collides with player and walls
+
+        attack.type = AttackType::LASER;
+        break;
     }
 
     //######### CREATE ########//
@@ -461,6 +478,22 @@ int EntityManager::createWeapon(GameEngine& gameContext, float x, float y, float
         distanceWeaponComp.explosionExpansion = 2.f;
         distanceWeaponComp.explosionTime = 0.2f;
         distanceWeaponComp.startActivated = false;
+
+        WorldData::worldDistanceWeapons.push_back(entityId);
+    }
+    
+    else if (goType == GameObjectType::LASER_GUN) {
+        DistanceWeaponComponent& distanceWeaponComp = createComponent<DistanceWeaponComponent>(entityId);
+
+        distanceWeaponComp.attackBounding = { 0.f, 5000.f, 0.f, 30.f };
+        distanceWeaponComp.damage = 1;
+        distanceWeaponComp.attackGeneralVelociy = 0.f;
+        distanceWeaponComp.attackGravity = 0.f;
+        distanceWeaponComp.maxCooldown = 0.6f;
+        distanceWeaponComp.attackLifetime = 0.6f;
+        distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::LASER;
+
+        distanceWeaponComp.attackSound.soundPath = "Media/Sound/GE_KF7_Soviet.wav";
 
         WorldData::worldDistanceWeapons.push_back(entityId);
     }

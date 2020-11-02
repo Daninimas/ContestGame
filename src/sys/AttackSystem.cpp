@@ -220,7 +220,7 @@ void AttackSystem::createDistanceAttack(GameEngine& gameContext, DistanceWeaponC
 			break;
 
 		case DistanceWeaponComponent::LASER:
-
+			createLaserAttack(gameContext, distanceWeaponAttacker);
 			break;
 		}
 	}
@@ -281,6 +281,67 @@ void AttackSystem::createBombEntity(GameEngine& gameContext, DistanceWeaponCompo
 	bombVel.velocityX = distanceWeaponAttacker.attackVelX;
 	bombVel.velocityY = distanceWeaponAttacker.attackVelY;
 	bombVel.gravity = distanceWeaponAttacker.attackGravity;
+
+
+	distanceWeaponAttacker.cooldown = 0.f;
+
+	// Play shoot sound
+	gameContext.getSoundFacadeRef().loadSound(distanceWeaponAttacker.attackSound.soundPath);
+	gameContext.getSoundFacadeRef().playSound(distanceWeaponAttacker.attackSound);
+}
+
+void AttackSystem::createLaserAttack(GameEngine& gameContext, DistanceWeaponComponent& distanceWeaponAttacker) const {
+
+	SituationComponent& attackerSit = gameContext.entityMan.getComponent<SituationComponent>(distanceWeaponAttacker.id);
+
+	GameObjectType attackGOtype = GameObjectType::LASER;
+	if (distanceWeaponAttacker.id == WorldData::playerId) {
+		attackGOtype = GameObjectType::PLAYER_LASER;
+	}
+
+	int attackId = gameContext.entityMan.createAttack(gameContext, attackerSit.x, attackerSit.y, 0.f, attackGOtype);
+
+	ColliderComponent& colliderComp = gameContext.entityMan.getComponent<ColliderComponent>(attackId);
+	AttackComponent& attackComp = gameContext.entityMan.getComponent<AttackComponent>(attackId);
+	VelocityComponent& attackVel = gameContext.entityMan.getComponent<VelocityComponent>(attackId);
+
+	attackComp.damage = distanceWeaponAttacker.damage;
+	attackComp.maxLifetime = distanceWeaponAttacker.attackLifetime;
+	attackVel.velocityX = distanceWeaponAttacker.attackVelX;
+	attackVel.velocityY = distanceWeaponAttacker.attackVelY;
+	attackVel.gravity = distanceWeaponAttacker.attackGravity;
+
+
+	// For setting the laser bounding
+
+	if (attackerSit.facing == SituationComponent::Left) {
+		//colliderComp.boundingRoot.bounding = { distanceWeaponAttacker.attackBounding.yUp, distanceWeaponAttacker.attackBounding.yDown, distanceWeaponAttacker.attackBounding.xLeft, distanceWeaponAttacker.attackBounding.xRight };
+		colliderComp.boundingRoot.bounding = { distanceWeaponAttacker.attackBounding.xLeft - distanceWeaponAttacker.attackBounding.xRight, distanceWeaponAttacker.attackBounding.xLeft, distanceWeaponAttacker.attackBounding.yUp, distanceWeaponAttacker.attackBounding.yDown };
+	}
+
+	if (distanceWeaponAttacker.id == WorldData::playerId) {
+		VelocityComponent& playerVel = gameContext.entityMan.getComponent<VelocityComponent>(WorldData::playerId);
+		InputComponent& playerInput = gameContext.entityMan.getComponent<InputComponent>(WorldData::playerId);
+
+		playerDistanceWeap.attackVelY = 0.f;
+		playerDistanceWeap.attackVelX = playerDistanceWeap.attackGeneralVelociy;
+		if (playerInput.movingUp)
+		{
+			playerDistanceWeap.attackVelX = 0.f;
+			playerDistanceWeap.attackVelY = -playerDistanceWeap.attackGeneralVelociy;
+
+			playerDistanceWeap.attackBounding = { playerDistanceWeap.attackBounding.yUp, playerDistanceWeap.attackBounding.yDown, playerDistanceWeap.attackBounding.xLeft, playerDistanceWeap.attackBounding.xRight };
+		}
+		if (playerInput.movingDown)
+		{
+			if (playerVel.velocityY != 0) {
+				// if the player is on air
+				// shoot down
+				playerDistanceWeap.attackVelX = 0.f;
+				playerDistanceWeap.attackVelY = playerDistanceWeap.attackGeneralVelociy;
+			}
+		}
+	}
 
 
 	distanceWeaponAttacker.cooldown = 0.f;

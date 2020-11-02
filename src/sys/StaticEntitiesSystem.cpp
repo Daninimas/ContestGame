@@ -50,6 +50,7 @@ void StaticEntitiesSystem::init(GameEngine &gameContext) const {
     gameContext.entityMan.createWeapon(gameContext, 250, 310.f, 0.f, GameObjectType::KNIFE);
     gameContext.entityMan.createWeapon(gameContext, 450, 360.f, 0.f, GameObjectType::M4);
     gameContext.entityMan.createWeapon(gameContext, 100.f, 200.f, 0.f, GameObjectType::GRENADE_LAUNCHER);
+    gameContext.entityMan.createWeapon(gameContext, 200, 310.f, 0.f, GameObjectType::LASER_GUN);
 
 
     gameContext.entityMan.createCamera(gameContext, 0, 0, 0.f, GameObjectType::NONE);    
