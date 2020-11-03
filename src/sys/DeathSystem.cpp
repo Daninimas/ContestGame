@@ -16,7 +16,7 @@ void DeathSystem::update(GameEngine& gameContext) const {
 }
 
 std::vector<int> DeathSystem::getDeadEntities(GameEngine& gameContext) const {
-    auto& allHeaths = gameContext.entityMan.getComponents<HeathComponent>();
+    auto& allHeaths = gameContext.entityMan.getComponents<HealthComponent>();
 
     std::vector<int> deadEntities;
     deadEntities.reserve(allHeaths.size());

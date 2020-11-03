@@ -33,7 +33,7 @@ void EntityManager::eraseEntityByID(int id) {
     eraseComponent<RenderComponent>(id);
     eraseComponent<InputComponent>(id);
     eraseComponent<VelocityComponent>(id);
-    eraseComponent<HeathComponent>(id);
+    eraseComponent<HealthComponent>(id);
     eraseComponent<ColliderComponent>(id);
     eraseComponent<MeleeWeaponComponent>(id);
     eraseComponent<DistanceWeaponComponent>(id);
@@ -51,6 +51,7 @@ void EntityManager::eraseEntityByID(int id) {
     eraseComponent<AIMeleeAtkComponent>(id);
     eraseComponent<AIDistanceAtkComponent>(id);
     eraseComponent<AITransformationComponent>(id);
+    eraseComponent<AIDropBombComponent>(id);
 
     entityMap           .erase(id);
 }
@@ -87,7 +88,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float
 
     SituationComponent& situation = createComponent<SituationComponent>(entityId);
     VelocityComponent& velocityComp = createComponent<VelocityComponent>(entityId);
-    HeathComponent& heathComp = createComponent<HeathComponent>(entityId);
+    HealthComponent& heathComp = createComponent<HealthComponent>(entityId);
     MeleeWeaponComponent& meleeWeaponComp = createComponent<MeleeWeaponComponent>(entityId);
     DistanceWeaponComponent& distanceWeaponComp = createComponent<DistanceWeaponComponent>(entityId);
     ColliderComponent& colliderComp = createComponent<ColliderComponent>(entityId);
@@ -259,7 +260,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, float x, float y, float 
     ColliderComponent& colliderComp = createComponent<ColliderComponent>(entityId);
     RenderComponent& renderComp = createComponent<RenderComponent>(entityId);
     VelocityComponent& velocityComp = createComponent<VelocityComponent>(entityId);
-    HeathComponent& healthComp = createComponent<HeathComponent>(entityId);
+    HealthComponent& healthComp = createComponent<HealthComponent>(entityId);
 
 
     //######### DATA ########//
@@ -280,7 +281,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, float x, float y, float 
     // Velocity
     velocityComp.gravity = 230.f;
 
-    // HeathComponent
+    // HealthComponent
     healthComp.maxHealth = 5;
 
 

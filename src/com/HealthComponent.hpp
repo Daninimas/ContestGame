@@ -2,10 +2,10 @@
 
 #include "Component.hpp"
 
-class HeathComponent : public Component {
+class HealthComponent : public Component {
 public:
-    explicit HeathComponent(const int id);
-    ~HeathComponent() override;
+    explicit HealthComponent(const int id);
+    ~HealthComponent() override;
 
     void resetHealth();
 

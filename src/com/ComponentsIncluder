@@ -3,7 +3,7 @@
 #include <com/SituationComponent.hpp>
 #include <com/InputComponent.hpp>
 #include <com/VelocityComponent.hpp>
-#include <com/HeathComponent.hpp>
+#include <com/HealthComponent.hpp>
 #include <com/ColliderComponent.hpp>
 #include <com/MeleeWeaponComponent.hpp>
 #include <com/WeaponComponent.hpp>
@@ -17,6 +17,7 @@
 #include <com/ExplosionAttackComponent.hpp>
 #include <com/BombComponent.hpp>
 
+// AI
 #include <com/AI/AIChaseComponent.hpp>
 #include <com/AI/AIMeleeAtkComponent.hpp>
 #include <com/AI/AIDistanceAtkComponent.hpp>

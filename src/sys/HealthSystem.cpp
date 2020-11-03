@@ -12,9 +12,9 @@ void HealthSystem::update(GameEngine& gameContext) const {
 }
 
 void HealthSystem::manageHeatlths(GameEngine& gameContext) const {
-    auto& healths = gameContext.entityMan.getComponents<HeathComponent>();
+    auto& healths = gameContext.entityMan.getComponents<HealthComponent>();
 
-    for (HeathComponent& health : healths) {
+    for (HealthComponent& health : healths) {
         // Substract damage
         if (health.damaged) {
             if (health.currentHealth < health.damageReceived) {

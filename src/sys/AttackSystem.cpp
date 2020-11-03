@@ -414,8 +414,8 @@ void AttackSystem::resolveAttackHit(GameEngine& gameContext, ColliderComponent& 
 
 void AttackSystem::damageEntity(GameEngine& gameContext, AttackComponent& attack, int entityHitId) const {
 
-	if (gameContext.entityMan.existsComponent<HeathComponent>(entityHitId)) { // if the hitted entity has health
-		HeathComponent& hittedHealth = gameContext.entityMan.getComponent<HeathComponent>(entityHitId);
+	if (gameContext.entityMan.existsComponent<HealthComponent>(entityHitId)) { // if the hitted entity has health
+		HealthComponent& hittedHealth = gameContext.entityMan.getComponent<HealthComponent>(entityHitId);
 
 		hittedHealth.damageReceived += attack.damage;
 		hittedHealth.damaged = true;

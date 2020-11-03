@@ -1,7 +1,7 @@
 class SituationComponent;
 class InputComponent;
 class VelocityComponent;
-class HeathComponent;
+class HealthComponent;
 class ColliderComponent;
 class MeleeWeaponComponent;
 class WeaponComponent;

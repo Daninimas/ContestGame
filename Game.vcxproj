@@ -182,7 +182,7 @@
     <ClCompile Include="src\com\WeaponComponent.cpp" />
     <ClCompile Include="src\sys\AttackSystem.cpp" />
     <ClCompile Include="src\com\ColliderComponent.cpp" />
-    <ClCompile Include="src\com\HeathComponent.cpp" />
+    <ClCompile Include="src\com\HealthComponent.cpp" />
     <ClCompile Include="src\com\InputComponent.cpp" />
     <ClCompile Include="src\com\MeleeWeaponComponent.cpp" />
     <ClCompile Include="src\com\VelocityComponent.cpp" />
@@ -231,7 +231,7 @@
     <ClInclude Include="src\com\AttackComponent.hpp" />
     <ClInclude Include="src\com\ColliderComponent.hpp" />
     <ClInclude Include="src\com\DistanceWeaponComponent.hpp" />
-    <ClInclude Include="src\com\HeathComponent.hpp" />
+    <ClInclude Include="src\com\HealthComponent.hpp" />
     <ClInclude Include="src\com\InputComponent.hpp" />
     <ClInclude Include="src\com\JumpComponent.hpp" />
     <ClInclude Include="src\com\MeleeWeaponComponent.hpp" />

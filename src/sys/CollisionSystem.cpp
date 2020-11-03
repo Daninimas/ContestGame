@@ -154,11 +154,64 @@ void CollisionSystem::undoCollision(GameEngine& gameContext, ColliderComponent& 
 
     if ( overlapX == 0 || (overlapY != 0 && std::abs(overlapY) <= std::abs(overlapX)) ) {
         sitMobile.y += overlapY;
-        mobileVel.velocityY = 0.f;
+
+        // Set velocity to mobile
+        if (mobileVel.velocityY > 0.f) { // moving down
+            if (sitSolid.y > sitMobile.y) {
+                mobileVel.velocityY = 0.f;
+            }
+        }
+        else {                           // moving up
+            if (sitSolid.y < sitMobile.y) {
+                mobileVel.velocityY = 0.f;
+            }
+        }
+
+        if (solidCol.type == ColliderType::DYNAMIC && gameContext.entityMan.existsComponent<VelocityComponent>(solidCol.id)) {
+            VelocityComponent& solidVel = gameContext.entityMan.getComponent<VelocityComponent>(solidCol.id);
+
+            if (solidVel.velocityY > 0.f) { // moving down
+                if (sitSolid.y < sitMobile.y) {
+                    solidVel.velocityY = 0.f;
+                }
+            }
+            else {                           // moving up
+                if (sitSolid.y > sitMobile.y) {
+                    solidVel.velocityY = 0.f;
+                }
+            }
+        }
     }
     else {
         sitMobile.x += overlapX;
-        mobileVel.velocityX = 0.f;
+
+        // Set velocity to mobile
+        if (mobileVel.velocityX > 0.f) { // moving right
+            if (sitSolid.x > sitMobile.x) {
+                mobileVel.velocityX = 0.f;
+            }
+        }
+        else {                           // moving left
+            if (sitSolid.x < sitMobile.x) {
+                mobileVel.velocityX = 0.f;
+            }
+        }
+
+        if (solidCol.type == ColliderType::DYNAMIC && gameContext.entityMan.existsComponent<VelocityComponent>(solidCol.id)) {
+            VelocityComponent& solidVel = gameContext.entityMan.getComponent<VelocityComponent>(solidCol.id);
+            
+            // Set velocity to mobile
+            if (solidVel.velocityX > 0.f) { // moving right
+                if (sitSolid.x < sitMobile.x) {
+                    solidVel.velocityX = 0.f;
+                }
+            }
+            else {                           // moving left
+                if (sitSolid.x > sitMobile.x) {
+                    solidVel.velocityX = 0.f;
+                }
+            }
+        }
     }
 
     gameContext.entityMan.addEntityToUpdate(mobileCol.id);
