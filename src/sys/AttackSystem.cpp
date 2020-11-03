@@ -313,36 +313,37 @@ void AttackSystem::createLaserAttack(GameEngine& gameContext, DistanceWeaponComp
 
 
 	// For setting the laser bounding
+	colliderComp.boundingRoot.bounding = distanceWeaponAttacker.attackBounding;
 
 	if (attackerSit.facing == SituationComponent::Left) {
-		//colliderComp.boundingRoot.bounding = { distanceWeaponAttacker.attackBounding.yUp, distanceWeaponAttacker.attackBounding.yDown, distanceWeaponAttacker.attackBounding.xLeft, distanceWeaponAttacker.attackBounding.xRight };
-		colliderComp.boundingRoot.bounding = { distanceWeaponAttacker.attackBounding.xLeft - distanceWeaponAttacker.attackBounding.xRight, distanceWeaponAttacker.attackBounding.xLeft, distanceWeaponAttacker.attackBounding.yUp, distanceWeaponAttacker.attackBounding.yDown };
+		colliderComp.boundingRoot.bounding.xRight = distanceWeaponAttacker.attackBounding.xLeft;
+		colliderComp.boundingRoot.bounding.xLeft = distanceWeaponAttacker.attackBounding.xLeft - (distanceWeaponAttacker.attackBounding.xRight - distanceWeaponAttacker.attackBounding.xLeft);
 	}
-
+	
 	if (distanceWeaponAttacker.id == WorldData::playerId) {
 		VelocityComponent& playerVel = gameContext.entityMan.getComponent<VelocityComponent>(WorldData::playerId);
 		InputComponent& playerInput = gameContext.entityMan.getComponent<InputComponent>(WorldData::playerId);
 
-		playerDistanceWeap.attackVelY = 0.f;
-		playerDistanceWeap.attackVelX = playerDistanceWeap.attackGeneralVelociy;
 		if (playerInput.movingUp)
 		{
-			playerDistanceWeap.attackVelX = 0.f;
-			playerDistanceWeap.attackVelY = -playerDistanceWeap.attackGeneralVelociy;
-
-			playerDistanceWeap.attackBounding = { playerDistanceWeap.attackBounding.yUp, playerDistanceWeap.attackBounding.yDown, playerDistanceWeap.attackBounding.xLeft, playerDistanceWeap.attackBounding.xRight };
+			colliderComp.boundingRoot.bounding.xLeft  = distanceWeaponAttacker.attackBounding.yUp;
+			colliderComp.boundingRoot.bounding.xRight = distanceWeaponAttacker.attackBounding.yDown;
+			colliderComp.boundingRoot.bounding.yUp    = distanceWeaponAttacker.attackBounding.xLeft - (distanceWeaponAttacker.attackBounding.xRight - distanceWeaponAttacker.attackBounding.xLeft);
+			colliderComp.boundingRoot.bounding.yDown  = distanceWeaponAttacker.attackBounding.xLeft;
 		}
 		if (playerInput.movingDown)
 		{
 			if (playerVel.velocityY != 0) {
 				// if the player is on air
 				// shoot down
-				playerDistanceWeap.attackVelX = 0.f;
-				playerDistanceWeap.attackVelY = playerDistanceWeap.attackGeneralVelociy;
+				colliderComp.boundingRoot.bounding.xLeft = distanceWeaponAttacker.attackBounding.yUp;
+				colliderComp.boundingRoot.bounding.xRight = distanceWeaponAttacker.attackBounding.yDown;
+				colliderComp.boundingRoot.bounding.yUp = distanceWeaponAttacker.attackBounding.xLeft;
+				colliderComp.boundingRoot.bounding.yDown = distanceWeaponAttacker.attackBounding.xRight;
 			}
 		}
 	}
-
+	
 
 	distanceWeaponAttacker.cooldown = 0.f;
 
