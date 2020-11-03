@@ -72,7 +72,8 @@ void GameEngine::setPlayingSystems() {
     systems.emplace_back(std::make_unique<AIChaseSystem>());
     systems.emplace_back(std::make_unique<BombSystem>());
     systems.emplace_back(std::make_unique<AIBombDropSystem>());
-    
+    systems.emplace_back(std::make_unique<DodgeSystem>());
+
     
     systemsLate.emplace_back(std::make_unique<CollisionSystem>()); // Collision 2 veces, esto es lo mejor para que todo funcione, pero sera mejor hacer lo de los hilos para resolver las colisiones
     systemsLate.emplace_back(std::make_unique<PhysicsSystem>());

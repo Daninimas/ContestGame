@@ -45,6 +45,7 @@ void EntityManager::eraseEntityByID(int id) {
     eraseComponent<WeaponComponent>(id);
     eraseComponent<ExplosionAttackComponent>(id);
     eraseComponent<BombComponent>(id);
+    eraseComponent<DodgeComponent>(id);
 
     // AI
     eraseComponent<AIChaseComponent>(id);
@@ -96,6 +97,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float
     RenderComponent& renderComp = createComponent<RenderComponent>(entityId);
     SensorComponent& sensorComp = createComponent<SensorComponent>(entityId);
     InputComponent& inputComp = createComponent<InputComponent>(entityId);
+    DodgeComponent& dodgeComp = createComponent<DodgeComponent>(entityId);
 
     //######### DATA ########//
     situation.x = x;
@@ -138,6 +140,13 @@ int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float
     // Sensor
     sensorComp.sensorBounding = {25.f, 100.f, 0.f, 50.f};
     sensorComp.sensorLayerMasc = ColliderComponent::Enemy; // Sensors only enemies
+
+    // Dodge
+    dodgeComp.dodgeMaxDuration = 0.5f;
+    dodgeComp.dodgeTime = 0.3f;
+    dodgeComp.maxCooldown = 1.f;
+    dodgeComp.velocityIncrementFactor = 4.f;
+    dodgeComp.initDodgeComponent();
 
 
     //######### RENDER ########//

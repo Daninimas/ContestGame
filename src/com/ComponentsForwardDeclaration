@@ -19,3 +19,4 @@ class ExplosionAttackComponent;
 class BombComponent;
 class AITransformationComponent;
 class AIDropBombComponent;
+class DodgeComponent;

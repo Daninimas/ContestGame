@@ -16,6 +16,7 @@
 #include <com/MenuComponent.hpp>
 #include <com/ExplosionAttackComponent.hpp>
 #include <com/BombComponent.hpp>
+#include <com/DodgeComponent.hpp>
 
 // AI
 #include <com/AI/AIChaseComponent.hpp>

@@ -21,6 +21,7 @@ void InputSystem::update(GameEngine& gameContext) const {
 void InputSystem::inputPlaying(GameEngine& gameContext) const {
     InputComponent& playerInput = gameContext.entityMan.getComponent<InputComponent>(WorldData::playerId);
     VelocityComponent& playerVel = gameContext.entityMan.getComponent<VelocityComponent>(WorldData::playerId);
+    uint8_t actualMovement = 0xFF; // start with no movement
 
     // Reset actions
     playerInput.resetActions();
@@ -30,20 +31,24 @@ void InputSystem::inputPlaying(GameEngine& gameContext) const {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
     {
         playerInput.movingUp = true;
+        actualMovement = DodgeComponent::Up;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
     {
         playerInput.movingDown = true;
+        actualMovement = DodgeComponent::Down;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
     {
         playerInput.movingLeft = true;
         playerVel.velocityX = -playerVel.speedX;
+        actualMovement = DodgeComponent::Left;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
     {
         playerInput.movingRight = true;
         playerVel.velocityX = playerVel.speedX;
+        actualMovement = DodgeComponent::Right;
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::N))
@@ -77,6 +82,28 @@ void InputSystem::inputPlaying(GameEngine& gameContext) const {
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
         gameContext.setGameState(GameState::PAUSE);
+    }
+
+    activateDodge(gameContext, actualMovement);
+}
+
+void InputSystem::activateDodge(GameEngine& gameContext, uint8_t actualMovement) const {
+    DodgeComponent& playerDodge = gameContext.entityMan.getComponent<DodgeComponent>(WorldData::playerId);
+
+    playerDodge.timeFromLastMove += gameContext.getDeltaTime();
+
+    if (actualMovement == playerDodge.lastMovemet && playerDodge.timeFromLastMove < playerDodge.dodgeTime && playerDodge.releasedKey) {
+        playerDodge.activateDodge = true;
+        playerDodge.dodgeDirection = actualMovement;
+    }
+    
+    if (actualMovement != 0xFF) { //if key pressed
+        playerDodge.timeFromLastMove = 0.f;
+        playerDodge.lastMovemet = actualMovement;
+        playerDodge.releasedKey = false;
+    }
+    else {
+        playerDodge.releasedKey = true;
     }
 }
 

@@ -1,7 +1,7 @@
 #include "InputComponent.hpp"
 
 InputComponent::InputComponent(const int id) 
-	: Component(id) {}
+    : Component(id), timeFromLastMove{dodgeTime} {}
 
 InputComponent::~InputComponent() {}
 
