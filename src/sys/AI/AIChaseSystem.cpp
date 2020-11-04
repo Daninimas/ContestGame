@@ -48,7 +48,7 @@ void AIChaseSystem::chaseObjective(GameEngine& gameContext, AIChaseComponent& ch
 		for (int sensoredEnt : chaserSens.entitiesSensoring) {
 			if (gameContext.entityMan.getEntity(sensoredEnt).getType() == EntityType::WALL) {
 				// Jump
-				if (chaserJump.cooldow > chaserJump.maxCooldown) { // if has cooldown on floor
+				if (chaserJump.cooldown > chaserJump.maxCooldown) { // if has cooldown on floor
 					chaserVel.velocityY = chaserJump.impulse;
 				}
 			}

@@ -24,3 +24,4 @@
 #include <com/AI/AIDistanceAtkComponent.hpp>
 #include <com/AI/AITransformationComponent.hpp>
 #include <com/AI/AIDropBombComponent.hpp>
+#include <com/AI/AIPounceComponent.hpp>

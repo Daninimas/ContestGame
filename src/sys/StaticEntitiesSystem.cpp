@@ -19,8 +19,8 @@ void StaticEntitiesSystem::init(GameEngine &gameContext) const {
 
     createPlayer(gameContext);
 
-    gameContext.entityMan.createWall(gameContext, 0.f,   380.f, 0.f, GameObjectType::NONE);
-    gameContext.entityMan.createWall(gameContext, 100.f, 390.f, 0.f, GameObjectType::NONE);
+    gameContext.entityMan.createWall(gameContext, 0.f,   400.f, 0.f, GameObjectType::NONE);
+    gameContext.entityMan.createWall(gameContext, 100.f, 400.f, 0.f, GameObjectType::NONE);
     gameContext.entityMan.createWall(gameContext, 200.f, 400.f, 0.f, GameObjectType::NONE);
     gameContext.entityMan.createWall(gameContext, 300.f, 400.f, 0.f, GameObjectType::NONE);
     gameContext.entityMan.createWall(gameContext, 400.f, 390.f, 0.f, GameObjectType::NONE);
@@ -34,9 +34,9 @@ void StaticEntitiesSystem::init(GameEngine &gameContext) const {
 
 
 
-    int chaserId = gameContext.entityMan.createEnemy(gameContext, 300.f, 300.f, 0.f, GameObjectType::CHASERJUMPER);
+    /*int chaserId = gameContext.entityMan.createEnemy(gameContext, 300.f, 300.f, 0.f, GameObjectType::CHASERJUMPER);
     gameContext.entityMan.getComponent<AIChaseComponent>(chaserId).objectiveId = WorldData::playerId;
-    gameContext.entityMan.getComponent<AIMeleeAtkComponent>(chaserId).objectiveId = WorldData::playerId;
+    gameContext.entityMan.getComponent<AIMeleeAtkComponent>(chaserId).objectiveId = WorldData::playerId;*/
 
     int distanceEnemId = gameContext.entityMan.createEnemy(gameContext, 650.f, 300.f, 0.f, GameObjectType::DISTANCE_ENEMY);
     gameContext.entityMan.getComponent<AIDistanceAtkComponent>(distanceEnemId).objectiveId = WorldData::playerId;
@@ -46,6 +46,10 @@ void StaticEntitiesSystem::init(GameEngine &gameContext) const {
 
     int bomber = gameContext.entityMan.createEnemy(gameContext, 300.f, 70, 0.f, GameObjectType::BOMBER_ENEMY);
     gameContext.entityMan.getComponent<AIChaseComponent>(bomber).objectiveId = WorldData::playerId;
+
+    int pouncerId = gameContext.entityMan.createEnemy(gameContext, 300.f, 300.f, 0.f, GameObjectType::POUNCER_ENEMY);
+    gameContext.entityMan.getComponent<AIPounceComponent>(pouncerId).objectiveId = WorldData::playerId;
+    gameContext.entityMan.getComponent<AIMeleeAtkComponent>(pouncerId).objectiveId = WorldData::playerId;
 
     gameContext.entityMan.createWeapon(gameContext, 250, 310.f, 0.f, GameObjectType::KNIFE);
     gameContext.entityMan.createWeapon(gameContext, 450, 360.f, 0.f, GameObjectType::M4);

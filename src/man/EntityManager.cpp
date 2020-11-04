@@ -53,6 +53,7 @@ void EntityManager::eraseEntityByID(int id) {
     eraseComponent<AIDistanceAtkComponent>(id);
     eraseComponent<AITransformationComponent>(id);
     eraseComponent<AIDropBombComponent>(id);
+    eraseComponent<AIPounceComponent>(id);
 
     entityMap           .erase(id);
 }
@@ -138,12 +139,12 @@ int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float
     //jumpComp.jumptable = { 500.f, 500.f, 400.f, 400.f, 300.f, 300.f, 200.f, 100.f };
     
     // Sensor
-    sensorComp.sensorBounding = {25.f, 100.f, 0.f, 50.f};
+    sensorComp.sensorBounding = {25.f, 100.f, 2.f, 48.f};
     sensorComp.sensorLayerMasc = ColliderComponent::Enemy; // Sensors only enemies
 
     // Dodge
-    dodgeComp.dodgeMaxDuration = 0.5f;
-    dodgeComp.dodgeTime = 0.3f;
+    dodgeComp.dodgeMaxDuration = 0.3f;
+    dodgeComp.dodgeTime = 0.2f;
     dodgeComp.maxCooldown = 1.f;
     dodgeComp.velocityIncrementFactor = 4.f;
     dodgeComp.initDodgeComponent();
@@ -398,6 +399,36 @@ int EntityManager::createEnemy(GameEngine& gameContext, float x, float y, float 
         AIDropBombComponent& dropBombComp = createComponent<AIDropBombComponent>(entityId);
         dropBombComp.maxCooldown = 2.f;
 
+    }
+
+    else if (goType == GameObjectType::POUNCER_ENEMY) {
+    velocityComp.speedX = 45.f;
+    renderComp.color = { 20, 20, 30, 255 };
+    healthComp.maxHealth = 4;
+
+
+    createComponent<AIMeleeAtkComponent>(entityId);
+    JumpComponent& jumpComp = createComponent<JumpComponent>(entityId);
+    SensorComponent& sensorComp = createComponent<SensorComponent>(entityId);
+    AIPounceComponent& pounceComp = createComponent<AIPounceComponent>(entityId);
+
+    sensorComp.sensorLayerMasc = ColliderComponent::Player + ColliderComponent::Wall;
+    sensorComp.sensorBounding = { 25.f, 60.f, 2.f, 48.f };
+
+    jumpComp.impulse = -100.f;
+    jumpComp.maxCooldown = 1.f;
+
+
+    MeleeWeaponComponent& meleeWeaponComp = createComponent<MeleeWeaponComponent>(entityId);
+    meleeWeaponComp.attackBounding = { 0.f, 20.f, 10.f, 40.f };
+    meleeWeaponComp.damage = 2;
+    meleeWeaponComp.maxCooldown = 1.5f;
+
+
+    pounceComp.rangeX = 200.f;
+    pounceComp.rangeY = 30.f;
+    pounceComp.velocityIncFactor = 4.7f;
+    pounceComp.maxCooldown = 2.f;
     }
 
     healthComp.resetHealth(); // Reset health to set the current health the same as maxHealth

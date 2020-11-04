@@ -26,10 +26,10 @@ void PhysicsSystem::updateJumps(GameEngine& gameContext) const {
         // Manage cooldown to make it not jump on air
         // Count time than you are on the floor
         if (velocity.velocityY == 0.f) {
-            jump.cooldow += gameContext.getDeltaTime();
+            jump.cooldown += gameContext.getDeltaTime();
         }
         else {
-            jump.cooldow = 0.f;
+            jump.cooldown = 0.f;
         }
 
         /*if (jump.jumpIndex < jump.jumptable.size()) {

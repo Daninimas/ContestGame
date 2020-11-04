@@ -34,6 +34,7 @@ enum class GameObjectType {
     DISTANCE_ENEMY,
     TRANSFORM_ENEMY,
     BOMBER_ENEMY,
+    POUNCER_ENEMY,
 
     // Bombs
     BOMB,

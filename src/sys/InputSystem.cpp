@@ -71,7 +71,7 @@ void InputSystem::inputPlaying(GameEngine& gameContext) const {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::M))
     {
         auto& jumpComp = gameContext.entityMan.getComponent<JumpComponent>(WorldData::playerId);
-        if (jumpComp.cooldow > jumpComp.maxCooldown) { // if has cooldown on floor
+        if (jumpComp.cooldown > jumpComp.maxCooldown) { // if has cooldown on floor
             playerVel.velocityY = jumpComp.impulse;
         }
 

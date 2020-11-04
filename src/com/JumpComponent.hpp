@@ -14,7 +14,7 @@ public:
     */
 
     float maxCooldown{ 0.7f };
-    float cooldow{ 0.f };
+    float cooldown{ 0.f };
 
     float impulse{ -50.f };
 };
