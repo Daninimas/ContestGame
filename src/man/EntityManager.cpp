@@ -129,6 +129,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float
     distanceWeaponComp.attackGravity = 100.f;
     distanceWeaponComp.maxCooldown = 0.5f;
     distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BULLET;
+    distanceWeaponComp.attackSound.soundPath = "Media/Sound/Weapons/gunFire.wav";
 
     // Render component
     renderComp.sprite = "Media/Images/YellowDuck.png";
@@ -143,7 +144,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float
     sensorComp.sensorLayerMasc = ColliderComponent::Enemy; // Sensors only enemies
 
     // Dodge
-    dodgeComp.dodgeMaxDuration = 0.3f;
+    dodgeComp.dodgeMaxDuration = 0.2f;
     dodgeComp.dodgeTime = 0.2f;
     dodgeComp.maxCooldown = 1.f;
     dodgeComp.velocityIncrementFactor = 4.f;
@@ -390,7 +391,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, float x, float y, float 
         distanceWeaponComp.attackLifetime = 0.3f;
         distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BOMB;
 
-        distanceWeaponComp.attackSound.soundPath = "Media/Sound/GE_KF7_Soviet.wav";
+        distanceWeaponComp.attackSound.soundPath = "Media/Sound/Weapons/silbidoBombaCayendo.wav";
 
         distanceWeaponComp.explosionExpansion = 1.3f;
         distanceWeaponComp.explosionTime = 0.5f;
@@ -484,7 +485,7 @@ int EntityManager::createWeapon(GameEngine& gameContext, float x, float y, float
         distanceWeaponComp.attackLifetime = 1.5f;
         distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BULLET;
 
-        distanceWeaponComp.attackSound.soundPath = "Media/Sound/GE_KF7_Soviet.wav";
+        distanceWeaponComp.attackSound.soundPath = "Media/Sound/Weapons/M4A1_Single-Kibblesbob-8540445.wav";
 
         WorldData::worldDistanceWeapons.push_back(entityId);
     }
@@ -514,7 +515,7 @@ int EntityManager::createWeapon(GameEngine& gameContext, float x, float y, float
         distanceWeaponComp.attackLifetime = 0.5f;
         distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BOMB;
 
-        distanceWeaponComp.attackSound.soundPath = "Media/Sound/GE_KF7_Soviet.wav";
+        distanceWeaponComp.attackSound.soundPath = "Media/Sound/Weapons/grenadeLauncherSound.wav";
 
         distanceWeaponComp.explosionExpansion = 2.f;
         distanceWeaponComp.explosionTime = 0.2f;
@@ -596,13 +597,15 @@ int EntityManager::createBomb(GameEngine& gameContext, float x, float y, float r
 
     switch (goType) {
         case GameObjectType::BOMB:
-        colliderComp.collisionLayer = ColliderComponent::Attack;
-        colliderComp.layerMasc = ColliderComponent::Player + ColliderComponent::Wall;
+            colliderComp.collisionLayer = ColliderComponent::Attack;
+            colliderComp.layerMasc = ColliderComponent::Player + ColliderComponent::Wall;
+            bombComp.explosionSound.soundPath = "Media/Sound/Weapons/alienExplosion.wav";
             break;
 
         case GameObjectType::PLAYER_BOMB:
             colliderComp.collisionLayer = ColliderComponent::PlayerAttack;
             colliderComp.layerMasc = ColliderComponent::Enemy + ColliderComponent::Wall;
+            bombComp.explosionSound.soundPath = "Media/Sound/Weapons/explosion.wav";
             break;
     }
     

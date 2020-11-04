@@ -69,6 +69,9 @@ void BombSystem::explodeBomb(GameEngine& gameContext, int bombId) const {
 	explosionAttack.damage		= bombComp.damageExplosion;
 	explosionAttack.maxLifetime = bombComp.explosionLifetime;
 
+	// Play explosion sound
+	gameContext.getSoundFacadeRef().loadSound(bombComp.explosionSound.soundPath);
+	gameContext.getSoundFacadeRef().playSound(bombComp.explosionSound);
 
 	// DELETE BOMB
 	gameContext.eraseEntityByID(bombId);

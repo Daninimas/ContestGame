@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Component.hpp"
-
+#include <tools/Sound.hpp>
 
 class BombComponent : public Component {
 public:
@@ -17,4 +17,6 @@ public:
     float explosionLifetime;
 
     uint16_t damageExplosion{ 1 };
+
+    Sound explosionSound{};
 };
