@@ -163,6 +163,7 @@
     <ClCompile Include="src\com\BombComponent.cpp" />
     <ClCompile Include="src\com\CameraComponent.cpp" />
     <ClCompile Include="src\com\DodgeComponent.cpp" />
+    <ClCompile Include="src\com\SpawnerComponent.cpp" />
     <ClCompile Include="src\com\ExplosionAttackComponent.cpp" />
     <ClCompile Include="src\com\MenuComponent.cpp" />
     <ClCompile Include="src\eng\sound\SoundSFMLEngine.cpp" />
@@ -201,6 +202,7 @@
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\man\EntityManager.cpp" />
     <ClCompile Include="src\sys\PhysicsSystem.cpp" />
+    <ClCompile Include="src\sys\SpawnSystem.cpp" />
     <ClCompile Include="src\sys\StaticEntitiesSystem.cpp" />
     <ClCompile Include="src\sys\WorldSystem.cpp" />
     <ClCompile Include="src\tools\Utils.cpp" />
@@ -215,6 +217,7 @@
     <ClInclude Include="src\com\BombComponent.hpp" />
     <ClInclude Include="src\com\CameraComponent.hpp" />
     <ClInclude Include="src\com\DodgeComponent.hpp" />
+    <ClInclude Include="src\com\SpawnerComponent.hpp" />
     <ClInclude Include="src\com\ExplosionAttackComponent.hpp" />
     <ClInclude Include="src\com\MenuComponent.hpp" />
     <ClInclude Include="src\eng\sound\SoundSFMLEngine.hpp" />
@@ -231,6 +234,7 @@
     <ClInclude Include="src\sys\DodgeSystem.hpp" />
     <ClInclude Include="src\sys\MenuSystem.hpp" />
     <ClInclude Include="src\sys\PickWeaponsSystem.hpp" />
+    <ClInclude Include="src\sys\SpawnSystem.hpp" />
     <ClInclude Include="src\sys\WorldSystem.hpp" />
     <ClInclude Include="src\tools\Sound.hpp" />
     <ClInclude Include="src\tools\WorldData.hpp" />

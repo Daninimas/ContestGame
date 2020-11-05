@@ -15,6 +15,7 @@
 #include <sys/MenuSystem.hpp>
 #include <sys/BombSystem.hpp>
 #include <sys/DodgeSystem.hpp>
+#include <sys/SpawnSystem.hpp>
 
 #include <sys/AI/AIChaseSystem.hpp>
 #include <sys/AI/AIMeleeSystem.hpp>

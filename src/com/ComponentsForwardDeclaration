@@ -21,3 +21,4 @@ class AITransformationComponent;
 class AIDropBombComponent;
 class DodgeComponent;
 class AIPounceComponent;
+class SpawnerComponent;

@@ -9,5 +9,6 @@ enum class EntityType {
     WEAPON, 
     CAMERA, 
     MENU,
-    BOMB
+    BOMB,
+    SPAWNER
 };

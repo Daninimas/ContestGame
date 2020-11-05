@@ -74,6 +74,7 @@ void GameEngine::setPlayingSystems() {
     systems.emplace_back(std::make_unique<BombSystem>());
     systems.emplace_back(std::make_unique<AIBombDropSystem>());
     systems.emplace_back(std::make_unique<DodgeSystem>());
+    systems.emplace_back(std::make_unique<SpawnSystem>());
 
     
     systemsLate.emplace_back(std::make_unique<CollisionSystem>()); // Collision 2 veces, esto es lo mejor para que todo funcione, pero sera mejor hacer lo de los hilos para resolver las colisiones
@@ -346,6 +347,11 @@ void GameEngine::eraseEntityByID(int id) {
     auto& sensors = entityMan.getComponents<SensorComponent>();
     for (SensorComponent& sensor : sensors) {
         sensor.entitiesSensoring.erase(std::remove(sensor.entitiesSensoring.begin(), sensor.entitiesSensoring.end(), id), sensor.entitiesSensoring.end());
+    }
+
+    auto& spawners = entityMan.getComponents<SpawnerComponent>();
+    for (SpawnerComponent& spawnComp : spawners) {
+        spawnComp.spawnedObjsAlive.erase(std::remove(spawnComp.spawnedObjsAlive.begin(), spawnComp.spawnedObjsAlive.end(), id), spawnComp.spawnedObjsAlive.end());
     }
     //getSoundFacadeRef().setParameterEventByID(id, STOP_SOUND);
 

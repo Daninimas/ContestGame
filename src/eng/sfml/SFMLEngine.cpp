@@ -14,7 +14,7 @@ SFMLEngine::SFMLEngine(int width, int height, bool fullscreen) {
 	}
 }
 SFMLEngine::~SFMLEngine() {
-
+	device.get()->close();
 }
 
 const bool SFMLEngine::checkInput(const uint16_t key) const {
@@ -34,8 +34,11 @@ void SFMLEngine::render(GameEngine& gameContext) const {
     while (device.get()->pollEvent(event))
     {
         // "close requested" event: we close the window
-        if (event.type == sf::Event::Closed)
+		if (event.type == sf::Event::Closed) {
 			device.get()->close();
+
+			gameContext.setPlaying(false);
+		}
     }
 
     // clear the window with black color

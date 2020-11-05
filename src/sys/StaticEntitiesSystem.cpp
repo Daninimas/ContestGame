@@ -44,12 +44,15 @@ void StaticEntitiesSystem::init(GameEngine &gameContext) const {
     int transformEnemId = gameContext.entityMan.createEnemy(gameContext, 1100.f, 350.f, 0.f, GameObjectType::TRANSFORM_ENEMY);
     gameContext.entityMan.getComponent<AITransformationComponent>(transformEnemId).objectiveId = WorldData::playerId;
 
-    int bomber = gameContext.entityMan.createEnemy(gameContext, 300.f, 70, 0.f, GameObjectType::BOMBER_ENEMY);
-    gameContext.entityMan.getComponent<AIChaseComponent>(bomber).objectiveId = WorldData::playerId;
+    /*int bomber = gameContext.entityMan.createEnemy(gameContext, 300.f, 70, 0.f, GameObjectType::BOMBER_ENEMY);
+    gameContext.entityMan.getComponent<AIChaseComponent>(bomber).objectiveId = WorldData::playerId;*/
 
-    int pouncerId = gameContext.entityMan.createEnemy(gameContext, 300.f, 300.f, 0.f, GameObjectType::POUNCER_ENEMY);
+    /*int pouncerId = gameContext.entityMan.createEnemy(gameContext, 300.f, 300.f, 0.f, GameObjectType::POUNCER_ENEMY);
     gameContext.entityMan.getComponent<AIPounceComponent>(pouncerId).objectiveId = WorldData::playerId;
-    gameContext.entityMan.getComponent<AIMeleeAtkComponent>(pouncerId).objectiveId = WorldData::playerId;
+    gameContext.entityMan.getComponent<AIMeleeAtkComponent>(pouncerId).objectiveId = WorldData::playerId;*/
+
+    int spawnId = gameContext.entityMan.createSpawner(gameContext, 300.f, 300.f, 0.f, GameObjectType::CHASERJUMPER);
+    gameContext.entityMan.getComponent<SpawnerComponent>(spawnId).objectiveId = WorldData::playerId;
 
     gameContext.entityMan.createWeapon(gameContext, 250, 310.f, 0.f, GameObjectType::KNIFE);
     gameContext.entityMan.createWeapon(gameContext, 450, 360.f, 0.f, GameObjectType::M4);

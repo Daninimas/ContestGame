@@ -16,16 +16,16 @@ void DeathSystem::update(GameEngine& gameContext) const {
 }
 
 std::vector<int> DeathSystem::getDeadEntities(GameEngine& gameContext) const {
-    auto& allHeaths = gameContext.entityMan.getComponents<HealthComponent>();
+    auto& allHealths = gameContext.entityMan.getComponents<HealthComponent>();
 
     std::vector<int> deadEntities;
-    deadEntities.reserve(allHeaths.size());
+    deadEntities.reserve(allHealths.size());
 
-    for (auto& heath : allHeaths) {
-        auto entityId{ heath.id };
-        auto& heathComp{ heath };
+    for (auto& health : allHealths) {
+        auto entityId{ health.id };
+        auto& healthComp{ health };
 
-        if (heathComp.currentHealth == 0) {
+        if (healthComp.currentHealth == 0) {
             deadEntities.emplace_back(entityId);
         }
     }

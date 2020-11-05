@@ -38,5 +38,5 @@ enum class GameObjectType {
 
     // Bombs
     BOMB,
-    PLAYER_BOMB
+    PLAYER_BOMB,
 };

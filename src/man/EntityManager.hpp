@@ -99,6 +99,7 @@ public:
     int createWeapon(GameEngine& gameContext, float x, float y, float r, GameObjectType goType = GameObjectType::NONE);
     int createCamera(GameEngine& gameContext, float x, float y, float r, GameObjectType goType = GameObjectType::NONE);
     int createBomb(GameEngine& gameContext, float x, float y, float r, GameObjectType goType = GameObjectType::NONE);
+    int createSpawner(GameEngine& gameContext, float x, float y, float r, GameObjectType goTypeToSpawn = GameObjectType::NONE);
 
 
     //////////////////////////////////////////////////

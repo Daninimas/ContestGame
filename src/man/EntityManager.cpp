@@ -46,6 +46,7 @@ void EntityManager::eraseEntityByID(int id) {
     eraseComponent<ExplosionAttackComponent>(id);
     eraseComponent<BombComponent>(id);
     eraseComponent<DodgeComponent>(id);
+    eraseComponent<SpawnerComponent>(id);
 
     // AI
     eraseComponent<AIChaseComponent>(id);
@@ -615,6 +616,62 @@ int EntityManager::createBomb(GameEngine& gameContext, float x, float y, float r
     return entityId;
 }
 
+
+int EntityManager::createSpawner(GameEngine& gameContext, float x, float y, float r, GameObjectType goTypeToSpawn) {
+    int entityId = Entity::getCurrentId();
+
+    SituationComponent& situation = createComponent<SituationComponent>(entityId);
+    ColliderComponent& colliderComp = createComponent<ColliderComponent>(entityId);
+    RenderComponent& renderComp = createComponent<RenderComponent>(entityId);
+    HealthComponent& healthComp = createComponent<HealthComponent>(entityId);
+    SpawnerComponent& spawnComp = createComponent<SpawnerComponent>(entityId);
+    // da problema en las colisiones porque ni esto ni el ataque tienen velocidad
+
+
+    //######### DATA ########//
+    situation.x = x;
+    situation.y = y;
+    situation.rotation = r;
+    situation.scaleX = 0.1f;
+    situation.scaleY = 0.1f;
+
+    // Render component
+    renderComp.sprite = "Media/Images/spawner.png";
+    renderComp.spriteRect = { 0, 200, 0, 200 };
+
+    // Collider
+    colliderComp.collisionLayer = ColliderComponent::Enemy; // temporal
+    colliderComp.layerMasc = ColliderComponent::Player + ColliderComponent::PlayerAttack + ColliderComponent::Wall; //Collides with player and enemy
+    colliderComp.boundingRoot.bounding = { 0.f, 20.f, 0.f, 20.f };
+    colliderComp.type = ColliderType::STATIC;
+    
+
+    switch (goTypeToSpawn) {
+    case GameObjectType::CHASERJUMPER:
+
+        // Spawner
+        spawnComp.maxCooldown = 5.f;
+        spawnComp.rangeX = 200.f;
+        spawnComp.rangeY = 200.f;
+        spawnComp.spawnObjectsType = GameObjectType::CHASERJUMPER;
+        spawnComp.spawnEntitiesType = EntityType::ENEMY;
+
+        // Health
+        healthComp.maxHealth = 10;
+
+        break;        
+    }
+
+    // Init health
+    healthComp.resetHealth();
+
+    //######### RENDER ########//
+    gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
+
+    //######### CREATE ########//
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::SPAWNER, goTypeToSpawn));
+    return entityId;
+}
 
 // ------------------------------ WORLD CREATION ------------------------------
 
