@@ -7,8 +7,8 @@
 #include <functional>
 
 /*
- ###### OPTIMIZATION V.2 #######
-   Calculate collision entity with (velocity-all collidables)
+ ###### OPTIMIZATION V.3 #######
+   Calculate collision entity with (not wall-all collidables)
    Collision calculate when they can collide with the layerMasc
 */
 
@@ -34,18 +34,17 @@ void CollisionSystem::clearAllCollisions(GameEngine& gameContext) const {
 
 
 void CollisionSystem::calculateCollisions(GameEngine& gameContext) const {
-    std::size_t velocitiesSize = gameContext.entityMan.getComponents<VelocityComponent>().size();
-    auto&       colliders      = gameContext.entityMan.getComponents<ColliderComponent>();
-    std::vector<int> idCollidersWithVelocity;
+    auto& colliders = gameContext.entityMan.getComponents<ColliderComponent>();
+    std::vector<std::reference_wrapper<ColliderComponent>> collidersNotWall; // vector of references to colliders
 
     // Prepare data for the collision calculation
-    idCollidersWithVelocity.reserve(velocitiesSize); // Reserve the size of the velocities component storage
-    Utils::insertCollidersIdWithVelocity(gameContext, idCollidersWithVelocity);
+    collidersNotWall.reserve(colliders.size()); // Reserve the size of the velocities component storage
+    //Utils::insertCollidersIdWithVelocity(gameContext, collidersNotWall);
+    Utils::insertNotWallColliders(gameContext, collidersNotWall);
 
     // Calculate collision
-    for (std::size_t i = 0; i < idCollidersWithVelocity.size(); ++i) {
-        int idA = idCollidersWithVelocity[i];
-        ColliderComponent& colliderA = gameContext.entityMan.getComponent<ColliderComponent>(idA);
+    for (ColliderComponent& colliderA : collidersNotWall) {
+        int idA = colliderA.id;
         SituationComponent& situationA = gameContext.entityMan.getComponent<SituationComponent>(idA);
 
         for (auto& colliderB : colliders) {

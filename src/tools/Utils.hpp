@@ -18,6 +18,7 @@ public:
     static BoundingBox moveToWorldCoords(BoundingBox& bounding, SituationComponent& situation);
 
     static void insertCollidersIdWithVelocity(GameEngine& gameContext, std::vector<int>& idCollidersWithVelocity);
+    static void insertNotWallColliders(GameEngine& gameContext, std::vector<std::reference_wrapper<ColliderComponent>>& collidersNotWall);
 
     static bool objectiveInsideRange(SituationComponent& attackerSit, SituationComponent& objectiveSit, float rangeX, float rangeY);
 

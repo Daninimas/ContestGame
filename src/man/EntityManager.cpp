@@ -625,7 +625,6 @@ int EntityManager::createSpawner(GameEngine& gameContext, float x, float y, floa
     RenderComponent& renderComp = createComponent<RenderComponent>(entityId);
     HealthComponent& healthComp = createComponent<HealthComponent>(entityId);
     SpawnerComponent& spawnComp = createComponent<SpawnerComponent>(entityId);
-    // da problema en las colisiones porque ni esto ni el ataque tienen velocidad
 
 
     //######### DATA ########//

@@ -93,6 +93,15 @@ void Utils::insertCollidersIdWithVelocity(GameEngine& gameContext, std::vector<i
     }
 }
 
+void Utils::insertNotWallColliders(GameEngine& gameContext, std::vector<std::reference_wrapper<ColliderComponent>>& collidersNotWall) {
+    auto& colliders = gameContext.entityMan.getComponents<ColliderComponent>();
+    for (auto& collComp : colliders) {
+        if (collComp.collisionLayer != ColliderComponent::Wall) {
+            collidersNotWall.emplace_back(collComp);
+        }
+    }
+}
+
 
 bool Utils::objectiveInsideRange(SituationComponent& attackerSit, SituationComponent& objectiveSit, float rangeX, float rangeY) {
     if (abs(attackerSit.x - objectiveSit.x) < rangeX && abs(attackerSit.y - objectiveSit.y) < rangeY) {
