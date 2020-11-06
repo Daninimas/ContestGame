@@ -25,6 +25,8 @@ public:
     static bool checkCollidingWithObjective(BoundingBoxNode& boundingNode, int objId);
     static void deleteCollidingWithObjective(BoundingBoxNode& boundingNode, int objId);
 
+    static void setNormalPistolToEntity(GameEngine& gameContext, int entityId);
+
     template <typename T> 
     static int sign(T val) {
         return (T(0) < val) - (val < T(0));

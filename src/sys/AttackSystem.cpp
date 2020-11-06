@@ -1,6 +1,7 @@
 #include "AttackSystem.hpp"
 
 #include <eng/GameEngine.hpp>
+#include <tools/Utils.hpp>
 #include <iostream>
 #include <algorithm>
 
@@ -116,7 +117,19 @@ void AttackSystem::checkPlayerAttacking(GameEngine& gameContext) const {
 				playerDistanceWeap.attackVelX *= -1;
 			}
 
-			createDistanceAttack(gameContext, playerDistanceWeap);
+			bool attackCreated = createDistanceAttack(gameContext, playerDistanceWeap);
+
+			// To update the ammo
+			if (attackCreated && !playerDistanceWeap.infiniteAmmo) {
+				--playerDistanceWeap.ammo;
+
+				if (playerDistanceWeap.ammo == 0) {
+					//Delete this weapon and set the normal pistol
+					gameContext.entityMan.eraseComponent<DistanceWeaponComponent>(WorldData::playerId);
+
+					Utils::setNormalPistolToEntity(gameContext, WorldData::playerId);
+				}
+			}
 
 			/*// Reset the melee cooldown too
 			if (gameContext.entityMan.existsComponent<MeleeWeaponComponent>(WorldData::playerId)) {
@@ -160,7 +173,7 @@ void AttackSystem::checkEnemiesAttacking(GameEngine& gameContext) const {
 
 
 
-void AttackSystem::createMeleeAttack(GameEngine& gameContext, MeleeWeaponComponent& meleeAttacker) const {
+bool AttackSystem::createMeleeAttack(GameEngine& gameContext, MeleeWeaponComponent& meleeAttacker) const {
 
 	if (meleeAttacker.cooldown > meleeAttacker.maxCooldown) {
 		SituationComponent& attackerSit = gameContext.entityMan.getComponent<SituationComponent>(meleeAttacker.id);
@@ -200,12 +213,16 @@ void AttackSystem::createMeleeAttack(GameEngine& gameContext, MeleeWeaponCompone
 		// Play attack sound
 		gameContext.getSoundFacadeRef().loadSound(meleeAttacker.attackSound.soundPath);
 		gameContext.getSoundFacadeRef().playSound(meleeAttacker.attackSound);
+
+		return true;
 	}
+
+	return false;
 }
 
 
 
-void AttackSystem::createDistanceAttack(GameEngine& gameContext, DistanceWeaponComponent& distanceWeaponAttacker) const {
+bool AttackSystem::createDistanceAttack(GameEngine& gameContext, DistanceWeaponComponent& distanceWeaponAttacker) const {
 	// Chooses the type of disatance attack that has to be generated
 	if (distanceWeaponAttacker.cooldown > distanceWeaponAttacker.maxCooldown) {
 
@@ -223,8 +240,11 @@ void AttackSystem::createDistanceAttack(GameEngine& gameContext, DistanceWeaponC
 			createLaserAttack(gameContext, distanceWeaponAttacker);
 			break;
 		}
+
+		return true;
 	}
 
+	return false;
 }
 void AttackSystem::createBulletAttack(GameEngine& gameContext, DistanceWeaponComponent& distanceWeaponAttacker) const{
 

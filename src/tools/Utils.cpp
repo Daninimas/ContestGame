@@ -140,3 +140,19 @@ void Utils::deleteCollidingWithObjective(BoundingBoxNode& boundingNode, int objI
 
     entitiesColliding.erase(std::remove(entitiesColliding.begin(), entitiesColliding.end(), objId), entitiesColliding.end());
 }
+
+
+
+void Utils::setNormalPistolToEntity(GameEngine& gameContext, int entityId) {
+    DistanceWeaponComponent& distanceWeaponComp = gameContext.entityMan.createComponent<DistanceWeaponComponent>(entityId);
+
+    distanceWeaponComp.attackBounding = { 0.f, 5.f, 0.f, 10.f };
+    distanceWeaponComp.damage = 1;
+    distanceWeaponComp.attackGeneralVelociy = 500.f;
+    distanceWeaponComp.attackGravity = 100.f;
+    distanceWeaponComp.maxCooldown = 0.5f;
+    distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BULLET;
+    distanceWeaponComp.attackSound.soundPath = "Media/Sound/Weapons/gunFire.wav";
+    distanceWeaponComp.ammo = 0;
+    distanceWeaponComp.infiniteAmmo = true;
+}

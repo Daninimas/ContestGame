@@ -93,13 +93,14 @@ int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float
     VelocityComponent& velocityComp = createComponent<VelocityComponent>(entityId);
     HealthComponent& heathComp = createComponent<HealthComponent>(entityId);
     MeleeWeaponComponent& meleeWeaponComp = createComponent<MeleeWeaponComponent>(entityId);
-    DistanceWeaponComponent& distanceWeaponComp = createComponent<DistanceWeaponComponent>(entityId);
     ColliderComponent& colliderComp = createComponent<ColliderComponent>(entityId);
     JumpComponent& jumpComp = createComponent<JumpComponent>(entityId);
     RenderComponent& renderComp = createComponent<RenderComponent>(entityId);
     SensorComponent& sensorComp = createComponent<SensorComponent>(entityId);
     InputComponent& inputComp = createComponent<InputComponent>(entityId);
     DodgeComponent& dodgeComp = createComponent<DodgeComponent>(entityId);
+    // Create the distance weapon
+    Utils::setNormalPistolToEntity(gameContext, entityId);
 
     //######### DATA ########//
     situation.x = x;
@@ -123,14 +124,6 @@ int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float
     meleeWeaponComp.damage = 2;
     meleeWeaponComp.attackLifetime = 0.15f;
 
-    // Distance
-    distanceWeaponComp.attackBounding = { 0.f, 5.f, 0.f, 10.f };
-    distanceWeaponComp.damage = 1;
-    distanceWeaponComp.attackGeneralVelociy = 500.f;
-    distanceWeaponComp.attackGravity = 100.f;
-    distanceWeaponComp.maxCooldown = 0.5f;
-    distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BULLET;
-    distanceWeaponComp.attackSound.soundPath = "Media/Sound/Weapons/gunFire.wav";
 
     // Render component
     renderComp.sprite = "Media/Images/YellowDuck.png";
@@ -485,6 +478,8 @@ int EntityManager::createWeapon(GameEngine& gameContext, float x, float y, float
         distanceWeaponComp.maxCooldown = 0.2f;
         distanceWeaponComp.attackLifetime = 1.5f;
         distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BULLET;
+        distanceWeaponComp.ammo = 100;
+        distanceWeaponComp.infiniteAmmo = false;
 
         distanceWeaponComp.attackSound.soundPath = "Media/Sound/Weapons/M4A1_Single-Kibblesbob-8540445.wav";
 
@@ -515,6 +510,8 @@ int EntityManager::createWeapon(GameEngine& gameContext, float x, float y, float
         distanceWeaponComp.maxCooldown = 0.5f;
         distanceWeaponComp.attackLifetime = 0.5f;
         distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BOMB;
+        distanceWeaponComp.ammo = 10;
+        distanceWeaponComp.infiniteAmmo = false;
 
         distanceWeaponComp.attackSound.soundPath = "Media/Sound/Weapons/grenadeLauncherSound.wav";
 
@@ -535,6 +532,8 @@ int EntityManager::createWeapon(GameEngine& gameContext, float x, float y, float
         distanceWeaponComp.maxCooldown = 0.6f;
         distanceWeaponComp.attackLifetime = 0.6f;
         distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::LASER;
+        distanceWeaponComp.ammo = 30;
+        distanceWeaponComp.infiniteAmmo = false;
 
         distanceWeaponComp.attackSound.soundPath = "Media/Sound/GE_KF7_Soviet.wav";
 

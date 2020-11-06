@@ -15,9 +15,9 @@ private:
     void addCooldownTimeToWeapons(GameEngine& gameContext) const;
     void checkPlayerAttacking(GameEngine& gameContext) const;
     void checkEnemiesAttacking(GameEngine& gameContext) const;
-    void createMeleeAttack(GameEngine& gameContext, MeleeWeaponComponent& meleeAttacker) const;
+    bool createMeleeAttack(GameEngine& gameContext, MeleeWeaponComponent& meleeAttacker) const;
     void animateExplosions(GameEngine& gameContext) const;
-    void createDistanceAttack(GameEngine& gameContext, DistanceWeaponComponent& distanceWeaponAttacker) const;
+    bool createDistanceAttack(GameEngine& gameContext, DistanceWeaponComponent& distanceWeaponAttacker) const;
     void createBulletAttack(GameEngine& gameContext, DistanceWeaponComponent& distanceWeaponAttacker) const;
     void createBombEntity(GameEngine& gameContext, DistanceWeaponComponent& distanceWeaponAttacker) const;
     void createLaserAttack(GameEngine& gameContext, DistanceWeaponComponent& distanceWeaponAttacker) const;

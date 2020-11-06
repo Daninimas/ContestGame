@@ -23,6 +23,9 @@ public:
 
     uint8_t attackGeneratedType{ BULLET };
 
+    uint16_t ammo{ 100 };
+    bool infiniteAmmo{ false };
+
 
     // Only for bombs generation
 
