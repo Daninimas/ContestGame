@@ -39,6 +39,7 @@ private:
     void renderColliders(GameEngine& gameContext) const;
     void renderAllSensors(GameEngine& gameContext) const;
     void drawBoundingTree(BoundingBoxNode boundingNode, SituationComponent& sit) const;
+    void drawHudElements(GameEngine& gameContext) const;
 
     void updateNode(GameEngine& gameContext, int id);
     void updateTexture(GameEngine& gameContext, int id);
@@ -50,6 +51,7 @@ private:
 
     std::unordered_map<int, sf::View> cameraMap;
 
+    sf::Font font;
 
     bool fullscreen = true;
     bool renderCollidables = true;

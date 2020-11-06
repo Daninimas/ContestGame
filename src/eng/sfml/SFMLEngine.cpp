@@ -12,6 +12,12 @@ SFMLEngine::SFMLEngine(int width, int height, bool fullscreen) {
 	else {
 		device = std::make_unique<sf::RenderWindow>(sf::VideoMode(width, height), "Game");
 	}
+
+	std::string fontPath = "Media/Fonts/arial.ttf";
+	if (!font.loadFromFile(fontPath))
+	{
+		std::cout << "Could not load font: " << fontPath << "\n";
+	}
 }
 SFMLEngine::~SFMLEngine() {
 	device.get()->close();
@@ -76,6 +82,8 @@ void SFMLEngine::drawScene(GameEngine& gameContext) const {
 	if (renderSensors) {
 		renderAllSensors(gameContext);
 	}
+
+	drawHudElements(gameContext);
 }
 
 void SFMLEngine::renderColliders(GameEngine& gameContext) const {
@@ -130,6 +138,32 @@ void SFMLEngine::renderAllSensors(GameEngine& gameContext) const {
 		}
 		device.get()->draw(rectangle);
 	}
+}
+
+void SFMLEngine::drawHudElements(GameEngine& gameContext) const {
+	// TODO hacer esto mejor, todo ordenado y bien, ahora esta de pueba
+
+	device.get()->setView(device.get()->getDefaultView()); //Change view to the hud view
+
+	sf::Text text;
+
+	// select the font
+	text.setFont(font); // font is a sf::Font
+
+	// set the string to display
+	text.setString("Ammo: " + to_string(gameContext.entityMan.getComponent<DistanceWeaponComponent>(WorldData::playerId).ammo));
+
+	// set the character size
+	text.setCharacterSize(24); // in pixels, not points!
+
+	// set the color
+	text.setFillColor(sf::Color::Red);
+
+	// set the text style
+	text.setStyle(sf::Text::Bold | sf::Text::Underlined);
+
+	// inside the main loop, between window.clear() and window.display()
+	device.get()->draw(text);
 }
 
 
