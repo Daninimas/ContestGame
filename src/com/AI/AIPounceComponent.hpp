@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Component.hpp"
+#include <tools/Vector2.hpp>
 
 class AIPounceComponent : public Component {
 public:
@@ -10,8 +11,7 @@ public:
 
     int objectiveId;
 
-    float rangeX{ 70.f };
-    float rangeY{ 10.f };
+    Vector2 range{ 70.f, 10.f };
 
     float velocityIncFactor{ 3.f };
 

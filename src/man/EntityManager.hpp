@@ -4,6 +4,7 @@
 class GameEngine;
 
 #include <tools/Storage.hpp>
+#include <tools/Vector2.hpp>
 #include <com/ComponentsIncluder>
 #include <enum/EnumsIncluder>
 #include <ent/Entity.hpp>
@@ -92,14 +93,14 @@ public:
     //////////////////////////////////////////////////
     //                ENTITY CREATION               //
     //////////////////////////////////////////////////
-    int createPlayer(GameEngine& gameContext, float x, float y, float r, GameObjectType goType = GameObjectType::NONE);
-    int createAttack(GameEngine& gameContext, float x, float y, float r, GameObjectType goType = GameObjectType::NONE);
-    int createWall(GameEngine& gameContext, float x, float y, float r, GameObjectType goType = GameObjectType::NONE);
-    int createEnemy(GameEngine& gameContext, float x, float y, float r, GameObjectType goType = GameObjectType::NONE);
-    int createWeapon(GameEngine& gameContext, float x, float y, float r, GameObjectType goType = GameObjectType::NONE);
-    int createCamera(GameEngine& gameContext, float x, float y, float r, GameObjectType goType = GameObjectType::NONE);
-    int createBomb(GameEngine& gameContext, float x, float y, float r, GameObjectType goType = GameObjectType::NONE);
-    int createSpawner(GameEngine& gameContext, float x, float y, float r, GameObjectType goTypeToSpawn = GameObjectType::NONE);
+    int createPlayer(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType = GameObjectType::NONE);
+    int createAttack(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType = GameObjectType::NONE);
+    int createWall(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType = GameObjectType::NONE);
+    int createEnemy(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType = GameObjectType::NONE);
+    int createWeapon(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType = GameObjectType::NONE);
+    int createCamera(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType = GameObjectType::NONE);
+    int createBomb(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType = GameObjectType::NONE);
+    int createSpawner(GameEngine& gameContext, Vector2 position, float r, GameObjectType goTypeToSpawn = GameObjectType::NONE);
 
 
     //////////////////////////////////////////////////

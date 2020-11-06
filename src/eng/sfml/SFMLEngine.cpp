@@ -105,7 +105,7 @@ void SFMLEngine::drawBoundingTree(BoundingBoxNode boundingNode, SituationCompone
 	}
 	rectangle.setOutlineThickness(2);
 	rectangle.setOutlineColor(sf::Color(250, 150, 100));
-	rectangle.setPosition(sit.x + boundingNode.bounding.xLeft, sit.y + boundingNode.bounding.yUp);
+	rectangle.setPosition(sit.position.x + boundingNode.bounding.xLeft, sit.position.y + boundingNode.bounding.yUp);
 	device.get()->draw(rectangle);
 
 
@@ -130,10 +130,10 @@ void SFMLEngine::renderAllSensors(GameEngine& gameContext) const {
 		rectangle.setOutlineColor(sf::Color(0, 255, 0));
 
 		if (sit.facing == SituationComponent::Right) {
-			rectangle.setPosition(sit.x + b.xLeft, sit.y + b.yUp);
+			rectangle.setPosition(sit.position.x + b.xLeft, sit.position.y + b.yUp);
 		}
 		else {
-			rectangle.setPosition(sit.x + b.xLeft - (b.xRight - b.xLeft), sit.y + b.yUp);
+			rectangle.setPosition(sit.position.x + b.xLeft - (b.xRight - b.xLeft), sit.position.y + b.yUp);
 
 		}
 		device.get()->draw(rectangle);
@@ -184,11 +184,11 @@ void SFMLEngine::updateNode(GameEngine& gameContext, int id) {
 
 	node.setOrigin(0,0);
 
-	node.setPosition(situation.x, situation.y);
+	node.setPosition(situation.position.x, situation.position.y);
 	node.setRotation(situation.rotation);
-	node.setScale(situation.scaleX, situation.scaleY);
+	node.setScale(situation.scale.x, situation.scale.y);
 
-	node.setColor(sf::Color(drawable.color[0], drawable.color[1], drawable.color[2], drawable.color[3]));
+	node.setColor(sf::Color(drawable.color.r, drawable.color.g, drawable.color.b, drawable.color.a));
 
 	if (situation.facing == SituationComponent::Left) {
 		node.move(node.getLocalBounds().width, 0.f);
@@ -222,7 +222,7 @@ void SFMLEngine::updateCamera(GameEngine& gameContext, int id) {
 
 	//BoundingBox worldViewRect = Utils::moveToWorldCoords(cameraComp.viewRect, situation);
 
-	cameraMap[id].setCenter(situation.x, situation.y);
+	cameraMap[id].setCenter(situation.position.x, situation.position.y);
 
 	cameraMap[id].zoom(cameraComp.zoom);
 }
@@ -260,8 +260,8 @@ void SFMLEngine::eraseEntity(int id) {
 	// Delete the texture and image?
 }
 
-void SFMLEngine::addColorToEntity(int id, std::array<float, 3> color) {
-	nodeMap[id].setColor( sf::Color(color[0], color[1], color[2]) );
+void SFMLEngine::addColorToEntity(int id, Color color) {
+	nodeMap[id].setColor( sf::Color(color.r, color.g, color.b, color.a) );
 }
 
 size_t SFMLEngine::countRenderNodes() const {

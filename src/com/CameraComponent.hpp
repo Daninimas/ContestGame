@@ -4,6 +4,7 @@
 
 #include <tools/BoundingBox.hpp>
 #include <enum/ColliderType.hpp>
+#include <tools/Vector2.hpp>
 #include <vector>
 
 class CameraComponent : public Component {
@@ -17,6 +18,5 @@ public:
 
 
     // Offset from the center where the player can be without moveng the camera
-    float offsetX{100.f};
-    float offsetY{100.f};
+    Vector2 offset{ 100.f, 100.f };
 };

@@ -25,7 +25,7 @@ void PhysicsSystem::updateJumps(GameEngine& gameContext) const {
         VelocityComponent& velocity = gameContext.entityMan.getComponent<VelocityComponent>(jump.id);
         // Manage cooldown to make it not jump on air
         // Count time than you are on the floor
-        if (velocity.velocityY == 0.f) {
+        if (velocity.velocity.y == 0.f) {
             jump.cooldown += gameContext.getDeltaTime();
         }
         else {
@@ -50,22 +50,22 @@ void PhysicsSystem::updateSituations(GameEngine& gameContext) const {
         SituationComponent& situation = gameContext.entityMan.getComponent<SituationComponent>(velocity.id);
 
         // Set the facing
-        if (velocity.velocityX > 0) {
+        if (velocity.velocity.x > 0) {
             situation.facing = SituationComponent::Right;
         }
-        else if(velocity.velocityX < 0) {
+        else if(velocity.velocity.x < 0) {
             situation.facing = SituationComponent::Left;
         }
         // if == 0, is the same as before
 
 
         // Gravity
-        velocity.velocityY += velocity.gravity * deltaTime;
-        velocity.velocityY = std::clamp(velocity.velocityY, velocity.minVy, velocity.maxVy);
+        velocity.velocity.y += velocity.gravity * deltaTime;
+        velocity.velocity.y = std::clamp(velocity.velocity.y, velocity.minVy, velocity.maxVy);
 
         // Update positions
-        situation.x = situation.x + velocity.velocityX * deltaTime;
-        situation.y = situation.y + velocity.velocityY * deltaTime;
+        situation.position.x = situation.position.x + velocity.velocity.x * deltaTime;
+        situation.position.y = situation.position.y + velocity.velocity.y * deltaTime;
 
         gameContext.entityMan.addEntityToUpdate(velocity.id);
     }

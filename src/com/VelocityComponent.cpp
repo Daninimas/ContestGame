@@ -6,6 +6,5 @@ VelocityComponent::VelocityComponent(const int id)
 VelocityComponent::~VelocityComponent() {}
 
 void VelocityComponent::resetAllVelocities() {
-    velocityX = 0.f;
-    velocityY = 0.f;
+    velocity = { 0.f, 0.f };
 }

@@ -2,8 +2,8 @@
 
 #include <com/Component.hpp>
 #include <tools/BoundingBox.hpp>
+#include <tools/Color.hpp>
 #include <string>
-#include <array>
 
 class RenderComponent : public Component
 {
@@ -15,6 +15,6 @@ public:
 
     BoundingBox spriteRect{ 0.f, 10.f, 0.f, 10.f };
 
-    std::array <uint8_t, 4> color {255, 255, 255, 255};
+    Color color {255, 255, 255, 255};
 };
 

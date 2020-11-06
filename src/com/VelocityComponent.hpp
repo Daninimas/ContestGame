@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Component.hpp"
+#include <tools/Vector2.hpp>
 
 class VelocityComponent : public Component {
 public:
@@ -9,8 +10,7 @@ public:
 
     void resetAllVelocities();
 
-    float	velocityX{ 0 };
-    float	velocityY{ 0 };
+    Vector2 velocity;
 
     float	speedX{ 70 }; // this is the default velocity when walking (velocity constant)
 

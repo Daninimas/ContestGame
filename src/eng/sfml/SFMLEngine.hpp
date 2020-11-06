@@ -25,7 +25,7 @@ public:
     void createEntity(GameEngine& gameContext, int id) override;
     void createCamera(GameEngine& gameContext, int id) override;
     void eraseEntity(int id) override;
-    void addColorToEntity(int id, std::array<float, 3> color) override;
+    void addColorToEntity(int id, Color color) override;
     size_t countRenderNodes() const override;
     bool existsNode(int id) const override;
     bool existsImage(std::string path) const override;

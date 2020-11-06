@@ -4,6 +4,7 @@
 #include <array>
 #include <unordered_map>
 #include <com/ComponentsIncluder>
+#include <tools/Color.hpp>
 
 class GameEngine;
 
@@ -22,7 +23,7 @@ public:
     virtual void createEntity(GameEngine& gameContext, int id) = 0;
     virtual void createCamera(GameEngine &gameContext, int id) = 0;
     virtual void eraseEntity(int id) = 0;
-    virtual void addColorToEntity(int id, std::array<float, 3> color) = 0;
+    virtual void addColorToEntity(int id, Color color) = 0;
     virtual size_t countRenderNodes() const = 0;
     virtual bool existsNode(int id) const = 0;
     virtual bool existsImage(std::string path) const = 0;

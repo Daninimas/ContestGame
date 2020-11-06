@@ -54,7 +54,7 @@ bool AITransformationSystem::checkRange(GameEngine & gameContext, AITransformati
 	SituationComponent& attackerSit = gameContext.entityMan.getComponent<SituationComponent>(transformComp.id);
 	SituationComponent& objectiveSit = gameContext.entityMan.getComponent<SituationComponent>(transformComp.objectiveId);
 	
-	return Utils::objectiveInsideRange(attackerSit, objectiveSit, transformComp.rangeX, transformComp.rangeY);
+	return Utils::objectiveInsideRange(attackerSit, objectiveSit, transformComp.range);
 }
 
 
@@ -68,7 +68,7 @@ void AITransformationSystem::transform(GameEngine& gameContext, AITransformation
 	SensorComponent& sensorComp = gameContext.entityMan.getComponent<SensorComponent>(entityId);
 
 	// Transform its appearance and atacks the objective
-	sitComp.y -= (transformComp.newBoundingRoot.bounding.yDown - collComp.boundingRoot.bounding.yDown);
+	sitComp.position.y -= (transformComp.newBoundingRoot.bounding.yDown - collComp.boundingRoot.bounding.yDown);
 
 		// Collider
 	collComp.boundingRoot = std::move(transformComp.newBoundingRoot);
@@ -77,8 +77,7 @@ void AITransformationSystem::transform(GameEngine& gameContext, AITransformation
 	renderComp.spriteRect = std::move(transformComp.newSpriteRect);
 	renderComp.color = std::move(transformComp.newColor);
 		// new situation
-	sitComp.scaleX = transformComp.newScaleX;
-	sitComp.scaleY = transformComp.newScaleY;
+	sitComp.scale = transformComp.newScale;
 		// move the sensor
 	float halfX = (collComp.boundingRoot.bounding.xRight - collComp.boundingRoot.bounding.xLeft);
 	float halfY = (collComp.boundingRoot.bounding.yDown - collComp.boundingRoot.bounding.yUp);

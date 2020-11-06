@@ -25,7 +25,7 @@ void InputSystem::inputPlaying(GameEngine& gameContext) const {
 
     // Reset actions
     playerInput.resetActions();
-    playerVel.velocityX = 0.f; // reset the movement
+    playerVel.velocity.x = 0.f; // reset the movement
 
     // Set new actions
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
@@ -41,13 +41,13 @@ void InputSystem::inputPlaying(GameEngine& gameContext) const {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
     {
         playerInput.movingLeft = true;
-        playerVel.velocityX = -playerVel.speedX;
+        playerVel.velocity.x = -playerVel.speedX;
         actualMovement = DodgeComponent::Left;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
     {
         playerInput.movingRight = true;
-        playerVel.velocityX = playerVel.speedX;
+        playerVel.velocity.x = playerVel.speedX;
         actualMovement = DodgeComponent::Right;
     }
 
@@ -72,7 +72,7 @@ void InputSystem::inputPlaying(GameEngine& gameContext) const {
     {
         auto& jumpComp = gameContext.entityMan.getComponent<JumpComponent>(WorldData::playerId);
         if (jumpComp.cooldown > jumpComp.maxCooldown) { // if has cooldown on floor
-            playerVel.velocityY = jumpComp.impulse;
+            playerVel.velocity.y = jumpComp.impulse;
         }
 
         /*if (jumpComp.jumpIndex == jumpComp.jumptable.size() && jumpComp.cooldow > jumpComp.maxCooldown) { // if has ended jumping && has cooldown on floor

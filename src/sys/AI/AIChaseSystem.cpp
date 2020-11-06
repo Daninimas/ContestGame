@@ -26,17 +26,17 @@ void AIChaseSystem::chaseObjective(GameEngine& gameContext, AIChaseComponent& ch
 	SituationComponent& chaserSit    = gameContext.entityMan.getComponent<SituationComponent>(chaseComp.id);
 	VelocityComponent& chaserVel     = gameContext.entityMan.getComponent<VelocityComponent>(chaseComp.id);
 
-	if (abs(chaserSit.x - objectiveSit.x) > chaseComp.minDistanceX) {
+	if (abs(chaserSit.position.x - objectiveSit.position.x) > chaseComp.minDistanceX) {
 		//Do the movement
-		if (chaserSit.x < objectiveSit.x) {
-			chaserVel.velocityX = chaserVel.speedX;
+		if (chaserSit.position.x < objectiveSit.position.x) {
+			chaserVel.velocity.x = chaserVel.speedX;
 		}
 		else {
-			chaserVel.velocityX = -chaserVel.speedX;
+			chaserVel.velocity.x = -chaserVel.speedX;
 		}
 	}
 	else {
-		chaserVel.velocityX = 0.f;
+		chaserVel.velocity.x = 0.f;
 	}
 
 	// For the CHASERJUMPERS
@@ -49,7 +49,7 @@ void AIChaseSystem::chaseObjective(GameEngine& gameContext, AIChaseComponent& ch
 			if (gameContext.entityMan.getEntity(sensoredEnt).getType() == EntityType::WALL) {
 				// Jump
 				if (chaserJump.cooldown > chaserJump.maxCooldown) { // if has cooldown on floor
-					chaserVel.velocityY = chaserJump.impulse;
+					chaserVel.velocity.y = chaserJump.impulse;
 				}
 			}
 		}

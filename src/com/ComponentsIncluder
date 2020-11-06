@@ -18,6 +18,7 @@
 #include <com/BombComponent.hpp>
 #include <com/DodgeComponent.hpp>
 #include <com/SpawnerComponent.hpp>
+#include <com/ShieldComponent.hpp>
 
 // AI
 #include <com/AI/AIChaseComponent.hpp>

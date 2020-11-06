@@ -33,13 +33,13 @@ void DodgeSystem::doDodge(GameEngine& gameContext, DodgeComponent& dodgeComp) co
 
 	switch (dodgeComp.dodgeDirection) {
 	case DodgeComponent::Right:
-		velComp.velocityX = velComp.speedX;
-		velComp.velocityX *= dodgeComp.velocityIncrementFactor;
+		velComp.velocity.x = velComp.speedX;
+		velComp.velocity.x *= dodgeComp.velocityIncrementFactor;
 		break;
 
 	case DodgeComponent::Left:
-		velComp.velocityX = -velComp.speedX;
-		velComp.velocityX *= dodgeComp.velocityIncrementFactor;
+		velComp.velocity.x = -velComp.speedX;
+		velComp.velocity.x *= dodgeComp.velocityIncrementFactor;
 		break;
 	}
 

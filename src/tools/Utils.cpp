@@ -70,10 +70,10 @@ float Utils::radToDeg(float angle) {
 
 BoundingBox Utils::moveToWorldCoords(BoundingBox& bounding, SituationComponent& situation) {
     BoundingBox worldCoords{
-            bounding.xLeft  + situation.x
-        ,   bounding.xRight + situation.x
-        ,   bounding.yUp    + situation.y
-        ,   bounding.yDown  + situation.y
+            bounding.xLeft  + situation.position.x
+        ,   bounding.xRight + situation.position.x
+        ,   bounding.yUp    + situation.position.y
+        ,   bounding.yDown  + situation.position.y
     };
 
     return worldCoords;
@@ -103,8 +103,8 @@ void Utils::insertNotWallColliders(GameEngine& gameContext, std::vector<std::ref
 }
 
 
-bool Utils::objectiveInsideRange(SituationComponent& attackerSit, SituationComponent& objectiveSit, float rangeX, float rangeY) {
-    if (abs(attackerSit.x - objectiveSit.x) < rangeX && abs(attackerSit.y - objectiveSit.y) < rangeY) {
+bool Utils::objectiveInsideRange(SituationComponent& attackerSit, SituationComponent& objectiveSit, const Vector2 range) {
+    if (abs(attackerSit.position.x - objectiveSit.position.x) < range.x && abs(attackerSit.position.y - objectiveSit.position.y) < range.y) {
         return true;
     }
     return false;

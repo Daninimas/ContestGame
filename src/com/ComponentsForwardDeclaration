@@ -22,3 +22,4 @@ class AIDropBombComponent;
 class DodgeComponent;
 class AIPounceComponent;
 class SpawnerComponent;
+class ShieldComponent;

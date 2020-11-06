@@ -33,7 +33,7 @@ void AIDistanceSystem::manageAttackGeneration(GameEngine& gameContext, AIDistanc
 
 	
 
-	if (Utils::objectiveInsideRange(attackerSit, objectiveSit, AImeleeComp.rangeX, AImeleeComp.rangeY) && distWeap.cooldown > distWeap.maxCooldown) {
+	if (Utils::objectiveInsideRange(attackerSit, objectiveSit, AImeleeComp.range) && distWeap.cooldown > distWeap.maxCooldown) {
 		AImeleeComp.createAttack = true;
 
 		setAttackDirection(gameContext, attackerSit, objectiveSit, distWeap);
@@ -42,20 +42,20 @@ void AIDistanceSystem::manageAttackGeneration(GameEngine& gameContext, AIDistanc
 
 
 void AIDistanceSystem::setAttackDirection(GameEngine& gameContext, SituationComponent& attackerSit, SituationComponent& objectiveSit, DistanceWeaponComponent& distWeap) const {
-	float dirX, dirY = 0.f;
+	Vector2 dir;
 
 	// Calculate direction vector
-	dirX = objectiveSit.x - attackerSit.x;
-	dirY = objectiveSit.y - attackerSit.y;
+	dir.x = objectiveSit.position.x - attackerSit.position.x;
+	dir.y = objectiveSit.position.y - attackerSit.position.y;
 
 	// Normalize direction vector
-	float mag = sqrt(dirX * dirX + dirY * dirY); // Calculate magnitude
+	float mag = sqrt(dir.x * dir.x + dir.y * dir.y); // Calculate magnitude
 	if (mag > 0) { 
-		dirX = dirX / mag;
-		dirY = dirY / mag;
+		dir.x = dir.x / mag;
+		dir.y = dir.y / mag;
 	}
 
 	// Set velocity to weapon
-	distWeap.attackVelX = distWeap.attackGeneralVelociy * dirX;
-	distWeap.attackVelY = distWeap.attackGeneralVelociy * dirY;
+	distWeap.attackVel.x = distWeap.attackGeneralVelociy * dir.x;
+	distWeap.attackVel.y = distWeap.attackGeneralVelociy * dir.y;
 }

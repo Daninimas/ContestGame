@@ -28,7 +28,7 @@ void SpawnSystem::manageSpawn(GameEngine& gameContext, SpawnerComponent& spawnCo
 	SituationComponent& spawnSit = gameContext.entityMan.getComponent<SituationComponent>(spawnComp.id);
 	SituationComponent& objSit   = gameContext.entityMan.getComponent<SituationComponent>(spawnComp.objectiveId);
 
-	if (Utils::objectiveInsideRange(spawnSit, objSit, spawnComp.rangeX, spawnComp.rangeY)) {
+	if (Utils::objectiveInsideRange(spawnSit, objSit, spawnComp.range)) {
 		spawnObject(gameContext, spawnComp, spawnSit);
 	}
 }
@@ -38,7 +38,7 @@ void SpawnSystem::spawnObject(GameEngine& gameContext, SpawnerComponent& spawnCo
 	switch (spawnComp.spawnEntitiesType)
 	{
 	case EntityType::ENEMY:
-		int newEntityID = gameContext.entityMan.createEnemy(gameContext, spawnSit.x, spawnSit.y, 0.f, spawnComp.spawnObjectsType);
+		int newEntityID = gameContext.entityMan.createEnemy(gameContext, spawnSit.position, 0.f, spawnComp.spawnObjectsType);
 
 		setobjectiveToAIComponents(gameContext, newEntityID, spawnComp.objectiveId);
 

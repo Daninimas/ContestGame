@@ -3,6 +3,7 @@
 
 #include <enum/GameObjectType.hpp>
 #include <enum/EntityType.hpp>
+#include <tools/Vector2.hpp>
 #include <limits>
 #include <vector>
 
@@ -20,8 +21,8 @@ public:
     int objectiveId;
 
     // if we want the spawner to activate in a certain to the objective
-    float rangeX{ 300.f };
-    float rangeY{ 300.f };
+    Vector2 range{ 300.f, 300.f };
+
 
     // if we want the spawner to spawn a certain number ob objects and die
     uint16_t numObjectsToSpawn{ std::numeric_limits<uint16_t>::max() }; // if we want it to be unlimited, with this number it is ok

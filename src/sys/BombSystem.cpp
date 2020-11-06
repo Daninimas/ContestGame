@@ -50,7 +50,7 @@ void BombSystem::explodeBomb(GameEngine& gameContext, int bombId) const {
 	ColliderComponent& bombColl   = gameContext.entityMan.getComponent<ColliderComponent>(bombId);
 
 	// Creates the explosion attack entity
-	int explosionId = gameContext.entityMan.createAttack(gameContext, bombSit.x, bombSit.y, bombSit.rotation, GameObjectType::EXPLOSION);
+	int explosionId = gameContext.entityMan.createAttack(gameContext, bombSit.position, bombSit.rotation, GameObjectType::EXPLOSION);
 
 	ExplosionAttackComponent& explosionComp = gameContext.entityMan.getComponent<ExplosionAttackComponent>(explosionId);
 	ColliderComponent& explosionCollider    = gameContext.entityMan.getComponent<ColliderComponent>(explosionId);

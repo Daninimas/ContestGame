@@ -2,6 +2,8 @@
 
 #include "../Component.hpp"
 #include <tools/BoundingBox.hpp>
+#include <tools/Vector2.hpp>
+#include <tools/Color.hpp>
 #include <string>
 #include <array>
 
@@ -12,9 +14,7 @@ public:
 
     int objectiveId;
 
-    float rangeX{ 70.f };
-    float rangeY{ 70.f };
-
+    Vector2 range{ 70.f, 70.f };
 
     // Data for the transformation
         // new collider
@@ -23,9 +23,8 @@ public:
         // new render
     std::string newSprite = "";
     BoundingBox newSpriteRect{ 0.f, 10.f, 0.f, 10.f };
-    std::array<uint8_t, 4> newColor{ 255, 255, 255, 255 };
+    Color newColor{ 255, 255, 255, 255 };
 
         // new situation
-    float	newScaleX{ 1.f };
-    float	newScaleY{ 1.f };
+    Vector2 newScale{ 1.f, 1.f };
 };

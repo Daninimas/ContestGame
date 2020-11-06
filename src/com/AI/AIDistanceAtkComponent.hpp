@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Component.hpp"
+#include <tools/Vector2.hpp>
 
 class AIDistanceAtkComponent : public Component {
 public:
@@ -11,6 +12,5 @@ public:
 
     bool createAttack{ false };
 
-    float rangeX{ 200.f };
-    float rangeY{ 20.f };
+    Vector2 range{ 200.f, 20.f };
 };

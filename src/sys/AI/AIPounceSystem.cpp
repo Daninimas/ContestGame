@@ -16,7 +16,7 @@ void AIPounceSystem::update(GameEngine& gameContext) const {
 	{
 		VelocityComponent& velComp = gameContext.entityMan.getComponent<VelocityComponent>(pounceComp.id);
 
-		if (velComp.velocityY == 0.f) { // if on ground
+		if (velComp.velocity.y == 0.f) { // if on ground
 			chaseObjective(gameContext, pounceComp);
 		}
 	}
@@ -34,14 +34,14 @@ void AIPounceSystem::chaseObjective(GameEngine& gameContext, AIPounceComponent& 
 	pounceComp.cooldown += gameContext.getDeltaTime();
 
 	//Do the movement
-	if (chaserSit.x < objectiveSit.x) {
-		chaserVel.velocityX = chaserVel.speedX;
+	if (chaserSit.position.x < objectiveSit.position.x) {
+		chaserVel.velocity.x = chaserVel.speedX;
 	}
 	else {
-		chaserVel.velocityX = -chaserVel.speedX;
+		chaserVel.velocity.x = -chaserVel.speedX;
 	}
 
-	if (!Utils::objectiveInsideRange(chaserSit, objectiveSit, pounceComp.rangeX, pounceComp.rangeY) || pounceComp.cooldown <= pounceComp.maxCooldown) { // if objective not in pounce range, chase
+	if (!Utils::objectiveInsideRange(chaserSit, objectiveSit, pounceComp.range) || pounceComp.cooldown <= pounceComp.maxCooldown) { // if objective not in pounce range, chase
 		// For jumping obstacles
 		SensorComponent& chaserSens = gameContext.entityMan.getComponent<SensorComponent>(pounceComp.id);
 		// Search if colliding with Wall and jump to advance
@@ -49,16 +49,16 @@ void AIPounceSystem::chaseObjective(GameEngine& gameContext, AIPounceComponent& 
 			if (gameContext.entityMan.getEntity(sensoredEnt).getType() == EntityType::WALL) {
 				// Jump
 				if (pouncerJump.cooldown > pouncerJump.maxCooldown) { // if has cooldown on floor
-					chaserVel.velocityY = pouncerJump.impulse;
+					chaserVel.velocity.y = pouncerJump.impulse;
 				}
 			}
 		}
 	}
 	else {
-		chaserVel.velocityX *= pounceComp.velocityIncFactor;
+		chaserVel.velocity.x *= pounceComp.velocityIncFactor;
 
 		if (pouncerJump.cooldown > pouncerJump.maxCooldown) { // if has cooldown on floor
-			chaserVel.velocityY = pouncerJump.impulse;
+			chaserVel.velocity.y = pouncerJump.impulse;
 		}
 
 		pounceComp.cooldown = 0.f;

@@ -96,25 +96,25 @@ void AttackSystem::checkPlayerAttacking(GameEngine& gameContext) const {
 			VelocityComponent& playerVel  = gameContext.entityMan.getComponent<VelocityComponent>(WorldData::playerId);
 			SituationComponent& playerSit = gameContext.entityMan.getComponent<SituationComponent>(WorldData::playerId);
 
-			playerDistanceWeap.attackVelY = 0.f;
-			playerDistanceWeap.attackVelX = playerDistanceWeap.attackGeneralVelociy;
+			playerDistanceWeap.attackVel.y = 0.f;
+			playerDistanceWeap.attackVel.x = playerDistanceWeap.attackGeneralVelociy;
 			if (playerInput.movingUp)
 			{
-				playerDistanceWeap.attackVelX = 0.f;
-				playerDistanceWeap.attackVelY = -playerDistanceWeap.attackGeneralVelociy;
+				playerDistanceWeap.attackVel.x = 0.f;
+				playerDistanceWeap.attackVel.y = -playerDistanceWeap.attackGeneralVelociy;
 			}
 			if (playerInput.movingDown)
 			{
-				if (playerVel.velocityY != 0) {
+				if (playerVel.velocity.y != 0) {
 					// if the player is on air
 					// shoot down
-					playerDistanceWeap.attackVelX = 0.f;
-					playerDistanceWeap.attackVelY = playerDistanceWeap.attackGeneralVelociy;
+					playerDistanceWeap.attackVel.x = 0.f;
+					playerDistanceWeap.attackVel.y = playerDistanceWeap.attackGeneralVelociy;
 				}
 			}
 
 			if (playerSit.facing == SituationComponent::Left) {
-				playerDistanceWeap.attackVelX *= -1;
+				playerDistanceWeap.attackVel.x *= -1;
 			}
 
 			bool attackCreated = createDistanceAttack(gameContext, playerDistanceWeap);
@@ -177,8 +177,7 @@ bool AttackSystem::createMeleeAttack(GameEngine& gameContext, MeleeWeaponCompone
 
 	if (meleeAttacker.cooldown > meleeAttacker.maxCooldown) {
 		SituationComponent& attackerSit = gameContext.entityMan.getComponent<SituationComponent>(meleeAttacker.id);
-		float attackX = attackerSit.x;
-		float attackY = attackerSit.y;
+		Vector2 attackPos = { attackerSit.position.x, attackerSit.position.y};
 
 		GameObjectType attackGOtype = GameObjectType::MELEE_ATTACK;
 		if (meleeAttacker.id == WorldData::playerId) {
@@ -190,16 +189,16 @@ bool AttackSystem::createMeleeAttack(GameEngine& gameContext, MeleeWeaponCompone
 			BoundingBox& attackerBounding = gameContext.entityMan.getComponent<ColliderComponent>(attackerSit.id).boundingRoot.bounding;
 
 			if (attackerSit.facing == SituationComponent::Right) {
-				attackX += attackerBounding.xRight;
+				attackPos.x += attackerBounding.xRight;
 			}
 			else {
 				// Left
-				attackX -= (meleeAttacker.attackBounding.xRight - meleeAttacker.attackBounding.xLeft);
+				attackPos.x -= (meleeAttacker.attackBounding.xRight - meleeAttacker.attackBounding.xLeft);
 			}
 		}
 
 
-		int attackId = gameContext.entityMan.createAttack(gameContext, attackX, attackY, 0.f, attackGOtype);
+		int attackId = gameContext.entityMan.createAttack(gameContext, attackPos, 0.f, attackGOtype);
 
 		ColliderComponent& colliderComp = gameContext.entityMan.getComponent<ColliderComponent>(attackId);
 		AttackComponent& attackComp     = gameContext.entityMan.getComponent<AttackComponent>(attackId);
@@ -255,7 +254,7 @@ void AttackSystem::createBulletAttack(GameEngine& gameContext, DistanceWeaponCom
 		attackGOtype = GameObjectType::PLAYER_DISTANCE_ATTACK;
 	}
 
-	int attackId = gameContext.entityMan.createAttack(gameContext, attackerSit.x, attackerSit.y, 0.f, attackGOtype);
+	int attackId = gameContext.entityMan.createAttack(gameContext, attackerSit.position, 0.f, attackGOtype);
 
 	ColliderComponent& colliderComp = gameContext.entityMan.getComponent<ColliderComponent>(attackId);
 	AttackComponent& attackComp = gameContext.entityMan.getComponent<AttackComponent>(attackId);
@@ -264,8 +263,7 @@ void AttackSystem::createBulletAttack(GameEngine& gameContext, DistanceWeaponCom
 	colliderComp.boundingRoot.bounding = distanceWeaponAttacker.attackBounding;
 	attackComp.damage = distanceWeaponAttacker.damage;
 	attackComp.maxLifetime = distanceWeaponAttacker.attackLifetime;
-	attackVel.velocityX = distanceWeaponAttacker.attackVelX;
-	attackVel.velocityY = distanceWeaponAttacker.attackVelY;
+	attackVel.velocity = distanceWeaponAttacker.attackVel;
 	attackVel.gravity = distanceWeaponAttacker.attackGravity;
 
 
@@ -284,7 +282,7 @@ void AttackSystem::createBombEntity(GameEngine& gameContext, DistanceWeaponCompo
 		attackGOtype = GameObjectType::PLAYER_BOMB;
 	}
 
-	int bombId = gameContext.entityMan.createBomb(gameContext, attackerSit.x, attackerSit.y, 0.f, attackGOtype);
+	int bombId = gameContext.entityMan.createBomb(gameContext, attackerSit.position, 0.f, attackGOtype);
 
 	ColliderComponent& colliderComp = gameContext.entityMan.getComponent<ColliderComponent>(bombId);
 	VelocityComponent& bombVel = gameContext.entityMan.getComponent<VelocityComponent>(bombId);
@@ -298,8 +296,7 @@ void AttackSystem::createBombEntity(GameEngine& gameContext, DistanceWeaponCompo
 	bombComp.explosionTime = distanceWeaponAttacker.explosionTime;
 	bombComp.explosionExpansion = distanceWeaponAttacker.explosionExpansion;
 
-	bombVel.velocityX = distanceWeaponAttacker.attackVelX;
-	bombVel.velocityY = distanceWeaponAttacker.attackVelY;
+	bombVel.velocity = distanceWeaponAttacker.attackVel;
 	bombVel.gravity = distanceWeaponAttacker.attackGravity;
 
 
@@ -319,7 +316,7 @@ void AttackSystem::createLaserAttack(GameEngine& gameContext, DistanceWeaponComp
 		attackGOtype = GameObjectType::PLAYER_LASER;
 	}
 
-	int attackId = gameContext.entityMan.createAttack(gameContext, attackerSit.x, attackerSit.y, 0.f, attackGOtype);
+	int attackId = gameContext.entityMan.createAttack(gameContext, attackerSit.position, 0.f, attackGOtype);
 
 	ColliderComponent& colliderComp = gameContext.entityMan.getComponent<ColliderComponent>(attackId);
 	AttackComponent& attackComp = gameContext.entityMan.getComponent<AttackComponent>(attackId);
@@ -327,8 +324,7 @@ void AttackSystem::createLaserAttack(GameEngine& gameContext, DistanceWeaponComp
 
 	attackComp.damage = distanceWeaponAttacker.damage;
 	attackComp.maxLifetime = distanceWeaponAttacker.attackLifetime;
-	attackVel.velocityX = distanceWeaponAttacker.attackVelX;
-	attackVel.velocityY = distanceWeaponAttacker.attackVelY;
+	attackVel.velocity = distanceWeaponAttacker.attackVel;
 	attackVel.gravity = distanceWeaponAttacker.attackGravity;
 
 
@@ -353,7 +349,7 @@ void AttackSystem::createLaserAttack(GameEngine& gameContext, DistanceWeaponComp
 		}
 		if (playerInput.movingDown)
 		{
-			if (playerVel.velocityY != 0) {
+			if (playerVel.velocity.y != 0) {
 				// if the player is on air
 				// shoot down
 				colliderComp.boundingRoot.bounding.xLeft = distanceWeaponAttacker.attackBounding.yUp;

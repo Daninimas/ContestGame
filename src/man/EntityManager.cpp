@@ -47,6 +47,7 @@ void EntityManager::eraseEntityByID(int id) {
     eraseComponent<BombComponent>(id);
     eraseComponent<DodgeComponent>(id);
     eraseComponent<SpawnerComponent>(id);
+    eraseComponent<ShieldComponent>(id);
 
     // AI
     eraseComponent<AIChaseComponent>(id);
@@ -85,7 +86,7 @@ void EntityManager::clearEntitiesToUpdate() {
 
 // ------------------------------ GAME OBJECTS FACTORY ------------------------------
 
-int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float r, GameObjectType goType) {
+int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType) {
     int entityId = Entity::getCurrentId();
 
 
@@ -103,8 +104,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float
     Utils::setNormalPistolToEntity(gameContext, entityId);
 
     //######### DATA ########//
-    situation.x = x;
-    situation.y = y;
+    situation.position = position;
     situation.rotation = r;
 
     velocityComp.speedX = 100.f;
@@ -154,7 +154,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, float x, float y, float
 }
 
 
-int EntityManager::createAttack(GameEngine& gameContext, float x, float y, float r, GameObjectType goType) {
+int EntityManager::createAttack(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType) {
     int entityId = Entity::getCurrentId();
 
     SituationComponent& situation = createComponent<SituationComponent>(entityId);
@@ -162,8 +162,7 @@ int EntityManager::createAttack(GameEngine& gameContext, float x, float y, float
     AttackComponent& attack = createComponent<AttackComponent>(entityId);
 
     //######### DATA ########//
-    situation.x = x;
-    situation.y = y;
+    situation.position = position;
     situation.rotation = r;
 
     collider.type = ColliderType::NO_SOLID;
@@ -230,7 +229,7 @@ int EntityManager::createAttack(GameEngine& gameContext, float x, float y, float
 }
 
 
-int EntityManager::createWall(GameEngine& gameContext, float x, float y, float r, GameObjectType goType) {
+int EntityManager::createWall(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType) {
     int entityId = Entity::getCurrentId();
 
     SituationComponent& situation = createComponent<SituationComponent>(entityId);
@@ -239,8 +238,7 @@ int EntityManager::createWall(GameEngine& gameContext, float x, float y, float r
 
 
     //######### DATA ########//
-    situation.x = x;
-    situation.y = y;
+    situation.position = position;
     situation.rotation = r;
 
     // Collider
@@ -257,7 +255,7 @@ int EntityManager::createWall(GameEngine& gameContext, float x, float y, float r
 }
 
 
-int EntityManager::createEnemy(GameEngine& gameContext, float x, float y, float r, GameObjectType goType) {
+int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType) {
     int entityId = Entity::getCurrentId();
 
 
@@ -269,8 +267,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, float x, float y, float 
 
 
     //######### DATA ########//
-    situation.x = x;
-    situation.y = y;
+    situation.position = position;
     situation.rotation = r;
 
     // Collider
@@ -326,8 +323,8 @@ int EntityManager::createEnemy(GameEngine& gameContext, float x, float y, float 
         healthComp.maxHealth = 7;
 
         AIDistanceAtkComponent& distanceAIComp = createComponent<AIDistanceAtkComponent>(entityId);
-        distanceAIComp.rangeX = 200.f;
-        distanceAIComp.rangeY = 40.f;
+        distanceAIComp.range.x = 200.f;
+        distanceAIComp.range.y = 40.f;
 
         DistanceWeaponComponent& distanceWeaponComp = createComponent<DistanceWeaponComponent>(entityId);
         // Distance
@@ -359,12 +356,10 @@ int EntityManager::createEnemy(GameEngine& gameContext, float x, float y, float 
         AITransformationComponent& transformComp = createComponent<AITransformationComponent>(entityId);
         transformComp.newBoundingRoot.bounding = { 0.f, 100.f, 0.f, 100.f };
         transformComp.newColor = { 255, 10, 10, 255 };
-        transformComp.newScaleX = 2.f;
-        transformComp.newScaleY = 2.f;
+        transformComp.newScale = { 2.f, 2.f };
         transformComp.newSprite = "Media/Images/Elfo del Bosque.jpg";
         transformComp.newSpriteRect = { 1020, 1080, 1080, 1153 };
-        transformComp.rangeX = 150.f;
-        transformComp.rangeY = 150.f;
+        transformComp.range = { 150.f, 150.f };
     }
 
     else if (goType == GameObjectType::BOMBER_ENEMY) {
@@ -420,8 +415,8 @@ int EntityManager::createEnemy(GameEngine& gameContext, float x, float y, float 
     meleeWeaponComp.maxCooldown = 1.5f;
 
 
-    pounceComp.rangeX = 200.f;
-    pounceComp.rangeY = 30.f;
+    pounceComp.range.x = 200.f;
+    pounceComp.range.y = 30.f;
     pounceComp.velocityIncFactor = 4.7f;
     pounceComp.maxCooldown = 2.f;
     }
@@ -437,7 +432,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, float x, float y, float 
 }
 
 
-int EntityManager::createWeapon(GameEngine& gameContext, float x, float y, float r, GameObjectType goType) {
+int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType) {
     int entityId = Entity::getCurrentId();
 
 
@@ -448,8 +443,7 @@ int EntityManager::createWeapon(GameEngine& gameContext, float x, float y, float
 
 
     //######### DATA ########//
-    situation.x = x;
-    situation.y = y;
+    situation.position = position;
     situation.rotation = r;
 
     // Collider
@@ -549,7 +543,7 @@ int EntityManager::createWeapon(GameEngine& gameContext, float x, float y, float
 }
 
 
-int EntityManager::createCamera(GameEngine& gameContext, float x, float y, float r, GameObjectType goType) {
+int EntityManager::createCamera(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType) {
     int entityId = Entity::getCurrentId();
 
     WorldData::activeCameraId = entityId;
@@ -560,15 +554,13 @@ int EntityManager::createCamera(GameEngine& gameContext, float x, float y, float
 
 
     //######### DATA ########//
-    situation.x = x;
-    situation.y = y;
+    situation.position = position;
     situation.rotation = r;
 
     // Camera
     cameraComp.viewRect = { 0.f, 600, 0, 400 };
     cameraComp.zoom = 1.f;
-    cameraComp.offsetX = 50.f;
-    cameraComp.offsetY = 50.f;
+    cameraComp.offset = { 50.f, 50.f};
 
 
     //######### RENDER ########//
@@ -580,7 +572,7 @@ int EntityManager::createCamera(GameEngine& gameContext, float x, float y, float
 }
 
 
-int EntityManager::createBomb(GameEngine& gameContext, float x, float y, float r, GameObjectType goType) {
+int EntityManager::createBomb(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType) {
     int entityId = Entity::getCurrentId();
 
     SituationComponent& situation = createComponent<SituationComponent>(entityId);
@@ -589,8 +581,7 @@ int EntityManager::createBomb(GameEngine& gameContext, float x, float y, float r
     createComponent<VelocityComponent>(entityId);
 
     //######### DATA ########//
-    situation.x = x;
-    situation.y = y;
+    situation.position = position;
     situation.rotation = r;
 
     colliderComp.type = ColliderType::DYNAMIC;
@@ -616,7 +607,7 @@ int EntityManager::createBomb(GameEngine& gameContext, float x, float y, float r
 }
 
 
-int EntityManager::createSpawner(GameEngine& gameContext, float x, float y, float r, GameObjectType goTypeToSpawn) {
+int EntityManager::createSpawner(GameEngine& gameContext, Vector2 position, float r, GameObjectType goTypeToSpawn) {
     int entityId = Entity::getCurrentId();
 
     SituationComponent& situation = createComponent<SituationComponent>(entityId);
@@ -627,11 +618,9 @@ int EntityManager::createSpawner(GameEngine& gameContext, float x, float y, floa
 
 
     //######### DATA ########//
-    situation.x = x;
-    situation.y = y;
+    situation.position = position;
     situation.rotation = r;
-    situation.scaleX = 0.1f;
-    situation.scaleY = 0.1f;
+    situation.scale = { 0.1f, 0.1f };
 
     // Render component
     renderComp.sprite = "Media/Images/spawner.png";
@@ -649,8 +638,7 @@ int EntityManager::createSpawner(GameEngine& gameContext, float x, float y, floa
 
         // Spawner
         spawnComp.maxCooldown = 5.f;
-        spawnComp.rangeX = 200.f;
-        spawnComp.rangeY = 200.f;
+        spawnComp.range = { 200.f, 200.f };
         spawnComp.spawnObjectsType = GameObjectType::CHASERJUMPER;
         spawnComp.spawnEntitiesType = EntityType::ENEMY;
 

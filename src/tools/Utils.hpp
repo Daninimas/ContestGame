@@ -2,6 +2,7 @@
 
 #include <eng/GameEngine.hpp>
 #include <tools/BoundingBox.hpp>
+#include <tools/Vector2.hpp>
 #include <string>
 
 
@@ -20,7 +21,7 @@ public:
     static void insertCollidersIdWithVelocity(GameEngine& gameContext, std::vector<int>& idCollidersWithVelocity);
     static void insertNotWallColliders(GameEngine& gameContext, std::vector<std::reference_wrapper<ColliderComponent>>& collidersNotWall);
 
-    static bool objectiveInsideRange(SituationComponent& attackerSit, SituationComponent& objectiveSit, float rangeX, float rangeY);
+    static bool objectiveInsideRange(SituationComponent& attackerSit, SituationComponent& objectiveSit, const Vector2 range);
 
     static bool checkCollidingWithObjective(BoundingBoxNode& boundingNode, int objId);
     static void deleteCollidingWithObjective(BoundingBoxNode& boundingNode, int objId);
