@@ -676,7 +676,7 @@ int EntityManager::createShield(GameEngine& gameContext, Vector2 position, float
     situation.position = position;
     situation.rotation = r;
 
-    colliderComp.type = ColliderType::DYNAMIC;
+    colliderComp.type = ColliderType::STATIC;
 
 
     switch (goType) {
@@ -696,7 +696,7 @@ int EntityManager::createShield(GameEngine& gameContext, Vector2 position, float
         meleeComp.damage = 10;
         healthComp.maxHealth = 3;
         healthComp.resetHealth();
-        colliderComp.boundingRoot.bounding = { 0.f, 60.f, 0.f, 60.f };
+        colliderComp.boundingRoot.bounding = { 0.f, 70.f, 0.f, 70.f };
         shieldComp.center = Utils::getCenterOfBounding(colliderComp.boundingRoot.bounding);
         situation.noWorldDelete = true;
         // temporal
