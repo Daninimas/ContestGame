@@ -61,6 +61,9 @@ void StaticEntitiesSystem::init(GameEngine &gameContext) const {
 
 
     gameContext.entityMan.createCamera(gameContext, { 0, 0 }, 0.f, GameObjectType::NONE);
+
+    int shieldId = gameContext.entityMan.createShield(gameContext, { 0.f, 0.f }, 0.f, GameObjectType::PLAYER_SHIELD);
+    gameContext.entityMan.getComponent<ShieldComponent>(shieldId).objectiveId = WorldData::playerId;
 }
 
 void StaticEntitiesSystem::createPlayer(GameEngine &gameContext) const {

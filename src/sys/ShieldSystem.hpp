@@ -12,5 +12,7 @@ public:
 
 private:
     void setInObjectivePosition(GameEngine& gameContext, ShieldComponent& shield) const;
-
+    void checkEnemyHits(GameEngine& gameContext, ShieldComponent& shield) const;
+    bool damageHittedEntities(GameEngine& gameContext, BoundingBoxNode& boundingNode, MeleeWeaponComponent& shieldWeapon) const;
+    
 };

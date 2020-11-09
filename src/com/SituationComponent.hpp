@@ -18,4 +18,6 @@ public:
         Right
     };
     uint8_t facing{ Right };
+
+    bool noWorldDelete{ false }; // to prevent deleting this entity hen it is outside of the world
 };

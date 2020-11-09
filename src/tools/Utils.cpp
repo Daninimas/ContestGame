@@ -156,3 +156,12 @@ void Utils::setNormalPistolToEntity(GameEngine& gameContext, int entityId) {
     distanceWeaponComp.ammo = 0;
     distanceWeaponComp.infiniteAmmo = true;
 }
+
+
+Vector2 Utils::getCenterOfBounding(BoundingBox const bounding) {
+    Vector2 center;
+    center.x = (bounding.xLeft + bounding.xRight) / 2.f;
+    center.y = (bounding.yUp + bounding.yDown) / 2.f;
+
+    return center;
+}

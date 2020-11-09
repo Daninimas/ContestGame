@@ -25,7 +25,7 @@ void WorldSystem::deleteEntitiesOutOfWorld(GameEngine& gameContext) const {
 	for (SituationComponent& situation : situations) {
 		if (situation.position.x < worldBounding.xLeft || situation.position.x > worldBounding.xRight || situation.position.y < worldBounding.yUp || situation.position.y > worldBounding.yDown) {
 
-			if (situation.id != WorldData::playerId && !gameContext.entityMan.existsComponent<CameraComponent>(situation.id)) {
+			if (!situation.noWorldDelete) {
 				entitiesToDelete.push_back(situation.id);
 			}
 			else {
