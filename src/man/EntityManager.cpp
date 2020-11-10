@@ -48,6 +48,7 @@ void EntityManager::eraseEntityByID(int id) {
     eraseComponent<DodgeComponent>(id);
     eraseComponent<SpawnerComponent>(id);
     eraseComponent<ShieldComponent>(id);
+    eraseComponent<PowerUpComponent>(id);
 
     // AI
     eraseComponent<AIChaseComponent>(id);
@@ -682,24 +683,19 @@ int EntityManager::createShield(GameEngine& gameContext, Vector2 position, float
     switch (goType) {
     case GameObjectType::SHIELD:
         colliderComp.collisionLayer = ColliderComponent::Shield;
-        colliderComp.layerMasc = ColliderComponent::Player + ColliderComponent::PlayerAttack;
+        colliderComp.layerMasc = ColliderComponent::Player + ColliderComponent::PlayerAttack + ColliderComponent::PlayerShield;
         break;
 
     case GameObjectType::PLAYER_SHIELD:
         colliderComp.collisionLayer = ColliderComponent::PlayerShield;
-        colliderComp.layerMasc = ColliderComponent::Enemy + ColliderComponent::Attack;
+        colliderComp.layerMasc = ColliderComponent::Enemy + ColliderComponent::Attack + ColliderComponent::Shield;
 
-
-        // temporal
         meleeComp.attackSound.soundPath = "Media/Sound/Weapons/shieldZap.wav";
         meleeComp.maxCooldown = 0.7f;
         meleeComp.damage = 10;
         healthComp.maxHealth = 3;
         healthComp.resetHealth();
-        colliderComp.boundingRoot.bounding = { 0.f, 70.f, 0.f, 70.f };
-        shieldComp.center = Utils::getCenterOfBounding(colliderComp.boundingRoot.bounding);
         situation.noWorldDelete = true;
-        // temporal
 
         break;
     }
@@ -707,6 +703,43 @@ int EntityManager::createShield(GameEngine& gameContext, Vector2 position, float
 
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::SHIELD, goType));
+    return entityId;
+}
+
+
+int EntityManager::createPowerUp(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType) {
+    int entityId = Entity::getCurrentId();
+
+    SituationComponent& situation = createComponent<SituationComponent>(entityId);
+    ColliderComponent& colliderComp = createComponent<ColliderComponent>(entityId);
+    PowerUpComponent& powerUpComp = createComponent<PowerUpComponent>(entityId);
+    //RenderComponent& renderComp = createComponent<RenderComponent>(entityId);
+
+    //######### DATA ########//
+    situation.position = position;
+    situation.rotation = r;
+
+    // Collider
+    colliderComp.collisionLayer = ColliderComponent::Weapon;
+    colliderComp.layerMasc = ColliderComponent::Player + ColliderComponent::Wall; //Collides with player and wall
+    colliderComp.boundingRoot.bounding = { 0.f, 10.f, 0.f, 10.f };
+    colliderComp.type = ColliderType::DYNAMIC;
+
+    // Render component
+    //renderComp.sprite = "Media/Images/TaOmA.png";
+    //renderComp.spriteRect = { 400, 450, 200, 250 };
+
+
+    switch (goType) {
+    case GameObjectType::POWERUP_SHIELD:
+        powerUpComp.type = PowerUpComponent::Shield;
+        powerUpComp.colliderIncFactor = 1.5f;
+        break;
+    }
+
+
+    //######### CREATE ########//
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::POWERUP, goType));
     return entityId;
 }
 

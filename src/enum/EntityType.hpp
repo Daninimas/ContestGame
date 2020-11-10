@@ -11,5 +11,6 @@ enum class EntityType {
     MENU,
     BOMB,
     SPAWNER,
-    SHIELD
+    SHIELD,
+    POWERUP
 };

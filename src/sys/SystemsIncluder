@@ -17,6 +17,7 @@
 #include <sys/DodgeSystem.hpp>
 #include <sys/SpawnSystem.hpp>
 #include <sys/ShieldSystem.hpp>
+#include <sys/PickPowerUpSystem.hpp>
 
 #include <sys/AI/AIChaseSystem.hpp>
 #include <sys/AI/AIMeleeSystem.hpp>

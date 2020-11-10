@@ -19,6 +19,7 @@
 #include <com/DodgeComponent.hpp>
 #include <com/SpawnerComponent.hpp>
 #include <com/ShieldComponent.hpp>
+#include <com/PowerUpComponent.hpp>
 
 // AI
 #include <com/AI/AIChaseComponent.hpp>

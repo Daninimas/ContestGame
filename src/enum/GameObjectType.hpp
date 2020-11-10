@@ -42,5 +42,7 @@ enum class GameObjectType {
 
     // Shields
     SHIELD,
-    PLAYER_SHIELD
+    PLAYER_SHIELD,
+    POWERUP_SHIELD,
+    POWERUP_FURY
 };

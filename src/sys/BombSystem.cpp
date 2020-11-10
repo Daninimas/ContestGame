@@ -1,7 +1,6 @@
 #include "BombSystem.hpp"
 
 #include <eng/GameEngine.hpp>
-#include <enum/AttackType.hpp>
 #include <iostream>
 
 BombSystem::BombSystem() {}
