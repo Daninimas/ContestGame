@@ -63,7 +63,7 @@ void StaticEntitiesSystem::init(GameEngine &gameContext) const {
     gameContext.entityMan.createCamera(gameContext, { 0, 0 }, 0.f, GameObjectType::NONE);
 
 
-    gameContext.entityMan.createPowerUp(gameContext, { 150.f, 200.f }, 0.f, GameObjectType::POWERUP_FURY);
+    gameContext.entityMan.createPowerUp(gameContext, { 150.f, 200.f }, 0.f, GameObjectType::POWERUP_SHIELD);
 }
 
 void StaticEntitiesSystem::createPlayer(GameEngine &gameContext) const {

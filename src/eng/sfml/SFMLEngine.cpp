@@ -164,6 +164,11 @@ void SFMLEngine::drawHudElements(GameEngine& gameContext) const {
 
 	// inside the main loop, between window.clear() and window.display()
 	device.get()->draw(text);
+
+	text.setString("Health: " + to_string(gameContext.entityMan.getComponent<HealthComponent>(WorldData::playerId).currentHealth));
+	text.setPosition(sf::Vector2(0.f, 30.f));
+	device.get()->draw(text);
+
 }
 
 

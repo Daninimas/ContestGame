@@ -76,10 +76,10 @@ void GameEngine::setPlayingSystems() {
     systems.emplace_back(std::make_unique<DodgeSystem>());
     systems.emplace_back(std::make_unique<SpawnSystem>());
     systems.emplace_back(std::make_unique<PickPowerUpSystem>());
-    systems.emplace_back(std::make_unique<ShieldSystem>());
     systems.emplace_back(std::make_unique<FurySystem>());
 
     
+    systemsLate.emplace_back(std::make_unique<ShieldSystem>());
     systemsLate.emplace_back(std::make_unique<CollisionSystem>()); // Collision 2 veces, esto es lo mejor para que todo funcione, pero sera mejor hacer lo de los hilos para resolver las colisiones
     systemsLate.emplace_back(std::make_unique<PhysicsSystem>());
     systemsLate.emplace_back(std::make_unique<CollisionSystem>());

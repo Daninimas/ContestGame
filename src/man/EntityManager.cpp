@@ -678,7 +678,7 @@ int EntityManager::createShield(GameEngine& gameContext, Vector2 position, float
     situation.position = position;
     situation.rotation = r;
 
-    colliderComp.type = ColliderType::STATIC;
+    colliderComp.type = ColliderType::NO_SOLID;
 
 
     switch (goType) {

@@ -14,6 +14,7 @@ void ShieldSystem::update(GameEngine& gameContext) const {
 
 	for (ShieldComponent& shield : shieldComponents) {
 		if (gameContext.entityMan.existsComponent<SituationComponent>(shield.objectiveId) && gameContext.entityMan.existsComponent<ColliderComponent>(shield.objectiveId)) {
+			checkIfObjLosesHealth(gameContext, shield);
 			//updateShieldCollider(gameContext, shield); 
 			setInObjectivePosition(gameContext, shield);
 			checkEnemyHits(gameContext, shield);
@@ -82,4 +83,14 @@ bool ShieldSystem::damageHittedEntities(GameEngine& gameContext, BoundingBoxNode
 	}
 
 	return hitEntity;
+}
+
+
+void ShieldSystem::checkIfObjLosesHealth(GameEngine& gameContext, ShieldComponent& shield) const {
+	HealthComponent& objHealth = gameContext.entityMan.getComponent<HealthComponent>(shield.id);
+
+	if (objHealth.damaged) {
+		objHealth.damaged = false;
+		objHealth.damageReceived = 0;
+	}
 }
