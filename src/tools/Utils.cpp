@@ -165,3 +165,8 @@ Vector2 Utils::getCenterOfBounding(BoundingBox const bounding) {
 
     return center;
 }
+
+
+void Utils::printBoundingBox(BoundingBox const bounding) {
+    std::cout << "xLeft: " << bounding.xLeft << " xRight: " << bounding.xRight << " yUp: " << bounding.yUp << " yDown: " << bounding.yDown << "\n";
+}

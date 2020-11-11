@@ -82,6 +82,7 @@ void PickPowerUpSystem::setShieldToEntity(GameEngine& gameContext, PowerUpCompon
 
 	shieldComp.objectiveId = entityColliding;
 	shieldColl.boundingRoot.bounding.xRight = (objectiveColl.boundingRoot.bounding.xRight - objectiveColl.boundingRoot.bounding.xLeft) * powerUp.colliderIncFactor;
-	shieldColl.boundingRoot.bounding.yUp    = (objectiveColl.boundingRoot.bounding.yDown  - objectiveColl.boundingRoot.bounding.yUp)   * powerUp.colliderIncFactor;
+	shieldColl.boundingRoot.bounding.yDown  = (objectiveColl.boundingRoot.bounding.yDown  - objectiveColl.boundingRoot.bounding.yUp)   * powerUp.colliderIncFactor;
+
 	shieldComp.center = Utils::getCenterOfBounding(shieldColl.boundingRoot.bounding);
 }
