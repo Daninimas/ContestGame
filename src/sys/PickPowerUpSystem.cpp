@@ -57,7 +57,11 @@ void PickPowerUpSystem::setPowerUpToEntity(GameEngine& gameContext, PowerUpCompo
 	switch (powerUp.type)
 	{
 	case PowerUpComponent::Shield:
-		setShieldToEntity(gameContext, powerUp, entityColliding, powerUpsToDelete);
+		setShieldToEntity(gameContext, powerUp, entityColliding);
+		break;
+
+	case PowerUpComponent::Fury:
+		setFuryToEntity(gameContext, powerUp, entityColliding);
 		break;
 	}
 
@@ -65,7 +69,7 @@ void PickPowerUpSystem::setPowerUpToEntity(GameEngine& gameContext, PowerUpCompo
 }
 
 
-void PickPowerUpSystem::setShieldToEntity(GameEngine& gameContext, PowerUpComponent& powerUp, int entityColliding, std::vector<int>& powerUpsToDelete) const {
+void PickPowerUpSystem::setShieldToEntity(GameEngine& gameContext, PowerUpComponent& powerUp, int entityColliding) const {
 	//DELETE previous powerUp component on entity
 	gameContext.entityMan.eraseComponent<ShieldComponent>(entityColliding);
 
@@ -81,8 +85,21 @@ void PickPowerUpSystem::setShieldToEntity(GameEngine& gameContext, PowerUpCompon
 	ColliderComponent& objectiveColl = gameContext.entityMan.getComponent<ColliderComponent>(entityColliding);
 
 	shieldComp.objectiveId = entityColliding;
-	shieldColl.boundingRoot.bounding.xRight = (objectiveColl.boundingRoot.bounding.xRight - objectiveColl.boundingRoot.bounding.xLeft) * powerUp.colliderIncFactor;
-	shieldColl.boundingRoot.bounding.yDown  = (objectiveColl.boundingRoot.bounding.yDown  - objectiveColl.boundingRoot.bounding.yUp)   * powerUp.colliderIncFactor;
+	shieldColl.boundingRoot.bounding.xRight = (objectiveColl.boundingRoot.bounding.xRight - objectiveColl.boundingRoot.bounding.xLeft) * powerUp.shieldColliderIncFactor;
+	shieldColl.boundingRoot.bounding.yDown  = (objectiveColl.boundingRoot.bounding.yDown  - objectiveColl.boundingRoot.bounding.yUp)   * powerUp.shieldColliderIncFactor;
 
 	shieldComp.center = Utils::getCenterOfBounding(shieldColl.boundingRoot.bounding);
+}
+
+
+void PickPowerUpSystem::setFuryToEntity(GameEngine& gameContext, PowerUpComponent& powerUp, int entityColliding) const {
+	//DELETE previous powerUp component on entity
+	gameContext.entityMan.eraseComponent<FuryComponent>(entityColliding);
+
+	// Set new fury component to entity
+	FuryComponent& furyComp = gameContext.entityMan.createComponent<FuryComponent>(entityColliding);
+	furyComp.timersSpeedIncFactor = powerUp.furyTimersSpeedIncFactor;
+	furyComp.speedIncFactor = powerUp.furySpeedIncFactor;
+	furyComp.totalLifeTime = powerUp.furyTotalLifeTime;
+	furyComp.furyColor = powerUp.furyColor;
 }

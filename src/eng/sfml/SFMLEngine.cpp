@@ -188,13 +188,17 @@ void SFMLEngine::updateNode(GameEngine& gameContext, int id) {
 	node.setRotation(situation.rotation);
 	node.setScale(situation.scale.x, situation.scale.y);
 
-	node.setColor(sf::Color(drawable.color.r, drawable.color.g, drawable.color.b, drawable.color.a));
-
 	if (situation.facing == SituationComponent::Left) {
 		node.move(node.getLocalBounds().width, 0.f);
 		node.scale(-1.f, 1.f);
 	}
 }
+
+void SFMLEngine::setColorToEntity(const int id, const Color color) {
+	if(existsNode(id))
+		nodeMap[id].setColor(sf::Color(color.r, color.g, color.b, color.a));
+}
+
 
 void SFMLEngine::updateTextures(GameEngine& gameContext, std::vector<int> entitiesId) {
 	for (int id : entitiesId) {
@@ -240,6 +244,7 @@ void SFMLEngine::createEntity(GameEngine& gameContext, int id) {
 
 	// Set the position and data
 	updateNode(gameContext, id);
+	setColorToEntity(id, drawable.color);
 	updateTexture(gameContext, id);
 }
 
@@ -260,9 +265,6 @@ void SFMLEngine::eraseEntity(int id) {
 	// Delete the texture and image?
 }
 
-void SFMLEngine::addColorToEntity(int id, Color color) {
-	nodeMap[id].setColor( sf::Color(color.r, color.g, color.b, color.a) );
-}
 
 size_t SFMLEngine::countRenderNodes() const {
 	return nodeMap.size();

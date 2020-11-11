@@ -13,6 +13,7 @@ public:
 private:
     int checkPowerUpCollides(GameEngine& gameContext, BoundingBoxNode& powerBounding) const;
     void setPowerUpToEntity(GameEngine& gameContext, PowerUpComponent& powerUp, int entityColliding, std::vector<int>& powerUpsToDelete) const;
-    void setShieldToEntity(GameEngine& gameContext, PowerUpComponent& powerUp, int entityColliding, std::vector<int>& powerUpsToDelete) const;
+    void setShieldToEntity(GameEngine& gameContext, PowerUpComponent& powerUp, int entityColliding) const;
+    void setFuryToEntity(GameEngine& gameContext, PowerUpComponent& powerUp, int entityColliding) const;
 
 };

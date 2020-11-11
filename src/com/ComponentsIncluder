@@ -20,6 +20,7 @@
 #include <com/SpawnerComponent.hpp>
 #include <com/ShieldComponent.hpp>
 #include <com/PowerUpComponent.hpp>
+#include <com/FuryComponent.hpp>
 
 // AI
 #include <com/AI/AIChaseComponent.hpp>

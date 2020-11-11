@@ -23,7 +23,6 @@ public:
     virtual void createEntity(GameEngine& gameContext, int id) = 0;
     virtual void createCamera(GameEngine &gameContext, int id) = 0;
     virtual void eraseEntity(int id) = 0;
-    virtual void addColorToEntity(int id, Color color) = 0;
     virtual size_t countRenderNodes() const = 0;
     virtual bool existsNode(int id) const = 0;
     virtual bool existsImage(std::string path) const = 0;
@@ -31,4 +30,5 @@ public:
     virtual void addImage(std::string path) = 0;
     virtual bool existsTexture(std::string path) const = 0;
     virtual void addTexture(std::string path) = 0;
+    virtual void setColorToEntity(const int id, const Color color) = 0;
 };

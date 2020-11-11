@@ -25,7 +25,6 @@ public:
     void createEntity(GameEngine& gameContext, int id) override;
     void createCamera(GameEngine& gameContext, int id) override;
     void eraseEntity(int id) override;
-    void addColorToEntity(int id, Color color) override;
     size_t countRenderNodes() const override;
     bool existsNode(int id) const override;
     bool existsImage(std::string path) const override;
@@ -33,6 +32,7 @@ public:
     void addImage(std::string path) override;
     bool existsTexture(std::string path) const override;
     void addTexture(std::string path) override;
+    void setColorToEntity(const int id, const Color color) override;
 
 private:
     void drawScene(GameEngine& gameContext) const;

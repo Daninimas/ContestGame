@@ -49,6 +49,7 @@ void EntityManager::eraseEntityByID(int id) {
     eraseComponent<SpawnerComponent>(id);
     eraseComponent<ShieldComponent>(id);
     eraseComponent<PowerUpComponent>(id);
+    eraseComponent<FuryComponent>(id);
 
     // AI
     eraseComponent<AIChaseComponent>(id);
@@ -733,7 +734,15 @@ int EntityManager::createPowerUp(GameEngine& gameContext, Vector2 position, floa
     switch (goType) {
     case GameObjectType::POWERUP_SHIELD:
         powerUpComp.type = PowerUpComponent::Shield;
-        powerUpComp.colliderIncFactor = 1.5f;
+        powerUpComp.shieldColliderIncFactor = 1.5f;
+        break;
+
+    case GameObjectType::POWERUP_FURY:
+        powerUpComp.type = PowerUpComponent::Fury;
+        powerUpComp.furyColor = { 255, 0, 0, 255 };
+        powerUpComp.furyTimersSpeedIncFactor = 0.7f;
+        powerUpComp.furySpeedIncFactor = 1.5f;
+        powerUpComp.furyTotalLifeTime = 3.f;
         break;
     }
 
