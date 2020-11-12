@@ -87,7 +87,7 @@ bool ShieldSystem::damageHittedEntities(GameEngine& gameContext, BoundingBoxNode
 
 
 void ShieldSystem::checkIfObjLosesHealth(GameEngine& gameContext, ShieldComponent& shield) const {
-	HealthComponent& objHealth = gameContext.entityMan.getComponent<HealthComponent>(shield.id);
+	HealthComponent& objHealth = gameContext.entityMan.getComponent<HealthComponent>(shield.objectiveId);
 
 	if (objHealth.damaged) {
 		objHealth.damaged = false;

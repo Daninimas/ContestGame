@@ -692,8 +692,8 @@ int EntityManager::createShield(GameEngine& gameContext, Vector2 position, float
         colliderComp.layerMasc = ColliderComponent::Enemy + ColliderComponent::Attack + ColliderComponent::Shield;
 
         meleeComp.attackSound.soundPath = "Media/Sound/Weapons/shieldZap.wav";
-        meleeComp.maxCooldown = 0.7f;
-        meleeComp.damage = 10;
+        meleeComp.maxCooldown = 1.5f;
+        meleeComp.damage = 1;
         healthComp.maxHealth = 3;
         healthComp.resetHealth();
         situation.noWorldDelete = true;
