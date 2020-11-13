@@ -154,34 +154,11 @@ void SFMLEngine::drawHudElements(GameEngine& gameContext) const {
 		device.get()->draw(node.second);
 	}
 
-
-
-	// TODO hacer esto mejor, todo ordenado y bien, ahora esta de pueba
-
-	sf::Text text;
-
-	// select the font
-	text.setFont(font); // font is a sf::Font
-
-	// set the string to display
-	text.setString("Ammo: " + to_string(gameContext.entityMan.getComponent<DistanceWeaponComponent>(WorldData::playerId).ammo));
-
-	// set the character size
-	text.setCharacterSize(24); // in pixels, not points!
-
-	// set the color
-	text.setFillColor(sf::Color::Red);
-
-	// set the text style
-	text.setStyle(sf::Text::Bold | sf::Text::Underlined);
-
-	// inside the main loop, between window.clear() and window.display()
-	device.get()->draw(text);
-
-	text.setString("Health: " + to_string(gameContext.entityMan.getComponent<HealthComponent>(WorldData::playerId).currentHealth));
-	text.setPosition(sf::Vector2(0.f, 30.f));
-	device.get()->draw(text);
-
+	// Render all HUD text
+	for (auto& text : HUDTextMap) 
+	{
+		device.get()->draw(text.second);
+	}
 }
 
 
@@ -275,6 +252,38 @@ void SFMLEngine::createEntity(GameEngine& gameContext, int id) {
 		setColorToEntity(id, drawable.color);
 		updateTexture(gameContext, *node, id);
 	}
+}
+
+
+void SFMLEngine::createText(GameEngine& gameContext, int id) {
+	TextComponent& textComp = gameContext.entityMan.getComponent<TextComponent>(id);
+
+
+	// TODO hacer esto mejor, todo ordenado y bien, ahora esta de pueba
+
+	sf::Text text;
+
+	// select the font
+	text.setFont(font); // font is a sf::Font
+
+	// set the string to display
+	text.setString("Ammo: " + to_string(gameContext.entityMan.getComponent<DistanceWeaponComponent>(WorldData::playerId).ammo));
+
+	// set the character size
+	text.setCharacterSize(24); // in pixels, not points!
+
+	// set the color
+	text.setFillColor(sf::Color::Red);
+
+	// set the text style
+	text.setStyle(sf::Text::Bold | sf::Text::Underlined);
+
+	// inside the main loop, between window.clear() and window.display()
+	device.get()->draw(text);
+
+	text.setString("Health: " + to_string(gameContext.entityMan.getComponent<HealthComponent>(WorldData::playerId).currentHealth));
+	text.setPosition(sf::Vector2(0.f, 30.f));
+	device.get()->draw(text);
 }
 
 

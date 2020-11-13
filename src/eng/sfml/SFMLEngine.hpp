@@ -23,6 +23,7 @@ public:
     void updateTextures(GameEngine& gameContext, std::vector<int> entitiesId) override;
     void updateCamera(GameEngine& gameContext, int id) override;
     void createEntity(GameEngine& gameContext, int id) override;
+    void createText(GameEngine& gameContext, int id) override;
     void createCamera(GameEngine& gameContext, int id) override;
     void eraseEntity(int id) override;
     size_t countRenderNodes() const override;
@@ -48,6 +49,7 @@ private:
     std::unique_ptr<sf::RenderWindow> device;
     std::unordered_map<int, sf::Sprite> nodeMap;
     std::unordered_map<int, sf::Sprite> HUDNodeMap; // nodes that render on hud 
+    std::unordered_map<int, sf::Text> HUDTextMap;
     std::unordered_map<std::string, sf::Image> imageMap;
     std::unordered_map<std::string, sf::Texture> textureMap;
 

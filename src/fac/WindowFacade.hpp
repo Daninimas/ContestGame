@@ -21,6 +21,7 @@ public:
     virtual void updateTextures(GameEngine &gameContext, std::vector<int> entitiesId) = 0;
     virtual void updateCamera(GameEngine& gameContext, int id) = 0;
     virtual void createEntity(GameEngine& gameContext, int id) = 0;
+    virtual void createText(GameEngine& gameContext, int id) = 0;
     virtual void createCamera(GameEngine &gameContext, int id) = 0;
     virtual void eraseEntity(int id) = 0;
     virtual size_t countRenderNodes() const = 0;

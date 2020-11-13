@@ -50,6 +50,7 @@ void EntityManager::eraseEntityByID(int id) {
     eraseComponent<ShieldComponent>(id);
     eraseComponent<PowerUpComponent>(id);
     eraseComponent<FuryComponent>(id);
+    eraseComponent<TextComponent>(id);
 
     // AI
     eraseComponent<AIChaseComponent>(id);

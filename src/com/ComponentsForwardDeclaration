@@ -25,3 +25,4 @@ class SpawnerComponent;
 class ShieldComponent;
 class PowerUpComponent;
 class FuryComponent;
+class TextComponent;

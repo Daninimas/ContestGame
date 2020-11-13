@@ -169,6 +169,7 @@
     <ClCompile Include="src\com\SpawnerComponent.cpp" />
     <ClCompile Include="src\com\ExplosionAttackComponent.cpp" />
     <ClCompile Include="src\com\MenuComponent.cpp" />
+    <ClCompile Include="src\com\TextComponent.cpp" />
     <ClCompile Include="src\eng\sound\SoundSFMLEngine.cpp" />
     <ClCompile Include="src\sys\AI\AIBombDropSystem.cpp" />
     <ClCompile Include="src\sys\AI\AIChaseSystem.cpp" />
@@ -229,6 +230,7 @@
     <ClInclude Include="src\com\SpawnerComponent.hpp" />
     <ClInclude Include="src\com\ExplosionAttackComponent.hpp" />
     <ClInclude Include="src\com\MenuComponent.hpp" />
+    <ClInclude Include="src\com\TextComponent.hpp" />
     <ClInclude Include="src\eng\sound\SoundSFMLEngine.hpp" />
     <ClInclude Include="src\enum\MenuOptions.hpp" />
     <ClInclude Include="src\enum\WorldEnum.hpp" />

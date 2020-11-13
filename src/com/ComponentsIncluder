@@ -21,6 +21,7 @@
 #include <com/ShieldComponent.hpp>
 #include <com/PowerUpComponent.hpp>
 #include <com/FuryComponent.hpp>
+#include <com/TextComponent.hpp>
 
 // AI
 #include <com/AI/AIChaseComponent.hpp>
