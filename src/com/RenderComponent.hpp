@@ -16,5 +16,7 @@ public:
     BoundingBox spriteRect{ 0.f, 10.f, 0.f, 10.f };
 
     Color color {255, 255, 255, 255};
+
+    bool isHUDElement{ false };
 };
 

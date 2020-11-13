@@ -27,6 +27,7 @@ public:
     void eraseEntity(int id) override;
     size_t countRenderNodes() const override;
     bool existsNode(int id) const override;
+    bool existsHUDNode(int id) const override;
     bool existsImage(std::string path) const override;
     bool existsCamera(int id) const override;
     void addImage(std::string path) override;
@@ -41,11 +42,12 @@ private:
     void drawBoundingTree(BoundingBoxNode boundingNode, SituationComponent& sit) const;
     void drawHudElements(GameEngine& gameContext) const;
 
-    void updateNode(GameEngine& gameContext, int id);
-    void updateTexture(GameEngine& gameContext, int id);
+    void updateNode(GameEngine& gameContext, sf::Sprite& node, int id);
+    void updateTexture(GameEngine& gameContext, sf::Sprite& node, int id);
 
     std::unique_ptr<sf::RenderWindow> device;
     std::unordered_map<int, sf::Sprite> nodeMap;
+    std::unordered_map<int, sf::Sprite> HUDNodeMap; // nodes that render on hud 
     std::unordered_map<std::string, sf::Image> imageMap;
     std::unordered_map<std::string, sf::Texture> textureMap;
 

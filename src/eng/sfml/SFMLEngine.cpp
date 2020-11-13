@@ -67,13 +67,15 @@ void SFMLEngine::render(GameEngine& gameContext) const {
 		drawScene(gameContext);
 	}
 
+	drawHudElements(gameContext);
+
     // end the current frame
 	device.get()->display();
 }
 
 void SFMLEngine::drawScene(GameEngine& gameContext) const {
 	// draw everything here...
-	for (auto node : nodeMap)
+	for (auto& node : nodeMap)
 	{
 		device.get()->draw(node.second);
 	}
@@ -86,8 +88,6 @@ void SFMLEngine::drawScene(GameEngine& gameContext) const {
 	if (renderSensors) {
 		renderAllSensors(gameContext);
 	}
-
-	drawHudElements(gameContext);
 }
 
 void SFMLEngine::renderColliders(GameEngine& gameContext) const {
@@ -145,9 +145,18 @@ void SFMLEngine::renderAllSensors(GameEngine& gameContext) const {
 }
 
 void SFMLEngine::drawHudElements(GameEngine& gameContext) const {
-	// TODO hacer esto mejor, todo ordenado y bien, ahora esta de pueba
 
 	device.get()->setView(device.get()->getDefaultView()); //Change view to the hud view
+
+	// Render all HUD sprites
+	for (auto& node : HUDNodeMap)
+	{
+		device.get()->draw(node.second);
+	}
+
+
+
+	// TODO hacer esto mejor, todo ordenado y bien, ahora esta de pueba
 
 	sf::Text text;
 
@@ -181,15 +190,14 @@ void SFMLEngine::updateEntities(GameEngine& gameContext, std::vector<int> entiti
 
 	for (int id : entitiesId) {
 		if (existsNode(id)) {
-			updateNode(gameContext, id);
+			updateNode(gameContext, nodeMap[id], id);
 		}
 	}
 }
 
-void SFMLEngine::updateNode(GameEngine& gameContext, int id) {
+void SFMLEngine::updateNode(GameEngine& gameContext, sf::Sprite& node, int id) {
 	SituationComponent& situation = gameContext.entityMan.getComponent<SituationComponent>(id);
 	RenderComponent& drawable = gameContext.entityMan.getComponent<RenderComponent>(id);
-	sf::Sprite& node = nodeMap[id];
 
 	node.setOrigin(0,0);
 
@@ -206,13 +214,16 @@ void SFMLEngine::updateNode(GameEngine& gameContext, int id) {
 void SFMLEngine::setColorToEntity(const int id, const Color color) {
 	if(existsNode(id))
 		nodeMap[id].setColor(sf::Color(color.r, color.g, color.b, color.a));
+
+	if(existsHUDNode(id))
+		HUDNodeMap[id].setColor(sf::Color(color.r, color.g, color.b, color.a));
 }
 
 
 void SFMLEngine::updateTextures(GameEngine& gameContext, std::vector<int> entitiesId) {
 	for (int id : entitiesId) {
 		if (existsNode(id)) {
-			updateTexture(gameContext, id);
+			updateTexture(gameContext, nodeMap[id], id);
 		}
 		else {
 			// if dont exists, create node
@@ -221,9 +232,8 @@ void SFMLEngine::updateTextures(GameEngine& gameContext, std::vector<int> entiti
 	}
 }
 
-void SFMLEngine::updateTexture(GameEngine& gameContext, int id) {
+void SFMLEngine::updateTexture(GameEngine& gameContext, sf::Sprite& node, int id) {
 	RenderComponent& drawable = gameContext.entityMan.getComponent<RenderComponent>(id);
-	sf::Sprite& node = nodeMap[id];
 	BoundingBox& drawableRect = drawable.spriteRect;
 
 	node.setTextureRect(sf::IntRect(drawableRect.xLeft, drawableRect.yUp, drawableRect.xRight - drawableRect.xLeft, drawableRect.yDown - drawableRect.yUp));
@@ -243,19 +253,31 @@ void SFMLEngine::updateCamera(GameEngine& gameContext, int id) {
 
 void SFMLEngine::createEntity(GameEngine& gameContext, int id) {
 	RenderComponent& drawable    = gameContext.entityMan.getComponent<RenderComponent>(id);
-
+	sf::Sprite* node;
 
 	if (!existsTexture(drawable.sprite)) {
 		addTexture(drawable.sprite);
 	}
 
-	nodeMap.emplace(std::piecewise_construct, std::forward_as_tuple(id), std::forward_as_tuple(textureMap[drawable.sprite]));
 
-	// Set the position and data
-	updateNode(gameContext, id);
-	setColorToEntity(id, drawable.color);
-	updateTexture(gameContext, id);
+	if (drawable.isHUDElement) {
+		HUDNodeMap.emplace(std::piecewise_construct, std::forward_as_tuple(id), std::forward_as_tuple(textureMap[drawable.sprite]));
+		node = &HUDNodeMap[id];
+	}
+	else {
+		nodeMap.emplace(std::piecewise_construct, std::forward_as_tuple(id), std::forward_as_tuple(textureMap[drawable.sprite]));
+		node = &nodeMap[id];
+	}
+
+	if (node != nullptr) {
+		// Set the position and data
+		updateNode(gameContext, *node, id);
+		setColorToEntity(id, drawable.color);
+		updateTexture(gameContext, *node, id);
+	}
 }
+
+
 
 void SFMLEngine::createCamera(GameEngine& gameContext, int id) {
 	CameraComponent& cameraComp   = gameContext.entityMan.getComponent<CameraComponent>(id);
@@ -281,6 +303,12 @@ size_t SFMLEngine::countRenderNodes() const {
 
 bool SFMLEngine::existsNode(int id) const {
 	if (nodeMap.find(id) == nodeMap.end())
+		return false;
+	return true;
+}
+
+bool SFMLEngine::existsHUDNode(int id) const {
+	if (HUDNodeMap.find(id) == HUDNodeMap.end())
 		return false;
 	return true;
 }

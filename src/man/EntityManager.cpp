@@ -796,3 +796,32 @@ int EntityManager::createMenu(GameEngine& gameContext, GameObjectType menuType) 
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::MENU, menuType));
     return entityId;
 }
+
+
+// ------------------------------ HUD CREATION --------------------------------
+
+int EntityManager::createHUDElement(GameEngine& gameContext, Vector2 position, float r, GameObjectType objType) {
+    int entityId = Entity::getCurrentId();
+
+    SituationComponent& situation = createComponent<SituationComponent>(entityId);
+    RenderComponent& renderComp = createComponent<RenderComponent>(entityId);
+
+    //######### DATA ########//
+    situation.position = position;
+    situation.rotation = r;
+    situation.noWorldDelete = true;
+
+    // Render component
+    renderComp.sprite = "Media/Images/YellowDuck.png";
+    renderComp.spriteRect = { 4, 34, 4, 34 };
+    renderComp.isHUDElement = true;
+    renderComp.color = { 255, 0, 0, 255 };
+
+
+    //######### RENDER ########//
+    gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
+
+    //######### CREATE ########//
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::HUDELEMENT, objType));
+    return entityId;
+}

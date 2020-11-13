@@ -115,6 +115,12 @@ public:
     //////////////////////////////////////////////////
     int createMenu(GameEngine& gameContext, GameObjectType menuType);
 
+
+    //////////////////////////////////////////////////
+    //                HUD CREATION                  //
+    //////////////////////////////////////////////////
+    int createHUDElement(GameEngine& gameContext, Vector2 position, float r, GameObjectType menuType);
+
 private:
 
     std::unordered_map<int, Entity> entityMap;
