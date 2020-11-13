@@ -45,6 +45,10 @@ void SFMLEngine::render(GameEngine& gameContext) const {
 
 			gameContext.setPlaying(false);
 		}
+
+		else if (event.type == sf::Event::LostFocus) {
+			gameContext.setGameState(GameState::PAUSE);
+		}
     }
 
     // clear the window with black color
@@ -194,7 +198,7 @@ void SFMLEngine::updateNode(GameEngine& gameContext, int id) {
 	node.setScale(situation.scale.x, situation.scale.y);
 
 	if (situation.facing == SituationComponent::Left) {
-		node.move(node.getLocalBounds().width, 0.f);
+		node.move(node.getGlobalBounds().width, 0.f);
 		node.scale(-1.f, 1.f);
 	}
 }

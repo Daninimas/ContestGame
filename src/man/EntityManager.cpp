@@ -734,7 +734,7 @@ int EntityManager::createPowerUp(GameEngine& gameContext, Vector2 position, floa
     switch (goType) {
     case GameObjectType::POWERUP_SHIELD:
         powerUpComp.type = PowerUpComponent::Shield;
-        powerUpComp.shieldColliderIncFactor = 1.5f;
+        powerUpComp.shieldColliderIncFactor = 1.4f;
         break;
 
     case GameObjectType::POWERUP_FURY:
@@ -763,9 +763,10 @@ void EntityManager::createWorld(GameEngine& gameContext, WorldEnum worldName) {
         WorldData::worldLimits = { 0.f, 10000.f, 0.f, 500.f };
 
         // World music
-        WorldData::worldMusic.soundPath = "Media/Sound/delayscape_planet.ogg";
+        WorldData::worldMusic.soundPath = "Media/Sound/Music/delayscape_planet.ogg";
         WorldData::worldMusic.pitch = 2.f;
         WorldData::worldMusic.volume = 100.f;
+        WorldData::worldMusic.repeat = true;
 
         gameContext.getSoundFacadeRef().loadMusic(WorldData::worldMusic.soundPath);
         gameContext.getSoundFacadeRef().playMusic(WorldData::worldMusic);
