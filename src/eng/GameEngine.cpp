@@ -313,6 +313,8 @@ void GameEngine::calculateDeltaTime(std::chrono::time_point<std::chrono::system_
     std::chrono::duration<float, std::ratio<1>> elapsed_time = now - then;
     deltaTime = elapsed_time.count();
 
+    if (deltaTime > 1/15.f) // el juego queda capado a estar a mas de 15fps
+        deltaTime = 1/15.f;
 
     then = now;
 

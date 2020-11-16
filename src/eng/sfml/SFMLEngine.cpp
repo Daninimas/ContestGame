@@ -10,7 +10,7 @@ SFMLEngine::SFMLEngine(int width, int height, bool fullscreen) {
 		device = std::make_unique<sf::RenderWindow>(sf::VideoMode(width, height), "Game", sf::Style::Fullscreen);
 	}
 	else {
-		device = std::make_unique<sf::RenderWindow>(sf::VideoMode(width, height), "Game");
+		device = std::make_unique<sf::RenderWindow>(sf::VideoMode(width, height), "Game", sf::Style::Titlebar | sf::Style::Close);
 	}
 
 	std::string fontPath = "Media/Fonts/arial.ttf";
