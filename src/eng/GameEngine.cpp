@@ -86,6 +86,7 @@ void GameEngine::setPlayingSystems() {
     systemsLate.emplace_back(std::make_unique<CameraSystem>());
     systemsLate.emplace_back(std::make_unique<HealthSystem>());
     systemsLate.emplace_back(std::make_unique<DeathSystem>());
+    systemsLate.emplace_back(std::make_unique<HUDSystem>());
 }
 
 void GameEngine::setPauseSystems() {

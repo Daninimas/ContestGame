@@ -181,6 +181,7 @@
     <ClCompile Include="src\sys\CameraSystem.cpp" />
     <ClCompile Include="src\sys\DodgeSystem.cpp" />
     <ClCompile Include="src\sys\FurySystem.cpp" />
+    <ClCompile Include="src\sys\HUDSystem.cpp" />
     <ClCompile Include="src\sys\MenuSystem.cpp" />
     <ClCompile Include="src\sys\PickWeaponsSystem.cpp" />
     <ClCompile Include="src\sys\PickPowerUpSystem.cpp" />
@@ -244,6 +245,7 @@
     <ClInclude Include="src\sys\CameraSystem.hpp" />
     <ClInclude Include="src\sys\DodgeSystem.hpp" />
     <ClInclude Include="src\sys\FurySystem.hpp" />
+    <ClInclude Include="src\sys\HUDSystem.hpp" />
     <ClInclude Include="src\sys\MenuSystem.hpp" />
     <ClInclude Include="src\sys\PickWeaponsSystem.hpp" />
     <ClInclude Include="src\sys\PickPowerUpSystem.hpp" />

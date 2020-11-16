@@ -27,6 +27,7 @@ public:
     virtual size_t countRenderNodes() const = 0;
     virtual bool existsNode(int id) const = 0;
     virtual bool existsHUDNode(int id) const = 0;
+    virtual bool existsHUDText(int id) const = 0;
     virtual bool existsImage(std::string path) const = 0;
     virtual bool existsCamera(int id) const = 0;
     virtual void addImage(std::string path) = 0;

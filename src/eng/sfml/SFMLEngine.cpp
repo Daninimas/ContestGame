@@ -169,6 +169,12 @@ void SFMLEngine::updateEntities(GameEngine& gameContext, std::vector<int> entiti
 		if (existsNode(id)) {
 			updateNode(gameContext, nodeMap[id], id);
 		}
+		else if (existsHUDNode(id)) {
+			updateNode(gameContext, HUDNodeMap[id], id);
+		}
+		else if (existsHUDText(id)) {
+			updateText(gameContext, HUDTextMap[id], id);
+		}
 	}
 }
 
@@ -229,8 +235,8 @@ void SFMLEngine::updateCamera(GameEngine& gameContext, int id) {
 
 
 void SFMLEngine::createEntity(GameEngine& gameContext, int id) {
-	RenderComponent& drawable    = gameContext.entityMan.getComponent<RenderComponent>(id);
-	sf::Sprite* node;
+	RenderComponent& drawable = gameContext.entityMan.getComponent<RenderComponent>(id);
+	sf::Sprite* node = nullptr;
 
 	if (!existsTexture(drawable.sprite)) {
 		addTexture(drawable.sprite);
@@ -258,34 +264,31 @@ void SFMLEngine::createEntity(GameEngine& gameContext, int id) {
 void SFMLEngine::createText(GameEngine& gameContext, int id) {
 	TextComponent& textComp = gameContext.entityMan.getComponent<TextComponent>(id);
 
+	sf::Text* textNode = nullptr;
+	if (textComp.isHUDElement) {
+		HUDTextMap.emplace(std::piecewise_construct, std::forward_as_tuple(id), std::forward_as_tuple());
+		textNode = &HUDTextMap[id];
+	}
 
-	// TODO hacer esto mejor, todo ordenado y bien, ahora esta de pueba
-
-	sf::Text text;
-
-	// select the font
-	text.setFont(font); // font is a sf::Font
-
-	// set the string to display
-	text.setString("Ammo: " + to_string(gameContext.entityMan.getComponent<DistanceWeaponComponent>(WorldData::playerId).ammo));
-
-	// set the character size
-	text.setCharacterSize(24); // in pixels, not points!
-
-	// set the color
-	text.setFillColor(sf::Color::Red);
-
-	// set the text style
-	text.setStyle(sf::Text::Bold | sf::Text::Underlined);
-
-	// inside the main loop, between window.clear() and window.display()
-	device.get()->draw(text);
-
-	text.setString("Health: " + to_string(gameContext.entityMan.getComponent<HealthComponent>(WorldData::playerId).currentHealth));
-	text.setPosition(sf::Vector2(0.f, 30.f));
-	device.get()->draw(text);
+	if (textNode != nullptr) {
+		// Set the position and data
+		updateText(gameContext, *textNode, id);
+	}
 }
 
+
+void SFMLEngine::updateText(GameEngine& gameContext, sf::Text& textNode, int id) {
+	SituationComponent& situation = gameContext.entityMan.getComponent<SituationComponent>(id);
+	TextComponent& textComp = gameContext.entityMan.getComponent<TextComponent>(id);
+
+	textNode.setPosition(situation.position.x, situation.position.y);
+	textNode.setRotation(situation.rotation);
+	textNode.setFont(font);
+	textNode.setString(textComp.text);
+	textNode.setCharacterSize(textComp.size);
+	textNode.setFillColor( { textComp.color.r, textComp.color.g, textComp.color.b, textComp.color.a } );
+	//text.setStyle(sf::Text::Bold | sf::Text::Underlined);
+}
 
 
 void SFMLEngine::createCamera(GameEngine& gameContext, int id) {
@@ -301,6 +304,9 @@ void SFMLEngine::createCamera(GameEngine& gameContext, int id) {
 
 void SFMLEngine::eraseEntity(int id) {
 	nodeMap.erase(id);
+	HUDNodeMap.erase(id);
+	cameraMap.erase(id);
+	HUDTextMap.erase(id);
 
 	// Delete the texture and image?
 }
@@ -318,6 +324,12 @@ bool SFMLEngine::existsNode(int id) const {
 
 bool SFMLEngine::existsHUDNode(int id) const {
 	if (HUDNodeMap.find(id) == HUDNodeMap.end())
+		return false;
+	return true;
+}
+
+bool SFMLEngine::existsHUDText(int id) const {
+	if (HUDTextMap.find(id) == HUDTextMap.end())
 		return false;
 	return true;
 }

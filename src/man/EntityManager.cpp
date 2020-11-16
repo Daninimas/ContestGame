@@ -805,7 +805,6 @@ int EntityManager::createHUDElement(GameEngine& gameContext, Vector2 position, f
     int entityId = Entity::getCurrentId();
 
     SituationComponent& situation = createComponent<SituationComponent>(entityId);
-    RenderComponent& renderComp = createComponent<RenderComponent>(entityId);
 
     //######### DATA ########//
     situation.position = position;
@@ -813,14 +812,33 @@ int EntityManager::createHUDElement(GameEngine& gameContext, Vector2 position, f
     situation.noWorldDelete = true;
 
     // Render component
-    renderComp.sprite = "Media/Images/YellowDuck.png";
+    /*renderComp.sprite = "Media/Images/YellowDuck.png";
     renderComp.spriteRect = { 4, 34, 4, 34 };
     renderComp.isHUDElement = true;
-    renderComp.color = { 255, 0, 0, 255 };
+    renderComp.color = { 255, 0, 0, 255 };*/
 
+    if (objType == GameObjectType::HUD_PLAYER_HEALTH) {
+        TextComponent& textComp = createComponent<TextComponent>(entityId);
 
-    //######### RENDER ########//
-    gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
+        textComp.color = { 255, 20, 30, 255 };
+        textComp.isHUDElement = true;
+        textComp.size = 24;
+        textComp.text = "";
+
+        //######### RENDER ########//
+        gameContext.getWindowFacadeRef().createText(gameContext, entityId);
+    }
+    else if (objType == GameObjectType::HUD_PLAYER_AMMO) {
+        TextComponent& textComp = createComponent<TextComponent>(entityId);
+
+        textComp.color = { 255, 255, 30, 255 };
+        textComp.isHUDElement = true;
+        textComp.size = 24;
+        textComp.text = "";
+
+        //######### RENDER ########//
+        gameContext.getWindowFacadeRef().createText(gameContext, entityId);
+    }
 
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::HUDELEMENT, objType));

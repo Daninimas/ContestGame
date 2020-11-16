@@ -29,6 +29,7 @@ public:
     size_t countRenderNodes() const override;
     bool existsNode(int id) const override;
     bool existsHUDNode(int id) const override;
+    bool existsHUDText(int id) const override;
     bool existsImage(std::string path) const override;
     bool existsCamera(int id) const override;
     void addImage(std::string path) override;
@@ -45,6 +46,7 @@ private:
 
     void updateNode(GameEngine& gameContext, sf::Sprite& node, int id);
     void updateTexture(GameEngine& gameContext, sf::Sprite& node, int id);
+    void updateText(GameEngine& gameContext, sf::Text& textNode, int id);
 
     std::unique_ptr<sf::RenderWindow> device;
     std::unordered_map<int, sf::Sprite> nodeMap;

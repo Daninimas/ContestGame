@@ -19,6 +19,7 @@
 #include <sys/ShieldSystem.hpp>
 #include <sys/PickPowerUpSystem.hpp>
 #include <sys/FurySystem.hpp>
+#include <sys/HUDSystem.hpp>
 
 #include <sys/AI/AIChaseSystem.hpp>
 #include <sys/AI/AIMeleeSystem.hpp>

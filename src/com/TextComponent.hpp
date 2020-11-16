@@ -15,5 +15,7 @@ public:
     Color color{ 255, 255, 255, 255 };
 
     bool isHUDElement{ false };
+
+    uint16_t size{ 12 };
 };
 

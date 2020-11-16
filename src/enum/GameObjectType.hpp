@@ -40,9 +40,14 @@ enum class GameObjectType {
     BOMB,
     PLAYER_BOMB,
 
-    // Shields
+    // Power ups
     SHIELD,
     PLAYER_SHIELD,
     POWERUP_SHIELD,
-    POWERUP_FURY
+    POWERUP_FURY,
+
+    //HUD elements
+    HUD_PLAYER_HEALTH,
+    HUD_PLAYER_AMMO
+
 };

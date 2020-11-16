@@ -66,8 +66,8 @@ void StaticEntitiesSystem::init(GameEngine &gameContext) const {
     gameContext.entityMan.createPowerUp(gameContext, { 150.f, 200.f }, 0.f, GameObjectType::POWERUP_SHIELD);
 
 
-    gameContext.entityMan.createHUDElement(gameContext, { 150.f, 20.f }, 45.f, GameObjectType::NONE);
-
+    gameContext.entityMan.createHUDElement(gameContext, { 10.f, 10.f }, 0.f, GameObjectType::HUD_PLAYER_HEALTH);
+    gameContext.entityMan.createHUDElement(gameContext, { 10.f, 35.f }, 0.f, GameObjectType::HUD_PLAYER_AMMO);
 }
 
 void StaticEntitiesSystem::createPlayer(GameEngine &gameContext) const {
