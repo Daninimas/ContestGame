@@ -1,9 +1,8 @@
 #include "StaticEntitiesSystem.hpp"
 
 #include <eng/GameEngine.hpp>
-
 #include <enum/EnumsIncluder>
-
+#include <tools/MapLoader.hpp>
 #include <iostream>
 
 
@@ -68,6 +67,8 @@ void StaticEntitiesSystem::init(GameEngine &gameContext) const {
 
     gameContext.entityMan.createHUDElement(gameContext, { 10.f, 10.f }, 0.f, GameObjectType::HUD_PLAYER_HEALTH);
     gameContext.entityMan.createHUDElement(gameContext, { 10.f, 35.f }, 0.f, GameObjectType::HUD_PLAYER_AMMO);
+
+    MapLoader::loadMap(gameContext, "Media/Maps/prueba.json");
 }
 
 void StaticEntitiesSystem::createPlayer(GameEngine &gameContext) const {

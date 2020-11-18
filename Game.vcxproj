@@ -90,7 +90,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
-      <AdditionalIncludeDirectories>.\src;.\SFML-2.5.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\src;.\SFML-2.5.1\include;.\Include\rapidjson</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -108,7 +108,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>SFML_STATIC;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.\src;.\SFML-2.5.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\src;.\SFML-2.5.1\include;.\Include\rapidjson</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -154,6 +154,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\tools\MapLoader.cpp" />
     <ClCompile Include="src\com\FuryComponent.cpp" />
     <ClCompile Include="src\com\AI\AIDropBombComponent.cpp" />
     <ClCompile Include="src\com\AI\AIPounceComponent.cpp" />
@@ -216,6 +217,7 @@
     <ClCompile Include="src\tools\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\tools\MapLoader.hpp" />
     <ClInclude Include="src\com\FuryComponent.hpp" />
     <ClInclude Include="src\com\AI\AIDropBombComponent.hpp" />
     <ClInclude Include="src\com\AI\AIPounceComponent.hpp" />
@@ -254,6 +256,7 @@
     <ClInclude Include="src\sys\WorldSystem.hpp" />
     <ClInclude Include="src\tools\Color.hpp" />
     <ClInclude Include="src\tools\Sound.hpp" />
+    <ClInclude Include="src\tools\tileson.hpp" />
     <ClInclude Include="src\tools\Vector2.hpp" />
     <ClInclude Include="src\tools\WorldData.hpp" />
     <ClInclude Include="src\sys\SensorSystem.hpp" />

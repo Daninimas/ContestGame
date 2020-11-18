@@ -1,7 +1,19 @@
 #pragma once
 
+///////////////////////////////////////////////////////////////////////
+//                                                                   //
+//                            IMPORTANTE                             //
+//                                                                   //
+//   Si se crea un tipo nuevo, anyadirlo en el mapa del MapLoader    //
+//                                                                   //
+///////////////////////////////////////////////////////////////////////
+
 enum class GameObjectType {
+    // Miscellaneous
     NONE,
+    ERROR,
+
+    // Player
     PLAYER_GENERAL,
 
     // Attacks
@@ -13,9 +25,11 @@ enum class GameObjectType {
     PLAYER_LASER,
     LASER,
 
+    // Obstacles
+    WALL,
+
 
     // Weapons
-    PISTOL,
     M4,
     KNIFE,
     GRENADE_LAUNCHER,
