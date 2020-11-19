@@ -11,7 +11,7 @@ const bool MapLoader::loadMap(GameEngine& gameContext, const std::string mapPath
     if (map->getStatus() == tson::ParseStatus::OK)
     {
         for (auto& phaseLayer : map->getLayers()) { // this are the layerGroups that are thr phases of the map
-            std::cout << phaseLayer.getName() << "\n";
+            std::cout << "Reading phase: " << phaseLayer.getName() << "\n";
             //Gets the layer from the .json map
             auto& objectLayers = phaseLayer.getLayers(); 
 
@@ -31,7 +31,7 @@ const bool MapLoader::loadMap(GameEngine& gameContext, const std::string mapPath
 
 void MapLoader::checkObjectsOfLayer(GameEngine& gameContext, tson::Layer& objLayer) { // refactorizar esto, no hacer que por cata type haya que crear un metodo nuevo
     std::string layerName = objLayer.getName();
-    std::cout << layerName << "\n";
+    std::cout << "  Reading Type layer: " << layerName << "\n";
 
     for (auto& obj : objLayer.getObjects())
     {
@@ -45,7 +45,7 @@ void MapLoader::checkObjectsOfLayer(GameEngine& gameContext, tson::Layer& objLay
 void MapLoader::createObject(GameEngine& gameContext, std::string layerName, tson::Object& obj) {
     std::string objType = obj.getType();
 
-    std::cout << objType << "\n";
+    std::cout << "      - Generate: " << objType << "\n";
     GameObjectType goType = getGameObject(objType);
     tson::Vector2f position = obj.getPosition();
     float rotation = obj.getRotation();
@@ -55,7 +55,6 @@ void MapLoader::createObject(GameEngine& gameContext, std::string layerName, tso
 
         // Check the object to crete
         if (layerName == "WALL") {
-            cout << "creo un muro en: " << position.x << ", " << position.y << "\n";
             gameContext.entityMan.createWall(gameContext, Vector2(position.x, position.y), rotation, goType);
         }
         else if (layerName == "ENEMY") {

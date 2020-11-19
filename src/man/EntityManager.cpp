@@ -723,7 +723,7 @@ int EntityManager::createPowerUp(GameEngine& gameContext, Vector2 position, floa
 
     // Collider
     colliderComp.collisionLayer = ColliderComponent::Weapon;
-    colliderComp.layerMasc = ColliderComponent::Player + ColliderComponent::Wall; //Collides with player and wall
+    colliderComp.layerMasc = ColliderComponent::Player; //Collides with player and wall
     colliderComp.boundingRoot.bounding = { 0.f, 10.f, 0.f, 10.f };
     colliderComp.type = ColliderType::DYNAMIC;
 
