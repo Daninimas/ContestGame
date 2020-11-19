@@ -1,6 +1,7 @@
 #pragma once
 
 struct Vector2 {
+	Vector2() = default;
 	Vector2(float posX, float posY)
 		: x{ posX }, y{ posY } {};
 

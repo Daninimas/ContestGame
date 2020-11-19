@@ -30,19 +30,19 @@ Entity &EntityManager::getEntity(int id) {
 void EntityManager::eraseEntityByID(int id) {
     // TODO Modifie this to not add new components all times
     eraseComponent<SituationComponent>(id);
-    eraseComponent<RenderComponent>(id);
     eraseComponent<InputComponent>(id);
     eraseComponent<VelocityComponent>(id);
     eraseComponent<HealthComponent>(id);
     eraseComponent<ColliderComponent>(id);
     eraseComponent<MeleeWeaponComponent>(id);
-    eraseComponent<DistanceWeaponComponent>(id);
+    eraseComponent<WeaponComponent>(id);
     eraseComponent<AttackComponent>(id);
     eraseComponent<JumpComponent>(id);
+    eraseComponent<RenderComponent>(id);
+    eraseComponent<DistanceWeaponComponent>(id);
     eraseComponent<SensorComponent>(id);
     eraseComponent<CameraComponent>(id);
     eraseComponent<MenuComponent>(id);
-    eraseComponent<WeaponComponent>(id);
     eraseComponent<ExplosionAttackComponent>(id);
     eraseComponent<BombComponent>(id);
     eraseComponent<DodgeComponent>(id);

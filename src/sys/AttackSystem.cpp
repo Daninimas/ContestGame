@@ -177,7 +177,7 @@ bool AttackSystem::createMeleeAttack(GameEngine& gameContext, MeleeWeaponCompone
 
 	if (meleeAttacker.cooldown > meleeAttacker.maxCooldown) {
 		SituationComponent& attackerSit = gameContext.entityMan.getComponent<SituationComponent>(meleeAttacker.id);
-		Vector2 attackPos = { attackerSit.position.x, attackerSit.position.y};
+		Vector2 attackPos = Vector2(attackerSit.position.x, attackerSit.position.y);
 
 		GameObjectType attackGOtype = GameObjectType::MELEE_ATTACK;
 		if (meleeAttacker.id == WorldData::playerId) {

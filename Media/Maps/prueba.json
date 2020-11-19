@@ -234,11 +234,11 @@
                          "id":35,
                          "name":"",
                          "rotation":0,
-                         "type":"BOMBER_ENEMY",
+                         "type":"WALL",
                          "visible":true,
                          "width":100,
-                         "x":-725.758,
-                         "y":-416.667
+                         "x":725.758,
+                         "y":416.66
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -271,7 +271,7 @@
                          "visible":true,
                          "width":100,
                          "x":100,
-                         "y":200
+                         "y":299
                         }, 
                         {
                          "gid":22,

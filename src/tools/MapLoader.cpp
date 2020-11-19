@@ -1,8 +1,6 @@
 #include "MapLoader.hpp"
 
 #include <iostream>
-#include <tools/Vector2.hpp>
-
 
 
 const bool MapLoader::loadMap(GameEngine& gameContext, const std::string mapPath) {
@@ -18,15 +16,7 @@ const bool MapLoader::loadMap(GameEngine& gameContext, const std::string mapPath
             auto& objectLayers = phaseLayer.getLayers(); 
 
             for (tson::Layer& objLayer : objectLayers) { //This are the Objects Layer
-                auto& layerName = objLayer.getName();
-                std::cout << layerName << "\n";
-
-                if (layerName == "WALL") {
-                    createWalls(gameContext, objLayer);
-                }
-                else if (layerName == "ENEMY") {
-
-                }
+                checkObjectsOfLayer(gameContext, objLayer);                
             }
         }
     }
@@ -39,26 +29,42 @@ const bool MapLoader::loadMap(GameEngine& gameContext, const std::string mapPath
 
 
 
-void MapLoader::createWalls(GameEngine& gameContext, tson::Layer& objLayer) { // refactorizar esto, no hacer que por cata type haya que crear un metodo nuevo
+void MapLoader::checkObjectsOfLayer(GameEngine& gameContext, tson::Layer& objLayer) { // refactorizar esto, no hacer que por cata type haya que crear un metodo nuevo
+    std::string layerName = objLayer.getName();
+    std::cout << layerName << "\n";
 
     for (auto& obj : objLayer.getObjects())
     {
         if (obj.getObjectType() == tson::ObjectType::Object) {
-            tson::Vector2i position = obj.getPosition();
-            float rotation = obj.getRotation();
-            std::string objType = obj.getType();
-            std::cout << objType << "\n";
-
-            GameObjectType goType = getGameObject(objType);
-
-            if (goType != GameObjectType::ERROR) {
-                gameContext.entityMan.createWall(gameContext, Vector2(position.x, position.y), rotation, goType);
-            }
-            else {
-                // Error on the type of the object
-                //gameContext.entityMan.createError(gameContext, Vector2(position.x, position.y), rotation, goType);
-            }
+            createObject(gameContext, layerName, obj);            
         }
+    }
+}
+
+
+void MapLoader::createObject(GameEngine& gameContext, std::string layerName, tson::Object& obj) {
+    std::string objType = obj.getType();
+
+    std::cout << objType << "\n";
+    GameObjectType goType = getGameObject(objType);
+    tson::Vector2f position = obj.getPosition();
+    float rotation = obj.getRotation();
+
+
+    if (goType != GameObjectType::ERROR) {
+
+        // Check the object to crete
+        if (layerName == "WALL") {
+            cout << "creo un muro en: " << position.x << ", " << position.y << "\n";
+            gameContext.entityMan.createWall(gameContext, Vector2(position.x, position.y), rotation, goType);
+        }
+        else if (layerName == "ENEMY") {
+            //gameContext.entityMan.createEnemy(gameContext, Vector2(position.x, position.y), rotation, goType);
+        }
+    }
+    else {
+        // Error on the type of the object
+        //gameContext.entityMan.createError(gameContext, Vector2(position.x, position.y), rotation, goType);
     }
 }
 

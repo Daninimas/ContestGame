@@ -70,8 +70,6 @@ void PickPowerUpSystem::setPowerUpToEntity(GameEngine& gameContext, PowerUpCompo
 
 
 void PickPowerUpSystem::setShieldToEntity(GameEngine& gameContext, PowerUpComponent& powerUp, int entityColliding) const {
-	//DELETE previous powerUp component on entity
-	gameContext.entityMan.eraseComponent<ShieldComponent>(entityColliding);
 
 	// Create shield entity and assing to entity
 	GameObjectType shieldGO = GameObjectType::SHIELD;
@@ -79,7 +77,7 @@ void PickPowerUpSystem::setShieldToEntity(GameEngine& gameContext, PowerUpCompon
 		shieldGO = GameObjectType::PLAYER_SHIELD;
 	}
 
-	int shieldId = gameContext.entityMan.createShield(gameContext, { 10.f, 10.f }, 0.f, shieldGO);
+	int shieldId = gameContext.entityMan.createShield(gameContext, Vector2(10.f, 10.f), 0.f, shieldGO);
 	ShieldComponent& shieldComp = gameContext.entityMan.getComponent<ShieldComponent>(shieldId);
 	ColliderComponent& shieldColl = gameContext.entityMan.getComponent<ColliderComponent>(shieldId);
 	ColliderComponent& objectiveColl = gameContext.entityMan.getComponent<ColliderComponent>(entityColliding);

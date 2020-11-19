@@ -12,7 +12,8 @@ public:
 	static const bool loadMap(GameEngine& gameContext, const std::string mapPath);
 
 private:
-	static void createWalls(GameEngine& gameContext, tson::Layer& objLayer);
+	static void checkObjectsOfLayer(GameEngine& gameContext, tson::Layer& objLayer);
+    static void createObject(GameEngine& gameContext, std::string layerName, tson::Object& obj);
     static GameObjectType getGameObject(const std::string objType);
 
 
