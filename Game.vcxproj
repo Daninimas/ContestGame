@@ -154,6 +154,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\com\MenuOptionComponent.cpp" />
     <ClCompile Include="src\tools\MapLoader.cpp" />
     <ClCompile Include="src\com\FuryComponent.cpp" />
     <ClCompile Include="src\com\AI\AIDropBombComponent.cpp" />
@@ -217,6 +218,7 @@
     <ClCompile Include="src\tools\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\com\MenuOptionComponent.hpp" />
     <ClInclude Include="src\tools\MapLoader.hpp" />
     <ClInclude Include="src\com\FuryComponent.hpp" />
     <ClInclude Include="src\com\AI\AIDropBombComponent.hpp" />
