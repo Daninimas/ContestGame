@@ -58,7 +58,20 @@ void MapLoader::createObject(GameEngine& gameContext, std::string layerName, tso
             gameContext.entityMan.createWall(gameContext, Vector2(position.x, position.y), rotation, goType);
         }
         else if (layerName == "ENEMY") {
-            //gameContext.entityMan.createEnemy(gameContext, Vector2(position.x, position.y), rotation, goType);
+            int enemyId = gameContext.entityMan.createEnemy(gameContext, Vector2(position.x, position.y), rotation, goType);
+
+            setEnemyObjective(gameContext, enemyId);
+        }
+        else if (layerName == "PLAYER") {
+            gameContext.entityMan.createPlayer(gameContext, Vector2(position.x, position.y), rotation, goType);
+        }
+        else if (layerName == "SPAWNER") {
+            int spawnId = gameContext.entityMan.createSpawner(gameContext, Vector2(position.x, position.y), rotation, goType);
+
+            gameContext.entityMan.getComponent<SpawnerComponent>(spawnId).objectiveId = WorldData::playerId;
+        }
+        else if (layerName == "POWERUP") {
+            gameContext.entityMan.createPowerUp(gameContext, Vector2(position.x, position.y), rotation, goType);
         }
     }
     else {
@@ -75,4 +88,22 @@ GameObjectType MapLoader::getGameObject(const std::string objType) { // if not f
         return it->second;
     else
         return GameObjectType::ERROR;
+}
+
+
+void MapLoader::setEnemyObjective(GameEngine& gameContext, int enemyId) {
+    if (gameContext.entityMan.existsComponent<AIChaseComponent>(enemyId))
+        gameContext.entityMan.getComponent<AIChaseComponent>(enemyId).objectiveId = WorldData::playerId;
+
+    if (gameContext.entityMan.existsComponent<AIMeleeAtkComponent>(enemyId))
+        gameContext.entityMan.getComponent<AIMeleeAtkComponent>(enemyId).objectiveId = WorldData::playerId;
+
+    if (gameContext.entityMan.existsComponent<AIDistanceAtkComponent>(enemyId))
+        gameContext.entityMan.getComponent<AIDistanceAtkComponent>(enemyId).objectiveId = WorldData::playerId;
+
+    if (gameContext.entityMan.existsComponent<AITransformationComponent>(enemyId))
+        gameContext.entityMan.getComponent<AITransformationComponent>(enemyId).objectiveId = WorldData::playerId;
+
+    if (gameContext.entityMan.existsComponent<AIPounceComponent>(enemyId))
+        gameContext.entityMan.getComponent<AIPounceComponent>(enemyId).objectiveId = WorldData::playerId;
 }

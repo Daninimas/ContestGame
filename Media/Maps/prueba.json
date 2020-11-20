@@ -376,11 +376,11 @@
                          "id":36,
                          "name":"",
                          "rotation":0,
-                         "type":"",
+                         "type":"BOMBER_ENEMY",
                          "visible":true,
                          "width":100,
-                         "x":-100,
-                         "y":-1200
+                         "x":300,
+                         "y":70
                         }, 
                         {
                          "gid":1,

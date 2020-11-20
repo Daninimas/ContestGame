@@ -15,7 +15,7 @@ private:
 	static void checkObjectsOfLayer(GameEngine& gameContext, tson::Layer& objLayer);
     static void createObject(GameEngine& gameContext, std::string layerName, tson::Object& obj);
     static GameObjectType getGameObject(const std::string objType);
-
+    static void setEnemyObjective(GameEngine& gameContext, int enemyId);
 
 	static inline std::map<std::string, GameObjectType> goTypeMap{    // Este mapa sirve para coger el gameobject del mapa que se esta generando y pasarlo a enum para poder crear la entidad en el entitiy manager
         // Miscellaneous
