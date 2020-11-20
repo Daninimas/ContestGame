@@ -51,6 +51,7 @@ void EntityManager::eraseEntityByID(int id) {
     eraseComponent<PowerUpComponent>(id);
     eraseComponent<FuryComponent>(id);
     eraseComponent<TextComponent>(id);
+    eraseComponent<MenuOptionComponent>(id);
 
     // AI
     eraseComponent<AIChaseComponent>(id);
@@ -799,6 +800,32 @@ int EntityManager::createMenu(GameEngine& gameContext, GameObjectType menuType) 
 }
 
 
+int EntityManager::createMenuOption(GameEngine& gameContext, Vector2 position, float r, MenuOptions menuOpt) {
+    int entityId = Entity::getCurrentId();
+
+    SituationComponent& situation = createComponent<SituationComponent>(entityId);
+    MenuOptionComponent& situation = createComponent<SituationComponent>(entityId);
+
+    //######### DATA ########//
+    situation.position = position;
+    situation.rotation = r;
+    situation.noWorldDelete = true;
+
+    switch (menuOpt)
+    {
+    case MenuOptions::PLAY:
+        menuComp.options.emplace_back(MenuOptions::PLAY);
+        menuComp.options.emplace_back(MenuOptions::EXIT);
+
+        break;
+    }
+
+    //######### CREATE ########//
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::MENU, menuType));
+    return entityId;
+}
+
+
 // ------------------------------ HUD CREATION --------------------------------
 
 int EntityManager::createHUDElement(GameEngine& gameContext, Vector2 position, float r, GameObjectType objType) {
@@ -841,6 +868,6 @@ int EntityManager::createHUDElement(GameEngine& gameContext, Vector2 position, f
     }
 
     //######### CREATE ########//
-    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::HUDELEMENT, objType));
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::HUD_ELEMENT, objType));
     return entityId;
 }

@@ -114,6 +114,7 @@ public:
     //                MENU CREATION               //
     //////////////////////////////////////////////////
     int createMenu(GameEngine& gameContext, GameObjectType menuType);
+    int createMenuOption(GameEngine& gameContext, Vector2 position, float r, MenuOptions menuOpt);
 
 
     //////////////////////////////////////////////////

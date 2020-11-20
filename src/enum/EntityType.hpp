@@ -9,9 +9,10 @@ enum class EntityType {
     WEAPON, 
     CAMERA, 
     MENU,
+    MENU_OPTION,
     BOMB,
     SPAWNER,
     SHIELD,
     POWERUP,
-    HUDELEMENT
+    HUD_ELEMENT
 };

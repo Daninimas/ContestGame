@@ -9,7 +9,7 @@ public:
     explicit MenuComponent(const int id);
     ~MenuComponent() override;
 
-    std::vector<MenuOptions> options;
+    std::vector<int> optionsId;
     std::size_t selectedOption {0};
 };
 
