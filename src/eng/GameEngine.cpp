@@ -359,6 +359,15 @@ void GameEngine::eraseEntityByID(int id) {
     for (SpawnerComponent& spawnComp : spawners) {
         spawnComp.spawnedObjsAlive.erase(std::remove(spawnComp.spawnedObjsAlive.begin(), spawnComp.spawnedObjsAlive.end(), id), spawnComp.spawnedObjsAlive.end());
     }
+
+    // Erase all options from the Menu Component
+    if (entityMan.existsComponent<MenuComponent>(id)) {
+        std::vector<int>& menuOptions = entityMan.getComponent<MenuComponent>(id).optionsId;
+
+        for (size_t i = 0; i < menuOptions.size(); ++i) {
+            eraseEntityByID(menuOptions[i]);
+        }
+    }
     //getSoundFacadeRef().setParameterEventByID(id, STOP_SOUND);
 
     entityMan.eraseEntityByID(id);

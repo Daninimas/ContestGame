@@ -783,19 +783,21 @@ void EntityManager::createWorld(GameEngine& gameContext, WorldEnum worldName) {
 int EntityManager::createMenu(GameEngine& gameContext, GameObjectType menuType) {
     int entityId = Entity::getCurrentId();
 
-    MenuComponent& menuComp = createComponent<MenuComponent>(entityId);
+    MenuComponent& menuComp = createComponent<MenuComponent>(entityId);    
 
+    //######### CREATE ########//
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::MENU, menuType));
+
+    // After creating the menu entity, create the menu Options
     switch (menuType)
     {
     case GameObjectType::PAUSE:
-        menuComp.options.emplace_back(MenuOptions::PLAY);
-        menuComp.options.emplace_back(MenuOptions::EXIT);
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(300.f, 150.f), 0.f, MenuOptions::PLAY));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(300.f, 200.f), 0.f, MenuOptions::EXIT));
 
         break;
     }
 
-    //######### CREATE ########//
-    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::MENU, menuType));
     return entityId;
 }
 
@@ -803,25 +805,38 @@ int EntityManager::createMenu(GameEngine& gameContext, GameObjectType menuType) 
 int EntityManager::createMenuOption(GameEngine& gameContext, Vector2 position, float r, MenuOptions menuOpt) {
     int entityId = Entity::getCurrentId();
 
-    SituationComponent& situation = createComponent<SituationComponent>(entityId);
-    MenuOptionComponent& situation = createComponent<SituationComponent>(entityId);
+    SituationComponent& situation   = createComponent<SituationComponent>(entityId);
+    MenuOptionComponent& optionComp = createComponent<MenuOptionComponent>(entityId);
+    //RenderComponent& renderComp = createComponent<RenderComponent>(entityId);
+    TextComponent& textComp = createComponent<TextComponent>(entityId);
 
     //######### DATA ########//
     situation.position = position;
     situation.rotation = r;
     situation.noWorldDelete = true;
 
+    optionComp.option = menuOpt;
+
+    textComp.isHUDElement = true;
+    textComp.size = 30;
+
     switch (menuOpt)
     {
     case MenuOptions::PLAY:
-        menuComp.options.emplace_back(MenuOptions::PLAY);
-        menuComp.options.emplace_back(MenuOptions::EXIT);
+        textComp.text = "PLAY";
+
+        break;
+
+    case MenuOptions::EXIT:
+        textComp.text = "EXIT";
 
         break;
     }
 
+    gameContext.getWindowFacadeRef().createText(gameContext, entityId);
+
     //######### CREATE ########//
-    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::MENU, menuType));
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::MENU, GameObjectType::NONE));
     return entityId;
 }
 

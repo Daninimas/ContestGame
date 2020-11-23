@@ -21,7 +21,7 @@ public:
     bool select      { false };
 
     float cooldown{ 0.f };
-    float maxCooldown{ 0.3f };
+    float maxCooldown{ 0.4f };
 
     float dodgeTime{ 0.5f }; // El tiempo en el que tienes que pulsar dos veces la tecla de vomimiento para activar el dodge
     float timeFromLastMove{ 0.f }; // Sirve para ver si se activa el dodge

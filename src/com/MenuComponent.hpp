@@ -11,5 +11,6 @@ public:
 
     std::vector<int> optionsId;
     std::size_t selectedOption {0};
+    bool firstTime{ true };
 };
 

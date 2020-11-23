@@ -11,6 +11,6 @@ public:
     void update(GameEngine& gameContext) const override;
 
 private:
-    void selectOption(GameEngine& gameContext, MenuComponent& menuComp) const;
+    void selectOption(GameEngine& gameContext, MenuComponent& menuComp, std::size_t lastSelected) const;
     void acceptOption(GameEngine& gameContext, MenuComponent& menuComp) const;
 };

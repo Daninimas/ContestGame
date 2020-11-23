@@ -16,7 +16,7 @@ void MenuSystem::update(GameEngine& gameContext) const {
 	std::size_t lastSelected = menuComp.selectedOption;
 
 	if (playerInput.movingUp) {
-		if (menuComp.selectedOption < menuComp.options.size() - 1) {
+		if (menuComp.selectedOption < menuComp.optionsId.size() - 1) {
 			++menuComp.selectedOption;
 		}
 		else {
@@ -28,23 +28,34 @@ void MenuSystem::update(GameEngine& gameContext) const {
 			--menuComp.selectedOption;
 		}
 		else {
-			menuComp.selectedOption = menuComp.options.size() - 1;
+			menuComp.selectedOption = menuComp.optionsId.size() - 1;
 		}
 	}
 
 
-	if (lastSelected != menuComp.selectedOption) {
-		selectOption(gameContext, menuComp);		
+	if (lastSelected != menuComp.selectedOption || menuComp.firstTime) {
+		selectOption(gameContext, menuComp, lastSelected);		
 	}
 
 	if (playerInput.select) {
 		acceptOption(gameContext, menuComp);
 	}
+
+	menuComp.firstTime = false;
 }
 
-void MenuSystem::selectOption(GameEngine& gameContext, MenuComponent& menuComp) const {
+void MenuSystem::selectOption(GameEngine& gameContext, MenuComponent& menuComp, std::size_t lastSelected) const {
 	
-	switch (menuComp.options[menuComp.selectedOption])
+	// Deselect last
+	gameContext.entityMan.getComponent<MenuOptionComponent>(menuComp.optionsId[lastSelected]).active = false;
+	gameContext.entityMan.getComponent<TextComponent>(menuComp.optionsId[lastSelected]).color = { 255, 255, 255, 255 };
+	gameContext.entityMan.addEntityToUpdate(menuComp.optionsId[lastSelected]);
+	// Select new selection
+	gameContext.entityMan.getComponent<MenuOptionComponent>(menuComp.optionsId[menuComp.selectedOption]).active = true;
+	gameContext.entityMan.getComponent<TextComponent>(menuComp.optionsId[menuComp.selectedOption]).color = { 255, 0, 0, 255 };
+	gameContext.entityMan.addEntityToUpdate(menuComp.optionsId[menuComp.selectedOption]);
+
+	/*switch (menuComp.optionsId[menuComp.selectedOption])
 	{
 	case MenuOptions::BACK:
 		std::cout << "Selecciono BACK\n";
@@ -58,12 +69,12 @@ void MenuSystem::selectOption(GameEngine& gameContext, MenuComponent& menuComp) 
 	case MenuOptions::PLAY:
 		std::cout << "Selecciono PLAY\n";
 		break;
-	}
+	}*/
 }
 
 void MenuSystem::acceptOption(GameEngine& gameContext, MenuComponent& menuComp) const {
 
-	switch (menuComp.options[menuComp.selectedOption])
+	switch ( gameContext.entityMan.getComponent<MenuOptionComponent>(menuComp.optionsId[menuComp.selectedOption]).option )
 	{
 	case MenuOptions::BACK:
 		gameContext.setGameState(gameContext.getLastGameState());
@@ -79,4 +90,6 @@ void MenuSystem::acceptOption(GameEngine& gameContext, MenuComponent& menuComp) 
 		gameContext.setGameState(GameState::PLAYING);
 		break;
 	}
+
+	gameContext.eraseEntityByID(menuComp.id);
 }
