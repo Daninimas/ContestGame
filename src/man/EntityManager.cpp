@@ -28,7 +28,7 @@ Entity &EntityManager::getEntity(int id) {
 
 
 void EntityManager::eraseEntityByID(int id) {
-    // TODO Modifie this to not add new components all times
+    // TODO Modify this to not add new components all times
     eraseComponent<SituationComponent>(id);
     eraseComponent<InputComponent>(id);
     eraseComponent<VelocityComponent>(id);
@@ -762,7 +762,7 @@ void EntityManager::createWorld(GameEngine& gameContext, WorldEnum worldName) {
     {
     case WorldEnum::DEBUG:
         // World limits
-        WorldData::worldLimits = { 0.f, 10000.f, 0.f, 500.f };
+        WorldData::worldLimits = { 0.f, 10000.f, 0.f, 800.f };
 
         // World music
         WorldData::worldMusic.soundPath = "Media/Sound/Music/delayscape_planet.ogg";
@@ -792,8 +792,8 @@ int EntityManager::createMenu(GameEngine& gameContext, GameObjectType menuType) 
     switch (menuType)
     {
     case GameObjectType::PAUSE:
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(300.f, 150.f), 0.f, MenuOptions::PLAY));
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(300.f, 200.f), 0.f, MenuOptions::EXIT));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 170.f), 0.f, MenuOptions::PLAY));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 260.f), 0.f, MenuOptions::EXIT));
 
         break;
     }
@@ -818,7 +818,7 @@ int EntityManager::createMenuOption(GameEngine& gameContext, Vector2 position, f
     optionComp.option = menuOpt;
 
     textComp.isHUDElement = true;
-    textComp.size = 30;
+    textComp.size = 40;
 
     switch (menuOpt)
     {

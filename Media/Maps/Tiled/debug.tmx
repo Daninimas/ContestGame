@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="100" tileheight="100" infinite="1" nextlayerid="5" nextobjectid="71">
+ <editorsettings>
+  <export target="../debug.json" format="json"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../Patters/WALL_pat.tsx"/>
+ <tileset firstgid="2" source="../Patters/SPAWNER_pat.tsx"/>
+ <layer id="1" name="Capa de patrones 1" width="100" height="100">
+  <data encoding="base64"/>
+ </layer>
+ <group id="3" name="Phase1">
+  <objectgroup id="4" name="SPAWNER">
+   <object id="64" type="CHASERJUMPER" gid="2" x="1044" y="282" width="20" height="20"/>
+   <object id="65" type="CHASERJUMPER" gid="2" x="1786" y="162" width="20" height="20"/>
+   <object id="67" type="CHASERJUMPER" gid="2" x="2594" y="106" width="20" height="20"/>
+   <object id="69" type="CHASERJUMPER" gid="2" x="2686" y="102" width="20" height="20"/>
+  </objectgroup>
+  <objectgroup id="2" name="WALL">
+   <object id="1" type="WALL" gid="1" x="0" y="400" width="100" height="10"/>
+   <object id="2" type="WALL" gid="1" x="100" y="400" width="100" height="10"/>
+   <object id="3" type="WALL" gid="1" x="200" y="400" width="100" height="10"/>
+   <object id="4" type="WALL" gid="1" x="300" y="400" width="100" height="10"/>
+   <object id="6" type="WALL" gid="1" x="500" y="400" width="100" height="10"/>
+   <object id="12" type="WALL" gid="1" x="400" y="400" width="100" height="10"/>
+   <object id="13" type="WALL" gid="1" x="800" y="600" width="100" height="10"/>
+   <object id="14" type="WALL" gid="1" x="900" y="600" width="100" height="10"/>
+   <object id="15" type="WALL" gid="1" x="1000" y="600" width="100" height="10"/>
+   <object id="16" type="WALL" gid="1" x="1100" y="500" width="100" height="10"/>
+   <object id="17" type="WALL" gid="1" x="1200" y="500" width="100" height="10"/>
+   <object id="18" type="WALL" gid="1" x="1300" y="400" width="100" height="10"/>
+   <object id="19" type="WALL" gid="1" x="1100" y="300" width="100" height="10"/>
+   <object id="20" type="WALL" gid="1" x="1000" y="300" width="100" height="10"/>
+   <object id="21" type="WALL" gid="1" x="900" y="300" width="100" height="10"/>
+   <object id="22" type="WALL" gid="1" x="700" y="600" width="100" height="10"/>
+   <object id="31" type="WALL" gid="1" x="1398.48" y="156.515" width="100" height="10"/>
+   <object id="32" type="WALL" gid="1" x="1501" y="157" width="100" height="10"/>
+   <object id="33" type="WALL" gid="1" x="1603" y="158" width="100" height="10"/>
+   <object id="48" type="WALL" gid="1" x="1800" y="200" width="100" height="10"/>
+   <object id="49" type="WALL" gid="1" x="1900" y="200" width="100" height="10"/>
+   <object id="50" type="WALL" gid="1" x="1702" y="175" width="100" height="10"/>
+   <object id="51" type="WALL" gid="1" x="2100" y="400" width="100" height="10"/>
+   <object id="52" type="WALL" gid="1" x="2200" y="400" width="100" height="10"/>
+   <object id="53" type="WALL" gid="1" x="2300" y="400" width="100" height="10"/>
+   <object id="54" type="WALL" gid="1" x="2400" y="400" width="100" height="10"/>
+   <object id="55" type="WALL" gid="1" x="2500" y="400" width="100" height="10"/>
+   <object id="57" type="WALL" gid="1" x="2600" y="200" width="100" height="10"/>
+   <object id="58" type="WALL" gid="1" x="2634" y="405" width="100" height="10"/>
+   <object id="59" type="WALL" gid="1" x="2730" y="405" width="100" height="10"/>
+   <object id="61" type="WALL" gid="1" x="2900" y="300" width="100" height="10"/>
+   <object id="62" type="WALL" gid="1" x="2838" y="405" width="100" height="10"/>
+  </objectgroup>
+ </group>
+</map>
