@@ -13,7 +13,7 @@ SFMLEngine::SFMLEngine(int width, int height, bool fullscreen) {
 		device = std::make_unique<sf::RenderWindow>(sf::VideoMode(width, height), "Game", sf::Style::Titlebar | sf::Style::Close);
 	}
 
-	std::string fontPath = "Media/Fonts/arial.ttf";
+	std::string fontPath = "Media/Fonts/Alien Android Italic.ttf";
 	if (!font.loadFromFile(fontPath))
 	{
 		std::cout << "Could not load font: " << fontPath << "\n";
