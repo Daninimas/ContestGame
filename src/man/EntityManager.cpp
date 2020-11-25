@@ -566,7 +566,7 @@ int EntityManager::createCamera(GameEngine& gameContext, Vector2 position, float
     // Camera
     cameraComp.viewRect = { 0.f, 600, 0, 400 };
     cameraComp.zoom = 1.f;
-    cameraComp.offset = { 50.f, 50.f};
+    cameraComp.offset = { 50.f, 70.f};
 
 
     //######### RENDER ########//
@@ -762,7 +762,7 @@ void EntityManager::createWorld(GameEngine& gameContext, WorldEnum worldName) {
     {
     case WorldEnum::DEBUG:
         // World limits
-        WorldData::worldLimits = { 0.f, 10000.f, 0.f, 800.f };
+        WorldData::phaseLimits = { 0.f, 10000.f, 0.f, 800.f };
 
         // World music
         WorldData::worldMusic.soundPath = "Media/Sound/Music/delayscape_planet.ogg";

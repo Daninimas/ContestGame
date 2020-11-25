@@ -228,9 +228,8 @@ void SFMLEngine::updateCamera(GameEngine& gameContext, int id) {
 
 	//BoundingBox worldViewRect = Utils::moveToWorldCoords(cameraComp.viewRect, situation);
 
-	cameraMap[id].setCenter(situation.position.x, situation.position.y);
-
 	cameraMap[id].zoom(cameraComp.zoom);
+	cameraMap[id].setCenter(situation.position.x, situation.position.y);
 }
 
 
@@ -295,9 +294,7 @@ void SFMLEngine::createCamera(GameEngine& gameContext, int id) {
 	CameraComponent& cameraComp   = gameContext.entityMan.getComponent<CameraComponent>(id);
 	SituationComponent& situation = gameContext.entityMan.getComponent<SituationComponent>(id);
 
-	BoundingBox worldViewRect = Utils::moveToWorldCoords(cameraComp.viewRect, situation);
-
-	cameraMap.emplace( std::piecewise_construct, std::forward_as_tuple(id), std::forward_as_tuple(sf::FloatRect(worldViewRect.xLeft, worldViewRect.yUp, worldViewRect.xRight, worldViewRect.yDown)) );
+	cameraMap.emplace( std::piecewise_construct, std::forward_as_tuple(id), std::forward_as_tuple(sf::FloatRect(cameraComp.viewRect.xLeft, cameraComp.viewRect.yUp, cameraComp.viewRect.xRight, cameraComp.viewRect.yDown)) );
 
 	cameraMap[id].zoom(cameraComp.zoom);
 }

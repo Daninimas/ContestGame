@@ -19,7 +19,7 @@ void WorldSystem::update(GameEngine& gameContext) const {
 void WorldSystem::deleteEntitiesOutOfWorld(GameEngine& gameContext) const {
 	auto& situations = gameContext.entityMan.getComponents<SituationComponent>();
 	std::vector<int> entitiesToDelete{};
-	BoundingBox& worldBounding = WorldData::worldLimits;
+	BoundingBox& worldBounding = WorldData::phaseLimits;
 
 	entitiesToDelete.reserve(situations.size());
 	for (SituationComponent& situation : situations) {

@@ -8,7 +8,7 @@ public:
     WorldData() {};
     ~WorldData() = default;
 
-    static inline BoundingBox worldLimits = {0.f, 0.f, 0.f, 0.f};
+    static inline BoundingBox phaseLimits = {0.f, 0.f, 0.f, 0.f};
     static inline int playerId = 0;
     static inline int activeCameraId = 0;
     static inline std::vector<int> worldDistanceWeapons{};
