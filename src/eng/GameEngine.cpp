@@ -61,7 +61,6 @@ void GameEngine::init() {
 }
 
 void GameEngine::setPlayingSystems() {
-    systems.emplace_back(std::make_unique<WorldSystem>());
     systems.emplace_back(std::make_unique<SensorSystem>());
     systems.emplace_back(std::make_unique<AIMeleeSystem>());
     systems.emplace_back(std::make_unique<AIDistanceSystem>());
@@ -87,6 +86,7 @@ void GameEngine::setPlayingSystems() {
     systemsLate.emplace_back(std::make_unique<HealthSystem>());
     systemsLate.emplace_back(std::make_unique<DeathSystem>());
     systemsLate.emplace_back(std::make_unique<HUDSystem>());
+    systemsLate.emplace_back(std::make_unique<WorldSystem>());
 }
 
 void GameEngine::setPauseSystems() {

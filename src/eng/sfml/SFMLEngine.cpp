@@ -175,6 +175,9 @@ void SFMLEngine::updateEntities(GameEngine& gameContext, std::vector<int> entiti
 		else if (existsHUDText(id)) {
 			updateText(gameContext, HUDTextMap[id], id);
 		}
+		else if (existsCamera(id)) {
+			updateCamera(gameContext, id);
+		}
 	}
 }
 
@@ -228,7 +231,7 @@ void SFMLEngine::updateCamera(GameEngine& gameContext, int id) {
 
 	//BoundingBox worldViewRect = Utils::moveToWorldCoords(cameraComp.viewRect, situation);
 
-	cameraMap[id].zoom(cameraComp.zoom);
+	cameraMap[id].setSize(cameraComp.viewRect.x * cameraComp.zoom, cameraComp.viewRect.y * cameraComp.zoom);
 	cameraMap[id].setCenter(situation.position.x, situation.position.y);
 }
 
@@ -294,9 +297,10 @@ void SFMLEngine::createCamera(GameEngine& gameContext, int id) {
 	CameraComponent& cameraComp   = gameContext.entityMan.getComponent<CameraComponent>(id);
 	SituationComponent& situation = gameContext.entityMan.getComponent<SituationComponent>(id);
 
-	cameraMap.emplace( std::piecewise_construct, std::forward_as_tuple(id), std::forward_as_tuple(sf::FloatRect(cameraComp.viewRect.xLeft, cameraComp.viewRect.yUp, cameraComp.viewRect.xRight, cameraComp.viewRect.yDown)) );
+	cameraMap.emplace( std::piecewise_construct, std::forward_as_tuple(id), std::forward_as_tuple() );
 
-	cameraMap[id].zoom(cameraComp.zoom);
+	cameraMap[id].setCenter(cameraComp.viewRect.y / 2.f, cameraComp.viewRect.y / 2.f);
+	cameraMap[id].setSize(cameraComp.viewRect.y, cameraComp.viewRect.y);
 }
 
 void SFMLEngine::eraseEntity(int id) {

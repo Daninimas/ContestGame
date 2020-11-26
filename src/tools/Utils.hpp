@@ -31,6 +31,8 @@ public:
     static Vector2 getCenterOfBounding(BoundingBox const bounding);
 
     static void printBoundingBox(BoundingBox const bounding);
+    
+    static BoundingBox getCameraViewBoundig(CameraComponent& cameraComp);
 
     template <typename T> 
     static int sign(T val) {

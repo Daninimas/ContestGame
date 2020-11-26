@@ -21,7 +21,6 @@ public:
     void render(GameEngine& gameContext) const override;
     void updateEntities(GameEngine& gameContext, std::vector<int> entitiesId) override;
     void updateTextures(GameEngine& gameContext, std::vector<int> entitiesId) override;
-    void updateCamera(GameEngine& gameContext, int id) override;
     void createEntity(GameEngine& gameContext, int id) override;
     void createText(GameEngine& gameContext, int id) override;
     void createCamera(GameEngine& gameContext, int id) override;
@@ -47,6 +46,7 @@ private:
     void updateNode(GameEngine& gameContext, sf::Sprite& node, int id);
     void updateTexture(GameEngine& gameContext, sf::Sprite& node, int id);
     void updateText(GameEngine& gameContext, sf::Text& textNode, int id);
+    void updateCamera(GameEngine& gameContext, int id);
 
     std::unique_ptr<sf::RenderWindow> device;
     std::unordered_map<int, sf::Sprite> nodeMap;

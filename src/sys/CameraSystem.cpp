@@ -38,5 +38,5 @@ void CameraSystem::setCameraLookingPlayer(GameEngine& gameContext) const {
 	cameraSit.position.y = playerSit.position.y;
 	
 	// Update position on engine, the situation of the camera is its center
-	gameContext.getWindowFacadeRef().updateCamera(gameContext, WorldData::activeCameraId);
+	gameContext.entityMan.addEntityToUpdate(WorldData::activeCameraId);
 }

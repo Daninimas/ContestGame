@@ -12,11 +12,11 @@ public:
     explicit CameraComponent(const int id);
     ~CameraComponent() override;
 
-    BoundingBox viewRect;
+    Vector2 viewRect;
 
     float zoom{1.f};
 
 
-    // Offset from the center where the player can be without moveng the camera
+    // Offset from the center where the player can be without moving the camera
     Vector2 offset{ 100.f, 100.f };
 };

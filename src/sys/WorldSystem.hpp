@@ -12,4 +12,7 @@ public:
 
 private:
     void deleteEntitiesOutOfWorld(GameEngine& gameContext) const;
+    void checkPhaseCollision(GameEngine& gameContext) const;
+
+    void collideWithPhaseBounding(GameEngine& gameContext, int entityId, BoundingBox& entityBounding) const;
 };

@@ -170,3 +170,11 @@ Vector2 Utils::getCenterOfBounding(BoundingBox const bounding) {
 void Utils::printBoundingBox(BoundingBox const bounding) {
     std::cout << "xLeft: " << bounding.xLeft << " xRight: " << bounding.xRight << " yUp: " << bounding.yUp << " yDown: " << bounding.yDown << "\n";
 }
+
+
+BoundingBox Utils::getCameraViewBoundig(CameraComponent& cameraComp) {
+    float zoomedRectX = cameraComp.viewRect.x * cameraComp.zoom;
+    float zoomedRectY = cameraComp.viewRect.y * cameraComp.zoom;
+
+    return BoundingBox{ -(zoomedRectX / 2.f), zoomedRectX / 2.f, -(zoomedRectY / 2.f), zoomedRectY / 2.f };
+}
