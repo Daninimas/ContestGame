@@ -16,9 +16,9 @@ void CameraSystem::update(GameEngine& gameContext) const {
 
 void CameraSystem::setCameraLookingPlayer(GameEngine& gameContext) const {
 	// Set the player in its center
-	SituationComponent& playerSit = gameContext.entityMan.getComponent<SituationComponent>(WorldData::playerId);
-	SituationComponent& cameraSit = gameContext.entityMan.getComponent<SituationComponent>(WorldData::activeCameraId);
-	CameraComponent&   cameraComp = gameContext.entityMan.getComponent<CameraComponent>(WorldData::activeCameraId);
+	SituationComponent& playerSit = gameContext.entityMan.getComponent<SituationComponent>(WorldElementsData::playerId);
+	SituationComponent& cameraSit = gameContext.entityMan.getComponent<SituationComponent>(WorldElementsData::activeCameraId);
+	CameraComponent&   cameraComp = gameContext.entityMan.getComponent<CameraComponent>(WorldElementsData::activeCameraId);
 
 	auto moveCamera = [](float posPlayer, float& posCamera, float offset) {
 		// Calculate distance from player to camera
@@ -38,5 +38,5 @@ void CameraSystem::setCameraLookingPlayer(GameEngine& gameContext) const {
 	cameraSit.position.y = playerSit.position.y;
 	
 	// Update position on engine, the situation of the camera is its center
-	gameContext.entityMan.addEntityToUpdate(WorldData::activeCameraId);
+	gameContext.entityMan.addEntityToUpdate(WorldElementsData::activeCameraId);
 }

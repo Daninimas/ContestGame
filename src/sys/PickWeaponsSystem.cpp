@@ -17,7 +17,7 @@ void PickWeaponsSystem::update(GameEngine& gameContext) const {
 
 void PickWeaponsSystem::checkPlayerPickingWeapons(GameEngine& gameContext) const {
 	// Distance weapons
-	for (int distanceWeapId : WorldData::worldDistanceWeapons)
+	for (int distanceWeapId : WorldElementsData::worldDistanceWeapons)
 	{
 		ColliderComponent& weaponCollider = gameContext.entityMan.getComponent<ColliderComponent>(distanceWeapId);
 
@@ -32,7 +32,7 @@ void PickWeaponsSystem::checkPlayerPickingWeapons(GameEngine& gameContext) const
 	}
 
 	// Melee weapons
-	for (int meleeWeapId : WorldData::worldMeleeWeapons)
+	for (int meleeWeapId : WorldElementsData::worldMeleeWeapons)
 	{
 		ColliderComponent& weaponCollider = gameContext.entityMan.getComponent<ColliderComponent>(meleeWeapId);
 
@@ -50,7 +50,7 @@ void PickWeaponsSystem::checkPlayerPickingWeapons(GameEngine& gameContext) const
 bool PickWeaponsSystem::checkWeaponCollidesWithPlayer(BoundingBoxNode& weaponBounding) const {
 
 	for (int entityColliding : weaponBounding.bounding.entitiesColliding) {
-		if (entityColliding == WorldData::playerId) {
+		if (entityColliding == WorldElementsData::playerId) {
 			return true;
 		}
 	}
@@ -62,37 +62,37 @@ bool PickWeaponsSystem::checkWeaponCollidesWithPlayer(BoundingBoxNode& weaponBou
 
 void PickWeaponsSystem::setDistanceWeaponToPlayer(GameEngine& gameContext, int distanceWeapId) const {
 	//DELETE previous distance component
-	gameContext.entityMan.eraseComponent<DistanceWeaponComponent>(WorldData::playerId);
+	gameContext.entityMan.eraseComponent<DistanceWeaponComponent>(WorldElementsData::playerId);
 
 	// Assign weapon component to the player
 	DistanceWeaponComponent auxiliarCopy = gameContext.entityMan.getComponent<DistanceWeaponComponent>(distanceWeapId);
 
-	DistanceWeaponComponent& playerDistance = gameContext.entityMan.createComponent<DistanceWeaponComponent>(WorldData::playerId);
+	DistanceWeaponComponent& playerDistance = gameContext.entityMan.createComponent<DistanceWeaponComponent>(WorldElementsData::playerId);
 	playerDistance = auxiliarCopy;
-	playerDistance.id = WorldData::playerId;
+	playerDistance.id = WorldElementsData::playerId;
 
 	// Delete the weapon entity
 	gameContext.eraseEntityByID(distanceWeapId);
 
 	// Delete id from world data
-	WorldData::worldDistanceWeapons.erase(std::remove(WorldData::worldDistanceWeapons.begin(), WorldData::worldDistanceWeapons.end(), distanceWeapId), WorldData::worldDistanceWeapons.end());
+	WorldElementsData::worldDistanceWeapons.erase(std::remove(WorldElementsData::worldDistanceWeapons.begin(), WorldElementsData::worldDistanceWeapons.end(), distanceWeapId), WorldElementsData::worldDistanceWeapons.end());
 }
 
 void PickWeaponsSystem::setMeleeWeaponToPlayer(GameEngine& gameContext, int meleeWeapId) const {
 
 	//DELETE previous distance component
-	gameContext.entityMan.eraseComponent<MeleeWeaponComponent>(WorldData::playerId);
+	gameContext.entityMan.eraseComponent<MeleeWeaponComponent>(WorldElementsData::playerId);
 	
 	// Assign weapon component to the player
 	MeleeWeaponComponent auxiliarCopy = gameContext.entityMan.getComponent<MeleeWeaponComponent>(meleeWeapId);
 
-	MeleeWeaponComponent& playerMelee = gameContext.entityMan.createComponent<MeleeWeaponComponent>(WorldData::playerId);
+	MeleeWeaponComponent& playerMelee = gameContext.entityMan.createComponent<MeleeWeaponComponent>(WorldElementsData::playerId);
 	playerMelee = auxiliarCopy;
-	playerMelee.id = WorldData::playerId;
+	playerMelee.id = WorldElementsData::playerId;
 
 	// Delete the weapon entity
 	gameContext.eraseEntityByID(meleeWeapId);
 
 	// Delete id from world data
-	WorldData::worldMeleeWeapons.erase(std::remove(WorldData::worldMeleeWeapons.begin(), WorldData::worldMeleeWeapons.end(), meleeWeapId), WorldData::worldMeleeWeapons.end());
+	WorldElementsData::worldMeleeWeapons.erase(std::remove(WorldElementsData::worldMeleeWeapons.begin(), WorldElementsData::worldMeleeWeapons.end(), meleeWeapId), WorldElementsData::worldMeleeWeapons.end());
 }

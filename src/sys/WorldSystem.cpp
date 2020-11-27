@@ -21,7 +21,8 @@ void WorldSystem::update(GameEngine& gameContext) const {
 void WorldSystem::deleteEntitiesOutOfWorld(GameEngine& gameContext) const {
 	auto& situations = gameContext.entityMan.getComponents<SituationComponent>();
 	std::vector<int> entitiesToDelete{};
-	BoundingBox& worldBounding = WorldData::phaseLimits;
+	WorldComponent& worldComp = gameContext.entityMan.getComponent<WorldComponent>(WorldElementsData::worldId);
+	BoundingBox& worldBounding = worldComp.phaseLimits[worldComp.currentPhase];
 
 	entitiesToDelete.reserve(situations.size());
 	for (SituationComponent& situation : situations) {
@@ -49,19 +50,20 @@ void WorldSystem::deleteEntitiesOutOfWorld(GameEngine& gameContext) const {
 
 void WorldSystem::checkPhaseCollision(GameEngine& gameContext) const {
 	// Calculate player collision with phase
-	collideWithPhaseBounding(gameContext, WorldData::playerId, gameContext.entityMan.getComponent<ColliderComponent>(WorldData::playerId).boundingRoot.bounding);
+	collideWithPhaseBounding(gameContext, WorldElementsData::playerId, gameContext.entityMan.getComponent<ColliderComponent>(WorldElementsData::playerId).boundingRoot.bounding);
 
 	// Calculate camera collision with phase
-	CameraComponent& cameraComp = gameContext.entityMan.getComponent<CameraComponent>(WorldData::activeCameraId);
+	CameraComponent& cameraComp = gameContext.entityMan.getComponent<CameraComponent>(WorldElementsData::activeCameraId);
 	BoundingBox cameraBounding = Utils::getCameraViewBoundig(cameraComp);
 
-	collideWithPhaseBounding(gameContext, WorldData::activeCameraId, cameraBounding);
+	collideWithPhaseBounding(gameContext, WorldElementsData::activeCameraId, cameraBounding);
 }
 
 
 void WorldSystem::collideWithPhaseBounding(GameEngine& gameContext, int entityId, BoundingBox& entityBounding) const {
 	// make the player and camera don't get out of the phase zone
-	BoundingBox& worldBounding = WorldData::phaseLimits;
+	WorldComponent& worldComp = gameContext.entityMan.getComponent<WorldComponent>(WorldElementsData::worldId);
+	BoundingBox& worldBounding = worldComp.phaseLimits[worldComp.currentPhase];
 	SituationComponent& entitySit = gameContext.entityMan.getComponent<SituationComponent>(entityId);
 	BoundingBox entityWorldBox = Utils::moveToWorldCoords(entityBounding, entitySit);
 

@@ -17,7 +17,7 @@ void HUDSystem::updateTexts(GameEngine& gameContext) const {
 
 	for (TextComponent& textComp : textComponents) {
 		Entity& textEnt = gameContext.entityMan.getEntity(textComp.id);
-		int playerId = WorldData::playerId;
+		int playerId = WorldElementsData::playerId;
 
 		switch (textEnt.getGameObjectType())
 		{

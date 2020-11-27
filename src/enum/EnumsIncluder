@@ -3,4 +3,3 @@
 #include <enum/EntityType.hpp>
 #include <enum/ColliderType.hpp>
 #include <enum/AttackType.hpp>
-#include <enum/WorldEnum.hpp>

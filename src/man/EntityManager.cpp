@@ -2,7 +2,7 @@
 
 #include <tools/Utils.hpp>
 #include <tools/Sound.hpp>
-#include <tools/WorldData.hpp>
+#include <tools/WorldElementsData.hpp>
 
 #include <math.h>
 #include <random>
@@ -52,6 +52,7 @@ void EntityManager::eraseEntityByID(int id) {
     eraseComponent<FuryComponent>(id);
     eraseComponent<TextComponent>(id);
     eraseComponent<MenuOptionComponent>(id);
+    eraseComponent<WorldComponent>(id);
 
     // AI
     eraseComponent<AIChaseComponent>(id);
@@ -115,7 +116,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
     velocityComp.speedX = 100.f;
     velocityComp.gravity = 250.f;
 
-    WorldData::playerId = entityId;
+    WorldElementsData::playerId = entityId;
 
     // Collider
     colliderComp.collisionLayer = ColliderComponent::Player;
@@ -482,7 +483,7 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
 
         distanceWeaponComp.attackSound.soundPath = "Media/Sound/Weapons/M4A1_Single-Kibblesbob-8540445.wav";
 
-        WorldData::worldDistanceWeapons.push_back(entityId);
+        WorldElementsData::worldDistanceWeapons.push_back(entityId);
     }
 
     else if (goType == GameObjectType::KNIFE) {
@@ -496,7 +497,7 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
         meleeWeaponComp.attackSound.soundPath = "Media/Sound/GE_KF7_Soviet.wav";
 
 
-        WorldData::worldMeleeWeapons.push_back(entityId);
+        WorldElementsData::worldMeleeWeapons.push_back(entityId);
     }
 
     else if (goType == GameObjectType::GRENADE_LAUNCHER) {
@@ -518,7 +519,7 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
         distanceWeaponComp.explosionTime = 0.2f;
         distanceWeaponComp.startActivated = false;
 
-        WorldData::worldDistanceWeapons.push_back(entityId);
+        WorldElementsData::worldDistanceWeapons.push_back(entityId);
     }
     
     else if (goType == GameObjectType::LASER_GUN) {
@@ -536,7 +537,7 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
 
         distanceWeaponComp.attackSound.soundPath = "Media/Sound/GE_KF7_Soviet.wav";
 
-        WorldData::worldDistanceWeapons.push_back(entityId);
+        WorldElementsData::worldDistanceWeapons.push_back(entityId);
     }
 
     //######### RENDER ########//
@@ -551,7 +552,7 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
 int EntityManager::createCamera(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType) {
     int entityId = Entity::getCurrentId();
 
-    WorldData::activeCameraId = entityId;
+    WorldElementsData::activeCameraId = entityId;
 
     SituationComponent& situation = createComponent<SituationComponent>(entityId);
     CameraComponent& cameraComp   = createComponent<CameraComponent>(entityId);
@@ -756,25 +757,31 @@ int EntityManager::createPowerUp(GameEngine& gameContext, Vector2 position, floa
 
 // ------------------------------ WORLD CREATION ------------------------------
 
-void EntityManager::createWorld(GameEngine& gameContext, WorldEnum worldName) {
+int EntityManager::createWorld(GameEngine& gameContext, GameObjectType worldName) {
+    int entityId = Entity::getCurrentId();
+
+    WorldComponent& worldComp = createComponent<WorldComponent>(entityId);
+
+    WorldElementsData::worldId = entityId;
 
     switch (worldName)
     {
-    case WorldEnum::DEBUG:
-        // World limits
-        WorldData::phaseLimits = { 0.f, 1000.f, 0.f, 1000.f };
-
+    case GameObjectType::WORLD_DEBUG:
         // World music
-        WorldData::worldMusic.soundPath = "Media/Sound/Music/delayscape_planet.ogg";
-        WorldData::worldMusic.pitch = 2.f;
-        WorldData::worldMusic.volume = 100.f;
-        WorldData::worldMusic.repeat = true;
+        worldComp.worldMusic.soundPath = "Media/Sound/Music/delayscape_planet.ogg";
+        worldComp.worldMusic.pitch = 2.f;
+        worldComp.worldMusic.volume = 100.f;
+        worldComp.worldMusic.repeat = true;
 
-        gameContext.getSoundFacadeRef().loadMusic(WorldData::worldMusic.soundPath);
-        gameContext.getSoundFacadeRef().playMusic(WorldData::worldMusic);
+        gameContext.getSoundFacadeRef().loadMusic(worldComp.worldMusic.soundPath);
+        gameContext.getSoundFacadeRef().playMusic(worldComp.worldMusic);
 
         break;
     }
+
+    //######### CREATE ########//
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::WORLD, worldName));
+    return entityId;
 }
 
 

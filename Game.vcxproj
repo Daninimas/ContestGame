@@ -155,6 +155,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\com\MenuOptionComponent.cpp" />
+    <ClCompile Include="src\com\WorldComponent.cpp" />
     <ClCompile Include="src\tools\MapLoader.cpp" />
     <ClCompile Include="src\com\FuryComponent.cpp" />
     <ClCompile Include="src\com\AI\AIDropBombComponent.cpp" />
@@ -219,6 +220,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\com\MenuOptionComponent.hpp" />
+    <ClInclude Include="src\com\WorldComponent.hpp" />
     <ClInclude Include="src\tools\MapLoader.hpp" />
     <ClInclude Include="src\com\FuryComponent.hpp" />
     <ClInclude Include="src\com\AI\AIDropBombComponent.hpp" />
@@ -238,7 +240,6 @@
     <ClInclude Include="src\com\TextComponent.hpp" />
     <ClInclude Include="src\eng\sound\SoundSFMLEngine.hpp" />
     <ClInclude Include="src\enum\MenuOptions.hpp" />
-    <ClInclude Include="src\enum\WorldEnum.hpp" />
     <ClInclude Include="src\sys\AI\AIBombDropSystem.hpp" />
     <ClInclude Include="src\sys\AI\AIChaseSystem.hpp" />
     <ClInclude Include="src\sys\AI\AIDistanceSystem.hpp" />
@@ -260,7 +261,7 @@
     <ClInclude Include="src\tools\Sound.hpp" />
     <ClInclude Include="src\tools\tileson.hpp" />
     <ClInclude Include="src\tools\Vector2.hpp" />
-    <ClInclude Include="src\tools\WorldData.hpp" />
+    <ClInclude Include="src\tools\WorldElementsData.hpp" />
     <ClInclude Include="src\sys\SensorSystem.hpp" />
     <ClInclude Include="src\com\SensorComponent.hpp" />
     <ClInclude Include="src\com\AttackComponent.hpp" />

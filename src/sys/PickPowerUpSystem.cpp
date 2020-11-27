@@ -73,7 +73,7 @@ void PickPowerUpSystem::setShieldToEntity(GameEngine& gameContext, PowerUpCompon
 
 	// Create shield entity and assing to entity
 	GameObjectType shieldGO = GameObjectType::SHIELD;
-	if (entityColliding == WorldData::playerId) {
+	if (entityColliding == WorldElementsData::playerId) {
 		shieldGO = GameObjectType::PLAYER_SHIELD;
 	}
 

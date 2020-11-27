@@ -14,5 +14,6 @@ enum class EntityType {
     SPAWNER,
     SHIELD,
     POWERUP,
-    HUD_ELEMENT
+    HUD_ELEMENT,
+    WORLD
 };

@@ -1,7 +1,7 @@
 #include "MenuSystem.hpp"
 
 #include <eng/GameEngine.hpp>
-#include <tools/WorldData.hpp>
+#include <tools/WorldElementsData.hpp>
 
 #include <iostream>
 
@@ -11,7 +11,7 @@ MenuSystem::~MenuSystem() {}
 
 void MenuSystem::update(GameEngine& gameContext) const {
 	MenuComponent&  menuComp    = gameContext.entityMan.getComponents<MenuComponent>()[ (size_t)0 ];
-	InputComponent& playerInput = gameContext.entityMan.getComponent<InputComponent>(WorldData::playerId);
+	InputComponent& playerInput = gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId);
 
 	std::size_t lastSelected = menuComp.selectedOption;
 

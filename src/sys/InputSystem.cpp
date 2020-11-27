@@ -19,8 +19,8 @@ void InputSystem::update(GameEngine& gameContext) const {
 
 
 void InputSystem::inputPlaying(GameEngine& gameContext) const {
-    InputComponent& playerInput = gameContext.entityMan.getComponent<InputComponent>(WorldData::playerId);
-    VelocityComponent& playerVel = gameContext.entityMan.getComponent<VelocityComponent>(WorldData::playerId);
+    InputComponent& playerInput = gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId);
+    VelocityComponent& playerVel = gameContext.entityMan.getComponent<VelocityComponent>(WorldElementsData::playerId);
     uint8_t actualMovement = 0xFF; // start with no movement
 
     // Reset actions
@@ -70,7 +70,7 @@ void InputSystem::inputPlaying(GameEngine& gameContext) const {
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::M))
     {
-        auto& jumpComp = gameContext.entityMan.getComponent<JumpComponent>(WorldData::playerId);
+        auto& jumpComp = gameContext.entityMan.getComponent<JumpComponent>(WorldElementsData::playerId);
         if (jumpComp.cooldown > jumpComp.maxCooldown) { // if has cooldown on floor
             playerVel.velocity.y = jumpComp.impulse;
         }
@@ -88,7 +88,7 @@ void InputSystem::inputPlaying(GameEngine& gameContext) const {
 }
 
 void InputSystem::activateDodge(GameEngine& gameContext, uint8_t actualMovement) const {
-    DodgeComponent& playerDodge = gameContext.entityMan.getComponent<DodgeComponent>(WorldData::playerId);
+    DodgeComponent& playerDodge = gameContext.entityMan.getComponent<DodgeComponent>(WorldElementsData::playerId);
 
     playerDodge.timeFromLastMove += gameContext.getDeltaTime();
 
@@ -109,7 +109,7 @@ void InputSystem::activateDodge(GameEngine& gameContext, uint8_t actualMovement)
 
 
 void InputSystem::inputMenus(GameEngine& gameContext) const {
-    InputComponent& playerInput = gameContext.entityMan.getComponent<InputComponent>(WorldData::playerId);
+    InputComponent& playerInput = gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId);
 
     playerInput.cooldown += gameContext.getDeltaTime();
 

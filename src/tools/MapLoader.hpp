@@ -14,6 +14,7 @@ public:
 private:
 	static void checkObjectsOfLayer(GameEngine& gameContext, tson::Layer& objLayer);
     static void createObject(GameEngine& gameContext, std::string layerName, tson::Object& obj);
+    static void setPhaseData(GameEngine& gameContext, tson::Object& obj);
     static GameObjectType getGameObject(const std::string objType);
     static void setEnemyObjective(GameEngine& gameContext, int enemyId);
 

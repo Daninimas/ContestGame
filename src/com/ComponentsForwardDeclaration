@@ -27,3 +27,4 @@ class PowerUpComponent;
 class FuryComponent;
 class TextComponent;
 class MenuOptionComponent;
+class WorldComponent;

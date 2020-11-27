@@ -23,6 +23,7 @@
 #include <com/FuryComponent.hpp>
 #include <com/TextComponent.hpp>
 #include <com/MenuOptionComponent.hpp>
+#include <com/WorldComponent.hpp>
 
 // AI
 #include <com/AI/AIChaseComponent.hpp>

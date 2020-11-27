@@ -108,7 +108,7 @@ public:
     //////////////////////////////////////////////////
     //                WORLD CREATION               //
     //////////////////////////////////////////////////
-    void createWorld(GameEngine& gameContext, WorldEnum worldName);
+    int createWorld(GameEngine& gameContext, GameObjectType worldName);
 
     //////////////////////////////////////////////////
     //                MENU CREATION               //

@@ -24003,7 +24003,7 @@ namespace tson
 			[[nodiscard]] inline ObjectType getObjectType() const;
 			[[nodiscard]] inline bool isEllipse() const;
 			[[nodiscard]] inline uint32_t getGid() const;
-			[[nodiscard]] inline const Vector2i &getSize() const;
+			[[nodiscard]] inline const Vector2f &getSize() const;
 			[[nodiscard]] inline int getId() const;
 			[[nodiscard]] inline const std::string &getName() const;
 			[[nodiscard]] inline bool isPoint() const;
@@ -24032,7 +24032,7 @@ namespace tson
 			ObjectType                        m_objectType = ObjectType::Undefined;    /*! Says with object type this is */
 			bool                              m_ellipse {};                            /*! 'ellipse': Used to mark an object as an ellipse */
 			uint32_t                          m_gid {};                                /*! 'gid': GID, only if object comes from a Tilemap */
-			tson::Vector2i                    m_size;                                  /*! x = 'width' (Width in pixels), y = 'height' (Height in pixels). Ignored if using a gid.)*/
+			tson::Vector2f                    m_size;                                  /*! x = 'width' (Width in pixels), y = 'height' (Height in pixels). Ignored if using a gid.)*/
 			int                               m_id{};                                  /*! 'id': Incremental id - unique across all objects */
 			std::string                       m_name;                                  /*! 'name':  String assigned to name field in editor*/
 			bool                              m_point {};                              /*! 'point': Used to mark an object as a point */
@@ -24104,7 +24104,7 @@ bool tson::Object::parse(const nlohmann::json &json)
 	if(json.count("visible") > 0) m_visible = json["visible"].get<bool>(); else allFound = false;
 
 	if(json.count("width") > 0 && json.count("height") > 0)
-		m_size = {json["width"].get<int>(), json["height"].get<int>()}; else allFound = false;
+		m_size = {json["width"].get<float>(), json["height"].get<float>()}; else allFound = false;
 	if(json.count("x") > 0 && json.count("y") > 0)
 		m_position = {json["x"].get<float>(), json["y"].get<float>()}; else allFound = false;
 
@@ -24188,7 +24188,7 @@ uint32_t tson::Object::getGid() const
  * x = 'width' (Width in pixels), y = 'height' (Height in pixels). Ignored if using a gid.)
  * @return
  */
-const tson::Vector2i &tson::Object::getSize() const
+const tson::Vector2f &tson::Object::getSize() const
 {
 	return m_size;
 }

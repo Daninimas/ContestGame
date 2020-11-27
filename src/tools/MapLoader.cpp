@@ -29,18 +29,33 @@ const bool MapLoader::loadMap(GameEngine& gameContext, const std::string mapPath
 
 
 
-void MapLoader::checkObjectsOfLayer(GameEngine& gameContext, tson::Layer& objLayer) { // refactorizar esto, no hacer que por cata type haya que crear un metodo nuevo
+void MapLoader::checkObjectsOfLayer(GameEngine& gameContext, tson::Layer& objLayer) {
     std::string layerName = objLayer.getName();
     std::cout << "  Reading Type layer: " << layerName << "\n";
 
     for (auto& obj : objLayer.getObjects())
     {
         if (obj.getObjectType() == tson::ObjectType::Object) {
-            createObject(gameContext, layerName, obj);            
+            createObject(gameContext, layerName, obj);
+        }
+        else if (obj.getObjectType() == tson::ObjectType::Rectangle) {
+            if (layerName == "phase_size") {
+                setPhaseData(gameContext, obj);
+            }
         }
     }
 }
 
+
+void MapLoader::setPhaseData(GameEngine& gameContext, tson::Object& obj) {
+    std::string objType = obj.getType();
+
+    tson::Vector2f position = obj.getPosition();
+    tson::Vector2f size = obj.getSize();
+    float rotation = obj.getRotation();
+
+    gameContext.entityMan.getComponent<WorldComponent>(WorldElementsData::worldId).phaseLimits.emplace_back(BoundingBox{position.x, size.x, position.y, size.y});
+}
 
 void MapLoader::createObject(GameEngine& gameContext, std::string layerName, tson::Object& obj) {
     std::string objType = obj.getType();
@@ -53,7 +68,7 @@ void MapLoader::createObject(GameEngine& gameContext, std::string layerName, tso
 
     if (goType != GameObjectType::ERROR) {
 
-        // Check the object to crete
+        // Check the object to create
         if (layerName == "WALL") {
             gameContext.entityMan.createWall(gameContext, Vector2(position.x, position.y), rotation, goType);
         }
@@ -68,11 +83,12 @@ void MapLoader::createObject(GameEngine& gameContext, std::string layerName, tso
         else if (layerName == "SPAWNER") {
             int spawnId = gameContext.entityMan.createSpawner(gameContext, Vector2(position.x, position.y), rotation, goType);
 
-            gameContext.entityMan.getComponent<SpawnerComponent>(spawnId).objectiveId = WorldData::playerId;
+            gameContext.entityMan.getComponent<SpawnerComponent>(spawnId).objectiveId = WorldElementsData::playerId;
         }
         else if (layerName == "POWERUP") {
             gameContext.entityMan.createPowerUp(gameContext, Vector2(position.x, position.y), rotation, goType);
         }
+        
     }
     else {
         // Error on the type of the object
@@ -93,17 +109,17 @@ GameObjectType MapLoader::getGameObject(const std::string objType) { // if not f
 
 void MapLoader::setEnemyObjective(GameEngine& gameContext, int enemyId) {
     if (gameContext.entityMan.existsComponent<AIChaseComponent>(enemyId))
-        gameContext.entityMan.getComponent<AIChaseComponent>(enemyId).objectiveId = WorldData::playerId;
+        gameContext.entityMan.getComponent<AIChaseComponent>(enemyId).objectiveId = WorldElementsData::playerId;
 
     if (gameContext.entityMan.existsComponent<AIMeleeAtkComponent>(enemyId))
-        gameContext.entityMan.getComponent<AIMeleeAtkComponent>(enemyId).objectiveId = WorldData::playerId;
+        gameContext.entityMan.getComponent<AIMeleeAtkComponent>(enemyId).objectiveId = WorldElementsData::playerId;
 
     if (gameContext.entityMan.existsComponent<AIDistanceAtkComponent>(enemyId))
-        gameContext.entityMan.getComponent<AIDistanceAtkComponent>(enemyId).objectiveId = WorldData::playerId;
+        gameContext.entityMan.getComponent<AIDistanceAtkComponent>(enemyId).objectiveId = WorldElementsData::playerId;
 
     if (gameContext.entityMan.existsComponent<AITransformationComponent>(enemyId))
-        gameContext.entityMan.getComponent<AITransformationComponent>(enemyId).objectiveId = WorldData::playerId;
+        gameContext.entityMan.getComponent<AITransformationComponent>(enemyId).objectiveId = WorldElementsData::playerId;
 
     if (gameContext.entityMan.existsComponent<AIPounceComponent>(enemyId))
-        gameContext.entityMan.getComponent<AIPounceComponent>(enemyId).objectiveId = WorldData::playerId;
+        gameContext.entityMan.getComponent<AIPounceComponent>(enemyId).objectiveId = WorldElementsData::playerId;
 }
