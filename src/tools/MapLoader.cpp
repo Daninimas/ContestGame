@@ -10,7 +10,7 @@ const bool MapLoader::loadMap(GameEngine& gameContext, const std::string mapPath
 
     if (map->getStatus() == tson::ParseStatus::OK)
     {
-        for (auto& phaseLayer : map->getLayers()) { // this are the layerGroups that are thr phases of the map
+        for (auto& phaseLayer : map->getLayers()) { // this are the layerGroups that are the phases of the map
             std::cout << "Reading phase: " << phaseLayer.getName() << "\n";
             //Gets the layer from the .json map
             auto& objectLayers = phaseLayer.getLayers(); 
@@ -25,6 +25,35 @@ const bool MapLoader::loadMap(GameEngine& gameContext, const std::string mapPath
     }
 
 	return true;
+}
+
+
+const bool MapLoader::loadMapPhase(GameEngine& gameContext, const std::string mapPath, const std::string phaseName) {
+
+    tson::Tileson t;
+    std::unique_ptr<tson::Map> map = t.parse(fs::path(mapPath));
+
+    if (map->getStatus() == tson::ParseStatus::OK)
+    {
+        tson::Layer* phaseLayer = map->getLayer(phaseName);
+        if (phaseLayer != nullptr) { // this are the layerGroups that are the phases of the map
+            std::cout << "Reading phase: " << phaseLayer->getName() << "\n";
+            //Gets the layer from the .json map
+            auto& objectLayers = phaseLayer->getLayers();
+
+            for (tson::Layer& objLayer : objectLayers) { //This are the Objects Layer
+                checkObjectsOfLayer(gameContext, objLayer);
+            }
+        }
+        else {
+            std::cout << "[Load Layer Error] The layer (" << phaseName << ") doesn't exist in the map (" << mapPath << ")\n";
+        }
+    }
+    else {
+        std::cout << "[Load Map Error] " << map->getStatusMessage() << "\n";
+    }
+
+    return true;
 }
 
 

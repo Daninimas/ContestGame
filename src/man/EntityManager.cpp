@@ -650,7 +650,7 @@ int EntityManager::createSpawner(GameEngine& gameContext, Vector2 position, floa
         spawnComp.spawnEntitiesType = EntityType::ENEMY;
 
         // Health
-        healthComp.maxHealth = 10;
+        healthComp.maxHealth = 5;
 
         break;        
     }

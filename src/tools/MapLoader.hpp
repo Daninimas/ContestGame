@@ -9,7 +9,8 @@
 
 class MapLoader {
 public:
-	static const bool loadMap(GameEngine& gameContext, const std::string mapPath);
+    static const bool loadMap(GameEngine& gameContext, const std::string mapPath);
+    static const bool loadMapPhase(GameEngine& gameContext, const std::string mapPath, const std::string phaseName);
 
 private:
 	static void checkObjectsOfLayer(GameEngine& gameContext, tson::Layer& objLayer);
