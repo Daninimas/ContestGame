@@ -14,9 +14,9 @@ void StaticEntitiesSystem::update(GameEngine& gameContext) const {}
 
 
 void StaticEntitiesSystem::init(GameEngine &gameContext) const {
+    createPlayer(gameContext);
     createWorld(gameContext);
 
-    createPlayer(gameContext);
 
     /*gameContext.entityMan.createWall(gameContext, Vector2( 0.f,   400.f ), 0.f, GameObjectType::NONE);
     gameContext.entityMan.createWall(gameContext, Vector2( 100.f, 400.f ), 0.f, GameObjectType::NONE);
@@ -50,7 +50,7 @@ void StaticEntitiesSystem::init(GameEngine &gameContext) const {
     gameContext.entityMan.getComponent<AIPounceComponent>(pouncerId).objectiveId = WorldElementsData::playerId;
     gameContext.entityMan.getComponent<AIMeleeAtkComponent>(pouncerId).objectiveId = WorldElementsData::playerId;*/
 
-    /*int spawnId = gameContext.entityMan.createSpawner(gameContext, Vector2(300.f, 300.f), 0.f, GameObjectType::CHASERJUMPER);
+    /*int spawnId = gameContext.entityMan.createSpawner(gameContext, Vector2(300.f, 200.f), 0.f, GameObjectType::CHASERJUMPER);
     gameContext.entityMan.getComponent<SpawnerComponent>(spawnId).objectiveId = WorldElementsData::playerId;
 
     gameContext.entityMan.createWeapon(gameContext, Vector2(250, 310.f), 0.f, GameObjectType::KNIFE);
