@@ -372,7 +372,9 @@ void GameEngine::eraseEntityByID(int id) {
     //getSoundFacadeRef().setParameterEventByID(id, STOP_SOUND);
 
     // Subtract enemy from world 
-    --WorldElementsData::enemiesInWorld;
+    if (entityMan.getEntity(id).getType() == EntityType::ENEMY || entityMan.getEntity(id).getType() == EntityType::SPAWNER) {
+        --WorldElementsData::enemiesInWorld;
+    }
 
     entityMan.eraseEntityByID(id);
 }

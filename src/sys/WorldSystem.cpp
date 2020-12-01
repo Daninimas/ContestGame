@@ -23,10 +23,11 @@ void WorldSystem::deleteEntitiesOutOfWorld(GameEngine& gameContext) const {
 	std::vector<int> entitiesToDelete{};
 	WorldComponent& worldComp = gameContext.entityMan.getComponent<WorldComponent>(WorldElementsData::worldId);
 	BoundingBox& worldBounding = worldComp.currentPhase.limits;
+	float offset = 100.f; // To prevent the player from seen the walls disappear 
 
 	entitiesToDelete.reserve(situations.size());
 	for (SituationComponent& situation : situations) {
-		if (situation.position.x < worldBounding.xLeft || situation.position.x > worldBounding.xRight || situation.position.y < worldBounding.yUp || situation.position.y > worldBounding.yDown) {
+		if (situation.position.x < worldBounding.xLeft - offset || situation.position.x > worldBounding.xRight + offset || situation.position.y < worldBounding.yUp - offset || situation.position.y > worldBounding.yDown + offset) {
 
 			if (!situation.noWorldDelete) {
 				entitiesToDelete.push_back(situation.id);
