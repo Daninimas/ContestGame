@@ -3,6 +3,7 @@
 #include <tools/Utils.hpp>
 #include <tools/Sound.hpp>
 #include <tools/WorldElementsData.hpp>
+#include <tools/MapLoader.hpp>
 
 #include <math.h>
 #include <random>
@@ -291,6 +292,10 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
 
     // HealthComponent
     healthComp.maxHealth = 5;
+
+
+    // Add entity to World enemy number
+    ++WorldElementsData::enemiesInWorld;
 
 
     if (goType == GameObjectType::CHASER) {
@@ -640,6 +645,9 @@ int EntityManager::createSpawner(GameEngine& gameContext, Vector2 position, floa
     colliderComp.type = ColliderType::STATIC;
     
 
+    // Add entity to World enemy number
+    ++WorldElementsData::enemiesInWorld;
+
     switch (goTypeToSpawn) {
     case GameObjectType::CHASERJUMPER:
 
@@ -767,14 +775,15 @@ int EntityManager::createWorld(GameEngine& gameContext, GameObjectType worldName
     switch (worldName)
     {
     case GameObjectType::WORLD_DEBUG:
-        // World music
-        worldComp.worldMusic.soundPath = "Media/Sound/Music/delayscape_planet.ogg";
-        worldComp.worldMusic.pitch = 2.f;
-        worldComp.worldMusic.volume = 100.f;
-        worldComp.worldMusic.repeat = true;
+        worldComp.worldPath = "Media/Maps/debug.json";
+        MapLoader::loadMapPhase(gameContext, worldComp.worldPath, "Phase1");
 
-        gameContext.getSoundFacadeRef().loadMusic(worldComp.worldMusic.soundPath);
-        gameContext.getSoundFacadeRef().playMusic(worldComp.worldMusic);
+        // TODO read number of phases of the world
+        MapLoader::getNumberOfPhases(worldComp.worldPath);
+
+        // Start music
+        //gameContext.getSoundFacadeRef().loadMusic(worldComp.currentPhase.phaseMusic.soundPath);
+        //gameContext.getSoundFacadeRef().playMusic(worldComp.currentPhase.phaseMusic);
 
         break;
     }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="100" tileheight="100" infinite="1" nextlayerid="6" nextobjectid="83">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="100" tileheight="100" infinite="1" nextlayerid="10" nextobjectid="125">
  <editorsettings>
   <export target="../debug.json" format="json"/>
  </editorsettings>
@@ -10,10 +10,10 @@
  </layer>
  <group id="3" name="Phase1">
   <objectgroup id="5" name="phase_size">
-   <object id="71" x="0" y="-104" width="1349.34" height="732"/>
+   <object id="71" x="0" y="-104" width="865.34" height="732"/>
   </objectgroup>
   <objectgroup id="4" name="SPAWNER">
-   <object id="82" type="CHASERJUMPER" gid="2" x="874" y="402.606" width="20" height="20"/>
+   <object id="82" type="CHASERJUMPER" gid="2" x="301.273" y="366.242" width="20" height="20"/>
   </objectgroup>
   <objectgroup id="2" name="WALL">
    <object id="1" type="WALL" gid="1" x="0" y="400" width="100" height="10"/>
@@ -22,16 +22,26 @@
    <object id="4" type="WALL" gid="1" x="300" y="400" width="100" height="10"/>
    <object id="6" type="WALL" gid="1" x="500" y="400" width="100" height="10"/>
    <object id="12" type="WALL" gid="1" x="400" y="400" width="100" height="10"/>
-   <object id="72" type="WALL" gid="1" x="650" y="574.697" width="100" height="10"/>
-   <object id="73" type="WALL" gid="1" x="753.03" y="574.697" width="100" height="10"/>
-   <object id="74" type="WALL" gid="1" x="862.121" y="574.697" width="100" height="10"/>
-   <object id="75" type="WALL" gid="1" x="962.121" y="514.091" width="100" height="10"/>
-   <object id="76" type="WALL" gid="1" x="1074.24" y="511.061" width="100" height="10"/>
-   <object id="77" type="WALL" gid="1" x="840.061" y="446.091" width="100" height="10"/>
-   <object id="78" type="WALL" gid="1" x="995.94" y="411.546" width="100" height="10"/>
-   <object id="79" type="WALL" gid="1" x="1095.34" y="411.667" width="100" height="10"/>
-   <object id="80" type="WALL" gid="1" x="1194" y="411.667" width="100" height="10"/>
-   <object id="81" type="WALL" gid="1" x="1294" y="411.667" width="100" height="10"/>
+  </objectgroup>
+ </group>
+ <group id="7" name="Phase2">
+  <objectgroup id="9" name="phase_size">
+   <object id="115" x="8" y="-128" width="1672" height="780"/>
+  </objectgroup>
+  <objectgroup id="6" name="WALL">
+   <object id="103" type="WALL" gid="1" x="872" y="396.576" width="100" height="10"/>
+   <object id="104" type="WALL" gid="1" x="975.03" y="396.576" width="100" height="10"/>
+   <object id="105" type="WALL" gid="1" x="1084.12" y="396.576" width="100" height="10"/>
+   <object id="106" type="WALL" gid="1" x="1184.12" y="335.97" width="100" height="10"/>
+   <object id="107" type="WALL" gid="1" x="1296.24" y="332.94" width="100" height="10"/>
+   <object id="108" type="WALL" gid="1" x="1392.06" y="371.97" width="100" height="10"/>
+   <object id="109" type="WALL" gid="1" x="1547.94" y="337.425" width="100" height="10"/>
+   <object id="110" type="WALL" gid="1" x="1647.34" y="337.546" width="100" height="10"/>
+   <object id="111" type="WALL" gid="1" x="1746" y="337.546" width="100" height="10"/>
+   <object id="112" type="WALL" gid="1" x="1846" y="337.546" width="100" height="10"/>
+   <object id="122" type="WALL" gid="1" x="592" y="399" width="100" height="10"/>
+   <object id="123" type="WALL" gid="1" x="696" y="403" width="100" height="10"/>
+   <object id="124" type="WALL" gid="1" x="788" y="403" width="100" height="10"/>
   </objectgroup>
  </group>
 </map>

@@ -178,3 +178,64 @@ BoundingBox Utils::getCameraViewBoundig(CameraComponent& cameraComp) {
 
     return BoundingBox{ -(zoomedRectX / 2.f), zoomedRectX / 2.f, -(zoomedRectY / 2.f), zoomedRectY / 2.f };
 }
+
+
+bool Utils::entityInPhaseLimit(GameEngine& gameContext, SituationComponent& entitySit) {
+    WorldPhase& phase = gameContext.entityMan.getComponent<WorldComponent>(WorldElementsData::worldId).currentPhase;
+
+    switch (phase.direction)
+    {
+    case WorldPhase::Left:
+        if (entitySit.position.x < (phase.limits.xLeft + phase.endDistance)) {
+            return true;
+        }
+        break;
+
+    case WorldPhase::Right:
+        if (entitySit.position.x > (phase.limits.xRight - phase.endDistance)) {
+            return true;
+        }
+        break;
+
+    case WorldPhase::Up:
+        if (entitySit.position.y < (phase.limits.yUp + phase.endDistance)) {
+            return true;
+        }
+        break;
+
+    case WorldPhase::Down:
+        if (entitySit.position.y < (phase.limits.yDown - phase.endDistance)) {
+            return true;
+        }
+        break;
+    }
+}
+
+
+void Utils::setPhaseStartToView(GameEngine& gameContext) {
+    WorldPhase&      phase  = gameContext.entityMan.getComponent<WorldComponent>(WorldElementsData::worldId).currentPhase;
+    CameraComponent& camera = gameContext.entityMan.getComponent<CameraComponent>(WorldElementsData::activeCameraId);
+    BoundingBox cameraView  = getCameraViewBoundig(camera);
+
+    cameraView = moveToWorldCoords(cameraView, gameContext.entityMan.getComponent<SituationComponent>(WorldElementsData::activeCameraId));
+
+    switch (phase.direction)
+    {
+    case WorldPhase::Left:
+        phase.limits.xRight = cameraView.xRight;
+        break;
+
+    case WorldPhase::Right:
+        phase.limits.xLeft = cameraView.xLeft;
+        break;
+
+    case WorldPhase::Up:
+        phase.limits.yDown = cameraView.yDown;
+        break;
+
+    case WorldPhase::Down:
+        phase.limits.yUp = cameraView.yUp;
+        break;
+    }
+}
+

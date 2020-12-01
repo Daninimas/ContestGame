@@ -2,16 +2,23 @@
 
 #include "Component.hpp"
 #include <tools/BoundingBox.hpp>
+#include <tools/WorldPhase.hpp>
 #include <tools/Sound.hpp>
 #include <vector>
+#include <string>
 
 class WorldComponent : public Component {
 public:
     explicit WorldComponent(const int id);
     ~WorldComponent() override;
 
-    std::vector<BoundingBox> phaseLimits;
-    std::size_t currentPhase{ 0 };
+    //std::vector<WorldPhase> worldPhases;
+    //std::size_t currentPhase{ 0 };
 
-    Sound worldMusic{};
+    WorldPhase currentPhase;
+
+    uint8_t currentPhaseNumber;
+    uint8_t numberOfPhases;
+
+    std::string worldPath;
 };

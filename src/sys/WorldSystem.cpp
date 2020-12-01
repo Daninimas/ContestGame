@@ -22,7 +22,7 @@ void WorldSystem::deleteEntitiesOutOfWorld(GameEngine& gameContext) const {
 	auto& situations = gameContext.entityMan.getComponents<SituationComponent>();
 	std::vector<int> entitiesToDelete{};
 	WorldComponent& worldComp = gameContext.entityMan.getComponent<WorldComponent>(WorldElementsData::worldId);
-	BoundingBox& worldBounding = worldComp.phaseLimits[worldComp.currentPhase];
+	BoundingBox& worldBounding = worldComp.currentPhase.limits;
 
 	entitiesToDelete.reserve(situations.size());
 	for (SituationComponent& situation : situations) {
@@ -63,7 +63,7 @@ void WorldSystem::checkPhaseCollision(GameEngine& gameContext) const {
 void WorldSystem::collideWithPhaseBounding(GameEngine& gameContext, int entityId, BoundingBox& entityBounding) const {
 	// make the player and camera don't get out of the phase zone
 	WorldComponent& worldComp = gameContext.entityMan.getComponent<WorldComponent>(WorldElementsData::worldId);
-	BoundingBox& worldBounding = worldComp.phaseLimits[worldComp.currentPhase];
+	BoundingBox& worldBounding = worldComp.currentPhase.limits;
 	SituationComponent& entitySit = gameContext.entityMan.getComponent<SituationComponent>(entityId);
 	BoundingBox entityWorldBox = Utils::moveToWorldCoords(entityBounding, entitySit);
 

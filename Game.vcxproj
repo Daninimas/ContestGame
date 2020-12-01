@@ -156,6 +156,7 @@
   <ItemGroup>
     <ClCompile Include="src\com\MenuOptionComponent.cpp" />
     <ClCompile Include="src\com\WorldComponent.cpp" />
+    <ClCompile Include="src\sys\PhaseSystem.cpp" />
     <ClCompile Include="src\tools\MapLoader.cpp" />
     <ClCompile Include="src\com\FuryComponent.cpp" />
     <ClCompile Include="src\com\AI\AIDropBombComponent.cpp" />
@@ -221,6 +222,7 @@
   <ItemGroup>
     <ClInclude Include="src\com\MenuOptionComponent.hpp" />
     <ClInclude Include="src\com\WorldComponent.hpp" />
+    <ClInclude Include="src\sys\PhaseSystem.hpp" />
     <ClInclude Include="src\tools\MapLoader.hpp" />
     <ClInclude Include="src\com\FuryComponent.hpp" />
     <ClInclude Include="src\com\AI\AIDropBombComponent.hpp" />
@@ -300,6 +302,7 @@
     <ClInclude Include="src\tools\linearMap.hpp" />
     <ClInclude Include="src\tools\Storage.hpp" />
     <ClInclude Include="src\tools\Utils.hpp" />
+    <ClInclude Include="src\tools\WorldPhase.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />

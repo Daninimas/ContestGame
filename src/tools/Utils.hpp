@@ -34,6 +34,10 @@ public:
     
     static BoundingBox getCameraViewBoundig(CameraComponent& cameraComp);
 
+    static bool entityInPhaseLimit(GameEngine& gameContext, SituationComponent& entitySit);
+
+    static void setPhaseStartToView(GameEngine& gameContext);
+
     template <typename T> 
     static int sign(T val) {
         return (T(0) < val) - (val < T(0));

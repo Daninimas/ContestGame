@@ -1,5 +1,7 @@
 #include "MapLoader.hpp"
 
+#include <tools/WorldPhase.hpp>
+
 #include <iostream>
 
 
@@ -83,7 +85,16 @@ void MapLoader::setPhaseData(GameEngine& gameContext, tson::Object& obj) {
     tson::Vector2f size = obj.getSize();
     float rotation = obj.getRotation();
 
-    gameContext.entityMan.getComponent<WorldComponent>(WorldElementsData::worldId).phaseLimits.emplace_back(BoundingBox{position.x, size.x, position.y, size.y});
+    WorldPhase newPhase = WorldPhase();
+    newPhase.limits = BoundingBox{ position.x, size.x, position.y, size.y };
+    std::cout << "      - Phase limits: { " << newPhase.limits.xLeft << ", " << newPhase.limits.xRight << ", " << newPhase.limits.yUp << ", " << newPhase.limits.yDown << " }\n";
+    // TODO faltan datos en el tilemap
+    // TODO ver si es necesario el componente de WorldComponent o si las fases se pueden poner en WorldElementsData
+    //newPhase.direction = ;
+    newPhase.endDistance = 100.f;
+    //newPhase.phaseMusic.path = ;
+    //newPhase.phaseMusic.repeat = true;
+    gameContext.entityMan.getComponent<WorldComponent>(WorldElementsData::worldId).currentPhase = std::move(newPhase);
 }
 
 void MapLoader::createObject(GameEngine& gameContext, std::string layerName, tson::Object& obj) {
@@ -151,4 +162,26 @@ void MapLoader::setEnemyObjective(GameEngine& gameContext, int enemyId) {
 
     if (gameContext.entityMan.existsComponent<AIPounceComponent>(enemyId))
         gameContext.entityMan.getComponent<AIPounceComponent>(enemyId).objectiveId = WorldElementsData::playerId;
+}
+
+
+
+uint8_t MapLoader::getNumberOfPhases(const std::string mapPath) {
+    uint8_t numberOfPhases = 0;
+    tson::Tileson t;
+    std::unique_ptr<tson::Map> map = t.parse(fs::path(mapPath));
+
+    if (map->getStatus() == tson::ParseStatus::OK)
+    {
+        for (auto& phaseLayer : map->getLayers()) { // this are the layerGroups that are the phases of the map
+            if (phaseLayer.getType() == tson::LayerType::Group) {
+                ++numberOfPhases;
+            }
+        }
+    }
+    else {
+        std::cout << "[Count Phases of Map Error] " << map->getStatusMessage() << "\n";
+    }
+
+    return numberOfPhases;
 }

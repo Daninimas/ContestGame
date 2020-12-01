@@ -76,6 +76,7 @@ void GameEngine::setPlayingSystems() {
     systems.emplace_back(std::make_unique<SpawnSystem>());
     systems.emplace_back(std::make_unique<PickPowerUpSystem>());
     systems.emplace_back(std::make_unique<FurySystem>());
+    systems.emplace_back(std::make_unique<PhaseSystem>());
 
     
     systemsLate.emplace_back(std::make_unique<ShieldSystem>());
@@ -369,6 +370,9 @@ void GameEngine::eraseEntityByID(int id) {
         }
     }
     //getSoundFacadeRef().setParameterEventByID(id, STOP_SOUND);
+
+    // Subtract enemy from world 
+    --WorldElementsData::enemiesInWorld;
 
     entityMan.eraseEntityByID(id);
 }
