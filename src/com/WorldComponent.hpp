@@ -17,7 +17,7 @@ public:
 
     WorldPhase currentPhase;
 
-    uint8_t currentPhaseNumber;
+    uint8_t currentPhaseNumber{ 1 }; // starts in 1
     uint8_t numberOfPhases;
 
     std::string worldPath;

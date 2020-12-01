@@ -776,10 +776,7 @@ int EntityManager::createWorld(GameEngine& gameContext, GameObjectType worldName
     {
     case GameObjectType::WORLD_DEBUG:
         worldComp.worldPath = "Media/Maps/debug.json";
-        MapLoader::loadMapPhase(gameContext, worldComp.worldPath, "Phase1");
-
-        // TODO read number of phases of the world
-        MapLoader::getNumberOfPhases(worldComp.worldPath);
+        
 
         // Start music
         //gameContext.getSoundFacadeRef().loadMusic(worldComp.currentPhase.phaseMusic.soundPath);
@@ -790,6 +787,11 @@ int EntityManager::createWorld(GameEngine& gameContext, GameObjectType worldName
 
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::WORLD, worldName));
+
+    // Create the entities of the world
+    MapLoader::loadMapPhase(gameContext, worldComp.worldPath, "Phase1");
+    MapLoader::getNumberOfPhases(worldComp.worldPath);
+
     return entityId;
 }
 

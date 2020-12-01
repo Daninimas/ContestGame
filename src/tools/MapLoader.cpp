@@ -86,7 +86,7 @@ void MapLoader::setPhaseData(GameEngine& gameContext, tson::Object& obj) {
     float rotation = obj.getRotation();
 
     WorldPhase newPhase = WorldPhase();
-    newPhase.limits = BoundingBox{ position.x, size.x, position.y, size.y };
+    newPhase.limits = BoundingBox{ position.x, size.x + position.x, position.y, size.y + position.y };
     std::cout << "      - Phase limits: { " << newPhase.limits.xLeft << ", " << newPhase.limits.xRight << ", " << newPhase.limits.yUp << ", " << newPhase.limits.yDown << " }\n";
     // TODO faltan datos en el tilemap
     // TODO ver si es necesario el componente de WorldComponent o si las fases se pueden poner en WorldElementsData
