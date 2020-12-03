@@ -204,11 +204,13 @@ bool Utils::entityInPhaseLimit(GameEngine& gameContext, SituationComponent& enti
         break;
 
     case WorldPhase::Down:
-        if (entitySit.position.y < (phase.limits.yDown - phase.endDistance)) {
+        if (entitySit.position.y > (phase.limits.yDown - phase.endDistance)) {
             return true;
         }
         break;
     }
+
+    return false;
 }
 
 

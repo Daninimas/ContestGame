@@ -24,7 +24,7 @@ void PhaseSystem::checkIfChangePhase(GameEngine& gameContext) const {
 		if (Utils::entityInPhaseLimit(gameContext, playerSit)) {
 			WorldComponent& worldComp = gameContext.entityMan.getComponent<WorldComponent>(WorldElementsData::worldId);
 
-			if (worldComp.currentPhaseNumber != worldComp.numberOfPhases) {
+			if (worldComp.currentPhaseNumber < worldComp.numberOfPhases) {
 				changeToNextPhase(gameContext, worldComp);
 			}
 			else { // End of the world

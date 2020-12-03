@@ -790,7 +790,7 @@ int EntityManager::createWorld(GameEngine& gameContext, GameObjectType worldName
 
     // Create the entities of the world
     MapLoader::loadMapPhase(gameContext, worldComp.worldPath, "Phase1");
-    MapLoader::getNumberOfPhases(worldComp.worldPath);
+    worldComp.numberOfPhases = MapLoader::getNumberOfPhases(worldComp.worldPath);
 
     return entityId;
 }

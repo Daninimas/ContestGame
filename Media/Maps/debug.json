@@ -65,8 +65,8 @@
                          "type":"CHASERJUMPER",
                          "visible":true,
                          "width":20,
-                         "x":301.272727272727,
-                         "y":366.242363636364
+                         "x":301.273,
+                         "y":366.242
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -195,6 +195,12 @@
                 }],
          "name":"Phase1",
          "opacity":1,
+         "properties":[
+                {
+                 "name":"Direction",
+                 "type":"string",
+                 "value":"Right"
+                }],
          "type":"group",
          "visible":true,
          "x":0,
@@ -209,13 +215,13 @@
                  "name":"phase_size",
                  "objects":[
                         {
-                         "height":780,
+                         "height":1161.81818181818,
                          "id":115,
                          "name":"",
                          "rotation":0,
                          "type":"",
                          "visible":true,
-                         "width":1672,
+                         "width":2090.60606060606,
                          "x":8,
                          "y":-128
                         }],
@@ -240,7 +246,7 @@
                          "visible":true,
                          "width":100,
                          "x":872,
-                         "y":396.5755
+                         "y":396.576
                         }, 
                         {
                          "gid":1,
@@ -252,7 +258,7 @@
                          "visible":true,
                          "width":100,
                          "x":975.03,
-                         "y":396.5755
+                         "y":396.576
                         }, 
                         {
                          "gid":1,
@@ -263,8 +269,8 @@
                          "type":"WALL",
                          "visible":true,
                          "width":100,
-                         "x":1084.121,
-                         "y":396.5755
+                         "x":1084.12,
+                         "y":396.576
                         }, 
                         {
                          "gid":1,
@@ -275,8 +281,8 @@
                          "type":"WALL",
                          "visible":true,
                          "width":100,
-                         "x":1184.121,
-                         "y":335.9695
+                         "x":1184.12,
+                         "y":335.97
                         }, 
                         {
                          "gid":1,
@@ -288,7 +294,7 @@
                          "visible":true,
                          "width":100,
                          "x":1296.24,
-                         "y":332.9395
+                         "y":332.94
                         }, 
                         {
                          "gid":1,
@@ -299,8 +305,8 @@
                          "type":"WALL",
                          "visible":true,
                          "width":100,
-                         "x":1392.061,
-                         "y":371.9695
+                         "x":1392.06,
+                         "y":371.97
                         }, 
                         {
                          "gid":1,
@@ -312,7 +318,7 @@
                          "visible":true,
                          "width":100,
                          "x":1547.94,
-                         "y":337.4245
+                         "y":337.425
                         }, 
                         {
                          "gid":1,
@@ -324,7 +330,7 @@
                          "visible":true,
                          "width":100,
                          "x":1647.34,
-                         "y":337.5455
+                         "y":337.546
                         }, 
                         {
                          "gid":1,
@@ -336,7 +342,7 @@
                          "visible":true,
                          "width":100,
                          "x":1746,
-                         "y":337.5455
+                         "y":337.546
                         }, 
                         {
                          "gid":1,
@@ -348,7 +354,7 @@
                          "visible":true,
                          "width":100,
                          "x":1846,
-                         "y":337.5455
+                         "y":337.546
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -358,13 +364,188 @@
                 }],
          "name":"Phase2",
          "opacity":1,
+         "properties":[
+                {
+                 "name":"Direction",
+                 "type":"string",
+                 "value":"Down"
+                }],
+         "type":"group",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "id":10,
+         "layers":[
+                {
+                 "draworder":"topdown",
+                 "id":12,
+                 "name":"phase_size",
+                 "objects":[
+                        {
+                         "height":400,
+                         "id":128,
+                         "name":"",
+                         "rotation":0,
+                         "type":"",
+                         "visible":true,
+                         "width":1088,
+                         "x":1298.30303030303,
+                         "y":971.757575757576
+                        }],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
+                }, 
+                {
+                 "draworder":"topdown",
+                 "id":11,
+                 "name":"WALL",
+                 "objects":[
+                        {
+                         "gid":1,
+                         "height":10,
+                         "id":129,
+                         "name":"",
+                         "rotation":0,
+                         "type":"WALL",
+                         "visible":true,
+                         "width":100,
+                         "x":2230.30303030303,
+                         "y":1275.75757575758
+                        }, 
+                        {
+                         "gid":1,
+                         "height":10,
+                         "id":130,
+                         "name":"",
+                         "rotation":0,
+                         "type":"WALL",
+                         "visible":true,
+                         "width":100,
+                         "x":2130.30303030303,
+                         "y":1275.75757575758
+                        }, 
+                        {
+                         "gid":1,
+                         "height":10,
+                         "id":131,
+                         "name":"",
+                         "rotation":0,
+                         "type":"WALL",
+                         "visible":true,
+                         "width":100,
+                         "x":2030.30303030303,
+                         "y":1275.75757575758
+                        }, 
+                        {
+                         "gid":1,
+                         "height":10,
+                         "id":132,
+                         "name":"",
+                         "rotation":0,
+                         "type":"WALL",
+                         "visible":true,
+                         "width":100,
+                         "x":1930.30303030303,
+                         "y":1275.75757575758
+                        }, 
+                        {
+                         "gid":1,
+                         "height":10,
+                         "id":133,
+                         "name":"",
+                         "rotation":0,
+                         "type":"WALL",
+                         "visible":true,
+                         "width":100,
+                         "x":1830.30303030303,
+                         "y":1275.75757575758
+                        }, 
+                        {
+                         "gid":1,
+                         "height":10,
+                         "id":134,
+                         "name":"",
+                         "rotation":0,
+                         "type":"WALL",
+                         "visible":true,
+                         "width":100,
+                         "x":1730.30303030303,
+                         "y":1275.75757575758
+                        }, 
+                        {
+                         "gid":1,
+                         "height":10,
+                         "id":135,
+                         "name":"",
+                         "rotation":0,
+                         "type":"WALL",
+                         "visible":true,
+                         "width":100,
+                         "x":1630.30303030303,
+                         "y":1275.75757575758
+                        }, 
+                        {
+                         "gid":1,
+                         "height":10,
+                         "id":136,
+                         "name":"",
+                         "rotation":0,
+                         "type":"WALL",
+                         "visible":true,
+                         "width":100,
+                         "x":1530.30303030303,
+                         "y":1275.75757575758
+                        }, 
+                        {
+                         "gid":1,
+                         "height":10,
+                         "id":137,
+                         "name":"",
+                         "rotation":0,
+                         "type":"WALL",
+                         "visible":true,
+                         "width":100,
+                         "x":1430.30303030303,
+                         "y":1275.75757575758
+                        }, 
+                        {
+                         "gid":1,
+                         "height":10,
+                         "id":138,
+                         "name":"",
+                         "rotation":0,
+                         "type":"WALL",
+                         "visible":true,
+                         "width":100,
+                         "x":1330.30303030303,
+                         "y":1275.75757575758
+                        }],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
+                }],
+         "name":"Phase3",
+         "opacity":1,
+         "properties":[
+                {
+                 "name":"Direction",
+                 "type":"string",
+                 "value":"Right"
+                }],
          "type":"group",
          "visible":true,
          "x":0,
          "y":0
         }],
- "nextlayerid":10,
- "nextobjectid":128,
+ "nextlayerid":13,
+ "nextobjectid":139,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.4.3",

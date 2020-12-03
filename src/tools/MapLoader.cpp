@@ -1,7 +1,5 @@
 #include "MapLoader.hpp"
 
-#include <tools/WorldPhase.hpp>
-
 #include <iostream>
 
 
@@ -18,7 +16,7 @@ const bool MapLoader::loadMap(GameEngine& gameContext, const std::string mapPath
             auto& objectLayers = phaseLayer.getLayers(); 
 
             for (tson::Layer& objLayer : objectLayers) { //This are the Objects Layer
-                checkObjectsOfLayer(gameContext, objLayer);                
+                checkObjectsOfLayer(gameContext, objLayer, &phaseLayer);
             }
         }
     }
@@ -44,11 +42,11 @@ const bool MapLoader::loadMapPhase(GameEngine& gameContext, const std::string ma
             auto& objectLayers = phaseLayer->getLayers();
 
             for (tson::Layer& objLayer : objectLayers) { //This are the Objects Layer
-                checkObjectsOfLayer(gameContext, objLayer);
+                checkObjectsOfLayer(gameContext, objLayer, phaseLayer);
             }
         }
         else {
-            std::cout << "[Load Layer Error] The layer (" << phaseName << ") doesn't exist in the map (" << mapPath << ")\n";
+            std::cout << "[Load Layer Error] The layer ( " << phaseName << " ) doesn't exist in the map (" << mapPath << ")\n";
         }
     }
     else {
@@ -60,7 +58,7 @@ const bool MapLoader::loadMapPhase(GameEngine& gameContext, const std::string ma
 
 
 
-void MapLoader::checkObjectsOfLayer(GameEngine& gameContext, tson::Layer& objLayer) {
+void MapLoader::checkObjectsOfLayer(GameEngine& gameContext, tson::Layer& objLayer, tson::Layer* phaseLayer) {
     std::string layerName = objLayer.getName();
     std::cout << "  Reading Type layer: " << layerName << "\n";
 
@@ -71,14 +69,14 @@ void MapLoader::checkObjectsOfLayer(GameEngine& gameContext, tson::Layer& objLay
         }
         else if (obj.getObjectType() == tson::ObjectType::Rectangle) {
             if (layerName == "phase_size") {
-                setPhaseData(gameContext, obj);
+                setPhaseData(gameContext, obj, phaseLayer);
             }
         }
     }
 }
 
 
-void MapLoader::setPhaseData(GameEngine& gameContext, tson::Object& obj) {
+void MapLoader::setPhaseData(GameEngine& gameContext, tson::Object& obj, tson::Layer* phaseLayer) {
     std::string objType = obj.getType();
 
     tson::Vector2f position = obj.getPosition();
@@ -88,9 +86,8 @@ void MapLoader::setPhaseData(GameEngine& gameContext, tson::Object& obj) {
     WorldPhase newPhase = WorldPhase();
     newPhase.limits = BoundingBox{ position.x, size.x + position.x, position.y, size.y + position.y };
     std::cout << "      - Phase limits: { " << newPhase.limits.xLeft << ", " << newPhase.limits.xRight << ", " << newPhase.limits.yUp << ", " << newPhase.limits.yDown << " }\n";
-    // TODO faltan datos en el tilemap
-    // TODO ver si es necesario el componente de WorldComponent o si las fases se pueden poner en WorldElementsData
-    //newPhase.direction = ;
+
+    newPhase.direction = getDirection( phaseLayer->get<std::string>("Direction") );
     newPhase.endDistance = 100.f;
     //newPhase.phaseMusic.path = ;
     //newPhase.phaseMusic.repeat = true;
@@ -144,6 +141,17 @@ GameObjectType MapLoader::getGameObject(const std::string objType) { // if not f
         return it->second;
     else
         return GameObjectType::ERROR;
+}
+
+uint8_t MapLoader::getDirection(const std::string dir) { // if not found, return GameObject ERROR
+    auto it = directionMap.find(dir);
+
+    if (it != directionMap.end())
+        return it->second;
+    else {
+        cout << "ERROR LOADING DIRECTION: " << dir << "\n";
+        return 0;
+    }
 }
 
 
