@@ -21,6 +21,7 @@ private:
     static GameObjectType getGameObject(const std::string objType);
     static uint8_t getDirection(const std::string dir);
     static void setEnemyObjective(GameEngine& gameContext, int enemyId);
+    static void setTriggerData(GameEngine& gameContext, int triggerId, tson::Object& obj);
 
 
 
@@ -52,7 +53,10 @@ private:
         // Power ups
         { "POWERUP_SHIELD", GameObjectType::POWERUP_SHIELD },
         { "POWERUP_FURY", GameObjectType::POWERUP_FURY },
-	};
+
+        // Triggers
+        { "TRIGGER", GameObjectType::TRIGGER },
+    };
 
     static inline std::map<std::string, uint8_t> directionMap{    // Este mapa sirve para coger la direccion del mapa que se esta generando y pasarlo a enum 
         { "Left", WorldPhase::Left },

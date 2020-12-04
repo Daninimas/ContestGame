@@ -53,6 +53,28 @@
                 }, 
                 {
                  "draworder":"topdown",
+                 "id":13,
+                 "name":"TRIGGER",
+                 "objects":[
+                        {
+                         "height":96,
+                         "id":139,
+                         "name":"",
+                         "rotation":0,
+                         "type":"TRIGGER",
+                         "visible":true,
+                         "width":61.3333,
+                         "x":710.667,
+                         "y":306.667
+                        }],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
+                }, 
+                {
+                 "draworder":"topdown",
                  "id":4,
                  "name":"SPAWNER",
                  "objects":[
@@ -215,13 +237,13 @@
                  "name":"phase_size",
                  "objects":[
                         {
-                         "height":1161.81818181818,
+                         "height":1161.82,
                          "id":115,
                          "name":"",
                          "rotation":0,
                          "type":"",
                          "visible":true,
-                         "width":2090.60606060606,
+                         "width":2090.61,
                          "x":8,
                          "y":-128
                         }],
@@ -391,8 +413,8 @@
                          "type":"",
                          "visible":true,
                          "width":1088,
-                         "x":1298.30303030303,
-                         "y":971.757575757576
+                         "x":1298.3,
+                         "y":971.758
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -414,8 +436,8 @@
                          "type":"WALL",
                          "visible":true,
                          "width":100,
-                         "x":2230.30303030303,
-                         "y":1275.75757575758
+                         "x":2230.3,
+                         "y":1275.76
                         }, 
                         {
                          "gid":1,
@@ -426,8 +448,8 @@
                          "type":"WALL",
                          "visible":true,
                          "width":100,
-                         "x":2130.30303030303,
-                         "y":1275.75757575758
+                         "x":2130.3,
+                         "y":1275.76
                         }, 
                         {
                          "gid":1,
@@ -438,8 +460,8 @@
                          "type":"WALL",
                          "visible":true,
                          "width":100,
-                         "x":2030.30303030303,
-                         "y":1275.75757575758
+                         "x":2030.3,
+                         "y":1275.76
                         }, 
                         {
                          "gid":1,
@@ -450,8 +472,8 @@
                          "type":"WALL",
                          "visible":true,
                          "width":100,
-                         "x":1930.30303030303,
-                         "y":1275.75757575758
+                         "x":1930.3,
+                         "y":1275.76
                         }, 
                         {
                          "gid":1,
@@ -462,8 +484,8 @@
                          "type":"WALL",
                          "visible":true,
                          "width":100,
-                         "x":1830.30303030303,
-                         "y":1275.75757575758
+                         "x":1830.3,
+                         "y":1275.76
                         }, 
                         {
                          "gid":1,
@@ -474,8 +496,8 @@
                          "type":"WALL",
                          "visible":true,
                          "width":100,
-                         "x":1730.30303030303,
-                         "y":1275.75757575758
+                         "x":1730.3,
+                         "y":1275.76
                         }, 
                         {
                          "gid":1,
@@ -486,8 +508,8 @@
                          "type":"WALL",
                          "visible":true,
                          "width":100,
-                         "x":1630.30303030303,
-                         "y":1275.75757575758
+                         "x":1630.3,
+                         "y":1275.76
                         }, 
                         {
                          "gid":1,
@@ -498,8 +520,8 @@
                          "type":"WALL",
                          "visible":true,
                          "width":100,
-                         "x":1530.30303030303,
-                         "y":1275.75757575758
+                         "x":1530.3,
+                         "y":1275.76
                         }, 
                         {
                          "gid":1,
@@ -510,8 +532,8 @@
                          "type":"WALL",
                          "visible":true,
                          "width":100,
-                         "x":1430.30303030303,
-                         "y":1275.75757575758
+                         "x":1430.3,
+                         "y":1275.76
                         }, 
                         {
                          "gid":1,
@@ -522,8 +544,8 @@
                          "type":"WALL",
                          "visible":true,
                          "width":100,
-                         "x":1330.30303030303,
-                         "y":1275.75757575758
+                         "x":1330.3,
+                         "y":1275.76
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -544,8 +566,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":13,
- "nextobjectid":139,
+ "nextlayerid":15,
+ "nextobjectid":140,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.4.3",

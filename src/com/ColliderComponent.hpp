@@ -23,13 +23,13 @@ public:
         Enemy         = 0x10,
         Weapon        = 0x20,
         Shield        = 0x40,
-        PlayerShield  = 0x80
-
+        PlayerShield  = 0x80,
+        Trigger       = 0x100
     };
 
 
-    uint8_t collisionLayer{ NoLayer }; // Este siempre tiene que ser con un tipo de collisionLayer
-    uint8_t layerMasc{0xFF}; // Este es libre, es con que collisionLayers va a colisionar
+    uint16_t collisionLayer{ NoLayer }; // Este siempre tiene que ser con un tipo de collisionLayer
+    uint16_t layerMasc{0xFFF}; // Este es libre, es con que collisionLayers va a colisionar
 
     ColliderType type{ ColliderType::STATIC };
     //Puedo hacer collidable type si necesito: Dinamic, kinematic, static

@@ -77,6 +77,7 @@ void GameEngine::setPlayingSystems() {
     systems.emplace_back(std::make_unique<PickPowerUpSystem>());
     systems.emplace_back(std::make_unique<FurySystem>());
     systems.emplace_back(std::make_unique<PhaseSystem>());
+    systems.emplace_back(std::make_unique<TriggerSystem>());
 
     
     systemsLate.emplace_back(std::make_unique<ShieldSystem>());

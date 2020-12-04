@@ -23,7 +23,7 @@ public:
 
     static bool objectiveInsideRange(SituationComponent& attackerSit, SituationComponent& objectiveSit, const Vector2 range);
 
-    static bool checkCollidingWithObjective(BoundingBoxNode& boundingNode, int objId);
+    static bool checkCollidingWithEntity(BoundingBoxNode& boundingNode, int objId);
     static void deleteCollidingWithObjective(BoundingBoxNode& boundingNode, int objId);
 
     static void setNormalPistolToEntity(GameEngine& gameContext, int entityId);

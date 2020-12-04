@@ -111,17 +111,15 @@ bool Utils::objectiveInsideRange(SituationComponent& attackerSit, SituationCompo
 };
 
 
-bool Utils::checkCollidingWithObjective(BoundingBoxNode& boundingNode, int objId) {
+bool Utils::checkCollidingWithEntity(BoundingBoxNode& boundingNode, int objId) {
     bool collide = false;
     std::vector<int>& entitiesColliding = boundingNode.bounding.entitiesColliding;
 
-    if (boundingNode.childs.size() > 0) {
-        for (auto& b : boundingNode.childs) {
-            collide = checkCollidingWithObjective(b, objId);
-        }
+    for (auto& b : boundingNode.childs) {
+        collide = checkCollidingWithEntity(b, objId);
     }
 
-    if (!collide && std::find(entitiesColliding.begin(), entitiesColliding.end(), objId) == entitiesColliding.end()) {
+    if (std::find(entitiesColliding.begin(), entitiesColliding.end(), objId) != entitiesColliding.end()) {
         collide = true;
     }
 

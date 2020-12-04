@@ -64,7 +64,13 @@ enum class GameObjectType {
     HUD_PLAYER_HEALTH,
     HUD_PLAYER_AMMO,
 
-    // WORLD
-    WORLD_DEBUG
+    // World
+    WORLD_DEBUG,
+
+    // Triggers
+    TRIGGER
+    /*TRIGGER_SOUND,
+    TRIGGER_CREATE_ENTITY,
+    TRIGGER_FUNCTION*/
 
 };

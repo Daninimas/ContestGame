@@ -13,7 +13,7 @@ public:
 private:
     void checkPlayerPickingWeapons(GameEngine& gameContext) const;
 
-    bool checkWeaponCollidesWithPlayer(BoundingBoxNode& weaponBounding) const;
+    //bool checkWeaponCollidesWithPlayer(BoundingBoxNode& weaponBounding) const;
 
     void setDistanceWeaponToPlayer(GameEngine& gameContext, int distanceWeapId) const;
     void setMeleeWeaponToPlayer(GameEngine& gameContext, int meleeWeapId) const;

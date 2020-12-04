@@ -28,3 +28,4 @@ class FuryComponent;
 class TextComponent;
 class MenuOptionComponent;
 class WorldComponent;
+class TriggerComponent;

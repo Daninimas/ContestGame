@@ -23,7 +23,7 @@ void PickWeaponsSystem::checkPlayerPickingWeapons(GameEngine& gameContext) const
 
 		if (weaponCollider.collide) {
 			// Supongo que el arma solo tiene un collidable sin bounding hijos
-			if (checkWeaponCollidesWithPlayer(weaponCollider.boundingRoot)) {
+			if (Utils::checkCollidingWithEntity(weaponCollider.boundingRoot, WorldElementsData::playerId)/*checkWeaponCollidesWithPlayer(weaponCollider.boundingRoot)*/) {
 				setDistanceWeaponToPlayer(gameContext, distanceWeapId);
 
 				break;
@@ -38,7 +38,7 @@ void PickWeaponsSystem::checkPlayerPickingWeapons(GameEngine& gameContext) const
 
 		if (weaponCollider.collide) {
 			// Supongo que el arma solo tiene un collidable sin bounding hijos
-			if (checkWeaponCollidesWithPlayer(weaponCollider.boundingRoot)) {
+			if (Utils::checkCollidingWithEntity(weaponCollider.boundingRoot, WorldElementsData::playerId)/*checkWeaponCollidesWithPlayer(weaponCollider.boundingRoot)*/) {
 				setMeleeWeaponToPlayer(gameContext, meleeWeapId);
 
 				break;
@@ -46,7 +46,7 @@ void PickWeaponsSystem::checkPlayerPickingWeapons(GameEngine& gameContext) const
 		}
 	}
 }
-
+/*
 bool PickWeaponsSystem::checkWeaponCollidesWithPlayer(BoundingBoxNode& weaponBounding) const {
 
 	for (int entityColliding : weaponBounding.bounding.entitiesColliding) {
@@ -57,7 +57,7 @@ bool PickWeaponsSystem::checkWeaponCollidesWithPlayer(BoundingBoxNode& weaponBou
 
 	return false;
 }
-
+*/
 
 
 void PickWeaponsSystem::setDistanceWeaponToPlayer(GameEngine& gameContext, int distanceWeapId) const {

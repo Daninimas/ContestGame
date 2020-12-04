@@ -64,13 +64,11 @@ void MapLoader::checkObjectsOfLayer(GameEngine& gameContext, tson::Layer& objLay
 
     for (auto& obj : objLayer.getObjects())
     {
-        if (obj.getObjectType() == tson::ObjectType::Object) {
+        if (layerName != "phase_size") {
             createObject(gameContext, layerName, obj);
         }
-        else if (obj.getObjectType() == tson::ObjectType::Rectangle) {
-            if (layerName == "phase_size") {
-                setPhaseData(gameContext, obj, phaseLayer);
-            }
+        else {
+            setPhaseData(gameContext, obj, phaseLayer);
         }
     }
 }
@@ -125,7 +123,11 @@ void MapLoader::createObject(GameEngine& gameContext, std::string layerName, tso
         else if (layerName == "POWERUP") {
             gameContext.entityMan.createPowerUp(gameContext, Vector2(position.x, position.y), rotation, goType);
         }
-        
+        else if (layerName == "TRIGGER") {
+            int triggerId = gameContext.entityMan.createTrigger(gameContext, Vector2(position.x, position.y), rotation, goType);
+
+            setTriggerData(gameContext, triggerId, obj);
+        }
     }
     else {
         // Error on the type of the object
@@ -170,6 +172,20 @@ void MapLoader::setEnemyObjective(GameEngine& gameContext, int enemyId) {
 
     if (gameContext.entityMan.existsComponent<AIPounceComponent>(enemyId))
         gameContext.entityMan.getComponent<AIPounceComponent>(enemyId).objectiveId = WorldElementsData::playerId;
+}
+
+
+void MapLoader::setTriggerData(GameEngine& gameContext, int triggerId, tson::Object& obj) {
+    ColliderComponent& collComp   = gameContext.entityMan.getComponent<ColliderComponent>(triggerId);
+    TriggerComponent& triggerComp = gameContext.entityMan.getComponent<TriggerComponent>(triggerId);
+
+    auto size = obj.getSize();
+    collComp.boundingRoot.bounding = { 0.f, size.x, 0.f, size.y };
+
+    triggerComp.sound.soundPath = "./Media/Sound/Music/darren-curtis-intruder-aboard.wav";
+    triggerComp.sound.repeat = true;
+
+    triggerComp.functions.emplace_back(TriggerFunction::PLAY_MUSIC);
 }
 
 

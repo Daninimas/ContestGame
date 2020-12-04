@@ -101,8 +101,9 @@ public:
     int createCamera(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType = GameObjectType::NONE);
     int createBomb(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType = GameObjectType::NONE);
     int createSpawner(GameEngine& gameContext, Vector2 position, float r, GameObjectType goTypeToSpawn = GameObjectType::NONE);
-    int createShield(GameEngine& gameContext, Vector2 position, float r, GameObjectType goTypeToSpawn = GameObjectType::NONE);
-    int createPowerUp(GameEngine& gameContext, Vector2 position, float r, GameObjectType goTypeToSpawn = GameObjectType::NONE);
+    int createShield(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType = GameObjectType::NONE);
+    int createPowerUp(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType = GameObjectType::NONE);
+    int createTrigger(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType = GameObjectType::NONE);
 
 
     //////////////////////////////////////////////////

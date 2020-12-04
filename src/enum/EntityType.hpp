@@ -15,5 +15,6 @@ enum class EntityType {
     SHIELD,
     POWERUP,
     HUD_ELEMENT,
-    WORLD
+    WORLD,
+    TRIGGER
 };

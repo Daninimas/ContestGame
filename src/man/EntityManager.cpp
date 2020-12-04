@@ -54,6 +54,7 @@ void EntityManager::eraseEntityByID(int id) {
     eraseComponent<TextComponent>(id);
     eraseComponent<MenuOptionComponent>(id);
     eraseComponent<WorldComponent>(id);
+    eraseComponent<TriggerComponent>(id);
 
     // AI
     eraseComponent<AIChaseComponent>(id);
@@ -122,7 +123,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
     // Collider
     colliderComp.collisionLayer = ColliderComponent::Player;
     colliderComp.type = ColliderType::DYNAMIC;
-    colliderComp.layerMasc = 0xFF - ColliderComponent::PlayerAttack - ColliderComponent::PlayerShield; //Collides with everything except PlayerAttacks
+    colliderComp.layerMasc = 0xFFF - ColliderComponent::PlayerAttack - ColliderComponent::PlayerShield; //Collides with everything except PlayerAttacks
     colliderComp.boundingRoot.bounding = { 0.f, 50.f, 0.f, 50.f };
     colliderComp.boundingRoot.childs.emplace_back( 20.f, 30.f, 10.f, 20.f ); //Head
 
@@ -763,6 +764,29 @@ int EntityManager::createPowerUp(GameEngine& gameContext, Vector2 position, floa
     return entityId;
 }
 
+
+int EntityManager::createTrigger(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType) {
+    int entityId = Entity::getCurrentId();
+
+    SituationComponent& situation   = createComponent<SituationComponent>(entityId);
+    ColliderComponent& colliderComp = createComponent<ColliderComponent>(entityId);
+    TriggerComponent& triggerComp   = createComponent<TriggerComponent>(entityId);
+
+    //######### DATA ########//
+    situation.position = position;
+    situation.rotation = r;
+
+    // Collider
+    colliderComp.collisionLayer = ColliderComponent::Trigger;
+    colliderComp.layerMasc = ColliderComponent::Player; //Collides with player and wall
+    colliderComp.type = ColliderType::NO_SOLID;
+
+    //######### CREATE ########//
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::TRIGGER, goType));
+    return entityId;
+}
+
+
 // ------------------------------ WORLD CREATION ------------------------------
 
 int EntityManager::createWorld(GameEngine& gameContext, GameObjectType worldName) {
@@ -776,11 +800,6 @@ int EntityManager::createWorld(GameEngine& gameContext, GameObjectType worldName
     {
     case GameObjectType::WORLD_DEBUG:
         worldComp.worldPath = "Media/Maps/debug.json";
-        
-
-        // Start music
-        //gameContext.getSoundFacadeRef().loadMusic(worldComp.currentPhase.phaseMusic.soundPath);
-        //gameContext.getSoundFacadeRef().playMusic(worldComp.currentPhase.phaseMusic);
 
         break;
     }
