@@ -75,8 +75,30 @@
                          "type":"TRIGGER",
                          "visible":true,
                          "width":61.3333,
-                         "x":710.667,
-                         "y":306.667
+                         "x":70.667,
+                         "y":300.000333333333
+                        }, 
+                        {
+                         "height":96,
+                         "id":140,
+                         "name":"",
+                         "properties":[
+                                {
+                                 "name":"Function",
+                                 "type":"string",
+                                 "value":"PLAY_SOUND"
+                                }, 
+                                {
+                                 "name":"soundPath",
+                                 "type":"string",
+                                 "value":".\/Media\/Sound\/Weapons\/veryBigExplosion.wav"
+                                }],
+                         "rotation":0,
+                         "type":"TRIGGER",
+                         "visible":true,
+                         "width":61.3333,
+                         "x":696.000016666667,
+                         "y":305.333333333333
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -578,7 +600,7 @@
          "y":0
         }],
  "nextlayerid":15,
- "nextobjectid":140,
+ "nextobjectid":141,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.4.3",
