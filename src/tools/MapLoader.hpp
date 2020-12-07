@@ -4,6 +4,7 @@
 #include <tools/Vector2.hpp>
 #include <tools/tileson.hpp>
 #include <tools/WorldPhase.hpp>
+#include <enum/TriggerFunction.hpp>
 #include <string>
 #include <map>
 
@@ -22,6 +23,7 @@ private:
     static uint8_t getDirection(const std::string dir);
     static void setEnemyObjective(GameEngine& gameContext, int enemyId);
     static void setTriggerData(GameEngine& gameContext, int triggerId, tson::Object& obj);
+    static TriggerFunction getTriggerFunction(const std::string func);
 
 
 
@@ -55,14 +57,20 @@ private:
         { "POWERUP_FURY", GameObjectType::POWERUP_FURY },
 
         // Triggers
-        { "TRIGGER", GameObjectType::TRIGGER },
+        { "TRIGGER", GameObjectType::TRIGGER }
     };
 
     static inline std::map<std::string, uint8_t> directionMap{    // Este mapa sirve para coger la direccion del mapa que se esta generando y pasarlo a enum 
         { "Left", WorldPhase::Left },
         { "Right", WorldPhase::Right },
         { "Up", WorldPhase::Up },
-        { "Down", WorldPhase::Down },
+        { "Down", WorldPhase::Down }
+    };
+
+    static inline std::map<std::string, TriggerFunction> triggerFuncMap{    // Este mapa sirve para coger la funcion de trigger que se esta generando y pasarlo a enum 
+        { "PLAY_MUSIC", TriggerFunction::PLAY_MUSIC },
+        { "PLAY_SOUND", TriggerFunction::PLAY_SOUND },
+        { "CREATE_ENTITY", TriggerFunction::CREATE_ENTITY }
     };
 };
 

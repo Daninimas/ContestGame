@@ -156,6 +156,17 @@ uint8_t MapLoader::getDirection(const std::string dir) { // if not found, return
     }
 }
 
+TriggerFunction MapLoader::getTriggerFunction(const std::string func) {
+    auto it = triggerFuncMap.find(func);
+
+    if (it != triggerFuncMap.end())
+        return it->second;
+    else {
+        cout << "ERROR LOADING TRIGGER FUNCTION: " << func << "\n";
+        return TriggerFunction::ERROR;
+    }
+}
+
 
 void MapLoader::setEnemyObjective(GameEngine& gameContext, int enemyId) {
     if (gameContext.entityMan.existsComponent<AIChaseComponent>(enemyId))
@@ -178,14 +189,35 @@ void MapLoader::setEnemyObjective(GameEngine& gameContext, int enemyId) {
 void MapLoader::setTriggerData(GameEngine& gameContext, int triggerId, tson::Object& obj) {
     ColliderComponent& collComp   = gameContext.entityMan.getComponent<ColliderComponent>(triggerId);
     TriggerComponent& triggerComp = gameContext.entityMan.getComponent<TriggerComponent>(triggerId);
+    TriggerFunction triggerFunc = getTriggerFunction(obj.get<std::string>("Function"));
 
-    auto size = obj.getSize();
-    collComp.boundingRoot.bounding = { 0.f, size.x, 0.f, size.y };
 
-    triggerComp.sound.soundPath = "./Media/Sound/Music/darren-curtis-intruder-aboard.wav";
-    triggerComp.sound.repeat = true;
+    if (triggerFunc != TriggerFunction::ERROR) {
+        auto size = obj.getSize();
+        collComp.boundingRoot.bounding = { 0.f, size.x, 0.f, size.y };
 
-    triggerComp.functions.emplace_back(TriggerFunction::PLAY_MUSIC);
+        triggerComp.functions.emplace_back(triggerFunc);
+
+        switch (triggerFunc)
+        {
+        case TriggerFunction::PLAY_MUSIC:
+            triggerComp.sound.soundPath = obj.get<std::string>("soundPath");
+            triggerComp.sound.repeat = true;
+            break;
+
+        case TriggerFunction::PLAY_SOUND:
+            triggerComp.sound.soundPath = obj.get<std::string>("soundPath");
+            break;
+
+        case TriggerFunction::CREATE_ENTITY:
+
+            break;
+        }
+    
+    }
+    else {
+        gameContext.eraseEntityByID(triggerId);
+    }
 }
 
 

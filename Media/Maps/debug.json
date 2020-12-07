@@ -60,6 +60,17 @@
                          "height":96,
                          "id":139,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"Function",
+                                 "type":"string",
+                                 "value":"PLAY_MUSIC"
+                                }, 
+                                {
+                                 "name":"soundPath",
+                                 "type":"string",
+                                 "value":".\/Media\/Sound\/Music\/darren-curtis-intruder-aboard.wav"
+                                }],
                          "rotation":0,
                          "type":"TRIGGER",
                          "visible":true,

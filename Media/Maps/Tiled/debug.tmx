@@ -16,7 +16,12 @@
    <object id="71" x="0" y="-104" width="865.34" height="732"/>
   </objectgroup>
   <objectgroup id="13" name="TRIGGER">
-   <object id="139" type="TRIGGER" x="710.667" y="306.667" width="61.3333" height="96"/>
+   <object id="139" type="TRIGGER" x="710.667" y="306.667" width="61.3333" height="96">
+    <properties>
+     <property name="Function" value="PLAY_MUSIC"/>
+     <property name="soundPath" value="./Media/Sound/Music/darren-curtis-intruder-aboard.wav"/>
+    </properties>
+   </object>
   </objectgroup>
   <objectgroup id="4" name="SPAWNER">
    <object id="82" type="CHASERJUMPER" gid="2" x="301.273" y="366.242" width="20" height="20"/>
