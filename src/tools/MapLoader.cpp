@@ -128,6 +128,9 @@ void MapLoader::createObject(GameEngine& gameContext, std::string layerName, tso
 
             setTriggerData(gameContext, triggerId, obj);
         }
+        else if (layerName == "WEAPON") {
+            gameContext.entityMan.createWeapon(gameContext, Vector2(position.x, position.y), rotation, goType);
+        }
     }
     else {
         // Error on the type of the object
