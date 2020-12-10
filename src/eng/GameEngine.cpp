@@ -417,7 +417,7 @@ void GameEngine::popGameState() {
 }
 
 void GameEngine::pushGameState(const GameState gs) {
-    if (gs != gameStateStack.top()) {
+    if (gameStateStack.size() == 0 || gs != gameStateStack.top()) {
         gameStateStack.push(gs);
         gameStateChanged = true;
     }

@@ -77,25 +77,25 @@ void MenuSystem::acceptOption(GameEngine& gameContext, MenuComponent& menuComp) 
 	switch ( gameContext.entityMan.getComponent<MenuOptionComponent>(menuComp.optionsId[menuComp.selectedOption]).option )
 	{
 	case MenuOptions::BACK:
-		gameContext.setGameState(gameContext.getLastGameState());
+		gameContext.popGameState();
 		break;
 	case MenuOptions::EXIT:
 		gameContext.setPlaying(false);
 		break;
 	case MenuOptions::PLAY:
 		std::cout << "Jugando...\n";
-		gameContext.setGameState(GameState::PLAYING);
+		gameContext.pushGameState(GameState::PLAYING);
 		break;
 	case MenuOptions::CONTROLS:
 		std::cout << "Accedo a CONTROLS\n";
-		gameContext.setGameState(GameState::CONTROLS);
+		gameContext.pushGameState(GameState::CONTROLS);
 		break;
 
 		// Set controls
 	case MenuOptions::SET_KEY_ATTACK:
 		// poner sistema de recepcion de teclas;
 		gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId).controlToChange = Controls::ACTION;
-		gameContext.setGameState(GameState::WAIT_INPUT);
+		gameContext.pushGameState(GameState::WAIT_INPUT);
 		break;
 	}
 
