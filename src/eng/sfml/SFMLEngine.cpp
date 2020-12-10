@@ -47,13 +47,13 @@ void SFMLEngine::render(GameEngine& gameContext) const {
 		}
 
 		else if (event.type == sf::Event::LostFocus) {
-			gameContext.setGameState(GameState::PAUSE);
+			gameContext.pushGameState(GameState::PAUSE);
 		}
 
 		// For the change of controls
 		if (gameContext.getGameState() == GameState::WAIT_INPUT && event.type == sf::Event::KeyPressed) {
 			setKeyToControl(gameContext, event);
-			gameContext.setGameState(gameContext.getLastGameState());
+			gameContext.popGameState();
 		}
     }
 

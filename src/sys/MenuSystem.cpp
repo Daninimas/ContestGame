@@ -88,7 +88,7 @@ void MenuSystem::acceptOption(GameEngine& gameContext, MenuComponent& menuComp) 
 		break;
 	case MenuOptions::CONTROLS:
 		std::cout << "Accedo a CONTROLS\n";
-		gameContext.setGameState(GameState::WAIT_INPUT);
+		gameContext.setGameState(GameState::CONTROLS);
 		break;
 
 		// Set controls

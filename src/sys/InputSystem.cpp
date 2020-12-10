@@ -81,7 +81,7 @@ void InputSystem::inputPlaying(GameEngine& gameContext) const {
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-        gameContext.setGameState(GameState::PAUSE);
+        gameContext.pushGameState(GameState::PAUSE);
     }
 
     activateDodge(gameContext, actualMovement);

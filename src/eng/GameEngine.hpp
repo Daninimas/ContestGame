@@ -18,6 +18,7 @@
 
 #include <memory>
 #include <chrono>
+#include <stack>
 
 #include <sys/System.hpp>
 
@@ -45,9 +46,8 @@ public:
     void clearEntitiesToUpdate();*/
 
     GameState getGameState() const;
-    GameState getLastGameState() const;
-    void setGameState(const GameState gs);
-    void setLastState(const GameState gs);
+    void popGameState();
+    void pushGameState(const GameState gs);
 
     EntityManager   entityMan;
 
@@ -85,7 +85,9 @@ private:
     const uint8_t MAX_TIMES = 25;
 
     bool        playing     {true};
-    GameState   gameState   {GameState::PLAYING};
-    GameState   lastState   {GameState::NOSTATE};
 
+    /*GameState   gameState   {GameState::PLAYING};
+    GameState   lastState   {GameState::NOSTATE};*/
+    std::stack<GameState> gameStateStack;
+    bool gameStateChanged{ false };
 };

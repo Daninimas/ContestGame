@@ -18,8 +18,7 @@ const bool CHECK_SYSTEMS    = false;
 const float DELTA_TO_UPDATE = 1.f / 60.f;
 
 GameEngine::GameEngine()
-    : windowFacade(800, 600, false), soundFacade()/*, soundFacade()*/ {
-
+    : windowFacade(800, 600, false), soundFacade(), gameStateStack(){
 
     srand(time(NULL)); // initialize the random seed
     //init();
@@ -52,7 +51,7 @@ void GameEngine::reset() {
 }
 
 void GameEngine::init() {
-    setGameState(GameState::PAUSE);
+    pushGameState(GameState::PAUSE);
 
     StaticEntitiesSystem staticSystem{};
     staticSystem.init(*this);
@@ -107,11 +106,11 @@ void GameEngine::run() {
 
     while (playing) {
 
-        if (lastState != gameState) {
+        if (gameStateChanged) {
             // State recently changed. Systems vector must be updated
             systems.clear();
             systemsLate.clear();
-            switch (gameState) {
+            switch (getGameState()) {
             case GameState::GAMEOVER:
                 //systems.emplace_back(std::make_unique<GameOverSystem>());
                 break;
@@ -132,7 +131,7 @@ void GameEngine::run() {
                 break;
             }
 
-            lastState = gameState;
+            gameStateChanged = false;
         }
 
         calculateDeltaTime(then);
@@ -409,18 +408,17 @@ void GameEngine::clearEntitiesToUpdate() {
 }*/
 
 GameState GameEngine::getGameState() const {
-    return gameState;
+    return gameStateStack.top();
 }
 
-GameState GameEngine::getLastGameState() const {
-    return lastState;
+void GameEngine::popGameState() {
+    gameStateStack.pop();
+    gameStateChanged = true;
 }
 
-void GameEngine::setGameState(const GameState gs) {
-    setLastState(gameState);
-    gameState = gs;
-}
-
-void GameEngine::setLastState(const GameState gs) {
-    lastState = gs;
+void GameEngine::pushGameState(const GameState gs) {
+    if (gs != gameStateStack.top()) {
+        gameStateStack.push(gs);
+        gameStateChanged = true;
+    }
 }
