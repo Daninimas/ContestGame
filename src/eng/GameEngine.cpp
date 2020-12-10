@@ -91,13 +91,14 @@ void GameEngine::setPlayingSystems() {
     systemsLate.emplace_back(std::make_unique<WorldSystem>());
 }
 
-void GameEngine::setPauseSystems() {
+void GameEngine::setMenuSystems(GameObjectType const menu) {
     std::cout << "EN PAUSA...\n";
-    entityMan.createMenu(*this, GameObjectType::PAUSE);
+    entityMan.createMenu(*this, menu);
 
     systems.emplace_back(std::make_unique<InputSystem>());
     systems.emplace_back(std::make_unique<MenuSystem>());
 }
+
 
 void GameEngine::run() {
     // For the interpolation
@@ -107,7 +108,7 @@ void GameEngine::run() {
     while (playing) {
 
         if (lastState != gameState) {
-            // State reciently changed. Systems vector must be updated
+            // State recently changed. Systems vector must be updated
             systems.clear();
             systemsLate.clear();
             switch (gameState) {
@@ -120,7 +121,14 @@ void GameEngine::run() {
                 break;
 
             case GameState::PAUSE:
-                setPauseSystems();
+                setMenuSystems(GameObjectType::PAUSE);
+                break;
+
+            case GameState::CONTROLS:
+                setMenuSystems(GameObjectType::CONTROLS);
+                break;
+
+            case GameState::WAIT_INPUT:
                 break;
             }
 
@@ -349,7 +357,7 @@ void GameEngine::eraseEntityByID(int id) {
     // Removing the entity ID on Components
     auto& colliders = entityMan.getComponents<ColliderComponent>();
     for (ColliderComponent& collider : colliders) {
-        Utils::deleteCollidingWithObjective(collider.boundingRoot, id); // deletes the id from the colliding entites
+        Utils::deleteCollidingWithObjective(collider.boundingRoot, id); // deletes the id from the colliding entities
     }
 
     auto& sensors = entityMan.getComponents<SensorComponent>();

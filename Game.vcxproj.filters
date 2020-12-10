@@ -473,6 +473,9 @@
     <ClInclude Include="src\sys\TriggerSystem.hpp">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="src\enum\Controls.hpp">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\enum\EnumsIncluder" />

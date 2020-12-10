@@ -57,7 +57,7 @@ private:
     void updateSound();
     void render();
 
-    void setPauseSystems();
+    void setMenuSystems(GameObjectType const menu);
     void setPlayingSystems();
 
     void updateEntitiesInWindow();

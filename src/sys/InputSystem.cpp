@@ -149,7 +149,7 @@ void InputSystem::inputMenus(GameEngine& gameContext) const {
         }
     }
     
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::N))
     {
         playerInput.select = true;
     }

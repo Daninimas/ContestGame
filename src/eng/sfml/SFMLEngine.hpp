@@ -36,6 +36,7 @@ public:
     void addTexture(std::string path) override;
     void setColorToEntity(const int id, const Color color) override;
 
+
 private:
     void drawScene(GameEngine& gameContext) const;
     void renderColliders(GameEngine& gameContext) const;
@@ -47,6 +48,9 @@ private:
     void updateTexture(GameEngine& gameContext, sf::Sprite& node, int id);
     void updateText(GameEngine& gameContext, sf::Text& textNode, int id);
     void updateCamera(GameEngine& gameContext, int id);
+
+    void setKeyToControl(GameEngine& gameContext, sf::Event& event) const;
+
 
     std::unique_ptr<sf::RenderWindow> device;
     std::unordered_map<int, sf::Sprite> nodeMap;

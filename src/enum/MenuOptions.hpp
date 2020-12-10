@@ -4,5 +4,6 @@ enum class MenuOptions {
     BACK,
     EXIT,
     PLAY,
-    OPTIONS
+    CONTROLS,
+    SET_KEY_ATTACK
 };

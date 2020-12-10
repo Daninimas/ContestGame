@@ -4,5 +4,7 @@ enum class GameState {
     NOSTATE,
     PLAYING,
     GAMEOVER,
-    PAUSE
+    PAUSE,
+    CONTROLS,
+    WAIT_INPUT
 };

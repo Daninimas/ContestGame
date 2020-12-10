@@ -39,7 +39,7 @@ enum class GameObjectType {
     // Menu types
     PAUSE,
     MAINMENU,
-    OPTIONS_CONTROLS,
+    CONTROLS,
 
 
     // Enemy types

@@ -15,7 +15,7 @@ void MenuSystem::update(GameEngine& gameContext) const {
 
 	std::size_t lastSelected = menuComp.selectedOption;
 
-	if (playerInput.movingUp) {
+	if (playerInput.movingDown) {
 		if (menuComp.selectedOption < menuComp.optionsId.size() - 1) {
 			++menuComp.selectedOption;
 		}
@@ -23,7 +23,7 @@ void MenuSystem::update(GameEngine& gameContext) const {
 			menuComp.selectedOption = 0;
 		}
 	}
-	else if (playerInput.movingDown) {
+	else if (playerInput.movingUp) {
 		if (menuComp.selectedOption != 0) {
 			--menuComp.selectedOption;
 		}
@@ -82,12 +82,20 @@ void MenuSystem::acceptOption(GameEngine& gameContext, MenuComponent& menuComp) 
 	case MenuOptions::EXIT:
 		gameContext.setPlaying(false);
 		break;
-	case MenuOptions::OPTIONS:
-		std::cout << "Accedo a OPTIONS\n";
-		break;
 	case MenuOptions::PLAY:
 		std::cout << "Jugando...\n";
 		gameContext.setGameState(GameState::PLAYING);
+		break;
+	case MenuOptions::CONTROLS:
+		std::cout << "Accedo a CONTROLS\n";
+		gameContext.setGameState(GameState::WAIT_INPUT);
+		break;
+
+		// Set controls
+	case MenuOptions::SET_KEY_ATTACK:
+		// poner sistema de recepcion de teclas;
+		gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId).controlToChange = Controls::ACTION;
+		gameContext.setGameState(GameState::WAIT_INPUT);
 		break;
 	}
 

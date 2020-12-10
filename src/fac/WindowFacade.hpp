@@ -6,6 +6,7 @@
 #include <com/ComponentsIncluder>
 #include <tools/Color.hpp>
 #include <tools/BoundingBox.hpp>
+#include <enum/Controls.hpp>
 
 class GameEngine;
 

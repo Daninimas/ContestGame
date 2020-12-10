@@ -49,6 +49,12 @@ void SFMLEngine::render(GameEngine& gameContext) const {
 		else if (event.type == sf::Event::LostFocus) {
 			gameContext.setGameState(GameState::PAUSE);
 		}
+
+		// For the change of controls
+		if (gameContext.getGameState() == GameState::WAIT_INPUT && event.type == sf::Event::KeyPressed) {
+			setKeyToControl(gameContext, event);
+			gameContext.setGameState(gameContext.getLastGameState());
+		}
     }
 
     // clear the window with black color
@@ -373,4 +379,13 @@ void SFMLEngine::addTexture(std::string path) {
 		std::cout << "Error loading texture " << path << "\n";
 		textureMap.erase( prev(textureMap.end()) ); // IF error creating, delete the node
 	}
+}
+
+
+void SFMLEngine::setKeyToControl(GameEngine& gameContext, sf::Event& event) const {
+	InputComponent& playerInput = gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId);
+	bool inputEntered = false;
+
+	std::cout << "key pressed: " << (int)event.key.code << "\n";
+	playerInput.keyboardControlsMap[playerInput.controlToChange] = event.key.code;
 }

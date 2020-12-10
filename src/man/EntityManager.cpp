@@ -825,12 +825,20 @@ int EntityManager::createMenu(GameEngine& gameContext, GameObjectType menuType) 
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::MENU, menuType));
 
+
     // After creating the menu entity, create the menu Options
     switch (menuType)
     {
     case GameObjectType::PAUSE:
         menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 170.f), 0.f, MenuOptions::PLAY));
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 260.f), 0.f, MenuOptions::EXIT));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 260.f), 0.f, MenuOptions::CONTROLS));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 350.f), 0.f, MenuOptions::EXIT));
+
+        break;
+
+    case GameObjectType::CONTROLS:
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 170.f), 0.f, MenuOptions::SET_KEY_ATTACK));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 260.f), 0.f, MenuOptions::BACK));
 
         break;
     }
@@ -868,12 +876,27 @@ int EntityManager::createMenuOption(GameEngine& gameContext, Vector2 position, f
         textComp.text = "EXIT";
 
         break;
+
+    case MenuOptions::BACK:
+        textComp.text = "BACK";
+
+        break;
+
+    case MenuOptions::CONTROLS:
+        textComp.text = "CONTROLS";
+
+        break;
+
+    case MenuOptions::SET_KEY_ATTACK:
+        textComp.text = "SET_KEY_ATTACK";
+
+        break;
     }
 
     gameContext.getWindowFacadeRef().createText(gameContext, entityId);
 
     //######### CREATE ########//
-    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::MENU, GameObjectType::NONE));
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::MENU_OPTION, GameObjectType::NONE));
     return entityId;
 }
 
