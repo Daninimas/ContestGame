@@ -28,30 +28,30 @@ void InputSystem::inputPlaying(GameEngine& gameContext) const {
     playerVel.velocity.x = 0.f; // reset the movement
 
     // Set new actions
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+    if ( sf::Keyboard::isKeyPressed( static_cast<sf::Keyboard::Key>(playerInput.keyboardControlsMap[Controls::MOVE_UP]) ) )
     {
         playerInput.movingUp = true;
         actualMovement = DodgeComponent::Up;
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+    if (sf::Keyboard::isKeyPressed( static_cast<sf::Keyboard::Key>(playerInput.keyboardControlsMap[Controls::MOVE_DOWN]) ))
     {
         playerInput.movingDown = true;
         actualMovement = DodgeComponent::Down;
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+    if (sf::Keyboard::isKeyPressed( static_cast<sf::Keyboard::Key>(playerInput.keyboardControlsMap[Controls::MOVE_LEFT]) ))
     {
         playerInput.movingLeft = true;
         playerVel.velocity.x = -playerVel.speedX;
         actualMovement = DodgeComponent::Left;
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+    if (sf::Keyboard::isKeyPressed( static_cast<sf::Keyboard::Key>(playerInput.keyboardControlsMap[Controls::MOVE_RIGHT]) ))
     {
         playerInput.movingRight = true;
         playerVel.velocity.x = playerVel.speedX;
         actualMovement = DodgeComponent::Right;
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::N))
+    if (sf::Keyboard::isKeyPressed( static_cast<sf::Keyboard::Key>(playerInput.keyboardControlsMap[Controls::ACTION]) ))
     {
         playerInput.attacking = true;
     }
@@ -68,7 +68,7 @@ void InputSystem::inputPlaying(GameEngine& gameContext) const {
     }*/
 
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::M))
+    if (sf::Keyboard::isKeyPressed( static_cast<sf::Keyboard::Key>(playerInput.keyboardControlsMap[Controls::JUMP]) ))
     {
         auto& jumpComp = gameContext.entityMan.getComponent<JumpComponent>(WorldElementsData::playerId);
         if (jumpComp.cooldown > jumpComp.maxCooldown) { // if has cooldown on floor
@@ -121,36 +121,36 @@ void InputSystem::inputMenus(GameEngine& gameContext) const {
         bool buttonPressed = false;
 
         // Set new actions
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
         {
             playerInput.movingUp = true;
             buttonPressed = true;
         }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) || sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
         {
             playerInput.movingDown = true;
             buttonPressed = true;
         }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
         {
             playerInput.movingLeft = true;
             buttonPressed = true;
         }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
         {
             playerInput.movingRight = true;
             buttonPressed = true;
         }
 
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+        {
+            playerInput.select = true;
+            buttonPressed = true;
+        }
 
         // Reset cooldown
         if (buttonPressed) {
             playerInput.cooldown = 0.f;
         }
-    }
-    
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::N))
-    {
-        playerInput.select = true;
     }
 }

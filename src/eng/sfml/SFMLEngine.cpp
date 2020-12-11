@@ -45,10 +45,10 @@ void SFMLEngine::render(GameEngine& gameContext) const {
 
 			gameContext.setPlaying(false);
 		}
-
+		/*
 		else if (event.type == sf::Event::LostFocus) {
 			gameContext.pushGameState(GameState::PAUSE);
-		}
+		}*/
 
 		// For the change of controls
 		if (gameContext.getGameState() == GameState::WAIT_INPUT && event.type == sf::Event::KeyPressed) {
@@ -386,6 +386,6 @@ void SFMLEngine::setKeyToControl(GameEngine& gameContext, sf::Event& event) cons
 	InputComponent& playerInput = gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId);
 	bool inputEntered = false;
 
-	std::cout << "key pressed: " << (int)event.key.code << "\n";
+	//std::cout << "key pressed: " << (int)event.key.code << "\n";
 	playerInput.keyboardControlsMap[playerInput.controlToChange] = event.key.code;
 }
