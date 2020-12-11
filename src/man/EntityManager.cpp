@@ -838,7 +838,12 @@ int EntityManager::createMenu(GameEngine& gameContext, GameObjectType menuType) 
 
     case GameObjectType::CONTROLS:
         menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 170.f), 0.f, MenuOptions::SET_KEY_ATTACK));
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 260.f), 0.f, MenuOptions::BACK));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 200.f), 0.f, MenuOptions::SET_KEY_JUMP));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 230.f), 0.f, MenuOptions::SET_KEY_LEFT));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 260.f), 0.f, MenuOptions::SET_KEY_RIGHT));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 290.f), 0.f, MenuOptions::SET_KEY_UP));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 320.f), 0.f, MenuOptions::SET_KEY_DOWN));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 400.f), 0.f, MenuOptions::BACK));
 
         break;
     }
@@ -887,9 +892,36 @@ int EntityManager::createMenuOption(GameEngine& gameContext, Vector2 position, f
 
         break;
 
+
+    // set controls, keys
     case MenuOptions::SET_KEY_ATTACK:
         textComp.text = "SET_KEY_ATTACK";
+        textComp.size = 20;
+        break;
 
+    case MenuOptions::SET_KEY_JUMP:
+        textComp.text = "SET_KEY_JUMP";
+        textComp.size = 20;
+        break;
+
+    case MenuOptions::SET_KEY_LEFT:
+        textComp.text = "SET_KEY_LEFT";
+        textComp.size = 20;
+        break;
+
+    case MenuOptions::SET_KEY_RIGHT:
+        textComp.text = "SET_KEY_RIGHT";
+        textComp.size = 20;
+        break;
+
+    case MenuOptions::SET_KEY_UP:
+        textComp.text = "SET_KEY_UP";
+        textComp.size = 20;
+        break;
+
+    case MenuOptions::SET_KEY_DOWN:
+        textComp.text = "SET_KEY_DOWN";
+        textComp.size = 20;
         break;
     }
 

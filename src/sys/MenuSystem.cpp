@@ -91,10 +91,29 @@ void MenuSystem::acceptOption(GameEngine& gameContext, MenuComponent& menuComp) 
 		gameContext.pushGameState(GameState::CONTROLS);
 		break;
 
-		// Set controls
+		// Set controls (KEYS)
 	case MenuOptions::SET_KEY_ATTACK:
-		// poner sistema de recepcion de teclas;
 		gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId).controlToChange = Controls::ACTION;
+		gameContext.pushGameState(GameState::WAIT_INPUT);
+		break;
+	case MenuOptions::SET_KEY_JUMP:
+		gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId).controlToChange = Controls::JUMP;
+		gameContext.pushGameState(GameState::WAIT_INPUT);
+		break;
+	case MenuOptions::SET_KEY_LEFT:
+		gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId).controlToChange = Controls::MOVE_LEFT;
+		gameContext.pushGameState(GameState::WAIT_INPUT);
+		break;
+	case MenuOptions::SET_KEY_RIGHT:
+		gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId).controlToChange = Controls::MOVE_RIGHT;
+		gameContext.pushGameState(GameState::WAIT_INPUT);
+		break;
+	case MenuOptions::SET_KEY_UP:
+		gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId).controlToChange = Controls::MOVE_UP;
+		gameContext.pushGameState(GameState::WAIT_INPUT);
+		break;
+	case MenuOptions::SET_KEY_DOWN:
+		gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId).controlToChange = Controls::MOVE_DOWN;
 		gameContext.pushGameState(GameState::WAIT_INPUT);
 		break;
 	}

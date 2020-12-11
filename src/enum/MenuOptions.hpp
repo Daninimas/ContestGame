@@ -5,5 +5,12 @@ enum class MenuOptions {
     EXIT,
     PLAY,
     CONTROLS,
-    SET_KEY_ATTACK
+
+    // set controls, keys
+    SET_KEY_ATTACK,
+    SET_KEY_JUMP,
+    SET_KEY_LEFT,
+    SET_KEY_RIGHT,
+    SET_KEY_UP,
+    SET_KEY_DOWN
 };
