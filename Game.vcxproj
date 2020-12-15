@@ -157,6 +157,7 @@
     <ClCompile Include="src\com\MenuOptionComponent.cpp" />
     <ClCompile Include="src\com\TriggerComponent.cpp" />
     <ClCompile Include="src\com\WorldComponent.cpp" />
+    <ClCompile Include="src\sys\InputJoystickSystem.cpp" />
     <ClCompile Include="src\sys\PhaseSystem.cpp" />
     <ClCompile Include="src\sys\TriggerSystem.cpp" />
     <ClCompile Include="src\tools\MapLoader.cpp" />
@@ -227,6 +228,7 @@
     <ClInclude Include="src\com\WorldComponent.hpp" />
     <ClInclude Include="src\enum\Controls.hpp" />
     <ClInclude Include="src\enum\TriggerFunction.hpp" />
+    <ClInclude Include="src\sys\InputJoystickSystem.hpp" />
     <ClInclude Include="src\sys\PhaseSystem.hpp" />
     <ClInclude Include="src\sys\TriggerSystem.hpp" />
     <ClInclude Include="src\tools\MapLoader.hpp" />

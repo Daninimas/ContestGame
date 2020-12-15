@@ -65,6 +65,7 @@ void GameEngine::setPlayingSystems() {
     systems.emplace_back(std::make_unique<AIDistanceSystem>());
     systems.emplace_back(std::make_unique<AITransformationSystem>());
     systems.emplace_back(std::make_unique<InputSystem>());
+    systems.emplace_back(std::make_unique<InputJoystickSystem>());
     systems.emplace_back(std::make_unique<AttackSystem>());
     systems.emplace_back(std::make_unique<PickWeaponsSystem>());
     systems.emplace_back(std::make_unique<AIChaseSystem>());

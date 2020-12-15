@@ -43,5 +43,8 @@ public:
 
 
     Controls controlToChange; // When we change a control
-};
+
+    // Para que no se chafen los dos inputs de teclado y joystick
+    bool movedWithKeyboard{ false };
+}; fas
 
