@@ -26,34 +26,40 @@ void InputSystem::inputPlaying(GameEngine& gameContext) const {
     // Reset actions
     playerInput.resetActions();
     playerVel.velocity.x = 0.f; // reset the movement
+    playerInput.movedWithKeyboard = false;
 
     // Set new actions
     if ( sf::Keyboard::isKeyPressed( static_cast<sf::Keyboard::Key>(playerInput.keyboardControlsMap[Controls::MOVE_UP]) ) )
     {
         playerInput.movingUp = true;
         actualMovement = DodgeComponent::Up;
+        playerInput.movedWithKeyboard = true;
     }
     if (sf::Keyboard::isKeyPressed( static_cast<sf::Keyboard::Key>(playerInput.keyboardControlsMap[Controls::MOVE_DOWN]) ))
     {
         playerInput.movingDown = true;
         actualMovement = DodgeComponent::Down;
+        playerInput.movedWithKeyboard = true;
     }
     if (sf::Keyboard::isKeyPressed( static_cast<sf::Keyboard::Key>(playerInput.keyboardControlsMap[Controls::MOVE_LEFT]) ))
     {
         playerInput.movingLeft = true;
         playerVel.velocity.x = -playerVel.speedX;
         actualMovement = DodgeComponent::Left;
+        playerInput.movedWithKeyboard = true;
     }
     if (sf::Keyboard::isKeyPressed( static_cast<sf::Keyboard::Key>(playerInput.keyboardControlsMap[Controls::MOVE_RIGHT]) ))
     {
         playerInput.movingRight = true;
         playerVel.velocity.x = playerVel.speedX;
         actualMovement = DodgeComponent::Right;
+        playerInput.movedWithKeyboard = true;
     }
 
     if (sf::Keyboard::isKeyPressed( static_cast<sf::Keyboard::Key>(playerInput.keyboardControlsMap[Controls::ACTION]) ))
     {
         playerInput.attacking = true;
+        playerInput.movedWithKeyboard = true;
     }
     /*if (sf::Keyboard::isKeyPressed(sf::Keyboard::N))
     {
@@ -74,6 +80,7 @@ void InputSystem::inputPlaying(GameEngine& gameContext) const {
         if (jumpComp.cooldown > jumpComp.maxCooldown) { // if has cooldown on floor
             playerVel.velocity.y = jumpComp.impulse;
         }
+        playerInput.movedWithKeyboard = true;
 
         /*if (jumpComp.jumpIndex == jumpComp.jumptable.size() && jumpComp.cooldow > jumpComp.maxCooldown) { // if has ended jumping && has cooldown on floor
             jumpComp.jumpIndex = 0;

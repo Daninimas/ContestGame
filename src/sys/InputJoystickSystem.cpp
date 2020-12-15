@@ -11,7 +11,7 @@ InputJoystickSystem::~InputJoystickSystem() {}
 
 void InputJoystickSystem::update(GameEngine& gameContext) const {
 
-    if (sf::Joystick::isConnected(0)) {
+    if (sf::Joystick::isConnected(0) && !gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId).movedWithKeyboard) {
         if (gameContext.getGameState() == GameState::PLAYING) {
             inputPlaying(gameContext);
         }
