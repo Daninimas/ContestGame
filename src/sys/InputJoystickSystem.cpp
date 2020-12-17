@@ -5,6 +5,9 @@
 
 //https://code.markrichards.ninja/sfml/working-with-joysticks-in-sfml
 
+const float joystickBias = 25.f;
+const float joystickMenuBias = 50.f;
+
 InputJoystickSystem::InputJoystickSystem() {}
 
 InputJoystickSystem::~InputJoystickSystem() {}
@@ -33,30 +36,28 @@ void InputJoystickSystem::inputPlaying(GameEngine& gameContext) const {
     //CHECK DEAD ZONES - OTHERWISE INPUT WILL RESULT IN JITTERY MOVEMENTS WHEN NO INPUT IS PROVIDED
     //INPUT RANGES FROM -100 TO 100
     //A 15% DEAD ZONE SEEMS TO WORK FOR ME - GIVE THAT A SHOT
-    if (joystickPos.x > 15.f || joystickPos.x < -15.f || joystickPos.y > 15.f || joystickPos.y < -15.f) {
-        // Set new actions
-        if (joystickPos.y < 0.f)
-        {
-            playerInput.movingUp = true;
-            actualMovement = DodgeComponent::Up;
-        }
-        if (joystickPos.y > 0.f)
-        {
-            playerInput.movingDown = true;
-            actualMovement = DodgeComponent::Down;
-        }
-        if (joystickPos.x < 0.f)
-        {
-            playerInput.movingLeft = true;
-            playerVel.velocity.x = playerVel.speedX * (joystickPos.x / 100.f);
-            actualMovement = DodgeComponent::Left;
-        }
-        if (joystickPos.x > 0.f)
-        {
-            playerInput.movingRight = true;
-            playerVel.velocity.x = playerVel.speedX * (joystickPos.x / 100.f);
-            actualMovement = DodgeComponent::Right;
-        }
+
+    if (joystickPos.y < -joystickBias)
+    {
+        playerInput.movingUp = true;
+        actualMovement = DodgeComponent::Up;
+    }
+    if (joystickPos.y > joystickBias)
+    {
+        playerInput.movingDown = true;
+        actualMovement = DodgeComponent::Down;
+    }
+    if (joystickPos.x < -joystickBias)
+    {
+        playerInput.movingLeft = true;
+        playerVel.velocity.x = playerVel.speedX * (joystickPos.x / 100.f);
+        actualMovement = DodgeComponent::Left;
+    }
+    if (joystickPos.x > joystickBias)
+    {
+        playerInput.movingRight = true;
+        playerVel.velocity.x = playerVel.speedX * (joystickPos.x / 100.f);
+        actualMovement = DodgeComponent::Right;
     }
 
     if (sf::Joystick::isButtonPressed(0, 1)) //"B" button on the XBox 360 controller
@@ -115,55 +116,42 @@ void InputJoystickSystem::activateDodge(GameEngine& gameContext, uint8_t actualM
 void InputJoystickSystem::inputMenus(GameEngine& gameContext) const {
     InputComponent& playerInput = gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId);
 
-    playerInput.cooldown += gameContext.getDeltaTime();
-
-    // Reset actions
-    playerInput.resetActions();
-    playerInput.cooldown += gameContext.getDeltaTime();
-
     if (playerInput.cooldown > playerInput.maxCooldown) {
         //check state of joystick
         Vector2 joystickPos = Vector2(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));  // in range [-100 .. 100]
 
-        //CHECK DEAD ZONES - OTHERWISE INPUT WILL RESULT IN JITTERY MOVEMENTS WHEN NO INPUT IS PROVIDED
-        //INPUT RANGES FROM -100 TO 100
-        //A 15% DEAD ZONE SEEMS TO WORK FOR ME - GIVE THAT A SHOT
-        if (joystickPos.x > 15.f || joystickPos.x < -15.f || joystickPos.y > 15.f || joystickPos.y < -15.f) {
+        bool buttonPressed = false;
 
-            bool buttonPressed = false;
+        if (joystickPos.y < -joystickMenuBias)
+        {
+            playerInput.movingUp = true;
+            buttonPressed = true;
+        }
+        if (joystickPos.y > joystickMenuBias)
+        {
+            playerInput.movingDown = true;
+            buttonPressed = true;
+        }
+        if (joystickPos.x < -joystickMenuBias)
+        {
+            playerInput.movingLeft = true;
+            buttonPressed = true;
+        }
+        if (joystickPos.x > joystickMenuBias)
+        {
+            playerInput.movingRight = true;
+            buttonPressed = true;
+        }
 
-            // Set new actions
-            if (joystickPos.y < 0.f)
-            {
-                playerInput.movingUp = true;
-                buttonPressed = true;
-            }
-            if (joystickPos.y > 0.f)
-            {
-                playerInput.movingDown = true;
-                buttonPressed = true;
-            }
-            if (joystickPos.x < 0.f)
-            {
-                playerInput.movingLeft = true;
-                buttonPressed = true;
-            }
-            if (joystickPos.x > 0.f)
-            {
-                playerInput.movingRight = true;
-                buttonPressed = true;
-            }
+        if (sf::Joystick::isButtonPressed(0, 0))
+        {
+            playerInput.select = true;
+            buttonPressed = true;
+        }
 
-            if (sf::Joystick::isButtonPressed(0, 0))
-            {
-                playerInput.select = true;
-                buttonPressed = true;
-            }
-
-            // Reset cooldown
-            if (buttonPressed) {
-                playerInput.cooldown = 0.f;
-            }
+        // Reset cooldown
+        if (buttonPressed) {
+            playerInput.cooldown = 0.f;
         }
     }
 }

@@ -96,6 +96,7 @@ void GameEngine::setMenuSystems(GameObjectType const menu) {
     entityMan.createMenu(*this, menu);
 
     systems.emplace_back(std::make_unique<InputSystem>());
+    systems.emplace_back(std::make_unique<InputJoystickSystem>());
     systems.emplace_back(std::make_unique<MenuSystem>());
 }
 
