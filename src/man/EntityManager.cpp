@@ -845,6 +845,8 @@ int EntityManager::createMenu(GameEngine& gameContext, GameObjectType menuType) 
         menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 320.f), 0.f, MenuOptions::SET_KEY_DOWN));
         menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 400.f), 0.f, MenuOptions::BACK));
 
+        Utils::setControlKeyToMenuOptions(gameContext, menuComp);
+
         break;
     }
 
@@ -895,32 +897,32 @@ int EntityManager::createMenuOption(GameEngine& gameContext, Vector2 position, f
 
     // set controls, keys
     case MenuOptions::SET_KEY_ATTACK:
-        textComp.text = "SET_KEY_ATTACK";
+        textComp.text = "ATTACK: ";
         textComp.size = 20;
         break;
 
     case MenuOptions::SET_KEY_JUMP:
-        textComp.text = "SET_KEY_JUMP";
+        textComp.text = "JUMP: ";
         textComp.size = 20;
         break;
 
     case MenuOptions::SET_KEY_LEFT:
-        textComp.text = "SET_KEY_LEFT";
+        textComp.text = "LEFT: ";
         textComp.size = 20;
         break;
 
     case MenuOptions::SET_KEY_RIGHT:
-        textComp.text = "SET_KEY_RIGHT";
+        textComp.text = "RIGHT: ";
         textComp.size = 20;
         break;
 
     case MenuOptions::SET_KEY_UP:
-        textComp.text = "SET_KEY_UP";
+        textComp.text = "UP: ";
         textComp.size = 20;
         break;
 
     case MenuOptions::SET_KEY_DOWN:
-        textComp.text = "SET_KEY_DOWN";
+        textComp.text = "DOWN: ";
         textComp.size = 20;
         break;
     }

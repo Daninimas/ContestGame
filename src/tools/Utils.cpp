@@ -2,6 +2,8 @@
 #include <iostream>
 #include <algorithm>
 
+#include <enum/Controls.hpp>
+
 Utils::Utils() {}
 
 float Utils::stringToFloat(std::string string) {
@@ -239,3 +241,49 @@ void Utils::setPhaseStartToView(GameEngine& gameContext) {
     }
 }
 
+
+void Utils::setControlKeyToMenuOptions(GameEngine& gameContext, MenuComponent& controlsMenu) {
+
+    if (gameContext.entityMan.getEntity(controlsMenu.id).getGameObjectType() == GameObjectType::CONTROLS) {
+        for (int id : controlsMenu.optionsId) {
+            MenuOptionComponent& optionComp = gameContext.entityMan.getComponent<MenuOptionComponent>(id);
+            TextComponent& textComp = gameContext.entityMan.getComponent<TextComponent>(id);
+            InputComponent& inputComp = gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId);
+
+            switch (optionComp.option)
+            {
+            case MenuOptions::SET_KEY_ATTACK:
+                textComp.text = "ATTACK: " + keyNameMap.at(inputComp.keyboardControlsMap[Controls::ACTION]);
+
+                break;
+
+            case MenuOptions::SET_KEY_JUMP:
+                textComp.text = "JUMP: " + keyNameMap.at(inputComp.keyboardControlsMap[Controls::JUMP]);
+                break;
+
+            case MenuOptions::SET_KEY_LEFT:
+                textComp.text = "LEFT: " + keyNameMap.at(inputComp.keyboardControlsMap[Controls::MOVE_LEFT]);
+                break;
+
+            case MenuOptions::SET_KEY_RIGHT:
+                textComp.text = "RIGHT: " + keyNameMap.at(inputComp.keyboardControlsMap[Controls::MOVE_RIGHT]);
+                break;
+
+            case MenuOptions::SET_KEY_UP:
+                textComp.text = "UP: " + keyNameMap.at(inputComp.keyboardControlsMap[Controls::MOVE_UP]);
+                break;
+
+            case MenuOptions::SET_KEY_DOWN:
+                textComp.text = "DOWN: " + keyNameMap.at(inputComp.keyboardControlsMap[Controls::MOVE_DOWN]);
+                break;
+            } 
+        }
+
+        gameContext.getWindowFacadeRef().updateEntities(gameContext, controlsMenu.optionsId);
+    }
+}
+
+
+std::string Utils::getKeyName(uint8_t keyCode) {
+    return keyNameMap.at(keyCode);
+}
