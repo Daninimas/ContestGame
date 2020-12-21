@@ -154,9 +154,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\com\AnimationComponent.cpp" />
     <ClCompile Include="src\com\MenuOptionComponent.cpp" />
     <ClCompile Include="src\com\TriggerComponent.cpp" />
     <ClCompile Include="src\com\WorldComponent.cpp" />
+    <ClCompile Include="src\sys\AnimationSystem.cpp" />
     <ClCompile Include="src\sys\InputJoystickSystem.cpp" />
     <ClCompile Include="src\sys\PhaseSystem.cpp" />
     <ClCompile Include="src\sys\TriggerSystem.cpp" />
@@ -223,11 +225,14 @@
     <ClCompile Include="src\tools\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\com\AnimationComponent.hpp" />
     <ClInclude Include="src\com\MenuOptionComponent.hpp" />
     <ClInclude Include="src\com\TriggerComponent.hpp" />
     <ClInclude Include="src\com\WorldComponent.hpp" />
+    <ClInclude Include="src\enum\AnimationEnum.hpp" />
     <ClInclude Include="src\enum\Controls.hpp" />
     <ClInclude Include="src\enum\TriggerFunction.hpp" />
+    <ClInclude Include="src\sys\AnimationSystem.hpp" />
     <ClInclude Include="src\sys\InputJoystickSystem.hpp" />
     <ClInclude Include="src\sys\PhaseSystem.hpp" />
     <ClInclude Include="src\sys\TriggerSystem.hpp" />

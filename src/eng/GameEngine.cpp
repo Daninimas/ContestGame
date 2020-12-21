@@ -84,6 +84,7 @@ void GameEngine::setPlayingSystems() {
     systemsLate.emplace_back(std::make_unique<CollisionSystem>()); // Collision 2 veces, esto es lo mejor para que todo funcione, pero sera mejor hacer lo de los hilos para resolver las colisiones
     systemsLate.emplace_back(std::make_unique<PhysicsSystem>());
     systemsLate.emplace_back(std::make_unique<CollisionSystem>());
+    systemsLate.emplace_back(std::make_unique<AnimationSystem>());
     systemsLate.emplace_back(std::make_unique<CameraSystem>());
     systemsLate.emplace_back(std::make_unique<HealthSystem>());
     systemsLate.emplace_back(std::make_unique<DeathSystem>());
