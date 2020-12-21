@@ -23,6 +23,7 @@
 #include <sys/PhaseSystem.hpp>
 #include <sys/TriggerSystem.hpp>
 #include <sys/InputJoystickSystem.hpp>
+#include <sys/AnimationSystem.hpp>
 
 #include <sys/AI/AIChaseSystem.hpp>
 #include <sys/AI/AIMeleeSystem.hpp>

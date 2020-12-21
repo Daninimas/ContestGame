@@ -25,6 +25,7 @@
 #include <com/MenuOptionComponent.hpp>
 #include <com/WorldComponent.hpp>
 #include <com/TriggerComponent.hpp>
+#include <com/AnimationComponent.hpp>
 
 // AI
 #include <com/AI/AIChaseComponent.hpp>
