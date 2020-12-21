@@ -201,6 +201,10 @@ void SFMLEngine::updateNode(GameEngine& gameContext, sf::Sprite& node, int id) {
 		node.move(node.getGlobalBounds().width, 0.f);
 		node.scale(-1.f, 1.f);
 	}
+
+	// Update the sprite sheet
+	BoundingBox& drawableRect = drawable.spriteRect;
+	node.setTextureRect(sf::IntRect(drawableRect.xLeft, drawableRect.yUp, drawableRect.xRight - drawableRect.xLeft, drawableRect.yDown - drawableRect.yUp));
 }
 
 void SFMLEngine::setColorToEntity(const int id, const Color color) {
@@ -228,6 +232,11 @@ void SFMLEngine::updateTexture(GameEngine& gameContext, sf::Sprite& node, int id
 	RenderComponent& drawable = gameContext.entityMan.getComponent<RenderComponent>(id);
 	BoundingBox& drawableRect = drawable.spriteRect;
 
+	if (!existsTexture(drawable.sprite)) {
+		addTexture(drawable.sprite);
+	}
+
+	node.setTexture(textureMap[drawable.sprite]);
 	node.setTextureRect(sf::IntRect(drawableRect.xLeft, drawableRect.yUp, drawableRect.xRight - drawableRect.xLeft, drawableRect.yDown - drawableRect.yUp));
 }
 

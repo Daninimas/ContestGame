@@ -2,6 +2,7 @@
 
 #include "Component.hpp"
 #include <Enum/AnimationEnum.hpp>
+#include <tools/BoundingBox.hpp>
 #include <vector>
 #include <string>
 
@@ -13,7 +14,7 @@ public:
 
     AnimationEnum animation;
 
-    std::vector<std::string> frames;
+    std::vector<BoundingBox> frames;
     size_t actualFrame{ 0 };
 
     float framerate{ 0.2f };  // Time to change the frame

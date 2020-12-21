@@ -33,7 +33,8 @@ void AnimationSystem::changeFrame(GameEngine& gameContext, AnimationComponent& a
 		animComp.actualFrame = 0;
 	}
 
-	renderComp.sprite = animComp.frames[animComp.actualFrame];
+	renderComp.spriteRect = animComp.frames[animComp.actualFrame];
 
 	gameContext.entityMan.addEntityToUpdate(animComp.id);
+	animComp.currentTime = 0.f;
 }

@@ -108,6 +108,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
     SensorComponent& sensorComp = createComponent<SensorComponent>(entityId);
     InputComponent& inputComp = createComponent<InputComponent>(entityId);
     DodgeComponent& dodgeComp = createComponent<DodgeComponent>(entityId);
+    AnimationComponent& animComp = createComponent<AnimationComponent>(entityId);
     // Create the distance weapon
     Utils::setNormalPistolToEntity(gameContext, entityId);
 
@@ -135,8 +136,8 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
 
 
     // Render component
-    renderComp.sprite = "Media/Images/YellowDuck.png";
-    renderComp.spriteRect = { 4, 34, 4, 34 };
+    renderComp.sprite = "Media/Images/SpriteSheet RUN.png";
+    renderComp.spriteRect = { 0, 512, 0, 512 };
 
     // Jump
     jumpComp.impulse = -200.f;
@@ -152,6 +153,13 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
     dodgeComp.maxCooldown = 1.f;
     dodgeComp.velocityIncrementFactor = 4.f;
     dodgeComp.initDodgeComponent();
+
+    // Animation
+    animComp.framerate = 0.2f;
+    animComp.repeat = true;
+    animComp.frames.push_back({ 0, 512, 0, 512 });
+    animComp.frames.push_back({ 512, 1024, 0, 512 });
+    animComp.frames.push_back({ 1024, 1536, 0, 512 });
 
 
     //######### RENDER ########//
