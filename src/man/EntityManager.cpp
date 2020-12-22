@@ -16,6 +16,8 @@
 
 #include <iostream>
 
+#include <tools/AnimationManager.hpp>
+
 
 EntityManager::EntityManager() {
 }
@@ -161,6 +163,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::PLAYER, goType));
 
+    AnimationManager::setAnimationToEntity(gameContext, Animation::RUNNING, animComp);
 
     return entityId;
 }
@@ -576,7 +579,7 @@ int EntityManager::createCamera(GameEngine& gameContext, Vector2 position, float
 
     // Camera
     cameraComp.viewRect = {600, 400 };
-    cameraComp.zoom = 1.f;
+    cameraComp.zoom = 2.4f;
     cameraComp.offset = { 50.f, 70.f};
 
 
