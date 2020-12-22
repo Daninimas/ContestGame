@@ -14,7 +14,7 @@ void AnimationSystem::update(GameEngine& gameContext) const {
 	for (AnimationComponent& animComp : animations) {
 		animComp.currentTime += gameContext.getDeltaTime();
 
-		if (animComp.currentTime > animComp.framerate) {
+		if (animComp.currentTime > animComp.framerate && animComp.animation != Animation::NONE) {
 			changeFrame(gameContext, animComp);
 		}
 	}
@@ -26,14 +26,18 @@ void AnimationSystem::changeFrame(GameEngine& gameContext, AnimationComponent& a
 
 	++animComp.actualFrame;
 
-	if ( animComp.actualFrame >= animComp.frames.size() ) {
+	if ( animComp.actualFrame >= animComp.totalFrames ) {
 		if (!animComp.repeat) {
 			return;
 		}
 		animComp.actualFrame = 0;
 	}
 
-	renderComp.spriteRect = animComp.frames[animComp.actualFrame];
+	// Update spriteRect
+	renderComp.spriteRect.xLeft = animComp.startSpriteRect.xLeft + ( animComp.nextFrameAdvance * animComp.actualFrame);
+	renderComp.spriteRect.xRight = animComp.startSpriteRect.xRight + (animComp.nextFrameAdvance * animComp.actualFrame);
+	renderComp.spriteRect.yUp = animComp.startSpriteRect.yUp;
+	renderComp.spriteRect.yDown = animComp.startSpriteRect.yDown;
 
 	gameContext.entityMan.addEntityToUpdate(animComp.id);
 	animComp.currentTime = 0.f;

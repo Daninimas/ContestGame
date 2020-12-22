@@ -162,6 +162,7 @@
     <ClCompile Include="src\sys\InputJoystickSystem.cpp" />
     <ClCompile Include="src\sys\PhaseSystem.cpp" />
     <ClCompile Include="src\sys\TriggerSystem.cpp" />
+    <ClCompile Include="src\tools\AnimationManager.cpp" />
     <ClCompile Include="src\tools\MapLoader.cpp" />
     <ClCompile Include="src\com\FuryComponent.cpp" />
     <ClCompile Include="src\com\AI\AIDropBombComponent.cpp" />
@@ -236,6 +237,7 @@
     <ClInclude Include="src\sys\InputJoystickSystem.hpp" />
     <ClInclude Include="src\sys\PhaseSystem.hpp" />
     <ClInclude Include="src\sys\TriggerSystem.hpp" />
+    <ClInclude Include="src\tools\AnimationManager.hpp" />
     <ClInclude Include="src\tools\MapLoader.hpp" />
     <ClInclude Include="src\com\FuryComponent.hpp" />
     <ClInclude Include="src\com\AI\AIDropBombComponent.hpp" />

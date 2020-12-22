@@ -154,19 +154,14 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
     dodgeComp.velocityIncrementFactor = 4.f;
     dodgeComp.initDodgeComponent();
 
-    // Animation
-    animComp.framerate = 0.2f;
-    animComp.repeat = true;
-    animComp.frames.push_back({ 0, 512, 0, 512 });
-    animComp.frames.push_back({ 512, 1024, 0, 512 });
-    animComp.frames.push_back({ 1024, 1536, 0, 512 });
-
 
     //######### RENDER ########//
     gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
 
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::PLAYER, goType));
+
+
     return entityId;
 }
 

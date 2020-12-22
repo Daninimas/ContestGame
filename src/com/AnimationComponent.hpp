@@ -12,10 +12,13 @@ public:
     ~AnimationComponent() override;
 
 
-    AnimationEnum animation;
+    Animation animation = Animation::NONE;
 
-    std::vector<BoundingBox> frames;
-    size_t actualFrame{ 0 };
+    uint16_t totalFrames;
+    uint16_t actualFrame{ 0 };
+
+    BoundingBox startSpriteRect; // The spriteRect where the animation starts
+    int nextFrameAdvance{ 512 }; // number of pixels that has to advance the spriteRect for the next frame
 
     float framerate{ 0.2f };  // Time to change the frame
     float currentTime{ 0.f }; // Actual time for changing the frame
