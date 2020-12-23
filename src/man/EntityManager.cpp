@@ -16,8 +16,6 @@
 
 #include <iostream>
 
-#include <tools/AnimationManager.hpp>
-
 
 EntityManager::EntityManager() {
 }
@@ -162,8 +160,6 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
 
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::PLAYER, goType));
-
-    AnimationManager::setAnimationToEntity(gameContext, Animation::RUNNING, animComp);
 
     return entityId;
 }

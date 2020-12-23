@@ -14,6 +14,7 @@ void AnimationManager::setAnimationToEntity(GameEngine& gameContext, const Anima
 			break;
 
 		case Animation::IDLE:
+			setIdleAnimation(gameContext, animation, animationComp, entityGO);
 			break;
 
 		default:
@@ -34,10 +35,25 @@ void AnimationManager::setRunningAnimation(GameEngine& gameContext, const Animat
 	{
 	case GameObjectType::PLAYER_GENERAL:
 		animationComp.animation = animation;
-		animationComp.framerate = 0.2f;
+		animationComp.framerate = 0.15f;
 		animationComp.repeat = true;
 		animationComp.startSpriteRect = { 0, 512, 0, 512 };
 		animationComp.totalFrames = 7;
+		animationComp.nextFrameAdvance = 512;
+		break;
+	}
+}
+
+void AnimationManager::setIdleAnimation(GameEngine& gameContext, const Animation animation, AnimationComponent& animationComp, GameObjectType entityGO) {
+
+	switch (entityGO)
+	{
+	case GameObjectType::PLAYER_GENERAL:
+		animationComp.animation = animation;
+		animationComp.framerate = 0.2f;
+		animationComp.repeat = true;
+		animationComp.startSpriteRect = { 0, 512, 0, 512 };
+		animationComp.totalFrames = 1;
 		animationComp.nextFrameAdvance = 512;
 		break;
 	}

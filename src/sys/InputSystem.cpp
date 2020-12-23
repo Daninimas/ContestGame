@@ -3,6 +3,8 @@
 #include <eng/GameEngine.hpp>
 #include <iostream>
 
+#include <tools/AnimationManager.hpp>
+
 InputSystem::InputSystem() {}
 
 InputSystem::~InputSystem() {}
@@ -19,8 +21,9 @@ void InputSystem::update(GameEngine& gameContext) const {
 
 
 void InputSystem::inputPlaying(GameEngine& gameContext) const {
-    InputComponent& playerInput = gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId);
+    InputComponent& playerInput  = gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId);
     VelocityComponent& playerVel = gameContext.entityMan.getComponent<VelocityComponent>(WorldElementsData::playerId);
+    AnimationComponent& animComp = gameContext.entityMan.getComponent<AnimationComponent>(WorldElementsData::playerId);
     uint8_t actualMovement = 0xFF; // start with no movement
 
     // Reset actions
@@ -47,6 +50,7 @@ void InputSystem::inputPlaying(GameEngine& gameContext) const {
         playerVel.velocity.x = -playerVel.speedX;
         actualMovement = DodgeComponent::Left;
         playerInput.movedWithKeyboard = true;
+        AnimationManager::setAnimationToEntity(gameContext, Animation::RUNNING, animComp);
     }
     if (sf::Keyboard::isKeyPressed( static_cast<sf::Keyboard::Key>(playerInput.keyboardControlsMap[Controls::MOVE_RIGHT]) ))
     {
@@ -54,6 +58,7 @@ void InputSystem::inputPlaying(GameEngine& gameContext) const {
         playerVel.velocity.x = playerVel.speedX;
         actualMovement = DodgeComponent::Right;
         playerInput.movedWithKeyboard = true;
+        AnimationManager::setAnimationToEntity(gameContext, Animation::RUNNING, animComp);
     }
 
     if (sf::Keyboard::isKeyPressed( static_cast<sf::Keyboard::Key>(playerInput.keyboardControlsMap[Controls::ACTION]) ))
@@ -89,6 +94,11 @@ void InputSystem::inputPlaying(GameEngine& gameContext) const {
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
         gameContext.pushGameState(GameState::PAUSE);
+    }
+
+    // Set idle animation if not moved
+    if (actualMovement == 0xFF) {
+        AnimationManager::setAnimationToEntity(gameContext, Animation::IDLE, animComp);
     }
 
     activateDodge(gameContext, actualMovement);
