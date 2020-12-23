@@ -10,6 +10,8 @@ DodgeSystem::DodgeSystem() {}
 DodgeSystem::~DodgeSystem() {}
 
 void DodgeSystem::update(GameEngine& gameContext) const {
+	checkPlayerDodge(gameContext);
+
 	auto& dodgeComponents = gameContext.entityMan.getComponents<DodgeComponent>();
 
 	for (DodgeComponent& dodgeComp : dodgeComponents) {
@@ -46,4 +48,30 @@ void DodgeSystem::doDodge(GameEngine& gameContext, DodgeComponent& dodgeComp) co
 	// The cooldown resets only when if finish doing the dodge
 	dodgeComp.cooldown = 0.f;
 	dodgeComp.dodgeDuration += gameContext.getDeltaTime();
+}
+
+
+void DodgeSystem::checkPlayerDodge(GameEngine& gameContext) const {
+	DodgeComponent& playerDodge = gameContext.entityMan.getComponent<DodgeComponent>(WorldElementsData::playerId);
+	InputComponent& playerInput = gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId);
+
+	playerDodge.timeFromLastMove += gameContext.getDeltaTime();
+
+	if (playerInput.actualMovement == playerDodge.lastMovement && playerDodge.timeFromLastMove < playerDodge.dodgeTime && playerDodge.releasedKey) {
+		playerDodge.activateDodge = true;
+		playerDodge.dodgeDirection = playerInput.actualMovement;
+	}
+
+	if (playerInput.actualMovement != 0xFF) { //if key pressed
+		playerDodge.timeFromLastMove = 0.f;
+		playerDodge.lastMovement = playerInput.actualMovement;
+		playerDodge.releasedKey = false;
+	}
+	else {
+		playerDodge.releasedKey = true;
+	}
+
+
+	// Reset actual movement
+	playerInput.actualMovement = 0xFF;
 }

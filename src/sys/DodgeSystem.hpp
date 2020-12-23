@@ -11,5 +11,7 @@ public:
     void update(GameEngine& gameContext) const override;
 
 private:
+    void checkPlayerDodge(GameEngine& gameContext) const;
     void doDodge(GameEngine& gameContext, DodgeComponent& dodgeComp) const;
+
 };

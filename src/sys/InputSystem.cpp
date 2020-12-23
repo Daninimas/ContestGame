@@ -24,7 +24,6 @@ void InputSystem::inputPlaying(GameEngine& gameContext) const {
     InputComponent& playerInput  = gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId);
     VelocityComponent& playerVel = gameContext.entityMan.getComponent<VelocityComponent>(WorldElementsData::playerId);
     AnimationComponent& animComp = gameContext.entityMan.getComponent<AnimationComponent>(WorldElementsData::playerId);
-    uint8_t actualMovement = 0xFF; // start with no movement
 
     // Reset actions
     playerInput.resetActions();
@@ -35,20 +34,20 @@ void InputSystem::inputPlaying(GameEngine& gameContext) const {
     if ( sf::Keyboard::isKeyPressed( static_cast<sf::Keyboard::Key>(playerInput.keyboardControlsMap[Controls::MOVE_UP]) ) )
     {
         playerInput.movingUp = true;
-        actualMovement = DodgeComponent::Up;
+        playerInput.actualMovement = DodgeComponent::Up;
         playerInput.movedWithKeyboard = true;
     }
     if (sf::Keyboard::isKeyPressed( static_cast<sf::Keyboard::Key>(playerInput.keyboardControlsMap[Controls::MOVE_DOWN]) ))
     {
         playerInput.movingDown = true;
-        actualMovement = DodgeComponent::Down;
+        playerInput.actualMovement = DodgeComponent::Down;
         playerInput.movedWithKeyboard = true;
     }
     if (sf::Keyboard::isKeyPressed( static_cast<sf::Keyboard::Key>(playerInput.keyboardControlsMap[Controls::MOVE_LEFT]) ))
     {
         playerInput.movingLeft = true;
         playerVel.velocity.x = -playerVel.speedX;
-        actualMovement = DodgeComponent::Left;
+        playerInput.actualMovement = DodgeComponent::Left;
         playerInput.movedWithKeyboard = true;
         AnimationManager::setAnimationToEntity(gameContext, Animation::RUNNING, animComp);
     }
@@ -56,7 +55,7 @@ void InputSystem::inputPlaying(GameEngine& gameContext) const {
     {
         playerInput.movingRight = true;
         playerVel.velocity.x = playerVel.speedX;
-        actualMovement = DodgeComponent::Right;
+        playerInput.actualMovement = DodgeComponent::Right;
         playerInput.movedWithKeyboard = true;
         AnimationManager::setAnimationToEntity(gameContext, Animation::RUNNING, animComp);
     }
@@ -86,10 +85,6 @@ void InputSystem::inputPlaying(GameEngine& gameContext) const {
             playerVel.velocity.y = jumpComp.impulse;
         }
         playerInput.movedWithKeyboard = true;
-
-        /*if (jumpComp.jumpIndex == jumpComp.jumptable.size() && jumpComp.cooldow > jumpComp.maxCooldown) { // if has ended jumping && has cooldown on floor
-            jumpComp.jumpIndex = 0;
-        }*/
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
@@ -97,30 +92,8 @@ void InputSystem::inputPlaying(GameEngine& gameContext) const {
     }
 
     // Set idle animation if not moved
-    if (actualMovement == 0xFF) {
+    if (playerInput.actualMovement == 0xFF) {
         AnimationManager::setAnimationToEntity(gameContext, Animation::IDLE, animComp);
-    }
-
-    activateDodge(gameContext, actualMovement);
-}
-
-void InputSystem::activateDodge(GameEngine& gameContext, uint8_t actualMovement) const {
-    DodgeComponent& playerDodge = gameContext.entityMan.getComponent<DodgeComponent>(WorldElementsData::playerId);
-
-    playerDodge.timeFromLastMove += gameContext.getDeltaTime();
-
-    if (actualMovement == playerDodge.lastMovemet && playerDodge.timeFromLastMove < playerDodge.dodgeTime && playerDodge.releasedKey) {
-        playerDodge.activateDodge = true;
-        playerDodge.dodgeDirection = actualMovement;
-    }
-    
-    if (actualMovement != 0xFF) { //if key pressed
-        playerDodge.timeFromLastMove = 0.f;
-        playerDodge.lastMovemet = actualMovement;
-        playerDodge.releasedKey = false;
-    }
-    else {
-        playerDodge.releasedKey = true;
     }
 }
 

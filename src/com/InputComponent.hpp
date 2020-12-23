@@ -29,7 +29,7 @@ public:
     float dodgeTime{ 0.5f }; // El tiempo en el que tienes que pulsar dos veces la tecla de vomimiento para activar el dodge
     float timeFromLastMove{ 0.f }; // Sirve para ver si se activa el dodge
 
-
+    uint8_t actualMovement = 0xFF; // start with no movement
 
     // ------------------- For the controls
     std::map<Controls, uint8_t> keyboardControlsMap{

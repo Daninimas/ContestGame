@@ -28,7 +28,6 @@ void InputJoystickSystem::update(GameEngine& gameContext) const {
 void InputJoystickSystem::inputPlaying(GameEngine& gameContext) const {
     InputComponent& playerInput = gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId);
     VelocityComponent& playerVel = gameContext.entityMan.getComponent<VelocityComponent>(WorldElementsData::playerId);
-    uint8_t actualMovement = 0xFF; // start with no movement
 
     //check state of joystick
     Vector2 joystickPos = Vector2(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));  // in range [-100 .. 100]
@@ -40,41 +39,30 @@ void InputJoystickSystem::inputPlaying(GameEngine& gameContext) const {
     if (joystickPos.y < -joystickBias)
     {
         playerInput.movingUp = true;
-        actualMovement = DodgeComponent::Up;
+        playerInput.actualMovement = DodgeComponent::Up;
     }
     if (joystickPos.y > joystickBias)
     {
         playerInput.movingDown = true;
-        actualMovement = DodgeComponent::Down;
+        playerInput.actualMovement = DodgeComponent::Down;
     }
     if (joystickPos.x < -joystickBias)
     {
         playerInput.movingLeft = true;
         playerVel.velocity.x = playerVel.speedX * (joystickPos.x / 100.f);
-        actualMovement = DodgeComponent::Left;
+        playerInput.actualMovement = DodgeComponent::Left;
     }
     if (joystickPos.x > joystickBias)
     {
         playerInput.movingRight = true;
         playerVel.velocity.x = playerVel.speedX * (joystickPos.x / 100.f);
-        actualMovement = DodgeComponent::Right;
+        playerInput.actualMovement = DodgeComponent::Right;
     }
 
     if (sf::Joystick::isButtonPressed(0, 1)) //"B" button on the XBox 360 controller
     {
         playerInput.attacking = true;
     }
-    /*if (sf::Keyboard::isKeyPressed(sf::Keyboard::N))
-    {
-        // This is obligates the player to release the key and press again
-        if (playerInput.canAttack) {
-            playerInput.attacking = true;
-            playerInput.canAttack = false;
-        }
-    }
-    else if (!sf::Keyboard::isKeyPressed(sf::Keyboard::N)) {
-        playerInput.canAttack = true;
-    }*/
 
 
     if (sf::Joystick::isButtonPressed(0, 0)) //"A" button on the XBox 360 controller
@@ -83,34 +71,9 @@ void InputJoystickSystem::inputPlaying(GameEngine& gameContext) const {
         if (jumpComp.cooldown > jumpComp.maxCooldown) { // if has cooldown on floor
             playerVel.velocity.y = jumpComp.impulse;
         }
-
-        /*if (jumpComp.jumpIndex == jumpComp.jumptable.size() && jumpComp.cooldow > jumpComp.maxCooldown) { // if has ended jumping && has cooldown on floor
-            jumpComp.jumpIndex = 0;
-        }*/
-    }
-
-    activateDodge(gameContext, actualMovement);
-}
-
-void InputJoystickSystem::activateDodge(GameEngine& gameContext, uint8_t actualMovement) const {
-    DodgeComponent& playerDodge = gameContext.entityMan.getComponent<DodgeComponent>(WorldElementsData::playerId);
-
-    playerDodge.timeFromLastMove += gameContext.getDeltaTime();
-
-    if (actualMovement == playerDodge.lastMovemet && playerDodge.timeFromLastMove < playerDodge.dodgeTime && playerDodge.releasedKey) {
-        playerDodge.activateDodge = true;
-        playerDodge.dodgeDirection = actualMovement;
-    }
-
-    if (actualMovement != 0xFF) { //if key pressed
-        playerDodge.timeFromLastMove = 0.f;
-        playerDodge.lastMovemet = actualMovement;
-        playerDodge.releasedKey = false;
-    }
-    else {
-        playerDodge.releasedKey = true;
     }
 }
+
 
 
 void InputJoystickSystem::inputMenus(GameEngine& gameContext) const {

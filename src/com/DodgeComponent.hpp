@@ -28,7 +28,7 @@ public:
         Up,
         Down
     };
-    uint8_t lastMovemet{ Right };
+    uint8_t lastMovement{ Right };
 
     bool releasedKey{ false };
 

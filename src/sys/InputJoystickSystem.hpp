@@ -15,5 +15,4 @@ private:
     void inputPlaying(GameEngine& gameContext) const;
     void inputMenus(GameEngine& gameContext) const;
 
-    void activateDodge(GameEngine& gameContext, uint8_t actualMovement) const;
 };
