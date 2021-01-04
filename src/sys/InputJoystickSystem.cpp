@@ -4,6 +4,8 @@
 #include <SFML/Window/Joystick.hpp>
 #include <iostream>
 
+#include <tools/AnimationManager.hpp>
+
 //https://code.markrichards.ninja/sfml/working-with-joysticks-in-sfml
 
 const float joystickBias = 25.f;
@@ -29,6 +31,7 @@ void InputJoystickSystem::update(GameEngine& gameContext) const {
 void InputJoystickSystem::inputPlaying(GameEngine& gameContext) const {
     InputComponent& playerInput = gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId);
     VelocityComponent& playerVel = gameContext.entityMan.getComponent<VelocityComponent>(WorldElementsData::playerId);
+    AnimationComponent& animComp = gameContext.entityMan.getComponent<AnimationComponent>(WorldElementsData::playerId);
 
     //check state of joystick
     Vector2 joystickPos = Vector2(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));  // in range [-100 .. 100]
@@ -52,12 +55,14 @@ void InputJoystickSystem::inputPlaying(GameEngine& gameContext) const {
         playerInput.movingLeft = true;
         playerVel.velocity.x = playerVel.speedX * (joystickPos.x / 100.f);
         playerInput.actualMovement = DodgeComponent::Left;
+        AnimationManager::setAnimationToEntity(gameContext, Animation::RUNNING, animComp);
     }
     if (joystickPos.x > joystickBias)
     {
         playerInput.movingRight = true;
         playerVel.velocity.x = playerVel.speedX * (joystickPos.x / 100.f);
         playerInput.actualMovement = DodgeComponent::Right;
+        AnimationManager::setAnimationToEntity(gameContext, Animation::RUNNING, animComp);
     }
 
     if (sf::Joystick::isButtonPressed(0, playerInput.keyboardControlsMap[Controls::JOYSTICK_ACTION])) //"B" button on the XBox 360 controller
@@ -72,6 +77,11 @@ void InputJoystickSystem::inputPlaying(GameEngine& gameContext) const {
         if (jumpComp.cooldown > jumpComp.maxCooldown) { // if has cooldown on floor
             playerVel.velocity.y = jumpComp.impulse;
         }
+    }
+
+    // Set idle animation if not moved
+    if (playerInput.actualMovement == 0xFF) {
+        AnimationManager::setAnimationToEntity(gameContext, Animation::IDLE, animComp);
     }
 }
 

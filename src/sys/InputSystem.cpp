@@ -90,11 +90,6 @@ void InputSystem::inputPlaying(GameEngine& gameContext) const {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
         gameContext.pushGameState(GameState::PAUSE);
     }
-
-    // Set idle animation if not moved
-    if (playerInput.actualMovement == 0xFF) {
-        AnimationManager::setAnimationToEntity(gameContext, Animation::IDLE, animComp);
-    }
 }
 
 

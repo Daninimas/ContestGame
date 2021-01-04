@@ -280,11 +280,11 @@ void Utils::setControlKeyToMenuOptions(GameEngine& gameContext, MenuComponent& c
 
             // For the joystick
             case MenuOptions::SET_JOYSTICK_ATTACK:
-                textComp.text = "ATTACK: Button" + inputComp.keyboardControlsMap[Controls::JOYSTICK_ACTION];
+                textComp.text = "ATTACK: Button " + to_string(inputComp.keyboardControlsMap[Controls::JOYSTICK_ACTION]);
                 break;
 
             case MenuOptions::SET_JOYSTICK_JUMP:
-                textComp.text = "JUMP: Button" + inputComp.keyboardControlsMap[Controls::JOYSTICK_JUMP];
+                textComp.text = "JUMP: Button " + to_string(inputComp.keyboardControlsMap[Controls::JOYSTICK_JUMP]);
                 break;
             } 
         }
