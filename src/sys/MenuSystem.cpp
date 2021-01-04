@@ -116,6 +116,15 @@ void MenuSystem::acceptOption(GameEngine& gameContext, MenuComponent& menuComp) 
 		gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId).controlToChange = Controls::MOVE_DOWN;
 		gameContext.pushGameState(GameState::WAIT_INPUT);
 		break;
+		// Set controls (JOYSTICK)
+	case MenuOptions::SET_JOYSTICK_ATTACK:
+		gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId).controlToChange = Controls::JOYSTICK_ACTION;
+		gameContext.pushGameState(GameState::WAIT_INPUT);
+		break;
+	case MenuOptions::SET_JOYSTICK_JUMP:
+		gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId).controlToChange = Controls::JOYSTICK_JUMP;
+		gameContext.pushGameState(GameState::WAIT_INPUT);
+		break;
 	}
 
 	gameContext.eraseEntityByID(menuComp.id);

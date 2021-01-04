@@ -1,7 +1,6 @@
 #pragma once
 
 #include "System.hpp"
-#include <SFML/Window/Joystick.hpp>
 #include <com/ComponentsIncluder>
 
 class InputJoystickSystem : public System {

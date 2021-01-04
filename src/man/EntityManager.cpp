@@ -839,13 +839,30 @@ int EntityManager::createMenu(GameEngine& gameContext, GameObjectType menuType) 
 
         break;
 
-    case GameObjectType::CONTROLS:
+    case GameObjectType::CONTROLS_KEYBOARD:
         menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 170.f), 0.f, MenuOptions::SET_KEY_ATTACK));
         menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 200.f), 0.f, MenuOptions::SET_KEY_JUMP));
         menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 230.f), 0.f, MenuOptions::SET_KEY_LEFT));
         menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 260.f), 0.f, MenuOptions::SET_KEY_RIGHT));
         menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 290.f), 0.f, MenuOptions::SET_KEY_UP));
         menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 320.f), 0.f, MenuOptions::SET_KEY_DOWN));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 400.f), 0.f, MenuOptions::BACK));
+
+        Utils::setControlKeyToMenuOptions(gameContext, menuComp);
+
+        break;
+
+    case GameObjectType::CONTROLS_JOYSTICK:
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 170.f), 0.f, MenuOptions::SET_KEY_ATTACK));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 200.f), 0.f, MenuOptions::SET_KEY_JUMP));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 230.f), 0.f, MenuOptions::SET_KEY_LEFT));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 260.f), 0.f, MenuOptions::SET_KEY_RIGHT));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 290.f), 0.f, MenuOptions::SET_KEY_UP));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 320.f), 0.f, MenuOptions::SET_KEY_DOWN));
+
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(500.f, 170.f), 0.f, MenuOptions::SET_JOYSTICK_ATTACK));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(500.f, 200.f), 0.f, MenuOptions::SET_JOYSTICK_JUMP));
+
         menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 400.f), 0.f, MenuOptions::BACK));
 
         Utils::setControlKeyToMenuOptions(gameContext, menuComp);
@@ -926,6 +943,18 @@ int EntityManager::createMenuOption(GameEngine& gameContext, Vector2 position, f
 
     case MenuOptions::SET_KEY_DOWN:
         textComp.text = "DOWN: ";
+        textComp.size = 20;
+        break;
+
+
+    // set controls, Joystick
+    case MenuOptions::SET_JOYSTICK_ATTACK:
+        textComp.text = "ATTACK: ";
+        textComp.size = 20;
+        break;
+
+    case MenuOptions::SET_JOYSTICK_JUMP:
+        textComp.text = "JUMP: ";
         textComp.size = 20;
         break;
     }

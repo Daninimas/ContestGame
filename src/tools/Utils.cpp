@@ -244,7 +244,7 @@ void Utils::setPhaseStartToView(GameEngine& gameContext) {
 
 void Utils::setControlKeyToMenuOptions(GameEngine& gameContext, MenuComponent& controlsMenu) {
 
-    if (gameContext.entityMan.getEntity(controlsMenu.id).getGameObjectType() == GameObjectType::CONTROLS) {
+    if (gameContext.entityMan.getEntity(controlsMenu.id).getGameObjectType() == GameObjectType::CONTROLS_KEYBOARD || gameContext.entityMan.getEntity(controlsMenu.id).getGameObjectType() == GameObjectType::CONTROLS_JOYSTICK) {
         for (int id : controlsMenu.optionsId) {
             MenuOptionComponent& optionComp = gameContext.entityMan.getComponent<MenuOptionComponent>(id);
             TextComponent& textComp = gameContext.entityMan.getComponent<TextComponent>(id);
@@ -275,6 +275,16 @@ void Utils::setControlKeyToMenuOptions(GameEngine& gameContext, MenuComponent& c
 
             case MenuOptions::SET_KEY_DOWN:
                 textComp.text = "DOWN: " + keyNameMap.at(inputComp.keyboardControlsMap[Controls::MOVE_DOWN]);
+                break;
+
+
+            // For the joystick
+            case MenuOptions::SET_JOYSTICK_ATTACK:
+                textComp.text = "ATTACK: Button" + keyNameMap.at(inputComp.keyboardControlsMap[Controls::JOYSTICK_ACTION]);
+                break;
+
+            case MenuOptions::SET_JOYSTICK_JUMP:
+                textComp.text = "JUMP: Button" + keyNameMap.at(inputComp.keyboardControlsMap[Controls::JOYSTICK_JUMP]);
                 break;
             } 
         }

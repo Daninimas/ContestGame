@@ -50,9 +50,14 @@ void SFMLEngine::render(GameEngine& gameContext) const {
 			gameContext.pushGameState(GameState::PAUSE);
 		}*/
 
-		// For the change of controls
+		// For the change of controls (KEYBOARD)
 		if (gameContext.getGameState() == GameState::WAIT_INPUT && event.type == sf::Event::KeyPressed) {
 			setKeyToControl(gameContext, event);
+			gameContext.popGameState();
+		}
+		// For the change of controls (JOYSTICK)
+		if (gameContext.getGameState() == GameState::WAIT_INPUT && event.type == sf::Event::JoystickButtonPressed) {
+			setJoystickButtonToControl(gameContext, event);
 			gameContext.popGameState();
 		}
     }
@@ -393,8 +398,13 @@ void SFMLEngine::addTexture(std::string path) {
 
 void SFMLEngine::setKeyToControl(GameEngine& gameContext, sf::Event& event) const {
 	InputComponent& playerInput = gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId);
-	bool inputEntered = false;
 
 	//std::cout << "key pressed: " << (int)event.key.code << "\n";
 	playerInput.keyboardControlsMap[playerInput.controlToChange] = event.key.code;
+}
+
+void SFMLEngine::setJoystickButtonToControl(GameEngine& gameContext, sf::Event& event) const {
+	InputComponent& playerInput = gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId);
+
+	playerInput.keyboardControlsMap[playerInput.controlToChange] = event.joystickButton.button;
 }

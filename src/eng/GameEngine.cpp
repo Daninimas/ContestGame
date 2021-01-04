@@ -11,7 +11,7 @@
 #include <tools/Utils.hpp>
 
 #include <sys/SystemsIncluder>
-
+#include <SFML/Window/Joystick.hpp>
 
 const bool SHOW_TIMERS      = false;
 const bool CHECK_SYSTEMS    = false;
@@ -127,7 +127,13 @@ void GameEngine::run() {
                 break;
 
             case GameState::CONTROLS:
-                setMenuSystems(GameObjectType::CONTROLS);
+                //TODO Comprobar que el mando este conectado, entonces usar el menu de joystick con los controles de teclado y joystick
+                if (sf::Joystick::isConnected(0)) {
+                    setMenuSystems(GameObjectType::CONTROLS_JOYSTICK);
+                }
+                else {
+                    setMenuSystems(GameObjectType::CONTROLS_KEYBOARD);
+                }
                 break;
 
             case GameState::WAIT_INPUT:

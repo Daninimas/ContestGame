@@ -50,6 +50,7 @@ private:
     void updateCamera(GameEngine& gameContext, int id);
 
     void setKeyToControl(GameEngine& gameContext, sf::Event& event) const;
+    void setJoystickButtonToControl(GameEngine& gameContext, sf::Event& event) const;
 
 
     std::unique_ptr<sf::RenderWindow> device;

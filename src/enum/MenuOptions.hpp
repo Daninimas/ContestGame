@@ -12,5 +12,9 @@ enum class MenuOptions {
     SET_KEY_LEFT,
     SET_KEY_RIGHT,
     SET_KEY_UP,
-    SET_KEY_DOWN
+    SET_KEY_DOWN,
+
+    // set controls, Joystick
+    SET_JOYSTICK_ATTACK,
+    SET_JOYSTICK_JUMP
 };

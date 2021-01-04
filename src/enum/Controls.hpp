@@ -8,5 +8,8 @@ enum class Controls
 	MOVE_DOWN,
 
 	ACTION,
-	JUMP
+	JUMP,
+
+	JOYSTICK_ACTION,
+	JOYSTICK_JUMP,
 };

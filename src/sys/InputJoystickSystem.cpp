@@ -1,6 +1,7 @@
 #include "InputJoystickSystem.hpp"
 
 #include <eng/GameEngine.hpp>
+#include <SFML/Window/Joystick.hpp>
 #include <iostream>
 
 //https://code.markrichards.ninja/sfml/working-with-joysticks-in-sfml
@@ -59,13 +60,13 @@ void InputJoystickSystem::inputPlaying(GameEngine& gameContext) const {
         playerInput.actualMovement = DodgeComponent::Right;
     }
 
-    if (sf::Joystick::isButtonPressed(0, 1)) //"B" button on the XBox 360 controller
+    if (sf::Joystick::isButtonPressed(0, playerInput.keyboardControlsMap[Controls::JOYSTICK_ACTION])) //"B" button on the XBox 360 controller
     {
         playerInput.attacking = true;
     }
 
 
-    if (sf::Joystick::isButtonPressed(0, 0)) //"A" button on the XBox 360 controller
+    if (sf::Joystick::isButtonPressed(0, playerInput.keyboardControlsMap[Controls::JOYSTICK_JUMP])) //"A" button on the XBox 360 controller
     {
         auto& jumpComp = gameContext.entityMan.getComponent<JumpComponent>(WorldElementsData::playerId);
         if (jumpComp.cooldown > jumpComp.maxCooldown) { // if has cooldown on floor

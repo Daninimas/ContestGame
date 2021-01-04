@@ -38,7 +38,10 @@ public:
         { Controls::MOVE_UP, 22 },    // W
         { Controls::MOVE_DOWN, 18 },  // S
         { Controls::ACTION, 13 },     // N
-        { Controls::JUMP, 12 }        // M
+        { Controls::JUMP, 12 },       // M
+        // For the joystick
+        { Controls::JOYSTICK_ACTION, 1 },
+        { Controls::JOYSTICK_JUMP, 0 }
     };
 
 
