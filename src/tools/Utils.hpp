@@ -36,7 +36,7 @@ public:
 
     static bool entityInPhaseLimit(GameEngine& gameContext, SituationComponent& entitySit);
 
-    static void setPhaseStartToView(GameEngine& gameContext);
+    static void setPhaseStartToView(GameEngine& gameContext, uint8_t lastPhaseDirection);
 
     static void setControlKeyToMenuOptions(GameEngine& gameContext, MenuComponent& controlsMenu);
 

@@ -36,6 +36,7 @@ void PhaseSystem::checkIfChangePhase(GameEngine& gameContext) const {
 
 void PhaseSystem::changeToNextPhase(GameEngine& gameContext, WorldComponent& worldComp) const {
 	WorldPhase previousPhase = worldComp.currentPhase; // copy of the previous phase
+	uint8_t previousPhaseDirection = worldComp.currentPhase.direction;
 
 	++worldComp.currentPhaseNumber;
 	MapLoader::loadMapPhase( gameContext, worldComp.worldPath, "Phase"+to_string(worldComp.currentPhaseNumber) );
@@ -48,5 +49,5 @@ void PhaseSystem::changeToNextPhase(GameEngine& gameContext, WorldComponent& wor
 		gameContext.getSoundFacadeRef().playMusic(worldComp.currentPhase.phaseMusic);
 	}*/
 
-	Utils::setPhaseStartToView(gameContext);
+	Utils::setPhaseStartToView(gameContext, previousPhaseDirection);
 }

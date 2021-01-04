@@ -214,14 +214,14 @@ bool Utils::entityInPhaseLimit(GameEngine& gameContext, SituationComponent& enti
 }
 
 
-void Utils::setPhaseStartToView(GameEngine& gameContext) {
+void Utils::setPhaseStartToView(GameEngine& gameContext, uint8_t lastPhaseDirection) {
     WorldPhase&      phase  = gameContext.entityMan.getComponent<WorldComponent>(WorldElementsData::worldId).currentPhase;
     CameraComponent& camera = gameContext.entityMan.getComponent<CameraComponent>(WorldElementsData::activeCameraId);
     BoundingBox cameraView  = getCameraViewBoundig(camera);
 
     cameraView = moveToWorldCoords(cameraView, gameContext.entityMan.getComponent<SituationComponent>(WorldElementsData::activeCameraId));
 
-    switch (phase.direction)
+    switch (lastPhaseDirection)
     {
     case WorldPhase::Left:
         phase.limits.xRight = cameraView.xRight;
@@ -280,11 +280,11 @@ void Utils::setControlKeyToMenuOptions(GameEngine& gameContext, MenuComponent& c
 
             // For the joystick
             case MenuOptions::SET_JOYSTICK_ATTACK:
-                textComp.text = "ATTACK: Button" + keyNameMap.at(inputComp.keyboardControlsMap[Controls::JOYSTICK_ACTION]);
+                textComp.text = "ATTACK: Button" + inputComp.keyboardControlsMap[Controls::JOYSTICK_ACTION];
                 break;
 
             case MenuOptions::SET_JOYSTICK_JUMP:
-                textComp.text = "JUMP: Button" + keyNameMap.at(inputComp.keyboardControlsMap[Controls::JOYSTICK_JUMP]);
+                textComp.text = "JUMP: Button" + inputComp.keyboardControlsMap[Controls::JOYSTICK_JUMP];
                 break;
             } 
         }

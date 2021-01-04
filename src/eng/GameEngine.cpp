@@ -127,7 +127,6 @@ void GameEngine::run() {
                 break;
 
             case GameState::CONTROLS:
-                //TODO Comprobar que el mando este conectado, entonces usar el menu de joystick con los controles de teclado y joystick
                 if (sf::Joystick::isConnected(0)) {
                     setMenuSystems(GameObjectType::CONTROLS_JOYSTICK);
                 }
