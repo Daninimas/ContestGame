@@ -4,5 +4,6 @@ enum class AttackType
     MELEE,
     DISTANCE,
     EXPLOSION,
-    LASER
+    LASER,
+    DAMAGE_PLATFORM
 };

@@ -15,6 +15,7 @@
 #include <string>
 
 #include <iostream>
+#include <limits>
 
 
 EntityManager::EntityManager() {
@@ -789,6 +790,32 @@ int EntityManager::createTrigger(GameEngine& gameContext, Vector2 position, floa
     return entityId;
 }
 
+
+int EntityManager::createDamagePlatform(GameEngine& gameContext, Vector2 position, Vector2 size, uint16_t damage, GameObjectType goType) {
+    int entityId = Entity::getCurrentId();
+
+    SituationComponent& situation = createComponent<SituationComponent>(entityId);
+    ColliderComponent& colliderComp = createComponent<ColliderComponent>(entityId);
+    AttackComponent& attack = createComponent<AttackComponent>(entityId);
+
+    //######### DATA ########//
+    situation.position = position;
+
+    // Collider
+    colliderComp.collisionLayer = ColliderComponent::Wall;
+    colliderComp.layerMasc = ColliderComponent::Player + ColliderComponent::Enemy; //Collides with player and wall
+    colliderComp.type = ColliderType::STATIC;
+    colliderComp.boundingRoot.bounding = {0.f, size.x, 0.f, size.y};
+    
+    // Attack
+    attack.damage = damage;
+    attack.maxLifetime = std::numeric_limits<float>::max();
+    attack.type = AttackType::DAMAGE_PLATFORM;
+
+    //######### CREATE ########//
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::DAMAGE_PLATFORM, goType));
+    return entityId;
+}
 
 // ------------------------------ WORLD CREATION ------------------------------
 

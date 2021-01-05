@@ -69,6 +69,8 @@ void StaticEntitiesSystem::init(GameEngine &gameContext) const {
     gameContext.entityMan.createHUDElement(gameContext, Vector2(10.f, 40.f), 0.f, GameObjectType::HUD_PLAYER_AMMO);
 
     //MapLoader::loadMapPhase(gameContext, "Media/Maps/debug.json", "Phase1");
+
+    gameContext.entityMan.createDamagePlatform(gameContext, Vector2(400.f, 320.f), Vector2(50.f, 50.f), 1, GameObjectType::DAMAGE_PLATFORM);
 }
 
 void StaticEntitiesSystem::createPlayer(GameEngine &gameContext) const {

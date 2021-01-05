@@ -68,6 +68,9 @@ enum class GameObjectType {
     // World
     WORLD_DEBUG,
 
+    // Damage platforms
+    DAMAGE_PLATFORM,
+
     // Triggers
     TRIGGER
     /*TRIGGER_SOUND,

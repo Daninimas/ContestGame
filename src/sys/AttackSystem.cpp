@@ -40,7 +40,7 @@ void AttackSystem::deleteAttacksByTime(GameEngine& gameContext) const {
 			attacksToDelete.push_back(attack.id);
 	}
 
-	//Delete collided attacks
+	//Delete attacks
 	for (size_t i = 0; i < attacksToDelete.size(); ++i) {
 		gameContext.eraseEntityByID(attacksToDelete[i]);
 	}
@@ -423,7 +423,7 @@ void AttackSystem::resolveAttackHit(GameEngine& gameContext, ColliderComponent& 
 		}
 	}
 
-	// After hit, delete attack if is a distance atack
+	// After hit, delete attack if is a distance attack
 	if(attack.type == AttackType::DISTANCE)
 		attacksToDelete.push_back(attack.id);
 }
