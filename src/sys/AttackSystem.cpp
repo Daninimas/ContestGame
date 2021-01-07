@@ -66,19 +66,14 @@ void AttackSystem::animateExplosion(GameEngine& gameContext, AttackComponent& at
 }
 
 void AttackSystem::manageDamagePlatform(GameEngine& gameContext, AttackComponent& attack) const {
-	if (gameContext.entityMan.getComponent<ColliderComponent>(attack.id).collide) {
-		// manages the time only if it is colliding
-		attack.resetDamagedEntTimeCounter += gameContext.getDeltaTime();
+	// manages the time only if it is colliding
+	attack.resetDamagedEntTimeCounter += gameContext.getDeltaTime();
 
-		if (attack.resetDamagedEntTimeCounter > attack.resetDamagedEntTime) {
+	if (attack.resetDamagedEntTimeCounter > attack.resetDamagedEntTime) {
+		if (gameContext.entityMan.getComponent<ColliderComponent>(attack.id).collide) {
 			attack.entitiesDamaged.clear();
-
 			attack.resetDamagedEntTimeCounter = 0.f;
 		}
-	}
-	else {
-		attack.entitiesDamaged.clear();
-		attack.resetDamagedEntTimeCounter = 0.f;
 	}
 }
 

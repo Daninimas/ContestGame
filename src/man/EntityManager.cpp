@@ -811,6 +811,7 @@ int EntityManager::createDamagePlatform(GameEngine& gameContext, Vector2 positio
     attack.damage = damage;
     attack.maxLifetime = std::numeric_limits<float>::max();
     attack.type = AttackType::DAMAGE_PLATFORM;
+    attack.resetDamagedEntTime = 1.f;
 
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::DAMAGE_PLATFORM, goType));
