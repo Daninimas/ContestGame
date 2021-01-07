@@ -11,12 +11,13 @@ public:
     void update(GameEngine& gameContext) const override;
 
 private:
-    void deleteAttacksByTime(GameEngine& gameContext) const;
+    void manageAttacks(GameEngine& gameContext) const;
     void addCooldownTimeToWeapons(GameEngine& gameContext) const;
     void checkPlayerAttacking(GameEngine& gameContext) const;
     void checkEnemiesAttacking(GameEngine& gameContext) const;
     bool createMeleeAttack(GameEngine& gameContext, MeleeWeaponComponent& meleeAttacker) const;
-    void animateExplosions(GameEngine& gameContext) const;
+    void animateExplosion(GameEngine& gameContext, AttackComponent& attack) const;
+    void manageDamagePlatform(GameEngine& gameContext, AttackComponent& attack) const;
     bool createDistanceAttack(GameEngine& gameContext, DistanceWeaponComponent& distanceWeaponAttacker) const;
     void createBulletAttack(GameEngine& gameContext, DistanceWeaponComponent& distanceWeaponAttacker) const;
     void createBombEntity(GameEngine& gameContext, DistanceWeaponComponent& distanceWeaponAttacker) const;

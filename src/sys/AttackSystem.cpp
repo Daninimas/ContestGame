@@ -12,7 +12,7 @@ AttackSystem::~AttackSystem() {}
 
 void AttackSystem::update(GameEngine& gameContext) const {
 	// Delete previous melee attacks
-	deleteAttacksByTime(gameContext);
+	manageAttacks(gameContext);
 
 	//manage COOLDOWN for all attacks
 	addCooldownTimeToWeapons(gameContext);
@@ -21,14 +21,11 @@ void AttackSystem::update(GameEngine& gameContext) const {
 	checkPlayerAttacking(gameContext);
 	checkEnemiesAttacking(gameContext);
 
-	//manage attacks special effects
-	animateExplosions(gameContext);
-
 	//manage hits
 	checkAttacksHits(gameContext);
 }
 
-void AttackSystem::deleteAttacksByTime(GameEngine& gameContext) const {
+void AttackSystem::manageAttacks(GameEngine& gameContext) const { // this method delete attacks by time, and manage explosion animations and reset of the hitted enemies of damage platforms
 	auto& attacks = gameContext.entityMan.getComponents<AttackComponent>();
 	std::vector<int> attacksToDelete;
 	attacksToDelete.reserve(attacks.size());
@@ -36,13 +33,52 @@ void AttackSystem::deleteAttacksByTime(GameEngine& gameContext) const {
 	for (AttackComponent& attack : attacks) {
 		attack.lifetime += gameContext.getDeltaTime();
 
-		if (attack.lifetime > attack.maxLifetime)
+		if (attack.lifetime > attack.maxLifetime) {
 			attacksToDelete.push_back(attack.id);
+		}
+		else {
+			// manage the attack
+			if (attack.type == AttackType::EXPLOSION && gameContext.entityMan.existsComponent<ExplosionAttackComponent>(attack.id)) {
+				animateExplosion(gameContext, attack);
+			}
+			else if (attack.type == AttackType::DAMAGE_PLATFORM) {
+				manageDamagePlatform(gameContext, attack);
+			}
+		}
 	}
 
 	//Delete attacks
 	for (size_t i = 0; i < attacksToDelete.size(); ++i) {
 		gameContext.eraseEntityByID(attacksToDelete[i]);
+	}
+}
+
+void AttackSystem::animateExplosion(GameEngine& gameContext, AttackComponent& attack) const {
+	ColliderComponent& attackCol = gameContext.entityMan.getComponent<ColliderComponent>(attack.id);
+	ExplosionAttackComponent& explosionComp = gameContext.entityMan.getComponent<ExplosionAttackComponent>(attack.id);
+	BoundingBox& attackBound = attackCol.boundingRoot.bounding;
+
+	// Do bigger the collider
+	attackBound.xLeft -= explosionComp.expansionVelocity;
+	attackBound.xRight += explosionComp.expansionVelocity;
+	attackBound.yDown += explosionComp.expansionVelocity;
+	attackBound.yUp -= explosionComp.expansionVelocity;
+}
+
+void AttackSystem::manageDamagePlatform(GameEngine& gameContext, AttackComponent& attack) const {
+	if (gameContext.entityMan.getComponent<ColliderComponent>(attack.id).collide) {
+		// manages the time only if it is colliding
+		attack.resetDamagedEntTimeCounter += gameContext.getDeltaTime();
+
+		if (attack.resetDamagedEntTimeCounter > attack.resetDamagedEntTime) {
+			attack.entitiesDamaged.clear();
+
+			attack.resetDamagedEntTimeCounter = 0.f;
+		}
+	}
+	else {
+		attack.entitiesDamaged.clear();
+		attack.resetDamagedEntTimeCounter = 0.f;
 	}
 }
 
@@ -367,30 +403,6 @@ void AttackSystem::createLaserAttack(GameEngine& gameContext, DistanceWeaponComp
 	gameContext.getSoundFacadeRef().loadSound(distanceWeaponAttacker.attackSound.soundPath);
 	gameContext.getSoundFacadeRef().playSound(distanceWeaponAttacker.attackSound);
 }
-
-
-
-
-void AttackSystem::animateExplosions(GameEngine& gameContext) const {
-	auto& attacks = gameContext.entityMan.getComponents<AttackComponent>();
-	
-	for (AttackComponent& attack : attacks) {
-		if (attack.type == AttackType::EXPLOSION && gameContext.entityMan.existsComponent<ExplosionAttackComponent>(attack.id) ) {
-			ColliderComponent& attackCol = gameContext.entityMan.getComponent<ColliderComponent>(attack.id);
-			ExplosionAttackComponent& explosionComp = gameContext.entityMan.getComponent<ExplosionAttackComponent>(attack.id);
-			BoundingBox& attackBound = attackCol.boundingRoot.bounding;
-
-			// Do bigger the collider
-			attackBound.xLeft  -= explosionComp.expansionVelocity;
-			attackBound.xRight += explosionComp.expansionVelocity;
-			attackBound.yDown  += explosionComp.expansionVelocity;
-			attackBound.yUp    -= explosionComp.expansionVelocity;
-		}
-	}
-}
-
-
-
 
 
 void AttackSystem::checkAttacksHits(GameEngine& gameContext) const{
