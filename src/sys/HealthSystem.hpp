@@ -11,5 +11,6 @@ public:
     void update(GameEngine& gameContext) const override;
 
 private:
+    void checkPlayerInvincibility(GameEngine& gameContext) const;
     void manageHeatlths(GameEngine& gameContext) const;
 };

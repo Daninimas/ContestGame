@@ -51,6 +51,7 @@ void DeathSystem::managePlayerLifes(GameEngine& gameContext, int playerId) const
         // Reset player stats when life lost
         --healthComp.extraLifes;
         healthComp.currentHealth = healthComp.maxHealth;
+        healthComp.recoverTimeCounter = 0.f; 
     }
     else {
         std::cout << "Game Over\n";

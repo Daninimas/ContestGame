@@ -157,6 +157,8 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
 
     // Health
     heathComp.extraLifes = 2;
+    heathComp.recoverTime = 2.f;
+    //heathComp.recoverTimeCounter = heathComp.recoverTime;
 
 
     //######### RENDER ########//
