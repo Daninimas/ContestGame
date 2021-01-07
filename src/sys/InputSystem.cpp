@@ -23,7 +23,6 @@ void InputSystem::update(GameEngine& gameContext) const {
 void InputSystem::inputPlaying(GameEngine& gameContext) const {
     InputComponent& playerInput  = gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId);
     VelocityComponent& playerVel = gameContext.entityMan.getComponent<VelocityComponent>(WorldElementsData::playerId);
-    AnimationComponent& animComp = gameContext.entityMan.getComponent<AnimationComponent>(WorldElementsData::playerId);
 
     // Reset actions
     playerInput.resetActions();
@@ -49,7 +48,6 @@ void InputSystem::inputPlaying(GameEngine& gameContext) const {
         playerVel.velocity.x = -playerVel.speedX;
         playerInput.actualMovement = DodgeComponent::Left;
         playerInput.movedWithKeyboard = true;
-        AnimationManager::setAnimationToEntity(gameContext, Animation::RUNNING, animComp);
     }
     if (sf::Keyboard::isKeyPressed( static_cast<sf::Keyboard::Key>(playerInput.keyboardControlsMap[Controls::MOVE_RIGHT]) ))
     {
@@ -57,7 +55,6 @@ void InputSystem::inputPlaying(GameEngine& gameContext) const {
         playerVel.velocity.x = playerVel.speedX;
         playerInput.actualMovement = DodgeComponent::Right;
         playerInput.movedWithKeyboard = true;
-        AnimationManager::setAnimationToEntity(gameContext, Animation::RUNNING, animComp);
     }
 
     if (sf::Keyboard::isKeyPressed( static_cast<sf::Keyboard::Key>(playerInput.keyboardControlsMap[Controls::ACTION]) ))

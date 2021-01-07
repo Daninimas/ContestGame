@@ -25,6 +25,8 @@ void InputJoystickSystem::update(GameEngine& gameContext) const {
             inputMenus(gameContext);
         }
     }
+
+    setAnimationToPlayer(gameContext);
 }
 
 
@@ -55,14 +57,12 @@ void InputJoystickSystem::inputPlaying(GameEngine& gameContext) const {
         playerInput.movingLeft = true;
         playerVel.velocity.x = playerVel.speedX * (joystickPos.x / 100.f);
         playerInput.actualMovement = DodgeComponent::Left;
-        AnimationManager::setAnimationToEntity(gameContext, Animation::RUNNING, animComp);
     }
     if (joystickPos.x > joystickBias)
     {
         playerInput.movingRight = true;
         playerVel.velocity.x = playerVel.speedX * (joystickPos.x / 100.f);
         playerInput.actualMovement = DodgeComponent::Right;
-        AnimationManager::setAnimationToEntity(gameContext, Animation::RUNNING, animComp);
     }
 
     if (sf::Joystick::isButtonPressed(0, playerInput.keyboardControlsMap[Controls::JOYSTICK_ACTION])) //"B" button on the XBox 360 controller
@@ -79,10 +79,7 @@ void InputJoystickSystem::inputPlaying(GameEngine& gameContext) const {
         }
     }
 
-    // Set idle animation if not moved
-    if (playerInput.actualMovement == 0xFF) {
-        AnimationManager::setAnimationToEntity(gameContext, Animation::IDLE, animComp);
-    }
+    
 }
 
 
@@ -127,5 +124,19 @@ void InputJoystickSystem::inputMenus(GameEngine& gameContext) const {
         if (buttonPressed) {
             playerInput.cooldown = 0.f;
         }
+    }
+}
+
+void InputJoystickSystem::setAnimationToPlayer(GameEngine& gameContext) const {
+    InputComponent& playerInput = gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId);
+    AnimationComponent& animComp = gameContext.entityMan.getComponent<AnimationComponent>(WorldElementsData::playerId);
+
+    if (playerInput.actualMovement == DodgeComponent::Left || playerInput.actualMovement == DodgeComponent::Right) {
+        AnimationManager::setAnimationToEntity(gameContext, Animation::RUNNING, animComp);
+    }
+
+    // Set idle animation if not moved
+    if (playerInput.actualMovement == 0xFF) {
+        AnimationManager::setAnimationToEntity(gameContext, Animation::IDLE, animComp);
     }
 }

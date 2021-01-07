@@ -14,4 +14,5 @@ private:
     void inputPlaying(GameEngine& gameContext) const;
     void inputMenus(GameEngine& gameContext) const;
 
+    void setAnimationToPlayer(GameEngine& gameContext) const;
 };
