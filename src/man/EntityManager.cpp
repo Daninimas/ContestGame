@@ -155,6 +155,9 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
     dodgeComp.velocityIncrementFactor = 4.f;
     dodgeComp.initDodgeComponent();
 
+    // Health
+    heathComp.extraLifes = 2;
+
 
     //######### RENDER ########//
     gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
@@ -1025,6 +1028,17 @@ int EntityManager::createHUDElement(GameEngine& gameContext, Vector2 position, f
         gameContext.getWindowFacadeRef().createText(gameContext, entityId);
     }
     else if (objType == GameObjectType::HUD_PLAYER_AMMO) {
+        TextComponent& textComp = createComponent<TextComponent>(entityId);
+
+        textComp.color = { 255, 255, 30, 255 };
+        textComp.isHUDElement = true;
+        textComp.size = 24;
+        textComp.text = "";
+
+        //######### RENDER ########//
+        gameContext.getWindowFacadeRef().createText(gameContext, entityId);
+    }
+    else if (objType == GameObjectType::HUD_PLAYER_LIFES) {
         TextComponent& textComp = createComponent<TextComponent>(entityId);
 
         textComp.color = { 255, 255, 30, 255 };

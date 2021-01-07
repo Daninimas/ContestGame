@@ -67,6 +67,7 @@ void StaticEntitiesSystem::init(GameEngine &gameContext) const {
 
     gameContext.entityMan.createHUDElement(gameContext, Vector2(10.f, 10.f), 0.f, GameObjectType::HUD_PLAYER_HEALTH);
     gameContext.entityMan.createHUDElement(gameContext, Vector2(10.f, 40.f), 0.f, GameObjectType::HUD_PLAYER_AMMO);
+    gameContext.entityMan.createHUDElement(gameContext, Vector2(10.f, 70.f), 0.f, GameObjectType::HUD_PLAYER_LIFES);
 
     //MapLoader::loadMapPhase(gameContext, "Media/Maps/debug.json", "Phase1");
 

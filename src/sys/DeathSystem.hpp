@@ -13,4 +13,6 @@ public:
 private:
     std::vector<int> getDeadEntities(GameEngine& gameContext) const;
     void deleteEntities(GameEngine& gameContext, std::vector<int>& deadEntities) const;
+
+    void managePlayerLifes(GameEngine& gameContext, int playerId) const;
 };

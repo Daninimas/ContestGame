@@ -14,4 +14,6 @@ public:
 
     uint16_t    damageReceived{ 0 };
     bool        damaged{ false };
+
+    uint8_t     extraLifes{ 0 }; // lifes for the player
 };

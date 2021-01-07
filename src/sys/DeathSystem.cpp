@@ -39,7 +39,20 @@ void DeathSystem::deleteEntities(GameEngine& gameContext, std::vector<int>& dead
             gameContext.eraseEntityByID(entityId); // Delete the entity
         }
         else {
-            std::cout << "Has muerto\n";
+            managePlayerLifes(gameContext, entityId);
         }
+    }
+}
+
+void DeathSystem::managePlayerLifes(GameEngine& gameContext, int playerId) const {
+    HealthComponent& healthComp = gameContext.entityMan.getComponent<HealthComponent>(playerId);
+
+    if (healthComp.extraLifes > 0) {
+        // Reset player stats when life lost
+        --healthComp.extraLifes;
+        healthComp.currentHealth = healthComp.maxHealth;
+    }
+    else {
+        std::cout << "Game Over\n";
     }
 }

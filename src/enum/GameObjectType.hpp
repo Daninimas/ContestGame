@@ -64,6 +64,7 @@ enum class GameObjectType {
     //HUD elements
     HUD_PLAYER_HEALTH,
     HUD_PLAYER_AMMO,
+    HUD_PLAYER_LIFES,
 
     // World
     WORLD_DEBUG,
