@@ -41,6 +41,10 @@ public:
     static void setControlKeyToMenuOptions(GameEngine& gameContext, MenuComponent& controlsMenu);
 
     static std::string getKeyName(uint8_t keyCode);
+    
+    static void resetPlayerPosition(GameEngine& gameContext);
+
+    static SituationComponent& getClosestDistanceXToObjetive(GameEngine& gameContext, SituationComponent& objetiveSituation);
 
     template <typename T> 
     static int sign(T val) {

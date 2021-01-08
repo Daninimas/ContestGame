@@ -297,3 +297,16 @@ void Utils::setControlKeyToMenuOptions(GameEngine& gameContext, MenuComponent& c
 std::string Utils::getKeyName(uint8_t keyCode) {
     return keyNameMap.at(keyCode);
 }
+
+
+void Utils::resetPlayerPosition(GameEngine& gameContext) {
+    SituationComponent& playerSituation = gameContext.entityMan.getComponent<SituationComponent>(WorldElementsData::playerId);
+
+
+}
+
+SituationComponent& Utils::getClosestDistanceXToObjetive(GameEngine& gameContext, SituationComponent& objetiveSituation) {
+    auto& allSituations = gameContext.entityMan.getComponents<SituationComponent>();
+    
+    for(size_t = 0; )
+}
