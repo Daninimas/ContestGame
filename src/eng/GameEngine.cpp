@@ -113,9 +113,10 @@ void GameEngine::run() {
             // State recently changed. Systems vector must be updated
             systems.clear();
             systemsLate.clear();
+
             switch (getGameState()) {
             case GameState::GAMEOVER:
-                //systems.emplace_back(std::make_unique<GameOverSystem>());
+                setMenuSystems(GameObjectType::GAME_OVER_MENU);
                 break;
 
             case GameState::PLAYING:

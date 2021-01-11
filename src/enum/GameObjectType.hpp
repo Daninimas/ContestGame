@@ -41,6 +41,7 @@ enum class GameObjectType {
     MAINMENU,
     CONTROLS_KEYBOARD,
     CONTROLS_JOYSTICK,
+    GAME_OVER_MENU,
 
 
     // Enemy types

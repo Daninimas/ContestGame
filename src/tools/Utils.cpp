@@ -308,10 +308,10 @@ void Utils::resetPlayerPosition(GameEngine& gameContext) {
         ColliderComponent& playerColl = gameContext.entityMan.getComponent<ColliderComponent>(WorldElementsData::playerId);
 
         playerSituation.position.x = closesWall->position.x;
-        playerSituation.position.y = closesWall->position.y - (playerColl.boundingRoot.bounding.yDown - playerColl.boundingRoot.bounding.yUp) + 50.f;
+        playerSituation.position.y = closesWall->position.y - (playerColl.boundingRoot.bounding.yDown - playerColl.boundingRoot.bounding.yUp) - 100.f;
     }
     else {
-        // TODO if don't found a wall, set gameState to GAME OVER
+        gameContext.pushGameState(GameState::GAMEOVER);
     }
 }
 

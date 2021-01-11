@@ -57,6 +57,6 @@ void DeathSystem::managePlayerLifes(GameEngine& gameContext, int playerId) const
         Utils::resetPlayerPosition(gameContext);
     }
     else {
-        std::cout << "Game Over\n";
+        gameContext.pushGameState(GameState::GAMEOVER);
     }
 }

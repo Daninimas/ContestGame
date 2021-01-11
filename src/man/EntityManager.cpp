@@ -156,7 +156,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
     dodgeComp.initDodgeComponent();
 
     // Health
-    heathComp.extraLifes = 2;
+    heathComp.extraLifes = 1;
     heathComp.recoverTime = 2.f;
     //heathComp.recoverTimeCounter = heathComp.recoverTime;
 
@@ -899,6 +899,11 @@ int EntityManager::createMenu(GameEngine& gameContext, GameObjectType menuType) 
         menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 400.f), 0.f, MenuOptions::BACK));
 
         Utils::setControlKeyToMenuOptions(gameContext, menuComp);
+
+        break;
+
+    case GameObjectType::GAME_OVER_MENU:
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 350.f), 0.f, MenuOptions::EXIT));
 
         break;
     }
