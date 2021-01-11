@@ -106,7 +106,7 @@ void MapLoader::createObject(GameEngine& gameContext, std::string layerName, tso
 
         // Check the object to create
         if (layerName == "WALL") {
-            gameContext.entityMan.createWall(gameContext, Vector2(position.x, position.y), rotation, goType);
+            gameContext.entityMan.createWall(gameContext, Vector2(position.x, position.y), Vector2(size.x, size.y), rotation, goType);
         }
         else if (layerName == "ENEMY") {
             int enemyId = gameContext.entityMan.createEnemy(gameContext, Vector2(position.x, position.y), rotation, goType);

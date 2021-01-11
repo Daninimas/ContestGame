@@ -246,7 +246,7 @@ int EntityManager::createAttack(GameEngine& gameContext, Vector2 position, float
 }
 
 
-int EntityManager::createWall(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType) {
+int EntityManager::createWall(GameEngine& gameContext, Vector2 position, Vector2 size, float r, GameObjectType goType) {
     int entityId = Entity::getCurrentId();
 
     SituationComponent& situation = createComponent<SituationComponent>(entityId);
@@ -261,7 +261,7 @@ int EntityManager::createWall(GameEngine& gameContext, Vector2 position, float r
     // Collider
     colliderComp.collisionLayer = ColliderComponent::Wall;
     colliderComp.layerMasc = ColliderComponent::Enemy + ColliderComponent::Player + ColliderComponent::PlayerAttack + ColliderComponent::Weapon + ColliderComponent::Attack; //Collides with player and enemy
-    colliderComp.boundingRoot.bounding = { 0.f, 100.f, 0.f, 10.f };
+    colliderComp.boundingRoot.bounding = { 0.f, size.x, 0.f, size.y };
 
     //######### RENDER ########//
     //gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);

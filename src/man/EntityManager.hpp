@@ -95,7 +95,7 @@ public:
     //////////////////////////////////////////////////
     int createPlayer(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType = GameObjectType::NONE);
     int createAttack(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType = GameObjectType::NONE);
-    int createWall(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType = GameObjectType::NONE);
+    int createWall(GameEngine& gameContext, Vector2 position, Vector2 size, float r, GameObjectType goType = GameObjectType::NONE);
     int createEnemy(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType = GameObjectType::NONE);
     int createWeapon(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType = GameObjectType::NONE);
     int createCamera(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType = GameObjectType::NONE);
