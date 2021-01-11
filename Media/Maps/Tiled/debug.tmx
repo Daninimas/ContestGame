@@ -40,7 +40,7 @@
    <object id="82" type="CHASERJUMPER" gid="2" x="301.273" y="366.242" width="20" height="20"/>
   </objectgroup>
   <objectgroup color="#0055ff" id="2" name="WALL">
-   <object id="142" x="0" y="400" width="634" height="32"/>
+   <object id="142" type="WALL" x="0" y="400" width="634" height="32"/>
    <object id="143" type="WALL" x="633" y="406" width="170" height="28"/>
    <object id="144" type="WALL" x="802" y="380" width="76" height="70"/>
   </objectgroup>
