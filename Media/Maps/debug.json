@@ -52,6 +52,36 @@
                  "y":0
                 }, 
                 {
+                 "color":"#ff0000",
+                 "draworder":"topdown",
+                 "id":15,
+                 "name":"DAMAGE_PLATFORM",
+                 "objects":[
+                        {
+                         "height":66.3636363636364,
+                         "id":141,
+                         "name":"",
+                         "properties":[
+                                {
+                                 "name":"Damage",
+                                 "type":"int",
+                                 "value":2
+                                }],
+                         "rotation":0,
+                         "type":"DAMAGE_PLATFORM",
+                         "visible":true,
+                         "width":93.9393939393939,
+                         "x":470.666666666667,
+                         "y":326.30303030303
+                        }],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
+                }, 
+                {
+                 "color":"#00aa00",
                  "draworder":"topdown",
                  "id":13,
                  "name":"TRIGGER",
@@ -76,7 +106,7 @@
                          "visible":true,
                          "width":61.3333,
                          "x":70.667,
-                         "y":300.000333333333
+                         "y":300
                         }, 
                         {
                          "height":96,
@@ -97,8 +127,8 @@
                          "type":"TRIGGER",
                          "visible":true,
                          "width":61.3333,
-                         "x":696.000016666667,
-                         "y":305.333333333333
+                         "x":696,
+                         "y":305.333
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -276,8 +306,8 @@
                          "rotation":0,
                          "type":"",
                          "visible":true,
-                         "width":2090.61,
-                         "x":8,
+                         "width":1444.61,
+                         "x":654,
                          "y":-128
                         }],
                  "opacity":1,
@@ -599,8 +629,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":15,
- "nextobjectid":141,
+ "nextlayerid":16,
+ "nextobjectid":142,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.4.3",

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="100" tileheight="100" infinite="1" nextlayerid="15" nextobjectid="141">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="100" tileheight="100" infinite="1" nextlayerid="16" nextobjectid="142">
  <editorsettings>
   <export target="../debug.json" format="json"/>
  </editorsettings>
@@ -15,7 +15,14 @@
   <objectgroup id="5" name="phase_size">
    <object id="71" x="0" y="-104" width="865.34" height="732"/>
   </objectgroup>
-  <objectgroup id="13" name="TRIGGER">
+  <objectgroup color="#ff0000" id="15" name="DAMAGE_PLATFORM">
+   <object id="141" type="DAMAGE_PLATFORM" x="470.667" y="326.303" width="93.9394" height="66.3636">
+    <properties>
+     <property name="Damage" type="int" value="2"/>
+    </properties>
+   </object>
+  </objectgroup>
+  <objectgroup color="#00aa00" id="13" name="TRIGGER">
    <object id="139" type="TRIGGER" x="70.667" y="300" width="61.3333" height="96">
     <properties>
      <property name="Function" value="PLAY_MUSIC"/>
@@ -49,7 +56,7 @@
    <property name="Direction" value="Down"/>
   </properties>
   <objectgroup id="9" name="phase_size">
-   <object id="115" x="8" y="-128" width="2090.61" height="1161.82"/>
+   <object id="115" x="654" y="-128" width="1444.61" height="1161.82"/>
   </objectgroup>
   <objectgroup id="6" name="WALL">
    <object id="103" type="WALL" gid="1" x="872" y="396.576" width="100" height="10"/>

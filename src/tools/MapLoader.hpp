@@ -57,7 +57,10 @@ private:
         { "POWERUP_FURY", GameObjectType::POWERUP_FURY },
 
         // Triggers
-        { "TRIGGER", GameObjectType::TRIGGER }
+        { "TRIGGER", GameObjectType::TRIGGER },
+
+        // Damage platforms
+        { "DAMAGE_PLATFORM", GameObjectType::DAMAGE_PLATFORM }
     };
 
     static inline std::map<std::string, uint8_t> directionMap{    // Este mapa sirve para coger la direccion del mapa que se esta generando y pasarlo a enum 

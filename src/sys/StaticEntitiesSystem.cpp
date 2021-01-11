@@ -71,7 +71,7 @@ void StaticEntitiesSystem::init(GameEngine &gameContext) const {
 
     //MapLoader::loadMapPhase(gameContext, "Media/Maps/debug.json", "Phase1");
 
-    gameContext.entityMan.createDamagePlatform(gameContext, Vector2(400.f, 320.f), Vector2(50.f, 50.f), 1, GameObjectType::DAMAGE_PLATFORM);
+    //gameContext.entityMan.createDamagePlatform(gameContext, Vector2(400.f, 320.f), Vector2(50.f, 50.f), 1, GameObjectType::DAMAGE_PLATFORM);
 }
 
 void StaticEntitiesSystem::createPlayer(GameEngine &gameContext) const {

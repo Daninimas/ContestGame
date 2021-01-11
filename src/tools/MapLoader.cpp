@@ -98,6 +98,7 @@ void MapLoader::createObject(GameEngine& gameContext, std::string layerName, tso
     std::cout << "      - Generate: " << objType << "\n";
     GameObjectType goType = getGameObject(objType);
     tson::Vector2f position = obj.getPosition();
+    tson::Vector2f size = obj.getSize();
     float rotation = obj.getRotation();
 
 
@@ -130,6 +131,10 @@ void MapLoader::createObject(GameEngine& gameContext, std::string layerName, tso
         }
         else if (layerName == "WEAPON") {
             gameContext.entityMan.createWeapon(gameContext, Vector2(position.x, position.y), rotation, goType);
+        }
+        else if (layerName == "DAMAGE_PLATFORM") {
+            uint16_t damage = obj.get<int>("Damage");
+            gameContext.entityMan.createDamagePlatform(gameContext, Vector2(position.x, position.y), Vector2(size.x, size.y), damage, goType);
         }
     }
     else {
