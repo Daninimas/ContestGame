@@ -138,6 +138,12 @@ void GameEngine::run() {
 
             case GameState::WAIT_INPUT:
                 break;
+
+            case GameState::WAIT_AFTER_LOSE_LIFE:
+                systems.emplace_back(std::make_unique<WaitAfterLoseLifeSystem>());
+                systemsLate.emplace_back(std::make_unique<CameraSystem>());
+                systemsLate.emplace_back(std::make_unique<WorldSystem>());
+                break;
             }
 
             gameStateChanged = false;

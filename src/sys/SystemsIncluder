@@ -24,6 +24,8 @@
 #include <sys/TriggerSystem.hpp>
 #include <sys/InputJoystickSystem.hpp>
 #include <sys/AnimationSystem.hpp>
+#include <sys/WaitAfterLoseLifeSystem.hpp>
+
 
 #include <sys/AI/AIChaseSystem.hpp>
 #include <sys/AI/AIMeleeSystem.hpp>

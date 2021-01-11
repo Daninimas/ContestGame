@@ -157,6 +157,7 @@
     <ClCompile Include="src\com\AnimationComponent.cpp" />
     <ClCompile Include="src\com\MenuOptionComponent.cpp" />
     <ClCompile Include="src\com\TriggerComponent.cpp" />
+    <ClCompile Include="src\sys\WaitAfterLoseLifeSystem.cpp" />
     <ClCompile Include="src\com\WorldComponent.cpp" />
     <ClCompile Include="src\sys\AnimationSystem.cpp" />
     <ClCompile Include="src\sys\InputJoystickSystem.cpp" />
@@ -229,6 +230,7 @@
     <ClInclude Include="src\com\AnimationComponent.hpp" />
     <ClInclude Include="src\com\MenuOptionComponent.hpp" />
     <ClInclude Include="src\com\TriggerComponent.hpp" />
+    <ClInclude Include="src\sys\WaitAfterLoseLifeSystem.hpp" />
     <ClInclude Include="src\com\WorldComponent.hpp" />
     <ClInclude Include="src\enum\AnimationEnum.hpp" />
     <ClInclude Include="src\enum\Controls.hpp" />

@@ -55,6 +55,7 @@ void DeathSystem::managePlayerLifes(GameEngine& gameContext, int playerId) const
         healthComp.recoverTimeCounter = 0.f; 
 
         Utils::resetPlayerPosition(gameContext);
+        gameContext.pushGameState(GameState::WAIT_AFTER_LOSE_LIFE);
     }
     else {
         gameContext.pushGameState(GameState::GAMEOVER);
