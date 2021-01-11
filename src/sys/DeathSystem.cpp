@@ -2,6 +2,7 @@
 
 #include <eng/GameEngine.hpp>
 #include <enum/EntityType.hpp>
+#include <tools/Utils.hpp>
 
 #include <iostream>
 
@@ -53,6 +54,7 @@ void DeathSystem::managePlayerLifes(GameEngine& gameContext, int playerId) const
         healthComp.currentHealth = healthComp.maxHealth;
         healthComp.recoverTimeCounter = 0.f; 
 
+        Utils::resetPlayerPosition(gameContext);
     }
     else {
         std::cout << "Game Over\n";

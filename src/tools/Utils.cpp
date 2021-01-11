@@ -1,6 +1,7 @@
 #include "Utils.hpp"
 #include <iostream>
 #include <algorithm>
+#include <limits>
 
 #include <enum/Controls.hpp>
 
@@ -302,11 +303,32 @@ std::string Utils::getKeyName(uint8_t keyCode) {
 void Utils::resetPlayerPosition(GameEngine& gameContext) {
     SituationComponent& playerSituation = gameContext.entityMan.getComponent<SituationComponent>(WorldElementsData::playerId);
 
+    SituationComponent* closesWall = getClosestWallXToObjetive(gameContext, playerSituation);
+    if (closesWall != nullptr) {
+        ColliderComponent& playerColl = gameContext.entityMan.getComponent<ColliderComponent>(WorldElementsData::playerId);
 
+        playerSituation.position.x = closesWall->position.x;
+        playerSituation.position.y = closesWall->position.y - (playerColl.boundingRoot.bounding.yDown - playerColl.boundingRoot.bounding.yUp) + 50.f;
+    }
+    else {
+        // TODO if don't found a wall, set gameState to GAME OVER
+    }
 }
 
-SituationComponent& Utils::getClosestDistanceXToObjetive(GameEngine& gameContext, SituationComponent& objetiveSituation) {
+SituationComponent* Utils::getClosestWallXToObjetive(GameEngine& gameContext, SituationComponent& objetiveSituation) {
     auto& allSituations = gameContext.entityMan.getComponents<SituationComponent>();
+    SituationComponent* closesWall = nullptr;
+    float closestDistance = std::numeric_limits<float>::max();
     
-    for(size_t = 0; )
+    for (SituationComponent& entitySit : allSituations) {
+        if (gameContext.getEntity(entitySit.id).getType() == EntityType::WALL) {
+            float distance = objetiveSituation.position.x - entitySit.position.x;
+            if (entitySit.position.x < objetiveSituation.position.x && distance < closestDistance) {
+                closestDistance = distance;
+                closesWall = &entitySit;
+            }
+        }
+    }
+
+    return closesWall;
 }

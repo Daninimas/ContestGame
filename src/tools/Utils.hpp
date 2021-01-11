@@ -44,7 +44,7 @@ public:
     
     static void resetPlayerPosition(GameEngine& gameContext);
 
-    static SituationComponent& getClosestDistanceXToObjetive(GameEngine& gameContext, SituationComponent& objetiveSituation);
+    static SituationComponent* getClosestWallXToObjetive(GameEngine& gameContext, SituationComponent& objetiveSituation);
 
     template <typename T> 
     static int sign(T val) {
