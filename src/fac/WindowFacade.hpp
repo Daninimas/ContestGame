@@ -35,4 +35,6 @@ public:
     virtual bool existsTexture(std::string path) const = 0;
     virtual void addTexture(std::string path) = 0;
     virtual void setColorToEntity(const int id, const Color color) = 0;
+    virtual void setBackgroundLayers(std::vector<BackgroundLayer>& layers) = 0;
+
 };

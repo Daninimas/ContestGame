@@ -323,6 +323,27 @@ void SFMLEngine::createCamera(GameEngine& gameContext, int id) {
 	cameraMap[id].setSize(cameraComp.viewRect.y, cameraComp.viewRect.y);
 }
 
+
+void SFMLEngine::setBackgroundLayers(std::vector<BackgroundLayer>& layers) {
+	// Delete previous layers
+	backgroundLayers.clear();
+
+	for (BackgroundLayer& layer : layers) {
+
+		if (!existsTexture(layer.layerSprite)) {
+			addTexture(layer.layerSprite);
+		}
+
+		// Set repeated textures
+		textureMap[layer.layerSprite].setRepeated(true);
+
+		backgroundLayers.emplace_back(sf::Sprite(textureMap[layer.layerSprite]));
+
+		backgroundLayers.back().setTextureRect(sf::IntRect(-1920, 0, 96.000, 1080));
+	}
+}
+
+
 void SFMLEngine::eraseEntity(int id) {
 	nodeMap.erase(id);
 	HUDNodeMap.erase(id);

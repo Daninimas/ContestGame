@@ -240,6 +240,7 @@
     <ClInclude Include="src\sys\PhaseSystem.hpp" />
     <ClInclude Include="src\sys\TriggerSystem.hpp" />
     <ClInclude Include="src\tools\AnimationManager.hpp" />
+    <ClInclude Include="src\tools\BackgroundLayer.hpp" />
     <ClInclude Include="src\tools\MapLoader.hpp" />
     <ClInclude Include="src\com\FuryComponent.hpp" />
     <ClInclude Include="src\com\AI\AIDropBombComponent.hpp" />

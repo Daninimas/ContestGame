@@ -3,6 +3,7 @@
 #include "Component.hpp"
 #include <tools/BoundingBox.hpp>
 #include <tools/WorldPhase.hpp>
+#include <tools/BackgroundLayer.hpp>
 #include <tools/Sound.hpp>
 #include <vector>
 #include <string>
@@ -21,4 +22,6 @@ public:
     uint8_t numberOfPhases;
 
     std::string worldPath;
+
+    std::vector<BackgroundLayer> backgroundLayers;
 };

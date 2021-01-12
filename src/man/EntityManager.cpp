@@ -4,6 +4,7 @@
 #include <tools/Sound.hpp>
 #include <tools/WorldElementsData.hpp>
 #include <tools/MapLoader.hpp>
+#include <tools/BackgroundLayer.hpp>
 
 #include <math.h>
 #include <random>
@@ -837,8 +838,22 @@ int EntityManager::createWorld(GameEngine& gameContext, GameObjectType worldName
     case GameObjectType::WORLD_DEBUG:
         worldComp.worldPath = "Media/Maps/debug.json";
 
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/10_Sky.png", {255, 255, 255, 140}));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/09_Forest.png"));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/08_Forest.png"));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/07_Forest.png"));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/06_Forest.png"));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/05_Particles.png"));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/04_Forest.png"));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/03_Particles.png"));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/02_Bushes.png"));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/01_Mist.png"));
+
         break;
     }
+
+    //######### RENDER ########//
+    gameContext.getWindowFacadeRef().setBackgroundLayers(worldComp.backgroundLayers);
 
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::WORLD, worldName));

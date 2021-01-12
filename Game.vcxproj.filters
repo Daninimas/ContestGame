@@ -509,6 +509,9 @@
     <ClInclude Include="src\sys\WaitAfterLoseLifeSystem.hpp">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="src\tools\BackgroundLayer.hpp">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\enum\EnumsIncluder" />

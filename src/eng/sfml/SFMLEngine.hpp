@@ -35,6 +35,7 @@ public:
     bool existsTexture(std::string path) const override;
     void addTexture(std::string path) override;
     void setColorToEntity(const int id, const Color color) override;
+    void setBackgroundLayers(std::vector<BackgroundLayer>& layers) override;
 
 
 private:
@@ -59,6 +60,7 @@ private:
     std::unordered_map<int, sf::Text> HUDTextMap;
     std::unordered_map<std::string, sf::Image> imageMap;
     std::unordered_map<std::string, sf::Texture> textureMap;
+    std::vector<sf::Sprite> backgroundLayers;
 
     std::unordered_map<int, sf::View> cameraMap;
 
