@@ -838,16 +838,16 @@ int EntityManager::createWorld(GameEngine& gameContext, GameObjectType worldName
     case GameObjectType::WORLD_DEBUG:
         worldComp.worldPath = "Media/Maps/debug.json";
 
-        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/10_Sky.png", {255, 255, 255, 140}));
-        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/09_Forest.png"));
-        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/08_Forest.png"));
-        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/07_Forest.png"));
-        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/06_Forest.png"));
-        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/05_Particles.png"));
-        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/04_Forest.png"));
-        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/03_Particles.png"));
-        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/02_Bushes.png"));
-        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/01_Mist.png"));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/10_Sky.png", {255, 255, 255, 140}));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/09_Forest.png"));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/08_Forest.png"));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/07_Forest.png"));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/06_Forest.png"));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/05_Particles.png"));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/04_Forest.png"));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/03_Particles.png"));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/02_Bushes.png"));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/01_Mist.png"));
 
         break;
     }

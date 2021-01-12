@@ -85,7 +85,12 @@ void SFMLEngine::render(GameEngine& gameContext) const {
 }
 
 void SFMLEngine::drawScene(GameEngine& gameContext) const {
-	// draw everything here...
+	// Draw the map background
+	for (sf::Sprite layer : backgroundLayers) {
+		device.get()->draw(layer);
+	}
+
+	// Draw everything here...
 	for (auto& node : nodeMap)
 	{
 		device.get()->draw(node.second);
@@ -255,6 +260,15 @@ void SFMLEngine::updateCamera(GameEngine& gameContext, int id) {
 	cameraMap[id].setCenter(situation.position.x, situation.position.y);
 }
 
+void SFMLEngine::updateBackgroundLayers(std::vector<BackgroundLayer>& layers) {
+
+	for (size_t i = 0; i < layers.size(); ++i) {
+		std::cout << "Layer " << (int)i << " position: (" << layers[i].layerPosition.x << ", " << layers[i].layerPosition.y << ")\n";
+		backgroundLayers[i].setPosition(layers[i].layerPosition.x, layers[i].layerPosition.y);
+	}
+}
+
+
 
 void SFMLEngine::createEntity(GameEngine& gameContext, int id) {
 	RenderComponent& drawable = gameContext.entityMan.getComponent<RenderComponent>(id);
@@ -339,7 +353,7 @@ void SFMLEngine::setBackgroundLayers(std::vector<BackgroundLayer>& layers) {
 
 		backgroundLayers.emplace_back(sf::Sprite(textureMap[layer.layerSprite]));
 
-		backgroundLayers.back().setTextureRect(sf::IntRect(-1920, 0, 96.000, 1080));
+		backgroundLayers.back().setTextureRect(sf::IntRect(-1920, 0, 96000, 1080));
 	}
 }
 

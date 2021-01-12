@@ -118,3 +118,19 @@ void WorldSystem::collideWithPhaseBounding(GameEngine& gameContext, int entityId
 		gameContext.entityMan.addEntityToUpdate(entityId);
 	}
 }
+
+
+void WorldSystem::moveBackgroundLayers(GameEngine& gameContext) const { // move the layer doing the Parallax effect with the camera
+
+	SituationComponent& cameraSit = gameContext.entityMan.getComponent<SituationComponent>(WorldElementsData::activeCameraId);
+	WorldComponent&     worldComp = gameContext.entityMan.getComponent<WorldComponent>(WorldElementsData::activeCameraId);
+
+	for (size_t i = 0; i < worldComp.backgroundLayers.size(); ++i) {  // it starts from the farthest layer
+		BackgroundLayer& layer = worldComp.backgroundLayers[i];
+
+		layer.layerPosition.x = cameraSit.position.x * (1 / (worldComp.backgroundLayers.size() - i));
+		layer.layerPosition.y = cameraSit.position.y * (1 / (worldComp.backgroundLayers.size() - i));
+	}
+
+	gameContext.getWindowFacadeRef().updateBackgroundLayers(worldComp.backgroundLayers);
+}

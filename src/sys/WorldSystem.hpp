@@ -15,4 +15,6 @@ private:
     void checkPhaseCollision(GameEngine& gameContext) const;
 
     void collideWithPhaseBounding(GameEngine& gameContext, int entityId, BoundingBox& entityBounding) const;
+
+    void moveBackgroundLayers(GameEngine& gameContext) const;
 };

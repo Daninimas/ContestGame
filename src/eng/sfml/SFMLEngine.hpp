@@ -36,6 +36,7 @@ public:
     void addTexture(std::string path) override;
     void setColorToEntity(const int id, const Color color) override;
     void setBackgroundLayers(std::vector<BackgroundLayer>& layers) override;
+    void updateBackgroundLayers(std::vector<BackgroundLayer>& layers) override;
 
 
 private:
