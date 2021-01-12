@@ -58,7 +58,7 @@
                  "name":"DAMAGE_PLATFORM",
                  "objects":[
                         {
-                         "height":66.3636363636364,
+                         "height":66.3636,
                          "id":141,
                          "name":"",
                          "properties":[
@@ -70,9 +70,9 @@
                          "rotation":0,
                          "type":"DAMAGE_PLATFORM",
                          "visible":true,
-                         "width":93.9393939393939,
-                         "x":470.666666666667,
-                         "y":326.30303030303
+                         "width":93.9394,
+                         "x":470.667,
+                         "y":326.303
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -232,7 +232,7 @@
                          "rotation":0,
                          "type":"",
                          "visible":true,
-                         "width":1444.61,
+                         "width":3620.61,
                          "x":654,
                          "y":-128
                         }],
@@ -243,6 +243,7 @@
                  "y":0
                 }, 
                 {
+                 "color":"#0055ff",
                  "draworder":"topdown",
                  "id":6,
                  "name":"WALL",
@@ -366,6 +367,17 @@
                          "width":100,
                          "x":1846,
                          "y":337.546
+                        }, 
+                        {
+                         "height":52,
+                         "id":145,
+                         "name":"",
+                         "rotation":0,
+                         "type":"WALL",
+                         "visible":true,
+                         "width":2208,
+                         "x":2024,
+                         "y":332
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -556,7 +568,7 @@
          "y":0
         }],
  "nextlayerid":16,
- "nextobjectid":145,
+ "nextobjectid":146,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.4.3",

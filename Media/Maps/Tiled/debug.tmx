@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="100" tileheight="100" infinite="1" nextlayerid="16" nextobjectid="145">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="100" tileheight="100" infinite="1" nextlayerid="16" nextobjectid="146">
  <editorsettings>
   <export target="../debug.json" format="json"/>
  </editorsettings>
@@ -50,9 +50,9 @@
    <property name="Direction" value="Down"/>
   </properties>
   <objectgroup id="9" name="phase_size">
-   <object id="115" x="654" y="-128" width="1444.61" height="1161.82"/>
+   <object id="115" x="654" y="-128" width="3620.61" height="1161.82"/>
   </objectgroup>
-  <objectgroup id="6" name="WALL">
+  <objectgroup color="#0055ff" id="6" name="WALL">
    <object id="103" type="WALL" gid="1" x="872" y="396.576" width="100" height="10"/>
    <object id="104" type="WALL" gid="1" x="975.03" y="396.576" width="100" height="10"/>
    <object id="105" type="WALL" gid="1" x="1084.12" y="396.576" width="100" height="10"/>
@@ -63,6 +63,7 @@
    <object id="110" type="WALL" gid="1" x="1647.34" y="337.546" width="100" height="10"/>
    <object id="111" type="WALL" gid="1" x="1746" y="337.546" width="100" height="10"/>
    <object id="112" type="WALL" gid="1" x="1846" y="337.546" width="100" height="10"/>
+   <object id="145" type="WALL" x="2024" y="332" width="2208" height="52"/>
   </objectgroup>
  </group>
  <group id="10" name="Phase3">

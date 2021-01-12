@@ -263,7 +263,6 @@ void SFMLEngine::updateCamera(GameEngine& gameContext, int id) {
 void SFMLEngine::updateBackgroundLayers(std::vector<BackgroundLayer>& layers) {
 
 	for (size_t i = 0; i < layers.size(); ++i) {
-		std::cout << "Layer " << (int)i << " position: (" << layers[i].layerPosition.x << ", " << layers[i].layerPosition.y << ")\n";
 		backgroundLayers[i].setPosition(layers[i].layerPosition.x, layers[i].layerPosition.y);
 	}
 }
@@ -354,6 +353,7 @@ void SFMLEngine::setBackgroundLayers(std::vector<BackgroundLayer>& layers) {
 		backgroundLayers.emplace_back(sf::Sprite(textureMap[layer.layerSprite]));
 
 		backgroundLayers.back().setTextureRect(sf::IntRect(-1920, 0, 96000, 1080));
+		backgroundLayers.back().setScale(0.5f, 0.5f);
 	}
 }
 

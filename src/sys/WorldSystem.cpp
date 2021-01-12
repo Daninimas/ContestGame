@@ -16,6 +16,9 @@ void WorldSystem::update(GameEngine& gameContext) const {
 	deleteEntitiesOutOfWorld(gameContext);
 
 	checkPhaseCollision(gameContext);
+
+	// Do Parallax Effect
+	moveBackgroundLayers(gameContext);
 }
 
 void WorldSystem::deleteEntitiesOutOfWorld(GameEngine& gameContext) const {
@@ -128,8 +131,8 @@ void WorldSystem::moveBackgroundLayers(GameEngine& gameContext) const { // move 
 	for (size_t i = 0; i < worldComp.backgroundLayers.size(); ++i) {  // it starts from the farthest layer
 		BackgroundLayer& layer = worldComp.backgroundLayers[i];
 
-		layer.layerPosition.x = cameraSit.position.x * (1 / (worldComp.backgroundLayers.size() - i));
-		layer.layerPosition.y = cameraSit.position.y * (1 / (worldComp.backgroundLayers.size() - i));
+		layer.layerPosition.x = cameraSit.position.x * (1.f / (worldComp.backgroundLayers.size() - i));
+		layer.layerPosition.y = cameraSit.position.y * (1.f / (worldComp.backgroundLayers.size() - i));
 	}
 
 	gameContext.getWindowFacadeRef().updateBackgroundLayers(worldComp.backgroundLayers);
