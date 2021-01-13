@@ -124,15 +124,20 @@ void WorldSystem::collideWithPhaseBounding(GameEngine& gameContext, int entityId
 
 
 void WorldSystem::moveBackgroundLayers(GameEngine& gameContext) const { // move the layer doing the Parallax effect with the camera
-
 	SituationComponent& cameraSit = gameContext.entityMan.getComponent<SituationComponent>(WorldElementsData::activeCameraId);
 	WorldComponent&     worldComp = gameContext.entityMan.getComponent<WorldComponent>(WorldElementsData::activeCameraId);
+	BoundingBox	   cameraBounding = Utils::getCameraViewBoundig(gameContext.entityMan.getComponent<CameraComponent>(WorldElementsData::activeCameraId));
+
+	Vector2 camPos = { cameraSit.position.x + cameraBounding.xLeft, cameraSit.position.y + cameraBounding.yUp };
+	//std::cout << "Camera position: (" << camPos.x << ", " << camPos.y << ")\n";
 
 	for (size_t i = 0; i < worldComp.backgroundLayers.size(); ++i) {  // it starts from the farthest layer
 		BackgroundLayer& layer = worldComp.backgroundLayers[i];
 
-		layer.layerPosition.x = cameraSit.position.x * (1.f / (worldComp.backgroundLayers.size() - i));
-		layer.layerPosition.y = cameraSit.position.y * (1.f / (worldComp.backgroundLayers.size() - i));
+		layer.layerPosition.x = camPos.x * (1.f / (1.f+i));
+		layer.layerPosition.y = camPos.y * (1.f / (1.f+i));
+
+		//std::cout << "Layer: " << (int)i << " Pos: (" << layer.layerPosition.x << ", " << layer.layerPosition.y << ")\n";
 	}
 
 	gameContext.getWindowFacadeRef().updateBackgroundLayers(worldComp.backgroundLayers);
