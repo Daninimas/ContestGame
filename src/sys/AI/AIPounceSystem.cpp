@@ -14,10 +14,22 @@ void AIPounceSystem::update(GameEngine& gameContext) const {
 
 	for (AIPounceComponent& pounceComp : pounceComponents)
 	{
-		VelocityComponent& velComp = gameContext.entityMan.getComponent<VelocityComponent>(pounceComp.id);
+		if (pounceComp.sticked) {
+			stickToObjective(gameContext, pounceComp);
+		}
+		else {
 
-		if (velComp.velocity.y == 0.f) { // if on ground
-			chaseObjective(gameContext, pounceComp);
+			VelocityComponent& velComp = gameContext.entityMan.getComponent<VelocityComponent>(pounceComp.id);
+
+			if (velComp.velocity.y == 0.f) { // if on ground
+				chaseObjective(gameContext, pounceComp);
+			}
+			else {
+				// To activate the be sticked to objective behavior
+				if (pounceComp.isStickyPouncer) {
+					checkStickedToObjective(gameContext, pounceComp);
+				}
+			}
 		}
 	}
 }
@@ -62,5 +74,36 @@ void AIPounceSystem::chaseObjective(GameEngine& gameContext, AIPounceComponent& 
 		}
 
 		pounceComp.cooldown = 0.f;
+	}
+}
+
+
+void AIPounceSystem::checkStickedToObjective(GameEngine& gameContext, AIPounceComponent& pounceComp) const {
+	ColliderComponent& colliderComp = gameContext.entityMan.getComponent<ColliderComponent>(pounceComp.id);
+
+	if (Utils::checkCollidingWithEntity(colliderComp.boundingRoot, pounceComp.objectiveId)) {
+		pounceComp.sticked = true;
+	}
+}
+
+
+
+void AIPounceSystem::stickToObjective(GameEngine& gameContext, AIPounceComponent& pounceComp) const {
+	SituationComponent& objectiveSit = gameContext.entityMan.getComponent<SituationComponent>(pounceComp.objectiveId);
+	SituationComponent& pouncerSit   = gameContext.entityMan.getComponent<SituationComponent>(pounceComp.id);
+
+	if (objectiveSit.facing == SituationComponent::Left) {
+		ColliderComponent& pouncerColl = gameContext.entityMan.getComponent<ColliderComponent>(pounceComp.id);
+
+		pouncerSit.facing = SituationComponent::Right;
+		pouncerSit.position = objectiveSit.position;
+		pouncerSit.position.x -= pouncerColl.boundingRoot.bounding.xRight - pouncerColl.boundingRoot.bounding.xLeft;
+	}
+	else {
+		ColliderComponent& objectiveColl = gameContext.entityMan.getComponent<ColliderComponent>(pounceComp.objectiveId);
+
+		pouncerSit.facing = SituationComponent::Left;
+		pouncerSit.position = objectiveSit.position;
+		pouncerSit.position.x += objectiveColl.boundingRoot.bounding.xRight - objectiveColl.boundingRoot.bounding.xLeft;
 	}
 }

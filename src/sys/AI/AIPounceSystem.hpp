@@ -11,6 +11,8 @@ public:
     void update(GameEngine& gameContext) const override;
 
 private:
+    void stickToObjective(GameEngine& gameContext, AIPounceComponent& pounceComp) const;
 
     void chaseObjective(GameEngine& gameContext, AIPounceComponent& pounceComp) const;
+    void checkStickedToObjective(GameEngine& gameContext, AIPounceComponent& pounceComp) const;
 };

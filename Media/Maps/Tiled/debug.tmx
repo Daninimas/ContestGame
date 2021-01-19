@@ -37,7 +37,7 @@
    </object>
   </objectgroup>
   <objectgroup id="4" name="SPAWNER">
-   <object id="82" type="CHASERJUMPER" gid="2" x="301.273" y="366.242" width="20" height="20"/>
+   <object id="82" type="ENEMY_SPIDER" gid="2" x="301.273" y="366.242" width="20" height="20"/>
   </objectgroup>
   <objectgroup color="#0055ff" id="2" name="WALL">
    <object id="142" type="WALL" x="0" y="400" width="634" height="32"/>

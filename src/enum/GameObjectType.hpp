@@ -51,6 +51,7 @@ enum class GameObjectType {
     TRANSFORM_ENEMY,
     BOMBER_ENEMY,
     POUNCER_ENEMY,
+    ENEMY_SPIDER,
 
     // Bombs
     BOMB,

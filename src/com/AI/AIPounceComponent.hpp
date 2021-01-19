@@ -17,4 +17,9 @@ public:
 
     float cooldown{ 0.f };
     float maxCooldown{ 1.f };
+
+    bool isStickyPouncer{ false }; // If is sticky, the enemy will pounce to the objective and the be sticked to it until someone dies
+
+    // For the sticky pouncer 
+    bool sticked{ false };
 };

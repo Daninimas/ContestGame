@@ -49,6 +49,9 @@ void StaticEntitiesSystem::init(GameEngine &gameContext) const {
     /*int pouncerId = gameContext.entityMan.createEnemy(gameContext, 300.f, 300.f, 0.f, GameObjectType::POUNCER_ENEMY);
     gameContext.entityMan.getComponent<AIPounceComponent>(pouncerId).objectiveId = WorldElementsData::playerId;
     gameContext.entityMan.getComponent<AIMeleeAtkComponent>(pouncerId).objectiveId = WorldElementsData::playerId;*/
+    /*int pouncerId = gameContext.entityMan.createEnemy(gameContext, Vector2(300.f, 300.f), 0.f, GameObjectType::ENEMY_SPIDER);
+    gameContext.entityMan.getComponent<AIPounceComponent>(pouncerId).objectiveId = WorldElementsData::playerId;
+    gameContext.entityMan.getComponent<AIMeleeAtkComponent>(pouncerId).objectiveId = WorldElementsData::playerId;*/
 
     /*int spawnId = gameContext.entityMan.createSpawner(gameContext, Vector2(300.f, 200.f), 0.f, GameObjectType::CHASERJUMPER);
     gameContext.entityMan.getComponent<SpawnerComponent>(spawnId).objectiveId = WorldElementsData::playerId;

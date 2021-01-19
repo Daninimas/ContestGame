@@ -147,7 +147,7 @@
                          "id":82,
                          "name":"",
                          "rotation":0,
-                         "type":"CHASERJUMPER",
+                         "type":"ENEMY_SPIDER",
                          "visible":true,
                          "width":20,
                          "x":301.273,

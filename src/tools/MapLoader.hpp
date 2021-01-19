@@ -51,6 +51,7 @@ private:
         { "TRANSFORM_ENEMY", GameObjectType::TRANSFORM_ENEMY },
         { "BOMBER_ENEMY", GameObjectType::BOMBER_ENEMY },
         { "POUNCER_ENEMY", GameObjectType::POUNCER_ENEMY },
+        { "ENEMY_SPIDER", GameObjectType::ENEMY_SPIDER },
 
         // Power ups
         { "POWERUP_SHIELD", GameObjectType::POWERUP_SHIELD },

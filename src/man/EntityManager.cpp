@@ -414,33 +414,64 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
     }
 
     else if (goType == GameObjectType::POUNCER_ENEMY) {
-    velocityComp.speedX = 45.f;
-    renderComp.color = { 20, 20, 30, 255 };
-    healthComp.maxHealth = 4;
+        velocityComp.speedX = 45.f;
+        renderComp.color = { 20, 20, 30, 255 };
+        healthComp.maxHealth = 4;
 
 
-    createComponent<AIMeleeAtkComponent>(entityId);
-    JumpComponent& jumpComp = createComponent<JumpComponent>(entityId);
-    SensorComponent& sensorComp = createComponent<SensorComponent>(entityId);
-    AIPounceComponent& pounceComp = createComponent<AIPounceComponent>(entityId);
+        createComponent<AIMeleeAtkComponent>(entityId);
+        JumpComponent& jumpComp = createComponent<JumpComponent>(entityId);
+        SensorComponent& sensorComp = createComponent<SensorComponent>(entityId);
+        AIPounceComponent& pounceComp = createComponent<AIPounceComponent>(entityId);
 
-    sensorComp.sensorLayerMasc = ColliderComponent::Player + ColliderComponent::Wall;
-    sensorComp.sensorBounding = { 25.f, 60.f, 2.f, 48.f };
+        sensorComp.sensorLayerMasc = ColliderComponent::Player + ColliderComponent::Wall;
+        sensorComp.sensorBounding = { 25.f, 60.f, 2.f, 48.f };
 
-    jumpComp.impulse = -100.f;
-    jumpComp.maxCooldown = 1.f;
-
-
-    MeleeWeaponComponent& meleeWeaponComp = createComponent<MeleeWeaponComponent>(entityId);
-    meleeWeaponComp.attackBounding = { 0.f, 20.f, 10.f, 40.f };
-    meleeWeaponComp.damage = 2;
-    meleeWeaponComp.maxCooldown = 1.5f;
+        jumpComp.impulse = -100.f;
+        jumpComp.maxCooldown = 1.f;
 
 
-    pounceComp.range.x = 200.f;
-    pounceComp.range.y = 30.f;
-    pounceComp.velocityIncFactor = 4.7f;
-    pounceComp.maxCooldown = 2.f;
+        MeleeWeaponComponent& meleeWeaponComp = createComponent<MeleeWeaponComponent>(entityId);
+        meleeWeaponComp.attackBounding = { 0.f, 20.f, 10.f, 40.f };
+        meleeWeaponComp.damage = 2;
+        meleeWeaponComp.maxCooldown = 1.5f;
+
+
+        pounceComp.range.x = 200.f;
+        pounceComp.range.y = 30.f;
+        pounceComp.velocityIncFactor = 4.7f;
+        pounceComp.maxCooldown = 2.f;
+    }
+
+    else if (goType == GameObjectType::ENEMY_SPIDER) {
+        velocityComp.speedX = 45.f;
+        renderComp.color = { 20, 20, 30, 255 };
+        healthComp.maxHealth = 4;
+
+
+        createComponent<AIMeleeAtkComponent>(entityId);
+        JumpComponent& jumpComp = createComponent<JumpComponent>(entityId);
+        SensorComponent& sensorComp = createComponent<SensorComponent>(entityId);
+        AIPounceComponent& pounceComp = createComponent<AIPounceComponent>(entityId);
+
+        sensorComp.sensorLayerMasc = ColliderComponent::Player + ColliderComponent::Wall;
+        sensorComp.sensorBounding = { 25.f, 60.f, 2.f, 48.f };
+
+        jumpComp.impulse = -100.f;
+        jumpComp.maxCooldown = 1.f;
+
+
+        MeleeWeaponComponent& meleeWeaponComp = createComponent<MeleeWeaponComponent>(entityId);
+        meleeWeaponComp.attackBounding = { 0.f, 20.f, 10.f, 40.f };
+        meleeWeaponComp.damage = 1;
+        meleeWeaponComp.maxCooldown = 1.5f;
+
+
+        pounceComp.range.x = 200.f;
+        pounceComp.range.y = 30.f;
+        pounceComp.velocityIncFactor = 4.7f;
+        pounceComp.maxCooldown = 2.f;
+        pounceComp.isStickyPouncer = true;
     }
 
     healthComp.resetHealth(); // Reset health to set the current health the same as maxHealth
@@ -671,7 +702,20 @@ int EntityManager::createSpawner(GameEngine& gameContext, Vector2 position, floa
         // Health
         healthComp.maxHealth = 5;
 
-        break;        
+        break;     
+
+    case GameObjectType::ENEMY_SPIDER:
+
+        // Spawner
+        spawnComp.maxCooldown = 5.f;
+        spawnComp.range = { 200.f, 200.f };
+        spawnComp.spawnObjectsType = GameObjectType::ENEMY_SPIDER;
+        spawnComp.spawnEntitiesType = EntityType::ENEMY;
+
+        // Health
+        healthComp.maxHealth = 5;
+
+        break;
     }
 
     // Init health
