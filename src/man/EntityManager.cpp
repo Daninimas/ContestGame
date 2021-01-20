@@ -138,7 +138,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
 
 
     // Render component
-    renderComp.sprite = "Media/Images/SpriteSheet RUN.png";
+    renderComp.sprite = "Media/Images/SpriteSheet RUN arma inicial.png";
     renderComp.spriteRect = { 0, 512, 0, 512 };
 
     // Jump
@@ -613,7 +613,7 @@ int EntityManager::createCamera(GameEngine& gameContext, Vector2 position, float
 
     // Camera
     cameraComp.viewRect = {600, 400 };
-    cameraComp.zoom = 1.f;
+    cameraComp.zoom = 3.5f;
     cameraComp.offset = { 50.f, 70.f};
 
 

@@ -38,7 +38,7 @@ void AnimationManager::setRunningAnimation(GameEngine& gameContext, const Animat
 		animationComp.framerate = 0.15f;
 		animationComp.repeat = true;
 		animationComp.startSpriteRect = { 0, 512, 0, 512 };
-		animationComp.totalFrames = 7;
+		animationComp.totalFrames = 9;
 		animationComp.nextFrameAdvance = 512;
 		break;
 	}
