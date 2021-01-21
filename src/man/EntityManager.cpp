@@ -397,7 +397,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         flyingChaseComp.minHeigtht = 200.f;
         flyingChaseComp.minDistanceX = 1.f;
 
-        /*DistanceWeaponComponent& distanceWeaponComp = createComponent<DistanceWeaponComponent>(entityId);
+        DistanceWeaponComponent& distanceWeaponComp = createComponent<DistanceWeaponComponent>(entityId);
 
         distanceWeaponComp.attackBounding = { 0.f, 20.f, 0.f, 20.f };
         distanceWeaponComp.damage = 3;
@@ -414,7 +414,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         distanceWeaponComp.startActivated = false;
 
         AIDropBombComponent& dropBombComp = createComponent<AIDropBombComponent>(entityId);
-        dropBombComp.maxCooldown = 2.f;*/
+        dropBombComp.maxCooldown = 2.f;
 
     }
 
@@ -764,7 +764,7 @@ int EntityManager::createShield(GameEngine& gameContext, Vector2 position, float
 
         meleeComp.attackSound.soundPath = "Media/Sound/Weapons/shieldZap.wav";
         meleeComp.maxCooldown = 1.5f;
-        meleeComp.damage = 1;
+        meleeComp.damage = 10;
         healthComp.maxHealth = 3;
         healthComp.resetHealth();
         situation.noWorldDelete = true;
@@ -787,23 +787,31 @@ int EntityManager::createDrone(GameEngine& gameContext, Vector2 position, float 
     HealthComponent& healthComp = createComponent<HealthComponent>(entityId);
     VelocityComponent& velocityComp = createComponent<VelocityComponent>(entityId);
     DistanceWeaponComponent& distanceWeaponComp = createComponent<DistanceWeaponComponent>(entityId);
-    createComponent<AIChaseComponent>(entityId);
-
+    AIFlyingChaseComponent& flyingChaseComp = createComponent<AIFlyingChaseComponent>(entityId);
 
     //######### DATA ########//
     situation.position = position;
     situation.rotation = r;
 
     colliderComp.type = ColliderType::DYNAMIC;
+    colliderComp.boundingRoot.bounding = { 0.f, 30.f, 0.f, 16.f };
+
+    flyingChaseComp.maxHeigtht = 55.f;
+    flyingChaseComp.minHeigtht = 50.f;
+    flyingChaseComp.minDistanceX = 1.f;
 
 
     switch (goType) {
     case GameObjectType::DRONE_FRIEND:
         situation.noWorldDelete = true;
 
+        colliderComp.collisionLayer = ColliderComponent::Player;
+        colliderComp.layerMasc = 0xFFF - ColliderComponent::PlayerAttack - ColliderComponent::PlayerShield;
+
         velocityComp.speedX = 80.f;
         velocityComp.gravity = 0.f;
-        healthComp.maxHealth = 10;
+
+        healthComp.maxHealth = 3;
 
         distanceWeaponComp.attackBounding = { 0.f, 5.f, 0.f, 10.f };
         distanceWeaponComp.damage = 1;
@@ -812,17 +820,26 @@ int EntityManager::createDrone(GameEngine& gameContext, Vector2 position, float 
         distanceWeaponComp.maxCooldown = 0.4f;
         distanceWeaponComp.attackLifetime = 1.5f;
         distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BULLET;
-        distanceWeaponComp.ammo = 100;
-        distanceWeaponComp.infiniteAmmo = false;
-
         distanceWeaponComp.attackSound.soundPath = "Media/Sound/Weapons/M4A1_Single-Kibblesbob-8540445.wav";
+
+        AIDistanceAtkComponent& distanceAIComp = createComponent<AIDistanceAtkComponent>(entityId);
+        distanceAIComp.range.x = 200.f;
+        distanceAIComp.range.y = 40.f;
+
+        break;
+
+    case GameObjectType::DRONE_ENEMY:
+
+        // Add entity to World enemy number
+        ++WorldElementsData::enemiesInWorld;
 
         break;
     }
 
+    healthComp.resetHealth();
 
     //######### CREATE ########//
-    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::SHIELD, goType));
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::DRONE, goType));
     return entityId;
 }
 

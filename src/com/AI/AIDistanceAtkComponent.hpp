@@ -1,5 +1,6 @@
 #pragma once
 
+#include <limits>
 #include "../Component.hpp"
 #include <tools/Vector2.hpp>
 
@@ -8,7 +9,7 @@ public:
     explicit AIDistanceAtkComponent(const int id);
     ~AIDistanceAtkComponent() override;
 
-    int objectiveId;
+    int objectiveId{ std::numeric_limits<int>::max() };
 
     bool createAttack{ false };
 

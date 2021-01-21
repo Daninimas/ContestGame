@@ -17,5 +17,6 @@ enum class EntityType {
     HUD_ELEMENT,
     WORLD,
     TRIGGER,
-    DAMAGE_PLATFORM
+    DAMAGE_PLATFORM,
+    DRONE
 };

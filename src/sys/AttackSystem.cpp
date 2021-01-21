@@ -281,7 +281,7 @@ void AttackSystem::createBulletAttack(GameEngine& gameContext, DistanceWeaponCom
 	SituationComponent& attackerSit = gameContext.entityMan.getComponent<SituationComponent>(distanceWeaponAttacker.id);
 
 	GameObjectType attackGOtype = GameObjectType::DISTANCE_ATTACK;
-	if (distanceWeaponAttacker.id == WorldElementsData::playerId) {
+	if (distanceWeaponAttacker.id == WorldElementsData::playerId || gameContext.entityMan.getEntity(distanceWeaponAttacker.id).getGameObjectType() == GameObjectType::DRONE_FRIEND) {
 		attackGOtype = GameObjectType::PLAYER_DISTANCE_ATTACK;
 	}
 

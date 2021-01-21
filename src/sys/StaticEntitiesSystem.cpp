@@ -65,7 +65,7 @@ void StaticEntitiesSystem::init(GameEngine &gameContext) const {
     gameContext.entityMan.createCamera(gameContext, Vector2(0, 0), 0.f, GameObjectType::NONE);
 
 
-    //gameContext.entityMan.createPowerUp(gameContext, Vector2(150.f, 300), 0.f, GameObjectType::POWERUP_SHIELD);
+    gameContext.entityMan.createPowerUp(gameContext, Vector2(150.f, 300), 0.f, GameObjectType::POWERUP_SHIELD);
 
 
     gameContext.entityMan.createHUDElement(gameContext, Vector2(10.f, 10.f), 0.f, GameObjectType::HUD_PLAYER_HEALTH);
