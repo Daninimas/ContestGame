@@ -34,3 +34,4 @@
 #include <com/AI/AITransformationComponent.hpp>
 #include <com/AI/AIDropBombComponent.hpp>
 #include <com/AI/AIPounceComponent.hpp>
+#include <com/AI/AIFlyingChaseComponent.hpp>

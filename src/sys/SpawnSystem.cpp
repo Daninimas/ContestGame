@@ -61,6 +61,9 @@ void SpawnSystem::setobjectiveToAIComponents(GameEngine& gameContext, int newEnt
 	if (enttityMan.existsComponent<AIChaseComponent>(newEntityID)) {
 		enttityMan.getComponent<AIChaseComponent>(newEntityID).objectiveId = objectiveId;
 	}
+	if (enttityMan.existsComponent<AIFlyingChaseComponent>(newEntityID)) {
+		enttityMan.getComponent<AIFlyingChaseComponent>(newEntityID).objectiveId = objectiveId;
+	}
 	if (enttityMan.existsComponent<AIDistanceAtkComponent>(newEntityID)) {
 		enttityMan.getComponent<AIDistanceAtkComponent>(newEntityID).objectiveId = objectiveId;
 	}

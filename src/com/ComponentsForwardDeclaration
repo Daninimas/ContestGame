@@ -30,3 +30,4 @@ class MenuOptionComponent;
 class WorldComponent;
 class TriggerComponent;
 class AnimationComponent;
+class AIFlyingChaseComponent;

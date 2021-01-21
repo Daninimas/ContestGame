@@ -53,6 +53,10 @@ enum class GameObjectType {
     POUNCER_ENEMY,
     ENEMY_SPIDER,
 
+    // Drone types
+    DRONE_FRIEND,
+    DRONE_ENEMY,
+
     // Bombs
     BOMB,
     PLAYER_BOMB,

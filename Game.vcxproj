@@ -154,6 +154,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\sys\AI\AIFlyingChaseSystem.cpp" />
+    <ClCompile Include="src\com\AI\AIFlyingChaseComponent.cpp" />
     <ClCompile Include="src\com\AnimationComponent.cpp" />
     <ClCompile Include="src\com\MenuOptionComponent.cpp" />
     <ClCompile Include="src\com\TriggerComponent.cpp" />
@@ -227,6 +229,8 @@
     <ClCompile Include="src\tools\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\sys\AI\AIFlyingChaseSystem.hpp" />
+    <ClInclude Include="src\com\AI\AIFlyingChaseComponent.hpp" />
     <ClInclude Include="src\com\AnimationComponent.hpp" />
     <ClInclude Include="src\com\MenuOptionComponent.hpp" />
     <ClInclude Include="src\com\TriggerComponent.hpp" />

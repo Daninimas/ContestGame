@@ -66,6 +66,7 @@ void EntityManager::eraseEntityByID(int id) {
     eraseComponent<AITransformationComponent>(id);
     eraseComponent<AIDropBombComponent>(id);
     eraseComponent<AIPounceComponent>(id);
+    eraseComponent<AIFlyingChaseComponent>(id);
 
     entityMap           .erase(id);
 }
@@ -763,6 +764,52 @@ int EntityManager::createShield(GameEngine& gameContext, Vector2 position, float
         healthComp.maxHealth = 3;
         healthComp.resetHealth();
         situation.noWorldDelete = true;
+
+        break;
+    }
+
+
+    //######### CREATE ########//
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::SHIELD, goType));
+    return entityId;
+}
+
+
+int EntityManager::createDrone(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType) {
+    int entityId = Entity::getCurrentId();
+
+    SituationComponent& situation = createComponent<SituationComponent>(entityId);
+    ColliderComponent& colliderComp = createComponent<ColliderComponent>(entityId);
+    HealthComponent& healthComp = createComponent<HealthComponent>(entityId);
+    VelocityComponent& velocityComp = createComponent<VelocityComponent>(entityId);
+    DistanceWeaponComponent& distanceWeaponComp = createComponent<DistanceWeaponComponent>(entityId);
+    createComponent<AIChaseComponent>(entityId);
+
+
+    //######### DATA ########//
+    situation.position = position;
+    situation.rotation = r;
+
+    colliderComp.type = ColliderType::DYNAMIC;
+
+
+    switch (goType) {
+    case GameObjectType::DRONE_FRIEND:
+        velocityComp.speedX = 80.f;
+        velocityComp.gravity = 0.f;
+        healthComp.maxHealth = 10;
+
+        distanceWeaponComp.attackBounding = { 0.f, 5.f, 0.f, 10.f };
+        distanceWeaponComp.damage = 1;
+        distanceWeaponComp.attackGeneralVelociy = 800.f;
+        distanceWeaponComp.attackGravity = 0.f;
+        distanceWeaponComp.maxCooldown = 0.4f;
+        distanceWeaponComp.attackLifetime = 1.5f;
+        distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BULLET;
+        distanceWeaponComp.ammo = 100;
+        distanceWeaponComp.infiniteAmmo = false;
+
+        distanceWeaponComp.attackSound.soundPath = "Media/Sound/Weapons/M4A1_Single-Kibblesbob-8540445.wav";
 
         break;
     }

@@ -180,6 +180,9 @@ void MapLoader::setEnemyObjective(GameEngine& gameContext, int enemyId) {
     if (gameContext.entityMan.existsComponent<AIChaseComponent>(enemyId))
         gameContext.entityMan.getComponent<AIChaseComponent>(enemyId).objectiveId = WorldElementsData::playerId;
 
+    if (gameContext.entityMan.existsComponent<AIFlyingChaseComponent>(enemyId))
+        gameContext.entityMan.getComponent<AIFlyingChaseComponent>(enemyId).objectiveId = WorldElementsData::playerId;
+
     if (gameContext.entityMan.existsComponent<AIMeleeAtkComponent>(enemyId))
         gameContext.entityMan.getComponent<AIMeleeAtkComponent>(enemyId).objectiveId = WorldElementsData::playerId;
 
