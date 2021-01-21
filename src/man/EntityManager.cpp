@@ -386,14 +386,18 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
     }
 
     else if (goType == GameObjectType::BOMBER_ENEMY) {
-        velocityComp.speedX = 70.f;
+        velocityComp.speedX = 50.f;
         velocityComp.gravity = 0.f;
         renderComp.color = { 255, 100, 30, 255 };
         healthComp.maxHealth = 10;
 
-        createComponent<AIChaseComponent>(entityId);
+        AIFlyingChaseComponent& flyingChaseComp = createComponent<AIFlyingChaseComponent>(entityId);
 
-        DistanceWeaponComponent& distanceWeaponComp = createComponent<DistanceWeaponComponent>(entityId);
+        flyingChaseComp.maxHeigtht = 230.f;
+        flyingChaseComp.minHeigtht = 200.f;
+        flyingChaseComp.minDistanceX = 1.f;
+
+        /*DistanceWeaponComponent& distanceWeaponComp = createComponent<DistanceWeaponComponent>(entityId);
 
         distanceWeaponComp.attackBounding = { 0.f, 20.f, 0.f, 20.f };
         distanceWeaponComp.damage = 3;
@@ -410,7 +414,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         distanceWeaponComp.startActivated = false;
 
         AIDropBombComponent& dropBombComp = createComponent<AIDropBombComponent>(entityId);
-        dropBombComp.maxCooldown = 2.f;
+        dropBombComp.maxCooldown = 2.f;*/
 
     }
 
@@ -795,6 +799,8 @@ int EntityManager::createDrone(GameEngine& gameContext, Vector2 position, float 
 
     switch (goType) {
     case GameObjectType::DRONE_FRIEND:
+        situation.noWorldDelete = true;
+
         velocityComp.speedX = 80.f;
         velocityComp.gravity = 0.f;
         healthComp.maxHealth = 10;
