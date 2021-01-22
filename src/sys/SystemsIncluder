@@ -34,3 +34,4 @@
 #include <sys/AI/AIBombDropSystem.hpp>
 #include <sys/AI/AIPounceSystem.hpp>
 #include <sys/AI/AIFlyingChaseSystem.hpp>
+#include <sys/AI/AIDroneSystem.hpp>

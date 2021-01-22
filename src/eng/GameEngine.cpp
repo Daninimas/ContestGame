@@ -61,6 +61,7 @@ void GameEngine::init() {
 
 void GameEngine::setPlayingSystems() {
     systems.emplace_back(std::make_unique<SensorSystem>());
+    systems.emplace_back(std::make_unique<AIDroneSystem>());
     systems.emplace_back(std::make_unique<AIMeleeSystem>());
     systems.emplace_back(std::make_unique<AIDistanceSystem>());
     systems.emplace_back(std::make_unique<AITransformationSystem>());
@@ -365,6 +366,10 @@ Entity &GameEngine::getEntity(int id) {
 
 
 void GameEngine::eraseEntityByID(int id) {
+    EntityType entityType = entityMan.getEntity(id).getType();
+    GameObjectType gameObjectType = entityMan.getEntity(id).getGameObjectType();
+
+
     entityMan.removeEntityToUpdate(id);
     windowFacade.eraseEntity(id);
 
@@ -396,8 +401,11 @@ void GameEngine::eraseEntityByID(int id) {
     //getSoundFacadeRef().setParameterEventByID(id, STOP_SOUND);
 
     // Subtract enemy from world 
-    if (entityMan.getEntity(id).getType() == EntityType::ENEMY || entityMan.getEntity(id).getType() == EntityType::SPAWNER || entityMan.getEntity(id).getGameObjectType() == GameObjectType::DRONE_ENEMY) {
+    if (entityType == EntityType::ENEMY || entityType == EntityType::SPAWNER || gameObjectType == GameObjectType::DRONE_ENEMY) {
         --WorldElementsData::enemiesInWorld;
+    }
+    else if(gameObjectType == GameObjectType::DRONE_FRIEND) {
+        WorldElementsData::playerDroneId = std::numeric_limits<int>::max();
     }
 
     entityMan.eraseEntityByID(id);

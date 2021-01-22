@@ -618,7 +618,7 @@ int EntityManager::createCamera(GameEngine& gameContext, Vector2 position, float
 
     // Camera
     cameraComp.viewRect = {600, 400 };
-    cameraComp.zoom = 3.5f;
+    cameraComp.zoom = 1.5f;
     cameraComp.offset = { 50.f, 70.f};
 
 
@@ -788,6 +788,8 @@ int EntityManager::createDrone(GameEngine& gameContext, Vector2 position, float 
     VelocityComponent& velocityComp = createComponent<VelocityComponent>(entityId);
     DistanceWeaponComponent& distanceWeaponComp = createComponent<DistanceWeaponComponent>(entityId);
     AIFlyingChaseComponent& flyingChaseComp = createComponent<AIFlyingChaseComponent>(entityId);
+    AIDistanceAtkComponent& distanceAIComp = createComponent<AIDistanceAtkComponent>(entityId);
+    SensorComponent& sensorComp = createComponent<SensorComponent>(entityId);
 
     //######### DATA ########//
     situation.position = position;
@@ -806,7 +808,7 @@ int EntityManager::createDrone(GameEngine& gameContext, Vector2 position, float 
         situation.noWorldDelete = true;
 
         colliderComp.collisionLayer = ColliderComponent::Player;
-        colliderComp.layerMasc = 0xFFF - ColliderComponent::PlayerAttack - ColliderComponent::PlayerShield;
+        colliderComp.layerMasc = ColliderComponent::Attack + ColliderComponent::Enemy + ColliderComponent::Wall;
 
         velocityComp.speedX = 80.f;
         velocityComp.gravity = 0.f;
@@ -822,9 +824,13 @@ int EntityManager::createDrone(GameEngine& gameContext, Vector2 position, float 
         distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BULLET;
         distanceWeaponComp.attackSound.soundPath = "Media/Sound/Weapons/M4A1_Single-Kibblesbob-8540445.wav";
 
-        AIDistanceAtkComponent& distanceAIComp = createComponent<AIDistanceAtkComponent>(entityId);
         distanceAIComp.range.x = 200.f;
-        distanceAIComp.range.y = 40.f;
+        distanceAIComp.range.y = 200.f;
+
+        sensorComp.sensorBounding = {-distanceAIComp.range.x, distanceAIComp.range.x, -distanceAIComp.range.y, distanceAIComp.range.y };  // The same bounding as the distanceAIComp
+        sensorComp.sensorLayerMasc = ColliderComponent::Enemy;
+
+        WorldElementsData::playerDroneId = entityId;
 
         break;
 
