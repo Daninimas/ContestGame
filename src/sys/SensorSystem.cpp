@@ -60,6 +60,7 @@ void SensorSystem::checkSensorsCollisions(GameEngine& gameContext) const {
 
 	for (SensorComponent& sensor : sensors) {
 		// Check this sensor with all the colliders with VELOCITY
+		BoundingBox sensorBounding = getSensorWorldFixedBounding(gameContext, sensor);
 
 		for (ColliderComponent& colliderEnt : colliders) {
 
@@ -67,17 +68,29 @@ void SensorSystem::checkSensorsCollisions(GameEngine& gameContext) const {
 				SituationComponent& entitySituation = gameContext.entityMan.getComponent<SituationComponent>(colliderEnt.id);
 				BoundingBox& entityBounding = colliderEnt.boundingRoot.bounding;
 
-				calculateSensorCollision(gameContext, sensor, entityBounding, entitySituation);
+				calculateSensorCollision(gameContext, sensor, entityBounding, sensorBounding, entitySituation);
 			}
 		}
 	}
 }
 
-bool SensorSystem::calculateSensorCollision(GameEngine& gameContext, SensorComponent& sensor, BoundingBox& entityBounding, SituationComponent& entitySituation) const {
+BoundingBox SensorSystem::getSensorWorldFixedBounding(GameEngine& gameContext, SensorComponent& sensor) const {
 	SituationComponent& sensorSit = gameContext.entityMan.getComponent<SituationComponent>(sensor.id);
-	BoundingBox sensorBounding    = getSensorBoundingDependingFacing(gameContext, sensor);
 
-	BoundingBox sensorWorldBounding = Utils::moveToWorldCoords(sensorBounding, sensorSit);
+	BoundingBox sensorWorldBounding = getSensorBoundingDependingFacing(gameContext, sensor);
+	sensorWorldBounding = Utils::moveToWorldCoords(sensorWorldBounding, sensorSit);
+
+	if (gameContext.entityMan.existsComponent<ColliderComponent>(sensor.id)) {
+		Vector2 objectiveCenter = Utils::getCenterOfBounding(gameContext.entityMan.getComponent<ColliderComponent>(sensor.id).boundingRoot.bounding);
+		sensorWorldBounding.xLeft + objectiveCenter.x;
+		sensorWorldBounding.xRight + objectiveCenter.x;
+	}
+
+
+	return sensorWorldBounding;
+}
+
+bool SensorSystem::calculateSensorCollision(GameEngine& gameContext, SensorComponent& sensor, BoundingBox& sensorWorldBounding, BoundingBox& entityBounding, SituationComponent& entitySituation) const {
 	BoundingBox entWorldBounding    = Utils::moveToWorldCoords(entityBounding, entitySituation);
 
 	auto checkIntervals = [](float L1, float R1, float L2, float R2) {
@@ -105,8 +118,9 @@ BoundingBox SensorSystem::getSensorBoundingDependingFacing(GameEngine& gameConte
 	if (sit.facing == SituationComponent::Left) {
 		BoundingBox auxBounding = sensor.sensorBounding;
 
-		auxBounding.xRight = sensor.sensorBounding.xLeft;
-		auxBounding.xLeft = sensor.sensorBounding.xLeft - ( sensor.sensorBounding.xRight - sensor.sensorBounding.xLeft);
+		// The center of reflexion is the point of the entity
+		auxBounding.xRight =  - sensor.sensorBounding.xLeft;
+		auxBounding.xLeft =  - sensor.sensorBounding.xRight;
 
 		return auxBounding;
 	}

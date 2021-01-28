@@ -14,7 +14,8 @@ public:
 private:
     void resetSensors(GameEngine& gameContext) const;
     void checkSensorsCollisions(GameEngine& gameContext) const;
-    bool calculateSensorCollision(GameEngine& gameContext, SensorComponent& sensor, BoundingBox& entityBounding, SituationComponent& entitySituation) const;
+    bool calculateSensorCollision(GameEngine& gameContext, SensorComponent& sensor, BoundingBox& sensorWorldBounding, BoundingBox& entityBounding, SituationComponent& entitySituation) const;
     BoundingBox getSensorBoundingDependingFacing(GameEngine& gameContext, SensorComponent& sensor) const;
+    BoundingBox getSensorWorldFixedBounding(GameEngine& gameContext, SensorComponent& sensor) const;
 };
 

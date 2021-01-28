@@ -42,11 +42,12 @@ void AIDistanceSystem::manageAttackGeneration(GameEngine& gameContext, AIDistanc
 
 
 void AIDistanceSystem::setAttackDirection(GameEngine& gameContext, SituationComponent& attackerSit, SituationComponent& objectiveSit, DistanceWeaponComponent& distWeap) const {
+	Vector2 objectiveCenter = Utils::getCenterOfBounding(gameContext.entityMan.getComponent<ColliderComponent>(objectiveSit.id).boundingRoot.bounding);
 	Vector2 dir;
 
 	// Calculate direction vector
-	dir.x = objectiveSit.position.x - attackerSit.position.x;
-	dir.y = objectiveSit.position.y - attackerSit.position.y;
+	dir.x = (objectiveSit.position.x + objectiveCenter.x) - attackerSit.position.x;
+	dir.y = (objectiveSit.position.y + objectiveCenter.y) - attackerSit.position.y;
 
 	// Normalize direction vector
 	float mag = sqrt(dir.x * dir.x + dir.y * dir.y); // Calculate magnitude

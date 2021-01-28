@@ -3,7 +3,6 @@
 #include <eng/GameEngine.hpp>
 #include <iostream>
 
-#include <tools/AnimationManager.hpp>
 
 InputSystem::InputSystem() {}
 

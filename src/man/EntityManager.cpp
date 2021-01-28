@@ -139,7 +139,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
 
 
     // Render component
-    renderComp.sprite = "Media/Images/SpriteSheet RUN arma inicial.png";
+    renderComp.sprite = "Media/Images/SpriteSheet _Completo.png";
     renderComp.spriteRect = { 0, 512, 0, 512 };
 
     // Jump
@@ -151,7 +151,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
     sensorComp.sensorLayerMasc = ColliderComponent::Enemy; // Sensors only enemies
 
     // Dodge
-    dodgeComp.dodgeMaxDuration = 0.2f;
+    dodgeComp.dodgeMaxDuration = 0.3f;
     dodgeComp.dodgeTime = 0.2f;
     dodgeComp.maxCooldown = 1.f;
     dodgeComp.velocityIncrementFactor = 4.f;
@@ -618,7 +618,7 @@ int EntityManager::createCamera(GameEngine& gameContext, Vector2 position, float
 
     // Camera
     cameraComp.viewRect = {600, 400 };
-    cameraComp.zoom = 1.5f;
+    cameraComp.zoom = 3.f;
     cameraComp.offset = { 50.f, 70.f};
 
 
@@ -866,7 +866,7 @@ int EntityManager::createPowerUp(GameEngine& gameContext, Vector2 position, floa
     colliderComp.collisionLayer = ColliderComponent::Weapon;
     colliderComp.layerMasc = ColliderComponent::Player; //Collides with player and wall
     colliderComp.boundingRoot.bounding = { 0.f, 10.f, 0.f, 10.f };
-    colliderComp.type = ColliderType::DYNAMIC;
+    colliderComp.type = ColliderType::NO_SOLID;
 
     // Render component
     //renderComp.sprite = "Media/Images/TaOmA.png";

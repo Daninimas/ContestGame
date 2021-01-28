@@ -153,7 +153,7 @@ void SFMLEngine::renderAllSensors(GameEngine& gameContext) const {
 			rectangle.setPosition(sit.position.x + b.xLeft, sit.position.y + b.yUp);
 		}
 		else {
-			rectangle.setPosition(sit.position.x + b.xLeft - (b.xRight - b.xLeft), sit.position.y + b.yUp);
+			rectangle.setPosition(sit.position.x - b.xRight, sit.position.y + b.yUp);
 
 		}
 		device.get()->draw(rectangle);

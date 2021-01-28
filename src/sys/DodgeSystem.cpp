@@ -2,6 +2,7 @@
 
 #include <eng/GameEngine.hpp>
 #include <enum/EntityType.hpp>
+#include <tools/AnimationManager.hpp>
 
 #include <iostream>
 
@@ -18,9 +19,14 @@ void DodgeSystem::update(GameEngine& gameContext) const {
 		dodgeComp.cooldown += gameContext.getDeltaTime();
 		if (dodgeComp.dodgeDuration < dodgeComp.dodgeMaxDuration) {
 			doDodge(gameContext, dodgeComp);
+			// Set the animation to the entity
+			AnimationComponent& animComp = gameContext.entityMan.getComponent<AnimationComponent>(dodgeComp.id);
+			AnimationManager::setAnimationToEntity(gameContext, Animation::DODGE, animComp);
+			
 		}
 		else if (dodgeComp.activateDodge && dodgeComp.cooldown > dodgeComp.maxCooldown && gameContext.entityMan.existsComponent<VelocityComponent>(dodgeComp.id)) {
 			dodgeComp.dodgeDuration = 0.f;
+			
 		}
 
 		dodgeComp.activateDodge = false;

@@ -131,12 +131,15 @@ void InputJoystickSystem::setAnimationToPlayer(GameEngine& gameContext) const {
     InputComponent& playerInput = gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId);
     AnimationComponent& animComp = gameContext.entityMan.getComponent<AnimationComponent>(WorldElementsData::playerId);
 
-    if (playerInput.actualMovement == DodgeComponent::Left || playerInput.actualMovement == DodgeComponent::Right) {
-        AnimationManager::setAnimationToEntity(gameContext, Animation::RUNNING, animComp);
-    }
 
-    // Set idle animation if not moved
-    if (playerInput.actualMovement == 0xFF) {
-        AnimationManager::setAnimationToEntity(gameContext, Animation::IDLE, animComp);
+    if (gameContext.entityMan.getComponent<DodgeComponent>(WorldElementsData::playerId).dodgeDuration >= gameContext.entityMan.getComponent<DodgeComponent>(WorldElementsData::playerId).dodgeMaxDuration) {
+        if (playerInput.actualMovement == DodgeComponent::Left || playerInput.actualMovement == DodgeComponent::Right) {
+            AnimationManager::setAnimationToEntity(gameContext, Animation::RUNNING, animComp);
+        }
+
+        // Set idle animation if not moved
+        if (playerInput.actualMovement == 0xFF) {
+            AnimationManager::setAnimationToEntity(gameContext, Animation::IDLE, animComp);
+        }
     }
 }

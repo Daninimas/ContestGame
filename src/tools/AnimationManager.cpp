@@ -17,6 +17,10 @@ void AnimationManager::setAnimationToEntity(GameEngine& gameContext, const Anima
 			setIdleAnimation(gameContext, animation, animationComp, entityGO);
 			break;
 
+		case Animation::DODGE:
+			setDodgeAnimation(gameContext, animation, animationComp, entityGO);
+			break;
+
 		default:
 			animationComp.animation = Animation::NONE;
 			break;
@@ -24,7 +28,7 @@ void AnimationManager::setAnimationToEntity(GameEngine& gameContext, const Anima
 
 		// Reset component data
 		animationComp.actualFrame = 0;
-		animationComp.currentTime = 0.f;
+		animationComp.currentTime = animationComp.framerate + 1;
 	}
 }
 
@@ -35,10 +39,10 @@ void AnimationManager::setRunningAnimation(GameEngine& gameContext, const Animat
 	{
 	case GameObjectType::PLAYER_GENERAL:
 		animationComp.animation = animation;
-		animationComp.framerate = 0.15f;
+		animationComp.framerate = 0.10f;
 		animationComp.repeat = true;
 		animationComp.startSpriteRect = { 0, 512, 0, 512 };
-		animationComp.totalFrames = 9;
+		animationComp.totalFrames = 12;
 		animationComp.nextFrameAdvance = 512;
 		break;
 	}
@@ -50,10 +54,28 @@ void AnimationManager::setIdleAnimation(GameEngine& gameContext, const Animation
 	{
 	case GameObjectType::PLAYER_GENERAL:
 		animationComp.animation = animation;
-		animationComp.framerate = 0.2f;
+		animationComp.framerate = 1.f;
 		animationComp.repeat = true;
 		animationComp.startSpriteRect = { 0, 512, 0, 512 };
 		animationComp.totalFrames = 1;
+		animationComp.nextFrameAdvance = 512;
+		break;
+	}
+}
+
+
+void AnimationManager::setDodgeAnimation(GameEngine& gameContext, const Animation animation, AnimationComponent& animationComp, GameObjectType entityGO) {
+
+	switch (entityGO)
+	{
+	case GameObjectType::PLAYER_GENERAL:
+		std::cout << "hola\n";
+
+		animationComp.animation = animation;
+		animationComp.framerate = 0.1f;
+		animationComp.repeat = false;
+		animationComp.startSpriteRect = { 0, 512, 512, 1024 };
+		animationComp.totalFrames = 4;
 		animationComp.nextFrameAdvance = 512;
 		break;
 	}
