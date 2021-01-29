@@ -18,11 +18,7 @@ void DodgeSystem::update(GameEngine& gameContext) const {
 	for (DodgeComponent& dodgeComp : dodgeComponents) {
 		dodgeComp.cooldown += gameContext.getDeltaTime();
 		if (dodgeComp.dodgeDuration < dodgeComp.dodgeMaxDuration) {
-			doDodge(gameContext, dodgeComp);
-			// Set the animation to the entity
-			AnimationComponent& animComp = gameContext.entityMan.getComponent<AnimationComponent>(dodgeComp.id);
-			AnimationManager::setAnimationToEntity(gameContext, Animation::DODGE, animComp);
-			
+			doDodge(gameContext, dodgeComp);			
 		}
 		else if (dodgeComp.activateDodge && dodgeComp.cooldown > dodgeComp.maxCooldown && gameContext.entityMan.existsComponent<VelocityComponent>(dodgeComp.id)) {
 			dodgeComp.dodgeDuration = 0.f;
@@ -54,6 +50,10 @@ void DodgeSystem::doDodge(GameEngine& gameContext, DodgeComponent& dodgeComp) co
 	// The cooldown resets only when if finish doing the dodge
 	dodgeComp.cooldown = 0.f;
 	dodgeComp.dodgeDuration += gameContext.getDeltaTime();
+
+	// Set the animation to the entity
+	AnimationComponent& animComp = gameContext.entityMan.getComponent<AnimationComponent>(dodgeComp.id);
+	AnimationManager::setAnimationToEntity(gameContext, Animation::DODGE, animComp);
 }
 
 

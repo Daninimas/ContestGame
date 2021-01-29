@@ -25,10 +25,6 @@ void AnimationManager::setAnimationToEntity(GameEngine& gameContext, const Anima
 			animationComp.animation = Animation::NONE;
 			break;
 		}
-
-		// Reset component data
-		animationComp.actualFrame = 0;
-		animationComp.currentTime = animationComp.framerate + 1;
 	}
 }
 

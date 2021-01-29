@@ -12,6 +12,13 @@ void AnimationSystem::update(GameEngine& gameContext) const {
 	auto& animations = gameContext.entityMan.getComponents<AnimationComponent>();
 
 	for (AnimationComponent& animComp : animations) {
+		// Check if animation has changed
+		if (animComp.animation != animComp.lastAnimation) {
+			// Reset component data
+			animComp.actualFrame = 0;
+			animComp.currentTime = animComp.framerate;
+		}
+
 		animComp.currentTime += gameContext.getDeltaTime();
 
 		std::cout << "animComp.currentTime: " << animComp.currentTime << " animComp.framerate: " << animComp.framerate << "\n";
@@ -20,6 +27,9 @@ void AnimationSystem::update(GameEngine& gameContext) const {
 			std::cout << (int)animComp.animation << "\n";
 
 		}
+
+		// Set last animation
+		animComp.lastAnimation = animComp.animation;
 	}
 }
 

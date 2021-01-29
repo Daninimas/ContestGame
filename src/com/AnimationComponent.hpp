@@ -13,6 +13,7 @@ public:
 
 
     Animation animation = Animation::NONE;
+    Animation lastAnimation = Animation::NONE;
 
     uint16_t totalFrames;
     uint16_t actualFrame{ 0 };
