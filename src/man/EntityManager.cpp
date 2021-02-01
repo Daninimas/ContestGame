@@ -929,7 +929,7 @@ int EntityManager::createDamagePlatform(GameEngine& gameContext, Vector2 positio
 
     // Collider
     colliderComp.collisionLayer = ColliderComponent::Wall;
-    colliderComp.layerMasc = ColliderComponent::Player + ColliderComponent::Enemy + +ColliderComponent::PlayerShield + +ColliderComponent::Shield; //Collides with player and wall
+    colliderComp.layerMasc = ColliderComponent::Player + ColliderComponent::Enemy + ColliderComponent::PlayerShield + ColliderComponent::Shield; //Collides with player and wall
     colliderComp.type = ColliderType::STATIC;
     colliderComp.boundingRoot.bounding = {0.f, size.x, 0.f, size.y};
     
