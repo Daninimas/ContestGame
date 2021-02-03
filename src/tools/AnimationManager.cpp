@@ -65,8 +65,6 @@ void AnimationManager::setDodgeAnimation(GameEngine& gameContext, const Animatio
 	switch (entityGO)
 	{
 	case GameObjectType::PLAYER_GENERAL:
-		std::cout << "hola\n";
-
 		animationComp.animation = animation;
 		animationComp.framerate = 0.1f;
 		animationComp.repeat = false;

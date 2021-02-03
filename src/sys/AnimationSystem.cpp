@@ -21,11 +21,8 @@ void AnimationSystem::update(GameEngine& gameContext) const {
 
 		animComp.currentTime += gameContext.getDeltaTime();
 
-		std::cout << "animComp.currentTime: " << animComp.currentTime << " animComp.framerate: " << animComp.framerate << "\n";
 		if (animComp.currentTime > animComp.framerate && animComp.animation != Animation::NONE) {
 			changeFrame(gameContext, animComp);
-			std::cout << (int)animComp.animation << "\n";
-
 		}
 
 		// Set last animation

@@ -755,16 +755,16 @@ int EntityManager::createShield(GameEngine& gameContext, Vector2 position, float
     switch (goType) {
     case GameObjectType::SHIELD:
         colliderComp.collisionLayer = ColliderComponent::Shield;
-        colliderComp.layerMasc = ColliderComponent::Player + ColliderComponent::PlayerAttack + ColliderComponent::PlayerShield;
+        colliderComp.layerMasc = ColliderComponent::Player + ColliderComponent::PlayerAttack + ColliderComponent::PlayerShield + ColliderComponent::Wall;
         break;
 
     case GameObjectType::PLAYER_SHIELD:
         colliderComp.collisionLayer = ColliderComponent::PlayerShield;
-        colliderComp.layerMasc = ColliderComponent::Enemy + ColliderComponent::Attack + ColliderComponent::Shield;
+        colliderComp.layerMasc = ColliderComponent::Enemy + ColliderComponent::Attack + ColliderComponent::Shield + ColliderComponent::Wall;
 
         meleeComp.attackSound.soundPath = "Media/Sound/Weapons/shieldZap.wav";
         meleeComp.maxCooldown = 1.5f;
-        meleeComp.damage = 10;
+        meleeComp.damage = 1;
         healthComp.maxHealth = 3;
         healthComp.resetHealth();
         situation.noWorldDelete = true;
