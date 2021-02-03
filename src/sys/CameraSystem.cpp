@@ -35,12 +35,17 @@ void CameraSystem::setCameraLookingPlayer(GameEngine& gameContext) const {
 	};
 	
 	// Get the camera objective position
-	moveCamera(playerSit.position.x, cameraObjectivePos.x, cameraComp.offset.x);
+	moveCamera(playerSit.position.x + cameraComp.cameraAdvancement, cameraObjectivePos.x, cameraComp.offset.x);
 	//moveCamera(playerSit.position.y, cameraSit.position.y, cameraComp.offset.y);
 	cameraSit.position.y = playerSit.position.y;
 
 	// Set the velocity to the camera
-	cameraVel.velocity.x = std::clamp((cameraObjectivePos.x - cameraSit.position.x), -cameraVel.speedX, cameraVel.speedX);
+	float distance = cameraObjectivePos.x - cameraSit.position.x;
+	if (abs(distance) < 10.f) {
+		distance = 0.f;
+	}
+
+	cameraVel.velocity.x = std::clamp(distance * 3.f, -cameraVel.speedX, cameraVel.speedX);
 	//cameraVel.velocity.y = cameraVel.speedX * (int)(cameraSit.position.y - cameraObjectivePos.y);
 	
 	std::cout << "----------------------------------------------\n";
