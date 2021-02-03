@@ -19,6 +19,8 @@ void CameraSystem::setCameraLookingPlayer(GameEngine& gameContext) const {
 	SituationComponent& playerSit = gameContext.entityMan.getComponent<SituationComponent>(WorldElementsData::playerId);
 	SituationComponent& cameraSit = gameContext.entityMan.getComponent<SituationComponent>(WorldElementsData::activeCameraId);
 	CameraComponent&   cameraComp = gameContext.entityMan.getComponent<CameraComponent>(WorldElementsData::activeCameraId);
+	VelocityComponent& cameraVel  = gameContext.entityMan.getComponent<VelocityComponent>(WorldElementsData::activeCameraId);
+	Vector2 cameraObjectivePos = cameraSit.position;
 
 	auto moveCamera = [](float posPlayer, float& posCamera, float offset) {
 		// Calculate distance from player to camera
@@ -31,12 +33,21 @@ void CameraSystem::setCameraLookingPlayer(GameEngine& gameContext) const {
 			posCamera += (Utils::sign(dis) * diff);
 		}
 	};
-
-
-	moveCamera(playerSit.position.x, cameraSit.position.x, cameraComp.offset.x);
+	
+	// Get the camera objective position
+	moveCamera(playerSit.position.x, cameraObjectivePos.x, cameraComp.offset.x);
 	//moveCamera(playerSit.position.y, cameraSit.position.y, cameraComp.offset.y);
 	cameraSit.position.y = playerSit.position.y;
+
+	// Set the velocity to the camera
+	cameraVel.velocity.x = std::clamp((cameraObjectivePos.x - cameraSit.position.x), -cameraVel.speedX, cameraVel.speedX);
+	//cameraVel.velocity.y = cameraVel.speedX * (int)(cameraSit.position.y - cameraObjectivePos.y);
 	
+	std::cout << "----------------------------------------------\n";
+	std::cout << "Camera position: ( " << cameraSit.position.x << ", " << cameraSit.position.y << ")\n";
+	std::cout << "Objective position: ( " << cameraObjectivePos.x << ", " << cameraObjectivePos.y << ")\n";
+	std::cout << "Final camera Velocity: ( " << cameraVel.velocity.x << ", " << cameraVel.velocity.y << ")\n";
+
 	// Update position on engine, the situation of the camera is its center
 	gameContext.entityMan.addEntityToUpdate(WorldElementsData::activeCameraId);
 }

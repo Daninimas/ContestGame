@@ -618,8 +618,14 @@ int EntityManager::createCamera(GameEngine& gameContext, Vector2 position, float
 
     // Camera
     cameraComp.viewRect = {600, 400 };
-    cameraComp.zoom = 3.f;
+    cameraComp.zoom = 1.f;
     cameraComp.offset = { 50.f, 70.f};
+
+    // Velocity
+    velocityComp.gravity = 0.f;
+    velocityComp.maxVy = 1000.f;
+    velocityComp.minVy = -1000.f;
+    velocityComp.speedX = 500.f;
 
 
     //######### RENDER ########//
