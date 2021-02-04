@@ -48,10 +48,10 @@ void CameraSystem::setCameraLookingPlayer(GameEngine& gameContext) const {
 	cameraVel.velocity.x = std::clamp(distance * 3.f, -cameraVel.speedX, cameraVel.speedX);
 	//cameraVel.velocity.y = cameraVel.speedX * (int)(cameraSit.position.y - cameraObjectivePos.y);
 	
-	std::cout << "----------------------------------------------\n";
+	/*std::cout << "----------------------------------------------\n";
 	std::cout << "Camera position: ( " << cameraSit.position.x << ", " << cameraSit.position.y << ")\n";
 	std::cout << "Objective position: ( " << cameraObjectivePos.x << ", " << cameraObjectivePos.y << ")\n";
-	std::cout << "Final camera Velocity: ( " << cameraVel.velocity.x << ", " << cameraVel.velocity.y << ")\n";
+	std::cout << "Final camera Velocity: ( " << cameraVel.velocity.x << ", " << cameraVel.velocity.y << ")\n";*/
 
 	// Update position on engine, the situation of the camera is its center
 	gameContext.entityMan.addEntityToUpdate(WorldElementsData::activeCameraId);

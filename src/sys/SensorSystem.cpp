@@ -77,7 +77,7 @@ void SensorSystem::checkSensorsCollisions(GameEngine& gameContext) const {
 BoundingBox SensorSystem::getSensorWorldFixedBounding(GameEngine& gameContext, SensorComponent& sensor) const {
 	SituationComponent& sensorSit = gameContext.entityMan.getComponent<SituationComponent>(sensor.id);
 
-	BoundingBox sensorWorldBounding = getSensorBoundingDependingFacing(gameContext, sensor);
+	BoundingBox sensorWorldBounding = getSensorBoundingDependingFacing(gameContext, sensor, sensorSit);
 	sensorWorldBounding = Utils::moveToWorldCoords(sensorWorldBounding, sensorSit);
 
 	if (gameContext.entityMan.existsComponent<ColliderComponent>(sensor.id)) {
@@ -112,8 +112,7 @@ bool SensorSystem::calculateSensorCollision(GameEngine& gameContext, SensorCompo
 }
 
 
-BoundingBox SensorSystem::getSensorBoundingDependingFacing(GameEngine& gameContext, SensorComponent& sensor) const {
-	SituationComponent& sit = gameContext.entityMan.getComponent<SituationComponent>(sensor.id);
+BoundingBox SensorSystem::getSensorBoundingDependingFacing(GameEngine& gameContext, SensorComponent& sensor, SituationComponent& sit) const {
 
 	if (sit.facing == SituationComponent::Left) {
 		BoundingBox auxBounding = sensor.sensorBounding;
