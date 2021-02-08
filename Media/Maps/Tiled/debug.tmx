@@ -50,7 +50,7 @@
    <property name="Direction" value="Down"/>
   </properties>
   <objectgroup id="9" name="phase_size">
-   <object id="115" x="654" y="-128" width="3620.61" height="1161.82"/>
+   <object id="115" x="629.667" y="-128" width="3644.94" height="1161.82"/>
   </objectgroup>
   <objectgroup color="#0055ff" id="6" name="WALL">
    <object id="103" type="WALL" gid="1" x="872" y="396.576" width="100" height="10"/>
