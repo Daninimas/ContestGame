@@ -10,7 +10,7 @@ public:
     ~WorldElementsData() = default;
 
     static inline int worldId = 0;
-    static inline int playerId = 0;
+    static inline int playerId = std::numeric_limits<int>::max();
     static inline int activeCameraId = 0;
     static inline int playerDroneId = std::numeric_limits<int>::max();
     static inline std::vector<int> worldDistanceWeapons{};

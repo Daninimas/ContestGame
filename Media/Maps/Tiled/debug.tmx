@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="100" tileheight="100" infinite="1" nextlayerid="16" nextobjectid="146">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="100" tileheight="100" infinite="1" nextlayerid="18" nextobjectid="147">
  <editorsettings>
   <export target="../debug.json" format="json"/>
  </editorsettings>
  <tileset firstgid="1" source="../Patters/WALL_pat.tsx"/>
  <tileset firstgid="2" source="../Patters/SPAWNER_pat.tsx"/>
+ <tileset firstgid="3" source="../Patters/PLAYER_pat.tsx"/>
  <layer id="1" name="Capa de patrones 1" width="100" height="100">
   <data encoding="base64"/>
  </layer>
@@ -12,6 +13,9 @@
   <properties>
    <property name="Direction" value="Right"/>
   </properties>
+  <objectgroup id="17" name="PLAYER">
+   <object id="146" gid="3" x="-112" y="424" width="512" height="512"/>
+  </objectgroup>
   <objectgroup id="5" name="phase_size">
    <object id="71" x="0" y="-104" width="865.34" height="732"/>
   </objectgroup>
