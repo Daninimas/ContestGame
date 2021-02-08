@@ -61,14 +61,14 @@ void SensorSystem::checkSensorsCollisions(GameEngine& gameContext) const {
 	for (SensorComponent& sensor : sensors) {
 		// Check this sensor with all the colliders with VELOCITY
 		BoundingBox sensorBounding = getSensorWorldFixedBounding(gameContext, sensor);
-
+ 
 		for (ColliderComponent& colliderEnt : colliders) {
 
 			if (colliderEnt.id != sensor.id && sensor.sensorLayerMasc & colliderEnt.collisionLayer) { // don't calculate the collision in the same entity
 				SituationComponent& entitySituation = gameContext.entityMan.getComponent<SituationComponent>(colliderEnt.id);
 				BoundingBox& entityBounding = colliderEnt.boundingRoot.bounding;
 
-				calculateSensorCollision(gameContext, sensor, entityBounding, sensorBounding, entitySituation);
+				calculateSensorCollision(gameContext, sensor, sensorBounding, entityBounding, entitySituation);
 			}
 		}
 	}
@@ -82,8 +82,8 @@ BoundingBox SensorSystem::getSensorWorldFixedBounding(GameEngine& gameContext, S
 
 	if (gameContext.entityMan.existsComponent<ColliderComponent>(sensor.id)) {
 		Vector2 objectiveCenter = Utils::getCenterOfBounding(gameContext.entityMan.getComponent<ColliderComponent>(sensor.id).boundingRoot.bounding);
-		sensorWorldBounding.xLeft + objectiveCenter.x;
-		sensorWorldBounding.xRight + objectiveCenter.x;
+		sensorWorldBounding.xLeft  += objectiveCenter.x;
+		sensorWorldBounding.xRight += objectiveCenter.x;
 	}
 
 

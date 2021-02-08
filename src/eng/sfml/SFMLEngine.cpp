@@ -154,8 +154,15 @@ void SFMLEngine::renderAllSensors(GameEngine& gameContext) const {
 		}
 		else {
 			rectangle.setPosition(sit.position.x - b.xRight, sit.position.y + b.yUp);
-
 		}
+
+		// Add bounding center
+		if (gameContext.entityMan.existsComponent<ColliderComponent>(s.id)) {
+			Vector2 objectiveCenter = Utils::getCenterOfBounding(gameContext.entityMan.getComponent<ColliderComponent>(s.id).boundingRoot.bounding);
+
+			rectangle.move(objectiveCenter.x, 0.f);
+		}
+
 		device.get()->draw(rectangle);
 	}
 }

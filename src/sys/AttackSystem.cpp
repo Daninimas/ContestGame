@@ -107,9 +107,9 @@ void AttackSystem::checkPlayerAttacking(GameEngine& gameContext) const {
 		//Decides if needs to use melee or distance weapon
 
 		for (int sensoredId : playerSensor.entitiesSensoring) {
-			EntityType sensoredType = gameContext.entityMan.getEntity(sensoredId).getType();
+			uint16_t sensoredCollLayer = gameContext.entityMan.getComponent<ColliderComponent>(sensoredId).collisionLayer;
 
-			if (sensoredType == EntityType::ENEMY) {
+			if (sensoredCollLayer == ColliderComponent::Enemy) {
 				createMelee = true;
 			}
 		}
