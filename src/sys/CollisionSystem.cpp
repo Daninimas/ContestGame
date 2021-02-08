@@ -61,7 +61,16 @@ void CollisionSystem::calculateCollisions(GameEngine& gameContext) const {
 
                     if (!(colliderA.type == ColliderType::NO_SOLID) && !(colliderB.type == ColliderType::NO_SOLID)) {
                         // Check who is the static and the dinamic
-                        if (colliderA.type == ColliderType::DYNAMIC) {
+                        if (colliderA.type == ColliderType::DYNAMIC && colliderB.type == ColliderType::DYNAMIC) {
+                            // If the two are dynamic, check weight
+                            if (colliderA.weight > colliderB.weight) {
+                                undoCollision(gameContext, colliderA, colliderB);
+                            }
+                            else {
+                                undoCollision(gameContext, colliderB, colliderA);
+                            }
+                        }
+                        else if (colliderA.type == ColliderType::DYNAMIC) {
                             undoCollision(gameContext, colliderB, colliderA);
                         }
                         else if (colliderB.type == ColliderType::DYNAMIC) {

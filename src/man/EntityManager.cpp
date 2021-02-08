@@ -131,6 +131,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
     colliderComp.layerMasc = 0xFFF - ColliderComponent::PlayerAttack - ColliderComponent::PlayerShield; //Collides with everything except PlayerAttacks
     colliderComp.boundingRoot.bounding = { 0.f, 50.f, 0.f, 50.f };
     colliderComp.boundingRoot.childs.emplace_back( 20.f, 30.f, 10.f, 20.f ); //Head
+    colliderComp.weight = 2.f;
 
     // Melee
     meleeWeaponComp.attackBounding = { 0.f, 10.f, 0.f, 10.f };
@@ -465,18 +466,18 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         jumpComp.impulse = -100.f;
         jumpComp.maxCooldown = 1.f;
 
-
         MeleeWeaponComponent& meleeWeaponComp = createComponent<MeleeWeaponComponent>(entityId);
         meleeWeaponComp.attackBounding = { 0.f, 20.f, 10.f, 40.f };
         meleeWeaponComp.damage = 1;
         meleeWeaponComp.maxCooldown = 1.5f;
-
 
         pounceComp.range.x = 200.f;
         pounceComp.range.y = 30.f;
         pounceComp.velocityIncFactor = 4.7f;
         pounceComp.maxCooldown = 2.f;
         pounceComp.isStickyPouncer = true;
+
+        colliderComp.weight = 3.f;
     }
 
     healthComp.resetHealth(); // Reset health to set the current health the same as maxHealth

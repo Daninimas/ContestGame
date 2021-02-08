@@ -37,4 +37,6 @@ public:
     bool collide{ false };
 
     BoundingBoxNode boundingRoot;
+
+    float weight{ 1.f };
 };
