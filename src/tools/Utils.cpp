@@ -156,6 +156,7 @@ void Utils::setNormalPistolToEntity(GameEngine& gameContext, int entityId) {
     distanceWeaponComp.attackSound.soundPath = "Media/Sound/Weapons/gunFire.wav";
     distanceWeaponComp.ammo = 0;
     distanceWeaponComp.infiniteAmmo = true;
+    distanceWeaponComp.bulletSpreadAngle = 5.f;
 }
 
 

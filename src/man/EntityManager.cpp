@@ -533,6 +533,7 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
         distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BULLET;
         distanceWeaponComp.ammo = 100;
         distanceWeaponComp.infiniteAmmo = false;
+        distanceWeaponComp.bulletSpreadAngle = 5.f;
 
         distanceWeaponComp.attackSound.soundPath = "Media/Sound/Weapons/M4A1_Single-Kibblesbob-8540445.wav";
 
@@ -602,11 +603,11 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
         distanceWeaponComp.attackGravity = 0.f;
         distanceWeaponComp.maxCooldown = 1.f;
         distanceWeaponComp.attackLifetime = 0.2f;
-        distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::SHOTGUN;
+        distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BULLET;
         distanceWeaponComp.ammo = 10;
         distanceWeaponComp.infiniteAmmo = false;
         distanceWeaponComp.numberOfShells = 5;
-        distanceWeaponComp.opertureAngle = 30.f;
+        distanceWeaponComp.bulletSpreadAngle = 30.f;
 
         distanceWeaponComp.attackSound.soundPath = "Media/Sound/Weapons/shotgunShot.wav";
 

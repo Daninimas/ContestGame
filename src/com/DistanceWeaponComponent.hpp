@@ -18,9 +18,11 @@ public:
     {
         BULLET,
         BOMB, 
-        LASER,
-        SHOTGUN
+        LASER
     };
+
+    uint8_t numberOfShells{ 1 }; // If more than one, this will generate a shotgun shot type
+    float bulletSpreadAngle{ 0.f };
 
     uint8_t attackGeneratedType{ BULLET };
 
@@ -32,10 +34,4 @@ public:
     bool startActivated{ false };
     float explosionTime{0.f};
     float explosionExpansion{1.f};
-
-
-    // Only for shotguns
-    uint8_t numberOfShells{ 1 };
-    float opertureAngle { 0.f };
-
 };

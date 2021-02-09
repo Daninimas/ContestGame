@@ -22,7 +22,6 @@ private:
     void createBulletAttack(GameEngine& gameContext, DistanceWeaponComponent& distanceWeaponAttacker) const;
     void createBombEntity(GameEngine& gameContext, DistanceWeaponComponent& distanceWeaponAttacker) const;
     void createLaserAttack(GameEngine& gameContext, DistanceWeaponComponent& distanceWeaponAttacker) const;
-    void createShotgunAttack(GameEngine& gameContext, DistanceWeaponComponent& distanceWeaponAttacker) const;
     void checkAttacksHits(GameEngine& gameContext) const;
 
     void resolveAttackHit(GameEngine& gameContext, ColliderComponent& attackCol, AttackComponent& attack, std::vector<int>& attacksToDelete) const;
