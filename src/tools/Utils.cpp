@@ -332,3 +332,16 @@ SituationComponent* Utils::getClosestWallXToObjetive(GameEngine& gameContext, Si
 
     return closesWall;
 }
+
+float Utils::getVectorMagnitude(Vector2& vec) {
+    return sqrt(vec.x * vec.x + vec.y * vec.y); // Calculate magnitude
+}
+
+Vector2 Utils::rotateVector(Vector2& vect, float angle) {
+    Vector2 rotatedAngle;
+
+    rotatedAngle.x = vect.x * cos(degToRad(angle)) - vect.y * sin(degToRad(angle));
+    rotatedAngle.y = vect.x * sin(degToRad(angle)) + vect.y * cos(degToRad(angle));
+
+    return rotatedAngle;
+}

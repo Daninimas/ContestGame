@@ -16,6 +16,9 @@ public:
     static float    degToRad(float angle);
     static float    radToDeg(float angle);
 
+    static float getVectorMagnitude(Vector2& vec);
+    static Vector2 rotateVector(Vector2& vect, float angle); // Gets angle in DEG
+
     static BoundingBox moveToWorldCoords(BoundingBox& bounding, SituationComponent& situation);
 
     static void insertCollidersIdWithVelocity(GameEngine& gameContext, std::vector<int>& idCollidersWithVelocity);
@@ -45,6 +48,7 @@ public:
     static void resetPlayerPosition(GameEngine& gameContext);
 
     static SituationComponent* getClosestWallXToObjetive(GameEngine& gameContext, SituationComponent& objetiveSituation);
+
 
     template <typename T> 
     static int sign(T val) {

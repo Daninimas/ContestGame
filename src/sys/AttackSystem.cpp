@@ -418,19 +418,13 @@ void AttackSystem::createShotgunAttack(GameEngine& gameContext, DistanceWeaponCo
 		AttackComponent& attackComp = gameContext.entityMan.getComponent<AttackComponent>(attackId);
 		VelocityComponent& attackVel = gameContext.entityMan.getComponent<VelocityComponent>(attackId);
 
-		// Bullet deviation
-		float opertureAngleRad = Utils::degToRad(distanceWeaponAttacker.opertureAngle);
-		float thisRandOperture = (-opertureAngleRad) + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (opertureAngleRad - (-opertureAngleRad))));
-		Vector2 deviation { cos(thisRandOperture) * distanceWeaponAttacker.attackGeneralVelociy, sin(thisRandOperture) * distanceWeaponAttacker.attackGeneralVelociy };
-
-		cout << "deviation: (" << deviation.x << ", " << deviation.y << ")\n";
+		float thisRandOperture = (-distanceWeaponAttacker.opertureAngle) + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (distanceWeaponAttacker.opertureAngle - (-distanceWeaponAttacker.opertureAngle))));
 
 		// Set data to bullet
 		colliderComp.boundingRoot.bounding = distanceWeaponAttacker.attackBounding;
 		attackComp.damage = distanceWeaponAttacker.damage;
 		attackComp.maxLifetime = distanceWeaponAttacker.attackLifetime;
-		attackVel.velocity.x = (distanceWeaponAttacker.attackVel.x + deviation.x);
-		attackVel.velocity.y = (distanceWeaponAttacker.attackVel.y + deviation.y);
+		attackVel.velocity = Utils::rotateVector(distanceWeaponAttacker.attackVel, thisRandOperture);
 		attackVel.gravity = distanceWeaponAttacker.attackGravity;
 	}
 
