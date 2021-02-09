@@ -18,20 +18,24 @@ public:
     {
         BULLET,
         BOMB, 
-        LASER
+        LASER,
+        SHOTGUN
     };
 
     uint8_t attackGeneratedType{ BULLET };
 
     uint16_t ammo{ 100 };
-    bool infiniteAmmo{ false };
+    bool infiniteAmmo{ false }; // Solo se usa en el player
 
 
     // Only for bombs generation
-
     bool startActivated{ false };
     float explosionTime{0.f};
     float explosionExpansion{1.f};
 
-    // Only for bombs generation
+
+    // Only for shotguns
+    uint8_t numberOfShells{ 1 };
+    float opertureAngle { 0.f };
+
 };

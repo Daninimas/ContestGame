@@ -269,6 +269,10 @@ bool AttackSystem::createDistanceAttack(GameEngine& gameContext, DistanceWeaponC
 		case DistanceWeaponComponent::LASER:
 			createLaserAttack(gameContext, distanceWeaponAttacker);
 			break;
+
+		case DistanceWeaponComponent::SHOTGUN:
+			createShotgunAttack(gameContext, distanceWeaponAttacker);
+			break;
 		}
 
 		return true;
@@ -309,7 +313,7 @@ void AttackSystem::createBombEntity(GameEngine& gameContext, DistanceWeaponCompo
 	SituationComponent& attackerSit = gameContext.entityMan.getComponent<SituationComponent>(distanceWeaponAttacker.id);
 
 	GameObjectType attackGOtype = GameObjectType::BOMB;
-	if (distanceWeaponAttacker.id == WorldElementsData::playerId) {
+	if (distanceWeaponAttacker.id == WorldElementsData::playerId || gameContext.entityMan.getEntity(distanceWeaponAttacker.id).getGameObjectType() == GameObjectType::DRONE_FRIEND) {
 		attackGOtype = GameObjectType::PLAYER_BOMB;
 	}
 
@@ -343,7 +347,7 @@ void AttackSystem::createLaserAttack(GameEngine& gameContext, DistanceWeaponComp
 	SituationComponent& attackerSit = gameContext.entityMan.getComponent<SituationComponent>(distanceWeaponAttacker.id);
 
 	GameObjectType attackGOtype = GameObjectType::LASER;
-	if (distanceWeaponAttacker.id == WorldElementsData::playerId) {
+	if (distanceWeaponAttacker.id == WorldElementsData::playerId || gameContext.entityMan.getEntity(distanceWeaponAttacker.id).getGameObjectType() == GameObjectType::DRONE_FRIEND) {
 		attackGOtype = GameObjectType::PLAYER_LASER;
 	}
 
@@ -398,6 +402,46 @@ void AttackSystem::createLaserAttack(GameEngine& gameContext, DistanceWeaponComp
 	gameContext.getSoundFacadeRef().loadSound(distanceWeaponAttacker.attackSound.soundPath);
 	gameContext.getSoundFacadeRef().playSound(distanceWeaponAttacker.attackSound);
 }
+
+void AttackSystem::createShotgunAttack(GameEngine& gameContext, DistanceWeaponComponent& distanceWeaponAttacker) const {
+	SituationComponent& attackerSit = gameContext.entityMan.getComponent<SituationComponent>(distanceWeaponAttacker.id);
+
+	GameObjectType attackGOtype = GameObjectType::DISTANCE_ATTACK;
+	if (distanceWeaponAttacker.id == WorldElementsData::playerId || gameContext.entityMan.getEntity(distanceWeaponAttacker.id).getGameObjectType() == GameObjectType::DRONE_FRIEND) {
+		attackGOtype = GameObjectType::PLAYER_DISTANCE_ATTACK;
+	}
+
+	for (uint8_t i = 0; i < distanceWeaponAttacker.numberOfShells; ++i) {
+		int attackId = gameContext.entityMan.createAttack(gameContext, attackerSit.position, 0.f, attackGOtype);
+
+		ColliderComponent& colliderComp = gameContext.entityMan.getComponent<ColliderComponent>(attackId);
+		AttackComponent& attackComp = gameContext.entityMan.getComponent<AttackComponent>(attackId);
+		VelocityComponent& attackVel = gameContext.entityMan.getComponent<VelocityComponent>(attackId);
+
+		// Bullet deviation
+		float opertureAngleRad = Utils::degToRad(distanceWeaponAttacker.opertureAngle);
+		float thisRandOperture = (-opertureAngleRad) + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (opertureAngleRad - (-opertureAngleRad))));
+		Vector2 deviation { cos(thisRandOperture) * distanceWeaponAttacker.attackGeneralVelociy, sin(thisRandOperture) * distanceWeaponAttacker.attackGeneralVelociy };
+
+		cout << "deviation: (" << deviation.x << ", " << deviation.y << ")\n";
+
+		// Set data to bullet
+		colliderComp.boundingRoot.bounding = distanceWeaponAttacker.attackBounding;
+		attackComp.damage = distanceWeaponAttacker.damage;
+		attackComp.maxLifetime = distanceWeaponAttacker.attackLifetime;
+		attackVel.velocity.x = (distanceWeaponAttacker.attackVel.x + deviation.x);
+		attackVel.velocity.y = (distanceWeaponAttacker.attackVel.y + deviation.y);
+		attackVel.gravity = distanceWeaponAttacker.attackGravity;
+	}
+
+
+	distanceWeaponAttacker.cooldown = 0.f;
+
+	// Play shoot sound
+	gameContext.getSoundFacadeRef().loadSound(distanceWeaponAttacker.attackSound.soundPath);
+	gameContext.getSoundFacadeRef().playSound(distanceWeaponAttacker.attackSound);
+}
+
 
 
 void AttackSystem::checkAttacksHits(GameEngine& gameContext) const{

@@ -593,6 +593,26 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
         WorldElementsData::worldDistanceWeapons.push_back(entityId);
     }
 
+    else if (goType == GameObjectType::SHOTGUN) {
+        DistanceWeaponComponent& distanceWeaponComp = createComponent<DistanceWeaponComponent>(entityId);
+
+        distanceWeaponComp.attackBounding = { 0.f, 2.f, 0.f, 2.f };
+        distanceWeaponComp.damage = 1;
+        distanceWeaponComp.attackGeneralVelociy = 900.f;
+        distanceWeaponComp.attackGravity = 0.f;
+        distanceWeaponComp.maxCooldown = 1.f;
+        distanceWeaponComp.attackLifetime = 0.2f;
+        distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::SHOTGUN;
+        distanceWeaponComp.ammo = 10;
+        distanceWeaponComp.infiniteAmmo = false;
+        distanceWeaponComp.numberOfShells = 5;
+        distanceWeaponComp.opertureAngle = 30.f;
+
+        distanceWeaponComp.attackSound.soundPath = "Media/Sound/Weapons/shotgunShot.wav";
+
+        WorldElementsData::worldDistanceWeapons.push_back(entityId);
+    }
+
     //######### RENDER ########//
     gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
 

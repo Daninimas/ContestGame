@@ -34,6 +34,7 @@ enum class GameObjectType {
     KNIFE,
     GRENADE_LAUNCHER,
     LASER_GUN,
+    SHOTGUN,
 
 
     // Menu types
