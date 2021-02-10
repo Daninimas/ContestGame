@@ -387,7 +387,7 @@ void AttackSystem::createBulletAttack(GameEngine& gameContext, DistanceWeaponCom
 		AttackComponent& attackComp = gameContext.entityMan.getComponent<AttackComponent>(attackId);
 		VelocityComponent& attackVel = gameContext.entityMan.getComponent<VelocityComponent>(attackId);
 
-		float thisRandOperture = (-distanceWeaponAttacker.bulletSpreadAngle) + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (distanceWeaponAttacker.bulletSpreadAngle - (-distanceWeaponAttacker.bulletSpreadAngle))));
+		float thisRandOperture = (-distanceWeaponAttacker.bulletSpreadAngle/2.f) + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (distanceWeaponAttacker.bulletSpreadAngle/2 - (-distanceWeaponAttacker.bulletSpreadAngle/2))));
 
 		// Set data to bullet
 		colliderComp.boundingRoot.bounding = distanceWeaponAttacker.attackBounding;

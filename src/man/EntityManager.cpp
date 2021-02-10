@@ -612,7 +612,7 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
         distanceWeaponComp.ammo = 10;
         distanceWeaponComp.infiniteAmmo = false;
         distanceWeaponComp.numberOfShells = 5;
-        distanceWeaponComp.bulletSpreadAngle = 30.f;
+        distanceWeaponComp.bulletSpreadAngle = 12.f;
 
         distanceWeaponComp.attackSound.soundPath = "Media/Sound/Weapons/shotgunShot.wav";
 
