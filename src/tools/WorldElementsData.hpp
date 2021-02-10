@@ -17,6 +17,9 @@ public:
     static inline std::vector<int> worldMeleeWeapons{};
     static inline uint16_t enemiesInWorld{ 0 };
 
+    // Score of the player
+    static inline int playerScore{ 0 };
+
     // Counter for wait after lose Live
     static inline float waitLoseLifeTime{ 1.f };
     static inline float waitLoseLifeTimeCounter{ 0.f };

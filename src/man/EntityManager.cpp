@@ -225,6 +225,11 @@ int EntityManager::createAttack(GameEngine& gameContext, Vector2 position, float
         attack.type = AttackType::EXPLOSION;
         break;
 
+    case GameObjectType::PLAYER_EXPLOSION:
+        createComponent<ExplosionAttackComponent>(entityId);
+        attack.type = AttackType::EXPLOSION;
+        break;
+
     case GameObjectType::PLAYER_LASER:
         createComponent<VelocityComponent>(entityId);
 
@@ -1213,6 +1218,17 @@ int EntityManager::createHUDElement(GameEngine& gameContext, Vector2 position, f
         TextComponent& textComp = createComponent<TextComponent>(entityId);
 
         textComp.color = { 255, 255, 30, 255 };
+        textComp.isHUDElement = true;
+        textComp.size = 24;
+        textComp.text = "";
+
+        //######### RENDER ########//
+        gameContext.getWindowFacadeRef().createText(gameContext, entityId);
+    }
+    else if (objType == GameObjectType::HUD_PLAYER_SCORE) {
+        TextComponent& textComp = createComponent<TextComponent>(entityId);
+
+        textComp.color = { 61, 81, 255, 255 };
         textComp.isHUDElement = true;
         textComp.size = 24;
         textComp.text = "";

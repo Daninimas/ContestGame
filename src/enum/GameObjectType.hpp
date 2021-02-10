@@ -22,6 +22,7 @@ enum class GameObjectType {
     DISTANCE_ATTACK,
     PLAYER_DISTANCE_ATTACK,
     EXPLOSION,
+    PLAYER_EXPLOSION,
     PLAYER_LASER,
     LASER,
 
@@ -72,6 +73,7 @@ enum class GameObjectType {
     HUD_PLAYER_HEALTH,
     HUD_PLAYER_AMMO,
     HUD_PLAYER_LIFES,
+    HUD_PLAYER_SCORE,
 
     // World
     WORLD_DEBUG,

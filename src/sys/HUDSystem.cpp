@@ -41,6 +41,11 @@ void HUDSystem::updateTexts(GameEngine& gameContext) const {
 			textComp.text = "Extra lifes: " + to_string(gameContext.entityMan.getComponent<HealthComponent>(playerId).extraLifes);
 			gameContext.entityMan.addEntityToUpdate(textComp.id);
 			break;
+
+		case GameObjectType::HUD_PLAYER_SCORE:
+			textComp.text = "Score: " + to_string(WorldElementsData::playerScore);
+			gameContext.entityMan.addEntityToUpdate(textComp.id);
+			break;
 		}
 
 

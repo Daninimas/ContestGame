@@ -449,6 +449,7 @@ void AttackSystem::damageEntity(GameEngine& gameContext, AttackComponent& attack
 
 		hittedHealth.damageReceived += attack.damage;
 		hittedHealth.damaged = true;
+		hittedHealth.hittedByGO = gameContext.entityMan.getEntity(attack.id).getGameObjectType();
 	}
 
 	attack.entitiesDamaged.push_back(entityHitId);

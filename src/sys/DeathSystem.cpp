@@ -37,6 +37,9 @@ void DeathSystem::deleteEntities(GameEngine& gameContext, std::vector<int>& dead
     for (int entityId : deadEntities) {
         EntityType entityTypeToDelete = gameContext.entityMan.getEntity(entityId).getType();
         if (entityTypeToDelete != EntityType::PLAYER) {
+            // Give score to player
+            manageScore(gameContext, entityId);
+
             gameContext.eraseEntityByID(entityId); // Delete the entity
         }
         else {
@@ -59,5 +62,20 @@ void DeathSystem::managePlayerLifes(GameEngine& gameContext, int playerId) const
     }
     else {
         gameContext.pushGameState(GameState::GAMEOVER);
+    }
+}
+
+
+void DeathSystem::manageScore(GameEngine& gameContext, int deadEntityId) const {
+    HealthComponent& deadEntityHealth = gameContext.entityMan.getComponent<HealthComponent>(deadEntityId);
+
+    if (deadEntityHealth.hittedByGO == GameObjectType::PLAYER_MELEE_ATTACK || deadEntityHealth.hittedByGO == GameObjectType::PLAYER_DISTANCE_ATTACK || deadEntityHealth.hittedByGO == GameObjectType::PLAYER_EXPLOSION || deadEntityHealth.hittedByGO == GameObjectType::PLAYER_LASER || deadEntityHealth.hittedByGO == GameObjectType::PLAYER_SHIELD) {
+        WorldElementsData::playerScore += deadEntityHealth.score;
+    }
+    else if (deadEntityHealth.hittedByGO == GameObjectType::NONE) {
+        cout << "-------------------- ERROR: Entidad asesinada por GameObjectType = NONE --------------------\n";
+        cout << "ID entidad: " << deadEntityId << "\n";
+        cout << "Game Object Entidad: " << (int)gameContext.entityMan.getEntity(deadEntityId).getGameObjectType() << "\n";
+
     }
 }

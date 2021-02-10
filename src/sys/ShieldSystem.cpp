@@ -70,6 +70,7 @@ bool ShieldSystem::damageHittedEntities(GameEngine& gameContext, BoundingBoxNode
 
 			hittedHealth.damaged = true;
 			hittedHealth.damageReceived += shieldWeapon.damage;
+			hittedHealth.hittedByGO = gameContext.entityMan.getEntity(shieldWeapon.id).getGameObjectType();
 
 			hitEntity = true;
 		}

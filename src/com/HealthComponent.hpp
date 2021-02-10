@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Component.hpp"
+#include <enum/GameObjectType.hpp>
 
 class HealthComponent : public Component {
 public:
@@ -23,4 +24,10 @@ public:
 
     float       invincibleAnimTime{ 0.25f };
     float       invincibleAnimCounter{ 0.f };
+
+    GameObjectType hittedByGO{ GameObjectType::NONE }; // The last Game Object that has hitted this entity
+
+
+    // For the score system
+    int score{ 100 };  // The score that gives to the player when this entity dies
 };
