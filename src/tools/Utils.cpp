@@ -147,7 +147,7 @@ void Utils::deleteCollidingWithObjective(BoundingBoxNode& boundingNode, int objI
 void Utils::setNormalPistolToEntity(GameEngine& gameContext, int entityId) {
     DistanceWeaponComponent& distanceWeaponComp = gameContext.entityMan.createComponent<DistanceWeaponComponent>(entityId);
 
-    distanceWeaponComp.attackBounding = { 0.f, 5.f, 0.f, 10.f };
+    distanceWeaponComp.attackBounding = { 0.f, 2.f, 0.f, 2.f };
     distanceWeaponComp.damage = 1;
     distanceWeaponComp.attackGeneralVelociy = 500.f;
     distanceWeaponComp.attackGravity = 100.f;

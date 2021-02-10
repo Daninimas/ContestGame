@@ -529,7 +529,7 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
     if (goType == GameObjectType::M4) {
         DistanceWeaponComponent& distanceWeaponComp = createComponent<DistanceWeaponComponent>(entityId);
 
-        distanceWeaponComp.attackBounding = { 0.f, 10.f, 0.f, 5.f };
+        distanceWeaponComp.attackBounding = { 0.f, 5.f, 0.f, 5.f };
         distanceWeaponComp.damage = 1;
         distanceWeaponComp.attackGeneralVelociy = 900.f;
         distanceWeaponComp.attackGravity = 0.f;
