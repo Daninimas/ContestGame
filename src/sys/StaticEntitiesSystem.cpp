@@ -13,7 +13,7 @@ StaticEntitiesSystem::~StaticEntitiesSystem() {}
 void StaticEntitiesSystem::update(GameEngine& gameContext) const {}
 
 
-void StaticEntitiesSystem::init(GameEngine &gameContext) const {
+void StaticEntitiesSystem::init(GameEngine& gameContext) const {
     createPlayer(gameContext);
     createWorld(gameContext);
 
@@ -77,6 +77,20 @@ void StaticEntitiesSystem::init(GameEngine &gameContext) const {
     gameContext.entityMan.createHUDElement(gameContext, Vector2(10.f, 70.f), 0.f, GameObjectType::HUD_PLAYER_LIFES);
     gameContext.entityMan.createHUDElement(gameContext, Vector2(280.f, 10.f), 0.f, GameObjectType::HUD_PLAYER_SCORE);
 
+
+    int orbital = gameContext.entityMan.createAttack(gameContext, Vector2(100.f, -10000.f), 0.f, GameObjectType::LASER);
+    ColliderComponent& colliderComp = gameContext.entityMan.getComponent<ColliderComponent>(orbital);
+    AttackComponent& attackComp = gameContext.entityMan.getComponent<AttackComponent>(orbital);
+    VelocityComponent& attackVel = gameContext.entityMan.getComponent<VelocityComponent>(orbital);
+    SituationComponent& situationComp = gameContext.entityMan.getComponent<SituationComponent>(orbital);
+
+    attackComp.damage = 5;
+    attackComp.maxLifetime = 20000;
+    attackVel.velocity = { 0.f, 0.f };
+    attackVel.gravity = 0.f;
+    colliderComp.type = ColliderType::DYNAMIC;
+    colliderComp.boundingRoot.bounding = { 0.f, 50.f, 0.f, 10410.f };
+    situationComp.noWorldDelete = true;
     //MapLoader::loadMapPhase(gameContext, "Media/Maps/debug.json", "Phase1");
 
     //gameContext.entityMan.createDamagePlatform(gameContext, Vector2(400.f, 320.f), Vector2(50.f, 50.f), 1, GameObjectType::DAMAGE_PLATFORM);
