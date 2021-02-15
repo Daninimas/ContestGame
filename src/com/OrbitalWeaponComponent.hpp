@@ -13,5 +13,7 @@ public:
     bool activated{ false };
 
     Sound markerSound{};
+
+    Vector2 attackPosition{};
 };
 

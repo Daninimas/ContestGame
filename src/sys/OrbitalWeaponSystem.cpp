@@ -49,6 +49,7 @@ void OrbitalWeaponSystem::generateOrbitalMarker(GameEngine& gameContext, Orbital
 	orbitalWeapon.activated = true;
 	orbitalWeapon.cooldown = 0.f;
 	orbitalWeapon.generateAttackTimeCounter = 0.f;
+	orbitalWeapon.attackPosition = objectiveSituation.position;
 
 	// Update render
 	gameContext.entityMan.addEntityToUpdate(markerID);
@@ -79,7 +80,19 @@ void OrbitalWeaponSystem::manageOrbitalStrikes(GameEngine& gameContext) const {
 
 
 void OrbitalWeaponSystem::generateOrbitalAttack(GameEngine& gameContext, OrbitalWeaponComponent& orbitalWeapon) const {
+	GameObjectType attackGOtype = GameObjectType::MELEE_ATTACK;
+	if (orbitalWeapon.id == WorldElementsData::playerId) {
+		attackGOtype = GameObjectType::PLAYER_MELEE_ATTACK;
+	}
 
+	int attackId = gameContext.entityMan.createAttack(gameContext, orbitalWeapon.attackPosition, 0.f, attackGOtype);
+
+	ColliderComponent& colliderComp = gameContext.entityMan.getComponent<ColliderComponent>(attackId);
+	AttackComponent& attackComp = gameContext.entityMan.getComponent<AttackComponent>(attackId);
+
+	colliderComp.boundingRoot.bounding = orbitalWeapon.attackBounding;
+	attackComp.damage = orbitalWeapon.damage;
+	attackComp.maxLifetime = orbitalWeapon.attackLifetime;
 
 
 	orbitalWeapon.generateAttackTimeCounter = 0.f;
