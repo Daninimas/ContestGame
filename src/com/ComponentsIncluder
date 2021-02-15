@@ -26,6 +26,8 @@
 #include <com/WorldComponent.hpp>
 #include <com/TriggerComponent.hpp>
 #include <com/AnimationComponent.hpp>
+#include <com/OrbitalWeaponComponent.hpp>
+#include <com/AutodeleteComponent.hpp>
 
 // AI
 #include <com/AI/AIChaseComponent.hpp>

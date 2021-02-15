@@ -18,5 +18,6 @@ enum class EntityType {
     WORLD,
     TRIGGER,
     DAMAGE_PLATFORM,
-    DRONE
+    DRONE,
+    ORBITAL_MARKER
 };

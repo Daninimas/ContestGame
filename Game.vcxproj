@@ -154,12 +154,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\com\AutodeleteComponent.cpp" />
+    <ClCompile Include="src\com\OrbitalWeaponComponent.cpp" />
     <ClCompile Include="src\sys\AI\AIDroneSystem.cpp" />
     <ClCompile Include="src\sys\AI\AIFlyingChaseSystem.cpp" />
     <ClCompile Include="src\com\AI\AIFlyingChaseComponent.cpp" />
     <ClCompile Include="src\com\AnimationComponent.cpp" />
     <ClCompile Include="src\com\MenuOptionComponent.cpp" />
     <ClCompile Include="src\com\TriggerComponent.cpp" />
+    <ClCompile Include="src\sys\AutodeleteSystem.cpp" />
+    <ClCompile Include="src\sys\OrbitalWeaponSystem.cpp" />
     <ClCompile Include="src\sys\WaitAfterLoseLifeSystem.cpp" />
     <ClCompile Include="src\com\WorldComponent.cpp" />
     <ClCompile Include="src\sys\AnimationSystem.cpp" />
@@ -230,12 +234,16 @@
     <ClCompile Include="src\tools\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\com\AutodeleteComponent.hpp" />
+    <ClInclude Include="src\com\OrbitalWeaponComponent.hpp" />
     <ClInclude Include="src\sys\AI\AIDroneSystem.hpp" />
     <ClInclude Include="src\sys\AI\AIFlyingChaseSystem.hpp" />
     <ClInclude Include="src\com\AI\AIFlyingChaseComponent.hpp" />
     <ClInclude Include="src\com\AnimationComponent.hpp" />
     <ClInclude Include="src\com\MenuOptionComponent.hpp" />
     <ClInclude Include="src\com\TriggerComponent.hpp" />
+    <ClInclude Include="src\sys\AutodeleteSystem.hpp" />
+    <ClInclude Include="src\sys\OrbitalWeaponSystem.hpp" />
     <ClInclude Include="src\sys\WaitAfterLoseLifeSystem.hpp" />
     <ClInclude Include="src\com\WorldComponent.hpp" />
     <ClInclude Include="src\enum\AnimationEnum.hpp" />

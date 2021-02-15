@@ -82,9 +82,12 @@ enum class GameObjectType {
     DAMAGE_PLATFORM,
 
     // Triggers
-    TRIGGER
+    TRIGGER,
     /*TRIGGER_SOUND,
     TRIGGER_CREATE_ENTITY,
     TRIGGER_FUNCTION*/
 
+
+    // Orbital marker
+    ORBITAL_MARKER
 };

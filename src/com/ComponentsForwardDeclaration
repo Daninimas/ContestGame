@@ -31,3 +31,5 @@ class WorldComponent;
 class TriggerComponent;
 class AnimationComponent;
 class AIFlyingChaseComponent;
+class OrbitalWeaponComponent;
+class AutodeleteComponent;

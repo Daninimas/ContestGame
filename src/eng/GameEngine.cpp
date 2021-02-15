@@ -60,6 +60,7 @@ void GameEngine::init() {
 }
 
 void GameEngine::setPlayingSystems() {
+    systems.emplace_back(std::make_unique<AutodeleteSystem>());
     systems.emplace_back(std::make_unique<SensorSystem>());
     systems.emplace_back(std::make_unique<AIDroneSystem>());
     systems.emplace_back(std::make_unique<AIMeleeSystem>());
@@ -67,6 +68,7 @@ void GameEngine::setPlayingSystems() {
     systems.emplace_back(std::make_unique<AITransformationSystem>());
     systems.emplace_back(std::make_unique<InputSystem>());
     systems.emplace_back(std::make_unique<InputJoystickSystem>());
+    systems.emplace_back(std::make_unique<OrbitalWeaponSystem>());
     systems.emplace_back(std::make_unique<AttackSystem>());
     systems.emplace_back(std::make_unique<PickWeaponsSystem>());
     systems.emplace_back(std::make_unique<AIChaseSystem>());

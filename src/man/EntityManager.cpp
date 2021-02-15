@@ -58,6 +58,8 @@ void EntityManager::eraseEntityByID(int id) {
     eraseComponent<WorldComponent>(id);
     eraseComponent<TriggerComponent>(id);
     eraseComponent<AnimationComponent>(id);
+    eraseComponent<OrbitalWeaponComponent>(id);
+    eraseComponent<AutodeleteComponent>(id);
 
     // AI
     eraseComponent<AIChaseComponent>(id);
@@ -975,6 +977,30 @@ int EntityManager::createDamagePlatform(GameEngine& gameContext, Vector2 positio
 
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::DAMAGE_PLATFORM, goType));
+    return entityId;
+}
+
+
+int EntityManager::createOrbitalMarker(GameEngine& gameContext, Vector2 position, GameObjectType goType) {
+    int entityId = Entity::getCurrentId();
+
+    SituationComponent& situation = createComponent<SituationComponent>(entityId);
+    AutodeleteComponent& autodelete = createComponent<AutodeleteComponent>(entityId);
+    RenderComponent& renderComp = createComponent<RenderComponent>(entityId);
+
+    //######### DATA ########//
+    situation.position = position;
+    situation.noWorldDelete = true;
+
+    // Render component
+    renderComp.sprite = "Media/Images/OrbitalMarker.png";
+
+
+    //######### RENDER ########//
+    gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
+
+    //######### CREATE ########//
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::ORBITAL_MARKER, GameObjectType::ORBITAL_MARKER));
     return entityId;
 }
 

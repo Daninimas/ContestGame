@@ -106,6 +106,7 @@ public:
     int createPowerUp(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType = GameObjectType::NONE);
     int createTrigger(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType = GameObjectType::NONE);
     int createDamagePlatform(GameEngine& gameContext, Vector2 position, Vector2 size, uint16_t damage, GameObjectType goType);
+    int createOrbitalMarker(GameEngine& gameContext, Vector2 position, GameObjectType goType = GameObjectType::NONE);
 
 
 
