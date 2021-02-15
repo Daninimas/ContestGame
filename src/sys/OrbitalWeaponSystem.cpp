@@ -28,7 +28,15 @@ void OrbitalWeaponSystem::addCooldownToOrbitalWeapons(GameEngine& gameContext) c
 
 
 void OrbitalWeaponSystem::checkEnemiesAttacking(GameEngine& gameContext) const {
-	
+	auto& AIOrbitalStrikers = gameContext.entityMan.getComponents<AIOrbitalAtkComponent>();
+
+	for (AIOrbitalAtkComponent& AIOrbitalStriker : AIOrbitalStrikers) {
+		OrbitalWeaponComponent& orbitalWeapon = gameContext.entityMan.getComponent<OrbitalWeaponComponent>(AIOrbitalStriker.id);
+
+		if (orbitalWeapon.cooldown > orbitalWeapon.maxCooldown) {
+			generateOrbitalMarker(gameContext, orbitalWeapon, gameContext.entityMan.getComponent<SituationComponent>(AIOrbitalStriker.id));
+		}
+	}
 }
 
 void OrbitalWeaponSystem::generateOrbitalMarker(GameEngine& gameContext, OrbitalWeaponComponent& orbitalWeapon, SituationComponent& objectiveSituation) const {

@@ -69,6 +69,7 @@ void EntityManager::eraseEntityByID(int id) {
     eraseComponent<AIDropBombComponent>(id);
     eraseComponent<AIPounceComponent>(id);
     eraseComponent<AIFlyingChaseComponent>(id);
+    eraseComponent<AIOrbitalAtkComponent>(id);
 
     entityMap           .erase(id);
 }
@@ -1001,6 +1002,24 @@ int EntityManager::createOrbitalMarker(GameEngine& gameContext, Vector2 position
 
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::ORBITAL_MARKER, GameObjectType::ORBITAL_MARKER));
+    return entityId;
+}
+
+
+int EntityManager::createOrbitalStrikerEnemy(GameEngine& gameContext, GameObjectType goType) {
+    int entityId = Entity::getCurrentId();
+
+    createComponent<AIOrbitalAtkComponent>(entityId);
+    OrbitalWeaponComponent& orbitalWeapon = createComponent<OrbitalWeaponComponent>(entityId);
+
+    orbitalWeapon.attackBounding = { 0.f, 50.f, 0.f, 0.f };
+    orbitalWeapon.attackLifetime = 0.5f;
+    orbitalWeapon.damage = 2;
+    orbitalWeapon.generateAttackTime = 1.3f;
+    orbitalWeapon.maxCooldown = 4.f;
+
+    //######### CREATE ########//
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::ORBITAL_STRIKER, GameObjectType::ORBITAL_STRIKER));
     return entityId;
 }
 

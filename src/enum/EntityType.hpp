@@ -19,5 +19,6 @@ enum class EntityType {
     TRIGGER,
     DAMAGE_PLATFORM,
     DRONE,
-    ORBITAL_MARKER
+    ORBITAL_MARKER,
+    ORBITAL_STRIKER
 };

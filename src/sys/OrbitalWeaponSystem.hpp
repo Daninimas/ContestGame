@@ -21,4 +21,3 @@ private:
     void calculateBoundingToFloor(GameEngine& gameContext, SituationComponent& objectiveSituation, OrbitalWeaponComponent& orbitalWeapon) const;
 
 };
-

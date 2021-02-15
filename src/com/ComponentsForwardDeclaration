@@ -33,3 +33,4 @@ class AnimationComponent;
 class AIFlyingChaseComponent;
 class OrbitalWeaponComponent;
 class AutodeleteComponent;
+class AIOrbitalAtkComponent;

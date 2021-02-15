@@ -49,6 +49,9 @@ void StaticEntitiesSystem::init(GameEngine& gameContext) const {
     /*int drone = gameContext.entityMan.createDrone(gameContext, Vector2(100.f, 200.f), 0.f, GameObjectType::DRONE_FRIEND);
     gameContext.entityMan.getComponent<AIFlyingChaseComponent>(drone).objectiveId = WorldElementsData::playerId;*/
 
+    int orbitalStrikerID = gameContext.entityMan.createOrbitalStrikerEnemy(gameContext, GameObjectType::ORBITAL_STRIKER);
+    gameContext.entityMan.getComponent<AIOrbitalAtkComponent>(orbitalStrikerID).objectiveId = WorldElementsData::playerId;
+
     /*int pouncerId = gameContext.entityMan.createEnemy(gameContext, 300.f, 300.f, 0.f, GameObjectType::POUNCER_ENEMY);
     gameContext.entityMan.getComponent<AIPounceComponent>(pouncerId).objectiveId = WorldElementsData::playerId;
     gameContext.entityMan.getComponent<AIMeleeAtkComponent>(pouncerId).objectiveId = WorldElementsData::playerId;*/
