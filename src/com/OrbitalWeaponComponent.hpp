@@ -1,6 +1,7 @@
 #pragma once
 #include "Component.hpp"
 #include <com/WeaponComponent.hpp>
+#include <tools/Vector2.hpp>
 
 class OrbitalWeaponComponent : public WeaponComponent {
 public:
