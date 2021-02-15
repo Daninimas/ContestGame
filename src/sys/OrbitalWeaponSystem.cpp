@@ -40,7 +40,7 @@ void OrbitalWeaponSystem::checkEnemiesAttacking(GameEngine& gameContext) const {
 }
 
 void OrbitalWeaponSystem::generateOrbitalMarker(GameEngine& gameContext, OrbitalWeaponComponent& orbitalWeapon, SituationComponent& objectiveSituation) const {
-	int markerID = gameContext.entityMan.createOrbitalMarker(gameContext, objectiveSituation.position, GameObjectType::ORBITAL_MARKER);
+	int markerID = gameContext.entityMan.createOrbitalMarker(gameContext, { objectiveSituation.position.x, 0.f }, GameObjectType::ORBITAL_MARKER);
 
 	AutodeleteComponent& autodeleteComp = gameContext.entityMan.getComponent<AutodeleteComponent>(markerID);
 	RenderComponent& renderComp = gameContext.entityMan.getComponent<RenderComponent>(markerID);
@@ -57,7 +57,8 @@ void OrbitalWeaponSystem::generateOrbitalMarker(GameEngine& gameContext, Orbital
 	orbitalWeapon.activated = true;
 	orbitalWeapon.cooldown = 0.f;
 	orbitalWeapon.generateAttackTimeCounter = 0.f;
-	orbitalWeapon.attackPosition = objectiveSituation.position;
+	orbitalWeapon.attackPosition.x = objectiveSituation.position.x;
+	orbitalWeapon.attackPosition.y = 0.f;
 
 	// Update render
 	gameContext.entityMan.addEntityToUpdate(markerID);
@@ -97,10 +98,12 @@ void OrbitalWeaponSystem::generateOrbitalAttack(GameEngine& gameContext, Orbital
 
 	ColliderComponent& colliderComp = gameContext.entityMan.getComponent<ColliderComponent>(attackId);
 	AttackComponent& attackComp = gameContext.entityMan.getComponent<AttackComponent>(attackId);
+	SituationComponent& attackSit = gameContext.entityMan.getComponent<SituationComponent>(attackId);
 
 	colliderComp.boundingRoot.bounding = orbitalWeapon.attackBounding;
 	attackComp.damage = orbitalWeapon.damage;
 	attackComp.maxLifetime = orbitalWeapon.attackLifetime;
+	attackSit.noWorldDelete = true;
 
 
 	orbitalWeapon.generateAttackTimeCounter = 0.f;
@@ -113,10 +116,10 @@ void OrbitalWeaponSystem::generateOrbitalAttack(GameEngine& gameContext, Orbital
 
 
 
-void OrbitalWeaponSystem::calculateBoundingToFloor(GameEngine& gameContext, SituationComponent& objectiveSituation, OrbitalWeaponComponent& orbitalWeapon) const { // changes the orbital Weapon attack bounding to the floor from the objective
+void OrbitalWeaponSystem::calculateBoundingToFloor(GameEngine& gameContext, SituationComponent& objectiveSituation, OrbitalWeaponComponent& orbitalWeapon) const { // changes the orbital Weapon attack bounding to the floor from the 0 in y
 	SituationComponent* closestWall = Utils::getClosestWallXToObjetive(gameContext, objectiveSituation);
 
-	orbitalWeapon.attackBounding.yUp = -100000.f;
+	orbitalWeapon.attackBounding.yUp = 0.f;
 
 	if (closestWall != nullptr) {
 		// Check if the situation of the objective is inside of the size x of the wall
@@ -126,7 +129,7 @@ void OrbitalWeaponSystem::calculateBoundingToFloor(GameEngine& gameContext, Situ
 
 		if (objectiveSituation.position.x >= wallWorldBounding.xLeft && objectiveSituation.position.x <= wallWorldBounding.xRight) {
 			// Data when there is floor
-			orbitalWeapon.attackBounding.yDown = closestWall->position.y - objectiveSituation.position.y;
+			orbitalWeapon.attackBounding.yDown = closestWall->position.y;
 
 		}
 		else {
