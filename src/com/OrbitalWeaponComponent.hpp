@@ -16,5 +16,7 @@ public:
     Sound markerSound{};
 
     Vector2 attackPosition{};
+
+    BoundingBox markerBounding{};
 };
 

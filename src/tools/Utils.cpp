@@ -320,11 +320,17 @@ SituationComponent* Utils::getClosestWallXToObjetive(GameEngine& gameContext, Si
     auto& allSituations = gameContext.entityMan.getComponents<SituationComponent>();
     SituationComponent* closesWall = nullptr;
     float closestDistance = std::numeric_limits<float>::max();
+
+    // This should be the right corner of the objective bounding
+    float objectivePositionX = objetiveSituation.position.x;
+    if (gameContext.entityMan.existsComponent<ColliderComponent>(objetiveSituation.id)) {
+        objectivePositionX += gameContext.entityMan.getComponent<ColliderComponent>(objetiveSituation.id).boundingRoot.bounding.xRight;
+    }
     
     for (SituationComponent& entitySit : allSituations) {
         if (gameContext.getEntity(entitySit.id).getType() == EntityType::WALL) {
-            float distance = objetiveSituation.position.x - entitySit.position.x;
-            if (entitySit.position.x < objetiveSituation.position.x && distance < closestDistance) {
+            float distance = objectivePositionX - entitySit.position.x;
+            if (entitySit.position.x < objectivePositionX && distance < closestDistance) {
                 closestDistance = distance;
                 closesWall = &entitySit;
             }

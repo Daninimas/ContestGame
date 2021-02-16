@@ -1013,6 +1013,7 @@ int EntityManager::createOrbitalStrikerEnemy(GameEngine& gameContext, GameObject
     OrbitalWeaponComponent& orbitalWeapon = createComponent<OrbitalWeaponComponent>(entityId);
 
     orbitalWeapon.attackBounding = { 0.f, 50.f, 0.f, 0.f };
+    orbitalWeapon.markerBounding = { 0.f, 30.f, 0.f, 0.f };
     orbitalWeapon.attackLifetime = 0.5f;
     orbitalWeapon.damage = 2;
     orbitalWeapon.generateAttackTime = 1.3f;

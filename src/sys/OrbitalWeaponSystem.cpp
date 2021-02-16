@@ -33,14 +33,20 @@ void OrbitalWeaponSystem::checkEnemiesAttacking(GameEngine& gameContext) const {
 	for (AIOrbitalAtkComponent& AIOrbitalStriker : AIOrbitalStrikers) {
 		OrbitalWeaponComponent& orbitalWeapon = gameContext.entityMan.getComponent<OrbitalWeaponComponent>(AIOrbitalStriker.id);
 
-		if (orbitalWeapon.cooldown > orbitalWeapon.maxCooldown) {
+		if (orbitalWeapon.cooldown > orbitalWeapon.maxCooldown && gameContext.entityMan.existsComponent<SituationComponent>(AIOrbitalStriker.objectiveId)) {
 			generateOrbitalMarker(gameContext, orbitalWeapon, gameContext.entityMan.getComponent<SituationComponent>(AIOrbitalStriker.id));
 		}
 	}
 }
 
 void OrbitalWeaponSystem::generateOrbitalMarker(GameEngine& gameContext, OrbitalWeaponComponent& orbitalWeapon, SituationComponent& objectiveSituation) const {
-	int markerID = gameContext.entityMan.createOrbitalMarker(gameContext, { objectiveSituation.position.x, 0.f }, GameObjectType::ORBITAL_MARKER);
+	// Set the position of the orbital attack
+	Vector2 objectiveCenter = Utils::getCenterOfBounding(gameContext.entityMan.getComponent<ColliderComponent>(objectiveSituation.id).boundingRoot.bounding);
+	Vector2 markerCenter = Utils::getCenterOfBounding(orbitalWeapon.markerBounding);
+	orbitalWeapon.attackPosition.x = objectiveSituation.position.x + objectiveCenter.x;
+	orbitalWeapon.attackPosition.y = 0.f;
+
+	int markerID = gameContext.entityMan.createOrbitalMarker(gameContext, { orbitalWeapon.attackPosition.x-markerCenter.x, orbitalWeapon.attackPosition.y }, GameObjectType::ORBITAL_MARKER);
 
 	AutodeleteComponent& autodeleteComp = gameContext.entityMan.getComponent<AutodeleteComponent>(markerID);
 	RenderComponent& renderComp = gameContext.entityMan.getComponent<RenderComponent>(markerID);
@@ -50,15 +56,13 @@ void OrbitalWeaponSystem::generateOrbitalMarker(GameEngine& gameContext, Orbital
 	autodeleteComp.timeToDelete = orbitalWeapon.generateAttackTime;
 
 	renderComp.spriteRect = orbitalWeapon.attackBounding; // The attack bounding previous calculated with the distance to the floor
-	renderComp.spriteRect.xLeft = 0.f;
-	renderComp.spriteRect.xRight = 30.f;
+	renderComp.spriteRect.xLeft = orbitalWeapon.markerBounding.xLeft;
+	renderComp.spriteRect.xRight = orbitalWeapon.markerBounding.xRight;
 
 	// Set the counters for the attack
 	orbitalWeapon.activated = true;
 	orbitalWeapon.cooldown = 0.f;
 	orbitalWeapon.generateAttackTimeCounter = 0.f;
-	orbitalWeapon.attackPosition.x = objectiveSituation.position.x;
-	orbitalWeapon.attackPosition.y = 0.f;
 
 	// Update render
 	gameContext.entityMan.addEntityToUpdate(markerID);
@@ -94,7 +98,9 @@ void OrbitalWeaponSystem::generateOrbitalAttack(GameEngine& gameContext, Orbital
 		attackGOtype = GameObjectType::PLAYER_MELEE_ATTACK;
 	}
 
-	int attackId = gameContext.entityMan.createAttack(gameContext, orbitalWeapon.attackPosition, 0.f, attackGOtype);
+	Vector2 attackCenter = Utils::getCenterOfBounding(orbitalWeapon.attackBounding);
+
+	int attackId = gameContext.entityMan.createAttack(gameContext, { orbitalWeapon.attackPosition.x-attackCenter.x, orbitalWeapon.attackPosition.y }, 0.f, attackGOtype);
 
 	ColliderComponent& colliderComp = gameContext.entityMan.getComponent<ColliderComponent>(attackId);
 	AttackComponent& attackComp = gameContext.entityMan.getComponent<AttackComponent>(attackId);
