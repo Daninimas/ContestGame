@@ -60,23 +60,34 @@ void CollisionSystem::calculateCollisions(GameEngine& gameContext) const {
                     colliderB.collide = true;
 
                     if (!(colliderA.type == ColliderType::NO_SOLID) && !(colliderB.type == ColliderType::NO_SOLID)) {
-                        // Check who is the static and the dinamic
-                        if (colliderA.type == ColliderType::DYNAMIC && colliderB.type == ColliderType::DYNAMIC) {
-                            // If the two are dynamic, check weight
-                            if (colliderA.weight > colliderB.weight) {
-                                undoCollision(gameContext, colliderA, colliderB);
+                        bool undoColl = true;
+
+                        if (colliderA.collisionLayer == ColliderComponent::Platform) {
+                            undoColl = checkCollisionWithPlatform(gameContext, colliderA, colliderB, situationA, situationB);
+                        }
+                        else if (colliderB.collisionLayer == ColliderComponent::Platform) {
+                            undoColl = checkCollisionWithPlatform(gameContext, colliderB, colliderA, situationB, situationA);
+                        }
+
+                        if (undoColl) {
+                            // Check who is the static and the dinamic
+                            if (colliderA.type == ColliderType::DYNAMIC && colliderB.type == ColliderType::DYNAMIC) {
+                                // If the two are dynamic, check weight
+                                if (colliderA.weight > colliderB.weight) {
+                                    undoCollision(gameContext, colliderA, colliderB);
+                                }
+                                else {
+                                    undoCollision(gameContext, colliderB, colliderA);
+                                }
                             }
-                            else {
+                            else if (colliderA.type == ColliderType::DYNAMIC) {
                                 undoCollision(gameContext, colliderB, colliderA);
                             }
+                            else if (colliderB.type == ColliderType::DYNAMIC) {
+                                undoCollision(gameContext, colliderA, colliderB);
+                            }
+                            // No one is dynamic, don't need to resolve
                         }
-                        else if (colliderA.type == ColliderType::DYNAMIC) {
-                            undoCollision(gameContext, colliderB, colliderA);
-                        }
-                        else if (colliderB.type == ColliderType::DYNAMIC) {
-                            undoCollision(gameContext, colliderA, colliderB);
-                        }
-                        // No one is dynamic, don't need to resolve
                     }
 
                 }
@@ -237,4 +248,11 @@ void CollisionSystem::clearCollisions(ColliderComponent& collider) const {
     };
 
     clearCollidersID(collider.boundingRoot);
+}
+
+
+bool CollisionSystem::checkCollisionWithPlatform(GameEngine& gameContext, ColliderComponent& platformColl, ColliderComponent& entityColl, SituationComponent& platformSit, SituationComponent& entitySit) const {
+    
+    // Todas las plataformas por encima de la parte inferior de la entidad no colisionan
+    
 }

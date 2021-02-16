@@ -27,6 +27,7 @@ enum class GameObjectType {
     LASER,
 
     // Obstacles
+    PLATFORM,
     WALL,
 
 
