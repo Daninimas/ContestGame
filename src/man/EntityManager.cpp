@@ -1019,6 +1019,9 @@ int EntityManager::createOrbitalStrikerEnemy(GameEngine& gameContext, GameObject
     orbitalWeapon.generateAttackTime = 1.3f;
     orbitalWeapon.maxCooldown = 4.f;
 
+    orbitalWeapon.markerSound.soundPath = "Media/Sound/Weapons/loadLaser.wav";
+    orbitalWeapon.attackSound.soundPath = "Media/Sound/Weapons/alienExplosion.wav";
+
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::ORBITAL_STRIKER, GameObjectType::ORBITAL_STRIKER));
     return entityId;
