@@ -17,5 +17,5 @@ private:
     void undoCollision(GameEngine& gameContext, ColliderComponent& solidCol, ColliderComponent& mobileCol) const;
     void clearCollisions(ColliderComponent& collider) const;
 
-    bool checkCollisionWithPlatform(GameEngine& gameContext, ColliderComponent& platformColl, ColliderComponent& entityColl, SituationComponent& platformSit, SituationComponent& entitySit) const;
+    bool checkCollisionWithPlatform(GameEngine& gameContext, ColliderComponent& platformColl, ColliderComponent& entityColl, SituationComponent& platformSit, SituationComponent& entitySit, float overlapY) const;
 };

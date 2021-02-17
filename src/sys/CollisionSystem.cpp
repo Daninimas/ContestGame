@@ -60,34 +60,23 @@ void CollisionSystem::calculateCollisions(GameEngine& gameContext) const {
                     colliderB.collide = true;
 
                     if (!(colliderA.type == ColliderType::NO_SOLID) && !(colliderB.type == ColliderType::NO_SOLID)) {
-                        bool undoColl = true;
-
-                        if (colliderA.collisionLayer == ColliderComponent::Platform) {
-                            undoColl = checkCollisionWithPlatform(gameContext, colliderA, colliderB, situationA, situationB);
-                        }
-                        else if (colliderB.collisionLayer == ColliderComponent::Platform) {
-                            undoColl = checkCollisionWithPlatform(gameContext, colliderB, colliderA, situationB, situationA);
-                        }
-
-                        if (undoColl) {
-                            // Check who is the static and the dinamic
-                            if (colliderA.type == ColliderType::DYNAMIC && colliderB.type == ColliderType::DYNAMIC) {
-                                // If the two are dynamic, check weight
-                                if (colliderA.weight > colliderB.weight) {
-                                    undoCollision(gameContext, colliderA, colliderB);
-                                }
-                                else {
-                                    undoCollision(gameContext, colliderB, colliderA);
-                                }
-                            }
-                            else if (colliderA.type == ColliderType::DYNAMIC) {
-                                undoCollision(gameContext, colliderB, colliderA);
-                            }
-                            else if (colliderB.type == ColliderType::DYNAMIC) {
+                        // Check who is the static and the dinamic
+                        if (colliderA.type == ColliderType::DYNAMIC && colliderB.type == ColliderType::DYNAMIC) {
+                            // If the two are dynamic, check weight
+                            if (colliderA.weight > colliderB.weight) {
                                 undoCollision(gameContext, colliderA, colliderB);
                             }
-                            // No one is dynamic, don't need to resolve
+                            else {
+                                undoCollision(gameContext, colliderB, colliderA);
+                            }
                         }
+                        else if (colliderA.type == ColliderType::DYNAMIC) {
+                            undoCollision(gameContext, colliderB, colliderA);
+                        }
+                        else if (colliderB.type == ColliderType::DYNAMIC) {
+                            undoCollision(gameContext, colliderA, colliderB);
+                        }
+                        // No one is dynamic, don't need to resolve                        
                     }
 
                 }
@@ -169,6 +158,18 @@ void CollisionSystem::undoCollision(GameEngine& gameContext, ColliderComponent& 
 
     float overlapX = calculateIntersection(mobileBounding.xLeft, mobileBounding.xRight, solidBounding.xLeft, solidBounding.xRight);
     float overlapY = calculateIntersection(mobileBounding.yUp, mobileBounding.yDown, solidBounding.yUp, solidBounding.yDown);
+
+
+    // First check the collision with the platform and check if we dont have to undoCollision
+    bool undoColl = true;
+    if (solidCol.collisionLayer == ColliderComponent::Platform) {
+        if (abs(overlapX) >= abs(overlapY))
+            undoColl = checkCollisionWithPlatform(gameContext, solidCol, mobileCol, sitSolid, sitMobile, overlapY);
+        else
+            return;
+    }
+    if (!undoColl)
+        return;
    
 
     if ( overlapX == 0 || (overlapY != 0 && std::abs(overlapY) <= std::abs(overlapX)) ) {
@@ -251,8 +252,26 @@ void CollisionSystem::clearCollisions(ColliderComponent& collider) const {
 }
 
 
-bool CollisionSystem::checkCollisionWithPlatform(GameEngine& gameContext, ColliderComponent& platformColl, ColliderComponent& entityColl, SituationComponent& platformSit, SituationComponent& entitySit) const {
-    
+bool CollisionSystem::checkCollisionWithPlatform(GameEngine& gameContext, ColliderComponent& platformColl, ColliderComponent& entityColl, SituationComponent& platformSit, SituationComponent& entitySit, float overlapY) const {
+    std::cout << "platformSit y: " << platformSit.position.y << " entitySit y: " << entitySit.position.y << " entityColl yDown: " << entityColl.boundingRoot.bounding.yDown << " overlapY: " << abs(overlapY) << "\n";
     // Todas las plataformas por encima de la parte inferior de la entidad no colisionan
-    
+    if (platformSit.position.y > (entitySit.position.y + entityColl.boundingRoot.bounding.yDown - abs(overlapY)-0.1f)) {
+        // Cuando la entidad va hacia arriba, no colisiona
+        if (gameContext.entityMan.existsComponent<VelocityComponent>(entityColl.id)) {
+            if (gameContext.entityMan.getComponent<VelocityComponent>(entityColl.id).velocity.y >= 0.f) {
+                // Por ultimo, si es el jugador y ha pulsado hacia abajo
+                if (entityColl.id == WorldElementsData::playerId) {
+                    if (gameContext.entityMan.getComponent<InputComponent>(entityColl.id).movingDown == false) {
+                        return true;
+                    }
+                }
+                else
+                {
+                    return true;
+                }
+            }
+        }
+    }
+
+    return false;
 }
