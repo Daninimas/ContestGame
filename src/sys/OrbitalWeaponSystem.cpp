@@ -123,7 +123,7 @@ void OrbitalWeaponSystem::generateOrbitalAttack(GameEngine& gameContext, Orbital
 
 
 void OrbitalWeaponSystem::calculateBoundingToFloor(GameEngine& gameContext, SituationComponent& objectiveSituation, OrbitalWeaponComponent& orbitalWeapon) const { // changes the orbital Weapon attack bounding to the floor from the 0 in y
-	SituationComponent* closestWall = Utils::getClosestWallXToObjetive(gameContext, objectiveSituation);
+	SituationComponent* closestWall = Utils::getClosestWallXToObjetive(gameContext, objectiveSituation, true);
 
 	orbitalWeapon.attackBounding.yUp = 0.f;
 

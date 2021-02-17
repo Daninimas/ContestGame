@@ -316,7 +316,7 @@ void Utils::resetPlayerPosition(GameEngine& gameContext) {
     }
 }
 
-SituationComponent* Utils::getClosestWallXToObjetive(GameEngine& gameContext, SituationComponent& objetiveSituation) {
+SituationComponent* Utils::getClosestWallXToObjetive(GameEngine& gameContext, SituationComponent& objetiveSituation, bool onlyWALLGameObject) {
     auto& allSituations = gameContext.entityMan.getComponents<SituationComponent>();
     SituationComponent* closesWall = nullptr;
     float closestDistance = std::numeric_limits<float>::max();
@@ -328,6 +328,9 @@ SituationComponent* Utils::getClosestWallXToObjetive(GameEngine& gameContext, Si
     }
     
     for (SituationComponent& entitySit : allSituations) {
+        if (onlyWALLGameObject && gameContext.getEntity(entitySit.id).getGameObjectType() != GameObjectType::WALL) {
+            continue;
+        }
         if (gameContext.getEntity(entitySit.id).getType() == EntityType::WALL) {
             float distance = objectivePositionX - entitySit.position.x;
             if (entitySit.position.x < objectivePositionX && distance < closestDistance) {
