@@ -163,7 +163,7 @@ void CollisionSystem::undoCollision(GameEngine& gameContext, ColliderComponent& 
     // First check the collision with the platform and check if we dont have to undoCollision
     bool undoColl = true;
     if (solidCol.collisionLayer == ColliderComponent::Platform) {
-        if (abs(overlapX) >= abs(overlapY))
+        if (overlapX == 0 || (overlapY != 0 && std::abs(overlapY) <= std::abs(overlapX)) )
             undoColl = checkCollisionWithPlatform(gameContext, solidCol, mobileCol, sitSolid, sitMobile, overlapY);
         else
             return;
@@ -254,7 +254,7 @@ void CollisionSystem::clearCollisions(ColliderComponent& collider) const {
 
 bool CollisionSystem::checkCollisionWithPlatform(GameEngine& gameContext, ColliderComponent& platformColl, ColliderComponent& entityColl, SituationComponent& platformSit, SituationComponent& entitySit, float overlapY) const {
     //std::cout << "platformSit y: " << platformSit.position.y << " entitySit y: " << entitySit.position.y << " entityColl yDown: " << entityColl.boundingRoot.bounding.yDown << " overlapY: " << abs(overlapY) << "\n";
-    float bias = 4.9f; // This bias is for solving when you press down, cuanto más grande, el jugador tiene que pulsar durante más tiempo hacia abajo, pero si hay pocos fps o va muy rápido, puede que no coja al jugador cuando está encima de la plataforma
+    float bias = 2.9f; // This bias is for solving when you press down, cuanto más grande, el jugador tiene que pulsar durante más tiempo hacia abajo, pero si hay pocos fps o va muy rápido, puede que no coja al jugador cuando está encima de la plataforma
     if (abs(overlapY) > bias) {
         overlapY = bias;
     }

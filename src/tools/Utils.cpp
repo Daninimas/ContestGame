@@ -99,7 +99,7 @@ void Utils::insertCollidersIdWithVelocity(GameEngine& gameContext, std::vector<i
 void Utils::insertNotWallColliders(GameEngine& gameContext, std::vector<std::reference_wrapper<ColliderComponent>>& collidersNotWall) {
     auto& colliders = gameContext.entityMan.getComponents<ColliderComponent>();
     for (auto& collComp : colliders) {
-        if (collComp.collisionLayer != ColliderComponent::Wall) {
+        if (collComp.collisionLayer != ColliderComponent::Wall && collComp.collisionLayer != ColliderComponent::Platform && collComp.collisionLayer != ColliderComponent::Trigger) {
             collidersNotWall.emplace_back(collComp);
         }
     }
