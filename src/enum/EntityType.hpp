@@ -20,5 +20,6 @@ enum class EntityType {
     DAMAGE_PLATFORM,
     DRONE,
     ORBITAL_MARKER,
-    ORBITAL_STRIKER
+    ORBITAL_STRIKER,
+    TURRET
 };

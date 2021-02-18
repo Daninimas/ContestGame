@@ -114,6 +114,18 @@ bool Utils::objectiveInsideRange(SituationComponent& attackerSit, SituationCompo
 };
 
 
+bool Utils::isEntitySensoredBy(SensorComponent& sensor, const int sensoredEntity) {
+
+    for (int sensedId : sensor.entitiesSensoring) {
+        if (sensedId == sensoredEntity) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+
 bool Utils::checkCollidingWithEntity(BoundingBoxNode& boundingNode, int objId) {
     bool collide = false;
     std::vector<int>& entitiesColliding = boundingNode.bounding.entitiesColliding;

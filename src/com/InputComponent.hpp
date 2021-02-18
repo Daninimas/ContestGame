@@ -49,5 +49,9 @@ public:
 
     // Para que no se chafen los dos inputs de teclado y joystick
     bool movedWithKeyboard{ false };
+
+
+    // For the turrets
+    bool usingTurret{ false };
 };
 

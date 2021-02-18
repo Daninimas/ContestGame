@@ -93,5 +93,8 @@ enum class GameObjectType {
     ORBITAL_MARKER,
 
     // Orbital striker
-    ORBITAL_STRIKER
+    ORBITAL_STRIKER,
+
+    // Turret
+    TURRET
 };

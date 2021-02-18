@@ -26,7 +26,7 @@ SFMLEngine::SFMLEngine(int width, int height, bool fullscreen) {
 	FPSTextNode.setFillColor({ 68, 255, 0, 255 });
 	FPSTextNode.setFont(font);
 	FPSTextNode.setCharacterSize(20);
-	renderFPS = true;
+	//renderFPS = true;
 }
 SFMLEngine::~SFMLEngine() {
 	device.get()->close();

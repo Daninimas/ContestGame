@@ -49,8 +49,8 @@ void StaticEntitiesSystem::init(GameEngine& gameContext) const {
     /*int drone = gameContext.entityMan.createDrone(gameContext, Vector2(100.f, 200.f), 0.f, GameObjectType::DRONE_FRIEND);
     gameContext.entityMan.getComponent<AIFlyingChaseComponent>(drone).objectiveId = WorldElementsData::playerId;*/
 
-    int orbitalStrikerID = gameContext.entityMan.createOrbitalStrikerEnemy(gameContext, GameObjectType::ORBITAL_STRIKER);
-    gameContext.entityMan.getComponent<AIOrbitalAtkComponent>(orbitalStrikerID).objectiveId = WorldElementsData::playerId;
+    /*int orbitalStrikerID = gameContext.entityMan.createOrbitalStrikerEnemy(gameContext, GameObjectType::ORBITAL_STRIKER);
+    gameContext.entityMan.getComponent<AIOrbitalAtkComponent>(orbitalStrikerID).objectiveId = WorldElementsData::playerId;*/
 
     /*int pouncerId = gameContext.entityMan.createEnemy(gameContext, 300.f, 300.f, 0.f, GameObjectType::POUNCER_ENEMY);
     gameContext.entityMan.getComponent<AIPounceComponent>(pouncerId).objectiveId = WorldElementsData::playerId;
@@ -79,6 +79,8 @@ void StaticEntitiesSystem::init(GameEngine& gameContext) const {
     gameContext.entityMan.createHUDElement(gameContext, Vector2(10.f, 40.f), 0.f, GameObjectType::HUD_PLAYER_AMMO);
     gameContext.entityMan.createHUDElement(gameContext, Vector2(10.f, 70.f), 0.f, GameObjectType::HUD_PLAYER_LIFES);
     gameContext.entityMan.createHUDElement(gameContext, Vector2(280.f, 10.f), 0.f, GameObjectType::HUD_PLAYER_SCORE);
+
+    gameContext.entityMan.createTurret(gameContext, Vector2(50.f, 370.f), 0.f, GameObjectType::TURRET);
 
     //MapLoader::loadMapPhase(gameContext, "Media/Maps/debug.json", "Phase1");
 

@@ -34,3 +34,4 @@ class AIFlyingChaseComponent;
 class OrbitalWeaponComponent;
 class AutodeleteComponent;
 class AIOrbitalAtkComponent;
+class TurretComponent;

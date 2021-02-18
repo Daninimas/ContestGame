@@ -60,6 +60,7 @@ void EntityManager::eraseEntityByID(int id) {
     eraseComponent<AnimationComponent>(id);
     eraseComponent<OrbitalWeaponComponent>(id);
     eraseComponent<AutodeleteComponent>(id);
+    eraseComponent<TurretComponent>(id);
 
     // AI
     eraseComponent<AIChaseComponent>(id);
@@ -152,7 +153,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
     
     // Sensor
     sensorComp.sensorBounding = {25.f, 100.f, 2.f, 48.f};
-    sensorComp.sensorLayerMasc = ColliderComponent::Enemy; // Sensors only enemies
+    sensorComp.sensorLayerMasc = ColliderComponent::Enemy + ColliderComponent::Turret; // Sensors enemies and turrets
 
     // Dodge
     dodgeComp.dodgeMaxDuration = 0.3f;
@@ -1035,6 +1036,32 @@ int EntityManager::createOrbitalStrikerEnemy(GameEngine& gameContext, GameObject
 
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::ORBITAL_STRIKER, GameObjectType::ORBITAL_STRIKER));
+    return entityId;
+}
+
+
+int EntityManager::createTurret(GameEngine& gameContext, Vector2 position, float r,  GameObjectType goType) {
+    int entityId = Entity::getCurrentId();
+
+    SituationComponent& situation = createComponent<SituationComponent>(entityId);
+    ColliderComponent& colliderComp = createComponent<ColliderComponent>(entityId);
+    TurretComponent& turretComp = createComponent<TurretComponent>(entityId);
+
+    //######### DATA ########//
+    situation.position = position;
+    situation.rotation = r;
+
+    // Collider
+    colliderComp.collisionLayer = ColliderComponent::Turret;
+    colliderComp.layerMasc = ColliderComponent::NoLayer; //doesn't collide
+    colliderComp.type = ColliderType::NO_SOLID;
+    colliderComp.boundingRoot.bounding = { 0.f, 40.f, 0.f, 30.f };
+
+    // Turret
+    turretComp.rotationVelocity = 30.f;
+
+    //######### CREATE ########//
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::TURRET, GameObjectType::TURRET));
     return entityId;
 }
 

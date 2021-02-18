@@ -233,6 +233,8 @@
     <ClCompile Include="src\sys\StaticEntitiesSystem.cpp" />
     <ClCompile Include="src\sys\WorldSystem.cpp" />
     <ClCompile Include="src\tools\Utils.cpp" />
+    <ClCompile Include="src\com\TurretComponent.cpp" />
+    <ClCompile Include="src\sys\TurretSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\com\AI\AIOrbitalAtkComponent.hpp" />
@@ -337,6 +339,8 @@
     <ClInclude Include="src\tools\Storage.hpp" />
     <ClInclude Include="src\tools\Utils.hpp" />
     <ClInclude Include="src\tools\WorldPhase.hpp" />
+    <ClInclude Include="src\com\TurretComponent.hpp" />
+    <ClInclude Include="src\sys\TurretSystem.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
