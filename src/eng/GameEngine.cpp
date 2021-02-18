@@ -157,11 +157,10 @@ void GameEngine::run() {
 
 
         if(SHOW_TIMERS) {
-            manageFPS();
 
             deltaFromLastUpdate += deltaTime;
             if (deltaFromLastUpdate >= DELTA_TO_UPDATE) {
-
+                manageFPS();
 
                 std::chrono::time_point<std::chrono::system_clock> allChronoInit;
                 allChronoInit = std::chrono::system_clock::now();
@@ -241,6 +240,7 @@ void GameEngine::run() {
         } else {
             deltaFromLastUpdate += deltaTime;
             if (deltaFromLastUpdate >= DELTA_TO_UPDATE) {
+                manageFPS();
                 update();
                 updateSound();
                 deltaFromLastUpdate = 0;
@@ -371,7 +371,7 @@ void GameEngine::calculateDeltaTime(std::chrono::time_point<std::chrono::system_
 
 void GameEngine::manageFPS() {
     // New FPS counter
-    frameTimeCounter += deltaTime;
+    frameTimeCounter += deltaFromLastUpdate;
     if (frameTimeCounter >= 1.f) { // When a second has passed
         windowFacade.updateFPSTextNode(framesPassed);
         framesPassed = 0;
