@@ -37,4 +37,6 @@ public:
     virtual void setColorToEntity(const int id, const Color color) = 0;
     virtual void setBackgroundLayers(std::vector<BackgroundLayer>& layers) = 0;
     virtual void updateBackgroundLayers(std::vector<BackgroundLayer>& layers) = 0;
+
+    virtual void updateFPSTextNode(uint8_t FPS) = 0;
 };

@@ -13,7 +13,7 @@
 #include <sys/SystemsIncluder>
 #include <SFML/Window/Joystick.hpp>
 
-const bool SHOW_TIMERS      = false;
+const bool SHOW_TIMERS      = true;
 const bool CHECK_SYSTEMS    = false;
 const float DELTA_TO_UPDATE = 1.f / 60.f;
 
@@ -60,40 +60,40 @@ void GameEngine::init() {
 }
 
 void GameEngine::setPlayingSystems() {
-    systems.emplace_back(std::make_unique<AutodeleteSystem>());
-    systems.emplace_back(std::make_unique<SensorSystem>());
-    systems.emplace_back(std::make_unique<AIDroneSystem>());
-    systems.emplace_back(std::make_unique<AIMeleeSystem>());
-    systems.emplace_back(std::make_unique<AIDistanceSystem>());
-    systems.emplace_back(std::make_unique<AITransformationSystem>());
-    systems.emplace_back(std::make_unique<InputSystem>());
-    systems.emplace_back(std::make_unique<InputJoystickSystem>());
-    systems.emplace_back(std::make_unique<OrbitalWeaponSystem>());
-    systems.emplace_back(std::make_unique<AttackSystem>());
-    systems.emplace_back(std::make_unique<PickWeaponsSystem>());
-    systems.emplace_back(std::make_unique<AIChaseSystem>());
-    systems.emplace_back(std::make_unique<AIFlyingChaseSystem>());
-    systems.emplace_back(std::make_unique<AIPounceSystem>());
-    systems.emplace_back(std::make_unique<BombSystem>());
-    systems.emplace_back(std::make_unique<AIBombDropSystem>());
-    systems.emplace_back(std::make_unique<DodgeSystem>());
-    systems.emplace_back(std::make_unique<SpawnSystem>());
-    systems.emplace_back(std::make_unique<PickPowerUpSystem>());
-    systems.emplace_back(std::make_unique<FurySystem>());
-    systems.emplace_back(std::make_unique<PhaseSystem>());
-    systems.emplace_back(std::make_unique<TriggerSystem>());
-
-    
-    systemsLate.emplace_back(std::make_unique<ShieldSystem>());
-    systemsLate.emplace_back(std::make_unique<CollisionSystem>()); // Collision 2 veces, esto es lo mejor para que todo funcione, pero sera mejor hacer lo de los hilos para resolver las colisiones
-    systemsLate.emplace_back(std::make_unique<PhysicsSystem>());
-    systemsLate.emplace_back(std::make_unique<CollisionSystem>());
-    systemsLate.emplace_back(std::make_unique<AnimationSystem>());
-    systemsLate.emplace_back(std::make_unique<CameraSystem>());
-    systemsLate.emplace_back(std::make_unique<HealthSystem>());
-    systemsLate.emplace_back(std::make_unique<DeathSystem>());
-    systemsLate.emplace_back(std::make_unique<HUDSystem>());
-    systemsLate.emplace_back(std::make_unique<WorldSystem>());
+    systems.emplace_back(std::make_unique<AutodeleteSystem>());         // 00
+    systems.emplace_back(std::make_unique<SensorSystem>());             // 01
+    systems.emplace_back(std::make_unique<AIDroneSystem>());            // 02
+    systems.emplace_back(std::make_unique<AIMeleeSystem>());            // 03
+    systems.emplace_back(std::make_unique<AIDistanceSystem>());         // 04
+    systems.emplace_back(std::make_unique<AITransformationSystem>());   // 05
+    systems.emplace_back(std::make_unique<InputSystem>());              // 06
+    systems.emplace_back(std::make_unique<InputJoystickSystem>());      // 07
+    systems.emplace_back(std::make_unique<OrbitalWeaponSystem>());      // 08
+    systems.emplace_back(std::make_unique<AttackSystem>());             // 09
+    systems.emplace_back(std::make_unique<PickWeaponsSystem>());        // 10
+    systems.emplace_back(std::make_unique<AIChaseSystem>());            // 11
+    systems.emplace_back(std::make_unique<AIFlyingChaseSystem>());      // 12
+    systems.emplace_back(std::make_unique<AIPounceSystem>());           // 13
+    systems.emplace_back(std::make_unique<BombSystem>());               // 14
+    systems.emplace_back(std::make_unique<AIBombDropSystem>());         // 15
+    systems.emplace_back(std::make_unique<DodgeSystem>());              // 16
+    systems.emplace_back(std::make_unique<SpawnSystem>());              // 17
+    systems.emplace_back(std::make_unique<PickPowerUpSystem>());        // 18
+    systems.emplace_back(std::make_unique<FurySystem>());               // 19
+    systems.emplace_back(std::make_unique<PhaseSystem>());              // 20
+    systems.emplace_back(std::make_unique<TriggerSystem>());            // 21
+                                                                        
+                                                                        
+    systemsLate.emplace_back(std::make_unique<ShieldSystem>());         // 22
+    systemsLate.emplace_back(std::make_unique<CollisionSystem>());      // 23            // Collision 2 veces, esto es lo mejor para que todo funcione, pero sera mejor hacer lo de los hilos para resolver las colisiones
+    systemsLate.emplace_back(std::make_unique<PhysicsSystem>());        // 24
+    systemsLate.emplace_back(std::make_unique<CollisionSystem>());      // 25
+    systemsLate.emplace_back(std::make_unique<AnimationSystem>());      // 26
+    systemsLate.emplace_back(std::make_unique<CameraSystem>());         // 27
+    systemsLate.emplace_back(std::make_unique<HealthSystem>());         // 28
+    systemsLate.emplace_back(std::make_unique<DeathSystem>());          // 29
+    systemsLate.emplace_back(std::make_unique<HUDSystem>());            // 30
+    systemsLate.emplace_back(std::make_unique<WorldSystem>());          // 31
 }
 
 void GameEngine::setMenuSystems(GameObjectType const menu) {
@@ -157,6 +157,7 @@ void GameEngine::run() {
 
 
         if(SHOW_TIMERS) {
+            manageFPS();
 
             deltaFromLastUpdate += deltaTime;
             if (deltaFromLastUpdate >= DELTA_TO_UPDATE) {
@@ -279,17 +280,37 @@ void GameEngine::updateWithTimers() {
         }
     }
 
+    for (size_t i = 0; i < systemsLate.size(); ++i) {
+        std::chrono::time_point<std::chrono::system_clock> thenS;
+        thenS = std::chrono::system_clock::now();
+
+        systemsLate[i]->update(*this);
+
+        std::chrono::time_point<std::chrono::system_clock> nowS;
+        nowS = std::chrono::system_clock::now();
+        std::chrono::duration<float, std::milli> elapsed_time = nowS - thenS;
+        systemTimes.at(i + systems.size())[timesUpdated_sys] = elapsed_time.count();
+        if (timesUpdated_sys == MAX_TIMES - 1) {
+            // get the average of the system
+            float total = 0.f;
+            for (int x = 0; x < MAX_TIMES; ++x) {
+                total += systemTimes.at(i + systems.size())[x];
+            }
+            cout << "The system: " << (int)(i + systems.size()) << " has spent: " << total / MAX_TIMES << endl;
+        }
+    }
 
     if(timesUpdated_sys == MAX_TIMES - 1)
         timesUpdated_sys = 0;
     else
         ++timesUpdated_sys;
 
-
+    updateEntitiesInWindow();
 }
 
 void GameEngine::update() {
 
+    // Reset entities to update
     entityMan.clearEntitiesToUpdate();
 
     for (size_t i = 0; i < systems.size(); ++i) {
@@ -321,9 +342,6 @@ void GameEngine::render() {
 void GameEngine::updateEntitiesInWindow() {
     // Update situation in engine
     windowFacade.updateEntities(*this, entityMan.getEntitiesToUpdate());
-
-    // Reset entities to update
-    entityMan.clearEntitiesToUpdate();
 }
 
 void GameEngine::setPlaying(const bool p) {
@@ -348,7 +366,19 @@ void GameEngine::calculateDeltaTime(std::chrono::time_point<std::chrono::system_
 
     // FPS counter
     //int fps   = 1 / elapsed_time.count();
-    //std::cout << "FPS: " << fps << std::endl;
+    //std::cout << "FPS: " << fps << std::endl;    
+}
+
+void GameEngine::manageFPS() {
+    // New FPS counter
+    frameTimeCounter += deltaTime;
+    if (frameTimeCounter >= 1.f) { // When a second has passed
+        windowFacade.updateFPSTextNode(framesPassed);
+        framesPassed = 0;
+        frameTimeCounter = 0.f;
+    }
+
+    ++framesPassed;
 }
 
 WindowFacade &GameEngine::getWindowFacadeRef() {

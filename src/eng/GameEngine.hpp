@@ -62,6 +62,8 @@ private:
 
     void updateEntitiesInWindow();
 
+    void manageFPS();
+
     std::vector<std::unique_ptr<System>> systems;
     std::vector<std::unique_ptr<System>> systemsLate;
 
@@ -72,6 +74,9 @@ private:
 
     float deltaTime {0};
     float deltaFromLastUpdate {0};
+
+    uint8_t framesPassed{ 0 };
+    float frameTimeCounter{ 0.f };
 
     // To check process time of the system
     //This works every 5 updates it gets the average value of the time for each system
