@@ -55,13 +55,15 @@ void InputJoystickSystem::inputPlaying(GameEngine& gameContext) const {
     if (joystickPos.x < -joystickBias)
     {
         playerInput.movingLeft = true;
-        playerVel.velocity.x = playerVel.speedX * (joystickPos.x / 100.f);
+        if(!playerInput.usingTurret)
+            playerVel.velocity.x = playerVel.speedX * (joystickPos.x / 100.f);
         playerInput.actualMovement = DodgeComponent::Left;
     }
     if (joystickPos.x > joystickBias)
     {
         playerInput.movingRight = true;
-        playerVel.velocity.x = playerVel.speedX * (joystickPos.x / 100.f);
+        if (!playerInput.usingTurret)
+            playerVel.velocity.x = playerVel.speedX * (joystickPos.x / 100.f);
         playerInput.actualMovement = DodgeComponent::Right;
     }
 
@@ -77,6 +79,7 @@ void InputJoystickSystem::inputPlaying(GameEngine& gameContext) const {
         if (jumpComp.cooldown > jumpComp.maxCooldown) { // if has cooldown on floor
             playerVel.velocity.y = jumpComp.impulse;
         }
+        playerInput.jumping = true;
     }
 
     

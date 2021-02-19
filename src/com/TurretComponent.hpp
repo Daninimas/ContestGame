@@ -13,4 +13,6 @@ public:
     int userID; //The entity using the turret
     
     bool inUse{ false }; //If there is an entity using this turret
+
+    float offsetX{ 0.f }; // The offset from the x turret position where the user is moved
 };

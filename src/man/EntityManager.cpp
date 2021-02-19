@@ -135,7 +135,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
     colliderComp.layerMasc = 0xFFF - ColliderComponent::PlayerAttack - ColliderComponent::PlayerShield; //Collides with everything except PlayerAttacks
     colliderComp.boundingRoot.bounding = { 0.f, 50.f, 0.f, 50.f };
     colliderComp.boundingRoot.childs.emplace_back( 20.f, 30.f, 10.f, 20.f ); //Head
-    colliderComp.weight = 2.f;
+    colliderComp.weight = 2.f; // if changed, check turret system, to reset the same
 
     // Melee
     meleeWeaponComp.attackBounding = { 0.f, 10.f, 0.f, 10.f };
@@ -1040,7 +1040,7 @@ int EntityManager::createOrbitalStrikerEnemy(GameEngine& gameContext, GameObject
 }
 
 
-int EntityManager::createTurret(GameEngine& gameContext, Vector2 position, float r,  GameObjectType goType) {
+int EntityManager::createTurret(GameEngine& gameContext, Vector2 position, uint8_t facing,  GameObjectType goType) {
     int entityId = Entity::getCurrentId();
 
     SituationComponent& situation = createComponent<SituationComponent>(entityId);
@@ -1049,16 +1049,17 @@ int EntityManager::createTurret(GameEngine& gameContext, Vector2 position, float
 
     //######### DATA ########//
     situation.position = position;
-    situation.rotation = r;
+    situation.facing = facing;
 
     // Collider
     colliderComp.collisionLayer = ColliderComponent::Turret;
-    colliderComp.layerMasc = ColliderComponent::NoLayer; //doesn't collide
+    colliderComp.layerMasc = ColliderComponent::NoLayer; //doesn't collide SI SE CAMBIA, CAMBIAR TAMBIEN EN EL TURRET SYSTEM
     colliderComp.type = ColliderType::NO_SOLID;
     colliderComp.boundingRoot.bounding = { 0.f, 40.f, 0.f, 30.f };
 
     // Turret
     turretComp.rotationVelocity = 30.f;
+    turretComp.offsetX = 10.f;
 
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::TURRET, GameObjectType::TURRET));

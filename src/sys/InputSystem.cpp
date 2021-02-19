@@ -44,14 +44,16 @@ void InputSystem::inputPlaying(GameEngine& gameContext) const {
     if (sf::Keyboard::isKeyPressed( static_cast<sf::Keyboard::Key>(playerInput.keyboardControlsMap[Controls::MOVE_LEFT]) ))
     {
         playerInput.movingLeft = true;
-        playerVel.velocity.x = -playerVel.speedX;
+        if (!playerInput.usingTurret)
+            playerVel.velocity.x = -playerVel.speedX;
         playerInput.actualMovement = DodgeComponent::Left;
         playerInput.movedWithKeyboard = true;
     }
     if (sf::Keyboard::isKeyPressed( static_cast<sf::Keyboard::Key>(playerInput.keyboardControlsMap[Controls::MOVE_RIGHT]) ))
     {
         playerInput.movingRight = true;
-        playerVel.velocity.x = playerVel.speedX;
+        if (!playerInput.usingTurret)
+            playerVel.velocity.x = playerVel.speedX;
         playerInput.actualMovement = DodgeComponent::Right;
         playerInput.movedWithKeyboard = true;
     }
@@ -81,6 +83,7 @@ void InputSystem::inputPlaying(GameEngine& gameContext) const {
             playerVel.velocity.y = jumpComp.impulse;
         }
         playerInput.movedWithKeyboard = true;
+        playerInput.jumping = true;
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {

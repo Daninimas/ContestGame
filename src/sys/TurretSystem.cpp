@@ -26,7 +26,7 @@ void TurretSystem::manageTurret(GameEngine& gameContext, TurretComponent& turret
 		checkIfPlayerUsesTurret(gameContext, turret);
 	}
 	else {
-
+		manageTurretUsage(gameContext, turret);
 	}
 }
 
@@ -55,6 +55,8 @@ void TurretSystem::checkIfPlayerUsesTurret(GameEngine& gameContext, TurretCompon
 void TurretSystem::enterInTurret(GameEngine& gameContext, TurretComponent& turret, int userID) const {
 	ColliderComponent& turretColl = gameContext.entityMan.getComponent<ColliderComponent>(turret.id);
 	ColliderComponent& userColl   = gameContext.entityMan.getComponent<ColliderComponent>(userID);
+	SituationComponent& userSit   = gameContext.entityMan.getComponent<SituationComponent>(userID);
+	SituationComponent& turretSit = gameContext.entityMan.getComponent<SituationComponent>(turret.id);
 
 	// Collider
 	turretColl.layerMasc = userColl.layerMasc;
@@ -64,4 +66,46 @@ void TurretSystem::enterInTurret(GameEngine& gameContext, TurretComponent& turre
 	turret.inUse = true;
 	turret.userID = userID;
 
+	// Situation
+	if (turretSit.facing == SituationComponent::Left) {
+		userSit.position.x = turretSit.position.x + turret.offsetX;
+		userSit.facing = SituationComponent::Left;
+	}
+	else {
+		userSit.position.x = turretSit.position.x + turretColl.boundingRoot.bounding.xRight - turret.offsetX - userColl.boundingRoot.bounding.xRight;
+		userSit.facing = SituationComponent::Right;
+	}
+
+
+	std::cout << "entro en la torreta\n";
+}
+
+
+void TurretSystem::manageTurretUsage(GameEngine& gameContext, TurretComponent& turret) const {
+	InputComponent& userInput = gameContext.entityMan.getComponent<InputComponent>(turret.userID);
+
+	if (userInput.jumping) {
+		exitTurret(gameContext, userInput, turret);
+
+		return;
+	}
+}
+
+void TurretSystem::exitTurret(GameEngine& gameContext, InputComponent& userInput, TurretComponent& turret) const {
+	ColliderComponent& turretColl = gameContext.entityMan.getComponent<ColliderComponent>(turret.id);
+	ColliderComponent& userColl = gameContext.entityMan.getComponent<ColliderComponent>(userInput.id);
+
+	// Input 
+	userInput.usingTurret = false;
+
+	// userColl
+	userColl.weight = 2.f;
+
+	// turretColl
+	turretColl.layerMasc = ColliderComponent::NoLayer;
+
+	// Turret
+	turret.inUse = false;
+
+	std::cout << "salgo de la torreta\n";
 }
