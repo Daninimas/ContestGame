@@ -18,4 +18,7 @@ private:
     void manageTurretUsage(GameEngine& gameContext, TurretComponent& turret) const;
     void exitTurret(GameEngine& gameContext, InputComponent& userInput, TurretComponent& turret) const;
 
+    void manageShoot(GameEngine& gameContext, TurretComponent& turret) const;
+
+
 };

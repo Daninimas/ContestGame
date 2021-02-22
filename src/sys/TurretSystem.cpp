@@ -89,6 +89,10 @@ void TurretSystem::manageTurretUsage(GameEngine& gameContext, TurretComponent& t
 
 		return;
 	}
+
+	if (userInput.attacking) {
+		manageShoot(gameContext, turret);
+	}
 }
 
 void TurretSystem::exitTurret(GameEngine& gameContext, InputComponent& userInput, TurretComponent& turret) const {
@@ -108,4 +112,11 @@ void TurretSystem::exitTurret(GameEngine& gameContext, InputComponent& userInput
 	turret.inUse = false;
 
 	std::cout << "salgo de la torreta\n";
+}
+
+
+void TurretSystem::manageShoot(GameEngine& gameContext, TurretComponent& turret) const {
+	WeaponComponent& turretWeapon = gameContext.entityMan.getComponent<WeaponComponent>(turret.id);
+
+	// Set velocity to the bullet
 }

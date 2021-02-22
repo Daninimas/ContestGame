@@ -101,7 +101,7 @@ void AttackSystem::addCooldownTimeToWeapons(GameEngine& gameContext) const {
 void AttackSystem::checkPlayerAttacking(GameEngine& gameContext) const {
 	InputComponent& playerInput = gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId);
 
-	if (playerInput.attacking) {
+	if (playerInput.attacking && !playerInput.usingTurret) {
 		SensorComponent& playerSensor = gameContext.entityMan.getComponent<SensorComponent>(WorldElementsData::playerId);
 		bool createMelee = false;
 		//Decides if needs to use melee or distance weapon

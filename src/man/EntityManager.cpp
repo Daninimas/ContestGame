@@ -1046,6 +1046,7 @@ int EntityManager::createTurret(GameEngine& gameContext, Vector2 position, uint8
     SituationComponent& situation = createComponent<SituationComponent>(entityId);
     ColliderComponent& colliderComp = createComponent<ColliderComponent>(entityId);
     TurretComponent& turretComp = createComponent<TurretComponent>(entityId);
+    HealthComponent& healthComp = createComponent<HealthComponent>(entityId);
 
     //######### DATA ########//
     situation.position = position;
@@ -1060,6 +1061,11 @@ int EntityManager::createTurret(GameEngine& gameContext, Vector2 position, uint8
     // Turret
     turretComp.rotationVelocity = 30.f;
     turretComp.offsetX = 10.f;
+
+    // Health
+    healthComp.maxHealth = 5.f;
+    healthComp.resetHealth();
+
 
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::TURRET, GameObjectType::TURRET));
