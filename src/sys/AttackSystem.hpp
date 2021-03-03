@@ -15,6 +15,7 @@ private:
     void addCooldownTimeToWeapons(GameEngine& gameContext) const;
     void checkPlayerAttacking(GameEngine& gameContext) const;
     void checkEnemiesAttacking(GameEngine& gameContext) const;
+    void checkTurretsAttacking(GameEngine& gameContext) const;
     bool createMeleeAttack(GameEngine& gameContext, MeleeWeaponComponent& meleeAttacker) const;
     void animateExplosion(GameEngine& gameContext, AttackComponent& attack) const;
     void manageDamagePlatform(GameEngine& gameContext, AttackComponent& attack) const;

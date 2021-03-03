@@ -29,6 +29,7 @@
 #include <com/OrbitalWeaponComponent.hpp>
 #include <com/AutodeleteComponent.hpp>
 #include <com/TurretComponent.hpp>
+#include <com/GunTurretComponent.hpp>
 
 // AI
 #include <com/AI/AIChaseComponent.hpp>

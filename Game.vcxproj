@@ -156,6 +156,7 @@
   <ItemGroup>
     <ClCompile Include="src\com\AI\AIOrbitalAtkComponent.cpp" />
     <ClCompile Include="src\com\AutodeleteComponent.cpp" />
+    <ClCompile Include="src\com\GunTurretComponent.cpp" />
     <ClCompile Include="src\com\OrbitalWeaponComponent.cpp" />
     <ClCompile Include="src\sys\AI\AIDroneSystem.cpp" />
     <ClCompile Include="src\sys\AI\AIFlyingChaseSystem.cpp" />
@@ -239,6 +240,7 @@
   <ItemGroup>
     <ClInclude Include="src\com\AI\AIOrbitalAtkComponent.hpp" />
     <ClInclude Include="src\com\AutodeleteComponent.hpp" />
+    <ClInclude Include="src\com\GunTurretComponent.hpp" />
     <ClInclude Include="src\com\OrbitalWeaponComponent.hpp" />
     <ClInclude Include="src\sys\AI\AIDroneSystem.hpp" />
     <ClInclude Include="src\sys\AI\AIFlyingChaseSystem.hpp" />

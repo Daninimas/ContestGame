@@ -61,6 +61,7 @@ void EntityManager::eraseEntityByID(int id) {
     eraseComponent<OrbitalWeaponComponent>(id);
     eraseComponent<AutodeleteComponent>(id);
     eraseComponent<TurretComponent>(id);
+    eraseComponent<GunTurretComponent>(id);
 
     // AI
     eraseComponent<AIChaseComponent>(id);
@@ -1040,7 +1041,60 @@ int EntityManager::createOrbitalStrikerEnemy(GameEngine& gameContext, GameObject
 }
 
 
-int EntityManager::createTurret(GameEngine& gameContext, Vector2 position, uint8_t facing,  GameObjectType goType) {
+
+void EntityManager::createTurret(GameEngine& gameContext, Vector2 position, uint8_t facing) {
+    int turretGun = createTurretGun(gameContext, position, facing, GameObjectType::TURRET_GUN);
+    createTurretPlatform(gameContext, position, facing, turretGun, GameObjectType::TURRET_PLATFORM);
+}
+
+int EntityManager::createTurretGun(GameEngine& gameContext, Vector2 position, uint8_t facing,GameObjectType goType) {
+    int entityId = Entity::getCurrentId();
+
+    SituationComponent& situation = createComponent<SituationComponent>(entityId);
+    RenderComponent& renderComp = createComponent<RenderComponent>(entityId);
+    DistanceWeaponComponent& distanceWeaponComp = createComponent<DistanceWeaponComponent>(entityId);
+    GunTurretComponent& gunTurretComp = createComponent<GunTurretComponent>(entityId);
+
+    //######### DATA ########//
+    situation.position = position;
+    situation.facing = facing;
+    situation.noWorldDelete = true;
+
+    // Render
+    renderComp.sprite = "Media/Images/TurretGun.png";
+    renderComp.spriteRect = { 0, 512, 170, 341 };
+
+    // Distance Weapon
+    distanceWeaponComp.attackBounding = { 0.f, 5.f, 0.f, 5.f };
+    distanceWeaponComp.damage = 1;
+    distanceWeaponComp.attackGeneralVelociy = 900.f;
+    distanceWeaponComp.attackGravity = 0.f;
+    distanceWeaponComp.maxCooldown = 0.1f;
+    distanceWeaponComp.attackLifetime = 1.5f;
+    distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BULLET;
+    distanceWeaponComp.infiniteAmmo = true;
+    distanceWeaponComp.bulletSpreadAngle = 5.f;
+
+    distanceWeaponComp.attackSound.soundPath = "Media/Sound/Weapons/M4A1_Single-Kibblesbob-8540445.wav";
+
+    // Gun Turret
+    gunTurretComp.currentRotation = 0.f;
+    if (facing == SituationComponent::Left) {
+        gunTurretComp.currentRotation = 180.f;
+    }
+    gunTurretComp.gunRotationSpeed = 30.f;
+    gunTurretComp.maxRotation = 180.f;
+    gunTurretComp.minRotation = -10.f;
+
+    //######### RENDER ########//
+    gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
+
+    //######### CREATE ########//
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::TURRET, GameObjectType::TURRET_GUN));
+    return entityId;
+}
+
+int EntityManager::createTurretPlatform(GameEngine& gameContext, Vector2 position, uint8_t facing, int turretGun, GameObjectType goType) {
     int entityId = Entity::getCurrentId();
 
     SituationComponent& situation = createComponent<SituationComponent>(entityId);
@@ -1061,14 +1115,15 @@ int EntityManager::createTurret(GameEngine& gameContext, Vector2 position, uint8
     // Turret
     turretComp.rotationVelocity = 30.f;
     turretComp.offsetX = 10.f;
+    turretComp.turretGunID = turretGun;
 
     // Health
-    healthComp.maxHealth = 5.f;
+    healthComp.maxHealth = 1.f;
     healthComp.resetHealth();
 
 
     //######### CREATE ########//
-    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::TURRET, GameObjectType::TURRET));
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::TURRET, GameObjectType::TURRET_PLATFORM));
     return entityId;
 }
 

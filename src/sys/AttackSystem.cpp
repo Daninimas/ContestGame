@@ -20,6 +20,7 @@ void AttackSystem::update(GameEngine& gameContext) const {
 	//manage attack creation
 	checkPlayerAttacking(gameContext);
 	checkEnemiesAttacking(gameContext);
+	checkTurretsAttacking(gameContext);
 
 	//manage hits
 	checkAttacksHits(gameContext);
@@ -202,6 +203,18 @@ void AttackSystem::checkEnemiesAttacking(GameEngine& gameContext) const {
 	}
 }
 
+void AttackSystem::checkTurretsAttacking(GameEngine& gameContext) const {
+	auto& gunTurretsComponents = gameContext.entityMan.getComponents<GunTurretComponent>();
+
+	for (GunTurretComponent& gunTurretComp : gunTurretsComponents) {
+		if (gunTurretComp.createAttack) {
+			createDistanceAttack(gameContext, gameContext.entityMan.getComponent<DistanceWeaponComponent>(gunTurretComp.id));
+
+			gunTurretComp.createAttack = false;
+		}
+	}
+}
+
 
 
 bool AttackSystem::createMeleeAttack(GameEngine& gameContext, MeleeWeaponComponent& meleeAttacker) const {
@@ -374,9 +387,10 @@ void AttackSystem::createLaserAttack(GameEngine& gameContext, DistanceWeaponComp
 
 void AttackSystem::createBulletAttack(GameEngine& gameContext, DistanceWeaponComponent& distanceWeaponAttacker) const {
 	SituationComponent& attackerSit = gameContext.entityMan.getComponent<SituationComponent>(distanceWeaponAttacker.id);
+	GameObjectType attackerGO = gameContext.entityMan.getEntity(distanceWeaponAttacker.id).getGameObjectType();
 
 	GameObjectType attackGOtype = GameObjectType::DISTANCE_ATTACK;
-	if (distanceWeaponAttacker.id == WorldElementsData::playerId || gameContext.entityMan.getEntity(distanceWeaponAttacker.id).getGameObjectType() == GameObjectType::DRONE_FRIEND) {
+	if (distanceWeaponAttacker.id == WorldElementsData::playerId || attackerGO == GameObjectType::DRONE_FRIEND || attackerGO == GameObjectType::TURRET_GUN) {
 		attackGOtype = GameObjectType::PLAYER_DISTANCE_ATTACK;
 	}
 

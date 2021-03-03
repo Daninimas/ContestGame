@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Component.hpp"
-#include <tools/Vector2.hpp>
 
 class TurretComponent : public Component {
 public:
@@ -15,4 +14,8 @@ public:
     bool inUse{ false }; //If there is an entity using this turret
 
     float offsetX{ 0.f }; // The offset from the x turret position where the user is moved
+
+    int turretGunID;
+
+    bool disabled{ false }; // When they die
 };

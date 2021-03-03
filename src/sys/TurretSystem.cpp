@@ -15,7 +15,9 @@ void TurretSystem::update(GameEngine& gameContext) const {
 	auto& turrets = gameContext.entityMan.getComponents<TurretComponent>();
 
 	for (TurretComponent& turret : turrets) {
-		manageTurret(gameContext, turret);
+		if (!turret.disabled) {
+			manageTurret(gameContext, turret);
+		}
 	}
 }
 
@@ -116,7 +118,14 @@ void TurretSystem::exitTurret(GameEngine& gameContext, InputComponent& userInput
 
 
 void TurretSystem::manageShoot(GameEngine& gameContext, TurretComponent& turret) const {
-	WeaponComponent& turretWeapon = gameContext.entityMan.getComponent<WeaponComponent>(turret.id);
+	DistanceWeaponComponent& turretWeapon = gameContext.entityMan.getComponent<DistanceWeaponComponent>(turret.turretGunID);
+	GunTurretComponent& gunTurretComp = gameContext.entityMan.getComponent<GunTurretComponent>(turret.turretGunID);
 
-	// Set velocity to the bullet
+	if (turretWeapon.cooldown > turretWeapon.maxCooldown) {
+		// Set velocity to weapon
+		turretWeapon.attackVel.x = turretWeapon.attackGeneralVelociy * cos(gunTurretComp.currentRotation);
+		turretWeapon.attackVel.y = turretWeapon.attackGeneralVelociy * sin(gunTurretComp.currentRotation);
+
+		gunTurretComp.createAttack = true;
+	}
 }

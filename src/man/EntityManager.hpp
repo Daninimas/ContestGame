@@ -108,7 +108,10 @@ public:
     int createDamagePlatform(GameEngine& gameContext, Vector2 position, Vector2 size, uint16_t damage, GameObjectType goType);
     int createOrbitalMarker(GameEngine& gameContext, Vector2 position, GameObjectType goType = GameObjectType::NONE);
     int createOrbitalStrikerEnemy(GameEngine& gameContext, GameObjectType goType);
-    int createTurret(GameEngine& gameContext, Vector2 position, uint8_t facing, GameObjectType goType = GameObjectType::NONE);
+
+    void createTurret(GameEngine& gameContext, Vector2 position, uint8_t facing);
+    int createTurretPlatform(GameEngine& gameContext, Vector2 position, uint8_t facing, int turretGun, GameObjectType goType = GameObjectType::NONE);
+    int createTurretGun(GameEngine& gameContext, Vector2 position, uint8_t facing, GameObjectType goType = GameObjectType::NONE);
 
 
 

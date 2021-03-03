@@ -17,4 +17,6 @@ private:
     void managePlayerLifes(GameEngine& gameContext, int playerId) const;
 
     void manageScore(GameEngine& gameContext, int deadEntityId) const;
+
+    void disableTurret(GameEngine& gameContext, int turretID) const;
 };

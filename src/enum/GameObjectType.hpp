@@ -96,5 +96,6 @@ enum class GameObjectType {
     ORBITAL_STRIKER,
 
     // Turret
-    TURRET
+    TURRET_GUN,
+    TURRET_PLATFORM
 };
