@@ -25,6 +25,9 @@
 #include <sys/InputJoystickSystem.hpp>
 #include <sys/AnimationSystem.hpp>
 #include <sys/WaitAfterLoseLifeSystem.hpp>
+#include <sys/AutodeleteSystem.hpp>
+#include <sys/OrbitalWeaponSystem.hpp>
+#include <sys/TurretSystem.hpp>
 
 
 #include <sys/AI/AIChaseSystem.hpp>

@@ -58,6 +58,10 @@ void EntityManager::eraseEntityByID(int id) {
     eraseComponent<WorldComponent>(id);
     eraseComponent<TriggerComponent>(id);
     eraseComponent<AnimationComponent>(id);
+    eraseComponent<OrbitalWeaponComponent>(id);
+    eraseComponent<AutodeleteComponent>(id);
+    eraseComponent<TurretComponent>(id);
+    eraseComponent<GunTurretComponent>(id);
 
     // AI
     eraseComponent<AIChaseComponent>(id);
@@ -67,6 +71,7 @@ void EntityManager::eraseEntityByID(int id) {
     eraseComponent<AIDropBombComponent>(id);
     eraseComponent<AIPounceComponent>(id);
     eraseComponent<AIFlyingChaseComponent>(id);
+    eraseComponent<AIOrbitalAtkComponent>(id);
 
     entityMap           .erase(id);
 }
@@ -131,7 +136,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
     colliderComp.layerMasc = 0xFFF - ColliderComponent::PlayerAttack - ColliderComponent::PlayerShield; //Collides with everything except PlayerAttacks
     colliderComp.boundingRoot.bounding = { 0.f, 50.f, 0.f, 50.f };
     colliderComp.boundingRoot.childs.emplace_back( 20.f, 30.f, 10.f, 20.f ); //Head
-    colliderComp.weight = 2.f;
+    colliderComp.weight = 2.f; // if changed, check turret system, to reset the same
 
     // Melee
     meleeWeaponComp.attackBounding = { 0.f, 10.f, 0.f, 10.f };
@@ -149,7 +154,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
     
     // Sensor
     sensorComp.sensorBounding = {25.f, 100.f, 2.f, 48.f};
-    sensorComp.sensorLayerMasc = ColliderComponent::Enemy; // Sensors only enemies
+    sensorComp.sensorLayerMasc = ColliderComponent::Enemy + ColliderComponent::Turret; // Sensors enemies and turrets
 
     // Dodge
     dodgeComp.dodgeMaxDuration = 0.3f;
@@ -267,9 +272,20 @@ int EntityManager::createWall(GameEngine& gameContext, Vector2 position, Vector2
     situation.rotation = r;
 
     // Collider
-    colliderComp.collisionLayer = ColliderComponent::Wall;
-    colliderComp.layerMasc = ColliderComponent::Enemy + ColliderComponent::Player + ColliderComponent::PlayerAttack + ColliderComponent::Weapon + ColliderComponent::Attack; //Collides with player and enemy
     colliderComp.boundingRoot.bounding = { 0.f, size.x, 0.f, size.y };
+
+    switch (goType)
+    {
+    case GameObjectType::PLATFORM:
+        colliderComp.collisionLayer = ColliderComponent::Platform;
+        colliderComp.layerMasc = ColliderComponent::Enemy + ColliderComponent::Player + ColliderComponent::Weapon;
+        break;
+
+    case GameObjectType::WALL:
+        colliderComp.collisionLayer = ColliderComponent::Wall;
+        colliderComp.layerMasc = ColliderComponent::Enemy + ColliderComponent::Player + ColliderComponent::PlayerAttack + ColliderComponent::Weapon + ColliderComponent::Attack; //Collides with player and enemy
+        break;
+    }
 
     //######### RENDER ########//
     //gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
@@ -297,7 +313,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
 
     // Collider
     colliderComp.collisionLayer = ColliderComponent::Enemy;
-    colliderComp.layerMasc = ColliderComponent::Player + ColliderComponent::PlayerAttack + ColliderComponent::Wall + ColliderComponent::PlayerShield; //Collides with player and enemy
+    colliderComp.layerMasc = ColliderComponent::Player + ColliderComponent::PlayerAttack + ColliderComponent::Wall + ColliderComponent::PlayerShield + ColliderComponent::Platform; //Collides with player and enemy
     colliderComp.boundingRoot.bounding = { 0.f, 50.f, 0.f, 50.f };
     colliderComp.type = ColliderType::DYNAMIC;
 
@@ -682,13 +698,13 @@ int EntityManager::createBomb(GameEngine& gameContext, Vector2 position, float r
     switch (goType) {
         case GameObjectType::BOMB:
             colliderComp.collisionLayer = ColliderComponent::Attack;
-            colliderComp.layerMasc = ColliderComponent::Player + ColliderComponent::Wall + ColliderComponent::PlayerShield;
+            colliderComp.layerMasc = ColliderComponent::Player + ColliderComponent::Wall + ColliderComponent::PlayerShield + ColliderComponent::Platform;
             bombComp.explosionSound.soundPath = "Media/Sound/Weapons/alienExplosion.wav";
             break;
 
         case GameObjectType::PLAYER_BOMB:
             colliderComp.collisionLayer = ColliderComponent::PlayerAttack;
-            colliderComp.layerMasc = ColliderComponent::Enemy + ColliderComponent::Wall + ColliderComponent::Shield;
+            colliderComp.layerMasc = ColliderComponent::Enemy + ColliderComponent::Wall + ColliderComponent::Shield + ColliderComponent::Platform;
             bombComp.explosionSound.soundPath = "Media/Sound/Weapons/explosion.wav";
             break;
     }
@@ -721,7 +737,7 @@ int EntityManager::createSpawner(GameEngine& gameContext, Vector2 position, floa
 
     // Collider
     colliderComp.collisionLayer = ColliderComponent::Enemy; // temporal
-    colliderComp.layerMasc = ColliderComponent::Player + ColliderComponent::PlayerAttack + ColliderComponent::Wall + ColliderComponent::PlayerShield; //Collides with player and enemy
+    colliderComp.layerMasc = ColliderComponent::Player + ColliderComponent::PlayerAttack + ColliderComponent::Wall + ColliderComponent::PlayerShield + +ColliderComponent::Platform; //Collides with player and enemy
     colliderComp.boundingRoot.bounding = { 0.f, 20.f, 0.f, 20.f };
     colliderComp.type = ColliderType::STATIC;
     
@@ -975,6 +991,139 @@ int EntityManager::createDamagePlatform(GameEngine& gameContext, Vector2 positio
 
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::DAMAGE_PLATFORM, goType));
+    return entityId;
+}
+
+
+int EntityManager::createOrbitalMarker(GameEngine& gameContext, Vector2 position, GameObjectType goType) {
+    int entityId = Entity::getCurrentId();
+
+    SituationComponent& situation = createComponent<SituationComponent>(entityId);
+    AutodeleteComponent& autodelete = createComponent<AutodeleteComponent>(entityId);
+    RenderComponent& renderComp = createComponent<RenderComponent>(entityId);
+
+    //######### DATA ########//
+    situation.position = position;
+    situation.noWorldDelete = true;
+
+    // Render component
+    renderComp.sprite = "Media/Images/OrbitalMarker.png";
+
+
+    //######### RENDER ########//
+    gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
+
+    //######### CREATE ########//
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::ORBITAL_MARKER, GameObjectType::ORBITAL_MARKER));
+    return entityId;
+}
+
+
+int EntityManager::createOrbitalStrikerEnemy(GameEngine& gameContext, GameObjectType goType) {
+    int entityId = Entity::getCurrentId();
+
+    createComponent<AIOrbitalAtkComponent>(entityId);
+    OrbitalWeaponComponent& orbitalWeapon = createComponent<OrbitalWeaponComponent>(entityId);
+
+    orbitalWeapon.attackBounding = { 0.f, 50.f, 0.f, 0.f };
+    orbitalWeapon.markerBounding = { 0.f, 30.f, 0.f, 0.f };
+    orbitalWeapon.attackLifetime = 0.5f;
+    orbitalWeapon.damage = 2;
+    orbitalWeapon.generateAttackTime = 1.3f;
+    orbitalWeapon.maxCooldown = 4.f;
+
+    orbitalWeapon.markerSound.soundPath = "Media/Sound/Weapons/loadLaser.wav";
+    orbitalWeapon.attackSound.soundPath = "Media/Sound/Weapons/alienExplosion.wav";
+
+    //######### CREATE ########//
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::ORBITAL_STRIKER, GameObjectType::ORBITAL_STRIKER));
+    return entityId;
+}
+
+
+
+void EntityManager::createTurret(GameEngine& gameContext, Vector2 position, uint8_t facing) {
+    int turretGun = createTurretGun(gameContext, position, facing, GameObjectType::TURRET_GUN);
+    createTurretPlatform(gameContext, position, facing, turretGun, GameObjectType::TURRET_PLATFORM);
+}
+
+int EntityManager::createTurretGun(GameEngine& gameContext, Vector2 position, uint8_t facing,GameObjectType goType) {
+    int entityId = Entity::getCurrentId();
+
+    SituationComponent& situation = createComponent<SituationComponent>(entityId);
+    RenderComponent& renderComp = createComponent<RenderComponent>(entityId);
+    DistanceWeaponComponent& distanceWeaponComp = createComponent<DistanceWeaponComponent>(entityId);
+    GunTurretComponent& gunTurretComp = createComponent<GunTurretComponent>(entityId);
+
+    //######### DATA ########//
+    situation.position = position;
+    situation.facing = facing;
+    situation.noWorldDelete = true;
+
+    // Render
+    renderComp.sprite = "Media/Images/TurretGun.png";
+    renderComp.spriteRect = { 0, 512, 170, 341 };
+
+    // Distance Weapon
+    distanceWeaponComp.attackBounding = { 0.f, 5.f, 0.f, 5.f };
+    distanceWeaponComp.damage = 1;
+    distanceWeaponComp.attackGeneralVelociy = 900.f;
+    distanceWeaponComp.attackGravity = 0.f;
+    distanceWeaponComp.maxCooldown = 0.1f;
+    distanceWeaponComp.attackLifetime = 1.5f;
+    distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BULLET;
+    distanceWeaponComp.infiniteAmmo = true;
+    distanceWeaponComp.bulletSpreadAngle = 5.f;
+
+    distanceWeaponComp.attackSound.soundPath = "Media/Sound/Weapons/M4A1_Single-Kibblesbob-8540445.wav";
+
+    // Gun Turret
+    gunTurretComp.currentRotation = 0.f;
+    if (facing == SituationComponent::Left) {
+        gunTurretComp.currentRotation = 180.f;
+    }
+    gunTurretComp.gunRotationSpeed = 30.f;
+    gunTurretComp.maxRotation = 180.f;
+    gunTurretComp.minRotation = -10.f;
+
+    //######### RENDER ########//
+    gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
+
+    //######### CREATE ########//
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::TURRET, GameObjectType::TURRET_GUN));
+    return entityId;
+}
+
+int EntityManager::createTurretPlatform(GameEngine& gameContext, Vector2 position, uint8_t facing, int turretGun, GameObjectType goType) {
+    int entityId = Entity::getCurrentId();
+
+    SituationComponent& situation = createComponent<SituationComponent>(entityId);
+    ColliderComponent& colliderComp = createComponent<ColliderComponent>(entityId);
+    TurretComponent& turretComp = createComponent<TurretComponent>(entityId);
+    HealthComponent& healthComp = createComponent<HealthComponent>(entityId);
+
+    //######### DATA ########//
+    situation.position = position;
+    situation.facing = facing;
+
+    // Collider
+    colliderComp.collisionLayer = ColliderComponent::Turret;
+    colliderComp.layerMasc = ColliderComponent::NoLayer; //doesn't collide SI SE CAMBIA, CAMBIAR TAMBIEN EN EL TURRET SYSTEM
+    colliderComp.type = ColliderType::NO_SOLID;
+    colliderComp.boundingRoot.bounding = { 0.f, 40.f, 0.f, 30.f };
+
+    // Turret
+    turretComp.rotationVelocity = 30.f;
+    turretComp.offsetX = 10.f;
+    turretComp.turretGunID = turretGun;
+
+    // Health
+    healthComp.maxHealth = 1.f;
+    healthComp.resetHealth();
+
+
+    //######### CREATE ########//
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::TURRET, GameObjectType::TURRET_PLATFORM));
     return entityId;
 }
 

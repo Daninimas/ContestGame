@@ -26,6 +26,10 @@
 #include <com/WorldComponent.hpp>
 #include <com/TriggerComponent.hpp>
 #include <com/AnimationComponent.hpp>
+#include <com/OrbitalWeaponComponent.hpp>
+#include <com/AutodeleteComponent.hpp>
+#include <com/TurretComponent.hpp>
+#include <com/GunTurretComponent.hpp>
 
 // AI
 #include <com/AI/AIChaseComponent.hpp>
@@ -35,3 +39,4 @@
 #include <com/AI/AIDropBombComponent.hpp>
 #include <com/AI/AIPounceComponent.hpp>
 #include <com/AI/AIFlyingChaseComponent.hpp>
+#include <com/AI/AIOrbitalAtkComponent.hpp>

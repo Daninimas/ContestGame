@@ -37,6 +37,7 @@ private:
 
         // Obstacles
         { "WALL", GameObjectType::WALL },
+        { "PLATFORM", GameObjectType::PLATFORM },
 
         // Weapons
         { "M4", GameObjectType::M4 },

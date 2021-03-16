@@ -18,6 +18,15 @@ SFMLEngine::SFMLEngine(int width, int height, bool fullscreen) {
 	{
 		std::cout << "Could not load font: " << fontPath << "\n";
 	}
+
+
+	// Set the FPS text data
+	FPSTextNode.setString("FPS: 0");
+	FPSTextNode.setPosition(10.f, 5.f);
+	FPSTextNode.setFillColor({ 68, 255, 0, 255 });
+	FPSTextNode.setFont(font);
+	FPSTextNode.setCharacterSize(20);
+	//renderFPS = true;
 }
 SFMLEngine::~SFMLEngine() {
 	device.get()->close();
@@ -181,6 +190,10 @@ void SFMLEngine::drawHudElements(GameEngine& gameContext) const {
 	for (auto& text : HUDTextMap) 
 	{
 		device.get()->draw(text.second);
+	}
+
+	if (renderFPS) {
+		device.get()->draw(FPSTextNode);
 	}
 }
 
@@ -449,4 +462,9 @@ void SFMLEngine::setJoystickButtonToControl(GameEngine& gameContext, sf::Event& 
 	InputComponent& playerInput = gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId);
 
 	playerInput.keyboardControlsMap[playerInput.controlToChange] = event.joystickButton.button;
+}
+
+
+void SFMLEngine::updateFPSTextNode(uint8_t FPS) {
+	FPSTextNode.setString("FPS: " + to_string(FPS));
 }

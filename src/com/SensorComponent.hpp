@@ -14,6 +14,6 @@ public:
 
     BoundingBox sensorBounding{ 0.f, 0.f, 0.f, 0.f };
 
-    uint8_t sensorLayerMasc{ 0xFF };
+    uint16_t sensorLayerMasc{ 0xFFF };
 };
 

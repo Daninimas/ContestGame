@@ -38,6 +38,8 @@ public:
     void setBackgroundLayers(std::vector<BackgroundLayer>& layers) override;
     void updateBackgroundLayers(std::vector<BackgroundLayer>& layers) override;
 
+    // For updating the FPS 
+    void updateFPSTextNode(uint8_t FPS) override;
 
 private:
     void drawScene(GameEngine& gameContext) const;
@@ -66,6 +68,10 @@ private:
     std::unordered_map<int, sf::View> cameraMap;
 
     sf::Font font;
+
+    // For the FPS display
+    sf::Text FPSTextNode {};
+    bool renderFPS { false };
 
     bool fullscreen = true;
     bool renderCollidables = true;

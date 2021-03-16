@@ -26,6 +26,8 @@ public:
 
     static bool objectiveInsideRange(SituationComponent& attackerSit, SituationComponent& objectiveSit, const Vector2 range);
 
+    static bool isEntitySensoredBy(SensorComponent& sensor, const int sensoredEntity);
+
     static bool checkCollidingWithEntity(BoundingBoxNode& boundingNode, int objId);
     static void deleteCollidingWithObjective(BoundingBoxNode& boundingNode, int objId);
 
@@ -47,8 +49,7 @@ public:
     
     static void resetPlayerPosition(GameEngine& gameContext);
 
-    static SituationComponent* getClosestWallXToObjetive(GameEngine& gameContext, SituationComponent& objetiveSituation);
-
+    static SituationComponent* getClosestWallXToObjetive(GameEngine& gameContext, SituationComponent& objetiveSituation, bool onlyWALLGameObject = false); // The bool is for not picking a platform
 
     template <typename T> 
     static int sign(T val) {

@@ -99,7 +99,7 @@ void Utils::insertCollidersIdWithVelocity(GameEngine& gameContext, std::vector<i
 void Utils::insertNotWallColliders(GameEngine& gameContext, std::vector<std::reference_wrapper<ColliderComponent>>& collidersNotWall) {
     auto& colliders = gameContext.entityMan.getComponents<ColliderComponent>();
     for (auto& collComp : colliders) {
-        if (collComp.collisionLayer != ColliderComponent::Wall) {
+        if (collComp.collisionLayer != ColliderComponent::Wall && collComp.collisionLayer != ColliderComponent::Platform && collComp.collisionLayer != ColliderComponent::Trigger) {
             collidersNotWall.emplace_back(collComp);
         }
     }
@@ -112,6 +112,18 @@ bool Utils::objectiveInsideRange(SituationComponent& attackerSit, SituationCompo
     }
     return false;
 };
+
+
+bool Utils::isEntitySensoredBy(SensorComponent& sensor, const int sensoredEntity) {
+
+    for (int sensedId : sensor.entitiesSensoring) {
+        if (sensedId == sensoredEntity) {
+            return true;
+        }
+    }
+
+    return false;
+}
 
 
 bool Utils::checkCollidingWithEntity(BoundingBoxNode& boundingNode, int objId) {
@@ -316,15 +328,24 @@ void Utils::resetPlayerPosition(GameEngine& gameContext) {
     }
 }
 
-SituationComponent* Utils::getClosestWallXToObjetive(GameEngine& gameContext, SituationComponent& objetiveSituation) {
+SituationComponent* Utils::getClosestWallXToObjetive(GameEngine& gameContext, SituationComponent& objetiveSituation, bool onlyWALLGameObject) {
     auto& allSituations = gameContext.entityMan.getComponents<SituationComponent>();
     SituationComponent* closesWall = nullptr;
     float closestDistance = std::numeric_limits<float>::max();
+
+    // This should be the right corner of the objective bounding
+    float objectivePositionX = objetiveSituation.position.x;
+    if (gameContext.entityMan.existsComponent<ColliderComponent>(objetiveSituation.id)) {
+        objectivePositionX += gameContext.entityMan.getComponent<ColliderComponent>(objetiveSituation.id).boundingRoot.bounding.xRight;
+    }
     
     for (SituationComponent& entitySit : allSituations) {
+        if (onlyWALLGameObject && gameContext.getEntity(entitySit.id).getGameObjectType() != GameObjectType::WALL) {
+            continue;
+        }
         if (gameContext.getEntity(entitySit.id).getType() == EntityType::WALL) {
-            float distance = objetiveSituation.position.x - entitySit.position.x;
-            if (entitySit.position.x < objetiveSituation.position.x && distance < closestDistance) {
+            float distance = objectivePositionX - entitySit.position.x;
+            if (entitySit.position.x < objectivePositionX && distance < closestDistance) {
                 closestDistance = distance;
                 closesWall = &entitySit;
             }

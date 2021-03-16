@@ -36,14 +36,22 @@ std::vector<int> DeathSystem::getDeadEntities(GameEngine& gameContext) const {
 void DeathSystem::deleteEntities(GameEngine& gameContext, std::vector<int>& deadEntities) const {
     for (int entityId : deadEntities) {
         EntityType entityTypeToDelete = gameContext.entityMan.getEntity(entityId).getType();
-        if (entityTypeToDelete != EntityType::PLAYER) {
+
+        switch (entityTypeToDelete)
+        {
+        case EntityType::PLAYER:
+            managePlayerLifes(gameContext, entityId);
+            break;
+
+        case EntityType::TURRET:
+            disableTurret(gameContext, entityId);
+            break;
+
+        default:
             // Give score to player
             manageScore(gameContext, entityId);
-
             gameContext.eraseEntityByID(entityId); // Delete the entity
-        }
-        else {
-            managePlayerLifes(gameContext, entityId);
+            break;
         }
     }
 }
@@ -77,5 +85,20 @@ void DeathSystem::manageScore(GameEngine& gameContext, int deadEntityId) const {
         cout << "ID entidad: " << deadEntityId << "\n";
         cout << "Game Object Entidad: " << (int)gameContext.entityMan.getEntity(deadEntityId).getGameObjectType() << "\n";
 
+    }
+}
+
+
+void DeathSystem::disableTurret(GameEngine& gameContext, int turretID) const {
+    // This entity can be a turret platform or a turret canon
+    if (gameContext.entityMan.existsComponent<TurretComponent>(turretID)) {
+        TurretComponent& turretComp = gameContext.entityMan.getComponent<TurretComponent>(turretID);
+
+        turretComp.disabled = true;
+        if (turretComp.inUse) {
+            gameContext.entityMan.getComponent<InputComponent>(turretComp.userID).usingTurret = false;
+        }
+
+        gameContext.entityMan.eraseComponent<ColliderComponent>(turretID);
     }
 }

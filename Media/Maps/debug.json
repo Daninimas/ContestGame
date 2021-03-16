@@ -31,6 +31,29 @@
          "layers":[
                 {
                  "draworder":"topdown",
+                 "id":17,
+                 "name":"PLAYER",
+                 "objects":[
+                        {
+                         "gid":3,
+                         "height":512,
+                         "id":146,
+                         "name":"",
+                         "rotation":0,
+                         "type":"",
+                         "visible":true,
+                         "width":512,
+                         "x":-112,
+                         "y":424
+                        }],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
+                }, 
+                {
+                 "draworder":"topdown",
                  "id":5,
                  "name":"phase_size",
                  "objects":[
@@ -197,6 +220,17 @@
                          "width":76,
                          "x":802,
                          "y":380
+                        }, 
+                        {
+                         "height":60,
+                         "id":147,
+                         "name":"",
+                         "rotation":0,
+                         "type":"PLATFORM",
+                         "visible":true,
+                         "width":86,
+                         "x":150,
+                         "y":346
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -232,8 +266,8 @@
                          "rotation":0,
                          "type":"",
                          "visible":true,
-                         "width":3644.94333333333,
-                         "x":629.666666666667,
+                         "width":3644.94,
+                         "x":629.667,
                          "y":-128
                         }],
                  "opacity":1,
@@ -567,8 +601,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":16,
- "nextobjectid":146,
+ "nextlayerid":18,
+ "nextobjectid":148,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.4.3",
@@ -581,6 +615,10 @@
         {
          "firstgid":2,
          "source":"Patters\/SPAWNER_pat.tsx"
+        }, 
+        {
+         "firstgid":3,
+         "source":"Patters\/PLAYER_pat.tsx"
         }],
  "tilewidth":100,
  "type":"map",

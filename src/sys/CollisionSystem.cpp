@@ -76,7 +76,7 @@ void CollisionSystem::calculateCollisions(GameEngine& gameContext) const {
                         else if (colliderB.type == ColliderType::DYNAMIC) {
                             undoCollision(gameContext, colliderA, colliderB);
                         }
-                        // No one is dynamic, don't need to resolve
+                        // No one is dynamic, don't need to resolve                        
                     }
 
                 }
@@ -158,6 +158,18 @@ void CollisionSystem::undoCollision(GameEngine& gameContext, ColliderComponent& 
 
     float overlapX = calculateIntersection(mobileBounding.xLeft, mobileBounding.xRight, solidBounding.xLeft, solidBounding.xRight);
     float overlapY = calculateIntersection(mobileBounding.yUp, mobileBounding.yDown, solidBounding.yUp, solidBounding.yDown);
+
+
+    // First check the collision with the platform and check if we dont have to undoCollision
+    bool undoColl = true;
+    if (solidCol.collisionLayer == ColliderComponent::Platform) {
+        if (overlapX == 0 || (overlapY != 0 && std::abs(overlapY) <= std::abs(overlapX)) )
+            undoColl = checkCollisionWithPlatform(gameContext, solidCol, mobileCol, sitSolid, sitMobile, overlapY);
+        else
+            return;
+    }
+    if (!undoColl)
+        return;
    
 
     if ( overlapX == 0 || (overlapY != 0 && std::abs(overlapY) <= std::abs(overlapX)) ) {
@@ -237,4 +249,33 @@ void CollisionSystem::clearCollisions(ColliderComponent& collider) const {
     };
 
     clearCollidersID(collider.boundingRoot);
+}
+
+
+bool CollisionSystem::checkCollisionWithPlatform(GameEngine& gameContext, ColliderComponent& platformColl, ColliderComponent& entityColl, SituationComponent& platformSit, SituationComponent& entitySit, float overlapY) const {
+    //std::cout << "platformSit y: " << platformSit.position.y << " entitySit y: " << entitySit.position.y << " entityColl yDown: " << entityColl.boundingRoot.bounding.yDown << " overlapY: " << abs(overlapY) << "\n";
+    float bias = 2.9f; // This bias is for solving when you press down, cuanto más grande, el jugador tiene que pulsar durante más tiempo hacia abajo, pero si hay pocos fps o va muy rápido, puede que no coja al jugador cuando está encima de la plataforma
+    if (abs(overlapY) > bias) {
+        overlapY = bias;
+    }
+    // Todas las plataformas por encima de la parte inferior de la entidad no colisionan
+    if (platformSit.position.y > (entitySit.position.y + entityColl.boundingRoot.bounding.yDown - abs(overlapY)-0.1f)) {
+        // Cuando la entidad va hacia arriba, no colisiona
+        if (gameContext.entityMan.existsComponent<VelocityComponent>(entityColl.id)) {
+            if (gameContext.entityMan.getComponent<VelocityComponent>(entityColl.id).velocity.y >= 0.f) {
+                // Por ultimo, si es el jugador y ha pulsado hacia abajo
+                if (entityColl.id == WorldElementsData::playerId) {
+                    if (gameContext.entityMan.getComponent<InputComponent>(entityColl.id).movingDown == false) {
+                        return true;
+                    }
+                }
+                else
+                {
+                    return true;
+                }
+            }
+        }
+    }
+
+    return false;
 }

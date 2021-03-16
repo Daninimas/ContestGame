@@ -24,7 +24,9 @@ public:
         Weapon        = 0x20,
         Shield        = 0x40,
         PlayerShield  = 0x80,
-        Trigger       = 0x100
+        Trigger       = 0x100,
+        Platform      = 0x200,   // This are the platforms that collide only from the top part
+        Turret        = 0x400
     };
 
 

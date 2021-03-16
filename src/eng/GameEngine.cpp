@@ -60,38 +60,41 @@ void GameEngine::init() {
 }
 
 void GameEngine::setPlayingSystems() {
-    systems.emplace_back(std::make_unique<SensorSystem>());
-    systems.emplace_back(std::make_unique<AIDroneSystem>());
-    systems.emplace_back(std::make_unique<AIMeleeSystem>());
-    systems.emplace_back(std::make_unique<AIDistanceSystem>());
-    systems.emplace_back(std::make_unique<AITransformationSystem>());
-    systems.emplace_back(std::make_unique<InputSystem>());
-    systems.emplace_back(std::make_unique<InputJoystickSystem>());
-    systems.emplace_back(std::make_unique<AttackSystem>());
-    systems.emplace_back(std::make_unique<PickWeaponsSystem>());
-    systems.emplace_back(std::make_unique<AIChaseSystem>());
-    systems.emplace_back(std::make_unique<AIFlyingChaseSystem>());
-    systems.emplace_back(std::make_unique<AIPounceSystem>());
-    systems.emplace_back(std::make_unique<BombSystem>());
-    systems.emplace_back(std::make_unique<AIBombDropSystem>());
-    systems.emplace_back(std::make_unique<DodgeSystem>());
-    systems.emplace_back(std::make_unique<SpawnSystem>());
-    systems.emplace_back(std::make_unique<PickPowerUpSystem>());
-    systems.emplace_back(std::make_unique<FurySystem>());
-    systems.emplace_back(std::make_unique<PhaseSystem>());
-    systems.emplace_back(std::make_unique<TriggerSystem>());
-
-    
-    systemsLate.emplace_back(std::make_unique<ShieldSystem>());
-    systemsLate.emplace_back(std::make_unique<CollisionSystem>()); // Collision 2 veces, esto es lo mejor para que todo funcione, pero sera mejor hacer lo de los hilos para resolver las colisiones
-    systemsLate.emplace_back(std::make_unique<PhysicsSystem>());
-    systemsLate.emplace_back(std::make_unique<CollisionSystem>());
-    systemsLate.emplace_back(std::make_unique<AnimationSystem>());
-    systemsLate.emplace_back(std::make_unique<CameraSystem>());
-    systemsLate.emplace_back(std::make_unique<HealthSystem>());
-    systemsLate.emplace_back(std::make_unique<DeathSystem>());
-    systemsLate.emplace_back(std::make_unique<HUDSystem>());
-    systemsLate.emplace_back(std::make_unique<WorldSystem>());
+    systems.emplace_back(std::make_unique<AutodeleteSystem>());         // 00
+    systems.emplace_back(std::make_unique<SensorSystem>());             // 01
+    systems.emplace_back(std::make_unique<AIDroneSystem>());            // 02
+    systems.emplace_back(std::make_unique<AIMeleeSystem>());            // 03
+    systems.emplace_back(std::make_unique<AIDistanceSystem>());         // 04
+    systems.emplace_back(std::make_unique<AITransformationSystem>());   // 05
+    systems.emplace_back(std::make_unique<InputSystem>());              // 06
+    systems.emplace_back(std::make_unique<InputJoystickSystem>());      // 07
+    systems.emplace_back(std::make_unique<OrbitalWeaponSystem>());      // 08
+    systems.emplace_back(std::make_unique<AttackSystem>());             // 09
+    systems.emplace_back(std::make_unique<PickWeaponsSystem>());        // 10
+    systems.emplace_back(std::make_unique<AIChaseSystem>());            // 11
+    systems.emplace_back(std::make_unique<AIFlyingChaseSystem>());      // 12
+    systems.emplace_back(std::make_unique<AIPounceSystem>());           // 13
+    systems.emplace_back(std::make_unique<BombSystem>());               // 14
+    systems.emplace_back(std::make_unique<AIBombDropSystem>());         // 15
+    systems.emplace_back(std::make_unique<DodgeSystem>());              // 16
+    systems.emplace_back(std::make_unique<SpawnSystem>());              // 17
+    systems.emplace_back(std::make_unique<PickPowerUpSystem>());        // 18
+    systems.emplace_back(std::make_unique<FurySystem>());               // 19
+    systems.emplace_back(std::make_unique<PhaseSystem>());              // 20
+    systems.emplace_back(std::make_unique<TriggerSystem>());            // 21
+    systems.emplace_back(std::make_unique<TurretSystem>());            // 22
+                                                                        
+                                                                        
+    systemsLate.emplace_back(std::make_unique<ShieldSystem>());         // 23
+    systemsLate.emplace_back(std::make_unique<CollisionSystem>());      // 24            // Collision 2 veces, esto es lo mejor para que todo funcione, pero sera mejor hacer lo de los hilos para resolver las colisiones
+    systemsLate.emplace_back(std::make_unique<PhysicsSystem>());        // 25
+    systemsLate.emplace_back(std::make_unique<CollisionSystem>());      // 26
+    systemsLate.emplace_back(std::make_unique<AnimationSystem>());      // 27
+    systemsLate.emplace_back(std::make_unique<CameraSystem>());         // 28
+    systemsLate.emplace_back(std::make_unique<HealthSystem>());         // 29
+    systemsLate.emplace_back(std::make_unique<DeathSystem>());          // 30
+    systemsLate.emplace_back(std::make_unique<HUDSystem>());            // 31
+    systemsLate.emplace_back(std::make_unique<WorldSystem>());          // 32
 }
 
 void GameEngine::setMenuSystems(GameObjectType const menu) {
@@ -158,7 +161,7 @@ void GameEngine::run() {
 
             deltaFromLastUpdate += deltaTime;
             if (deltaFromLastUpdate >= DELTA_TO_UPDATE) {
-
+                manageFPS();
 
                 std::chrono::time_point<std::chrono::system_clock> allChronoInit;
                 allChronoInit = std::chrono::system_clock::now();
@@ -238,6 +241,7 @@ void GameEngine::run() {
         } else {
             deltaFromLastUpdate += deltaTime;
             if (deltaFromLastUpdate >= DELTA_TO_UPDATE) {
+                manageFPS();
                 update();
                 updateSound();
                 deltaFromLastUpdate = 0;
@@ -277,17 +281,37 @@ void GameEngine::updateWithTimers() {
         }
     }
 
+    for (size_t i = 0; i < systemsLate.size(); ++i) {
+        std::chrono::time_point<std::chrono::system_clock> thenS;
+        thenS = std::chrono::system_clock::now();
+
+        systemsLate[i]->update(*this);
+
+        std::chrono::time_point<std::chrono::system_clock> nowS;
+        nowS = std::chrono::system_clock::now();
+        std::chrono::duration<float, std::milli> elapsed_time = nowS - thenS;
+        systemTimes.at(i + systems.size())[timesUpdated_sys] = elapsed_time.count();
+        if (timesUpdated_sys == MAX_TIMES - 1) {
+            // get the average of the system
+            float total = 0.f;
+            for (int x = 0; x < MAX_TIMES; ++x) {
+                total += systemTimes.at(i + systems.size())[x];
+            }
+            cout << "The system: " << (int)(i + systems.size()) << " has spent: " << total / MAX_TIMES << endl;
+        }
+    }
 
     if(timesUpdated_sys == MAX_TIMES - 1)
         timesUpdated_sys = 0;
     else
         ++timesUpdated_sys;
 
-
+    updateEntitiesInWindow();
 }
 
 void GameEngine::update() {
 
+    // Reset entities to update
     entityMan.clearEntitiesToUpdate();
 
     for (size_t i = 0; i < systems.size(); ++i) {
@@ -319,9 +343,6 @@ void GameEngine::render() {
 void GameEngine::updateEntitiesInWindow() {
     // Update situation in engine
     windowFacade.updateEntities(*this, entityMan.getEntitiesToUpdate());
-
-    // Reset entities to update
-    entityMan.clearEntitiesToUpdate();
 }
 
 void GameEngine::setPlaying(const bool p) {
@@ -346,7 +367,19 @@ void GameEngine::calculateDeltaTime(std::chrono::time_point<std::chrono::system_
 
     // FPS counter
     //int fps   = 1 / elapsed_time.count();
-    //std::cout << "FPS: " << fps << std::endl;
+    //std::cout << "FPS: " << fps << std::endl;    
+}
+
+void GameEngine::manageFPS() {
+    // New FPS counter
+    frameTimeCounter += deltaFromLastUpdate;
+    if (frameTimeCounter >= 1.f) { // When a second has passed
+        windowFacade.updateFPSTextNode(framesPassed);
+        framesPassed = 0;
+        frameTimeCounter = 0.f;
+    }
+
+    ++framesPassed;
 }
 
 WindowFacade &GameEngine::getWindowFacadeRef() {
@@ -399,6 +432,16 @@ void GameEngine::eraseEntityByID(int id) {
         }
     }
     //getSoundFacadeRef().setParameterEventByID(id, STOP_SOUND);
+
+    // Erase canon on turret (NUNCA DESTRUIR UNA TORRETA A MANO)
+    if (entityMan.existsComponent<TurretComponent>(id)) {
+        eraseEntityByID(entityMan.getComponent<TurretComponent>(id).turretGunID);
+
+        TurretComponent& turretComp = entityMan.getComponent<TurretComponent>(id);
+        if (turretComp.inUse) {
+            entityMan.getComponent<InputComponent>(turretComp.userID).usingTurret = false;
+        }
+    }
 
     // Subtract enemy from world 
     if (entityType == EntityType::ENEMY || entityType == EntityType::SPAWNER || gameObjectType == GameObjectType::DRONE_ENEMY) {
