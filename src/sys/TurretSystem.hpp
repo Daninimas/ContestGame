@@ -19,6 +19,6 @@ private:
     void exitTurret(GameEngine& gameContext, InputComponent& userInput, TurretComponent& turret) const;
 
     void manageShoot(GameEngine& gameContext, TurretComponent& turret) const;
-
+    void manageGunRotation(GameEngine& gameContext, TurretComponent& turret, InputComponent& userInput) const;
 
 };

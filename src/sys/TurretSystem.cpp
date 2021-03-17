@@ -92,6 +92,8 @@ void TurretSystem::manageTurretUsage(GameEngine& gameContext, TurretComponent& t
 		return;
 	}
 
+	manageGunRotation(gameContext, turret, userInput);
+
 	if (userInput.attacking) {
 		manageShoot(gameContext, turret);
 	}
@@ -103,13 +105,10 @@ void TurretSystem::exitTurret(GameEngine& gameContext, InputComponent& userInput
 
 	// Input 
 	userInput.usingTurret = false;
-
 	// userColl
 	userColl.weight = 2.f;
-
 	// turretColl
 	turretColl.layerMasc = ColliderComponent::NoLayer;
-
 	// Turret
 	turret.inUse = false;
 
@@ -123,9 +122,32 @@ void TurretSystem::manageShoot(GameEngine& gameContext, TurretComponent& turret)
 
 	if (turretWeapon.cooldown > turretWeapon.maxCooldown) {
 		// Set velocity to weapon
-		turretWeapon.attackVel.x = turretWeapon.attackGeneralVelociy * cos(gunTurretComp.currentRotation);
-		turretWeapon.attackVel.y = turretWeapon.attackGeneralVelociy * sin(gunTurretComp.currentRotation);
+		turretWeapon.attackVel.x = turretWeapon.attackGeneralVelociy * sin(Utils::degToRad(gunTurretComp.currentRotation + 90.f));
+		turretWeapon.attackVel.y = turretWeapon.attackGeneralVelociy * cos(Utils::degToRad(gunTurretComp.currentRotation + 90.f));
 
 		gunTurretComp.createAttack = true;
 	}
+}
+
+
+void TurretSystem::manageGunRotation(GameEngine& gameContext, TurretComponent& turret, InputComponent& userInput) const {
+	GunTurretComponent& gunTurretComp = gameContext.entityMan.getComponent<GunTurretComponent>(turret.turretGunID);
+	SituationComponent& TurretGunSit = gameContext.entityMan.getComponent<SituationComponent>(turret.turretGunID);
+	float inverted = 1.f; // Es o 1 o -1, para que dependiendo el facing el subir o el bajar hagan lo contrario
+
+	if (TurretGunSit.facing == SituationComponent::Left) {
+		inverted = -1.f;
+	}
+
+	if (userInput.movingDown) {
+		gunTurretComp.currentRotation -= gunTurretComp.gunRotationSpeed * gameContext.getDeltaTime() * inverted;
+	}
+	if (userInput.movingUp) {
+		gunTurretComp.currentRotation += gunTurretComp.gunRotationSpeed * gameContext.getDeltaTime() * inverted;
+	}
+
+	gunTurretComp.currentRotation = std::clamp(gunTurretComp.currentRotation, gunTurretComp.minRotation, gunTurretComp.maxRotation);
+	TurretGunSit.rotation = gunTurretComp.currentRotation;
+
+	gameContext.entityMan.addEntityToUpdate(turret.turretGunID); // Update canon in the sfml engine
 }

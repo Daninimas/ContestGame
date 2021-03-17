@@ -661,7 +661,7 @@ int EntityManager::createCamera(GameEngine& gameContext, Vector2 position, float
 
     // Camera
     cameraComp.viewRect = {600, 400 };
-    cameraComp.zoom = 1.5f;
+    cameraComp.zoom = 1.f;
     cameraComp.offset = { 10.f, 70.f};
     cameraComp.cameraAdvancement = 150.f;
 
@@ -1082,8 +1082,8 @@ int EntityManager::createTurretGun(GameEngine& gameContext, Vector2 position, ui
     if (facing == SituationComponent::Left) {
         gunTurretComp.currentRotation = 180.f;
     }
-    gunTurretComp.gunRotationSpeed = 30.f;
-    gunTurretComp.maxRotation = 180.f;
+    gunTurretComp.gunRotationSpeed = 50.f;
+    gunTurretComp.maxRotation = 80.f;
     gunTurretComp.minRotation = -10.f;
 
     //######### RENDER ########//

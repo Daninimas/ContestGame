@@ -26,7 +26,7 @@ SFMLEngine::SFMLEngine(int width, int height, bool fullscreen) {
 	FPSTextNode.setFillColor({ 68, 255, 0, 255 });
 	FPSTextNode.setFont(font);
 	FPSTextNode.setCharacterSize(20);
-	//renderFPS = true;
+	renderFPS = true;
 }
 SFMLEngine::~SFMLEngine() {
 	device.get()->close();
@@ -224,7 +224,7 @@ void SFMLEngine::updateNode(GameEngine& gameContext, sf::Sprite& node, int id) {
 	node.setOrigin(0,0);
 
 	node.setPosition(situation.position.x, situation.position.y);
-	node.setRotation(situation.rotation);
+	node.setRotation(-situation.rotation);
 	node.setScale(situation.scale.x, situation.scale.y);
 
 	if (situation.facing == SituationComponent::Left) {
@@ -337,7 +337,7 @@ void SFMLEngine::updateText(GameEngine& gameContext, sf::Text& textNode, int id)
 	TextComponent& textComp = gameContext.entityMan.getComponent<TextComponent>(id);
 
 	textNode.setPosition(situation.position.x, situation.position.y);
-	textNode.setRotation(situation.rotation);
+	textNode.setRotation(-situation.rotation);
 	textNode.setFont(font);
 	textNode.setString(textComp.text);
 	textNode.setCharacterSize(textComp.size);

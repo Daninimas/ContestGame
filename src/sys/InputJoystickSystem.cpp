@@ -142,4 +142,9 @@ void InputJoystickSystem::setAnimationToPlayer(GameEngine& gameContext) const {
     if (playerInput.actualMovement == 0xFF) {
         AnimationManager::setAnimationToEntity(gameContext, Animation::IDLE, animComp);
     }
+
+    // Set animation in turret
+    if (playerInput.usingTurret == true) {
+        AnimationManager::setAnimationToEntity(gameContext, Animation::IDLE, animComp);
+    }
 }
