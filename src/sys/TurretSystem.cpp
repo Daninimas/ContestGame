@@ -59,6 +59,7 @@ void TurretSystem::enterInTurret(GameEngine& gameContext, TurretComponent& turre
 	ColliderComponent& userColl   = gameContext.entityMan.getComponent<ColliderComponent>(userID);
 	SituationComponent& userSit   = gameContext.entityMan.getComponent<SituationComponent>(userID);
 	SituationComponent& turretSit = gameContext.entityMan.getComponent<SituationComponent>(turret.id);
+	DistanceWeaponComponent& turretWeapon = gameContext.entityMan.getComponent<DistanceWeaponComponent>(turret.turretGunID);
 
 	// Collider
 	turretColl.layerMasc = userColl.layerMasc;
@@ -77,6 +78,10 @@ void TurretSystem::enterInTurret(GameEngine& gameContext, TurretComponent& turre
 		userSit.position.x = turretSit.position.x + turretColl.boundingRoot.bounding.xRight - turret.offsetX - userColl.boundingRoot.bounding.xRight;
 		userSit.facing = SituationComponent::Right;
 	}
+
+	// Distasnce weapon
+	// For solving the problem of shooting when the player enters
+	turretWeapon.cooldown = 0.f;
 
 
 	std::cout << "entro en la torreta\n";

@@ -65,14 +65,14 @@ void StaticEntitiesSystem::init(GameEngine& gameContext) const {
     gameContext.entityMan.createWeapon(gameContext, Vector2(250, 310.f), 0.f, GameObjectType::KNIFE);
     gameContext.entityMan.createWeapon(gameContext, Vector2(450, 360.f), 0.f, GameObjectType::M4);
     gameContext.entityMan.createWeapon(gameContext, Vector2(100.f, 200.f), 0.f, GameObjectType::GRENADE_LAUNCHER);
-    gameContext.entityMan.createWeapon(gameContext, Vector2(200, 310.f), 0.f, GameObjectType::LASER_GUN);*/
-    gameContext.entityMan.createWeapon(gameContext, Vector2(100.f, 200.f), 0.f, GameObjectType::SHOTGUN);
+    gameContext.entityMan.createWeapon(gameContext, Vector2(200, 310.f), 0.f, GameObjectType::LASER_GUN);
+    gameContext.entityMan.createWeapon(gameContext, Vector2(100.f, 200.f), 0.f, GameObjectType::SHOTGUN);*/
 
 
     gameContext.entityMan.createCamera(gameContext, Vector2(0, 0), 0.f, GameObjectType::NONE);
 
 
-    gameContext.entityMan.createPowerUp(gameContext, Vector2(150.f, 300), 0.f, GameObjectType::POWERUP_SHIELD);
+    //gameContext.entityMan.createPowerUp(gameContext, Vector2(150.f, 300), 0.f, GameObjectType::POWERUP_SHIELD);
 
 
     gameContext.entityMan.createHUDElement(gameContext, Vector2(10.f, 10.f), 0.f, GameObjectType::HUD_PLAYER_HEALTH);
@@ -80,7 +80,7 @@ void StaticEntitiesSystem::init(GameEngine& gameContext) const {
     gameContext.entityMan.createHUDElement(gameContext, Vector2(10.f, 70.f), 0.f, GameObjectType::HUD_PLAYER_LIFES);
     gameContext.entityMan.createHUDElement(gameContext, Vector2(280.f, 10.f), 0.f, GameObjectType::HUD_PLAYER_SCORE);
 
-    gameContext.entityMan.createTurret(gameContext, Vector2(50.f, 370.f), SituationComponent::Right);
+    //gameContext.entityMan.createTurret(gameContext, Vector2(50.f, 370.f), SituationComponent::Right);
 
     //MapLoader::loadMapPhase(gameContext, "Media/Maps/debug.json", "Phase1");
 

@@ -24,6 +24,7 @@ private:
     static void setEnemyObjective(GameEngine& gameContext, int enemyId);
     static void setTriggerData(GameEngine& gameContext, int triggerId, tson::Object& obj);
     static TriggerFunction getTriggerFunction(const std::string func);
+    static uint8_t getFacing(const std::string facingString);
 
 
 
@@ -76,6 +77,11 @@ private:
         { "PLAY_MUSIC", TriggerFunction::PLAY_MUSIC },
         { "PLAY_SOUND", TriggerFunction::PLAY_SOUND },
         { "CREATE_ENTITY", TriggerFunction::CREATE_ENTITY }
+    };
+
+    static inline std::map<std::string, uint8_t> facingMap {    // Este mapa sirve para saber desde un string el facing 
+        { "Left", SituationComponent::Left },
+        { "Right", SituationComponent::Right }
     };
 };
 

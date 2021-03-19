@@ -661,7 +661,7 @@ int EntityManager::createCamera(GameEngine& gameContext, Vector2 position, float
 
     // Camera
     cameraComp.viewRect = {600, 400 };
-    cameraComp.zoom = 1.f;
+    cameraComp.zoom = 3.f;
     cameraComp.offset = { 10.f, 70.f};
     cameraComp.cameraAdvancement = 150.f;
 

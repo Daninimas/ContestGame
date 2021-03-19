@@ -69,20 +69,20 @@ void GameEngine::setPlayingSystems() {
     systems.emplace_back(std::make_unique<InputSystem>());              // 06
     systems.emplace_back(std::make_unique<InputJoystickSystem>());      // 07
     systems.emplace_back(std::make_unique<OrbitalWeaponSystem>());      // 08
-    systems.emplace_back(std::make_unique<AttackSystem>());             // 09
-    systems.emplace_back(std::make_unique<PickWeaponsSystem>());        // 10
-    systems.emplace_back(std::make_unique<AIChaseSystem>());            // 11
-    systems.emplace_back(std::make_unique<AIFlyingChaseSystem>());      // 12
-    systems.emplace_back(std::make_unique<AIPounceSystem>());           // 13
-    systems.emplace_back(std::make_unique<BombSystem>());               // 14
-    systems.emplace_back(std::make_unique<AIBombDropSystem>());         // 15
-    systems.emplace_back(std::make_unique<DodgeSystem>());              // 16
-    systems.emplace_back(std::make_unique<SpawnSystem>());              // 17
-    systems.emplace_back(std::make_unique<PickPowerUpSystem>());        // 18
-    systems.emplace_back(std::make_unique<FurySystem>());               // 19
-    systems.emplace_back(std::make_unique<PhaseSystem>());              // 20
-    systems.emplace_back(std::make_unique<TriggerSystem>());            // 21
-    systems.emplace_back(std::make_unique<TurretSystem>());            // 22
+    systems.emplace_back(std::make_unique<TurretSystem>());             // 09
+    systems.emplace_back(std::make_unique<AttackSystem>());             // 10
+    systems.emplace_back(std::make_unique<PickWeaponsSystem>());        // 11
+    systems.emplace_back(std::make_unique<AIChaseSystem>());            // 12
+    systems.emplace_back(std::make_unique<AIFlyingChaseSystem>());      // 13
+    systems.emplace_back(std::make_unique<AIPounceSystem>());           // 14
+    systems.emplace_back(std::make_unique<BombSystem>());               // 15
+    systems.emplace_back(std::make_unique<AIBombDropSystem>());         // 16
+    systems.emplace_back(std::make_unique<DodgeSystem>());              // 17
+    systems.emplace_back(std::make_unique<SpawnSystem>());              // 18
+    systems.emplace_back(std::make_unique<PickPowerUpSystem>());        // 19
+    systems.emplace_back(std::make_unique<FurySystem>());               // 20
+    systems.emplace_back(std::make_unique<PhaseSystem>());              // 21
+    systems.emplace_back(std::make_unique<TriggerSystem>());            // 22
                                                                         
                                                                         
     systemsLate.emplace_back(std::make_unique<ShieldSystem>());         // 23

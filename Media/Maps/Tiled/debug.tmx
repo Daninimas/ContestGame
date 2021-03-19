@@ -1,94 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="100" tileheight="100" infinite="1" nextlayerid="18" nextobjectid="148">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="100" tileheight="100" infinite="1" nextlayerid="22" nextobjectid="160">
  <editorsettings>
   <export target="../debug.json" format="json"/>
  </editorsettings>
  <tileset firstgid="1" source="../Patters/WALL_pat.tsx"/>
  <tileset firstgid="2" source="../Patters/SPAWNER_pat.tsx"/>
  <tileset firstgid="3" source="../Patters/PLAYER_pat.tsx"/>
+ <tileset firstgid="4" source="../Patters/WEAPON_pat.tsx"/>
+ <tileset firstgid="7" source="../Patters/ENEMY_pat.tsx"/>
  <layer id="1" name="Capa de patrones 1" width="100" height="100">
   <data encoding="base64"/>
  </layer>
- <group id="3" name="Phase1">
+ <group id="3" name="Phase1" offsetx="-928" offsety="800">
   <properties>
    <property name="Direction" value="Right"/>
   </properties>
   <objectgroup id="17" name="PLAYER">
-   <object id="146" gid="3" x="-112" y="424" width="512" height="512"/>
+   <object id="146" gid="3" x="40" y="1440" width="512" height="512"/>
   </objectgroup>
   <objectgroup id="5" name="phase_size">
-   <object id="71" x="0" y="-104" width="865.34" height="732"/>
+   <object id="71" x="40" y="-1720" width="5789.34" height="3996"/>
+  </objectgroup>
+  <objectgroup id="18" name="WEAPON">
+   <object id="152" type="SHOTGUN" gid="6" x="2420" y="921" width="152" height="65"/>
   </objectgroup>
   <objectgroup color="#ff0000" id="15" name="DAMAGE_PLATFORM">
-   <object id="141" type="DAMAGE_PLATFORM" x="470.667" y="326.303" width="93.9394" height="66.3636">
+   <object id="141" type="DAMAGE_PLATFORM" x="119.273" y="2024" width="5663.52" height="170.364">
     <properties>
-     <property name="Damage" type="int" value="2"/>
+     <property name="Damage" type="int" value="100"/>
     </properties>
    </object>
   </objectgroup>
   <objectgroup color="#00aa00" id="13" name="TRIGGER">
-   <object id="139" type="TRIGGER" x="70.667" y="300" width="61.3333" height="96">
+   <object id="139" type="TRIGGER" x="457.939" y="615.879" width="164.364" height="786.909">
     <properties>
      <property name="Function" value="PLAY_MUSIC"/>
      <property name="soundPath" value="./Media/Sound/Music/darren-curtis-intruder-aboard.wav"/>
     </properties>
    </object>
-   <object id="140" type="TRIGGER" x="696" y="305.333" width="61.3333" height="96">
+   <object id="140" type="TRIGGER" x="6371.39" y="-1358.3" width="61.3333" height="96">
     <properties>
      <property name="Function" value="PLAY_SOUND"/>
      <property name="soundPath" value="./Media/Sound/Weapons/veryBigExplosion.wav"/>
     </properties>
    </object>
   </objectgroup>
+  <objectgroup id="19" name="ENEMY">
+   <object id="158" gid="8" x="2000" y="1488" width="512" height="512"/>
+   <object id="159" gid="8" x="2640" y="1496" width="512" height="512"/>
+  </objectgroup>
   <objectgroup id="4" name="SPAWNER">
-   <object id="82" type="ENEMY_SPIDER" gid="2" x="301.273" y="366.242" width="20" height="20"/>
+   <object id="82" type="ENEMY_SPIDER" gid="2" x="6029.09" y="-2054.55" width="20" height="20"/>
   </objectgroup>
   <objectgroup color="#0055ff" id="2" name="WALL">
-   <object id="142" type="WALL" x="0" y="400" width="634" height="32"/>
-   <object id="143" type="WALL" x="633" y="406" width="170" height="28"/>
-   <object id="144" type="WALL" x="802" y="380" width="76" height="70"/>
-   <object id="147" type="PLATFORM" x="150" y="346" width="86" height="60"/>
-  </objectgroup>
- </group>
- <group id="7" name="Phase2">
-  <properties>
-   <property name="Direction" value="Down"/>
-  </properties>
-  <objectgroup id="9" name="phase_size">
-   <object id="115" x="629.667" y="-128" width="3644.94" height="1161.82"/>
-  </objectgroup>
-  <objectgroup color="#0055ff" id="6" name="WALL">
-   <object id="103" type="WALL" gid="1" x="872" y="396.576" width="100" height="10"/>
-   <object id="104" type="WALL" gid="1" x="975.03" y="396.576" width="100" height="10"/>
-   <object id="105" type="WALL" gid="1" x="1084.12" y="396.576" width="100" height="10"/>
-   <object id="106" type="WALL" gid="1" x="1184.12" y="335.97" width="100" height="10"/>
-   <object id="107" type="WALL" gid="1" x="1296.24" y="332.94" width="100" height="10"/>
-   <object id="108" type="WALL" gid="1" x="1392.06" y="371.97" width="100" height="10"/>
-   <object id="109" type="WALL" gid="1" x="1547.94" y="337.425" width="100" height="10"/>
-   <object id="110" type="WALL" gid="1" x="1647.34" y="337.546" width="100" height="10"/>
-   <object id="111" type="WALL" gid="1" x="1746" y="337.546" width="100" height="10"/>
-   <object id="112" type="WALL" gid="1" x="1846" y="337.546" width="100" height="10"/>
-   <object id="145" type="WALL" x="2024" y="332" width="2208" height="52"/>
-  </objectgroup>
- </group>
- <group id="10" name="Phase3">
-  <properties>
-   <property name="Direction" value="Right"/>
-  </properties>
-  <objectgroup id="12" name="phase_size">
-   <object id="128" x="1298.3" y="971.758" width="1088" height="400"/>
-  </objectgroup>
-  <objectgroup id="11" name="WALL">
-   <object id="129" type="WALL" gid="1" x="2230.3" y="1275.76" width="100" height="10"/>
-   <object id="130" type="WALL" gid="1" x="2130.3" y="1275.76" width="100" height="10"/>
-   <object id="131" type="WALL" gid="1" x="2030.3" y="1275.76" width="100" height="10"/>
-   <object id="132" type="WALL" gid="1" x="1930.3" y="1275.76" width="100" height="10"/>
-   <object id="133" type="WALL" gid="1" x="1830.3" y="1275.76" width="100" height="10"/>
-   <object id="134" type="WALL" gid="1" x="1730.3" y="1275.76" width="100" height="10"/>
-   <object id="135" type="WALL" gid="1" x="1630.3" y="1275.76" width="100" height="10"/>
-   <object id="136" type="WALL" gid="1" x="1530.3" y="1275.76" width="100" height="10"/>
-   <object id="137" type="WALL" gid="1" x="1430.3" y="1275.76" width="100" height="10"/>
-   <object id="138" type="WALL" gid="1" x="1330.3" y="1275.76" width="100" height="10"/>
+   <object id="142" type="WALL" x="40" y="1416" width="3033.64" height="113.818"/>
+   <object id="147" type="PLATFORM" x="979.394" y="1193.76" width="598" height="204"/>
+   <object id="148" type="WALL" x="3715.18" y="1416" width="1593.64" height="113.818"/>
+   <object id="149" type="WALL" x="5307.18" y="1271.09" width="553.64" height="257.818"/>
+   <object id="150" type="PLATFORM" x="1421" y="1026" width="598" height="388"/>
+   <object id="151" type="PLATFORM" x="2389" y="958" width="182" height="444"/>
+   <object id="154" type="WALL" x="1267.18" y="1335.09" width="241.64" height="97.818"/>
   </objectgroup>
  </group>
 </map>

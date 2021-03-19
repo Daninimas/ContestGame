@@ -136,6 +136,10 @@ void MapLoader::createObject(GameEngine& gameContext, std::string layerName, tso
             uint16_t damage = obj.get<int>("Damage");
             gameContext.entityMan.createDamagePlatform(gameContext, Vector2(position.x, position.y), Vector2(size.x, size.y), damage, goType);
         }
+        else if (layerName == "TURRET") {
+            uint8_t facing = getFacing(obj.get<std::string>("Facing"));
+            gameContext.entityMan.createTurret(gameContext, Vector2(position.x, position.y), facing);
+        }
     }
     else {
         // Error on the type of the object
@@ -153,13 +157,24 @@ GameObjectType MapLoader::getGameObject(const std::string objType) { // if not f
         return GameObjectType::ERROR;
 }
 
-uint8_t MapLoader::getDirection(const std::string dir) { // if not found, return GameObject ERROR
+uint8_t MapLoader::getDirection(const std::string dir) { // if not found, return 0
     auto it = directionMap.find(dir);
 
     if (it != directionMap.end())
         return it->second;
     else {
         cout << "ERROR LOADING DIRECTION: " << dir << "\n";
+        return 0;
+    }
+}
+
+uint8_t MapLoader::getFacing(const std::string facingString) { // if not found, return 0
+    auto it = facingMap.find(facingString);
+
+    if (it != facingMap.end())
+        return it->second;
+    else {
+        cout << "ERROR LOADING FACING: " << facingString << "\n";
         return 0;
     }
 }
