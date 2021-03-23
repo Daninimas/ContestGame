@@ -241,6 +241,9 @@ bool AttackSystem::createMeleeAttack(GameEngine& gameContext, MeleeWeaponCompone
 			}
 		}
 
+		// Add attack spawn threshold
+		attackPos.x += meleeAttacker.spawnAttackPos.x;
+		attackPos.y += meleeAttacker.spawnAttackPos.y;
 
 		int attackId = gameContext.entityMan.createAttack(gameContext, attackPos, 0.f, attackGOtype);
 
@@ -333,7 +336,12 @@ void AttackSystem::createLaserAttack(GameEngine& gameContext, DistanceWeaponComp
 		attackGOtype = GameObjectType::PLAYER_LASER;
 	}
 
-	int attackId = gameContext.entityMan.createAttack(gameContext, attackerSit.position, 0.f, attackGOtype);
+	// Add attack spawn threshold
+	Vector2 attackPos = attackerSit.position;
+	attackPos.x += distanceWeaponAttacker.spawnAttackPos.x;
+	attackPos.y += distanceWeaponAttacker.spawnAttackPos.y;
+
+	int attackId = gameContext.entityMan.createAttack(gameContext, attackPos, 0.f, attackGOtype);
 
 	ColliderComponent& colliderComp = gameContext.entityMan.getComponent<ColliderComponent>(attackId);
 	AttackComponent& attackComp = gameContext.entityMan.getComponent<AttackComponent>(attackId);
@@ -394,8 +402,13 @@ void AttackSystem::createBulletAttack(GameEngine& gameContext, DistanceWeaponCom
 		attackGOtype = GameObjectType::PLAYER_DISTANCE_ATTACK;
 	}
 
+	// Add attack spawn threshold
+	Vector2 attackPos = attackerSit.position;
+	attackPos.x += distanceWeaponAttacker.spawnAttackPos.x;
+	attackPos.y += distanceWeaponAttacker.spawnAttackPos.y;
+
 	for (uint8_t i = 0; i < distanceWeaponAttacker.numberOfShells; ++i) {
-		int attackId = gameContext.entityMan.createAttack(gameContext, attackerSit.position, 0.f, attackGOtype);
+		int attackId = gameContext.entityMan.createAttack(gameContext, attackPos, 0.f, attackGOtype);
 
 		ColliderComponent& colliderComp = gameContext.entityMan.getComponent<ColliderComponent>(attackId);
 		AttackComponent& attackComp = gameContext.entityMan.getComponent<AttackComponent>(attackId);

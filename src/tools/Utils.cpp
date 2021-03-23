@@ -169,6 +169,7 @@ void Utils::setNormalPistolToEntity(GameEngine& gameContext, int entityId) {
     distanceWeaponComp.ammo = 0;
     distanceWeaponComp.infiniteAmmo = true;
     distanceWeaponComp.bulletSpreadAngle = 5.f;
+    distanceWeaponComp.spawnAttackPos = { 20.f, 39.f };
 }
 
 

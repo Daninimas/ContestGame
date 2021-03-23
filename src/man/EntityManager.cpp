@@ -556,6 +556,7 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
         distanceWeaponComp.ammo = 100;
         distanceWeaponComp.infiniteAmmo = false;
         distanceWeaponComp.bulletSpreadAngle = 5.f;
+        distanceWeaponComp.spawnAttackPos = { 20.f, 39.f };
 
         distanceWeaponComp.attackSound.soundPath = "Media/Sound/Weapons/M4A1_Single-Kibblesbob-8540445.wav";
 
@@ -569,6 +570,7 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
         meleeWeaponComp.damage = 4;
         meleeWeaponComp.maxCooldown = 1.f;
         meleeWeaponComp.attackLifetime = 0.1f;
+        meleeWeaponComp.spawnAttackPos = { 20.f, 39.f };
 
         meleeWeaponComp.attackSound.soundPath = "Media/Sound/GE_KF7_Soviet.wav";
 
@@ -588,6 +590,7 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
         distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BOMB;
         distanceWeaponComp.ammo = 10;
         distanceWeaponComp.infiniteAmmo = false;
+        distanceWeaponComp.spawnAttackPos = { 20.f, 39.f };
 
         distanceWeaponComp.attackSound.soundPath = "Media/Sound/Weapons/grenadeLauncherSound.wav";
 
@@ -610,6 +613,7 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
         distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::LASER;
         distanceWeaponComp.ammo = 30;
         distanceWeaponComp.infiniteAmmo = false;
+        distanceWeaponComp.spawnAttackPos = { 20.f, 39.f };
 
         distanceWeaponComp.attackSound.soundPath = "Media/Sound/GE_KF7_Soviet.wav";
 
@@ -630,6 +634,7 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
         distanceWeaponComp.infiniteAmmo = false;
         distanceWeaponComp.numberOfShells = 5;
         distanceWeaponComp.bulletSpreadAngle = 12.f;
+        distanceWeaponComp.spawnAttackPos = { 20.f, 39.f };
 
         distanceWeaponComp.attackSound.soundPath = "Media/Sound/Weapons/shotgunShot.wav";
 

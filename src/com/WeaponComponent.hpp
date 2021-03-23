@@ -3,6 +3,7 @@
 #include "Component.hpp"
 #include <tools/BoundingBox.hpp>
 #include <tools/Sound.hpp>
+#include <tools/Vector2.hpp>
 
 class WeaponComponent : public Component {
 public:
@@ -20,9 +21,8 @@ public:
 
     float attackLifetime{ 0.5f };
 
-    /*
+
     // Position where the attack is created from player
-    float spawnX{ 0.f };
-    float spawnY{ 0.f };
-    */
+    Vector2 spawnAttackPos{ 0.f, 0.f }; // esto es con refencia a la esquina superior izquierda de la entidad (su posicion)
+
 };
