@@ -64,7 +64,10 @@ private:
         { "TRIGGER", GameObjectType::TRIGGER },
 
         // Damage platforms
-        { "DAMAGE_PLATFORM", GameObjectType::DAMAGE_PLATFORM }
+        { "DAMAGE_PLATFORM", GameObjectType::DAMAGE_PLATFORM },
+
+        // Drone
+        { "DRONE_FRIEND", GameObjectType::DRONE_FRIEND}
     };
 
     static inline std::map<std::string, uint8_t> directionMap{    // Este mapa sirve para coger la direccion del mapa que se esta generando y pasarlo a enum 

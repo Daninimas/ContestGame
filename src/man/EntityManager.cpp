@@ -886,6 +886,8 @@ int EntityManager::createDrone(GameEngine& gameContext, Vector2 position, float 
         sensorComp.sensorBounding = {-distanceAIComp.range.x, distanceAIComp.range.x, -distanceAIComp.range.y, distanceAIComp.range.y };  // The same bounding as the distanceAIComp
         sensorComp.sensorLayerMasc = ColliderComponent::Enemy;
 
+        flyingChaseComp.objectiveId = WorldElementsData::playerId;
+
         WorldElementsData::playerDroneId = entityId;
 
         break;

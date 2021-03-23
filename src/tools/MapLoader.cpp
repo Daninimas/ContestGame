@@ -140,6 +140,9 @@ void MapLoader::createObject(GameEngine& gameContext, std::string layerName, tso
             uint8_t facing = getFacing(obj.get<std::string>("Facing"));
             gameContext.entityMan.createTurret(gameContext, Vector2(position.x, position.y), facing);
         }
+        else if (layerName == "DRONE") {
+            gameContext.entityMan.createDrone(gameContext, Vector2(position.x, position.y), rotation, goType);
+        }
     }
     else {
         // Error on the type of the object
