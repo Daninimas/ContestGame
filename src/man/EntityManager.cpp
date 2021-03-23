@@ -279,7 +279,7 @@ int EntityManager::createWall(GameEngine& gameContext, Vector2 position, Vector2
     {
     case GameObjectType::PLATFORM:
         colliderComp.collisionLayer = ColliderComponent::Platform;
-        colliderComp.layerMasc = ColliderComponent::Enemy + ColliderComponent::Player + ColliderComponent::Weapon;
+        colliderComp.layerMasc = ColliderComponent::Enemy + ColliderComponent::Player + ColliderComponent::Weapon + ColliderComponent::Attack + ColliderComponent::PlayerAttack;
         break;
 
     case GameObjectType::WALL:
@@ -352,7 +352,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         SensorComponent& sensorComp = createComponent<SensorComponent>(entityId);
 
         sensorComp.sensorLayerMasc = ColliderComponent::Player + ColliderComponent::Wall;
-        sensorComp.sensorBounding = { 25.f, 75.f, 2.f, 48.f };
+        sensorComp.sensorBounding = { 25.f, 60.f, 2.f, 48.f };
 
         jumpComp.impulse = -150.f;
 
@@ -361,6 +361,8 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         meleeWeaponComp.attackBounding = { 0.f, 20.f, 10.f, 40.f };
         meleeWeaponComp.damage = 2;
         meleeWeaponComp.maxCooldown = 1.5f;
+
+        colliderComp.weight = 3.f;
     }
     
     else if(goType == GameObjectType::DISTANCE_ENEMY) {
@@ -370,15 +372,17 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
 
         AIDistanceAtkComponent& distanceAIComp = createComponent<AIDistanceAtkComponent>(entityId);
         distanceAIComp.range.x = 200.f;
-        distanceAIComp.range.y = 40.f;
+        distanceAIComp.range.y = 200.f;
 
         DistanceWeaponComponent& distanceWeaponComp = createComponent<DistanceWeaponComponent>(entityId);
         // Distance
-        distanceWeaponComp.attackBounding = { 0.f, 10.f, 0.f, 5.f };
+        distanceWeaponComp.attackBounding = { 0.f, 5.f, 0.f, 5.f };
         distanceWeaponComp.damage = 1;
         distanceWeaponComp.attackGeneralVelociy = 300.f;
         distanceWeaponComp.attackGravity = 100.f;
         distanceWeaponComp.maxCooldown = 1.f;
+
+        colliderComp.weight = 3.f;
     }
 
     else if (goType == GameObjectType::TRANSFORM_ENEMY) {
@@ -409,7 +413,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
     }
 
     else if (goType == GameObjectType::BOMBER_ENEMY) {
-        velocityComp.speedX = 50.f;
+        velocityComp.speedX = 80.f;
         velocityComp.gravity = 0.f;
         renderComp.color = { 255, 100, 30, 255 };
         healthComp.maxHealth = 10;
@@ -604,8 +608,8 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
     else if (goType == GameObjectType::LASER_GUN) {
         DistanceWeaponComponent& distanceWeaponComp = createComponent<DistanceWeaponComponent>(entityId);
 
-        distanceWeaponComp.attackBounding = { 0.f, 5000.f, 0.f, 30.f };
-        distanceWeaponComp.damage = 1;
+        distanceWeaponComp.attackBounding = { 0.f, 5000.f, 0.f, 5.f };
+        distanceWeaponComp.damage = 2;
         distanceWeaponComp.attackGeneralVelociy = 0.f;
         distanceWeaponComp.attackGravity = 0.f;
         distanceWeaponComp.maxCooldown = 0.6f;
@@ -615,7 +619,7 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
         distanceWeaponComp.infiniteAmmo = false;
         distanceWeaponComp.spawnAttackPos = { 20.f, 39.f };
 
-        distanceWeaponComp.attackSound.soundPath = "Media/Sound/GE_KF7_Soviet.wav";
+        distanceWeaponComp.attackSound.soundPath = "Media/Sound/Weapons/laserShot.wav";
 
         WorldElementsData::worldDistanceWeapons.push_back(entityId);
     }
@@ -1126,7 +1130,7 @@ int EntityManager::createTurretPlatform(GameEngine& gameContext, Vector2 positio
     turretComp.turretGunID = turretGun;
 
     // Health
-    healthComp.maxHealth = 1.f;
+    healthComp.maxHealth = 3;
     healthComp.resetHealth();
 
 
@@ -1148,7 +1152,7 @@ int EntityManager::createWorld(GameEngine& gameContext, GameObjectType worldName
     {
     case GameObjectType::WORLD_DEBUG:
         worldComp.worldPath = "Media/Maps/debug.json";
-        worldComp.backgroundSize = 2.f;
+        worldComp.backgroundSize = 0.75f;
 
         worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/10_Sky.png"));
         worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/09_Forest.png"));

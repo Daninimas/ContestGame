@@ -67,7 +67,7 @@ void AnimationManager::setDodgeAnimation(GameEngine& gameContext, const Animatio
 	case GameObjectType::PLAYER_GENERAL:
 		animationComp.animation = animation;
 		animationComp.framerate = 0.1f;
-		animationComp.repeat = false;
+		animationComp.repeat = true;
 		animationComp.startSpriteRect = { 0, 512, 512, 1024 };
 		animationComp.totalFrames = 4;
 		animationComp.nextFrameAdvance = 512;
