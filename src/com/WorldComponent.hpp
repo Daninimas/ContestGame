@@ -24,4 +24,5 @@ public:
     std::string worldPath;
 
     std::vector<BackgroundLayer> backgroundLayers;
+    float backgroundSize = 1.f;
 };

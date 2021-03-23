@@ -139,6 +139,6 @@ void WorldSystem::moveBackgroundLayers(GameEngine& gameContext) const { // move 
 
 		//std::cout << "Layer: " << (int)i << " Pos: (" << layer.layerPosition.x << ", " << layer.layerPosition.y << ")\n";
 	}
-
-	gameContext.getWindowFacadeRef().updateBackgroundLayers(worldComp.backgroundLayers);
+	//std::cout << "\n";
+	gameContext.getWindowFacadeRef().updateBackgroundLayers(worldComp.backgroundLayers, worldComp.backgroundSize);
 }

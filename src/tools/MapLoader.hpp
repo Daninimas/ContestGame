@@ -45,6 +45,7 @@ private:
         { "KNIFE", GameObjectType::KNIFE },
         { "GRENADE_LAUNCHER", GameObjectType::GRENADE_LAUNCHER },
         { "LASER_GUN", GameObjectType::LASER_GUN },
+        { "SHOTGUN", GameObjectType::SHOTGUN },
 
         // Enemy types
         { "CHASER", GameObjectType::CHASER },

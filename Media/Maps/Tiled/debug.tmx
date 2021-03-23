@@ -16,29 +16,29 @@
    <property name="Direction" value="Right"/>
   </properties>
   <objectgroup id="17" name="PLAYER">
-   <object id="146" gid="3" x="40" y="1440" width="512" height="512"/>
+   <object id="146" gid="3" x="0" y="574" width="512" height="512"/>
   </objectgroup>
   <objectgroup id="5" name="phase_size">
-   <object id="71" x="40" y="-1720" width="5789.34" height="3996"/>
+   <object id="71" x="112" y="-959.47" width="2861.26" height="1974.94"/>
   </objectgroup>
   <objectgroup id="18" name="WEAPON">
-   <object id="152" type="SHOTGUN" gid="6" x="2420" y="921" width="152" height="65"/>
+   <object id="152" type="SHOTGUN" gid="6" x="1286" y="433" width="152" height="65"/>
   </objectgroup>
   <objectgroup color="#ff0000" id="15" name="DAMAGE_PLATFORM">
-   <object id="141" type="DAMAGE_PLATFORM" x="119.273" y="2024" width="5663.52" height="170.364">
+   <object id="141" type="DAMAGE_PLATFORM" x="151.179" y="890.924" width="2799.08" height="84.1989">
     <properties>
      <property name="Damage" type="int" value="100"/>
     </properties>
    </object>
   </objectgroup>
   <objectgroup color="#00aa00" id="13" name="TRIGGER">
-   <object id="139" type="TRIGGER" x="457.939" y="615.879" width="164.364" height="786.909">
+   <object id="139" type="TRIGGER" x="318.558" y="194.99" width="81.2335" height="388.914">
     <properties>
      <property name="Function" value="PLAY_MUSIC"/>
      <property name="soundPath" value="./Media/Sound/Music/darren-curtis-intruder-aboard.wav"/>
     </properties>
    </object>
-   <object id="140" type="TRIGGER" x="6371.39" y="-1358.3" width="61.3333" height="96">
+   <object id="140" type="TRIGGER" x="6331.39" y="-2224.3" width="61.3333" height="96">
     <properties>
      <property name="Function" value="PLAY_SOUND"/>
      <property name="soundPath" value="./Media/Sound/Weapons/veryBigExplosion.wav"/>
@@ -46,20 +46,19 @@
    </object>
   </objectgroup>
   <objectgroup id="19" name="ENEMY">
-   <object id="158" gid="8" x="2000" y="1488" width="512" height="512"/>
-   <object id="159" gid="8" x="2640" y="1496" width="512" height="512"/>
+   <object id="159" type="CHASERJUMPER" gid="8" x="1158" y="324" width="512" height="512"/>
   </objectgroup>
   <objectgroup id="4" name="SPAWNER">
-   <object id="82" type="ENEMY_SPIDER" gid="2" x="6029.09" y="-2054.55" width="20" height="20"/>
+   <object id="82" type="ENEMY_SPIDER" gid="2" x="5989.09" y="-2920.55" width="20" height="20"/>
   </objectgroup>
   <objectgroup color="#0055ff" id="2" name="WALL">
-   <object id="142" type="WALL" x="40" y="1416" width="3033.64" height="113.818"/>
-   <object id="147" type="PLATFORM" x="979.394" y="1193.76" width="598" height="204"/>
-   <object id="148" type="WALL" x="3715.18" y="1416" width="1593.64" height="113.818"/>
-   <object id="149" type="WALL" x="5307.18" y="1271.09" width="553.64" height="257.818"/>
-   <object id="150" type="PLATFORM" x="1421" y="1026" width="598" height="388"/>
-   <object id="151" type="PLATFORM" x="2389" y="958" width="182" height="444"/>
-   <object id="154" type="WALL" x="1267.18" y="1335.09" width="241.64" height="97.818"/>
+   <object id="142" type="WALL" x="112" y="590.433" width="1499.31" height="56.2522"/>
+   <object id="147" type="PLATFORM" x="576.276" y="480.595" width="295.549" height="100.823"/>
+   <object id="148" type="WALL" x="1817.38" y="590.433" width="787.624" height="56.2522"/>
+   <object id="149" type="WALL" x="2603.19" y="568.814" width="385.625" height="77.4212"/>
+   <object id="150" type="PLATFORM" x="794.531" y="435.684" width="295.549" height="153.761"/>
+   <object id="151" type="PLATFORM" x="1263.94" y="440.076" width="89.9497" height="143.438"/>
+   <object id="154" type="WALL" x="718.508" y="550.445" width="119.426" height="48.3445"/>
   </objectgroup>
  </group>
 </map>

@@ -26,7 +26,7 @@ SFMLEngine::SFMLEngine(int width, int height, bool fullscreen) {
 	FPSTextNode.setFillColor({ 68, 255, 0, 255 });
 	FPSTextNode.setFont(font);
 	FPSTextNode.setCharacterSize(20);
-	renderFPS = true;
+	renderFPS = false;
 }
 SFMLEngine::~SFMLEngine() {
 	device.get()->close();
@@ -280,10 +280,11 @@ void SFMLEngine::updateCamera(GameEngine& gameContext, int id) {
 	cameraMap[id].setCenter(situation.position.x, situation.position.y);
 }
 
-void SFMLEngine::updateBackgroundLayers(std::vector<BackgroundLayer>& layers) {
+void SFMLEngine::updateBackgroundLayers(std::vector<BackgroundLayer>& layers, float backgroundSize) {
 
 	for (size_t i = 0; i < layers.size(); ++i) {
 		backgroundLayers[i].setPosition(layers[i].layerPosition.x, layers[i].layerPosition.y);
+		backgroundLayers[i].setScale(backgroundSize, backgroundSize);
 	}
 }
 
@@ -357,7 +358,7 @@ void SFMLEngine::createCamera(GameEngine& gameContext, int id) {
 }
 
 
-void SFMLEngine::setBackgroundLayers(std::vector<BackgroundLayer>& layers) {
+void SFMLEngine::setBackgroundLayers(std::vector<BackgroundLayer>& layers, float backgroundSize) {
 	// Delete previous layers
 	backgroundLayers.clear();
 

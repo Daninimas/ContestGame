@@ -37,7 +37,7 @@ void AnimationManager::setRunningAnimation(GameEngine& gameContext, const Animat
 		animationComp.animation = animation;
 		animationComp.framerate = 0.10f;
 		animationComp.repeat = true;
-		animationComp.startSpriteRect = { 0, 512, 0, 512 };
+		animationComp.startSpriteRect = { 100, 400, 60, 500 };
 		animationComp.totalFrames = 12;
 		animationComp.nextFrameAdvance = 512;
 		break;
@@ -51,8 +51,8 @@ void AnimationManager::setIdleAnimation(GameEngine& gameContext, const Animation
 	case GameObjectType::PLAYER_GENERAL:
 		animationComp.animation = animation;
 		animationComp.framerate = 1.f;
-		animationComp.repeat = true;
-		animationComp.startSpriteRect = { 0, 512, 0, 512 };
+		animationComp.repeat = false;
+		animationComp.startSpriteRect = { 100, 400, 60, 500 };
 		animationComp.totalFrames = 1;
 		animationComp.nextFrameAdvance = 512;
 		break;

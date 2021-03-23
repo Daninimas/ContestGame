@@ -35,8 +35,8 @@ public:
     bool existsTexture(std::string path) const override;
     void addTexture(std::string path) override;
     void setColorToEntity(const int id, const Color color) override;
-    void setBackgroundLayers(std::vector<BackgroundLayer>& layers) override;
-    void updateBackgroundLayers(std::vector<BackgroundLayer>& layers) override;
+    void setBackgroundLayers(std::vector<BackgroundLayer>& layers, float backgroundSize) override;
+    void updateBackgroundLayers(std::vector<BackgroundLayer>& layers, float backgroundSize) override;
 
     // For updating the FPS 
     void updateFPSTextNode(uint8_t FPS) override;

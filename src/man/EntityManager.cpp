@@ -124,6 +124,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
     situation.position = position;
     situation.rotation = r;
     situation.noWorldDelete = true;
+    situation.scale = Vector2(0.18f, 0.18f);
 
     velocityComp.speedX = 100.f;
     velocityComp.gravity = 250.f;
@@ -134,7 +135,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
     colliderComp.collisionLayer = ColliderComponent::Player;
     colliderComp.type = ColliderType::DYNAMIC;
     colliderComp.layerMasc = 0xFFF - ColliderComponent::PlayerAttack - ColliderComponent::PlayerShield; //Collides with everything except PlayerAttacks
-    colliderComp.boundingRoot.bounding = { 0.f, 50.f, 0.f, 50.f };
+    colliderComp.boundingRoot.bounding = { 0.f, 40.f, 0.f, 78.f };
     colliderComp.boundingRoot.childs.emplace_back( 20.f, 30.f, 10.f, 20.f ); //Head
     colliderComp.weight = 2.f; // if changed, check turret system, to reset the same
 
@@ -146,14 +147,14 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
 
     // Render component
     renderComp.sprite = "Media/Images/SpriteSheet _Completo.png";
-    renderComp.spriteRect = { 0, 512, 0, 512 };
+    renderComp.spriteRect = { 100, 400, 60, 500 };
 
     // Jump
     jumpComp.impulse = -200.f;
     //jumpComp.jumptable = { 500.f, 500.f, 400.f, 400.f, 300.f, 300.f, 200.f, 100.f };
     
     // Sensor
-    sensorComp.sensorBounding = {25.f, 100.f, 2.f, 48.f};
+    sensorComp.sensorBounding = {0.f, 50.f, 2.f, 76.f};
     sensorComp.sensorLayerMasc = ColliderComponent::Enemy + ColliderComponent::Turret; // Sensors enemies and turrets
 
     // Dodge
@@ -528,7 +529,7 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
 
     // Collider
     colliderComp.collisionLayer = ColliderComponent::Weapon;
-    colliderComp.layerMasc = ColliderComponent::Player + ColliderComponent::Wall; //Collides with player and wall
+    colliderComp.layerMasc = ColliderComponent::Player + ColliderComponent::Wall + ColliderComponent::Platform; //Collides with player and wall
     colliderComp.boundingRoot.bounding = { 0.f, 10.f, 0.f, 10.f };
     colliderComp.type = ColliderType::DYNAMIC;
 
@@ -661,7 +662,7 @@ int EntityManager::createCamera(GameEngine& gameContext, Vector2 position, float
 
     // Camera
     cameraComp.viewRect = {600, 400 };
-    cameraComp.zoom = 3.f;
+    cameraComp.zoom = 1.f;
     cameraComp.offset = { 10.f, 70.f};
     cameraComp.cameraAdvancement = 150.f;
 
@@ -1140,6 +1141,7 @@ int EntityManager::createWorld(GameEngine& gameContext, GameObjectType worldName
     {
     case GameObjectType::WORLD_DEBUG:
         worldComp.worldPath = "Media/Maps/debug.json";
+        worldComp.backgroundSize = 2.f;
 
         worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/10_Sky.png"));
         worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/09_Forest.png"));
@@ -1156,7 +1158,7 @@ int EntityManager::createWorld(GameEngine& gameContext, GameObjectType worldName
     }
 
     //######### RENDER ########//
-    gameContext.getWindowFacadeRef().setBackgroundLayers(worldComp.backgroundLayers);
+    gameContext.getWindowFacadeRef().setBackgroundLayers(worldComp.backgroundLayers, worldComp.backgroundSize);
 
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::WORLD, worldName));
