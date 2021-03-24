@@ -174,8 +174,8 @@
                          "type":"CHASERJUMPER",
                          "visible":true,
                          "width":512,
-                         "x":1426.60606060606,
-                         "y":464.424242424242
+                         "x":1426.61,
+                         "y":464.424
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -278,15 +278,15 @@
                          "y":548.445
                         }, 
                         {
-                         "height":33.1929848484849,
+                         "height":33.193,
                          "id":203,
                          "name":"",
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,
-                         "width":46.6987272727272,
-                         "x":982.711242424242,
-                         "y":558.858053030303
+                         "width":46.6987,
+                         "x":982.711,
+                         "y":558.858
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -322,7 +322,7 @@
                          "rotation":0,
                          "type":"",
                          "visible":true,
-                         "width":2503.68424242424,
+                         "width":2503.68,
                          "x":2940,
                          "y":-953.47
                         }],
@@ -346,8 +346,8 @@
                          "type":"POWERUP_SHIELD",
                          "visible":true,
                          "width":0,
-                         "x":3975.75757575758,
-                         "y":472.727272727273
+                         "x":3975.76,
+                         "y":472.727
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -397,7 +397,7 @@
                          "rotation":0,
                          "type":"DAMAGE_PLATFORM",
                          "visible":true,
-                         "width":2485.14060606061,
+                         "width":2485.14,
                          "x":2959.18,
                          "y":888.924
                         }],
@@ -421,8 +421,8 @@
                          "type":"BOMBER_ENEMY",
                          "visible":true,
                          "width":512,
-                         "x":3631.87878787879,
-                         "y":116.606060606061
+                         "x":3631.88,
+                         "y":116.606
                         }, 
                         {
                          "height":0,
@@ -433,8 +433,8 @@
                          "type":"DISTANCE_ENEMY",
                          "visible":true,
                          "width":0,
-                         "x":4184.84848484848,
-                         "y":438.666666666667
+                         "x":4184.85,
+                         "y":438.667
                         }, 
                         {
                          "height":0,
@@ -445,8 +445,8 @@
                          "type":"DISTANCE_ENEMY",
                          "visible":true,
                          "width":0,
-                         "x":4360.60606060606,
-                         "y":293.939393939394
+                         "x":4360.61,
+                         "y":293.939
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -464,12 +464,33 @@
                          "height":20,
                          "id":183,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"maxCooldown",
+                                 "type":"float",
+                                 "value":4
+                                }, 
+                                {
+                                 "name":"numObjectsToSpawn",
+                                 "type":"int",
+                                 "value":-1
+                                }, 
+                                {
+                                 "name":"range.x",
+                                 "type":"float",
+                                 "value":400
+                                }, 
+                                {
+                                 "name":"range.y",
+                                 "type":"float",
+                                 "value":400
+                                }],
                          "rotation":0,
                          "type":"ENEMY_SPIDER",
                          "visible":true,
                          "width":20,
-                         "x":5250.90818181818,
-                         "y":354.965151515151
+                         "x":5250.91,
+                         "y":354.965
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -567,20 +588,20 @@
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,
-                         "width":302.340303030305,
-                         "x":3925.01166666667,
-                         "y":504.298142424242
+                         "width":302.34,
+                         "x":3925.01,
+                         "y":504.298
                         }, 
                         {
-                         "height":37.5855333333334,
+                         "height":37.5855,
                          "id":196,
                          "name":"",
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
-                         "width":55.5524242424244,
-                         "x":4166.58742424242,
-                         "y":473.389051515152
+                         "width":55.5524,
+                         "x":4166.59,
+                         "y":473.389
                         }, 
                         {
                          "height":56.2522,
@@ -590,8 +611,8 @@
                          "type":"PLATFORM",
                          "visible":true,
                          "width":55.5524,
-                         "x":4352.95107272727,
-                         "y":357.752687878788
+                         "x":4352.95,
+                         "y":357.753
                         }, 
                         {
                          "height":72.2522,
@@ -601,8 +622,8 @@
                          "type":"WALL",
                          "visible":true,
                          "width":402.34,
-                         "x":4293.19363636364,
-                         "y":564.904203030303
+                         "x":4293.19,
+                         "y":564.904
                         }, 
                         {
                          "height":72.2522,
@@ -611,9 +632,9 @@
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,
-                         "width":635.673333333333,
-                         "x":4817.43606060606,
-                         "y":410.358748484849
+                         "width":635.673,
+                         "x":4817.44,
+                         "y":410.359
                         }, 
                         {
                          "height":56.2522,
@@ -622,9 +643,9 @@
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
-                         "width":110.097854545454,
-                         "x":4580.2238,
-                         "y":509.267839393939
+                         "width":110.098,
+                         "x":4580.22,
+                         "y":509.268
                         }, 
                         {
                          "height":56.2522,
@@ -633,20 +654,20 @@
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
-                         "width":137.370727272728,
-                         "x":4462.04190909091,
-                         "y":463.813293939394
+                         "width":137.371,
+                         "x":4462.04,
+                         "y":463.813
                         }, 
                         {
-                         "height":25.9491696969697,
+                         "height":25.9492,
                          "id":202,
                          "name":"",
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
-                         "width":134.340696969697,
-                         "x":4572.64783333333,
-                         "y":406.237536363636
+                         "width":134.341,
+                         "x":4572.65,
+                         "y":406.238
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -666,9 +687,370 @@
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "id":40,
+         "layers":[
+                {
+                 "draworder":"topdown",
+                 "id":45,
+                 "name":"phase_size",
+                 "objects":[
+                        {
+                         "height":1630.94,
+                         "id":225,
+                         "name":"",
+                         "rotation":0,
+                         "type":"",
+                         "visible":true,
+                         "width":1719.68,
+                         "x":5444,
+                         "y":-945.47
+                        }],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
+                }, 
+                {
+                 "draworder":"topdown",
+                 "id":46,
+                 "name":"ENEMY",
+                 "objects":[],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
+                }, 
+                {
+                 "draworder":"topdown",
+                 "id":47,
+                 "name":"DRONE",
+                 "objects":[
+                        {
+                         "height":0,
+                         "id":244,
+                         "name":"",
+                         "point":true,
+                         "rotation":0,
+                         "type":"DRONE_FRIEND",
+                         "visible":true,
+                         "width":0,
+                         "x":5520,
+                         "y":100
+                        }],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
+                }, 
+                {
+                 "color":"#0055ff",
+                 "draworder":"topdown",
+                 "id":48,
+                 "name":"WALL",
+                 "objects":[
+                        {
+                         "height":72.2522,
+                         "id":239,
+                         "name":"",
+                         "rotation":0,
+                         "type":"WALL",
+                         "visible":true,
+                         "width":1163.673,
+                         "x":5450.77,
+                         "y":410.359
+                        }],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
+                }, 
+                {
+                 "draworder":"topdown",
+                 "id":43,
+                 "name":"TURRET",
+                 "objects":[
+                        {
+                         "height":0,
+                         "id":243,
+                         "name":"",
+                         "point":true,
+                         "properties":[
+                                {
+                                 "name":"Facing",
+                                 "type":"string",
+                                 "value":"Right"
+                                }],
+                         "rotation":0,
+                         "type":"NONE",
+                         "visible":true,
+                         "width":0,
+                         "x":5660,
+                         "y":356
+                        }],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
+                }, 
+                {
+                 "draworder":"topdown",
+                 "id":44,
+                 "name":"SPAWNER",
+                 "objects":[
+                        {
+                         "gid":2,
+                         "height":20,
+                         "id":246,
+                         "name":"",
+                         "properties":[
+                                {
+                                 "name":"maxCooldown",
+                                 "type":"float",
+                                 "value":3
+                                }, 
+                                {
+                                 "name":"numObjectsToSpawn",
+                                 "type":"int",
+                                 "value":10
+                                }, 
+                                {
+                                 "name":"range.x",
+                                 "type":"float",
+                                 "value":4000
+                                }, 
+                                {
+                                 "name":"range.y",
+                                 "type":"float",
+                                 "value":4000
+                                }],
+                         "rotation":0,
+                         "type":"ENEMY_SPIDER",
+                         "visible":true,
+                         "width":20,
+                         "x":6506,
+                         "y":342
+                        }, 
+                        {
+                         "gid":2,
+                         "height":20,
+                         "id":247,
+                         "name":"",
+                         "properties":[
+                                {
+                                 "name":"maxCooldown",
+                                 "type":"float",
+                                 "value":2
+                                }, 
+                                {
+                                 "name":"numObjectsToSpawn",
+                                 "type":"int",
+                                 "value":15
+                                }, 
+                                {
+                                 "name":"range.x",
+                                 "type":"float",
+                                 "value":4000
+                                }, 
+                                {
+                                 "name":"range.y",
+                                 "type":"float",
+                                 "value":4000
+                                }],
+                         "rotation":0,
+                         "type":"ENEMY_SPIDER",
+                         "visible":true,
+                         "width":20,
+                         "x":6282,
+                         "y":326
+                        }, 
+                        {
+                         "gid":2,
+                         "height":20,
+                         "id":248,
+                         "name":"",
+                         "properties":[
+                                {
+                                 "name":"maxCooldown",
+                                 "type":"float",
+                                 "value":5
+                                }, 
+                                {
+                                 "name":"numObjectsToSpawn",
+                                 "type":"int",
+                                 "value":6
+                                }, 
+                                {
+                                 "name":"range.x",
+                                 "type":"float",
+                                 "value":4000
+                                }, 
+                                {
+                                 "name":"range.y",
+                                 "type":"float",
+                                 "value":4000
+                                }],
+                         "rotation":0,
+                         "type":"POUNCER_ENEMY",
+                         "visible":true,
+                         "width":20,
+                         "x":6402,
+                         "y":286
+                        }, 
+                        {
+                         "gid":2,
+                         "height":20,
+                         "id":249,
+                         "name":"",
+                         "properties":[
+                                {
+                                 "name":"maxCooldown",
+                                 "type":"float",
+                                 "value":8
+                                }, 
+                                {
+                                 "name":"numObjectsToSpawn",
+                                 "type":"int",
+                                 "value":5
+                                }, 
+                                {
+                                 "name":"range.x",
+                                 "type":"float",
+                                 "value":4000
+                                }, 
+                                {
+                                 "name":"range.y",
+                                 "type":"float",
+                                 "value":4000
+                                }],
+                         "rotation":0,
+                         "type":"BOMBER_ENEMY",
+                         "visible":true,
+                         "width":20,
+                         "x":6838,
+                         "y":-254
+                        }, 
+                        {
+                         "gid":2,
+                         "height":20,
+                         "id":250,
+                         "name":"",
+                         "properties":[
+                                {
+                                 "name":"maxCooldown",
+                                 "type":"float",
+                                 "value":10
+                                }, 
+                                {
+                                 "name":"numObjectsToSpawn",
+                                 "type":"int",
+                                 "value":3
+                                }, 
+                                {
+                                 "name":"range.x",
+                                 "type":"float",
+                                 "value":4000
+                                }, 
+                                {
+                                 "name":"range.y",
+                                 "type":"float",
+                                 "value":4000
+                                }],
+                         "rotation":0,
+                         "type":"BOMBER_ENEMY",
+                         "visible":true,
+                         "width":20,
+                         "x":7026,
+                         "y":54
+                        }],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
+                }],
+         "name":"Phase3",
+         "opacity":1,
+         "properties":[
+                {
+                 "name":"Direction",
+                 "type":"string",
+                 "value":"Down"
+                }],
+         "type":"group",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "id":49,
+         "layers":[
+                {
+                 "draworder":"topdown",
+                 "id":50,
+                 "name":"phase_size",
+                 "objects":[
+                        {
+                         "height":1694.94,
+                         "id":252,
+                         "name":"",
+                         "rotation":0,
+                         "type":"",
+                         "visible":true,
+                         "width":1527.68,
+                         "x":6332,
+                         "y":646.53
+                        }],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
+                }, 
+                {
+                 "color":"#0055ff",
+                 "draworder":"topdown",
+                 "id":51,
+                 "name":"WALL",
+                 "objects":[
+                        {
+                         "height":72.2522,
+                         "id":253,
+                         "name":"",
+                         "rotation":0,
+                         "type":"WALL",
+                         "visible":true,
+                         "width":1499.673,
+                         "x":6362.77,
+                         "y":2114.359
+                        }],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
+                }],
+         "name":"Phase4",
+         "opacity":1,
+         "properties":[
+                {
+                 "name":"Direction",
+                 "type":"string",
+                 "value":"Right"
+                }],
+         "type":"group",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":40,
- "nextobjectid":210,
+ "nextlayerid":52,
+ "nextobjectid":254,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.4.3",

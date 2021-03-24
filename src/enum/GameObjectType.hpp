@@ -97,5 +97,8 @@ enum class GameObjectType {
 
     // Turret
     TURRET_GUN,
-    TURRET_PLATFORM
+    TURRET_PLATFORM,
+
+    // Spawner
+    SPAWNER
 };

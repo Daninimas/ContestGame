@@ -23,6 +23,7 @@ private:
     static uint8_t getDirection(const std::string dir);
     static void setEnemyObjective(GameEngine& gameContext, int enemyId);
     static void setTriggerData(GameEngine& gameContext, int triggerId, tson::Object& obj);
+    static void setSpawnerData(GameEngine& gameContext, int spawnerId, tson::Object& obj);
     static TriggerFunction getTriggerFunction(const std::string func);
     static uint8_t getFacing(const std::string facingString);
 

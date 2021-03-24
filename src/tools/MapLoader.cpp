@@ -119,7 +119,7 @@ void MapLoader::createObject(GameEngine& gameContext, std::string layerName, tso
         else if (layerName == "SPAWNER") {
             int spawnId = gameContext.entityMan.createSpawner(gameContext, Vector2(position.x, position.y), rotation, goType);
 
-            gameContext.entityMan.getComponent<SpawnerComponent>(spawnId).objectiveId = WorldElementsData::playerId;
+            setSpawnerData(gameContext, spawnId, obj);
         }
         else if (layerName == "POWERUP") {
             gameContext.entityMan.createPowerUp(gameContext, Vector2(position.x, position.y), rotation, goType);
@@ -247,6 +247,20 @@ void MapLoader::setTriggerData(GameEngine& gameContext, int triggerId, tson::Obj
     else {
         gameContext.eraseEntityByID(triggerId);
     }
+}
+
+
+void MapLoader::setSpawnerData(GameEngine& gameContext, int spawnerId, tson::Object& obj) {
+    SpawnerComponent& spawnerComp = gameContext.entityMan.getComponent<SpawnerComponent>(spawnerId);
+
+    spawnerComp.objectiveId = WorldElementsData::playerId;
+    spawnerComp.maxCooldown = obj.get<float>("maxCooldown");
+
+    int numToSpawn = obj.get<int>("numObjectsToSpawn");
+    if (numToSpawn > 0) {
+        spawnerComp.numObjectsToSpawn = static_cast<uint16_t>(numToSpawn);
+    }
+    spawnerComp.range = { obj.get<float>("range.x") , obj.get<float>("range.y") };
 }
 
 

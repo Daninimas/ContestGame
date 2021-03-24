@@ -140,7 +140,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
     colliderComp.weight = 2.f; // if changed, check turret system, to reset the same
 
     // Melee
-    meleeWeaponComp.attackBounding = { 0.f, 10.f, 0.f, 10.f };
+    meleeWeaponComp.attackBounding = { 0.f, 28.f, 20.f, 58.f };
     meleeWeaponComp.damage = 2;
     meleeWeaponComp.attackLifetime = 0.15f;
 
@@ -381,6 +381,10 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         distanceWeaponComp.attackGeneralVelociy = 300.f;
         distanceWeaponComp.attackGravity = 100.f;
         distanceWeaponComp.maxCooldown = 1.f;
+        distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BULLET;
+        distanceWeaponComp.attackLifetime = 1.f;
+        distanceWeaponComp.bulletSpreadAngle = 5.f;
+        distanceWeaponComp.infiniteAmmo = true;
 
         colliderComp.weight = 3.f;
     }
@@ -495,12 +499,12 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         MeleeWeaponComponent& meleeWeaponComp = createComponent<MeleeWeaponComponent>(entityId);
         meleeWeaponComp.attackBounding = { 0.f, 20.f, 10.f, 40.f };
         meleeWeaponComp.damage = 1;
-        meleeWeaponComp.maxCooldown = 1.5f;
+        meleeWeaponComp.maxCooldown = 1.2f;
 
         pounceComp.range.x = 200.f;
         pounceComp.range.y = 30.f;
         pounceComp.velocityIncFactor = 4.7f;
-        pounceComp.maxCooldown = 2.f;
+        pounceComp.maxCooldown = 1.2f;
         pounceComp.isStickyPouncer = true;
 
         colliderComp.weight = 3.f;
@@ -671,7 +675,7 @@ int EntityManager::createCamera(GameEngine& gameContext, Vector2 position, float
 
     // Camera
     cameraComp.viewRect = {600, 400 };
-    cameraComp.zoom = 1.f;
+    cameraComp.zoom = 1.4f;
     cameraComp.offset = { 10.f, 70.f};
     cameraComp.cameraAdvancement = 150.f;
 
@@ -747,7 +751,7 @@ int EntityManager::createSpawner(GameEngine& gameContext, Vector2 position, floa
 
     // Collider
     colliderComp.collisionLayer = ColliderComponent::Enemy; // temporal
-    colliderComp.layerMasc = ColliderComponent::Player + ColliderComponent::PlayerAttack + ColliderComponent::Wall + ColliderComponent::PlayerShield + +ColliderComponent::Platform; //Collides with player and enemy
+    colliderComp.layerMasc = ColliderComponent::Player + ColliderComponent::PlayerAttack + ColliderComponent::Wall + ColliderComponent::PlayerShield + ColliderComponent::Platform; //Collides with player and enemy
     colliderComp.boundingRoot.bounding = { 0.f, 20.f, 0.f, 20.f };
     colliderComp.type = ColliderType::STATIC;
     
@@ -781,6 +785,11 @@ int EntityManager::createSpawner(GameEngine& gameContext, Vector2 position, floa
         healthComp.maxHealth = 5;
 
         break;
+
+    default:
+        spawnComp.spawnObjectsType = goTypeToSpawn;
+        spawnComp.spawnEntitiesType = EntityType::ENEMY;
+        break;
     }
 
     // Init health
@@ -790,7 +799,7 @@ int EntityManager::createSpawner(GameEngine& gameContext, Vector2 position, floa
     gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
 
     //######### CREATE ########//
-    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::SPAWNER, goTypeToSpawn));
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::SPAWNER, GameObjectType::SPAWNER));
     return entityId;
 }
 
@@ -875,17 +884,17 @@ int EntityManager::createDrone(GameEngine& gameContext, Vector2 position, float 
 
         healthComp.maxHealth = 3;
 
-        distanceWeaponComp.attackBounding = { 0.f, 5.f, 0.f, 10.f };
+        distanceWeaponComp.attackBounding = { 0.f, 5.f, 0.f, 5.f };
         distanceWeaponComp.damage = 1;
         distanceWeaponComp.attackGeneralVelociy = 800.f;
         distanceWeaponComp.attackGravity = 0.f;
         distanceWeaponComp.maxCooldown = 0.4f;
         distanceWeaponComp.attackLifetime = 1.5f;
         distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BULLET;
-        distanceWeaponComp.attackSound.soundPath = "Media/Sound/Weapons/M4A1_Single-Kibblesbob-8540445.wav";
+        distanceWeaponComp.attackSound.soundPath = "Media/Sound/GE_KF7_Soviet.wav";
 
-        distanceAIComp.range.x = 200.f;
-        distanceAIComp.range.y = 200.f;
+        distanceAIComp.range.x = 350.f;
+        distanceAIComp.range.y = 350.f;
 
         sensorComp.sensorBounding = {-distanceAIComp.range.x, distanceAIComp.range.x, -distanceAIComp.range.y, distanceAIComp.range.y };  // The same bounding as the distanceAIComp
         sensorComp.sensorLayerMasc = ColliderComponent::Enemy;
@@ -1081,7 +1090,7 @@ int EntityManager::createTurretGun(GameEngine& gameContext, Vector2 position, ui
     distanceWeaponComp.damage = 1;
     distanceWeaponComp.attackGeneralVelociy = 900.f;
     distanceWeaponComp.attackGravity = 0.f;
-    distanceWeaponComp.maxCooldown = 0.1f;
+    distanceWeaponComp.maxCooldown = 0.13f;
     distanceWeaponComp.attackLifetime = 1.5f;
     distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BULLET;
     distanceWeaponComp.infiniteAmmo = true;
@@ -1095,7 +1104,7 @@ int EntityManager::createTurretGun(GameEngine& gameContext, Vector2 position, ui
         gunTurretComp.currentRotation = 180.f;
     }
     gunTurretComp.gunRotationSpeed = 50.f;
-    gunTurretComp.maxRotation = 80.f;
+    gunTurretComp.maxRotation = 90.f;
     gunTurretComp.minRotation = -10.f;
 
     //######### RENDER ########//

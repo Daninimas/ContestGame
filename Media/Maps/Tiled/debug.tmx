@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="100" tileheight="100" infinite="1" nextlayerid="40" nextobjectid="210">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="100" tileheight="100" infinite="1" nextlayerid="52" nextobjectid="254">
  <editorsettings>
   <export target="../debug.json" format="json"/>
  </editorsettings>
@@ -77,7 +77,7 @@
    </object>
   </objectgroup>
   <objectgroup id="35" name="ENEMY">
-   <object id="204" type="BOMBER_ENEMY" gid="8" x="3631.88" y="116.606" width="512" height="512"/>
+   <object id="204" type="BOMBER_ENEMY" gid="8" x="4175.88" y="116.606" width="512" height="512"/>
    <object id="208" type="DISTANCE_ENEMY" x="4184.85" y="438.667">
     <point/>
    </object>
@@ -86,7 +86,14 @@
    </object>
   </objectgroup>
   <objectgroup id="34" name="SPAWNER">
-   <object id="183" type="ENEMY_SPIDER" gid="2" x="5250.91" y="354.965" width="20" height="20"/>
+   <object id="183" type="ENEMY_SPIDER" gid="2" x="5250.91" y="354.965" width="20" height="20">
+    <properties>
+     <property name="maxCooldown" type="float" value="4"/>
+     <property name="numObjectsToSpawn" type="int" value="-1"/>
+     <property name="range.x" type="float" value="400"/>
+     <property name="range.y" type="float" value="400"/>
+    </properties>
+   </object>
   </objectgroup>
   <objectgroup color="#0055ff" id="33" name="WALL">
    <object id="176" type="WALL" x="2992" y="568.433" width="435.31" height="88.2522"/>
@@ -104,6 +111,84 @@
    <object id="200" type="PLATFORM" x="4580.22" y="509.268" width="110.098" height="56.2522"/>
    <object id="201" type="PLATFORM" x="4462.04" y="463.813" width="137.371" height="56.2522"/>
    <object id="202" type="PLATFORM" x="4572.65" y="406.238" width="134.341" height="25.9492"/>
+  </objectgroup>
+ </group>
+ <group id="40" name="Phase3">
+  <properties>
+   <property name="Direction" value="Down"/>
+  </properties>
+  <objectgroup id="45" name="phase_size">
+   <object id="225" x="5444" y="-945.47" width="1719.68" height="1630.94"/>
+  </objectgroup>
+  <objectgroup id="46" name="ENEMY"/>
+  <objectgroup id="47" name="DRONE">
+   <object id="244" type="DRONE_FRIEND" x="5520" y="100">
+    <point/>
+   </object>
+  </objectgroup>
+  <objectgroup color="#0055ff" id="48" name="WALL">
+   <object id="239" type="WALL" x="5450.77" y="410.359" width="1163.67" height="72.2522"/>
+  </objectgroup>
+  <objectgroup id="43" name="TURRET">
+   <object id="243" type="NONE" x="5660" y="356">
+    <properties>
+     <property name="Facing" value="Right"/>
+    </properties>
+    <point/>
+   </object>
+  </objectgroup>
+  <objectgroup id="44" name="SPAWNER">
+   <object id="246" type="ENEMY_SPIDER" gid="2" x="6506" y="342" width="20" height="20">
+    <properties>
+     <property name="maxCooldown" type="float" value="3"/>
+     <property name="numObjectsToSpawn" type="int" value="10"/>
+     <property name="range.x" type="float" value="4000"/>
+     <property name="range.y" type="float" value="4000"/>
+    </properties>
+   </object>
+   <object id="247" type="ENEMY_SPIDER" gid="2" x="6282" y="326" width="20" height="20">
+    <properties>
+     <property name="maxCooldown" type="float" value="2"/>
+     <property name="numObjectsToSpawn" type="int" value="15"/>
+     <property name="range.x" type="float" value="4000"/>
+     <property name="range.y" type="float" value="4000"/>
+    </properties>
+   </object>
+   <object id="248" type="POUNCER_ENEMY" gid="2" x="6402" y="286" width="20" height="20">
+    <properties>
+     <property name="maxCooldown" type="float" value="5"/>
+     <property name="numObjectsToSpawn" type="int" value="6"/>
+     <property name="range.x" type="float" value="4000"/>
+     <property name="range.y" type="float" value="4000"/>
+    </properties>
+   </object>
+   <object id="249" type="BOMBER_ENEMY" gid="2" x="6838" y="-254" width="20" height="20">
+    <properties>
+     <property name="maxCooldown" type="float" value="8"/>
+     <property name="numObjectsToSpawn" type="int" value="5"/>
+     <property name="range.x" type="float" value="4000"/>
+     <property name="range.y" type="float" value="4000"/>
+    </properties>
+   </object>
+   <object id="250" type="BOMBER_ENEMY" gid="2" x="7026" y="54" width="20" height="20">
+    <properties>
+     <property name="maxCooldown" type="float" value="10"/>
+     <property name="numObjectsToSpawn" type="int" value="3"/>
+     <property name="range.x" type="float" value="4000"/>
+     <property name="range.y" type="float" value="4000"/>
+    </properties>
+   </object>
+  </objectgroup>
+ </group>
+ <group id="49" name="Phase4">
+  <properties>
+   <property name="Direction" value="Right"/>
+  </properties>
+  <objectgroup id="50" name="phase_size">
+   <object id="252" x="6332" y="646.53" width="1527.68" height="1694.94"/>
+  </objectgroup>
+  <objectgroup color="#0055ff" id="51" name="WALL">
+   <object id="253" type="WALL" x="6362.77" y="2114.36" width="1499.67" height="72.2522"/>
   </objectgroup>
  </group>
 </map>
