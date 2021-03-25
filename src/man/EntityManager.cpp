@@ -538,7 +538,7 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
     // Collider
     colliderComp.collisionLayer = ColliderComponent::Weapon;
     colliderComp.layerMasc = ColliderComponent::Player + ColliderComponent::Wall + ColliderComponent::Platform; //Collides with player and wall
-    colliderComp.boundingRoot.bounding = { 0.f, 10.f, 0.f, 10.f };
+    colliderComp.boundingRoot.bounding = { 0.f, 45.6f, 0.f, 19.5f };
     colliderComp.type = ColliderType::DYNAMIC;
 
     // Render component
@@ -622,8 +622,12 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
         distanceWeaponComp.ammo = 30;
         distanceWeaponComp.infiniteAmmo = false;
         distanceWeaponComp.spawnAttackPos = { 20.f, 39.f };
-
         distanceWeaponComp.attackSound.soundPath = "Media/Sound/Weapons/laserShot.wav";
+
+        renderComp.sprite = "Media/Images/laser_gun.png";
+        renderComp.spriteRect = { 0, 152, 0, 65 };
+
+        situation.scale = { 0.3f, 0.3f };
 
         WorldElementsData::worldDistanceWeapons.push_back(entityId);
     }
@@ -643,8 +647,12 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
         distanceWeaponComp.numberOfShells = 5;
         distanceWeaponComp.bulletSpreadAngle = 12.f;
         distanceWeaponComp.spawnAttackPos = { 20.f, 39.f };
-
         distanceWeaponComp.attackSound.soundPath = "Media/Sound/Weapons/shotgunShot.wav";
+
+        renderComp.sprite = "Media/Images/shotgun.png";
+        renderComp.spriteRect = { 0, 152, 0, 65 };
+
+        situation.scale = {0.3f, 0.3f};
 
         WorldElementsData::worldDistanceWeapons.push_back(entityId);
     }
@@ -1080,6 +1088,7 @@ int EntityManager::createTurretGun(GameEngine& gameContext, Vector2 position, ui
     situation.position = position;
     situation.facing = facing;
     situation.noWorldDelete = true;
+    situation.scale = {0.3f, 0.3f};
 
     // Render
     renderComp.sprite = "Media/Images/TurretGun.png";
@@ -1095,6 +1104,7 @@ int EntityManager::createTurretGun(GameEngine& gameContext, Vector2 position, ui
     distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BULLET;
     distanceWeaponComp.infiniteAmmo = true;
     distanceWeaponComp.bulletSpreadAngle = 5.f;
+    distanceWeaponComp.spawnAttackPos = {40.f, 15.f};
 
     distanceWeaponComp.attackSound.soundPath = "Media/Sound/Weapons/M4A1_Single-Kibblesbob-8540445.wav";
 
@@ -1184,7 +1194,7 @@ int EntityManager::createWorld(GameEngine& gameContext, GameObjectType worldName
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::WORLD, worldName));
 
     // Create the entities of the world
-    MapLoader::loadMapPhase(gameContext, worldComp.worldPath, "Phase1");
+    MapLoader::loadMapPhase(gameContext, worldComp.worldPath, "Phase3");
     worldComp.numberOfPhases = MapLoader::getNumberOfPhases(worldComp.worldPath);
 
     return entityId;

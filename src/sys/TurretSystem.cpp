@@ -91,7 +91,8 @@ void TurretSystem::enterInTurret(GameEngine& gameContext, TurretComponent& turre
 void TurretSystem::manageTurretUsage(GameEngine& gameContext, TurretComponent& turret) const {
 	InputComponent& userInput = gameContext.entityMan.getComponent<InputComponent>(turret.userID);
 
-	if (userInput.jumping) {
+	// Check if the entity has lost the turret (if the player loses a life, or the entity is dead, or the player has exit (jump))
+	if (userInput.jumping || !userInput.usingTurret) {
 		exitTurret(gameContext, userInput, turret);
 
 		return;

@@ -65,6 +65,8 @@ void DeathSystem::managePlayerLifes(GameEngine& gameContext, int playerId) const
         healthComp.currentHealth = healthComp.maxHealth;
         healthComp.recoverTimeCounter = 0.f; 
 
+        gameContext.entityMan.getComponent<InputComponent>(playerId).usingTurret = false;
+
         Utils::resetPlayerPosition(gameContext);
         gameContext.pushGameState(GameState::WAIT_AFTER_LOSE_LIFE);
     }
