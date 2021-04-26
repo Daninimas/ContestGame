@@ -220,12 +220,25 @@ void SFMLEngine::updateEntities(GameEngine& gameContext, std::vector<int> entiti
 void SFMLEngine::updateNode(GameEngine& gameContext, sf::Sprite& node, int id) {
 	SituationComponent& situation = gameContext.entityMan.getComponent<SituationComponent>(id);
 	RenderComponent& drawable = gameContext.entityMan.getComponent<RenderComponent>(id);
+	// Father data
+	Vector2 fatherPos{};
+	Vector2 fatherScale{};
+	float fatherRor = 0.f;
+
+	// Get the father data
+	if (situation.father != std::numeric_limits<int>::max()) {
+		SituationComponent& fatherSit = gameContext.entityMan.getComponent<SituationComponent>(situation.father);
+		fatherPos = fatherSit.position;
+		fatherScale = fatherSit.scale;
+		fatherRor = fatherSit.rotation;
+		situation.facing = fatherSit.facing;
+	}
 
 	node.setOrigin(0,0);
 
-	node.setPosition(situation.position.x, situation.position.y);
-	node.setRotation(-situation.rotation);
-	node.setScale(situation.scale.x, situation.scale.y);
+	node.setPosition(situation.position.x + fatherPos.x, situation.position.y + fatherPos.y);
+	node.setRotation(-situation.rotation + fatherRor);
+	node.setScale(situation.scale.x * fatherScale.x, situation.scale.y * fatherScale.y);
 
 	if (situation.facing == SituationComponent::Left) {
 		node.move(node.getGlobalBounds().width, 0.f);
@@ -235,6 +248,10 @@ void SFMLEngine::updateNode(GameEngine& gameContext, sf::Sprite& node, int id) {
 	// Update the sprite sheet
 	BoundingBox& drawableRect = drawable.spriteRect;
 	node.setTextureRect(sf::IntRect(drawableRect.xLeft, drawableRect.yUp, drawableRect.xRight - drawableRect.xLeft, drawableRect.yDown - drawableRect.yUp));
+
+	// Update sons
+	if(situation.sons.size() > 0)
+		updateEntities(gameContext, situation.sons);
 }
 
 void SFMLEngine::setColorToEntity(const int id, const Color color) {

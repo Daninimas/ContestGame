@@ -2,6 +2,8 @@
 
 #include <tools/Vector2.hpp>
 #include "Component.hpp"
+#include <limits>
+#include <vector>
 
 class SituationComponent : public Component {
 public:
@@ -20,4 +22,9 @@ public:
     uint8_t facing{ Right };
 
     bool noWorldDelete{ false }; // to prevent deleting this entity hen it is outside of the world
+
+
+    // Para hacer entidades con hijos y padre
+    int father = std::numeric_limits<int>::max();
+    std::vector<int> sons{}; // Hay que tener en cuenta que los hijos tienen la posicion relativa al padre, no al mundo
 };

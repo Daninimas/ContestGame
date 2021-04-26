@@ -176,6 +176,36 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::PLAYER, goType));
 
+    situation.sons.emplace_back(createPlayerHand(gameContext, entityId));
+
+    return entityId;
+}
+
+int EntityManager::createPlayerHand(GameEngine& gameContext, int playerId) {
+    int entityId = Entity::getCurrentId();
+
+    SituationComponent& situation = createComponent<SituationComponent>(entityId);
+    RenderComponent& renderComp = createComponent<RenderComponent>(entityId);
+
+    //######### DATA ########//
+    situation.position = {0.f, 0.f};
+    situation.rotation = 0;
+    situation.noWorldDelete = true;
+    situation.scale = Vector2(10.f, 10.f);
+    situation.father = playerId;
+
+    
+    // Render component
+    renderComp.sprite = "Media/Images/spawnerSprite.png";
+    renderComp.spriteRect = { 0, 20, 0, 20 };
+
+
+    //######### RENDER ########//
+    gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
+
+    //######### CREATE ########//
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::PLAYER, GameObjectType::PLAYER_HAND));
+
     return entityId;
 }
 

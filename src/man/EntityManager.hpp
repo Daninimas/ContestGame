@@ -94,6 +94,7 @@ public:
     //                ENTITY CREATION               //
     //////////////////////////////////////////////////
     int createPlayer(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType = GameObjectType::NONE);
+    int createPlayerHand(GameEngine& gameContext, int playerId);
     int createAttack(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType = GameObjectType::NONE);
     int createWall(GameEngine& gameContext, Vector2 position, Vector2 size, float r, GameObjectType goType = GameObjectType::NONE);
     int createEnemy(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType = GameObjectType::NONE);

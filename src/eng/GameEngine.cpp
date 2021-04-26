@@ -406,6 +406,11 @@ void GameEngine::eraseEntityByID(int id) {
     entityMan.removeEntityToUpdate(id);
     windowFacade.eraseEntity(id);
 
+    // Remove the render sons of the entity
+    auto& renderSons = entityMan.getComponent<SituationComponent>(id).sons;
+    for (int son : renderSons) {
+        eraseEntityByID(son);
+    }
 
     // Removing the entity ID on Components
     auto& colliders = entityMan.getComponents<ColliderComponent>();

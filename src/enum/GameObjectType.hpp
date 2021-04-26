@@ -15,6 +15,7 @@ enum class GameObjectType {
 
     // Player
     PLAYER_GENERAL,
+    PLAYER_HAND,
 
     // Attacks
     PLAYER_MELEE_ATTACK,
