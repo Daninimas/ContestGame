@@ -221,15 +221,15 @@ void SFMLEngine::updateNode(GameEngine& gameContext, sf::Sprite& node, int id) {
 	SituationComponent& situation = gameContext.entityMan.getComponent<SituationComponent>(id);
 	RenderComponent& drawable = gameContext.entityMan.getComponent<RenderComponent>(id);
 	// Father data
-	Vector2 fatherPos{};
-	Vector2 fatherScale{};
+	Vector2 fatherPos {0.f, 0.f};
+	//Vector2 fatherScale {1.f, 1.f};
 	float fatherRor = 0.f;
 
 	// Get the father data
 	if (situation.father != std::numeric_limits<int>::max()) {
 		SituationComponent& fatherSit = gameContext.entityMan.getComponent<SituationComponent>(situation.father);
 		fatherPos = fatherSit.position;
-		fatherScale = fatherSit.scale;
+		//fatherScale = fatherSit.scale;
 		fatherRor = fatherSit.rotation;
 		situation.facing = fatherSit.facing;
 	}
@@ -237,8 +237,8 @@ void SFMLEngine::updateNode(GameEngine& gameContext, sf::Sprite& node, int id) {
 	node.setOrigin(0,0);
 
 	node.setPosition(situation.position.x + fatherPos.x, situation.position.y + fatherPos.y);
-	node.setRotation(-situation.rotation + fatherRor);
-	node.setScale(situation.scale.x * fatherScale.x, situation.scale.y * fatherScale.y);
+	node.setRotation(-(situation.rotation + fatherRor));
+	node.setScale(situation.scale.x, situation.scale.y);
 
 	if (situation.facing == SituationComponent::Left) {
 		node.move(node.getGlobalBounds().width, 0.f);
