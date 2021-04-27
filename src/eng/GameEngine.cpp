@@ -407,25 +407,33 @@ void GameEngine::eraseEntityByID(int id) {
     windowFacade.eraseEntity(id);
 
     // Remove the render sons of the entity
-    auto& renderSons = entityMan.getComponent<SituationComponent>(id).sons;
-    for (int son : renderSons) {
-        eraseEntityByID(son);
+    if (entityMan.existsComponent<SituationComponent>(id)) {
+        auto& renderSons = entityMan.getComponent<SituationComponent>(id).sons;
+        for (int son : renderSons) {
+            eraseEntityByID(son);
+        }
     }
 
     // Removing the entity ID on Components
-    auto& colliders = entityMan.getComponents<ColliderComponent>();
-    for (ColliderComponent& collider : colliders) {
-        Utils::deleteCollidingWithObjective(collider.boundingRoot, id); // deletes the id from the colliding entities
+    if (entityMan.existsComponent<ColliderComponent>(id)) {
+        auto& colliders = entityMan.getComponents<ColliderComponent>();
+        for (ColliderComponent& collider : colliders) {
+            Utils::deleteCollidingWithObjective(collider.boundingRoot, id); // deletes the id from the colliding entities
+        }
     }
 
-    auto& sensors = entityMan.getComponents<SensorComponent>();
-    for (SensorComponent& sensor : sensors) {
-        sensor.entitiesSensoring.erase(std::remove(sensor.entitiesSensoring.begin(), sensor.entitiesSensoring.end(), id), sensor.entitiesSensoring.end());
+    if (entityMan.existsComponent<SensorComponent>(id)) {
+        auto& sensors = entityMan.getComponents<SensorComponent>();
+        for (SensorComponent& sensor : sensors) {
+            sensor.entitiesSensoring.erase(std::remove(sensor.entitiesSensoring.begin(), sensor.entitiesSensoring.end(), id), sensor.entitiesSensoring.end());
+        }
     }
 
-    auto& spawners = entityMan.getComponents<SpawnerComponent>();
-    for (SpawnerComponent& spawnComp : spawners) {
-        spawnComp.spawnedObjsAlive.erase(std::remove(spawnComp.spawnedObjsAlive.begin(), spawnComp.spawnedObjsAlive.end(), id), spawnComp.spawnedObjsAlive.end());
+    if (entityMan.existsComponent<SpawnerComponent>(id)) {
+        auto& spawners = entityMan.getComponents<SpawnerComponent>();
+        for (SpawnerComponent& spawnComp : spawners) {
+            spawnComp.spawnedObjsAlive.erase(std::remove(spawnComp.spawnedObjsAlive.begin(), spawnComp.spawnedObjsAlive.end(), id), spawnComp.spawnedObjsAlive.end());
+        }
     }
 
     // Erase all options from the Menu Component

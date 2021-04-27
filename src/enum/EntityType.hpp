@@ -1,7 +1,7 @@
 #pragma once
 
 enum class EntityType {
-    PLAYER,             
+    PLAYER,   
     ENEMY,           
     ATTACK, 
     WALL,

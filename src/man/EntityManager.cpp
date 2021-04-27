@@ -1224,7 +1224,7 @@ int EntityManager::createWorld(GameEngine& gameContext, GameObjectType worldName
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::WORLD, worldName));
 
     // Create the entities of the world
-    MapLoader::loadMapPhase(gameContext, worldComp.worldPath, "Phase3");
+    MapLoader::loadMapPhase(gameContext, worldComp.worldPath, "Phase1");
     worldComp.numberOfPhases = MapLoader::getNumberOfPhases(worldComp.worldPath);
 
     return entityId;
