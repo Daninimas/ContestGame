@@ -1,6 +1,7 @@
 #include "AIFlyingChaseSystem.hpp"
 
 #include <eng/GameEngine.hpp>
+#include <tools/Utils.hpp>
 #include <iostream>
 
 AIFlyingChaseSystem::AIFlyingChaseSystem() {}
@@ -36,7 +37,18 @@ bool AIFlyingChaseSystem::chaseObjective(GameEngine& gameContext, AIFlyingChaseC
 	VelocityComponent& chaserVel = gameContext.entityMan.getComponent<VelocityComponent>(chaseComp.id);
 	bool idle = false;
 
-	if (abs(chaserSit.position.x - objectiveSit.position.x) > chaseComp.minDistanceX) {
+	// Objetive center
+	float objetiveCenterPositionX = objectiveSit.position.x;
+	if (gameContext.entityMan.existsComponent<ColliderComponent>(chaseComp.objectiveId)) {
+		objetiveCenterPositionX += Utils::getCenterOfBounding(gameContext.entityMan.getComponent<ColliderComponent>(chaseComp.objectiveId).boundingRoot.bounding).x;
+	}
+	// Chaser center
+	float chaserCenterPositionX = chaserSit.position.x;
+	if (gameContext.entityMan.existsComponent<ColliderComponent>(chaseComp.objectiveId)) {
+		chaserCenterPositionX += Utils::getCenterOfBounding(gameContext.entityMan.getComponent<ColliderComponent>(chaseComp.id).boundingRoot.bounding).x;
+	}
+
+	if (abs(chaserCenterPositionX - objetiveCenterPositionX) > chaseComp.minDistanceX) {
 		//Do the movement
 		if (chaserSit.position.x < objectiveSit.position.x) {
 			chaserVel.velocity.x = chaserVel.speedX;

@@ -376,7 +376,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         renderComp.color = { 10, 20, 255, 255 };
         healthComp.maxHealth = 3;
 
-        createComponent<AIChaseComponent>(entityId);
+        AIChaseComponent& chaseComp = createComponent<AIChaseComponent>(entityId);
         createComponent<AIMeleeAtkComponent>(entityId);
         JumpComponent& jumpComp = createComponent<JumpComponent>(entityId);
         SensorComponent& sensorComp = createComponent<SensorComponent>(entityId);
@@ -386,6 +386,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
 
         jumpComp.impulse = -150.f;
 
+        chaseComp.minDistanceX = rand() % (65 - 46) + 46; // Entre 65 y 46
 
         MeleeWeaponComponent& meleeWeaponComp = createComponent<MeleeWeaponComponent>(entityId);
         meleeWeaponComp.attackBounding = { 0.f, 20.f, 10.f, 40.f };
@@ -456,7 +457,8 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
 
         flyingChaseComp.maxHeigtht = 230.f;
         flyingChaseComp.minHeigtht = 200.f;
-        flyingChaseComp.minDistanceX = 1.f;
+        flyingChaseComp.minDistanceX = rand() % (30 - 1) + 1; // Entre 65 y 46
+
 
         DistanceWeaponComponent& distanceWeaponComp = createComponent<DistanceWeaponComponent>(entityId);
 
