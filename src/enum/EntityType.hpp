@@ -21,5 +21,6 @@ enum class EntityType {
     DRONE,
     ORBITAL_MARKER,
     ORBITAL_STRIKER,
-    TURRET
+    TURRET,
+    CHILD
 };

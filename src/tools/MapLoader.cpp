@@ -143,6 +143,9 @@ void MapLoader::createObject(GameEngine& gameContext, std::string layerName, tso
         else if (layerName == "DRONE") {
             gameContext.entityMan.createDrone(gameContext, Vector2(position.x, position.y), rotation, goType);
         }
+        else if (layerName == "CHILD") {
+            gameContext.entityMan.createChild(gameContext, Vector2(position.x, position.y), rotation, goType);
+        }
     }
     else {
         // Error on the type of the object

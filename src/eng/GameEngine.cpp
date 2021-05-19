@@ -402,7 +402,6 @@ void GameEngine::eraseEntityByID(int id) {
     EntityType entityType = entityMan.getEntity(id).getType();
     GameObjectType gameObjectType = entityMan.getEntity(id).getGameObjectType();
 
-
     entityMan.removeEntityToUpdate(id);
     windowFacade.eraseEntity(id);
 

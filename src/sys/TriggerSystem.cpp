@@ -50,6 +50,10 @@ void TriggerSystem::activateFunction(GameEngine& gameContext, TriggerComponent& 
 		case TriggerFunction::CREATE_ENTITY:
 			createEntity(gameContext, trigger);
 			break;
+
+		case TriggerFunction::GIVE_CHILD_POINTS:
+			WorldElementsData::playerScore += -(gameContext.entityMan.getComponent<HealthComponent>(trigger.id).score);
+			break;
 		}
 	}
 }

@@ -26,7 +26,8 @@ public:
         PlayerShield  = 0x80,
         Trigger       = 0x100,
         Platform      = 0x200,   // This are the platforms that collide only from the top part
-        Turret        = 0x400
+        Turret        = 0x400,
+        Child         = 0x800
     };
 
 

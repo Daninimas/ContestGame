@@ -8,7 +8,7 @@ enum class TriggerFunction
     CREATE_ENTITY,
 
     // Especific
-
+    GIVE_CHILD_POINTS,
 
 
 

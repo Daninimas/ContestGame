@@ -242,7 +242,7 @@ int EntityManager::createAttack(GameEngine& gameContext, Vector2 position, float
 
     case GameObjectType::PLAYER_MELEE_ATTACK:
         collider.collisionLayer = ColliderComponent::PlayerAttack;
-        collider.layerMasc = ColliderComponent::Enemy + ColliderComponent::Shield;  // Collides with enemies only
+        collider.layerMasc = ColliderComponent::Enemy + ColliderComponent::Shield + ColliderComponent::Child;  // Collides with enemies only
 
         attack.type = AttackType::MELEE;
         break;
@@ -251,7 +251,7 @@ int EntityManager::createAttack(GameEngine& gameContext, Vector2 position, float
         createComponent<VelocityComponent>(entityId);
 
         collider.collisionLayer = ColliderComponent::PlayerAttack;
-        collider.layerMasc = ColliderComponent::Enemy + ColliderComponent::Wall + ColliderComponent::Shield;  // Collides with enemies and walls
+        collider.layerMasc = ColliderComponent::Enemy + ColliderComponent::Wall + ColliderComponent::Shield + ColliderComponent::Child;  // Collides with enemies and walls
 
         attack.type = AttackType::DISTANCE;
         break;
@@ -270,7 +270,7 @@ int EntityManager::createAttack(GameEngine& gameContext, Vector2 position, float
         createComponent<VelocityComponent>(entityId);
 
         collider.collisionLayer = ColliderComponent::PlayerAttack;
-        collider.layerMasc = ColliderComponent::Enemy + ColliderComponent::Wall + ColliderComponent::Shield;  // Collides with enemies and walls
+        collider.layerMasc = ColliderComponent::Enemy + ColliderComponent::Wall + ColliderComponent::Shield + ColliderComponent::Child;  // Collides with enemies and walls
 
         attack.type = AttackType::LASER;
         break;
@@ -758,7 +758,7 @@ int EntityManager::createBomb(GameEngine& gameContext, Vector2 position, float r
 
         case GameObjectType::PLAYER_BOMB:
             colliderComp.collisionLayer = ColliderComponent::PlayerAttack;
-            colliderComp.layerMasc = ColliderComponent::Enemy + ColliderComponent::Wall + ColliderComponent::Shield + ColliderComponent::Platform;
+            colliderComp.layerMasc = ColliderComponent::Enemy + ColliderComponent::Wall + ColliderComponent::Shield + ColliderComponent::Platform + ColliderComponent::Child;
             bombComp.explosionSound.soundPath = "Media/Sound/Weapons/explosion.wav";
             break;
     }
@@ -1187,6 +1187,38 @@ int EntityManager::createTurretPlatform(GameEngine& gameContext, Vector2 positio
 
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::TURRET, GameObjectType::TURRET_PLATFORM));
+    return entityId;
+}
+
+
+int EntityManager::createChild(GameEngine& gameContext, Vector2 position, float rotation, GameObjectType goType) {
+    int entityId = Entity::getCurrentId();
+
+    SituationComponent& situation = createComponent<SituationComponent>(entityId);
+    ColliderComponent& colliderComp = createComponent<ColliderComponent>(entityId);
+    TriggerComponent& triggerComp = createComponent<TriggerComponent>(entityId);
+    HealthComponent& healthComp = createComponent<HealthComponent>(entityId);
+
+    //######### DATA ########//
+    situation.position = position;
+    situation.rotation = rotation;
+
+    // Collider
+    colliderComp.collisionLayer = ColliderComponent::Child;
+    colliderComp.layerMasc = ColliderComponent::PlayerAttack + ColliderComponent::Player;
+    colliderComp.type = ColliderType::STATIC;
+    colliderComp.boundingRoot.bounding = { 0.f, 30.f, 0.f, 20.f };
+
+    // Health
+    healthComp.maxHealth = 1;
+    healthComp.resetHealth();
+    healthComp.score = -100;
+
+    // Trigger
+    triggerComp.functions.push_back(TriggerFunction::GIVE_CHILD_POINTS);
+
+    //######### CREATE ########//
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::CHILD, GameObjectType::CHILD));
     return entityId;
 }
 

@@ -76,6 +76,29 @@
                 }, 
                 {
                  "draworder":"topdown",
+                 "id":52,
+                 "name":"CHILD",
+                 "objects":[
+                        {
+                         "height":0,
+                         "id":254,
+                         "name":"",
+                         "point":true,
+                         "rotation":0,
+                         "type":"CHILD",
+                         "visible":true,
+                         "width":0,
+                         "x":261.818181818182,
+                         "y":528.484848484848
+                        }],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
+                }, 
+                {
+                 "draworder":"topdown",
                  "id":18,
                  "name":"WEAPON",
                  "objects":[
@@ -421,7 +444,7 @@
                          "type":"BOMBER_ENEMY",
                          "visible":true,
                          "width":512,
-                         "x":3631.88,
+                         "x":4175.88,
                          "y":116.606
                         }, 
                         {
@@ -760,7 +783,7 @@
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,
-                         "width":1163.673,
+                         "width":1163.67,
                          "x":5450.77,
                          "y":410.359
                         }],
@@ -1026,9 +1049,9 @@
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,
-                         "width":1499.673,
+                         "width":1499.67,
                          "x":6362.77,
-                         "y":2114.359
+                         "y":2114.36
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -1049,8 +1072,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":52,
- "nextobjectid":254,
+ "nextlayerid":53,
+ "nextobjectid":255,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.4.3",

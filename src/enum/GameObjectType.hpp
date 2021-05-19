@@ -101,5 +101,8 @@ enum class GameObjectType {
     TURRET_PLATFORM,
 
     // Spawner
-    SPAWNER
+    SPAWNER,
+
+    // Child
+    CHILD
 };
