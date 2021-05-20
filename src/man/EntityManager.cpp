@@ -362,8 +362,13 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
     // Add entity to World enemy number
     ++WorldElementsData::enemiesInWorld;
 
+    if (goType == GameObjectType::FIRST_ENEMY) {
+        renderComp.color = { 255, 100, 30, 255 };
+        healthComp.maxHealth = 1;
 
-    if (goType == GameObjectType::CHASER) {
+        situation.facing = SituationComponent::Right;
+    }
+    else if (goType == GameObjectType::CHASER) {
         velocityComp.speedX = 70.f;
         renderComp.color = { 255, 100, 30, 255 };
         healthComp.maxHealth = 3;

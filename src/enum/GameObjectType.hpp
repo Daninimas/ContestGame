@@ -56,6 +56,7 @@ enum class GameObjectType {
     BOMBER_ENEMY,
     POUNCER_ENEMY,
     ENEMY_SPIDER,
+    FIRST_ENEMY,  //El enemigo que te da la pistola
 
     // Drone types
     DRONE_FRIEND,
