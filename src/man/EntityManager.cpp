@@ -341,16 +341,13 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
     //######### DATA ########//
     situation.position = position;
     situation.rotation = r;
+    situation.scale = { 0.18f, 0.18f };
 
     // Collider
     colliderComp.collisionLayer = ColliderComponent::Enemy;
     colliderComp.layerMasc = ColliderComponent::Player + ColliderComponent::PlayerAttack + ColliderComponent::Wall + ColliderComponent::PlayerShield + ColliderComponent::Platform; //Collides with player and enemy
     colliderComp.boundingRoot.bounding = { 0.f, 50.f, 0.f, 50.f };
     colliderComp.type = ColliderType::DYNAMIC;
-
-    // Render component
-    renderComp.sprite = "Media/Images/Elfo del Bosque.jpg";
-    renderComp.spriteRect = { 1020, 1080, 1080, 1153 };
 
     // Velocity
     velocityComp.gravity = 230.f;
@@ -363,14 +360,22 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
     ++WorldElementsData::enemiesInWorld;
 
     if (goType == GameObjectType::FIRST_ENEMY) {
-        renderComp.color = { 255, 100, 30, 255 };
         healthComp.maxHealth = 1;
+
+        // Render component
+        renderComp.sprite = "Media/Images/Enemy.png";
+        renderComp.spriteRect = { 0, 512, 0, 512 };
 
         situation.facing = SituationComponent::Right;
     }
     else if (goType == GameObjectType::CHASER) {
         velocityComp.speedX = 70.f;
-        renderComp.color = { 255, 100, 30, 255 };
+
+        // Render component
+        renderComp.sprite = "Media/Images/Enemy.png";
+        renderComp.spriteRect = { 0, 248, 0, 360 };
+        renderComp.color = { 10, 20, 255, 255 };
+
         healthComp.maxHealth = 3;
 
         createComponent<AIChaseComponent>(entityId);
@@ -378,7 +383,11 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
 
     else if (goType == GameObjectType::CHASERJUMPER) {
         velocityComp.speedX = 50.f;
-        renderComp.color = { 10, 20, 255, 255 };
+
+        // Render component
+        renderComp.sprite = "Media/Images/Enemy.png";
+        renderComp.spriteRect = { 0, 248, 0, 360 };
+
         healthComp.maxHealth = 3;
 
         AIChaseComponent& chaseComp = createComponent<AIChaseComponent>(entityId);
@@ -403,7 +412,11 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
     
     else if(goType == GameObjectType::DISTANCE_ENEMY) {
         velocityComp.speedX = 0.f;
-        renderComp.color = { 10, 255, 20, 255 };
+        
+        // Render component
+        renderComp.sprite = "Media/Images/Enemy.png";
+        renderComp.spriteRect = { 0, 248, 0, 360 };
+
         healthComp.maxHealth = 7;
 
         AIDistanceAtkComponent& distanceAIComp = createComponent<AIDistanceAtkComponent>(entityId);
@@ -427,7 +440,11 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
 
     else if (goType == GameObjectType::TRANSFORM_ENEMY) {
         velocityComp.speedX = 100.f;
-        renderComp.color = { 255, 255, 255, 255 };
+
+        // Render component
+        renderComp.sprite = "Media/Images/Personajes/Alien camuflado/Nino.png";
+        renderComp.spriteRect = { 0, 116, 0, 274 };
+
         healthComp.maxHealth = 5;
 
         JumpComponent& jumpComp = createComponent<JumpComponent>(entityId);
@@ -444,10 +461,10 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         meleeWeaponComp.maxCooldown = 0.5f;
 
         AITransformationComponent& transformComp = createComponent<AITransformationComponent>(entityId);
-        transformComp.newBoundingRoot.bounding = { 0.f, 100.f, 0.f, 100.f };
-        transformComp.newColor = { 255, 10, 10, 255 };
-        transformComp.newScale = { 2.f, 2.f };
-        transformComp.newSprite = "Media/Images/Elfo del Bosque.jpg";
+        transformComp.newBoundingRoot.bounding = { 0.f, 520.f, 0.f, 1016.f };
+        transformComp.newColor = { 255, 255, 255, 255 };
+        transformComp.newScale = { 1.f, 1.f };
+        transformComp.newSprite = "Media/Images/Personajes/Alien camuflado/AlienTransformado.png";
         transformComp.newSpriteRect = { 1020, 1080, 1080, 1153 };
         transformComp.range = { 150.f, 150.f };
     }
@@ -455,7 +472,11 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
     else if (goType == GameObjectType::BOMBER_ENEMY) {
         velocityComp.speedX = 80.f;
         velocityComp.gravity = 0.f;
-        renderComp.color = { 255, 100, 30, 255 };
+
+        // Render component
+        renderComp.sprite = "Media/Images/Personajes/alien volador/AlienVolador.png";
+        renderComp.spriteRect = { 0, 399, 0, 464 };
+
         healthComp.maxHealth = 10;
 
         AIFlyingChaseComponent& flyingChaseComp = createComponent<AIFlyingChaseComponent>(entityId);
@@ -488,7 +509,12 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
 
     else if (goType == GameObjectType::POUNCER_ENEMY) {
         velocityComp.speedX = 45.f;
+
+        // Render component
+        renderComp.sprite = "Media/Images/Personajes/Alien araña/AlienArana.png";
+        renderComp.spriteRect = { 0, 297, 0, 381 };
         renderComp.color = { 20, 20, 30, 255 };
+
         healthComp.maxHealth = 4;
 
 
@@ -518,7 +544,11 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
 
     else if (goType == GameObjectType::ENEMY_SPIDER) {
         velocityComp.speedX = 45.f;
-        renderComp.color = { 20, 20, 30, 255 };
+        
+        // Render component
+        renderComp.sprite = "Media/Images/Personajes/Alien araña/AlienArana.png";
+        renderComp.spriteRect = { 0, 297, 0, 381 };
+
         healthComp.maxHealth = 4;
 
 
@@ -1203,10 +1233,15 @@ int EntityManager::createChild(GameEngine& gameContext, Vector2 position, float 
     ColliderComponent& colliderComp = createComponent<ColliderComponent>(entityId);
     TriggerComponent& triggerComp = createComponent<TriggerComponent>(entityId);
     HealthComponent& healthComp = createComponent<HealthComponent>(entityId);
+    RenderComponent& renderComp = createComponent<RenderComponent>(entityId);
 
     //######### DATA ########//
     situation.position = position;
     situation.rotation = rotation;
+
+    // Render component
+    renderComp.sprite = "Media/Images/Personajes/Alien camuflado/Nino.png";
+    renderComp.spriteRect = { 0, 116, 0, 274 };
 
     // Collider
     colliderComp.collisionLayer = ColliderComponent::Child;
@@ -1222,8 +1257,13 @@ int EntityManager::createChild(GameEngine& gameContext, Vector2 position, float 
     // Trigger
     triggerComp.functions.push_back(TriggerFunction::GIVE_CHILD_POINTS);
 
+
+    //######### RENDER ########//
+    gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
+
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::CHILD, GameObjectType::CHILD));
+
     return entityId;
 }
 
