@@ -17,6 +17,7 @@
 
 #include <iostream>
 #include <limits>
+#include <fstream> 
 
 #include <tools/json.hpp>
 using json = nlohmann::json;
@@ -175,7 +176,15 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
     // Input (Read Json)
     std::ifstream i("config.json");
     json jf = json::parse(i);
-    std::cout<<"LEO JSON............. "<<jf["pi"].get<float>() << "\n";
+    inputComp.keyboardControlsMap[Controls::MOVE_LEFT]  = jf["MOVE_LEFT"].get<uint8_t>();
+    inputComp.keyboardControlsMap[Controls::MOVE_RIGHT] = jf["MOVE_RIGHT"].get<uint8_t>();
+    inputComp.keyboardControlsMap[Controls::MOVE_UP]    = jf["MOVE_UP"].get<uint8_t>();
+    inputComp.keyboardControlsMap[Controls::MOVE_DOWN]  = jf["MOVE_DOWN"].get<uint8_t>();
+    inputComp.keyboardControlsMap[Controls::ACTION]     = jf["ACTION"].get<uint8_t>();
+    inputComp.keyboardControlsMap[Controls::JUMP]       = jf["JUMP"].get<uint8_t>();
+    inputComp.keyboardControlsMap[Controls::JOYSTICK_ACTION] = jf["JOYSTICK_ACTION"].get<uint8_t>();
+    inputComp.keyboardControlsMap[Controls::JOYSTICK_JUMP]   = jf["JOYSTICK_JUMP"].get<uint8_t>();
+    i.close();
 
     //######### RENDER ########//
     gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);

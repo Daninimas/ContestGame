@@ -482,12 +482,18 @@ void SFMLEngine::setKeyToControl(GameEngine& gameContext, sf::Event& event) cons
 
 	//std::cout << "key pressed: " << (int)event.key.code << "\n";
 	playerInput.keyboardControlsMap[playerInput.controlToChange] = event.key.code;
+
+	// Update json file
+	Utils::updateControlsJSON(playerInput);
 }
 
 void SFMLEngine::setJoystickButtonToControl(GameEngine& gameContext, sf::Event& event) const {
 	InputComponent& playerInput = gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId);
 
 	playerInput.keyboardControlsMap[playerInput.controlToChange] = event.joystickButton.button;
+
+	// Update json file
+	Utils::updateControlsJSON(playerInput);
 }
 
 

@@ -56,6 +56,8 @@ public:
         return (T(0) < val) - (val < T(0));
     }
 
+    static void updateControlsJSON(InputComponent& inputComp);
+
 private:
 
     static inline const std::map<uint8_t, std::string> keyNameMap {

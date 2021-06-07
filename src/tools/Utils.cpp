@@ -5,6 +5,10 @@
 
 #include <enum/Controls.hpp>
 
+#include <tools/json.hpp>
+using json = nlohmann::json;
+#include <fstream> 
+
 Utils::Utils() {}
 
 float Utils::stringToFloat(std::string string) {
@@ -367,4 +371,21 @@ Vector2 Utils::rotateVector(Vector2& vect, float angle) {
     rotatedAngle.y = vect.x * sin(degToRad(angle)) + vect.y * cos(degToRad(angle));
 
     return rotatedAngle;
+}
+
+
+void Utils::updateControlsJSON(InputComponent& inputComp) {
+    //std::ifstream i("config.json");
+    json jf;
+    jf["MOVE_LEFT"] = inputComp.keyboardControlsMap[Controls::MOVE_LEFT];
+    jf["MOVE_RIGHT"] = inputComp.keyboardControlsMap[Controls::MOVE_RIGHT];
+    jf["MOVE_UP"] = inputComp.keyboardControlsMap[Controls::MOVE_UP];
+    jf["MOVE_DOWN"] = inputComp.keyboardControlsMap[Controls::MOVE_DOWN];
+    jf["ACTION"] = inputComp.keyboardControlsMap[Controls::ACTION];
+    jf["JUMP"] = inputComp.keyboardControlsMap[Controls::JUMP];
+    jf["JOYSTICK_ACTION"] = inputComp.keyboardControlsMap[Controls::JOYSTICK_ACTION];
+    jf["JOYSTICK_JUMP"] = inputComp.keyboardControlsMap[Controls::JOYSTICK_JUMP];
+
+    std::ofstream file("config.json");
+    file << jf;
 }
