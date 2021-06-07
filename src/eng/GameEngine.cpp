@@ -445,9 +445,10 @@ void GameEngine::eraseEntityByID(int id) {
     }
     //getSoundFacadeRef().setParameterEventByID(id, STOP_SOUND);
 
-    // Erase canon on turret (NUNCA DESTRUIR UNA TORRETA A MANO)
+    // Erase canon and text on turret (NUNCA DESTRUIR UNA TORRETA A MANO)
     if (entityMan.existsComponent<TurretComponent>(id)) {
         eraseEntityByID(entityMan.getComponent<TurretComponent>(id).turretGunID);
+        eraseEntityByID(entityMan.getComponent<TurretComponent>(id).textID);
 
         TurretComponent& turretComp = entityMan.getComponent<TurretComponent>(id);
         if (turretComp.inUse) {

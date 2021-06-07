@@ -52,12 +52,28 @@ void HealthSystem::manageHeatlths(GameEngine& gameContext) const {
             }
             else {
                 health.currentHealth -= health.damageReceived;
+
+                health.hitColorCounter = health.hitColorMaxTime;
             }
 
 
             // Reset damage data
             health.damaged = false;
             health.damageReceived = 0;
+        }
+
+        if (gameContext.entityMan.existsComponent<RenderComponent>(health.id)) { // Solo se le pone el color a las entidades con render
+            // Poner color rojo en las entidades que lo necesitan
+            if (health.hitColorCounter > 0.f) {
+                gameContext.getWindowFacadeRef().setColorToEntity(health.id, { 255, 20, 20, 255 });
+                health.isRedColored = true;
+                health.hitColorCounter -= gameContext.getDeltaTime();
+            }
+            // Quitar el color rojo donde no se necesita
+            else if (health.isRedColored) {
+                gameContext.getWindowFacadeRef().setColorToEntity(health.id, gameContext.entityMan.getComponent<RenderComponent>(health.id).color);
+                health.isRedColored = false;
+            }
         }
     }
 }

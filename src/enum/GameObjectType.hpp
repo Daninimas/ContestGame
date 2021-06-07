@@ -105,5 +105,8 @@ enum class GameObjectType {
     SPAWNER,
 
     // Child
-    CHILD
+    CHILD,
+
+    // Text
+    TEXT
 };

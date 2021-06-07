@@ -18,6 +18,8 @@
 #include <iostream>
 #include <limits>
 
+#include <tools/json.hpp>
+using json = nlohmann::json;
 
 EntityManager::EntityManager() {
 }
@@ -170,13 +172,18 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
     //heathComp.recoverTimeCounter = heathComp.recoverTime;
 
 
+    // Input (Read Json)
+    std::ifstream i("config.json");
+    json jf = json::parse(i);
+    std::cout<<"LEO JSON............. "<<jf["pi"].get<float>() << "\n";
+
     //######### RENDER ########//
     gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
 
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::PLAYER, goType));
 
-    situation.sons.emplace_back(createPlayerHand(gameContext, entityId));
+    //situation.sons.emplace_back(createPlayerHand(gameContext, entityId));
 
     return entityId;
 }
@@ -1140,7 +1147,8 @@ int EntityManager::createOrbitalStrikerEnemy(GameEngine& gameContext, GameObject
 
 void EntityManager::createTurret(GameEngine& gameContext, Vector2 position, uint8_t facing) {
     int turretGun = createTurretGun(gameContext, position, facing, GameObjectType::TURRET_GUN);
-    createTurretPlatform(gameContext, position, facing, turretGun, GameObjectType::TURRET_PLATFORM);
+    int turretText = createText(gameContext, { 0.f, 0.f }, 0.f, "Press ACTION to use turret", { 0, 0, 0, 0 }, true, 10);
+    createTurretPlatform(gameContext, position, facing, turretGun, turretText, GameObjectType::TURRET_PLATFORM);
 }
 
 int EntityManager::createTurretGun(GameEngine& gameContext, Vector2 position, uint8_t facing,GameObjectType goType) {
@@ -1192,7 +1200,7 @@ int EntityManager::createTurretGun(GameEngine& gameContext, Vector2 position, ui
     return entityId;
 }
 
-int EntityManager::createTurretPlatform(GameEngine& gameContext, Vector2 position, uint8_t facing, int turretGun, GameObjectType goType) {
+int EntityManager::createTurretPlatform(GameEngine& gameContext, Vector2 position, uint8_t facing, int turretGun, int turretText, GameObjectType goType) {
     int entityId = Entity::getCurrentId();
 
     SituationComponent& situation = createComponent<SituationComponent>(entityId);
@@ -1214,6 +1222,7 @@ int EntityManager::createTurretPlatform(GameEngine& gameContext, Vector2 positio
     turretComp.rotationVelocity = 30.f;
     turretComp.offsetX = 10.f;
     turretComp.turretGunID = turretGun;
+    turretComp.textID = turretText;
 
     // Health
     healthComp.maxHealth = 3;
@@ -1529,5 +1538,33 @@ int EntityManager::createHUDElement(GameEngine& gameContext, Vector2 position, f
 
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::HUD_ELEMENT, objType));
+    return entityId;
+}
+
+
+int EntityManager::createText(GameEngine& gameContext, Vector2 position, float r, string text, Color color, bool isHUDElement, uint16_t size) {
+    int entityId = Entity::getCurrentId();
+
+    SituationComponent& situation = createComponent<SituationComponent>(entityId);
+    TextComponent& textComp = createComponent<TextComponent>(entityId);
+
+    //######### DATA ########//
+    situation.position = position;
+    situation.rotation = r;
+
+    if(isHUDElement)
+        situation.noWorldDelete = true;
+
+    textComp.color = color;
+    textComp.isHUDElement = isHUDElement;
+    textComp.size = size;
+    textComp.text = text;
+
+    //######### RENDER ########//
+    gameContext.getWindowFacadeRef().createText(gameContext, entityId);
+    
+
+    //######### CREATE ########//
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::TEXT, GameObjectType::TEXT));
     return entityId;
 }

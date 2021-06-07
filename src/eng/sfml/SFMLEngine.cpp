@@ -27,6 +27,8 @@ SFMLEngine::SFMLEngine(int width, int height, bool fullscreen) {
 	FPSTextNode.setFont(font);
 	FPSTextNode.setCharacterSize(20);
 	renderFPS = false;
+
+	renderSensors = false;
 }
 SFMLEngine::~SFMLEngine() {
 	device.get()->close();
@@ -119,9 +121,15 @@ void SFMLEngine::renderColliders(GameEngine& gameContext) const {
 	auto& colliders = gameContext.entityMan.getComponents<ColliderComponent>();
 
 	for (ColliderComponent& c : colliders) {
-		SituationComponent& sit = gameContext.entityMan.getComponent<SituationComponent>(c.id);
-		BoundingBoxNode& b = c.boundingRoot;
-		drawBoundingTree(b, sit);
+
+		// TODO QUITAR
+		EntityType type = gameContext.entityMan.getEntity(c.id).getType();
+		if (type == EntityType::WALL || type == EntityType::ATTACK || type == EntityType::BOMB) {
+
+			SituationComponent& sit = gameContext.entityMan.getComponent<SituationComponent>(c.id);
+			BoundingBoxNode& b = c.boundingRoot;
+			drawBoundingTree(b, sit);
+		}
 	}
 }
 

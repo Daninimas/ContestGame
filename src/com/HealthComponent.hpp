@@ -2,6 +2,7 @@
 
 #include "Component.hpp"
 #include <enum/GameObjectType.hpp>
+#include <tools/Color.hpp>
 
 class HealthComponent : public Component {
 public:
@@ -15,6 +16,12 @@ public:
 
     uint16_t    damageReceived{ 0 };
     bool        damaged{ false };
+
+    // For the color when hitted
+    float       hitColorCounter{0};
+    float       hitColorMaxTime{0.3f};
+    bool        isRedColored{ false };
+
 
     // When player loses a life
     uint8_t     extraLifes{ 0 }; // lifes for the player

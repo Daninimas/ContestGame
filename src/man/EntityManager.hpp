@@ -112,7 +112,7 @@ public:
     int createChild(GameEngine& gameContext, Vector2 position, float rotation, GameObjectType goType);
 
     void createTurret(GameEngine& gameContext, Vector2 position, uint8_t facing);
-    int createTurretPlatform(GameEngine& gameContext, Vector2 position, uint8_t facing, int turretGun, GameObjectType goType = GameObjectType::NONE);
+    int createTurretPlatform(GameEngine& gameContext, Vector2 position, uint8_t facing, int turretGun, int turretText, GameObjectType goType = GameObjectType::NONE);
     int createTurretGun(GameEngine& gameContext, Vector2 position, uint8_t facing, GameObjectType goType = GameObjectType::NONE);
 
 
@@ -133,6 +133,8 @@ public:
     //                HUD CREATION                  //
     //////////////////////////////////////////////////
     int createHUDElement(GameEngine& gameContext, Vector2 position, float r, GameObjectType menuType);
+    int createText(GameEngine& gameContext, Vector2 position, float r, string text, Color color, bool isHUDElement, uint16_t size);
+
 
 private:
 

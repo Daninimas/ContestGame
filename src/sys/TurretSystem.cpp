@@ -18,6 +18,10 @@ void TurretSystem::update(GameEngine& gameContext) const {
 		if (!turret.disabled) {
 			manageTurret(gameContext, turret);
 		}
+		else {
+			// Hide text
+			hideText(gameContext, turret);
+		}
 	}
 }
 
@@ -42,6 +46,9 @@ void TurretSystem::checkIfPlayerUsesTurret(GameEngine& gameContext, TurretCompon
 
 		if (Utils::isEntitySensoredBy(playerSensor, turret.id)) {
 			// Hacer que salga un cartelito para entrar
+			TextComponent& textComp = gameContext.entityMan.getComponent<TextComponent>(turret.textID);
+			textComp.text = "Press ACTION to use turret";
+			showText(gameContext, textComp, turret);
 
 
 			if (playerInput.attacking) {
@@ -49,6 +56,9 @@ void TurretSystem::checkIfPlayerUsesTurret(GameEngine& gameContext, TurretCompon
 
 				playerInput.usingTurret = true;
 			}
+		}
+		else {
+			hideText(gameContext, turret);
 		}
 	}
 }
@@ -85,6 +95,10 @@ void TurretSystem::enterInTurret(GameEngine& gameContext, TurretComponent& turre
 
 
 	std::cout << "entro en la torreta\n";
+	// Hacer que salga un cartelito para salir
+	TextComponent& textComp = gameContext.entityMan.getComponent<TextComponent>(turret.textID);
+	textComp.text = "Press JUMP to exit turret";
+	showText(gameContext, textComp, turret);
 }
 
 
@@ -156,4 +170,31 @@ void TurretSystem::manageGunRotation(GameEngine& gameContext, TurretComponent& t
 	TurretGunSit.rotation = gunTurretComp.currentRotation;
 
 	gameContext.entityMan.addEntityToUpdate(turret.turretGunID); // Update canon in the sfml engine
+}
+
+
+
+void TurretSystem::showText(GameEngine& gameContext, TextComponent& textComp, TurretComponent& turret) const {
+	SituationComponent& textSit = gameContext.entityMan.getComponent<SituationComponent>(textComp.id);
+	SituationComponent& turretSit = gameContext.entityMan.getComponent<SituationComponent>(turret.id);
+
+	textComp.color.a = 255;
+
+
+	BoundingBox cameraView = Utils::getCameraViewBoundig(gameContext.entityMan.getComponent<CameraComponent>(WorldElementsData::activeCameraId));
+	BoundingBox cameraViewWorld = Utils::moveToWorldCoords(cameraView, gameContext.entityMan.getComponent<SituationComponent>(WorldElementsData::activeCameraId));
+	textSit.position = { turretSit.position.x - cameraViewWorld.xLeft, turretSit.position.y - cameraViewWorld.yUp };
+
+	// Update text in render
+	gameContext.entityMan.addEntityToUpdate(textComp.id);
+}
+
+void TurretSystem::hideText(GameEngine& gameContext, TurretComponent& turretComp) const {
+	TextComponent& textComp = gameContext.entityMan.getComponent<TextComponent>(turretComp.textID);
+
+	if (textComp.color.a != 0) {
+		textComp.color.a = 0;
+		// Update text in render
+		gameContext.entityMan.addEntityToUpdate(textComp.id);
+	}
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Component.hpp"
+#include <limits>
 
 class TurretComponent : public Component {
 public:
@@ -18,4 +19,6 @@ public:
     int turretGunID;
 
     bool disabled{ false }; // When they die
+
+    int textID = std::numeric_limits<int>::max(); // texto para ver de entrar o salir de la torreta -> ver de borrar cuando se desactiva la torreta
 };

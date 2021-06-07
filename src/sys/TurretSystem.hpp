@@ -21,4 +21,6 @@ private:
     void manageShoot(GameEngine& gameContext, TurretComponent& turret) const;
     void manageGunRotation(GameEngine& gameContext, TurretComponent& turret, InputComponent& userInput) const;
 
+    void showText(GameEngine& gameContext, TextComponent& textComp, TurretComponent& turret) const;
+    void hideText(GameEngine& gameContext, TurretComponent& turretComp) const;
 };

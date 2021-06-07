@@ -578,6 +578,9 @@
     <ClInclude Include="src\com\GunTurretComponent.hpp">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="src\tools\json.hpp">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\enum\EnumsIncluder" />
