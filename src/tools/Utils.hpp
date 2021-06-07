@@ -58,6 +58,8 @@ public:
 
     static void updateControlsJSON(InputComponent& inputComp);
 
+    static float normalizeValues(float minNormalized, float maxNormalized, float minRange, float maxRange, float value);
+
 private:
 
     static inline const std::map<uint8_t, std::string> keyNameMap {

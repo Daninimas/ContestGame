@@ -166,6 +166,7 @@
     <ClCompile Include="src\com\TriggerComponent.cpp" />
     <ClCompile Include="src\sys\AutodeleteSystem.cpp" />
     <ClCompile Include="src\sys\OrbitalWeaponSystem.cpp" />
+    <ClCompile Include="src\sys\TimeSystem.cpp" />
     <ClCompile Include="src\sys\WaitAfterLoseLifeSystem.cpp" />
     <ClCompile Include="src\com\WorldComponent.cpp" />
     <ClCompile Include="src\sys\AnimationSystem.cpp" />
@@ -250,6 +251,7 @@
     <ClInclude Include="src\com\TriggerComponent.hpp" />
     <ClInclude Include="src\sys\AutodeleteSystem.hpp" />
     <ClInclude Include="src\sys\OrbitalWeaponSystem.hpp" />
+    <ClInclude Include="src\sys\TimeSystem.hpp" />
     <ClInclude Include="src\sys\WaitAfterLoseLifeSystem.hpp" />
     <ClInclude Include="src\com\WorldComponent.hpp" />
     <ClInclude Include="src\enum\AnimationEnum.hpp" />

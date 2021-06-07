@@ -87,6 +87,9 @@ void MapLoader::setPhaseData(GameEngine& gameContext, tson::Object& obj, tson::L
 
     newPhase.direction = getDirection( phaseLayer->get<std::string>("Direction") );
     newPhase.endDistance = 100.f;
+
+    newPhase.maxPhaseTime = phaseLayer->get<float>("maxPhaseTime");
+    newPhase.minPhaseTime = phaseLayer->get<float>("minPhaseTime");
     //newPhase.phaseMusic.path = ;
     //newPhase.phaseMusic.repeat = true;
     gameContext.entityMan.getComponent<WorldComponent>(WorldElementsData::worldId).currentPhase = std::move(newPhase);

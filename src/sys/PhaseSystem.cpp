@@ -25,6 +25,7 @@ void PhaseSystem::checkIfChangePhase(GameEngine& gameContext) const {
 			WorldComponent& worldComp = gameContext.entityMan.getComponent<WorldComponent>(WorldElementsData::worldId);
 
 			if (worldComp.currentPhaseNumber < worldComp.numberOfPhases) {
+				setPhaseTimePunctuation(worldComp.currentPhase);
 				changeToNextPhase(gameContext, worldComp);
 			}
 			else { // End of the world
@@ -50,4 +51,14 @@ void PhaseSystem::changeToNextPhase(GameEngine& gameContext, WorldComponent& wor
 	}*/
 
 	Utils::setPhaseStartToView(gameContext, previousPhaseDirection);
+}
+
+
+void PhaseSystem::setPhaseTimePunctuation(WorldPhase& phase) const {
+	int punctuation = (int)Utils::normalizeValues(500, 100, phase.minPhaseTime, phase.maxPhaseTime, WorldElementsData::timeInPhase);
+
+	punctuation = std::clamp(punctuation, 100, 50000);
+
+	WorldElementsData::playerScore += punctuation;
+	WorldElementsData::timeInPhase = 0.f;
 }

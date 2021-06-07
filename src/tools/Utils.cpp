@@ -389,3 +389,11 @@ void Utils::updateControlsJSON(InputComponent& inputComp) {
     std::ofstream file("config.json");
     file << jf;
 }
+
+/// <summary>
+/// Normaliza un valor (value) en valores [minNormalized, maxNormalized] pasandole el rango minRange y maxRange donde puede estar 
+/// </summary>
+float Utils::normalizeValues(float minNormalized, float maxNormalized, float minRange, float maxRange, float value) {
+    float normalizedValue = (maxNormalized - minNormalized) * ((value - minRange) / (maxRange - minRange)) + minNormalized;
+    return normalizedValue;
+}

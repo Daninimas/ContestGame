@@ -15,4 +15,5 @@ private:
 
     void changeToNextPhase (GameEngine& gameContext, WorldComponent& worldComp) const;
 
+    void setPhaseTimePunctuation(WorldPhase& phase) const;
 };

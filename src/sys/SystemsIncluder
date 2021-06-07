@@ -28,6 +28,7 @@
 #include <sys/AutodeleteSystem.hpp>
 #include <sys/OrbitalWeaponSystem.hpp>
 #include <sys/TurretSystem.hpp>
+#include <sys/TimeSystem.hpp>
 
 
 #include <sys/AI/AIChaseSystem.hpp>

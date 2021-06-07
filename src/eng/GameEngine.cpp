@@ -95,6 +95,7 @@ void GameEngine::setPlayingSystems() {
     systemsLate.emplace_back(std::make_unique<DeathSystem>());          // 30
     systemsLate.emplace_back(std::make_unique<HUDSystem>());            // 31
     systemsLate.emplace_back(std::make_unique<WorldSystem>());          // 32
+    systemsLate.emplace_back(std::make_unique<TimeSystem>());            // 33
 }
 
 void GameEngine::setMenuSystems(GameObjectType const menu) {

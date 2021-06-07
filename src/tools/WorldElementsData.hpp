@@ -23,4 +23,7 @@ public:
     // Counter for wait after lose Live
     static inline float waitLoseLifeTime{ 1.f };
     static inline float waitLoseLifeTimeCounter{ 0.f };
+
+    // Time spended in the phase
+    static inline float timeInPhase{ 0.f }; // Con este tiempo por cada fase vamos sumando puntuacion
 };
