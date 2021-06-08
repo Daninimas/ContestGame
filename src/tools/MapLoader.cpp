@@ -90,6 +90,10 @@ void MapLoader::setPhaseData(GameEngine& gameContext, tson::Object& obj, tson::L
 
     newPhase.maxPhaseTime = phaseLayer->get<float>("maxPhaseTime");
     newPhase.minPhaseTime = phaseLayer->get<float>("minPhaseTime");
+
+    //Reset the time in the phase
+    WorldElementsData::timeInPhase = 0.f;
+
     //newPhase.phaseMusic.path = ;
     //newPhase.phaseMusic.repeat = true;
     gameContext.entityMan.getComponent<WorldComponent>(WorldElementsData::worldId).currentPhase = std::move(newPhase);

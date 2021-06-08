@@ -60,5 +60,4 @@ void PhaseSystem::setPhaseTimePunctuation(WorldPhase& phase) const {
 	punctuation = std::clamp(punctuation, 100, 50000);
 
 	WorldElementsData::playerScore += punctuation;
-	WorldElementsData::timeInPhase = 0.f;
 }
