@@ -136,6 +136,11 @@ public:
     int createText(GameEngine& gameContext, Vector2 position, float r, string text, Color color, bool isHUDElement, uint16_t size);
 
 
+
+
+
+    void readBestScore();
+    void writeBestScore();
 private:
 
     std::unordered_map<int, Entity> entityMap;

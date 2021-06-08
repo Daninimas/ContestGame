@@ -174,7 +174,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
 
 
     // Input (Read Json)
-    std::ifstream i("config.json");
+    std::ifstream i("controls.json");
     json jf = json::parse(i);
     inputComp.keyboardControlsMap[Controls::MOVE_LEFT]  = jf["MOVE_LEFT"].get<uint8_t>();
     inputComp.keyboardControlsMap[Controls::MOVE_RIGHT] = jf["MOVE_RIGHT"].get<uint8_t>();
@@ -1340,16 +1340,14 @@ int EntityManager::createMenu(GameEngine& gameContext, GameObjectType menuType) 
 
 
     // After creating the menu entity, create the menu Options
-    switch (menuType)
-    {
-    case GameObjectType::PAUSE:
+    if (menuType == GameObjectType::PAUSE) {
         menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 170.f), 0.f, MenuOptions::PLAY));
         menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 260.f), 0.f, MenuOptions::CONTROLS));
         menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 350.f), 0.f, MenuOptions::EXIT));
 
-        break;
 
-    case GameObjectType::CONTROLS_KEYBOARD:
+    }
+    else if (menuType == GameObjectType::CONTROLS_KEYBOARD) {
         menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 170.f), 0.f, MenuOptions::SET_KEY_ATTACK));
         menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 200.f), 0.f, MenuOptions::SET_KEY_JUMP));
         menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 230.f), 0.f, MenuOptions::SET_KEY_LEFT));
@@ -1360,9 +1358,8 @@ int EntityManager::createMenu(GameEngine& gameContext, GameObjectType menuType) 
 
         Utils::setControlKeyToMenuOptions(gameContext, menuComp);
 
-        break;
-
-    case GameObjectType::CONTROLS_JOYSTICK:
+    }
+    else if (menuType == GameObjectType::CONTROLS_JOYSTICK) {
         menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 170.f), 0.f, MenuOptions::SET_KEY_ATTACK));
         menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 200.f), 0.f, MenuOptions::SET_KEY_JUMP));
         menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 230.f), 0.f, MenuOptions::SET_KEY_LEFT));
@@ -1377,12 +1374,25 @@ int EntityManager::createMenu(GameEngine& gameContext, GameObjectType menuType) 
 
         Utils::setControlKeyToMenuOptions(gameContext, menuComp);
 
-        break;
+    }
+    else if (menuType == GameObjectType::BEST_SCORES) {
+        gameContext.entityMan.readBestScore();
 
-    case GameObjectType::GAME_OVER_MENU:
+        // Create the text of the best scores
+        auto& best_score_list = WorldElementsData::best_score_list;
+        Vector2 pos = { 230.f, 0.f };
+
+        for (std::size_t i = 0; i < best_score_list.size(); ++i) {
+            std::string text = best_score_list[i].name + "____________________" + to_string(best_score_list[i].score);
+            pos.y += 40.f;
+            menuComp.textsId.emplace_back(createText(gameContext, pos, 0.f, text, { 239, 184, 4, 255 }, true, 20));
+        }
+
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 470.f), 0.f, MenuOptions::MAIN_MENU));
+
+    }
+    else if( menuType == GameObjectType::GAME_OVER_MENU){
         menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 350.f), 0.f, MenuOptions::EXIT));
-
-        break;
     }
 
     return entityId;
@@ -1426,6 +1436,11 @@ int EntityManager::createMenuOption(GameEngine& gameContext, Vector2 position, f
 
     case MenuOptions::CONTROLS:
         textComp.text = "CONTROLS";
+
+        break;
+
+    case MenuOptions::MAIN_MENU:
+        textComp.text = "MAIN MENU";
 
         break;
 
@@ -1576,4 +1591,38 @@ int EntityManager::createText(GameEngine& gameContext, Vector2 position, float r
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::TEXT, GameObjectType::TEXT));
     return entityId;
+}
+
+
+
+
+void EntityManager::readBestScore() {
+    auto& best_score_list = WorldElementsData::best_score_list;
+
+    // Input (Read Json)
+    std::ifstream file("score.json");
+    json jData = json::parse(file);
+
+    for (std::size_t i = 0; i < best_score_list.size(); ++i) {
+        best_score_list[i].name = jData["best_score_list"][i]["name"].get<string>();
+        best_score_list[i].score = jData["best_score_list"][i]["score"].get<int>();
+    }
+
+
+    /*for (std::size_t i = 0; i < best_score_list.size(); ++i) {
+        std::cout << "Name: " << best_score_list[i].name << " score: " << best_score_list[i].score << "\n";
+    }*/
+}
+
+void EntityManager::writeBestScore() {
+    auto& best_score_list = WorldElementsData::best_score_list;
+    json jData;
+
+    for (std::size_t i = 0; i < best_score_list.size(); ++i) {
+         jData["best_score_list"][i]["name"] = best_score_list[i].name;
+         jData["best_score_list"][i]["score"] = best_score_list[i].score;
+    }
+
+    std::ofstream file("score.json");
+    file << jData;
 }

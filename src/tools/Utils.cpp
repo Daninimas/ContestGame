@@ -386,7 +386,7 @@ void Utils::updateControlsJSON(InputComponent& inputComp) {
     jf["JOYSTICK_ACTION"] = inputComp.keyboardControlsMap[Controls::JOYSTICK_ACTION];
     jf["JOYSTICK_JUMP"] = inputComp.keyboardControlsMap[Controls::JOYSTICK_JUMP];
 
-    std::ofstream file("config.json");
+    std::ofstream file("controls.json");
     file << jf;
 }
 

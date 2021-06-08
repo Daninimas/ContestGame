@@ -68,7 +68,6 @@ void StaticEntitiesSystem::init(GameEngine& gameContext) const {
     gameContext.entityMan.createWeapon(gameContext, Vector2(200, 310.f), 0.f, GameObjectType::LASER_GUN);
     gameContext.entityMan.createWeapon(gameContext, Vector2(100.f, 200.f), 0.f, GameObjectType::SHOTGUN);*/
 
-
     gameContext.entityMan.createCamera(gameContext, Vector2(0, 0), 0.f, GameObjectType::NONE);
 
 

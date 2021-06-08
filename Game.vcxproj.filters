@@ -587,6 +587,9 @@
     <ClInclude Include="src\sys\TimeSystem.hpp">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="src\tools\Score.hpp">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\enum\EnumsIncluder" />

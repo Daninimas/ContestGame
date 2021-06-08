@@ -7,5 +7,6 @@ enum class GameState {
     PAUSE,
     CONTROLS,
     WAIT_INPUT,
-    WAIT_AFTER_LOSE_LIFE
+    WAIT_AFTER_LOSE_LIFE,
+    BEST_SCORES
 };

@@ -51,7 +51,7 @@ void GameEngine::reset() {
 }
 
 void GameEngine::init() {
-    pushGameState(GameState::PAUSE);
+    pushGameState(GameState::BEST_SCORES);
 
     StaticEntitiesSystem staticSystem{};
     staticSystem.init(*this);
@@ -140,6 +140,10 @@ void GameEngine::run() {
                 else {
                     setMenuSystems(GameObjectType::CONTROLS_KEYBOARD);
                 }
+                break;
+
+            case GameState::BEST_SCORES:
+                setMenuSystems(GameObjectType::BEST_SCORES);
                 break;
 
             case GameState::WAIT_INPUT:
@@ -438,10 +442,15 @@ void GameEngine::eraseEntityByID(int id) {
 
     // Erase all options from the Menu Component
     if (entityMan.existsComponent<MenuComponent>(id)) {
+        MenuComponent& menuComp = entityMan.getComponent<MenuComponent>(id);
         std::vector<int>& menuOptions = entityMan.getComponent<MenuComponent>(id).optionsId;
 
         for (size_t i = 0; i < menuOptions.size(); ++i) {
             eraseEntityByID(menuOptions[i]);
+        }
+
+        for (size_t i = 0; i < menuComp.textsId.size(); ++i) {
+            eraseEntityByID(menuComp.textsId[i]);
         }
     }
     //getSoundFacadeRef().setParameterEventByID(id, STOP_SOUND);
@@ -502,4 +511,9 @@ void GameEngine::pushGameState(const GameState gs) {
         gameStateStack.push(gs);
         gameStateChanged = true;
     }
+}
+
+void GameEngine::clearGameStateStack() {
+    stack<GameState>().swap(gameStateStack);
+    gameStateChanged = true;
 }

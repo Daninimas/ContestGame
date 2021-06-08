@@ -301,6 +301,7 @@
     <ClInclude Include="src\sys\SpawnSystem.hpp" />
     <ClInclude Include="src\sys\WorldSystem.hpp" />
     <ClInclude Include="src\tools\Color.hpp" />
+    <ClInclude Include="src\tools\Score.hpp" />
     <ClInclude Include="src\tools\Sound.hpp" />
     <ClInclude Include="src\tools\tileson.hpp" />
     <ClInclude Include="src\tools\Vector2.hpp" />

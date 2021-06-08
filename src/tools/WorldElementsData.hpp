@@ -2,7 +2,9 @@
 
 #include <tools/BoundingBox.hpp>
 #include <tools/Sound.hpp>
+#include <tools/Score.hpp>
 #include <limits>
+#include <array>
 
 class WorldElementsData {
 public:
@@ -26,4 +28,7 @@ public:
 
     // Time spended in the phase
     static inline float timeInPhase{ 0.f }; // Con este tiempo por cada fase vamos sumando puntuacion
+
+    // Best punctuations (score list)
+    static inline std::array<Score, 10> best_score_list = { };
 };

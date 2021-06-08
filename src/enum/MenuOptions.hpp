@@ -5,6 +5,7 @@ enum class MenuOptions {
     EXIT,
     PLAY,
     CONTROLS,
+    MAIN_MENU,
 
     // set controls, keys
     SET_KEY_ATTACK,

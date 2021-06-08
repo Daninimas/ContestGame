@@ -48,6 +48,7 @@ public:
     GameState getGameState() const;
     void popGameState();
     void pushGameState(const GameState gs);
+    void clearGameStateStack(); // cuidado con esto, no dejar vacio
 
     EntityManager   entityMan;
 

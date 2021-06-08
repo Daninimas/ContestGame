@@ -91,6 +91,12 @@ void MenuSystem::acceptOption(GameEngine& gameContext, MenuComponent& menuComp) 
 		gameContext.pushGameState(GameState::CONTROLS);
 		break;
 
+	case MenuOptions::MAIN_MENU:
+		std::cout << "Vuelvo a MENU PRINCIPAL\n";
+		gameContext.clearGameStateStack();
+		gameContext.pushGameState(GameState::PAUSE);
+		break;
+
 		// Set controls (KEYS)
 	case MenuOptions::SET_KEY_ATTACK:
 		gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId).controlToChange = Controls::ACTION;
