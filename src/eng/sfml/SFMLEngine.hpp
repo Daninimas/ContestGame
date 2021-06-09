@@ -25,6 +25,7 @@ public:
     void createText(GameEngine& gameContext, int id) override;
     void createCamera(GameEngine& gameContext, int id) override;
     void eraseEntity(int id) override;
+    void eraseAllEntities() override;
     size_t countRenderNodes() const override;
     bool existsNode(int id) const override;
     bool existsHUDNode(int id) const override;

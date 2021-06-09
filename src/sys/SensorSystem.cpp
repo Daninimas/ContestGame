@@ -19,7 +19,7 @@ void SensorSystem::update(GameEngine& gameContext) const {
 }
 
 void SensorSystem::resetSensors(GameEngine& gameContext) const {
-	auto& sensors = gameContext.entityMan.getComponents<SensorComponent>();
+	auto& sensors = gameContext.entityMan->getComponents<SensorComponent>();
 
 	for (SensorComponent& sensor : sensors) {
 		sensor.entitiesSensoring.clear();
@@ -28,21 +28,21 @@ void SensorSystem::resetSensors(GameEngine& gameContext) const {
 
 	// ------------------------ COLLIDES ONLY WITH VELOCITY ENTITIES ----------------------------------------- 
 /*void SensorSystem::checkSensorsCollisions(GameEngine& gameContext) const {
-	auto& sensors = gameContext.entityMan.getComponents<SensorComponent>();
+	auto& sensors = gameContext.entityMan->getComponents<SensorComponent>();
 	std::vector<int> idCollidersWithVelocity;
 
 
-	idCollidersWithVelocity.reserve( gameContext.entityMan.getComponents<VelocityComponent>().size() ); // Reserve the size of the velocities component storage
+	idCollidersWithVelocity.reserve( gameContext.entityMan->getComponents<VelocityComponent>().size() ); // Reserve the size of the velocities component storage
 	Utils::insertCollidersIdWithVelocity(gameContext, idCollidersWithVelocity);
 
 	for (SensorComponent& sensor : sensors) {
 		// Check this sensor with all the colliders with VELOCITY
 
 		for (int velEntityID : idCollidersWithVelocity) {
-			ColliderComponent& entityCollider = gameContext.entityMan.getComponent<ColliderComponent>(velEntityID);
+			ColliderComponent& entityCollider = gameContext.entityMan->getComponent<ColliderComponent>(velEntityID);
 
 			if (velEntityID != sensor.id && sensor.sensorLayerMasc & entityCollider.collisionLayer) { // don't calculate the collision in the same entity
-				SituationComponent& entitySituation = gameContext.entityMan.getComponent<SituationComponent>(velEntityID);
+				SituationComponent& entitySituation = gameContext.entityMan->getComponent<SituationComponent>(velEntityID);
 				BoundingBox& entityBounding = entityCollider.boundingRoot.bounding;
 
 				calculateSensorCollision(gameContext, sensor, entityBounding, entitySituation);
@@ -55,8 +55,8 @@ void SensorSystem::resetSensors(GameEngine& gameContext) const {
 
 	// -------------------------- COLLIDES WITH ALL COLLIDERS ---------------------------------------------
 void SensorSystem::checkSensorsCollisions(GameEngine& gameContext) const {
-	auto& sensors   = gameContext.entityMan.getComponents<SensorComponent>();
-	auto& colliders = gameContext.entityMan.getComponents<ColliderComponent>();
+	auto& sensors   = gameContext.entityMan->getComponents<SensorComponent>();
+	auto& colliders = gameContext.entityMan->getComponents<ColliderComponent>();
 
 	for (SensorComponent& sensor : sensors) {
 		// Check this sensor with all the colliders with VELOCITY
@@ -65,7 +65,7 @@ void SensorSystem::checkSensorsCollisions(GameEngine& gameContext) const {
 		for (ColliderComponent& colliderEnt : colliders) {
 
 			if (colliderEnt.id != sensor.id && sensor.sensorLayerMasc & colliderEnt.collisionLayer) { // don't calculate the collision in the same entity
-				SituationComponent& entitySituation = gameContext.entityMan.getComponent<SituationComponent>(colliderEnt.id);
+				SituationComponent& entitySituation = gameContext.entityMan->getComponent<SituationComponent>(colliderEnt.id);
 				BoundingBox& entityBounding = colliderEnt.boundingRoot.bounding;
 
 				calculateSensorCollision(gameContext, sensor, sensorBounding, entityBounding, entitySituation);
@@ -75,13 +75,13 @@ void SensorSystem::checkSensorsCollisions(GameEngine& gameContext) const {
 }
 
 BoundingBox SensorSystem::getSensorWorldFixedBounding(GameEngine& gameContext, SensorComponent& sensor) const {
-	SituationComponent& sensorSit = gameContext.entityMan.getComponent<SituationComponent>(sensor.id);
+	SituationComponent& sensorSit = gameContext.entityMan->getComponent<SituationComponent>(sensor.id);
 
 	BoundingBox sensorWorldBounding = getSensorBoundingDependingFacing(gameContext, sensor, sensorSit);
 	sensorWorldBounding = Utils::moveToWorldCoords(sensorWorldBounding, sensorSit);
 
-	if (gameContext.entityMan.existsComponent<ColliderComponent>(sensor.id)) {
-		Vector2 objectiveCenter = Utils::getCenterOfBounding(gameContext.entityMan.getComponent<ColliderComponent>(sensor.id).boundingRoot.bounding);
+	if (gameContext.entityMan->existsComponent<ColliderComponent>(sensor.id)) {
+		Vector2 objectiveCenter = Utils::getCenterOfBounding(gameContext.entityMan->getComponent<ColliderComponent>(sensor.id).boundingRoot.bounding);
 		sensorWorldBounding.xLeft  += objectiveCenter.x;
 		sensorWorldBounding.xRight += objectiveCenter.x;
 	}

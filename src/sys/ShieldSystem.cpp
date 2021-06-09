@@ -10,10 +10,10 @@ ShieldSystem::~ShieldSystem() {}
 
 
 void ShieldSystem::update(GameEngine& gameContext) const {
-	auto& shieldComponents = gameContext.entityMan.getComponents<ShieldComponent>();
+	auto& shieldComponents = gameContext.entityMan->getComponents<ShieldComponent>();
 
 	for (ShieldComponent& shield : shieldComponents) {
-		if (gameContext.entityMan.existsComponent<SituationComponent>(shield.objectiveId) && gameContext.entityMan.existsComponent<ColliderComponent>(shield.objectiveId)) {
+		if (gameContext.entityMan->existsComponent<SituationComponent>(shield.objectiveId) && gameContext.entityMan->existsComponent<ColliderComponent>(shield.objectiveId)) {
 			checkIfObjLosesHealth(gameContext, shield);
 			//updateShieldCollider(gameContext, shield); 
 			setInObjectivePosition(gameContext, shield);
@@ -24,9 +24,9 @@ void ShieldSystem::update(GameEngine& gameContext) const {
 
 
 void ShieldSystem::setInObjectivePosition(GameEngine& gameContext, ShieldComponent& shield) const {
-	SituationComponent& shieldSit    = gameContext.entityMan.getComponent<SituationComponent>(shield.id);
-	SituationComponent& objectiveSit = gameContext.entityMan.getComponent<SituationComponent>(shield.objectiveId);
-	ColliderComponent& objectiveColl = gameContext.entityMan.getComponent<ColliderComponent>(shield.objectiveId);
+	SituationComponent& shieldSit    = gameContext.entityMan->getComponent<SituationComponent>(shield.id);
+	SituationComponent& objectiveSit = gameContext.entityMan->getComponent<SituationComponent>(shield.objectiveId);
+	ColliderComponent& objectiveColl = gameContext.entityMan->getComponent<ColliderComponent>(shield.objectiveId);
 
 	// Calculate center of objective
 	Vector2 objCenterWorld = Utils::getCenterOfBounding(objectiveColl.boundingRoot.bounding);
@@ -40,10 +40,10 @@ void ShieldSystem::setInObjectivePosition(GameEngine& gameContext, ShieldCompone
 }*/
 
 void ShieldSystem::checkEnemyHits(GameEngine& gameContext, ShieldComponent& shield) const {
-	ColliderComponent& shieldColl = gameContext.entityMan.getComponent<ColliderComponent>(shield.id);
+	ColliderComponent& shieldColl = gameContext.entityMan->getComponent<ColliderComponent>(shield.id);
 
-	if (gameContext.entityMan.existsComponent<MeleeWeaponComponent>(shield.id)) {
-		MeleeWeaponComponent& shieldWeapon = gameContext.entityMan.getComponent<MeleeWeaponComponent>(shield.id);
+	if (gameContext.entityMan->existsComponent<MeleeWeaponComponent>(shield.id)) {
+		MeleeWeaponComponent& shieldWeapon = gameContext.entityMan->getComponent<MeleeWeaponComponent>(shield.id);
 
 
 		if (shieldWeapon.cooldown > shieldWeapon.maxCooldown) {
@@ -65,12 +65,12 @@ bool ShieldSystem::damageHittedEntities(GameEngine& gameContext, BoundingBoxNode
 	bool hitEntity = false;
 
 	for (int hittedEntID : boundingNode.bounding.entitiesColliding) {
-		if (gameContext.entityMan.existsComponent<HealthComponent>(hittedEntID)) {
-			HealthComponent& hittedHealth = gameContext.entityMan.getComponent<HealthComponent>(hittedEntID);
+		if (gameContext.entityMan->existsComponent<HealthComponent>(hittedEntID)) {
+			HealthComponent& hittedHealth = gameContext.entityMan->getComponent<HealthComponent>(hittedEntID);
 
 			hittedHealth.damaged = true;
 			hittedHealth.damageReceived += shieldWeapon.damage;
-			hittedHealth.hittedByGO = gameContext.entityMan.getEntity(shieldWeapon.id).getGameObjectType();
+			hittedHealth.hittedByGO = gameContext.entityMan->getEntity(shieldWeapon.id).getGameObjectType();
 
 			hitEntity = true;
 		}
@@ -88,7 +88,7 @@ bool ShieldSystem::damageHittedEntities(GameEngine& gameContext, BoundingBoxNode
 
 
 void ShieldSystem::checkIfObjLosesHealth(GameEngine& gameContext, ShieldComponent& shield) const {
-	HealthComponent& objHealth = gameContext.entityMan.getComponent<HealthComponent>(shield.objectiveId);
+	HealthComponent& objHealth = gameContext.entityMan->getComponent<HealthComponent>(shield.objectiveId);
 
 	if (objHealth.damaged) {
 		objHealth.damaged = false;

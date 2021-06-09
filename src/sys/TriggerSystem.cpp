@@ -13,12 +13,12 @@ TriggerSystem::~TriggerSystem() {}
 
 
 void TriggerSystem::update(GameEngine& gameContext) const {
-	auto& triggers = gameContext.entityMan.getComponents<TriggerComponent>();
+	auto& triggers = gameContext.entityMan->getComponents<TriggerComponent>();
 	std::vector<int> triggersToDelete;
 	triggersToDelete.reserve(triggers.size());
 
 	for (TriggerComponent& trigger : triggers) {
-		ColliderComponent& collComp = gameContext.entityMan.getComponent<ColliderComponent>(trigger.id);
+		ColliderComponent& collComp = gameContext.entityMan->getComponent<ColliderComponent>(trigger.id);
 
 		if (Utils::checkCollidingWithEntity(collComp.boundingRoot, WorldElementsData::playerId)) {
 			activateFunction(gameContext, trigger);
@@ -52,7 +52,7 @@ void TriggerSystem::activateFunction(GameEngine& gameContext, TriggerComponent& 
 			break;
 
 		case TriggerFunction::GIVE_CHILD_POINTS:
-			WorldElementsData::playerScore += -(gameContext.entityMan.getComponent<HealthComponent>(trigger.id).score);
+			WorldElementsData::playerScore += -(gameContext.entityMan->getComponent<HealthComponent>(trigger.id).score);
 			break;
 		}
 	}

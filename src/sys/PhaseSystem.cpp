@@ -19,10 +19,10 @@ void PhaseSystem::checkIfChangePhase(GameEngine& gameContext) const {
 	// activates the change of phase when the player is close to the limit and all enemies entities have been killed
 
 	if (WorldElementsData::enemiesInWorld == 0) {
-		SituationComponent& playerSit = gameContext.entityMan.getComponent<SituationComponent>(WorldElementsData::playerId);
+		SituationComponent& playerSit = gameContext.entityMan->getComponent<SituationComponent>(WorldElementsData::playerId);
 
 		if (Utils::entityInPhaseLimit(gameContext, playerSit)) {
-			WorldComponent& worldComp = gameContext.entityMan.getComponent<WorldComponent>(WorldElementsData::worldId);
+			WorldComponent& worldComp = gameContext.entityMan->getComponent<WorldComponent>(WorldElementsData::worldId);
 
 			if (worldComp.currentPhaseNumber < worldComp.numberOfPhases) {
 				setPhaseTimePunctuation(worldComp.currentPhase);

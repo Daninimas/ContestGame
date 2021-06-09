@@ -25,7 +25,49 @@ using json = nlohmann::json;
 EntityManager::EntityManager() {
 }
 
-EntityManager::~EntityManager() {}
+EntityManager::~EntityManager() {
+    // TODO Modify this to not add new components all times
+    getComponents<SituationComponent>().clear();
+    getComponents<InputComponent>().clear();
+    getComponents<VelocityComponent>().clear();
+    getComponents<HealthComponent>().clear();
+    getComponents<ColliderComponent>().clear();
+    getComponents<MeleeWeaponComponent>().clear();
+    getComponents<WeaponComponent>().clear();
+    getComponents<AttackComponent>().clear();
+    getComponents<JumpComponent>().clear();
+    getComponents<RenderComponent>().clear();
+    getComponents<DistanceWeaponComponent>().clear();
+    getComponents<SensorComponent>().clear();
+    getComponents<CameraComponent>().clear();
+    getComponents<MenuComponent>().clear();
+    getComponents<ExplosionAttackComponent>().clear();
+    getComponents<BombComponent>().clear();
+    getComponents<DodgeComponent>().clear();
+    getComponents<SpawnerComponent>().clear();
+    getComponents<ShieldComponent>().clear();
+    getComponents<PowerUpComponent>().clear();
+    getComponents<FuryComponent>().clear();
+    getComponents<TextComponent>().clear();
+    getComponents<MenuOptionComponent>().clear();
+    getComponents<WorldComponent>().clear();
+    getComponents<TriggerComponent>().clear();
+    getComponents<AnimationComponent>().clear();
+    getComponents<OrbitalWeaponComponent>().clear();
+    getComponents<AutodeleteComponent>().clear();
+    getComponents<TurretComponent>().clear();
+    getComponents<GunTurretComponent>().clear();
+
+    // AI
+    getComponents<AIChaseComponent>().clear();
+    getComponents<AIMeleeAtkComponent>().clear();
+    getComponents<AIDistanceAtkComponent>().clear();
+    getComponents<AITransformationComponent>().clear();
+    getComponents<AIDropBombComponent>().clear();
+    getComponents<AIPounceComponent>().clear();
+    getComponents<AIFlyingChaseComponent>().clear();
+    getComponents<AIOrbitalAtkComponent>().clear();
+}
 
 
 Entity &EntityManager::getEntity(int id) {
@@ -85,6 +127,7 @@ void EntityManager::eraseEntityByID(int id) {
 
     entityMap           .erase(id);
 }
+
 
 std::unordered_map<int, Entity> &EntityManager::getEntities() {
     return entityMap;
@@ -1383,7 +1426,7 @@ int EntityManager::createMenu(GameEngine& gameContext, GameObjectType menuType) 
 
     }
     else if (menuType == GameObjectType::BEST_SCORES) {
-        gameContext.entityMan.readBestScore();
+        gameContext.entityMan->readBestScore();
 
         // Create the text of the best scores
         auto& best_score_list = WorldElementsData::best_score_list;

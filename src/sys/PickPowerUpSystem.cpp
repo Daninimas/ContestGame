@@ -11,7 +11,7 @@ PickPowerUpSystem::~PickPowerUpSystem() {}
 
 
 void PickPowerUpSystem::update(GameEngine& gameContext) const {
-	auto& powerUps = gameContext.entityMan.getComponents<PowerUpComponent>();
+	auto& powerUps = gameContext.entityMan->getComponents<PowerUpComponent>();
 	std::vector<int> powerUpsToDelete;
 
 
@@ -20,7 +20,7 @@ void PickPowerUpSystem::update(GameEngine& gameContext) const {
 	// Distance weapons
 	for (PowerUpComponent& powerUp : powerUps)
 	{
-		ColliderComponent& powerUpCollider = gameContext.entityMan.getComponent<ColliderComponent>(powerUp.id);
+		ColliderComponent& powerUpCollider = gameContext.entityMan->getComponent<ColliderComponent>(powerUp.id);
 
 		if (powerUpCollider.collide) {
 			int entityColliding = checkPowerUpCollides(gameContext, powerUpCollider.boundingRoot);
@@ -42,7 +42,7 @@ void PickPowerUpSystem::update(GameEngine& gameContext) const {
 
 int PickPowerUpSystem::checkPowerUpCollides(GameEngine& gameContext, BoundingBoxNode& powerBounding) const {
 	for (int entityColliding : powerBounding.bounding.entitiesColliding) {
-		if (gameContext.entityMan.getEntity(entityColliding).getType() != EntityType::WALL ) {
+		if (gameContext.entityMan->getEntity(entityColliding).getType() != EntityType::WALL ) {
 			return entityColliding;
 		}
 	}
@@ -77,10 +77,10 @@ void PickPowerUpSystem::setShieldToEntity(GameEngine& gameContext, PowerUpCompon
 		shieldGO = GameObjectType::PLAYER_SHIELD;
 	}
 
-	int shieldId = gameContext.entityMan.createShield(gameContext, Vector2(10.f, 10.f), 0.f, shieldGO);
-	ShieldComponent& shieldComp = gameContext.entityMan.getComponent<ShieldComponent>(shieldId);
-	ColliderComponent& shieldColl = gameContext.entityMan.getComponent<ColliderComponent>(shieldId);
-	ColliderComponent& objectiveColl = gameContext.entityMan.getComponent<ColliderComponent>(entityColliding);
+	int shieldId = gameContext.entityMan->createShield(gameContext, Vector2(10.f, 10.f), 0.f, shieldGO);
+	ShieldComponent& shieldComp = gameContext.entityMan->getComponent<ShieldComponent>(shieldId);
+	ColliderComponent& shieldColl = gameContext.entityMan->getComponent<ColliderComponent>(shieldId);
+	ColliderComponent& objectiveColl = gameContext.entityMan->getComponent<ColliderComponent>(entityColliding);
 
 	shieldComp.objectiveId = entityColliding;
 	shieldColl.boundingRoot.bounding.xRight = (objectiveColl.boundingRoot.bounding.xRight - objectiveColl.boundingRoot.bounding.xLeft) * powerUp.shieldColliderIncFactor;
@@ -92,10 +92,10 @@ void PickPowerUpSystem::setShieldToEntity(GameEngine& gameContext, PowerUpCompon
 
 void PickPowerUpSystem::setFuryToEntity(GameEngine& gameContext, PowerUpComponent& powerUp, int entityColliding) const {
 	//DELETE previous powerUp component on entity
-	gameContext.entityMan.eraseComponent<FuryComponent>(entityColliding);
+	gameContext.entityMan->eraseComponent<FuryComponent>(entityColliding);
 
 	// Set new fury component to entity
-	FuryComponent& furyComp = gameContext.entityMan.createComponent<FuryComponent>(entityColliding);
+	FuryComponent& furyComp = gameContext.entityMan->createComponent<FuryComponent>(entityColliding);
 	furyComp.timersSpeedIncFactor = powerUp.furyTimersSpeedIncFactor;
 	furyComp.speedIncFactor = powerUp.furySpeedIncFactor;
 	furyComp.totalLifeTime = powerUp.furyTotalLifeTime;

@@ -88,8 +88,8 @@ BoundingBox Utils::moveToWorldCoords(BoundingBox& bounding, SituationComponent& 
 
 
 void Utils::insertCollidersIdWithVelocity(GameEngine& gameContext, std::vector<int>& idCollidersWithVelocity) {
-    auto& velocitiesComps = gameContext.entityMan.getComponents<VelocityComponent>();
-    auto& colliders = gameContext.entityMan.getComponents<ColliderComponent>();
+    auto& velocitiesComps = gameContext.entityMan->getComponents<VelocityComponent>();
+    auto& colliders = gameContext.entityMan->getComponents<ColliderComponent>();
     for (auto& velComp : velocitiesComps) {
         int idVelEnt = velComp.id;
 
@@ -101,7 +101,7 @@ void Utils::insertCollidersIdWithVelocity(GameEngine& gameContext, std::vector<i
 }
 
 void Utils::insertNotWallColliders(GameEngine& gameContext, std::vector<std::reference_wrapper<ColliderComponent>>& collidersNotWall) {
-    auto& colliders = gameContext.entityMan.getComponents<ColliderComponent>();
+    auto& colliders = gameContext.entityMan->getComponents<ColliderComponent>();
     for (auto& collComp : colliders) {
         if (collComp.collisionLayer != ColliderComponent::Wall && collComp.collisionLayer != ColliderComponent::Platform && collComp.collisionLayer != ColliderComponent::Trigger) {
             collidersNotWall.emplace_back(collComp);
@@ -161,7 +161,7 @@ void Utils::deleteCollidingWithObjective(BoundingBoxNode& boundingNode, int objI
 
 
 void Utils::setNormalPistolToEntity(GameEngine& gameContext, int entityId) {
-    DistanceWeaponComponent& distanceWeaponComp = gameContext.entityMan.createComponent<DistanceWeaponComponent>(entityId);
+    DistanceWeaponComponent& distanceWeaponComp = gameContext.entityMan->createComponent<DistanceWeaponComponent>(entityId);
 
     distanceWeaponComp.attackBounding = { 0.f, 2.f, 0.f, 2.f };
     distanceWeaponComp.damage = 1;
@@ -200,7 +200,7 @@ BoundingBox Utils::getCameraViewBoundig(CameraComponent& cameraComp) {
 
 
 bool Utils::entityInPhaseLimit(GameEngine& gameContext, SituationComponent& entitySit) {
-    WorldPhase& phase = gameContext.entityMan.getComponent<WorldComponent>(WorldElementsData::worldId).currentPhase;
+    WorldPhase& phase = gameContext.entityMan->getComponent<WorldComponent>(WorldElementsData::worldId).currentPhase;
 
     switch (phase.direction)
     {
@@ -234,11 +234,11 @@ bool Utils::entityInPhaseLimit(GameEngine& gameContext, SituationComponent& enti
 
 
 void Utils::setPhaseStartToView(GameEngine& gameContext, uint8_t lastPhaseDirection) {
-    WorldPhase&      phase  = gameContext.entityMan.getComponent<WorldComponent>(WorldElementsData::worldId).currentPhase;
-    CameraComponent& camera = gameContext.entityMan.getComponent<CameraComponent>(WorldElementsData::activeCameraId);
+    WorldPhase&      phase  = gameContext.entityMan->getComponent<WorldComponent>(WorldElementsData::worldId).currentPhase;
+    CameraComponent& camera = gameContext.entityMan->getComponent<CameraComponent>(WorldElementsData::activeCameraId);
     BoundingBox cameraView  = getCameraViewBoundig(camera);
 
-    cameraView = moveToWorldCoords(cameraView, gameContext.entityMan.getComponent<SituationComponent>(WorldElementsData::activeCameraId));
+    cameraView = moveToWorldCoords(cameraView, gameContext.entityMan->getComponent<SituationComponent>(WorldElementsData::activeCameraId));
 
     switch (lastPhaseDirection)
     {
@@ -263,11 +263,11 @@ void Utils::setPhaseStartToView(GameEngine& gameContext, uint8_t lastPhaseDirect
 
 void Utils::setControlKeyToMenuOptions(GameEngine& gameContext, MenuComponent& controlsMenu) {
 
-    if (gameContext.entityMan.getEntity(controlsMenu.id).getGameObjectType() == GameObjectType::CONTROLS_KEYBOARD || gameContext.entityMan.getEntity(controlsMenu.id).getGameObjectType() == GameObjectType::CONTROLS_JOYSTICK) {
+    if (gameContext.entityMan->getEntity(controlsMenu.id).getGameObjectType() == GameObjectType::CONTROLS_KEYBOARD || gameContext.entityMan->getEntity(controlsMenu.id).getGameObjectType() == GameObjectType::CONTROLS_JOYSTICK) {
         for (int id : controlsMenu.optionsId) {
-            MenuOptionComponent& optionComp = gameContext.entityMan.getComponent<MenuOptionComponent>(id);
-            TextComponent& textComp = gameContext.entityMan.getComponent<TextComponent>(id);
-            InputComponent& inputComp = gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId);
+            MenuOptionComponent& optionComp = gameContext.entityMan->getComponent<MenuOptionComponent>(id);
+            TextComponent& textComp = gameContext.entityMan->getComponent<TextComponent>(id);
+            InputComponent& inputComp = gameContext.entityMan->getComponent<InputComponent>(WorldElementsData::playerId);
 
             switch (optionComp.option)
             {
@@ -319,11 +319,11 @@ std::string Utils::getKeyName(uint8_t keyCode) {
 
 
 void Utils::resetPlayerPosition(GameEngine& gameContext) {
-    SituationComponent& playerSituation = gameContext.entityMan.getComponent<SituationComponent>(WorldElementsData::playerId);
+    SituationComponent& playerSituation = gameContext.entityMan->getComponent<SituationComponent>(WorldElementsData::playerId);
 
     SituationComponent* closesWall = getClosestWallXToObjetive(gameContext, playerSituation);
     if (closesWall != nullptr) {
-        ColliderComponent& playerColl = gameContext.entityMan.getComponent<ColliderComponent>(WorldElementsData::playerId);
+        ColliderComponent& playerColl = gameContext.entityMan->getComponent<ColliderComponent>(WorldElementsData::playerId);
 
         playerSituation.position.x = closesWall->position.x;
         playerSituation.position.y = closesWall->position.y - (playerColl.boundingRoot.bounding.yDown - playerColl.boundingRoot.bounding.yUp) - 1.f;
@@ -334,14 +334,14 @@ void Utils::resetPlayerPosition(GameEngine& gameContext) {
 }
 
 SituationComponent* Utils::getClosestWallXToObjetive(GameEngine& gameContext, SituationComponent& objetiveSituation, bool onlyWALLGameObject) {
-    auto& allSituations = gameContext.entityMan.getComponents<SituationComponent>();
+    auto& allSituations = gameContext.entityMan->getComponents<SituationComponent>();
     SituationComponent* closesWall = nullptr;
     float closestDistance = std::numeric_limits<float>::max();
 
     // This should be the right corner of the objective bounding
     float objectivePositionX = objetiveSituation.position.x;
-    if (gameContext.entityMan.existsComponent<ColliderComponent>(objetiveSituation.id)) {
-        objectivePositionX += gameContext.entityMan.getComponent<ColliderComponent>(objetiveSituation.id).boundingRoot.bounding.xRight;
+    if (gameContext.entityMan->existsComponent<ColliderComponent>(objetiveSituation.id)) {
+        objectivePositionX += gameContext.entityMan->getComponent<ColliderComponent>(objetiveSituation.id).boundingRoot.bounding.xRight;
     }
     
     for (SituationComponent& entitySit : allSituations) {

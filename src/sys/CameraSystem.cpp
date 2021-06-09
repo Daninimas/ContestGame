@@ -16,10 +16,10 @@ void CameraSystem::update(GameEngine& gameContext) const {
 
 void CameraSystem::setCameraLookingPlayer(GameEngine& gameContext) const {
 	// Set the player in its center
-	SituationComponent& playerSit = gameContext.entityMan.getComponent<SituationComponent>(WorldElementsData::playerId);
-	SituationComponent& cameraSit = gameContext.entityMan.getComponent<SituationComponent>(WorldElementsData::activeCameraId);
-	CameraComponent&   cameraComp = gameContext.entityMan.getComponent<CameraComponent>(WorldElementsData::activeCameraId);
-	VelocityComponent& cameraVel  = gameContext.entityMan.getComponent<VelocityComponent>(WorldElementsData::activeCameraId);
+	SituationComponent& playerSit = gameContext.entityMan->getComponent<SituationComponent>(WorldElementsData::playerId);
+	SituationComponent& cameraSit = gameContext.entityMan->getComponent<SituationComponent>(WorldElementsData::activeCameraId);
+	CameraComponent&   cameraComp = gameContext.entityMan->getComponent<CameraComponent>(WorldElementsData::activeCameraId);
+	VelocityComponent& cameraVel  = gameContext.entityMan->getComponent<VelocityComponent>(WorldElementsData::activeCameraId);
 	Vector2 cameraObjectivePos = cameraSit.position;
 
 	auto moveCamera = [](float posPlayer, float& posCamera, float offset) {
@@ -54,5 +54,5 @@ void CameraSystem::setCameraLookingPlayer(GameEngine& gameContext) const {
 	std::cout << "Final camera Velocity: ( " << cameraVel.velocity.x << ", " << cameraVel.velocity.y << ")\n";*/
 
 	// Update position on engine, the situation of the camera is its center
-	gameContext.entityMan.addEntityToUpdate(WorldElementsData::activeCameraId);
+	gameContext.entityMan->addEntityToUpdate(WorldElementsData::activeCameraId);
 }

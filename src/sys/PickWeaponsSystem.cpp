@@ -19,7 +19,7 @@ void PickWeaponsSystem::checkPlayerPickingWeapons(GameEngine& gameContext) const
 	// Distance weapons
 	for (int distanceWeapId : WorldElementsData::worldDistanceWeapons)
 	{
-		ColliderComponent& weaponCollider = gameContext.entityMan.getComponent<ColliderComponent>(distanceWeapId);
+		ColliderComponent& weaponCollider = gameContext.entityMan->getComponent<ColliderComponent>(distanceWeapId);
 
 		if (weaponCollider.collide) {
 			// Supongo que el arma solo tiene un collidable sin bounding hijos
@@ -34,7 +34,7 @@ void PickWeaponsSystem::checkPlayerPickingWeapons(GameEngine& gameContext) const
 	// Melee weapons
 	for (int meleeWeapId : WorldElementsData::worldMeleeWeapons)
 	{
-		ColliderComponent& weaponCollider = gameContext.entityMan.getComponent<ColliderComponent>(meleeWeapId);
+		ColliderComponent& weaponCollider = gameContext.entityMan->getComponent<ColliderComponent>(meleeWeapId);
 
 		if (weaponCollider.collide) {
 			// Supongo que el arma solo tiene un collidable sin bounding hijos
@@ -62,12 +62,12 @@ bool PickWeaponsSystem::checkWeaponCollidesWithPlayer(BoundingBoxNode& weaponBou
 
 void PickWeaponsSystem::setDistanceWeaponToPlayer(GameEngine& gameContext, int distanceWeapId) const {
 	//DELETE previous distance component
-	gameContext.entityMan.eraseComponent<DistanceWeaponComponent>(WorldElementsData::playerId);
+	gameContext.entityMan->eraseComponent<DistanceWeaponComponent>(WorldElementsData::playerId);
 
 	// Assign weapon component to the player
-	DistanceWeaponComponent auxiliarCopy = gameContext.entityMan.getComponent<DistanceWeaponComponent>(distanceWeapId);
+	DistanceWeaponComponent auxiliarCopy = gameContext.entityMan->getComponent<DistanceWeaponComponent>(distanceWeapId);
 
-	DistanceWeaponComponent& playerDistance = gameContext.entityMan.createComponent<DistanceWeaponComponent>(WorldElementsData::playerId);
+	DistanceWeaponComponent& playerDistance = gameContext.entityMan->createComponent<DistanceWeaponComponent>(WorldElementsData::playerId);
 	playerDistance = auxiliarCopy;
 	playerDistance.id = WorldElementsData::playerId;
 
@@ -81,12 +81,12 @@ void PickWeaponsSystem::setDistanceWeaponToPlayer(GameEngine& gameContext, int d
 void PickWeaponsSystem::setMeleeWeaponToPlayer(GameEngine& gameContext, int meleeWeapId) const {
 
 	//DELETE previous distance component
-	gameContext.entityMan.eraseComponent<MeleeWeaponComponent>(WorldElementsData::playerId);
+	gameContext.entityMan->eraseComponent<MeleeWeaponComponent>(WorldElementsData::playerId);
 	
 	// Assign weapon component to the player
-	MeleeWeaponComponent auxiliarCopy = gameContext.entityMan.getComponent<MeleeWeaponComponent>(meleeWeapId);
+	MeleeWeaponComponent auxiliarCopy = gameContext.entityMan->getComponent<MeleeWeaponComponent>(meleeWeapId);
 
-	MeleeWeaponComponent& playerMelee = gameContext.entityMan.createComponent<MeleeWeaponComponent>(WorldElementsData::playerId);
+	MeleeWeaponComponent& playerMelee = gameContext.entityMan->createComponent<MeleeWeaponComponent>(WorldElementsData::playerId);
 	playerMelee = auxiliarCopy;
 	playerMelee.id = WorldElementsData::playerId;
 

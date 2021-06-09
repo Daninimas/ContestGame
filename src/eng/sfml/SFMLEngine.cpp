@@ -48,7 +48,7 @@ std::array<float, 2> SFMLEngine::getWindowDimensions() const {
 
 void SFMLEngine::render(GameEngine& gameContext) const {
 	sf::Event event;
-    while (device.get()->pollEvent(event))
+	while (device.get()->pollEvent(event))
     {
         // "close requested" event: we close the window
 		if (event.type == sf::Event::Closed) {
@@ -97,6 +97,7 @@ void SFMLEngine::render(GameEngine& gameContext) const {
 
 void SFMLEngine::drawScene(GameEngine& gameContext) const {
 	// Draw the map background
+
 	for (sf::Sprite layer : backgroundLayers) {
 		device.get()->draw(layer);
 	}
@@ -118,15 +119,15 @@ void SFMLEngine::drawScene(GameEngine& gameContext) const {
 }
 
 void SFMLEngine::renderColliders(GameEngine& gameContext) const {
-	auto& colliders = gameContext.entityMan.getComponents<ColliderComponent>();
+	auto& colliders = gameContext.entityMan->getComponents<ColliderComponent>();
 
 	for (ColliderComponent& c : colliders) {
 
 		// TODO QUITAR
-		EntityType type = gameContext.entityMan.getEntity(c.id).getType();
+		EntityType type = gameContext.entityMan->getEntity(c.id).getType();
 		if (type == EntityType::WALL || type == EntityType::ATTACK || type == EntityType::BOMB) {
 
-			SituationComponent& sit = gameContext.entityMan.getComponent<SituationComponent>(c.id);
+			SituationComponent& sit = gameContext.entityMan->getComponent<SituationComponent>(c.id);
 			BoundingBoxNode& b = c.boundingRoot;
 			drawBoundingTree(b, sit);
 		}
@@ -153,10 +154,10 @@ void SFMLEngine::drawBoundingTree(BoundingBoxNode boundingNode, SituationCompone
 }
 
 void SFMLEngine::renderAllSensors(GameEngine& gameContext) const {
-	auto& sensors = gameContext.entityMan.getComponents<SensorComponent>();
+	auto& sensors = gameContext.entityMan->getComponents<SensorComponent>();
 
 	for (SensorComponent& s : sensors) {
-		SituationComponent& sit = gameContext.entityMan.getComponent<SituationComponent>(s.id);
+		SituationComponent& sit = gameContext.entityMan->getComponent<SituationComponent>(s.id);
 		BoundingBox& b = s.sensorBounding;
 
 		// Draw the sensor rectangle
@@ -174,8 +175,8 @@ void SFMLEngine::renderAllSensors(GameEngine& gameContext) const {
 		}
 
 		// Add bounding center
-		if (gameContext.entityMan.existsComponent<ColliderComponent>(s.id)) {
-			Vector2 objectiveCenter = Utils::getCenterOfBounding(gameContext.entityMan.getComponent<ColliderComponent>(s.id).boundingRoot.bounding);
+		if (gameContext.entityMan->existsComponent<ColliderComponent>(s.id)) {
+			Vector2 objectiveCenter = Utils::getCenterOfBounding(gameContext.entityMan->getComponent<ColliderComponent>(s.id).boundingRoot.bounding);
 
 			rectangle.move(objectiveCenter.x, 0.f);
 		}
@@ -226,8 +227,8 @@ void SFMLEngine::updateEntities(GameEngine& gameContext, std::vector<int> entiti
 }
 
 void SFMLEngine::updateNode(GameEngine& gameContext, sf::Sprite& node, int id) {
-	SituationComponent& situation = gameContext.entityMan.getComponent<SituationComponent>(id);
-	RenderComponent& drawable = gameContext.entityMan.getComponent<RenderComponent>(id);
+	SituationComponent& situation = gameContext.entityMan->getComponent<SituationComponent>(id);
+	RenderComponent& drawable = gameContext.entityMan->getComponent<RenderComponent>(id);
 	// Father data
 	Vector2 fatherPos{ 0.f, 0.f };
 	Vector2 fatherScale{ 1.f, 1.f };
@@ -235,7 +236,7 @@ void SFMLEngine::updateNode(GameEngine& gameContext, sf::Sprite& node, int id) {
 
 	// Get the father data
 	if (situation.father != std::numeric_limits<int>::max()) {
-		SituationComponent& fatherSit = gameContext.entityMan.getComponent<SituationComponent>(situation.father);
+		SituationComponent& fatherSit = gameContext.entityMan->getComponent<SituationComponent>(situation.father);
 		fatherPos = fatherSit.position;
 		fatherScale = fatherSit.scale;
 		fatherRor = fatherSit.rotation;
@@ -284,7 +285,7 @@ void SFMLEngine::updateTextures(GameEngine& gameContext, std::vector<int> entiti
 }
 
 void SFMLEngine::updateTexture(GameEngine& gameContext, sf::Sprite& node, int id) {
-	RenderComponent& drawable = gameContext.entityMan.getComponent<RenderComponent>(id);
+	RenderComponent& drawable = gameContext.entityMan->getComponent<RenderComponent>(id);
 	BoundingBox& drawableRect = drawable.spriteRect;
 
 	if (!existsTexture(drawable.sprite)) {
@@ -296,8 +297,8 @@ void SFMLEngine::updateTexture(GameEngine& gameContext, sf::Sprite& node, int id
 }
 
 void SFMLEngine::updateCamera(GameEngine& gameContext, int id) {
-	CameraComponent& cameraComp = gameContext.entityMan.getComponent<CameraComponent>(id);
-	SituationComponent& situation = gameContext.entityMan.getComponent<SituationComponent>(id);
+	CameraComponent& cameraComp = gameContext.entityMan->getComponent<CameraComponent>(id);
+	SituationComponent& situation = gameContext.entityMan->getComponent<SituationComponent>(id);
 
 	//BoundingBox worldViewRect = Utils::moveToWorldCoords(cameraComp.viewRect, situation);
 
@@ -316,7 +317,7 @@ void SFMLEngine::updateBackgroundLayers(std::vector<BackgroundLayer>& layers, fl
 
 
 void SFMLEngine::createEntity(GameEngine& gameContext, int id) {
-	RenderComponent& drawable = gameContext.entityMan.getComponent<RenderComponent>(id);
+	RenderComponent& drawable = gameContext.entityMan->getComponent<RenderComponent>(id);
 	sf::Sprite* node = nullptr;
 
 	if (!existsTexture(drawable.sprite)) {
@@ -343,7 +344,7 @@ void SFMLEngine::createEntity(GameEngine& gameContext, int id) {
 
 
 void SFMLEngine::createText(GameEngine& gameContext, int id) {
-	TextComponent& textComp = gameContext.entityMan.getComponent<TextComponent>(id);
+	TextComponent& textComp = gameContext.entityMan->getComponent<TextComponent>(id);
 
 	sf::Text* textNode = nullptr;
 	if (textComp.isHUDElement) {
@@ -359,8 +360,8 @@ void SFMLEngine::createText(GameEngine& gameContext, int id) {
 
 
 void SFMLEngine::updateText(GameEngine& gameContext, sf::Text& textNode, int id) {
-	SituationComponent& situation = gameContext.entityMan.getComponent<SituationComponent>(id);
-	TextComponent& textComp = gameContext.entityMan.getComponent<TextComponent>(id);
+	SituationComponent& situation = gameContext.entityMan->getComponent<SituationComponent>(id);
+	TextComponent& textComp = gameContext.entityMan->getComponent<TextComponent>(id);
 
 	textNode.setPosition(situation.position.x, situation.position.y);
 	textNode.setRotation(-situation.rotation);
@@ -373,8 +374,8 @@ void SFMLEngine::updateText(GameEngine& gameContext, sf::Text& textNode, int id)
 
 
 void SFMLEngine::createCamera(GameEngine& gameContext, int id) {
-	CameraComponent& cameraComp   = gameContext.entityMan.getComponent<CameraComponent>(id);
-	SituationComponent& situation = gameContext.entityMan.getComponent<SituationComponent>(id);
+	CameraComponent& cameraComp   = gameContext.entityMan->getComponent<CameraComponent>(id);
+	SituationComponent& situation = gameContext.entityMan->getComponent<SituationComponent>(id);
 
 	cameraMap.emplace( std::piecewise_construct, std::forward_as_tuple(id), std::forward_as_tuple() );
 
@@ -411,6 +412,13 @@ void SFMLEngine::eraseEntity(int id) {
 	HUDTextMap.erase(id);
 
 	// Delete the texture and image?
+}
+
+void SFMLEngine::eraseAllEntities() {
+	nodeMap.clear();
+	HUDNodeMap.clear();
+	cameraMap.clear();
+	HUDTextMap.clear();
 }
 
 
@@ -478,7 +486,7 @@ void SFMLEngine::addTexture(std::string path) {
 
 
 void SFMLEngine::setKeyToControl(GameEngine& gameContext, sf::Event& event) const {
-	InputComponent& playerInput = gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId);
+	InputComponent& playerInput = gameContext.entityMan->getComponent<InputComponent>(WorldElementsData::playerId);
 
 	//std::cout << "key pressed: " << (int)event.key.code << "\n";
 	playerInput.keyboardControlsMap[playerInput.controlToChange] = event.key.code;
@@ -488,7 +496,7 @@ void SFMLEngine::setKeyToControl(GameEngine& gameContext, sf::Event& event) cons
 }
 
 void SFMLEngine::setJoystickButtonToControl(GameEngine& gameContext, sf::Event& event) const {
-	InputComponent& playerInput = gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId);
+	InputComponent& playerInput = gameContext.entityMan->getComponent<InputComponent>(WorldElementsData::playerId);
 
 	playerInput.keyboardControlsMap[playerInput.controlToChange] = event.joystickButton.button;
 

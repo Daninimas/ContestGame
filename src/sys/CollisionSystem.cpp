@@ -25,7 +25,7 @@ void CollisionSystem::update(GameEngine& gameContext) const {
 
 
 void CollisionSystem::clearAllCollisions(GameEngine& gameContext) const {
-    auto& colliders = gameContext.entityMan.getComponents<ColliderComponent>();
+    auto& colliders = gameContext.entityMan->getComponents<ColliderComponent>();
 
     for (auto& collider : colliders) {
         clearCollisions(collider);
@@ -34,7 +34,7 @@ void CollisionSystem::clearAllCollisions(GameEngine& gameContext) const {
 
 
 void CollisionSystem::calculateCollisions(GameEngine& gameContext) const {
-    auto& colliders = gameContext.entityMan.getComponents<ColliderComponent>();
+    auto& colliders = gameContext.entityMan->getComponents<ColliderComponent>();
     std::vector<std::reference_wrapper<ColliderComponent>> collidersNotWall; // vector of references to colliders
 
     // Prepare data for the collision calculation
@@ -45,13 +45,13 @@ void CollisionSystem::calculateCollisions(GameEngine& gameContext) const {
     // Calculate collision
     for (ColliderComponent& colliderA : collidersNotWall) {
         int idA = colliderA.id;
-        SituationComponent& situationA = gameContext.entityMan.getComponent<SituationComponent>(idA);
+        SituationComponent& situationA = gameContext.entityMan->getComponent<SituationComponent>(idA);
 
         for (auto& colliderB : colliders) {
             int idB = colliderB.id;
 
             if (idA != idB && ( colliderA.layerMasc & colliderB.collisionLayer && colliderB.layerMasc & colliderA.collisionLayer) ) {
-                SituationComponent& situationB = gameContext.entityMan.getComponent<SituationComponent>(idB);
+                SituationComponent& situationB = gameContext.entityMan->getComponent<SituationComponent>(idB);
                 
                 bool collided = checkCollisionAB(colliderA.boundingRoot, situationA, colliderB.boundingRoot, situationB);
 
@@ -134,9 +134,9 @@ bool CollisionSystem::checkCollisionAB(BoundingBoxNode& boundingA, SituationComp
 }
 
 void CollisionSystem::undoCollision(GameEngine& gameContext, ColliderComponent& solidCol, ColliderComponent&  mobileCol) const {
-    VelocityComponent& mobileVel  = gameContext.entityMan.getComponent<VelocityComponent>(mobileCol.id);
-    SituationComponent& sitSolid  = gameContext.entityMan.getComponent<SituationComponent>(solidCol.id);
-    SituationComponent& sitMobile = gameContext.entityMan.getComponent<SituationComponent>(mobileCol.id);
+    VelocityComponent& mobileVel  = gameContext.entityMan->getComponent<VelocityComponent>(mobileCol.id);
+    SituationComponent& sitSolid  = gameContext.entityMan->getComponent<SituationComponent>(solidCol.id);
+    SituationComponent& sitMobile = gameContext.entityMan->getComponent<SituationComponent>(mobileCol.id);
     // This will change the situation of the mobile component to resolve the collision
 
     BoundingBox solidBounding  = Utils::moveToWorldCoords(solidCol.boundingRoot.bounding, sitSolid);
@@ -187,8 +187,8 @@ void CollisionSystem::undoCollision(GameEngine& gameContext, ColliderComponent& 
             }
         }
 
-        if (solidCol.type == ColliderType::DYNAMIC && gameContext.entityMan.existsComponent<VelocityComponent>(solidCol.id)) {
-            VelocityComponent& solidVel = gameContext.entityMan.getComponent<VelocityComponent>(solidCol.id);
+        if (solidCol.type == ColliderType::DYNAMIC && gameContext.entityMan->existsComponent<VelocityComponent>(solidCol.id)) {
+            VelocityComponent& solidVel = gameContext.entityMan->getComponent<VelocityComponent>(solidCol.id);
 
             if (solidVel.velocity.y > 0.f) { // moving down
                 if (sitSolid.position.y < sitMobile.position.y) {
@@ -217,8 +217,8 @@ void CollisionSystem::undoCollision(GameEngine& gameContext, ColliderComponent& 
             }
         }
 
-        if (solidCol.type == ColliderType::DYNAMIC && gameContext.entityMan.existsComponent<VelocityComponent>(solidCol.id)) {
-            VelocityComponent& solidVel = gameContext.entityMan.getComponent<VelocityComponent>(solidCol.id);
+        if (solidCol.type == ColliderType::DYNAMIC && gameContext.entityMan->existsComponent<VelocityComponent>(solidCol.id)) {
+            VelocityComponent& solidVel = gameContext.entityMan->getComponent<VelocityComponent>(solidCol.id);
             
             // Set velocity to mobile
             if (solidVel.velocity.x > 0.f) { // moving right
@@ -234,7 +234,7 @@ void CollisionSystem::undoCollision(GameEngine& gameContext, ColliderComponent& 
         }
     }
 
-    gameContext.entityMan.addEntityToUpdate(mobileCol.id);
+    gameContext.entityMan->addEntityToUpdate(mobileCol.id);
 }
 
 
@@ -261,11 +261,11 @@ bool CollisionSystem::checkCollisionWithPlatform(GameEngine& gameContext, Collid
     // Todas las plataformas por encima de la parte inferior de la entidad no colisionan
     if (platformSit.position.y > (entitySit.position.y + entityColl.boundingRoot.bounding.yDown - abs(overlapY)-0.1f)) {
         // Cuando la entidad va hacia arriba, no colisiona
-        if (gameContext.entityMan.existsComponent<VelocityComponent>(entityColl.id)) {
-            if (gameContext.entityMan.getComponent<VelocityComponent>(entityColl.id).velocity.y >= 0.f) {
+        if (gameContext.entityMan->existsComponent<VelocityComponent>(entityColl.id)) {
+            if (gameContext.entityMan->getComponent<VelocityComponent>(entityColl.id).velocity.y >= 0.f) {
                 // Por ultimo, si es el jugador y ha pulsado hacia abajo
                 if (entityColl.id == WorldElementsData::playerId) {
-                    if (gameContext.entityMan.getComponent<InputComponent>(entityColl.id).movingDown == false) {
+                    if (gameContext.entityMan->getComponent<InputComponent>(entityColl.id).movingDown == false) {
                         return true;
                     }
                 }

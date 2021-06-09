@@ -16,6 +16,7 @@ public:
     virtual void playSound(Sound&) = 0;
     virtual void playMusic(Sound&) = 0;
 
+    virtual void stopAllMusic() = 0;
 
     virtual void loadSound(std::string) = 0;
     virtual void loadSoundBuffer(std::string) = 0;

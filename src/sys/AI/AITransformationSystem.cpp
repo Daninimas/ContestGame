@@ -10,18 +10,18 @@ AITransformationSystem::~AITransformationSystem() {}
 
 
 void AITransformationSystem::update(GameEngine& gameContext) const {
-	auto& transformComponents = gameContext.entityMan.getComponents<AITransformationComponent>();
+	auto& transformComponents = gameContext.entityMan->getComponents<AITransformationComponent>();
 	std::vector<int> transformsCompToDelete;
 	transformsCompToDelete.reserve(transformComponents.size());
 
 	for (AITransformationComponent& transformComp : transformComponents) {
-		if (gameContext.entityMan.existsComponent<SituationComponent>(transformComp.objectiveId) && hasToTransform(gameContext, transformComp)) {
+		if (gameContext.entityMan->existsComponent<SituationComponent>(transformComp.objectiveId) && hasToTransform(gameContext, transformComp)) {
 			transform(gameContext, transformComp, transformsCompToDelete);
 		}
 	}
 
 	for (int transformId : transformsCompToDelete) {
-		gameContext.entityMan.eraseComponent<AITransformationComponent>(transformId);
+		gameContext.entityMan->eraseComponent<AITransformationComponent>(transformId);
 	}
 }
 
@@ -30,7 +30,7 @@ bool AITransformationSystem::hasToTransform(GameEngine& gameContext, AITransform
 	bool result = false;
 
 	// Check if has been hitted
-	result = checkHitted(gameContext, gameContext.entityMan.getComponent<ColliderComponent>(transformComp.id));
+	result = checkHitted(gameContext, gameContext.entityMan->getComponent<ColliderComponent>(transformComp.id));
 
 	// Check if objective is in range
 	if (!result) {
@@ -42,7 +42,7 @@ bool AITransformationSystem::hasToTransform(GameEngine& gameContext, AITransform
 
 bool AITransformationSystem::checkHitted(GameEngine& gameContext, ColliderComponent& transformEntColl) const {
 	for (int hittingId : transformEntColl.boundingRoot.bounding.entitiesColliding) {
-		if (gameContext.entityMan.getEntity(hittingId).getType() != EntityType::WALL) {
+		if (gameContext.entityMan->getEntity(hittingId).getType() != EntityType::WALL) {
 			return true;
 		}
 	}
@@ -51,8 +51,8 @@ bool AITransformationSystem::checkHitted(GameEngine& gameContext, ColliderCompon
 }
 
 bool AITransformationSystem::checkRange(GameEngine & gameContext, AITransformationComponent & transformComp) const {
-	SituationComponent& attackerSit = gameContext.entityMan.getComponent<SituationComponent>(transformComp.id);
-	SituationComponent& objectiveSit = gameContext.entityMan.getComponent<SituationComponent>(transformComp.objectiveId);
+	SituationComponent& attackerSit = gameContext.entityMan->getComponent<SituationComponent>(transformComp.id);
+	SituationComponent& objectiveSit = gameContext.entityMan->getComponent<SituationComponent>(transformComp.objectiveId);
 	
 	return Utils::objectiveInsideRange(attackerSit, objectiveSit, transformComp.range);
 }
@@ -62,10 +62,10 @@ bool AITransformationSystem::checkRange(GameEngine & gameContext, AITransformati
 
 void AITransformationSystem::transform(GameEngine& gameContext, AITransformationComponent& transformComp, std::vector<int>& transformsCompToDelete) const {
 	int entityId = transformComp.id;
-	RenderComponent& renderComp = gameContext.entityMan.getComponent<RenderComponent>(entityId);
-	SituationComponent& sitComp = gameContext.entityMan.getComponent<SituationComponent>(entityId);
-	ColliderComponent& collComp = gameContext.entityMan.getComponent<ColliderComponent>(entityId);
-	SensorComponent& sensorComp = gameContext.entityMan.getComponent<SensorComponent>(entityId);
+	RenderComponent& renderComp = gameContext.entityMan->getComponent<RenderComponent>(entityId);
+	SituationComponent& sitComp = gameContext.entityMan->getComponent<SituationComponent>(entityId);
+	ColliderComponent& collComp = gameContext.entityMan->getComponent<ColliderComponent>(entityId);
+	SensorComponent& sensorComp = gameContext.entityMan->getComponent<SensorComponent>(entityId);
 
 	// Transform its appearance and atacks the objective
 	sitComp.position.y -= (transformComp.newBoundingRoot.bounding.yDown - collComp.boundingRoot.bounding.yDown);
@@ -84,8 +84,8 @@ void AITransformationSystem::transform(GameEngine& gameContext, AITransformation
 	sensorComp.sensorBounding = { sensorComp.sensorBounding.xLeft, halfX, sensorComp.sensorBounding.yUp, halfY-2.f };
 
 		// Make it attack the objective
-	AIChaseComponent& AIchaseComp = gameContext.entityMan.createComponent<AIChaseComponent>(entityId);
-	AIMeleeAtkComponent& AImeleeComp = gameContext.entityMan.createComponent<AIMeleeAtkComponent>(entityId);
+	AIChaseComponent& AIchaseComp = gameContext.entityMan->createComponent<AIChaseComponent>(entityId);
+	AIMeleeAtkComponent& AImeleeComp = gameContext.entityMan->createComponent<AIMeleeAtkComponent>(entityId);
 			// AIChaseComponent
 	AIchaseComp.objectiveId = transformComp.objectiveId;
 			// AIMeleeAtkComponent
@@ -98,6 +98,6 @@ void AITransformationSystem::transform(GameEngine& gameContext, AITransformation
 	// Update on render
 	vector<int> aux;
 	aux.push_back(entityId);
-	gameContext.entityMan.addEntityToUpdate(entityId);
+	gameContext.entityMan->addEntityToUpdate(entityId);
 	gameContext.getWindowFacadeRef().updateTextures(gameContext, aux);
 }

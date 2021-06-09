@@ -27,7 +27,7 @@ void AttackSystem::update(GameEngine& gameContext) const {
 }
 
 void AttackSystem::manageAttacks(GameEngine& gameContext) const { // this method delete attacks by time, and manage explosion animations and reset of the hitted enemies of damage platforms
-	auto& attacks = gameContext.entityMan.getComponents<AttackComponent>();
+	auto& attacks = gameContext.entityMan->getComponents<AttackComponent>();
 	std::vector<int> attacksToDelete;
 	attacksToDelete.reserve(attacks.size());
 
@@ -39,7 +39,7 @@ void AttackSystem::manageAttacks(GameEngine& gameContext) const { // this method
 		}
 		else {
 			// manage the attack
-			if (attack.type == AttackType::EXPLOSION && gameContext.entityMan.existsComponent<ExplosionAttackComponent>(attack.id)) {
+			if (attack.type == AttackType::EXPLOSION && gameContext.entityMan->existsComponent<ExplosionAttackComponent>(attack.id)) {
 				animateExplosion(gameContext, attack);
 			}
 			else if (attack.type == AttackType::DAMAGE_PLATFORM) {
@@ -55,8 +55,8 @@ void AttackSystem::manageAttacks(GameEngine& gameContext) const { // this method
 }
 
 void AttackSystem::animateExplosion(GameEngine& gameContext, AttackComponent& attack) const {
-	ColliderComponent& attackCol = gameContext.entityMan.getComponent<ColliderComponent>(attack.id);
-	ExplosionAttackComponent& explosionComp = gameContext.entityMan.getComponent<ExplosionAttackComponent>(attack.id);
+	ColliderComponent& attackCol = gameContext.entityMan->getComponent<ColliderComponent>(attack.id);
+	ExplosionAttackComponent& explosionComp = gameContext.entityMan->getComponent<ExplosionAttackComponent>(attack.id);
 	BoundingBox& attackBound = attackCol.boundingRoot.bounding;
 
 	// Do bigger the collider
@@ -71,7 +71,7 @@ void AttackSystem::manageDamagePlatform(GameEngine& gameContext, AttackComponent
 	attack.resetDamagedEntTimeCounter += gameContext.getDeltaTime();
 
 	if (attack.resetDamagedEntTimeCounter > attack.resetDamagedEntTime) {
-		if (gameContext.entityMan.getComponent<ColliderComponent>(attack.id).collide) {
+		if (gameContext.entityMan->getComponent<ColliderComponent>(attack.id).collide) {
 			attack.entitiesDamaged.clear();
 			attack.resetDamagedEntTimeCounter = 0.f;
 		}
@@ -82,7 +82,7 @@ void AttackSystem::manageDamagePlatform(GameEngine& gameContext, AttackComponent
 void AttackSystem::addCooldownTimeToWeapons(GameEngine& gameContext) const {
 
 	// FOR THE MELEE WEAPONS
-	auto& meleeWeapons = gameContext.entityMan.getComponents<MeleeWeaponComponent>();
+	auto& meleeWeapons = gameContext.entityMan->getComponents<MeleeWeaponComponent>();
 	float deltaTime = gameContext.getDeltaTime();
 
 	for (auto& meleeWeap : meleeWeapons) {
@@ -90,7 +90,7 @@ void AttackSystem::addCooldownTimeToWeapons(GameEngine& gameContext) const {
 	}
 
 	// FOR THE DISTANCE WEAPONS
-	auto& distanceWeapons = gameContext.entityMan.getComponents<DistanceWeaponComponent>();
+	auto& distanceWeapons = gameContext.entityMan->getComponents<DistanceWeaponComponent>();
 
 	for (auto& distanceWeap : distanceWeapons) {
 		distanceWeap.cooldown += deltaTime;
@@ -100,15 +100,15 @@ void AttackSystem::addCooldownTimeToWeapons(GameEngine& gameContext) const {
 
 
 void AttackSystem::checkPlayerAttacking(GameEngine& gameContext) const {
-	InputComponent& playerInput = gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId);
+	InputComponent& playerInput = gameContext.entityMan->getComponent<InputComponent>(WorldElementsData::playerId);
 
 	if (playerInput.attacking && !playerInput.usingTurret) {
-		SensorComponent& playerSensor = gameContext.entityMan.getComponent<SensorComponent>(WorldElementsData::playerId);
+		SensorComponent& playerSensor = gameContext.entityMan->getComponent<SensorComponent>(WorldElementsData::playerId);
 		bool createMelee = false;
 		//Decides if needs to use melee or distance weapon
 
 		for (int sensoredId : playerSensor.entitiesSensoring) {
-			uint16_t sensoredCollLayer = gameContext.entityMan.getComponent<ColliderComponent>(sensoredId).collisionLayer;
+			uint16_t sensoredCollLayer = gameContext.entityMan->getComponent<ColliderComponent>(sensoredId).collisionLayer;
 
 			if (sensoredCollLayer == ColliderComponent::Enemy) {
 				createMelee = true;
@@ -116,17 +116,17 @@ void AttackSystem::checkPlayerAttacking(GameEngine& gameContext) const {
 		}
 
 		if (createMelee) {
-			createMeleeAttack(gameContext, gameContext.entityMan.getComponent<MeleeWeaponComponent>(WorldElementsData::playerId));
+			createMeleeAttack(gameContext, gameContext.entityMan->getComponent<MeleeWeaponComponent>(WorldElementsData::playerId));
 
 			// Reset the distance cooldown too
-			if (gameContext.entityMan.existsComponent<DistanceWeaponComponent>(WorldElementsData::playerId)) {
-				gameContext.entityMan.getComponent<DistanceWeaponComponent>(WorldElementsData::playerId).cooldown = 0.f;
+			if (gameContext.entityMan->existsComponent<DistanceWeaponComponent>(WorldElementsData::playerId)) {
+				gameContext.entityMan->getComponent<DistanceWeaponComponent>(WorldElementsData::playerId).cooldown = 0.f;
 			}
 		}
 		else {
-			DistanceWeaponComponent& playerDistanceWeap = gameContext.entityMan.getComponent<DistanceWeaponComponent>(WorldElementsData::playerId);
-			VelocityComponent& playerVel  = gameContext.entityMan.getComponent<VelocityComponent>(WorldElementsData::playerId);
-			SituationComponent& playerSit = gameContext.entityMan.getComponent<SituationComponent>(WorldElementsData::playerId);
+			DistanceWeaponComponent& playerDistanceWeap = gameContext.entityMan->getComponent<DistanceWeaponComponent>(WorldElementsData::playerId);
+			VelocityComponent& playerVel  = gameContext.entityMan->getComponent<VelocityComponent>(WorldElementsData::playerId);
+			SituationComponent& playerSit = gameContext.entityMan->getComponent<SituationComponent>(WorldElementsData::playerId);
 
 			playerDistanceWeap.attackVel.y = 0.f;
 			playerDistanceWeap.attackVel.x = playerDistanceWeap.attackGeneralVelociy;
@@ -157,15 +157,15 @@ void AttackSystem::checkPlayerAttacking(GameEngine& gameContext) const {
 
 				if (playerDistanceWeap.ammo == 0) {
 					//Delete this weapon and set the normal pistol
-					gameContext.entityMan.eraseComponent<DistanceWeaponComponent>(WorldElementsData::playerId);
+					gameContext.entityMan->eraseComponent<DistanceWeaponComponent>(WorldElementsData::playerId);
 
 					Utils::setNormalPistolToEntity(gameContext, WorldElementsData::playerId);
 				}
 			}
 
 			/*// Reset the melee cooldown too
-			if (gameContext.entityMan.existsComponent<MeleeWeaponComponent>(WorldElementsData::playerId)) {
-				gameContext.entityMan.getComponent<MeleeWeaponComponent>(WorldElementsData::playerId).cooldown = 0.f;
+			if (gameContext.entityMan->existsComponent<MeleeWeaponComponent>(WorldElementsData::playerId)) {
+				gameContext.entityMan->getComponent<MeleeWeaponComponent>(WorldElementsData::playerId).cooldown = 0.f;
 			}*/
 		}
 		
@@ -174,41 +174,41 @@ void AttackSystem::checkPlayerAttacking(GameEngine& gameContext) const {
 
 void AttackSystem::checkEnemiesAttacking(GameEngine& gameContext) const {
 	// For the melee attacks
-	auto& AIMeleeAtkComponents = gameContext.entityMan.getComponents<AIMeleeAtkComponent>();
+	auto& AIMeleeAtkComponents = gameContext.entityMan->getComponents<AIMeleeAtkComponent>();
 
 	for (AIMeleeAtkComponent& AIMeleeComp : AIMeleeAtkComponents) {
 		if (AIMeleeComp.createAttack) {
-			createMeleeAttack(gameContext, gameContext.entityMan.getComponent<MeleeWeaponComponent>(AIMeleeComp.id));
+			createMeleeAttack(gameContext, gameContext.entityMan->getComponent<MeleeWeaponComponent>(AIMeleeComp.id));
 		}
 	}
 
 
 	// For the distance attacks
-	auto& AIDistanceAtkComponents = gameContext.entityMan.getComponents<AIDistanceAtkComponent>();
+	auto& AIDistanceAtkComponents = gameContext.entityMan->getComponents<AIDistanceAtkComponent>();
 
 	for (AIDistanceAtkComponent& AIDistanceComp : AIDistanceAtkComponents) {
 		if (AIDistanceComp.createAttack) {
-			createDistanceAttack(gameContext, gameContext.entityMan.getComponent<DistanceWeaponComponent>(AIDistanceComp.id));
+			createDistanceAttack(gameContext, gameContext.entityMan->getComponent<DistanceWeaponComponent>(AIDistanceComp.id));
 		}
 	}
 
 
 	// For the drop bomb enemies
-	auto& AIDropBombComponents = gameContext.entityMan.getComponents<AIDropBombComponent>();
+	auto& AIDropBombComponents = gameContext.entityMan->getComponents<AIDropBombComponent>();
 
 	for (AIDropBombComponent& AIDropBombComp : AIDropBombComponents) {
 		if (AIDropBombComp.createBomb) {
-			createDistanceAttack(gameContext, gameContext.entityMan.getComponent<DistanceWeaponComponent>(AIDropBombComp.id));
+			createDistanceAttack(gameContext, gameContext.entityMan->getComponent<DistanceWeaponComponent>(AIDropBombComp.id));
 		}
 	}
 }
 
 void AttackSystem::checkTurretsAttacking(GameEngine& gameContext) const {
-	auto& gunTurretsComponents = gameContext.entityMan.getComponents<GunTurretComponent>();
+	auto& gunTurretsComponents = gameContext.entityMan->getComponents<GunTurretComponent>();
 
 	for (GunTurretComponent& gunTurretComp : gunTurretsComponents) {
 		if (gunTurretComp.createAttack) {
-			createDistanceAttack(gameContext, gameContext.entityMan.getComponent<DistanceWeaponComponent>(gunTurretComp.id));
+			createDistanceAttack(gameContext, gameContext.entityMan->getComponent<DistanceWeaponComponent>(gunTurretComp.id));
 
 			gunTurretComp.createAttack = false;
 		}
@@ -220,7 +220,7 @@ void AttackSystem::checkTurretsAttacking(GameEngine& gameContext) const {
 bool AttackSystem::createMeleeAttack(GameEngine& gameContext, MeleeWeaponComponent& meleeAttacker) const {
 
 	if (meleeAttacker.cooldown > meleeAttacker.maxCooldown) {
-		SituationComponent& attackerSit = gameContext.entityMan.getComponent<SituationComponent>(meleeAttacker.id);
+		SituationComponent& attackerSit = gameContext.entityMan->getComponent<SituationComponent>(meleeAttacker.id);
 		Vector2 attackPos = Vector2(attackerSit.position.x, attackerSit.position.y);
 
 		GameObjectType attackGOtype = GameObjectType::MELEE_ATTACK;
@@ -229,8 +229,8 @@ bool AttackSystem::createMeleeAttack(GameEngine& gameContext, MeleeWeaponCompone
 		}
 
 		// Calculate attack spawn situation outside of the attacker collidable
-		if (gameContext.entityMan.existsComponent<ColliderComponent>(attackerSit.id)) {
-			BoundingBox& attackerBounding = gameContext.entityMan.getComponent<ColliderComponent>(attackerSit.id).boundingRoot.bounding;
+		if (gameContext.entityMan->existsComponent<ColliderComponent>(attackerSit.id)) {
+			BoundingBox& attackerBounding = gameContext.entityMan->getComponent<ColliderComponent>(attackerSit.id).boundingRoot.bounding;
 
 			if (attackerSit.facing == SituationComponent::Right) {
 				attackPos.x += attackerBounding.xRight;
@@ -245,10 +245,10 @@ bool AttackSystem::createMeleeAttack(GameEngine& gameContext, MeleeWeaponCompone
 		attackPos.x += meleeAttacker.spawnAttackPos.x;
 		attackPos.y += meleeAttacker.spawnAttackPos.y;
 
-		int attackId = gameContext.entityMan.createAttack(gameContext, attackPos, 0.f, attackGOtype);
+		int attackId = gameContext.entityMan->createAttack(gameContext, attackPos, 0.f, attackGOtype);
 
-		ColliderComponent& colliderComp = gameContext.entityMan.getComponent<ColliderComponent>(attackId);
-		AttackComponent& attackComp     = gameContext.entityMan.getComponent<AttackComponent>(attackId);
+		ColliderComponent& colliderComp = gameContext.entityMan->getComponent<ColliderComponent>(attackId);
+		AttackComponent& attackComp     = gameContext.entityMan->getComponent<AttackComponent>(attackId);
 
 		colliderComp.boundingRoot.bounding = meleeAttacker.attackBounding;
 		attackComp.damage = meleeAttacker.damage;
@@ -295,18 +295,18 @@ bool AttackSystem::createDistanceAttack(GameEngine& gameContext, DistanceWeaponC
 
 
 void AttackSystem::createBombEntity(GameEngine& gameContext, DistanceWeaponComponent& distanceWeaponAttacker) const {
-	SituationComponent& attackerSit = gameContext.entityMan.getComponent<SituationComponent>(distanceWeaponAttacker.id);
+	SituationComponent& attackerSit = gameContext.entityMan->getComponent<SituationComponent>(distanceWeaponAttacker.id);
 
 	GameObjectType attackGOtype = GameObjectType::BOMB;
-	if (distanceWeaponAttacker.id == WorldElementsData::playerId || gameContext.entityMan.getEntity(distanceWeaponAttacker.id).getGameObjectType() == GameObjectType::DRONE_FRIEND) {
+	if (distanceWeaponAttacker.id == WorldElementsData::playerId || gameContext.entityMan->getEntity(distanceWeaponAttacker.id).getGameObjectType() == GameObjectType::DRONE_FRIEND) {
 		attackGOtype = GameObjectType::PLAYER_BOMB;
 	}
 
-	int bombId = gameContext.entityMan.createBomb(gameContext, attackerSit.position, 0.f, attackGOtype);
+	int bombId = gameContext.entityMan->createBomb(gameContext, attackerSit.position, 0.f, attackGOtype);
 
-	ColliderComponent& colliderComp = gameContext.entityMan.getComponent<ColliderComponent>(bombId);
-	VelocityComponent& bombVel = gameContext.entityMan.getComponent<VelocityComponent>(bombId);
-	BombComponent& bombComp = gameContext.entityMan.getComponent<BombComponent>(bombId);
+	ColliderComponent& colliderComp = gameContext.entityMan->getComponent<ColliderComponent>(bombId);
+	VelocityComponent& bombVel = gameContext.entityMan->getComponent<VelocityComponent>(bombId);
+	BombComponent& bombComp = gameContext.entityMan->getComponent<BombComponent>(bombId);
 
 	colliderComp.boundingRoot.bounding = distanceWeaponAttacker.attackBounding;
 
@@ -329,10 +329,10 @@ void AttackSystem::createBombEntity(GameEngine& gameContext, DistanceWeaponCompo
 
 void AttackSystem::createLaserAttack(GameEngine& gameContext, DistanceWeaponComponent& distanceWeaponAttacker) const {
 
-	SituationComponent& attackerSit = gameContext.entityMan.getComponent<SituationComponent>(distanceWeaponAttacker.id);
+	SituationComponent& attackerSit = gameContext.entityMan->getComponent<SituationComponent>(distanceWeaponAttacker.id);
 
 	GameObjectType attackGOtype = GameObjectType::LASER;
-	if (distanceWeaponAttacker.id == WorldElementsData::playerId || gameContext.entityMan.getEntity(distanceWeaponAttacker.id).getGameObjectType() == GameObjectType::DRONE_FRIEND) {
+	if (distanceWeaponAttacker.id == WorldElementsData::playerId || gameContext.entityMan->getEntity(distanceWeaponAttacker.id).getGameObjectType() == GameObjectType::DRONE_FRIEND) {
 		attackGOtype = GameObjectType::PLAYER_LASER;
 	}
 
@@ -341,11 +341,11 @@ void AttackSystem::createLaserAttack(GameEngine& gameContext, DistanceWeaponComp
 	attackPos.x += distanceWeaponAttacker.spawnAttackPos.x;
 	attackPos.y += distanceWeaponAttacker.spawnAttackPos.y;
 
-	int attackId = gameContext.entityMan.createAttack(gameContext, attackPos, 0.f, attackGOtype);
+	int attackId = gameContext.entityMan->createAttack(gameContext, attackPos, 0.f, attackGOtype);
 
-	ColliderComponent& colliderComp = gameContext.entityMan.getComponent<ColliderComponent>(attackId);
-	AttackComponent& attackComp = gameContext.entityMan.getComponent<AttackComponent>(attackId);
-	VelocityComponent& attackVel = gameContext.entityMan.getComponent<VelocityComponent>(attackId);
+	ColliderComponent& colliderComp = gameContext.entityMan->getComponent<ColliderComponent>(attackId);
+	AttackComponent& attackComp = gameContext.entityMan->getComponent<AttackComponent>(attackId);
+	VelocityComponent& attackVel = gameContext.entityMan->getComponent<VelocityComponent>(attackId);
 
 	attackComp.damage = distanceWeaponAttacker.damage;
 	attackComp.maxLifetime = distanceWeaponAttacker.attackLifetime;
@@ -362,8 +362,8 @@ void AttackSystem::createLaserAttack(GameEngine& gameContext, DistanceWeaponComp
 	}
 	
 	if (distanceWeaponAttacker.id == WorldElementsData::playerId) {
-		VelocityComponent& playerVel = gameContext.entityMan.getComponent<VelocityComponent>(WorldElementsData::playerId);
-		InputComponent& playerInput = gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId);
+		VelocityComponent& playerVel = gameContext.entityMan->getComponent<VelocityComponent>(WorldElementsData::playerId);
+		InputComponent& playerInput = gameContext.entityMan->getComponent<InputComponent>(WorldElementsData::playerId);
 
 		if (playerInput.movingUp)
 		{
@@ -394,8 +394,8 @@ void AttackSystem::createLaserAttack(GameEngine& gameContext, DistanceWeaponComp
 }
 
 void AttackSystem::createBulletAttack(GameEngine& gameContext, DistanceWeaponComponent& distanceWeaponAttacker) const {
-	SituationComponent& attackerSit = gameContext.entityMan.getComponent<SituationComponent>(distanceWeaponAttacker.id);
-	GameObjectType attackerGO = gameContext.entityMan.getEntity(distanceWeaponAttacker.id).getGameObjectType();
+	SituationComponent& attackerSit = gameContext.entityMan->getComponent<SituationComponent>(distanceWeaponAttacker.id);
+	GameObjectType attackerGO = gameContext.entityMan->getEntity(distanceWeaponAttacker.id).getGameObjectType();
 
 	GameObjectType attackGOtype = GameObjectType::DISTANCE_ATTACK;
 	if (distanceWeaponAttacker.id == WorldElementsData::playerId || attackerGO == GameObjectType::DRONE_FRIEND || attackerGO == GameObjectType::TURRET_GUN) {
@@ -408,11 +408,11 @@ void AttackSystem::createBulletAttack(GameEngine& gameContext, DistanceWeaponCom
 	attackPos.y += distanceWeaponAttacker.spawnAttackPos.y;
 
 	for (uint8_t i = 0; i < distanceWeaponAttacker.numberOfShells; ++i) {
-		int attackId = gameContext.entityMan.createAttack(gameContext, attackPos, 0.f, attackGOtype);
+		int attackId = gameContext.entityMan->createAttack(gameContext, attackPos, 0.f, attackGOtype);
 
-		ColliderComponent& colliderComp = gameContext.entityMan.getComponent<ColliderComponent>(attackId);
-		AttackComponent& attackComp = gameContext.entityMan.getComponent<AttackComponent>(attackId);
-		VelocityComponent& attackVel = gameContext.entityMan.getComponent<VelocityComponent>(attackId);
+		ColliderComponent& colliderComp = gameContext.entityMan->getComponent<ColliderComponent>(attackId);
+		AttackComponent& attackComp = gameContext.entityMan->getComponent<AttackComponent>(attackId);
+		VelocityComponent& attackVel = gameContext.entityMan->getComponent<VelocityComponent>(attackId);
 
 		float thisRandOperture = (-distanceWeaponAttacker.bulletSpreadAngle/2.f) + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (distanceWeaponAttacker.bulletSpreadAngle/2 - (-distanceWeaponAttacker.bulletSpreadAngle/2))));
 
@@ -435,12 +435,12 @@ void AttackSystem::createBulletAttack(GameEngine& gameContext, DistanceWeaponCom
 
 
 void AttackSystem::checkAttacksHits(GameEngine& gameContext) const{
-	auto& attacks = gameContext.entityMan.getComponents<AttackComponent>();
+	auto& attacks = gameContext.entityMan->getComponents<AttackComponent>();
 	std::vector<int> attacksToDelete;
 	attacksToDelete.reserve(attacks.size());
 
 	for (AttackComponent& attack : attacks) {
-		ColliderComponent& attackCol = gameContext.entityMan.getComponent<ColliderComponent>(attack.id);
+		ColliderComponent& attackCol = gameContext.entityMan->getComponent<ColliderComponent>(attack.id);
 		
 		if (attackCol.collide) {
 			resolveAttackHit(gameContext, attackCol, attack, attacksToDelete);
@@ -471,12 +471,12 @@ void AttackSystem::resolveAttackHit(GameEngine& gameContext, ColliderComponent& 
 
 void AttackSystem::damageEntity(GameEngine& gameContext, AttackComponent& attack, int entityHitId) const {
 
-	if (gameContext.entityMan.existsComponent<HealthComponent>(entityHitId)) { // if the hitted entity has health
-		HealthComponent& hittedHealth = gameContext.entityMan.getComponent<HealthComponent>(entityHitId);
+	if (gameContext.entityMan->existsComponent<HealthComponent>(entityHitId)) { // if the hitted entity has health
+		HealthComponent& hittedHealth = gameContext.entityMan->getComponent<HealthComponent>(entityHitId);
 
 		hittedHealth.damageReceived += attack.damage;
 		hittedHealth.damaged = true;
-		hittedHealth.hittedByGO = gameContext.entityMan.getEntity(attack.id).getGameObjectType();
+		hittedHealth.hittedByGO = gameContext.entityMan->getEntity(attack.id).getGameObjectType();
 	}
 
 	attack.entitiesDamaged.push_back(entityHitId);

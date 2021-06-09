@@ -17,7 +17,7 @@ const bool SHOW_TIMERS      = false;
 const bool CHECK_SYSTEMS    = false;
 
 GameEngine::GameEngine()
-    : windowFacade(800, 600, false), soundFacade(), gameStateStack(){
+    : windowFacade(800, 600, false), soundFacade(), gameStateStack(), entityMan(std::make_unique<EntityManager>()){
 
     srand(time(NULL)); // initialize the random seed
     //init();
@@ -41,23 +41,41 @@ GameEngine::GameEngine()
 GameEngine::~GameEngine() {}
 
 void GameEngine::reset() {
-
-    //ResetGame
+    
+    //ResetGame systems
     systems.clear();
     systemsLate.clear();
 
-    // Delete all entities
-    /*while (entityMan.getEntities().size())
-    {
-        eraseEntityByID(entityMan.getEntities().begin()->second.getId());
-    }*/
+    
+    // Delete all entities from engine
+    windowFacade.eraseAllEntities();
 
+    // Stop all music
+    soundFacade.stopAllMusic();
+
+    // Delete previous entity manager
+    entityMan.reset();
+    entityMan = std::make_unique<EntityManager>();
+
+    // Reset world elements data
+    WorldElementsData::worldId = 0;
+    WorldElementsData::playerId = std::numeric_limits<int>::max();
+    WorldElementsData::activeCameraId = 0;
+    WorldElementsData::playerDroneId = std::numeric_limits<int>::max();
+    WorldElementsData::worldDistanceWeapons.clear();
+    WorldElementsData::worldMeleeWeapons.clear();
+    WorldElementsData::enemiesInWorld = 0;
+    WorldElementsData::playerScore = 0;
+
+
+    // Restart game
     init();
 
+    resetFlag = false;
 }
 
 void GameEngine::init() {
-    pushGameState(GameState::BEST_SCORES);
+    pushGameState(GameState::PAUSE);
 
     StaticEntitiesSystem staticSystem{};
     staticSystem.init(*this);
@@ -108,7 +126,7 @@ void GameEngine::setMenuSystems(GameObjectType const menu) {
     float DELTA_TO_UPDATE = 1.f / 20.f; // Ponemos el juego a 20 FPS
 
     std::cout << "EN PAUSA...\n";
-    entityMan.createMenu(*this, menu);
+    entityMan->createMenu(*this, menu);
 
     systems.emplace_back(std::make_unique<InputSystem>());
     systems.emplace_back(std::make_unique<InputJoystickSystem>());
@@ -122,6 +140,8 @@ void GameEngine::run() {
     then = std::chrono::system_clock::now();
 
     while (playing) {
+        if (resetFlag)
+            reset();
 
         if (gameStateChanged) {
             // State recently changed. Systems vector must be updated
@@ -237,7 +257,7 @@ void GameEngine::run() {
                     cout << "\nRender " << " has spent: " << (totalRender / MAX_TIMES);
                     cout << "\nTOTAL  " << " has spent: " << (all / MAX_TIMES);
                     //cout << "\nNum Render Nodes  : " << windowFacade.countRenderNodes();
-                    cout << "\nNum Total Entities: " << entityMan.getEntities().size() << "\n\n\n";
+                    cout << "\nNum Total Entities: " << entityMan->getEntities().size() << "\n\n\n";
 
 
                     //RESET
@@ -275,7 +295,7 @@ void GameEngine::run() {
 }
 
 void GameEngine::updateWithTimers() {
-    entityMan.clearEntitiesToUpdate();
+    entityMan->clearEntitiesToUpdate();
     float totalTimeSpent = 0.f;
 
     for (size_t i = 0; i < systems.size(); ++i) {
@@ -329,7 +349,7 @@ void GameEngine::updateWithTimers() {
 void GameEngine::update() {
 
     // Reset entities to update
-    entityMan.clearEntitiesToUpdate();
+    entityMan->clearEntitiesToUpdate();
 
     for (size_t i = 0; i < systems.size(); ++i) {
 
@@ -359,7 +379,7 @@ void GameEngine::render() {
 
 void GameEngine::updateEntitiesInWindow() {
     // Update situation in engine
-    windowFacade.updateEntities(*this, entityMan.getEntitiesToUpdate());
+    windowFacade.updateEntities(*this, entityMan->getEntitiesToUpdate());
 }
 
 void GameEngine::setPlaying(const bool p) {
@@ -410,54 +430,54 @@ SoundFacade &GameEngine::getSoundFacadeRef() {
 
 
 Entity &GameEngine::getEntity(int id) {
-    return entityMan.getEntity(id);
+    return entityMan->getEntity(id);
 }
 
 
 
 void GameEngine::eraseEntityByID(int id) {
-    if (entityMan.existEntity(id)) {
+    if (entityMan->existEntity(id)) {
 
-        EntityType entityType = entityMan.getEntity(id).getType();
-        GameObjectType gameObjectType = entityMan.getEntity(id).getGameObjectType();
+        EntityType entityType = entityMan->getEntity(id).getType();
+        GameObjectType gameObjectType = entityMan->getEntity(id).getGameObjectType();
 
-        entityMan.removeEntityToUpdate(id);
+        entityMan->removeEntityToUpdate(id);
         windowFacade.eraseEntity(id);
 
         // Remove the render sons of the entity
-        if (entityMan.existsComponent<SituationComponent>(id)) {
-            auto& renderSons = entityMan.getComponent<SituationComponent>(id).sons;
+        if (entityMan->existsComponent<SituationComponent>(id)) {
+            auto& renderSons = entityMan->getComponent<SituationComponent>(id).sons;
             for (int son : renderSons) {
                 eraseEntityByID(son);
             }
         }
 
         // Removing the entity ID on Components
-        if (entityMan.existsComponent<ColliderComponent>(id)) {
-            auto& colliders = entityMan.getComponents<ColliderComponent>();
+        if (entityMan->existsComponent<ColliderComponent>(id)) {
+            auto& colliders = entityMan->getComponents<ColliderComponent>();
             for (ColliderComponent& collider : colliders) {
                 Utils::deleteCollidingWithObjective(collider.boundingRoot, id); // deletes the id from the colliding entities
             }
         }
 
-        if (entityMan.existsComponent<SensorComponent>(id)) {
-            auto& sensors = entityMan.getComponents<SensorComponent>();
+        if (entityMan->existsComponent<SensorComponent>(id)) {
+            auto& sensors = entityMan->getComponents<SensorComponent>();
             for (SensorComponent& sensor : sensors) {
                 sensor.entitiesSensoring.erase(std::remove(sensor.entitiesSensoring.begin(), sensor.entitiesSensoring.end(), id), sensor.entitiesSensoring.end());
             }
         }
 
-        if (entityMan.existsComponent<SpawnerComponent>(id)) {
-            auto& spawners = entityMan.getComponents<SpawnerComponent>();
+        if (entityMan->existsComponent<SpawnerComponent>(id)) {
+            auto& spawners = entityMan->getComponents<SpawnerComponent>();
             for (SpawnerComponent& spawnComp : spawners) {
                 spawnComp.spawnedObjsAlive.erase(std::remove(spawnComp.spawnedObjsAlive.begin(), spawnComp.spawnedObjsAlive.end(), id), spawnComp.spawnedObjsAlive.end());
             }
         }
 
         // Erase all options from the Menu Component
-        if (entityMan.existsComponent<MenuComponent>(id)) {
-            MenuComponent& menuComp = entityMan.getComponent<MenuComponent>(id);
-            std::vector<int>& menuOptions = entityMan.getComponent<MenuComponent>(id).optionsId;
+        if (entityMan->existsComponent<MenuComponent>(id)) {
+            MenuComponent& menuComp = entityMan->getComponent<MenuComponent>(id);
+            std::vector<int>& menuOptions = entityMan->getComponent<MenuComponent>(id).optionsId;
 
             for (size_t i = 0; i < menuOptions.size(); ++i) {
                 eraseEntityByID(menuOptions[i]);
@@ -470,13 +490,13 @@ void GameEngine::eraseEntityByID(int id) {
         //getSoundFacadeRef().setParameterEventByID(id, STOP_SOUND);
 
         // Erase canon and text on turret (NUNCA DESTRUIR UNA TORRETA A MANO)
-        if (entityMan.existsComponent<TurretComponent>(id)) {
-            eraseEntityByID(entityMan.getComponent<TurretComponent>(id).turretGunID);
-            eraseEntityByID(entityMan.getComponent<TurretComponent>(id).textID);
+        if (entityMan->existsComponent<TurretComponent>(id)) {
+            eraseEntityByID(entityMan->getComponent<TurretComponent>(id).turretGunID);
+            eraseEntityByID(entityMan->getComponent<TurretComponent>(id).textID);
 
-            TurretComponent& turretComp = entityMan.getComponent<TurretComponent>(id);
+            TurretComponent& turretComp = entityMan->getComponent<TurretComponent>(id);
             if (turretComp.inUse) {
-                entityMan.getComponent<InputComponent>(turretComp.userID).usingTurret = false;
+                entityMan->getComponent<InputComponent>(turretComp.userID).usingTurret = false;
             }
         }
 
@@ -500,7 +520,7 @@ void GameEngine::eraseEntityByID(int id) {
             WorldElementsData::playerDroneId = std::numeric_limits<int>::max();
         }
 
-        entityMan.eraseEntityByID(id);
+        entityMan->eraseEntityByID(id);
     }
 }
 
@@ -508,20 +528,20 @@ void GameEngine::eraseEntityByID(int id) {
 
 std::unordered_map<int, Entity> &GameEngine::getEntities() {
 
-    return entityMan.getEntities();
+    return entityMan->getEntities();
 }
 
 /*
 std::vector<int> &GameEngine::getEntitiesToUpdate() {
-    return entityMan.getEntitiesToUpdate();
+    return entityMan->getEntitiesToUpdate();
 }
 
 void GameEngine::addEntityToUpdate(const int id) {
-    entityMan.addEntityToUpdate(id);
+    entityMan->addEntityToUpdate(id);
 }
 
 void GameEngine::clearEntitiesToUpdate() {
-    entityMan.clearEntitiesToUpdate();
+    entityMan->clearEntitiesToUpdate();
 }*/
 
 GameState GameEngine::getGameState() const {

@@ -13,14 +13,14 @@ DodgeSystem::~DodgeSystem() {}
 void DodgeSystem::update(GameEngine& gameContext) const {
 	checkPlayerDodge(gameContext);
 
-	auto& dodgeComponents = gameContext.entityMan.getComponents<DodgeComponent>();
+	auto& dodgeComponents = gameContext.entityMan->getComponents<DodgeComponent>();
 
 	for (DodgeComponent& dodgeComp : dodgeComponents) {
 		dodgeComp.cooldown += gameContext.getDeltaTime();
 		if (dodgeComp.dodgeDuration < dodgeComp.dodgeMaxDuration) {
 			doDodge(gameContext, dodgeComp);			
 		}
-		else if (dodgeComp.activateDodge && dodgeComp.cooldown > dodgeComp.maxCooldown && gameContext.entityMan.existsComponent<VelocityComponent>(dodgeComp.id)) {
+		else if (dodgeComp.activateDodge && dodgeComp.cooldown > dodgeComp.maxCooldown && gameContext.entityMan->existsComponent<VelocityComponent>(dodgeComp.id)) {
 			dodgeComp.dodgeDuration = 0.f;
 			
 		}
@@ -32,7 +32,7 @@ void DodgeSystem::update(GameEngine& gameContext) const {
 // el dodge tiene que durar un tiempo, ahora mismo, dura una iteración
 
 void DodgeSystem::doDodge(GameEngine& gameContext, DodgeComponent& dodgeComp) const {
-	VelocityComponent& velComp = gameContext.entityMan.getComponent<VelocityComponent>(dodgeComp.id);
+	VelocityComponent& velComp = gameContext.entityMan->getComponent<VelocityComponent>(dodgeComp.id);
 
 
 	switch (dodgeComp.dodgeDirection) {
@@ -52,14 +52,14 @@ void DodgeSystem::doDodge(GameEngine& gameContext, DodgeComponent& dodgeComp) co
 	dodgeComp.dodgeDuration += gameContext.getDeltaTime();
 
 	// Set the animation to the entity
-	AnimationComponent& animComp = gameContext.entityMan.getComponent<AnimationComponent>(dodgeComp.id);
+	AnimationComponent& animComp = gameContext.entityMan->getComponent<AnimationComponent>(dodgeComp.id);
 	AnimationManager::setAnimationToEntity(gameContext, Animation::DODGE, animComp);
 }
 
 
 void DodgeSystem::checkPlayerDodge(GameEngine& gameContext) const {
-	DodgeComponent& playerDodge = gameContext.entityMan.getComponent<DodgeComponent>(WorldElementsData::playerId);
-	InputComponent& playerInput = gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId);
+	DodgeComponent& playerDodge = gameContext.entityMan->getComponent<DodgeComponent>(WorldElementsData::playerId);
+	InputComponent& playerInput = gameContext.entityMan->getComponent<InputComponent>(WorldElementsData::playerId);
 
 	playerDodge.timeFromLastMove += gameContext.getDeltaTime();
 

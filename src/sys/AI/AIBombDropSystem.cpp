@@ -9,7 +9,7 @@ AIBombDropSystem::~AIBombDropSystem() {}
 
 
 void AIBombDropSystem::update(GameEngine& gameContext) const {
-	auto& AIBombComponents = gameContext.entityMan.getComponents<AIDropBombComponent>();
+	auto& AIBombComponents = gameContext.entityMan->getComponents<AIDropBombComponent>();
 
 	for (AIDropBombComponent& AIDropBombComp : AIBombComponents) {
 		AIDropBombComp.createBomb = false;

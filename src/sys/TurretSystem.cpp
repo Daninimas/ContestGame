@@ -12,7 +12,7 @@ TurretSystem::~TurretSystem() {}
 
 
 void TurretSystem::update(GameEngine& gameContext) const {
-	auto& turrets = gameContext.entityMan.getComponents<TurretComponent>();
+	auto& turrets = gameContext.entityMan->getComponents<TurretComponent>();
 
 	for (TurretComponent& turret : turrets) {
 		if (!turret.disabled) {
@@ -39,14 +39,14 @@ void TurretSystem::manageTurret(GameEngine& gameContext, TurretComponent& turret
 
 void TurretSystem::checkIfPlayerUsesTurret(GameEngine& gameContext, TurretComponent& turret) const {
 	int playerId = WorldElementsData::playerId;
-	InputComponent& playerInput = gameContext.entityMan.getComponent<InputComponent>(playerId);
+	InputComponent& playerInput = gameContext.entityMan->getComponent<InputComponent>(playerId);
 
 	if (!playerInput.usingTurret) {
-		SensorComponent& playerSensor = gameContext.entityMan.getComponent<SensorComponent>(playerId);
+		SensorComponent& playerSensor = gameContext.entityMan->getComponent<SensorComponent>(playerId);
 
 		if (Utils::isEntitySensoredBy(playerSensor, turret.id)) {
 			// Hacer que salga un cartelito para entrar
-			TextComponent& textComp = gameContext.entityMan.getComponent<TextComponent>(turret.textID);
+			TextComponent& textComp = gameContext.entityMan->getComponent<TextComponent>(turret.textID);
 			textComp.text = "Press ACTION to use turret";
 			showText(gameContext, textComp, turret);
 
@@ -65,11 +65,11 @@ void TurretSystem::checkIfPlayerUsesTurret(GameEngine& gameContext, TurretCompon
 
 
 void TurretSystem::enterInTurret(GameEngine& gameContext, TurretComponent& turret, int userID) const {
-	ColliderComponent& turretColl = gameContext.entityMan.getComponent<ColliderComponent>(turret.id);
-	ColliderComponent& userColl   = gameContext.entityMan.getComponent<ColliderComponent>(userID);
-	SituationComponent& userSit   = gameContext.entityMan.getComponent<SituationComponent>(userID);
-	SituationComponent& turretSit = gameContext.entityMan.getComponent<SituationComponent>(turret.id);
-	DistanceWeaponComponent& turretWeapon = gameContext.entityMan.getComponent<DistanceWeaponComponent>(turret.turretGunID);
+	ColliderComponent& turretColl = gameContext.entityMan->getComponent<ColliderComponent>(turret.id);
+	ColliderComponent& userColl   = gameContext.entityMan->getComponent<ColliderComponent>(userID);
+	SituationComponent& userSit   = gameContext.entityMan->getComponent<SituationComponent>(userID);
+	SituationComponent& turretSit = gameContext.entityMan->getComponent<SituationComponent>(turret.id);
+	DistanceWeaponComponent& turretWeapon = gameContext.entityMan->getComponent<DistanceWeaponComponent>(turret.turretGunID);
 
 	// Collider
 	turretColl.layerMasc = userColl.layerMasc;
@@ -96,14 +96,14 @@ void TurretSystem::enterInTurret(GameEngine& gameContext, TurretComponent& turre
 
 	std::cout << "entro en la torreta\n";
 	// Hacer que salga un cartelito para salir
-	TextComponent& textComp = gameContext.entityMan.getComponent<TextComponent>(turret.textID);
+	TextComponent& textComp = gameContext.entityMan->getComponent<TextComponent>(turret.textID);
 	textComp.text = "Press JUMP to exit turret";
 	showText(gameContext, textComp, turret);
 }
 
 
 void TurretSystem::manageTurretUsage(GameEngine& gameContext, TurretComponent& turret) const {
-	InputComponent& userInput = gameContext.entityMan.getComponent<InputComponent>(turret.userID);
+	InputComponent& userInput = gameContext.entityMan->getComponent<InputComponent>(turret.userID);
 
 	// Check if the entity has lost the turret (if the player loses a life, or the entity is dead, or the player has exit (jump))
 	if (userInput.jumping || !userInput.usingTurret) {
@@ -120,8 +120,8 @@ void TurretSystem::manageTurretUsage(GameEngine& gameContext, TurretComponent& t
 }
 
 void TurretSystem::exitTurret(GameEngine& gameContext, InputComponent& userInput, TurretComponent& turret) const {
-	ColliderComponent& turretColl = gameContext.entityMan.getComponent<ColliderComponent>(turret.id);
-	ColliderComponent& userColl = gameContext.entityMan.getComponent<ColliderComponent>(userInput.id);
+	ColliderComponent& turretColl = gameContext.entityMan->getComponent<ColliderComponent>(turret.id);
+	ColliderComponent& userColl = gameContext.entityMan->getComponent<ColliderComponent>(userInput.id);
 
 	// Input 
 	userInput.usingTurret = false;
@@ -137,8 +137,8 @@ void TurretSystem::exitTurret(GameEngine& gameContext, InputComponent& userInput
 
 
 void TurretSystem::manageShoot(GameEngine& gameContext, TurretComponent& turret) const {
-	DistanceWeaponComponent& turretWeapon = gameContext.entityMan.getComponent<DistanceWeaponComponent>(turret.turretGunID);
-	GunTurretComponent& gunTurretComp = gameContext.entityMan.getComponent<GunTurretComponent>(turret.turretGunID);
+	DistanceWeaponComponent& turretWeapon = gameContext.entityMan->getComponent<DistanceWeaponComponent>(turret.turretGunID);
+	GunTurretComponent& gunTurretComp = gameContext.entityMan->getComponent<GunTurretComponent>(turret.turretGunID);
 
 	if (turretWeapon.cooldown > turretWeapon.maxCooldown) {
 		// Set velocity to weapon
@@ -151,8 +151,8 @@ void TurretSystem::manageShoot(GameEngine& gameContext, TurretComponent& turret)
 
 
 void TurretSystem::manageGunRotation(GameEngine& gameContext, TurretComponent& turret, InputComponent& userInput) const {
-	GunTurretComponent& gunTurretComp = gameContext.entityMan.getComponent<GunTurretComponent>(turret.turretGunID);
-	SituationComponent& TurretGunSit = gameContext.entityMan.getComponent<SituationComponent>(turret.turretGunID);
+	GunTurretComponent& gunTurretComp = gameContext.entityMan->getComponent<GunTurretComponent>(turret.turretGunID);
+	SituationComponent& TurretGunSit = gameContext.entityMan->getComponent<SituationComponent>(turret.turretGunID);
 	float inverted = 1.f; // Es o 1 o -1, para que dependiendo el facing el subir o el bajar hagan lo contrario
 
 	if (TurretGunSit.facing == SituationComponent::Left) {
@@ -169,32 +169,32 @@ void TurretSystem::manageGunRotation(GameEngine& gameContext, TurretComponent& t
 	gunTurretComp.currentRotation = std::clamp(gunTurretComp.currentRotation, gunTurretComp.minRotation, gunTurretComp.maxRotation);
 	TurretGunSit.rotation = gunTurretComp.currentRotation;
 
-	gameContext.entityMan.addEntityToUpdate(turret.turretGunID); // Update canon in the sfml engine
+	gameContext.entityMan->addEntityToUpdate(turret.turretGunID); // Update canon in the sfml engine
 }
 
 
 
 void TurretSystem::showText(GameEngine& gameContext, TextComponent& textComp, TurretComponent& turret) const {
-	SituationComponent& textSit = gameContext.entityMan.getComponent<SituationComponent>(textComp.id);
-	SituationComponent& turretSit = gameContext.entityMan.getComponent<SituationComponent>(turret.id);
+	SituationComponent& textSit = gameContext.entityMan->getComponent<SituationComponent>(textComp.id);
+	SituationComponent& turretSit = gameContext.entityMan->getComponent<SituationComponent>(turret.id);
 
 	textComp.color.a = 255;
 
 
-	BoundingBox cameraView = Utils::getCameraViewBoundig(gameContext.entityMan.getComponent<CameraComponent>(WorldElementsData::activeCameraId));
-	BoundingBox cameraViewWorld = Utils::moveToWorldCoords(cameraView, gameContext.entityMan.getComponent<SituationComponent>(WorldElementsData::activeCameraId));
+	BoundingBox cameraView = Utils::getCameraViewBoundig(gameContext.entityMan->getComponent<CameraComponent>(WorldElementsData::activeCameraId));
+	BoundingBox cameraViewWorld = Utils::moveToWorldCoords(cameraView, gameContext.entityMan->getComponent<SituationComponent>(WorldElementsData::activeCameraId));
 	textSit.position = { turretSit.position.x - cameraViewWorld.xLeft, turretSit.position.y - cameraViewWorld.yUp };
 
 	// Update text in render
-	gameContext.entityMan.addEntityToUpdate(textComp.id);
+	gameContext.entityMan->addEntityToUpdate(textComp.id);
 }
 
 void TurretSystem::hideText(GameEngine& gameContext, TurretComponent& turretComp) const {
-	TextComponent& textComp = gameContext.entityMan.getComponent<TextComponent>(turretComp.textID);
+	TextComponent& textComp = gameContext.entityMan->getComponent<TextComponent>(turretComp.textID);
 
 	if (textComp.color.a != 0) {
 		textComp.color.a = 0;
 		// Update text in render
-		gameContext.entityMan.addEntityToUpdate(textComp.id);
+		gameContext.entityMan->addEntityToUpdate(textComp.id);
 	}
 }

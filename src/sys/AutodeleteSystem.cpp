@@ -9,7 +9,7 @@ AutodeleteSystem::~AutodeleteSystem() {}
 
 
 void AutodeleteSystem::update(GameEngine& gameContext) const {
-	auto& autodeleteComponents = gameContext.entityMan.getComponents<AutodeleteComponent>();
+	auto& autodeleteComponents = gameContext.entityMan->getComponents<AutodeleteComponent>();
 	std::vector<int> entitiesToDelete {};
 
 	entitiesToDelete.reserve(autodeleteComponents.size());

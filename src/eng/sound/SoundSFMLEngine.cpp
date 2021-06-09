@@ -35,6 +35,11 @@ void SoundSFMLEngine::playMusic(Sound& music) {
 	}
 }
 
+void SoundSFMLEngine::stopAllMusic() {
+	for (auto& music : musicMap) {
+		music.second.stop();
+	}
+}
 
 
 

@@ -9,7 +9,7 @@ AnimationSystem::~AnimationSystem() {}
 
 
 void AnimationSystem::update(GameEngine& gameContext) const {
-	auto& animations = gameContext.entityMan.getComponents<AnimationComponent>();
+	auto& animations = gameContext.entityMan->getComponents<AnimationComponent>();
 
 	for (AnimationComponent& animComp : animations) {
 		// Check if animation has changed
@@ -32,7 +32,7 @@ void AnimationSystem::update(GameEngine& gameContext) const {
 
 
 void AnimationSystem::changeFrame(GameEngine& gameContext, AnimationComponent& animComp) const {
-	RenderComponent& renderComp = gameContext.entityMan.getComponent<RenderComponent>(animComp.id);
+	RenderComponent& renderComp = gameContext.entityMan->getComponent<RenderComponent>(animComp.id);
 
 	++animComp.actualFrame;
 
@@ -49,6 +49,6 @@ void AnimationSystem::changeFrame(GameEngine& gameContext, AnimationComponent& a
 	renderComp.spriteRect.yUp = animComp.startSpriteRect.yUp;
 	renderComp.spriteRect.yDown = animComp.startSpriteRect.yDown;
 
-	gameContext.entityMan.addEntityToUpdate(animComp.id);
+	gameContext.entityMan->addEntityToUpdate(animComp.id);
 	animComp.currentTime = 0.f;
 }

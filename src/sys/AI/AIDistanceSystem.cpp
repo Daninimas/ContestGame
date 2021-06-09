@@ -13,13 +13,13 @@ AIDistanceSystem::~AIDistanceSystem() {}
 
 void AIDistanceSystem::update(GameEngine& gameContext) const {
 
-	auto& AIDistanceAtkComponents = gameContext.entityMan.getComponents<AIDistanceAtkComponent>();
+	auto& AIDistanceAtkComponents = gameContext.entityMan->getComponents<AIDistanceAtkComponent>();
 
 	for (AIDistanceAtkComponent& AIdistanceComp : AIDistanceAtkComponents)
 	{
 		AIdistanceComp.createAttack = false;
 
-		if (gameContext.entityMan.existsComponent<DistanceWeaponComponent>(AIdistanceComp.id) && gameContext.entityMan.existsComponent<SituationComponent>(AIdistanceComp.objectiveId)) {
+		if (gameContext.entityMan->existsComponent<DistanceWeaponComponent>(AIdistanceComp.id) && gameContext.entityMan->existsComponent<SituationComponent>(AIdistanceComp.objectiveId)) {
 			manageAttackGeneration(gameContext, AIdistanceComp);
 		}
 	}
@@ -27,9 +27,9 @@ void AIDistanceSystem::update(GameEngine& gameContext) const {
 
 
 void AIDistanceSystem::manageAttackGeneration(GameEngine& gameContext, AIDistanceAtkComponent& AImeleeComp) const {
-	SituationComponent&   attackerSit  = gameContext.entityMan.getComponent<SituationComponent>(AImeleeComp.id);
-	SituationComponent&   objectiveSit = gameContext.entityMan.getComponent<SituationComponent>(AImeleeComp.objectiveId);
-	DistanceWeaponComponent& distWeap  = gameContext.entityMan.getComponent<DistanceWeaponComponent>(AImeleeComp.id);
+	SituationComponent&   attackerSit  = gameContext.entityMan->getComponent<SituationComponent>(AImeleeComp.id);
+	SituationComponent&   objectiveSit = gameContext.entityMan->getComponent<SituationComponent>(AImeleeComp.objectiveId);
+	DistanceWeaponComponent& distWeap  = gameContext.entityMan->getComponent<DistanceWeaponComponent>(AImeleeComp.id);
 
 	
 
@@ -42,7 +42,7 @@ void AIDistanceSystem::manageAttackGeneration(GameEngine& gameContext, AIDistanc
 
 
 void AIDistanceSystem::setAttackDirection(GameEngine& gameContext, SituationComponent& attackerSit, SituationComponent& objectiveSit, DistanceWeaponComponent& distWeap) const {
-	Vector2 objectiveCenter = Utils::getCenterOfBounding(gameContext.entityMan.getComponent<ColliderComponent>(objectiveSit.id).boundingRoot.bounding);
+	Vector2 objectiveCenter = Utils::getCenterOfBounding(gameContext.entityMan->getComponent<ColliderComponent>(objectiveSit.id).boundingRoot.bounding);
 	Vector2 dir;
 
 	// Calculate direction vector

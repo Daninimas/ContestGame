@@ -27,7 +27,6 @@ public:
     GameEngine();
     ~GameEngine();
 
-    void reset();
     void init();
     void run() ;
     WindowFacade &getWindowFacadeRef();
@@ -50,9 +49,12 @@ public:
     void pushGameState(const GameState gs);
     void clearGameStateStack(); // cuidado con esto, no dejar vacio
 
-    EntityManager   entityMan;
+    std::unique_ptr<EntityManager>   entityMan;
+
+    bool resetFlag{ false };
 
 private:
+    void reset();
     void update();
     void updateWithTimers();
     void updateSound();

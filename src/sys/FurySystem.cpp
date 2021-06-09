@@ -10,7 +10,7 @@ FurySystem::FurySystem() {}
 FurySystem::~FurySystem() {}
 
 void FurySystem::update(GameEngine& gameContext) const {
-	auto& furyComponents = gameContext.entityMan.getComponents<FuryComponent>();
+	auto& furyComponents = gameContext.entityMan->getComponents<FuryComponent>();
 	std::vector<int> furiesToDestroy;
 	furiesToDestroy.reserve(furyComponents.size());
 
@@ -30,10 +30,10 @@ void FurySystem::update(GameEngine& gameContext) const {
 
 
 	for (int& id : furiesToDestroy) {
-		gameContext.entityMan.eraseComponent<FuryComponent>(id);
+		gameContext.entityMan->eraseComponent<FuryComponent>(id);
 
-		if (gameContext.entityMan.existsComponent<RenderComponent>(id)) {
-			gameContext.getWindowFacadeRef().setColorToEntity(id, gameContext.entityMan.getComponent<RenderComponent>(id).color);
+		if (gameContext.entityMan->existsComponent<RenderComponent>(id)) {
+			gameContext.getWindowFacadeRef().setColorToEntity(id, gameContext.entityMan->getComponent<RenderComponent>(id).color);
 		}
 	}
 }
@@ -43,17 +43,17 @@ void FurySystem::applyFuryToTimers(GameEngine& gameContext, FuryComponent& furyC
 	int furyId = furyComp.id;
 	float incrementTime = (gameContext.getDeltaTime() * furyComp.timersSpeedIncFactor);
 
-	if (gameContext.entityMan.existsComponent<MeleeWeaponComponent>(furyId)) {
-		gameContext.entityMan.getComponent<MeleeWeaponComponent>(furyId).cooldown += incrementTime;
+	if (gameContext.entityMan->existsComponent<MeleeWeaponComponent>(furyId)) {
+		gameContext.entityMan->getComponent<MeleeWeaponComponent>(furyId).cooldown += incrementTime;
 	}
 
-	if (gameContext.entityMan.existsComponent<DistanceWeaponComponent>(furyId)) {
-		gameContext.entityMan.getComponent<DistanceWeaponComponent>(furyId).cooldown += incrementTime;
+	if (gameContext.entityMan->existsComponent<DistanceWeaponComponent>(furyId)) {
+		gameContext.entityMan->getComponent<DistanceWeaponComponent>(furyId).cooldown += incrementTime;
 	}
 
 
-	if (gameContext.entityMan.existsComponent<VelocityComponent>(furyId)) {
-		gameContext.entityMan.getComponent<VelocityComponent>(furyId).velocity.x *= furyComp.speedIncFactor;
+	if (gameContext.entityMan->existsComponent<VelocityComponent>(furyId)) {
+		gameContext.entityMan->getComponent<VelocityComponent>(furyId).velocity.x *= furyComp.speedIncFactor;
 	}
 }
 

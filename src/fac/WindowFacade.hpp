@@ -25,6 +25,7 @@ public:
     virtual void createText(GameEngine& gameContext, int id) = 0;
     virtual void createCamera(GameEngine &gameContext, int id) = 0;
     virtual void eraseEntity(int id) = 0;
+    virtual void eraseAllEntities() = 0;
     virtual size_t countRenderNodes() const = 0;
     virtual bool existsNode(int id) const = 0;
     virtual bool existsHUDNode(int id) const = 0;

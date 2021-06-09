@@ -17,7 +17,7 @@ InputJoystickSystem::~InputJoystickSystem() {}
 
 void InputJoystickSystem::update(GameEngine& gameContext) const {
 
-    if (sf::Joystick::isConnected(0) && !gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId).movedWithKeyboard) {
+    if (sf::Joystick::isConnected(0) && !gameContext.entityMan->getComponent<InputComponent>(WorldElementsData::playerId).movedWithKeyboard) {
         if (gameContext.getGameState() == GameState::PLAYING) {
             inputPlaying(gameContext);
         }
@@ -31,9 +31,9 @@ void InputJoystickSystem::update(GameEngine& gameContext) const {
 
 
 void InputJoystickSystem::inputPlaying(GameEngine& gameContext) const {
-    InputComponent& playerInput = gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId);
-    VelocityComponent& playerVel = gameContext.entityMan.getComponent<VelocityComponent>(WorldElementsData::playerId);
-    AnimationComponent& animComp = gameContext.entityMan.getComponent<AnimationComponent>(WorldElementsData::playerId);
+    InputComponent& playerInput = gameContext.entityMan->getComponent<InputComponent>(WorldElementsData::playerId);
+    VelocityComponent& playerVel = gameContext.entityMan->getComponent<VelocityComponent>(WorldElementsData::playerId);
+    AnimationComponent& animComp = gameContext.entityMan->getComponent<AnimationComponent>(WorldElementsData::playerId);
 
     //check state of joystick
     Vector2 joystickPos = Vector2(sf::Joystick::getAxisPosition(0, sf::Joystick::X), sf::Joystick::getAxisPosition(0, sf::Joystick::Y));  // in range [-100 .. 100]
@@ -75,7 +75,7 @@ void InputJoystickSystem::inputPlaying(GameEngine& gameContext) const {
 
     if (sf::Joystick::isButtonPressed(0, playerInput.keyboardControlsMap[Controls::JOYSTICK_JUMP])) //"A" button on the XBox 360 controller
     {
-        auto& jumpComp = gameContext.entityMan.getComponent<JumpComponent>(WorldElementsData::playerId);
+        auto& jumpComp = gameContext.entityMan->getComponent<JumpComponent>(WorldElementsData::playerId);
         if (jumpComp.cooldown > jumpComp.maxCooldown) { // if has cooldown on floor
             playerVel.velocity.y = jumpComp.impulse;
         }
@@ -88,7 +88,7 @@ void InputJoystickSystem::inputPlaying(GameEngine& gameContext) const {
 
 
 void InputJoystickSystem::inputMenus(GameEngine& gameContext) const {
-    InputComponent& playerInput = gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId);
+    InputComponent& playerInput = gameContext.entityMan->getComponent<InputComponent>(WorldElementsData::playerId);
 
     if (playerInput.cooldown > playerInput.maxCooldown) {
         //check state of joystick
@@ -131,8 +131,8 @@ void InputJoystickSystem::inputMenus(GameEngine& gameContext) const {
 }
 
 void InputJoystickSystem::setAnimationToPlayer(GameEngine& gameContext) const {
-    InputComponent& playerInput = gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId);
-    AnimationComponent& animComp = gameContext.entityMan.getComponent<AnimationComponent>(WorldElementsData::playerId);
+    InputComponent& playerInput = gameContext.entityMan->getComponent<InputComponent>(WorldElementsData::playerId);
+    AnimationComponent& animComp = gameContext.entityMan->getComponent<AnimationComponent>(WorldElementsData::playerId);
 
     if (playerInput.actualMovement == DodgeComponent::Left || playerInput.actualMovement == DodgeComponent::Right) {
         AnimationManager::setAnimationToEntity(gameContext, Animation::RUNNING, animComp);

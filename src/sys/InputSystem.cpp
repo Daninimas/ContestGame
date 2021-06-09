@@ -20,8 +20,8 @@ void InputSystem::update(GameEngine& gameContext) const {
 
 
 void InputSystem::inputPlaying(GameEngine& gameContext) const {
-    InputComponent& playerInput  = gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId);
-    VelocityComponent& playerVel = gameContext.entityMan.getComponent<VelocityComponent>(WorldElementsData::playerId);
+    InputComponent& playerInput  = gameContext.entityMan->getComponent<InputComponent>(WorldElementsData::playerId);
+    VelocityComponent& playerVel = gameContext.entityMan->getComponent<VelocityComponent>(WorldElementsData::playerId);
 
     // Reset actions
     playerInput.resetActions();
@@ -78,7 +78,7 @@ void InputSystem::inputPlaying(GameEngine& gameContext) const {
 
     if (sf::Keyboard::isKeyPressed( static_cast<sf::Keyboard::Key>(playerInput.keyboardControlsMap[Controls::JUMP]) ))
     {
-        auto& jumpComp = gameContext.entityMan.getComponent<JumpComponent>(WorldElementsData::playerId);
+        auto& jumpComp = gameContext.entityMan->getComponent<JumpComponent>(WorldElementsData::playerId);
         if (jumpComp.cooldown > jumpComp.maxCooldown) { // if has cooldown on floor
             playerVel.velocity.y = jumpComp.impulse;
         }
@@ -93,7 +93,7 @@ void InputSystem::inputPlaying(GameEngine& gameContext) const {
 
 
 void InputSystem::inputMenus(GameEngine& gameContext) const {
-    InputComponent& playerInput = gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId);
+    InputComponent& playerInput = gameContext.entityMan->getComponent<InputComponent>(WorldElementsData::playerId);
 
     playerInput.cooldown += gameContext.getDeltaTime();
 

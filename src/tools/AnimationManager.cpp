@@ -5,7 +5,7 @@
 
 void AnimationManager::setAnimationToEntity(GameEngine& gameContext, const Animation animation, AnimationComponent& animationComp) {
 	if (animationComp.animation != animation) {
-		GameObjectType entityGO = gameContext.entityMan.getEntity(animationComp.id).getGameObjectType();
+		GameObjectType entityGO = gameContext.entityMan->getEntity(animationComp.id).getGameObjectType();
 
 		switch (animation)
 		{

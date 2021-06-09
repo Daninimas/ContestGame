@@ -10,7 +10,7 @@ AIPounceSystem::~AIPounceSystem() {}
 
 
 void AIPounceSystem::update(GameEngine& gameContext) const {
-	auto& pounceComponents = gameContext.entityMan.getComponents<AIPounceComponent>();
+	auto& pounceComponents = gameContext.entityMan->getComponents<AIPounceComponent>();
 
 	for (AIPounceComponent& pounceComp : pounceComponents)
 	{
@@ -19,7 +19,7 @@ void AIPounceSystem::update(GameEngine& gameContext) const {
 		}
 		else {
 
-			VelocityComponent& velComp = gameContext.entityMan.getComponent<VelocityComponent>(pounceComp.id);
+			VelocityComponent& velComp = gameContext.entityMan->getComponent<VelocityComponent>(pounceComp.id);
 
 			if (velComp.velocity.y == 0.f) { // if on ground
 				chaseObjective(gameContext, pounceComp);
@@ -36,10 +36,10 @@ void AIPounceSystem::update(GameEngine& gameContext) const {
 
 
 void AIPounceSystem::chaseObjective(GameEngine& gameContext, AIPounceComponent& pounceComp) const {
-	SituationComponent& objectiveSit = gameContext.entityMan.getComponent<SituationComponent>(pounceComp.objectiveId);
-	SituationComponent& chaserSit    = gameContext.entityMan.getComponent<SituationComponent>(pounceComp.id);
-	VelocityComponent& chaserVel     = gameContext.entityMan.getComponent<VelocityComponent>(pounceComp.id);
-	JumpComponent& pouncerJump       = gameContext.entityMan.getComponent<JumpComponent>(pounceComp.id);
+	SituationComponent& objectiveSit = gameContext.entityMan->getComponent<SituationComponent>(pounceComp.objectiveId);
+	SituationComponent& chaserSit    = gameContext.entityMan->getComponent<SituationComponent>(pounceComp.id);
+	VelocityComponent& chaserVel     = gameContext.entityMan->getComponent<VelocityComponent>(pounceComp.id);
+	JumpComponent& pouncerJump       = gameContext.entityMan->getComponent<JumpComponent>(pounceComp.id);
 
 
 	// Update cooldown
@@ -55,10 +55,10 @@ void AIPounceSystem::chaseObjective(GameEngine& gameContext, AIPounceComponent& 
 
 	if (!Utils::objectiveInsideRange(chaserSit, objectiveSit, pounceComp.range) || pounceComp.cooldown <= pounceComp.maxCooldown) { // if objective not in pounce range, chase
 		// For jumping obstacles
-		SensorComponent& chaserSens = gameContext.entityMan.getComponent<SensorComponent>(pounceComp.id);
+		SensorComponent& chaserSens = gameContext.entityMan->getComponent<SensorComponent>(pounceComp.id);
 		// Search if colliding with Wall and jump to advance
 		for (int sensoredEnt : chaserSens.entitiesSensoring) {
-			if (gameContext.entityMan.getEntity(sensoredEnt).getType() == EntityType::WALL) {
+			if (gameContext.entityMan->getEntity(sensoredEnt).getType() == EntityType::WALL) {
 				// Jump
 				if (pouncerJump.cooldown > pouncerJump.maxCooldown) { // if has cooldown on floor
 					chaserVel.velocity.y = pouncerJump.impulse;
@@ -79,7 +79,7 @@ void AIPounceSystem::chaseObjective(GameEngine& gameContext, AIPounceComponent& 
 
 
 void AIPounceSystem::checkStickedToObjective(GameEngine& gameContext, AIPounceComponent& pounceComp) const {
-	ColliderComponent& colliderComp = gameContext.entityMan.getComponent<ColliderComponent>(pounceComp.id);
+	ColliderComponent& colliderComp = gameContext.entityMan->getComponent<ColliderComponent>(pounceComp.id);
 
 	if (Utils::checkCollidingWithEntity(colliderComp.boundingRoot, pounceComp.objectiveId)) {
 		pounceComp.sticked = true;
@@ -89,18 +89,18 @@ void AIPounceSystem::checkStickedToObjective(GameEngine& gameContext, AIPounceCo
 
 
 void AIPounceSystem::stickToObjective(GameEngine& gameContext, AIPounceComponent& pounceComp) const {
-	SituationComponent& objectiveSit = gameContext.entityMan.getComponent<SituationComponent>(pounceComp.objectiveId);
-	SituationComponent& pouncerSit   = gameContext.entityMan.getComponent<SituationComponent>(pounceComp.id);
+	SituationComponent& objectiveSit = gameContext.entityMan->getComponent<SituationComponent>(pounceComp.objectiveId);
+	SituationComponent& pouncerSit   = gameContext.entityMan->getComponent<SituationComponent>(pounceComp.id);
 
 	if (objectiveSit.facing == SituationComponent::Left) {
-		ColliderComponent& pouncerColl = gameContext.entityMan.getComponent<ColliderComponent>(pounceComp.id);
+		ColliderComponent& pouncerColl = gameContext.entityMan->getComponent<ColliderComponent>(pounceComp.id);
 
 		pouncerSit.facing = SituationComponent::Right;
 		pouncerSit.position = objectiveSit.position;
 		pouncerSit.position.x -= pouncerColl.boundingRoot.bounding.xRight - pouncerColl.boundingRoot.bounding.xLeft;
 	}
 	else {
-		ColliderComponent& objectiveColl = gameContext.entityMan.getComponent<ColliderComponent>(pounceComp.objectiveId);
+		ColliderComponent& objectiveColl = gameContext.entityMan->getComponent<ColliderComponent>(pounceComp.objectiveId);
 
 		pouncerSit.facing = SituationComponent::Left;
 		pouncerSit.position = objectiveSit.position;

@@ -96,7 +96,7 @@ void MapLoader::setPhaseData(GameEngine& gameContext, tson::Object& obj, tson::L
 
     //newPhase.phaseMusic.path = ;
     //newPhase.phaseMusic.repeat = true;
-    gameContext.entityMan.getComponent<WorldComponent>(WorldElementsData::worldId).currentPhase = std::move(newPhase);
+    gameContext.entityMan->getComponent<WorldComponent>(WorldElementsData::worldId).currentPhase = std::move(newPhase);
 }
 
 void MapLoader::createObject(GameEngine& gameContext, std::string layerName, tson::Object& obj) {
@@ -113,50 +113,50 @@ void MapLoader::createObject(GameEngine& gameContext, std::string layerName, tso
 
         // Check the object to create
         if (layerName == "WALL") {
-            gameContext.entityMan.createWall(gameContext, Vector2(position.x, position.y), Vector2(size.x, size.y), rotation, goType);
+            gameContext.entityMan->createWall(gameContext, Vector2(position.x, position.y), Vector2(size.x, size.y), rotation, goType);
         }
         else if (layerName == "ENEMY") {
-            int enemyId = gameContext.entityMan.createEnemy(gameContext, Vector2(position.x, position.y), rotation, goType);
+            int enemyId = gameContext.entityMan->createEnemy(gameContext, Vector2(position.x, position.y), rotation, goType);
 
             setEnemyObjective(gameContext, enemyId);
         }
         else if (layerName == "PLAYER") {
-            gameContext.entityMan.createPlayer(gameContext, Vector2(position.x, position.y), rotation, goType);
+            gameContext.entityMan->createPlayer(gameContext, Vector2(position.x, position.y), rotation, goType);
         }
         else if (layerName == "SPAWNER") {
-            int spawnId = gameContext.entityMan.createSpawner(gameContext, Vector2(position.x, position.y), rotation, goType);
+            int spawnId = gameContext.entityMan->createSpawner(gameContext, Vector2(position.x, position.y), rotation, goType);
 
             setSpawnerData(gameContext, spawnId, obj);
         }
         else if (layerName == "POWERUP") {
-            gameContext.entityMan.createPowerUp(gameContext, Vector2(position.x, position.y), rotation, goType);
+            gameContext.entityMan->createPowerUp(gameContext, Vector2(position.x, position.y), rotation, goType);
         }
         else if (layerName == "TRIGGER") {
-            int triggerId = gameContext.entityMan.createTrigger(gameContext, Vector2(position.x, position.y), rotation, goType);
+            int triggerId = gameContext.entityMan->createTrigger(gameContext, Vector2(position.x, position.y), rotation, goType);
 
             setTriggerData(gameContext, triggerId, obj);
         }
         else if (layerName == "WEAPON") {
-            gameContext.entityMan.createWeapon(gameContext, Vector2(position.x, position.y), rotation, goType);
+            gameContext.entityMan->createWeapon(gameContext, Vector2(position.x, position.y), rotation, goType);
         }
         else if (layerName == "DAMAGE_PLATFORM") {
             uint16_t damage = obj.get<int>("Damage");
-            gameContext.entityMan.createDamagePlatform(gameContext, Vector2(position.x, position.y), Vector2(size.x, size.y), damage, goType);
+            gameContext.entityMan->createDamagePlatform(gameContext, Vector2(position.x, position.y), Vector2(size.x, size.y), damage, goType);
         }
         else if (layerName == "TURRET") {
             uint8_t facing = getFacing(obj.get<std::string>("Facing"));
-            gameContext.entityMan.createTurret(gameContext, Vector2(position.x, position.y), facing);
+            gameContext.entityMan->createTurret(gameContext, Vector2(position.x, position.y), facing);
         }
         else if (layerName == "DRONE") {
-            gameContext.entityMan.createDrone(gameContext, Vector2(position.x, position.y), rotation, goType);
+            gameContext.entityMan->createDrone(gameContext, Vector2(position.x, position.y), rotation, goType);
         }
         else if (layerName == "CHILD") {
-            gameContext.entityMan.createChild(gameContext, Vector2(position.x, position.y), rotation, goType);
+            gameContext.entityMan->createChild(gameContext, Vector2(position.x, position.y), rotation, goType);
         }
     }
     else {
         // Error on the type of the object
-        //gameContext.entityMan.createError(gameContext, Vector2(position.x, position.y), rotation, goType);
+        //gameContext.entityMan->createError(gameContext, Vector2(position.x, position.y), rotation, goType);
     }
 }
 
@@ -205,29 +205,29 @@ TriggerFunction MapLoader::getTriggerFunction(const std::string func) {
 
 
 void MapLoader::setEnemyObjective(GameEngine& gameContext, int enemyId) {
-    if (gameContext.entityMan.existsComponent<AIChaseComponent>(enemyId))
-        gameContext.entityMan.getComponent<AIChaseComponent>(enemyId).objectiveId = WorldElementsData::playerId;
+    if (gameContext.entityMan->existsComponent<AIChaseComponent>(enemyId))
+        gameContext.entityMan->getComponent<AIChaseComponent>(enemyId).objectiveId = WorldElementsData::playerId;
 
-    if (gameContext.entityMan.existsComponent<AIFlyingChaseComponent>(enemyId))
-        gameContext.entityMan.getComponent<AIFlyingChaseComponent>(enemyId).objectiveId = WorldElementsData::playerId;
+    if (gameContext.entityMan->existsComponent<AIFlyingChaseComponent>(enemyId))
+        gameContext.entityMan->getComponent<AIFlyingChaseComponent>(enemyId).objectiveId = WorldElementsData::playerId;
 
-    if (gameContext.entityMan.existsComponent<AIMeleeAtkComponent>(enemyId))
-        gameContext.entityMan.getComponent<AIMeleeAtkComponent>(enemyId).objectiveId = WorldElementsData::playerId;
+    if (gameContext.entityMan->existsComponent<AIMeleeAtkComponent>(enemyId))
+        gameContext.entityMan->getComponent<AIMeleeAtkComponent>(enemyId).objectiveId = WorldElementsData::playerId;
 
-    if (gameContext.entityMan.existsComponent<AIDistanceAtkComponent>(enemyId))
-        gameContext.entityMan.getComponent<AIDistanceAtkComponent>(enemyId).objectiveId = WorldElementsData::playerId;
+    if (gameContext.entityMan->existsComponent<AIDistanceAtkComponent>(enemyId))
+        gameContext.entityMan->getComponent<AIDistanceAtkComponent>(enemyId).objectiveId = WorldElementsData::playerId;
 
-    if (gameContext.entityMan.existsComponent<AITransformationComponent>(enemyId))
-        gameContext.entityMan.getComponent<AITransformationComponent>(enemyId).objectiveId = WorldElementsData::playerId;
+    if (gameContext.entityMan->existsComponent<AITransformationComponent>(enemyId))
+        gameContext.entityMan->getComponent<AITransformationComponent>(enemyId).objectiveId = WorldElementsData::playerId;
 
-    if (gameContext.entityMan.existsComponent<AIPounceComponent>(enemyId))
-        gameContext.entityMan.getComponent<AIPounceComponent>(enemyId).objectiveId = WorldElementsData::playerId;
+    if (gameContext.entityMan->existsComponent<AIPounceComponent>(enemyId))
+        gameContext.entityMan->getComponent<AIPounceComponent>(enemyId).objectiveId = WorldElementsData::playerId;
 }
 
 
 void MapLoader::setTriggerData(GameEngine& gameContext, int triggerId, tson::Object& obj) {
-    ColliderComponent& collComp   = gameContext.entityMan.getComponent<ColliderComponent>(triggerId);
-    TriggerComponent& triggerComp = gameContext.entityMan.getComponent<TriggerComponent>(triggerId);
+    ColliderComponent& collComp   = gameContext.entityMan->getComponent<ColliderComponent>(triggerId);
+    TriggerComponent& triggerComp = gameContext.entityMan->getComponent<TriggerComponent>(triggerId);
     TriggerFunction triggerFunc = getTriggerFunction(obj.get<std::string>("Function"));
 
 
@@ -261,7 +261,7 @@ void MapLoader::setTriggerData(GameEngine& gameContext, int triggerId, tson::Obj
 
 
 void MapLoader::setSpawnerData(GameEngine& gameContext, int spawnerId, tson::Object& obj) {
-    SpawnerComponent& spawnerComp = gameContext.entityMan.getComponent<SpawnerComponent>(spawnerId);
+    SpawnerComponent& spawnerComp = gameContext.entityMan->getComponent<SpawnerComponent>(spawnerId);
 
     spawnerComp.objectiveId = WorldElementsData::playerId;
     spawnerComp.maxCooldown = obj.get<float>("maxCooldown");

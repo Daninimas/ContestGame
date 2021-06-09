@@ -8,7 +8,7 @@ BombSystem::BombSystem() {}
 BombSystem::~BombSystem() {}
 
 void BombSystem::update(GameEngine& gameContext) const {
-	auto& BombComponents = gameContext.entityMan.getComponents<BombComponent>();
+	auto& BombComponents = gameContext.entityMan->getComponents<BombComponent>();
 	std::vector<int> bombsToExplode;
 	bombsToExplode.reserve(BombComponents.size());
 
@@ -38,26 +38,26 @@ void BombSystem::updateBombTimers(GameEngine& gameContext, BombComponent& bombCo
 }
 
 void BombSystem::checkBombCollision(GameEngine& gameContext, BombComponent& bombComp) const {
-	ColliderComponent& collider = gameContext.entityMan.getComponent<ColliderComponent>(bombComp.id);
+	ColliderComponent& collider = gameContext.entityMan->getComponent<ColliderComponent>(bombComp.id);
 
 	bombComp.activated = collider.collide;
 }
 
 void BombSystem::explodeBomb(GameEngine& gameContext, int bombId) const {
-	SituationComponent& bombSit   = gameContext.entityMan.getComponent<SituationComponent>(bombId);
-	BombComponent& bombComp       = gameContext.entityMan.getComponent<BombComponent>(bombId);
-	ColliderComponent& bombColl   = gameContext.entityMan.getComponent<ColliderComponent>(bombId);
+	SituationComponent& bombSit   = gameContext.entityMan->getComponent<SituationComponent>(bombId);
+	BombComponent& bombComp       = gameContext.entityMan->getComponent<BombComponent>(bombId);
+	ColliderComponent& bombColl   = gameContext.entityMan->getComponent<ColliderComponent>(bombId);
 	GameObjectType explosionGO    = GameObjectType::EXPLOSION;
 
-	if (gameContext.entityMan.getEntity(bombId).getGameObjectType() == GameObjectType::PLAYER_BOMB) {
+	if (gameContext.entityMan->getEntity(bombId).getGameObjectType() == GameObjectType::PLAYER_BOMB) {
 		GameObjectType explosionGO = GameObjectType::PLAYER_EXPLOSION;
 	}
 	// Creates the explosion attack entity
-	int explosionId = gameContext.entityMan.createAttack(gameContext, bombSit.position, bombSit.rotation, explosionGO);
+	int explosionId = gameContext.entityMan->createAttack(gameContext, bombSit.position, bombSit.rotation, explosionGO);
 
-	ExplosionAttackComponent& explosionComp = gameContext.entityMan.getComponent<ExplosionAttackComponent>(explosionId);
-	ColliderComponent& explosionCollider    = gameContext.entityMan.getComponent<ColliderComponent>(explosionId);
-	AttackComponent& explosionAttack        = gameContext.entityMan.getComponent<AttackComponent>(explosionId);
+	ExplosionAttackComponent& explosionComp = gameContext.entityMan->getComponent<ExplosionAttackComponent>(explosionId);
+	ColliderComponent& explosionCollider    = gameContext.entityMan->getComponent<ColliderComponent>(explosionId);
+	AttackComponent& explosionAttack        = gameContext.entityMan->getComponent<AttackComponent>(explosionId);
 
 	// ExplosionAttackComponent
 	explosionComp.expansionVelocity = bombComp.explosionExpansion;

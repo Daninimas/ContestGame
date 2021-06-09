@@ -14,7 +14,7 @@ void HealthSystem::update(GameEngine& gameContext) const {
 }
 
 void HealthSystem::checkPlayerInvincibility(GameEngine& gameContext) const {
-    HealthComponent& playerHealth = gameContext.entityMan.getComponent<HealthComponent>(WorldElementsData::playerId);
+    HealthComponent& playerHealth = gameContext.entityMan->getComponent<HealthComponent>(WorldElementsData::playerId);
 
     if (playerHealth.recoverTimeCounter < playerHealth.recoverTime) {
         playerHealth.recoverTimeCounter += gameContext.getDeltaTime();
@@ -24,7 +24,7 @@ void HealthSystem::checkPlayerInvincibility(GameEngine& gameContext) const {
 
 
         //Do invincibility animation
-        RenderComponent& playerRender = gameContext.entityMan.getComponent<RenderComponent>(WorldElementsData::playerId);
+        RenderComponent& playerRender = gameContext.entityMan->getComponent<RenderComponent>(WorldElementsData::playerId);
 
         playerHealth.invincibleAnimCounter += gameContext.getDeltaTime();
         Color playerAnimColor = playerRender.color;
@@ -42,7 +42,7 @@ void HealthSystem::checkPlayerInvincibility(GameEngine& gameContext) const {
 
 
 void HealthSystem::manageHeatlths(GameEngine& gameContext) const {
-    auto& healths = gameContext.entityMan.getComponents<HealthComponent>();
+    auto& healths = gameContext.entityMan->getComponents<HealthComponent>();
 
     for (HealthComponent& health : healths) {
         // Subtract damage
@@ -62,7 +62,7 @@ void HealthSystem::manageHeatlths(GameEngine& gameContext) const {
             health.damageReceived = 0;
         }
 
-        if (gameContext.entityMan.existsComponent<RenderComponent>(health.id)) { // Solo se le pone el color a las entidades con render
+        if (gameContext.entityMan->existsComponent<RenderComponent>(health.id)) { // Solo se le pone el color a las entidades con render
             // Poner color rojo en las entidades que lo necesitan
             if (health.hitColorCounter > 0.f) {
                 gameContext.getWindowFacadeRef().setColorToEntity(health.id, { 255, 20, 20, 255 });
@@ -71,7 +71,7 @@ void HealthSystem::manageHeatlths(GameEngine& gameContext) const {
             }
             // Quitar el color rojo donde no se necesita
             else if (health.isRedColored) {
-                gameContext.getWindowFacadeRef().setColorToEntity(health.id, gameContext.entityMan.getComponent<RenderComponent>(health.id).color);
+                gameContext.getWindowFacadeRef().setColorToEntity(health.id, gameContext.entityMan->getComponent<RenderComponent>(health.id).color);
                 health.isRedColored = false;
             }
         }

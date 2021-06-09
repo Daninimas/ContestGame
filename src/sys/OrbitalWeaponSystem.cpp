@@ -19,7 +19,7 @@ void OrbitalWeaponSystem::update(GameEngine& gameContext) const {
 
 void OrbitalWeaponSystem::addCooldownToOrbitalWeapons(GameEngine& gameContext) const {
 	float deltaTime = gameContext.getDeltaTime();
-	auto& orbitalWeapons = gameContext.entityMan.getComponents<OrbitalWeaponComponent>();
+	auto& orbitalWeapons = gameContext.entityMan->getComponents<OrbitalWeaponComponent>();
 
 	for (auto& orbitalWeap : orbitalWeapons) {
 		orbitalWeap.cooldown += deltaTime;
@@ -28,28 +28,28 @@ void OrbitalWeaponSystem::addCooldownToOrbitalWeapons(GameEngine& gameContext) c
 
 
 void OrbitalWeaponSystem::checkEnemiesAttacking(GameEngine& gameContext) const {
-	auto& AIOrbitalStrikers = gameContext.entityMan.getComponents<AIOrbitalAtkComponent>();
+	auto& AIOrbitalStrikers = gameContext.entityMan->getComponents<AIOrbitalAtkComponent>();
 
 	for (AIOrbitalAtkComponent& AIOrbitalStriker : AIOrbitalStrikers) {
-		OrbitalWeaponComponent& orbitalWeapon = gameContext.entityMan.getComponent<OrbitalWeaponComponent>(AIOrbitalStriker.id);
+		OrbitalWeaponComponent& orbitalWeapon = gameContext.entityMan->getComponent<OrbitalWeaponComponent>(AIOrbitalStriker.id);
 
-		if (orbitalWeapon.cooldown > orbitalWeapon.maxCooldown && gameContext.entityMan.existsComponent<SituationComponent>(AIOrbitalStriker.objectiveId)) {
-			generateOrbitalMarker(gameContext, orbitalWeapon, gameContext.entityMan.getComponent<SituationComponent>(AIOrbitalStriker.id));
+		if (orbitalWeapon.cooldown > orbitalWeapon.maxCooldown && gameContext.entityMan->existsComponent<SituationComponent>(AIOrbitalStriker.objectiveId)) {
+			generateOrbitalMarker(gameContext, orbitalWeapon, gameContext.entityMan->getComponent<SituationComponent>(AIOrbitalStriker.id));
 		}
 	}
 }
 
 void OrbitalWeaponSystem::generateOrbitalMarker(GameEngine& gameContext, OrbitalWeaponComponent& orbitalWeapon, SituationComponent& objectiveSituation) const {
 	// Set the position of the orbital attack
-	Vector2 objectiveCenter = Utils::getCenterOfBounding(gameContext.entityMan.getComponent<ColliderComponent>(objectiveSituation.id).boundingRoot.bounding);
+	Vector2 objectiveCenter = Utils::getCenterOfBounding(gameContext.entityMan->getComponent<ColliderComponent>(objectiveSituation.id).boundingRoot.bounding);
 	Vector2 markerCenter = Utils::getCenterOfBounding(orbitalWeapon.markerBounding);
 	orbitalWeapon.attackPosition.x = objectiveSituation.position.x + objectiveCenter.x;
 	orbitalWeapon.attackPosition.y = 0.f;
 
-	int markerID = gameContext.entityMan.createOrbitalMarker(gameContext, { orbitalWeapon.attackPosition.x-markerCenter.x, orbitalWeapon.attackPosition.y }, GameObjectType::ORBITAL_MARKER);
+	int markerID = gameContext.entityMan->createOrbitalMarker(gameContext, { orbitalWeapon.attackPosition.x-markerCenter.x, orbitalWeapon.attackPosition.y }, GameObjectType::ORBITAL_MARKER);
 
-	AutodeleteComponent& autodeleteComp = gameContext.entityMan.getComponent<AutodeleteComponent>(markerID);
-	RenderComponent& renderComp = gameContext.entityMan.getComponent<RenderComponent>(markerID);
+	AutodeleteComponent& autodeleteComp = gameContext.entityMan->getComponent<AutodeleteComponent>(markerID);
+	RenderComponent& renderComp = gameContext.entityMan->getComponent<RenderComponent>(markerID);
 
 	calculateBoundingToFloor(gameContext, objectiveSituation, orbitalWeapon);
 
@@ -65,7 +65,7 @@ void OrbitalWeaponSystem::generateOrbitalMarker(GameEngine& gameContext, Orbital
 	orbitalWeapon.generateAttackTimeCounter = 0.f;
 
 	// Update render
-	gameContext.entityMan.addEntityToUpdate(markerID);
+	gameContext.entityMan->addEntityToUpdate(markerID);
 
 	// Play orbital marker sound
 	gameContext.getSoundFacadeRef().loadSound(orbitalWeapon.markerSound.soundPath);
@@ -76,7 +76,7 @@ void OrbitalWeaponSystem::generateOrbitalMarker(GameEngine& gameContext, Orbital
 
 
 void OrbitalWeaponSystem::manageOrbitalStrikes(GameEngine& gameContext) const {
-	auto& orbitalWeapons = gameContext.entityMan.getComponents<OrbitalWeaponComponent>();
+	auto& orbitalWeapons = gameContext.entityMan->getComponents<OrbitalWeaponComponent>();
 	float deltaTime = gameContext.getDeltaTime();
 
 	for (OrbitalWeaponComponent& orbitalWeapon : orbitalWeapons) {
@@ -100,11 +100,11 @@ void OrbitalWeaponSystem::generateOrbitalAttack(GameEngine& gameContext, Orbital
 
 	Vector2 attackCenter = Utils::getCenterOfBounding(orbitalWeapon.attackBounding);
 
-	int attackId = gameContext.entityMan.createAttack(gameContext, { orbitalWeapon.attackPosition.x-attackCenter.x, orbitalWeapon.attackPosition.y }, 0.f, attackGOtype);
+	int attackId = gameContext.entityMan->createAttack(gameContext, { orbitalWeapon.attackPosition.x-attackCenter.x, orbitalWeapon.attackPosition.y }, 0.f, attackGOtype);
 
-	ColliderComponent& colliderComp = gameContext.entityMan.getComponent<ColliderComponent>(attackId);
-	AttackComponent& attackComp = gameContext.entityMan.getComponent<AttackComponent>(attackId);
-	SituationComponent& attackSit = gameContext.entityMan.getComponent<SituationComponent>(attackId);
+	ColliderComponent& colliderComp = gameContext.entityMan->getComponent<ColliderComponent>(attackId);
+	AttackComponent& attackComp = gameContext.entityMan->getComponent<AttackComponent>(attackId);
+	SituationComponent& attackSit = gameContext.entityMan->getComponent<SituationComponent>(attackId);
 
 	colliderComp.boundingRoot.bounding = orbitalWeapon.attackBounding;
 	attackComp.damage = orbitalWeapon.damage;
@@ -129,7 +129,7 @@ void OrbitalWeaponSystem::calculateBoundingToFloor(GameEngine& gameContext, Situ
 
 	if (closestWall != nullptr) {
 		// Check if the situation of the objective is inside of the size x of the wall
-		ColliderComponent& wallCollider = gameContext.entityMan.getComponent<ColliderComponent>(closestWall->id);
+		ColliderComponent& wallCollider = gameContext.entityMan->getComponent<ColliderComponent>(closestWall->id);
 
 		BoundingBox wallWorldBounding = Utils::moveToWorldCoords(wallCollider.boundingRoot.bounding, *closestWall);
 

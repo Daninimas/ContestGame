@@ -22,9 +22,9 @@ void WorldSystem::update(GameEngine& gameContext) const {
 }
 
 void WorldSystem::deleteEntitiesOutOfWorld(GameEngine& gameContext) const {
-	auto& situations = gameContext.entityMan.getComponents<SituationComponent>();
+	auto& situations = gameContext.entityMan->getComponents<SituationComponent>();
 	std::vector<int> entitiesToDelete{};
-	WorldComponent& worldComp = gameContext.entityMan.getComponent<WorldComponent>(WorldElementsData::worldId);
+	WorldComponent& worldComp = gameContext.entityMan->getComponent<WorldComponent>(WorldElementsData::worldId);
 	BoundingBox& worldBounding = worldComp.currentPhase.limits;
 	float offset = 100.f; // To prevent the player from seen the walls disappear 
 
@@ -54,10 +54,10 @@ void WorldSystem::deleteEntitiesOutOfWorld(GameEngine& gameContext) const {
 
 void WorldSystem::checkPhaseCollision(GameEngine& gameContext) const {
 	// Calculate player collision with phase
-	collideWithPhaseBounding(gameContext, WorldElementsData::playerId, gameContext.entityMan.getComponent<ColliderComponent>(WorldElementsData::playerId).boundingRoot.bounding);
+	collideWithPhaseBounding(gameContext, WorldElementsData::playerId, gameContext.entityMan->getComponent<ColliderComponent>(WorldElementsData::playerId).boundingRoot.bounding);
 
 	// Calculate camera collision with phase
-	CameraComponent& cameraComp = gameContext.entityMan.getComponent<CameraComponent>(WorldElementsData::activeCameraId);
+	CameraComponent& cameraComp = gameContext.entityMan->getComponent<CameraComponent>(WorldElementsData::activeCameraId);
 	BoundingBox cameraBounding = Utils::getCameraViewBoundig(cameraComp);
 
 	collideWithPhaseBounding(gameContext, WorldElementsData::activeCameraId, cameraBounding);
@@ -66,9 +66,9 @@ void WorldSystem::checkPhaseCollision(GameEngine& gameContext) const {
 
 void WorldSystem::collideWithPhaseBounding(GameEngine& gameContext, int entityId, BoundingBox& entityBounding) const {
 	// make the player and camera don't get out of the phase zone
-	WorldComponent& worldComp = gameContext.entityMan.getComponent<WorldComponent>(WorldElementsData::worldId);
+	WorldComponent& worldComp = gameContext.entityMan->getComponent<WorldComponent>(WorldElementsData::worldId);
 	BoundingBox& worldBounding = worldComp.currentPhase.limits;
-	SituationComponent& entitySit = gameContext.entityMan.getComponent<SituationComponent>(entityId);
+	SituationComponent& entitySit = gameContext.entityMan->getComponent<SituationComponent>(entityId);
 	BoundingBox entityWorldBox = Utils::moveToWorldCoords(entityBounding, entitySit);
 
 	auto calculateIntersection = [](float mobLeft, float mobRight, float worldLeft, float worldRight) -> float { // trailing return type
@@ -91,8 +91,8 @@ void WorldSystem::collideWithPhaseBounding(GameEngine& gameContext, int entityId
 		entitySit.position.y += overlapY;
 
 		// Make velocity 0 when intersect
-		if (gameContext.entityMan.existsComponent<VelocityComponent>(entityId)) {
-			VelocityComponent& entityVelocity = gameContext.entityMan.getComponent<VelocityComponent>(entityId);
+		if (gameContext.entityMan->existsComponent<VelocityComponent>(entityId)) {
+			VelocityComponent& entityVelocity = gameContext.entityMan->getComponent<VelocityComponent>(entityId);
 
 			if (entityVelocity.velocity.x < 0.f) {  // moving left
 				if (overlapX > 0.f) {
@@ -118,15 +118,15 @@ void WorldSystem::collideWithPhaseBounding(GameEngine& gameContext, int entityId
 			}
 		}
 
-		gameContext.entityMan.addEntityToUpdate(entityId);
+		gameContext.entityMan->addEntityToUpdate(entityId);
 	}
 }
 
 
 void WorldSystem::moveBackgroundLayers(GameEngine& gameContext) const { // move the layer doing the Parallax effect with the camera
-	SituationComponent& cameraSit = gameContext.entityMan.getComponent<SituationComponent>(WorldElementsData::activeCameraId);
-	WorldComponent&     worldComp = gameContext.entityMan.getComponent<WorldComponent>(WorldElementsData::activeCameraId);
-	BoundingBox	   cameraBounding = Utils::getCameraViewBoundig(gameContext.entityMan.getComponent<CameraComponent>(WorldElementsData::activeCameraId));
+	SituationComponent& cameraSit = gameContext.entityMan->getComponent<SituationComponent>(WorldElementsData::activeCameraId);
+	WorldComponent&     worldComp = gameContext.entityMan->getComponent<WorldComponent>(WorldElementsData::activeCameraId);
+	BoundingBox	   cameraBounding = Utils::getCameraViewBoundig(gameContext.entityMan->getComponent<CameraComponent>(WorldElementsData::activeCameraId));
 
 	Vector2 camPos = { cameraSit.position.x + cameraBounding.xLeft, cameraSit.position.y + cameraBounding.yUp };
 	//std::cout << "Camera position: (" << camPos.x << ", " << camPos.y << ")\n";

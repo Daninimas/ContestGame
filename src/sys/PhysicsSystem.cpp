@@ -19,10 +19,10 @@ void PhysicsSystem::update(GameEngine& gameContext) const {
 }
 
 void PhysicsSystem::updateJumps(GameEngine& gameContext) const {
-    auto& jumpsComponents = gameContext.entityMan.getComponents<JumpComponent>();
+    auto& jumpsComponents = gameContext.entityMan->getComponents<JumpComponent>();
 
     for (JumpComponent& jump : jumpsComponents) {
-        VelocityComponent& velocity = gameContext.entityMan.getComponent<VelocityComponent>(jump.id);
+        VelocityComponent& velocity = gameContext.entityMan->getComponent<VelocityComponent>(jump.id);
         // Manage cooldown to make it not jump on air
         // Count time than you are on the floor
         if (velocity.velocity.y == 0.f) {
@@ -43,11 +43,11 @@ void PhysicsSystem::updateJumps(GameEngine& gameContext) const {
 void PhysicsSystem::updateSituations(GameEngine& gameContext) const {
     //Use the deltaTime for interpolation
     const float deltaTime = gameContext.getDeltaTime();
-    auto& velocities = gameContext.entityMan.getComponents<VelocityComponent>();
+    auto& velocities = gameContext.entityMan->getComponents<VelocityComponent>();
 
 
     for (VelocityComponent& velocity : velocities) {
-        SituationComponent& situation = gameContext.entityMan.getComponent<SituationComponent>(velocity.id);
+        SituationComponent& situation = gameContext.entityMan->getComponent<SituationComponent>(velocity.id);
 
         // Set the facing
         if (velocity.velocity.x > 0) {
@@ -67,6 +67,6 @@ void PhysicsSystem::updateSituations(GameEngine& gameContext) const {
         situation.position.x = situation.position.x + velocity.velocity.x * deltaTime;
         situation.position.y = situation.position.y + velocity.velocity.y * deltaTime;
 
-        gameContext.entityMan.addEntityToUpdate(velocity.id);
+        gameContext.entityMan->addEntityToUpdate(velocity.id);
     }
 }

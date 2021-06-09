@@ -11,11 +11,11 @@ AIFlyingChaseSystem::~AIFlyingChaseSystem() {}
 
 void AIFlyingChaseSystem::update(GameEngine& gameContext) const {
 
-	auto& chaseComponents = gameContext.entityMan.getComponents<AIFlyingChaseComponent>();
+	auto& chaseComponents = gameContext.entityMan->getComponents<AIFlyingChaseComponent>();
 
 	for (AIFlyingChaseComponent& chaseComp : chaseComponents)
 	{
-		if (gameContext.entityMan.existsComponent<SituationComponent>(chaseComp.objectiveId)) {
+		if (gameContext.entityMan->existsComponent<SituationComponent>(chaseComp.objectiveId)) {
 			bool idle = chaseObjective(gameContext, chaseComp);
 
 			/*
@@ -32,20 +32,20 @@ void AIFlyingChaseSystem::update(GameEngine& gameContext) const {
 
 
 bool AIFlyingChaseSystem::chaseObjective(GameEngine& gameContext, AIFlyingChaseComponent& chaseComp) const {  // Returns true if the entity is IDLE
-	SituationComponent& objectiveSit = gameContext.entityMan.getComponent<SituationComponent>(chaseComp.objectiveId);
-	SituationComponent& chaserSit = gameContext.entityMan.getComponent<SituationComponent>(chaseComp.id);
-	VelocityComponent& chaserVel = gameContext.entityMan.getComponent<VelocityComponent>(chaseComp.id);
+	SituationComponent& objectiveSit = gameContext.entityMan->getComponent<SituationComponent>(chaseComp.objectiveId);
+	SituationComponent& chaserSit = gameContext.entityMan->getComponent<SituationComponent>(chaseComp.id);
+	VelocityComponent& chaserVel = gameContext.entityMan->getComponent<VelocityComponent>(chaseComp.id);
 	bool idle = false;
 
 	// Objetive center
 	float objetiveCenterPositionX = objectiveSit.position.x;
-	if (gameContext.entityMan.existsComponent<ColliderComponent>(chaseComp.objectiveId)) {
-		objetiveCenterPositionX += Utils::getCenterOfBounding(gameContext.entityMan.getComponent<ColliderComponent>(chaseComp.objectiveId).boundingRoot.bounding).x;
+	if (gameContext.entityMan->existsComponent<ColliderComponent>(chaseComp.objectiveId)) {
+		objetiveCenterPositionX += Utils::getCenterOfBounding(gameContext.entityMan->getComponent<ColliderComponent>(chaseComp.objectiveId).boundingRoot.bounding).x;
 	}
 	// Chaser center
 	float chaserCenterPositionX = chaserSit.position.x;
-	if (gameContext.entityMan.existsComponent<ColliderComponent>(chaseComp.objectiveId)) {
-		chaserCenterPositionX += Utils::getCenterOfBounding(gameContext.entityMan.getComponent<ColliderComponent>(chaseComp.id).boundingRoot.bounding).x;
+	if (gameContext.entityMan->existsComponent<ColliderComponent>(chaseComp.objectiveId)) {
+		chaserCenterPositionX += Utils::getCenterOfBounding(gameContext.entityMan->getComponent<ColliderComponent>(chaseComp.id).boundingRoot.bounding).x;
 	}
 
 	if (abs(chaserCenterPositionX - objetiveCenterPositionX) > chaseComp.minDistanceX) {
@@ -83,6 +83,6 @@ bool AIFlyingChaseSystem::chaseObjective(GameEngine& gameContext, AIFlyingChaseC
 /*
 void AIFlyingChaseSystem::doIdleAnimation(GameEngine& gameContext, AIFlyingChaseComponent& chaseComp) const {
 	// Move up and down the entity a little doing an animation
-	VelocityComponent& chaserVel = gameContext.entityMan.getComponent<VelocityComponent>(chaseComp.id);
+	VelocityComponent& chaserVel = gameContext.entityMan->getComponent<VelocityComponent>(chaseComp.id);
 }
 */
