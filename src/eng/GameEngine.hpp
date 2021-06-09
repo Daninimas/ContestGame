@@ -96,4 +96,7 @@ private:
     GameState   lastState   {GameState::NOSTATE};*/
     std::stack<GameState> gameStateStack;
     bool gameStateChanged{ false };
+
+
+    float DELTA_TO_UPDATE = 1.f / 60.f;
 };

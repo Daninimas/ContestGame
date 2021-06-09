@@ -47,6 +47,7 @@ enum class GameObjectType {
     CONTROLS_JOYSTICK,
     GAME_OVER_MENU,
     BEST_SCORES,
+    NEW_BEST_SCORE,
 
 
     // Enemy types

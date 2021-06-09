@@ -12,4 +12,6 @@ public:
     MenuOptions option;
 
     bool active{ false };
+
+    uint8_t characterSelected{ 0 }; // Solo para las opciones de letras de nueva mejor puntuacion
 };

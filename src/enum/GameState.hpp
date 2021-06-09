@@ -8,5 +8,6 @@ enum class GameState {
     CONTROLS,
     WAIT_INPUT,
     WAIT_AFTER_LOSE_LIFE,
-    BEST_SCORES
+    BEST_SCORES,
+    NEW_BEST_SCORE
 };

@@ -2,6 +2,7 @@
 
 #include <eng/GameEngine.hpp>
 #include <tools/WorldElementsData.hpp>
+#include <tools/Utils.hpp>
 
 #include <iostream>
 
@@ -11,6 +12,12 @@ MenuSystem::~MenuSystem() {}
 
 void MenuSystem::update(GameEngine& gameContext) const {
 	MenuComponent&  menuComp    = gameContext.entityMan.getComponents<MenuComponent>()[ (size_t)0 ];
+
+	if (gameContext.entityMan.getEntity(menuComp.id).getGameObjectType() == GameObjectType::NEW_BEST_SCORE) { // Para el funcionamiento del menu de nueva mejor puntuacion
+		updateNewBestScore(gameContext, menuComp);
+		return;
+	}
+
 	InputComponent& playerInput = gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId);
 
 	std::size_t lastSelected = menuComp.selectedOption;
@@ -44,6 +51,8 @@ void MenuSystem::update(GameEngine& gameContext) const {
 	menuComp.firstTime = false;
 }
 
+
+
 void MenuSystem::selectOption(GameEngine& gameContext, MenuComponent& menuComp, std::size_t lastSelected) const {
 	
 	// Deselect last
@@ -54,22 +63,6 @@ void MenuSystem::selectOption(GameEngine& gameContext, MenuComponent& menuComp, 
 	gameContext.entityMan.getComponent<MenuOptionComponent>(menuComp.optionsId[menuComp.selectedOption]).active = true;
 	gameContext.entityMan.getComponent<TextComponent>(menuComp.optionsId[menuComp.selectedOption]).color = { 255, 0, 0, 255 };
 	gameContext.entityMan.addEntityToUpdate(menuComp.optionsId[menuComp.selectedOption]);
-
-	/*switch (menuComp.optionsId[menuComp.selectedOption])
-	{
-	case MenuOptions::BACK:
-		std::cout << "Selecciono BACK\n";
-		break;
-	case MenuOptions::EXIT:
-		std::cout << "Selecciono EXIT\n";
-		break;
-	case MenuOptions::OPTIONS:
-		std::cout << "Selecciono OPTIONS\n";
-		break;
-	case MenuOptions::PLAY:
-		std::cout << "Selecciono PLAY\n";
-		break;
-	}*/
 }
 
 void MenuSystem::acceptOption(GameEngine& gameContext, MenuComponent& menuComp) const {
@@ -96,6 +89,33 @@ void MenuSystem::acceptOption(GameEngine& gameContext, MenuComponent& menuComp) 
 		gameContext.clearGameStateStack();
 		gameContext.pushGameState(GameState::PAUSE);
 		break;
+
+	case MenuOptions::TO_BEST_SCORES:
+		if (gameContext.entityMan.getEntity(menuComp.id).getGameObjectType() == GameObjectType::NEW_BEST_SCORE)  // Para el funcionamiento del menu de nueva mejor puntuacion
+			manageBestScoreAdding(gameContext, menuComp);
+
+		std::cout << "Accedo a BEST SCORES\n";
+		gameContext.pushGameState(GameState::BEST_SCORES);
+		break;
+
+	case MenuOptions::NEW_BEST_SCORE:
+		//comprobamos que esta sea una nueva mejor puntuacion
+		gameContext.entityMan.readBestScore();
+
+		if (Utils::getNewPlayerScorePosition() < 0) {
+			std::cout << "Accedo a BEST SCORES\n";
+			gameContext.pushGameState(GameState::BEST_SCORES);
+		}
+		else {
+			std::cout << "Accedo a NEW BEST SCORES\n";
+			gameContext.pushGameState(GameState::NEW_BEST_SCORE);
+		}
+		break;
+
+	case MenuOptions::SELECT_CHARACTER:
+		return; // no hace nada
+		break;
+
 
 		// Set controls (KEYS)
 	case MenuOptions::SET_KEY_ATTACK:
@@ -134,4 +154,103 @@ void MenuSystem::acceptOption(GameEngine& gameContext, MenuComponent& menuComp) 
 	}
 
 	gameContext.eraseEntityByID(menuComp.id);
+}
+
+
+void MenuSystem::updateNewBestScore(GameEngine& gameContext, MenuComponent& menuComp) const {
+	InputComponent& playerInput = gameContext.entityMan.getComponent<InputComponent>(WorldElementsData::playerId);
+
+	std::size_t lastSelected = menuComp.selectedOption;
+
+	if (playerInput.movingRight) {
+		if (menuComp.selectedOption < menuComp.optionsId.size() - 1) {
+			++menuComp.selectedOption;
+		}
+		else {
+			menuComp.selectedOption = 0;
+		}
+	}
+	else if (playerInput.movingLeft) {
+		if (menuComp.selectedOption != 0) {
+			--menuComp.selectedOption;
+		}
+		else {
+			menuComp.selectedOption = menuComp.optionsId.size() - 1;
+		}
+	}
+
+
+	if (lastSelected != menuComp.selectedOption || menuComp.firstTime) {
+		selectOption(gameContext, menuComp, lastSelected);
+	}
+
+	if (playerInput.select) {
+		acceptOption(gameContext, menuComp);
+	}
+
+	// Para cambiar de letra
+	if (playerInput.movingDown) {
+		changeCharacter(gameContext, menuComp, +1);
+	}
+	if (playerInput.movingUp) {
+		changeCharacter(gameContext, menuComp, -1);
+	}
+
+	menuComp.firstTime = false;
+}
+
+void MenuSystem::changeCharacter(GameEngine& gameContext, MenuComponent& menuComp, int step) const {
+	MenuOptionComponent& optionComp = gameContext.entityMan.getComponent<MenuOptionComponent>(menuComp.optionsId[menuComp.selectedOption]);
+
+	if (optionComp.option == MenuOptions::SELECT_CHARACTER) {
+
+		if (step == +1) {
+			if (optionComp.characterSelected < characters.size() - 1) {
+				++optionComp.characterSelected;
+			}
+			else {
+				optionComp.characterSelected = 0;
+			}
+		}
+		else if (step == -1) {
+			if (optionComp.characterSelected != 0) {
+				--optionComp.characterSelected;
+			}
+			else {
+				optionComp.characterSelected = characters.size() - 1;
+			}
+		}
+
+		gameContext.entityMan.getComponent<TextComponent>(optionComp.id).text = characters[optionComp.characterSelected];
+		gameContext.entityMan.addEntityToUpdate(optionComp.id);
+	}
+}
+
+void MenuSystem::manageBestScoreAdding(GameEngine& gameContext, MenuComponent& menuComp) const {
+	int scorePosition = Utils::getNewPlayerScorePosition();
+
+	if (scorePosition != -1) {
+
+		Score newScore; // First create the new score
+		newScore.score = WorldElementsData::playerScore;
+		newScore.name = gameContext.entityMan.getComponent<TextComponent>(menuComp.optionsId[0]).text + gameContext.entityMan.getComponent<TextComponent>(menuComp.optionsId[1]).text + gameContext.entityMan.getComponent<TextComponent>(menuComp.optionsId[2]).text;
+		
+		std::array<Score, 10> aux;
+		int j = 0;
+		auto& best_score_list = WorldElementsData::best_score_list;
+
+		for (std::size_t i = 0; i < aux.size(); ++i) {
+			if (scorePosition == i) {
+				aux[i] = newScore;
+			}
+			else {
+				aux[i] = best_score_list[j];
+				++j;
+			}
+		}
+
+		// Update file
+		best_score_list.swap(aux);
+		gameContext.entityMan.writeBestScore();
+	}
 }

@@ -1341,20 +1341,20 @@ int EntityManager::createMenu(GameEngine& gameContext, GameObjectType menuType) 
 
     // After creating the menu entity, create the menu Options
     if (menuType == GameObjectType::PAUSE) {
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 170.f), 0.f, MenuOptions::PLAY));
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 260.f), 0.f, MenuOptions::CONTROLS));
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 350.f), 0.f, MenuOptions::EXIT));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 170.f), 0.f, MenuOptions::PLAY));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 260.f), 0.f, MenuOptions::CONTROLS));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 350.f), 0.f, MenuOptions::EXIT));
 
 
     }
     else if (menuType == GameObjectType::CONTROLS_KEYBOARD) {
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 170.f), 0.f, MenuOptions::SET_KEY_ATTACK));
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 200.f), 0.f, MenuOptions::SET_KEY_JUMP));
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 230.f), 0.f, MenuOptions::SET_KEY_LEFT));
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 260.f), 0.f, MenuOptions::SET_KEY_RIGHT));
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 290.f), 0.f, MenuOptions::SET_KEY_UP));
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 320.f), 0.f, MenuOptions::SET_KEY_DOWN));
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 400.f), 0.f, MenuOptions::BACK));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 170.f), 0.f, MenuOptions::SET_KEY_ATTACK));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 200.f), 0.f, MenuOptions::SET_KEY_JUMP));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 230.f), 0.f, MenuOptions::SET_KEY_LEFT));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 260.f), 0.f, MenuOptions::SET_KEY_RIGHT));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 290.f), 0.f, MenuOptions::SET_KEY_UP));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 320.f), 0.f, MenuOptions::SET_KEY_DOWN));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 400.f), 0.f, MenuOptions::BACK));
 
         Utils::setControlKeyToMenuOptions(gameContext, menuComp);
 
@@ -1370,7 +1370,7 @@ int EntityManager::createMenu(GameEngine& gameContext, GameObjectType menuType) 
         menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(500.f, 170.f), 0.f, MenuOptions::SET_JOYSTICK_ATTACK));
         menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(500.f, 200.f), 0.f, MenuOptions::SET_JOYSTICK_JUMP));
 
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 400.f), 0.f, MenuOptions::BACK));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 400.f), 0.f, MenuOptions::BACK));
 
         Utils::setControlKeyToMenuOptions(gameContext, menuComp);
 
@@ -1383,23 +1383,30 @@ int EntityManager::createMenu(GameEngine& gameContext, GameObjectType menuType) 
         Vector2 pos = { 230.f, 0.f };
 
         for (std::size_t i = 0; i < best_score_list.size(); ++i) {
-            std::string text = best_score_list[i].name + "____________________" + to_string(best_score_list[i].score);
+            std::string text = best_score_list[i].name + " __________________ " + to_string(best_score_list[i].score);
             pos.y += 40.f;
             menuComp.textsId.emplace_back(createText(gameContext, pos, 0.f, text, { 239, 184, 4, 255 }, true, 20));
         }
 
         menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 470.f), 0.f, MenuOptions::MAIN_MENU));
-
     }
     else if( menuType == GameObjectType::GAME_OVER_MENU){
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(320.f, 350.f), 0.f, MenuOptions::EXIT));
+
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 400.f), 0.f, MenuOptions::NEW_BEST_SCORE));
+    }
+    else if(menuType == GameObjectType::NEW_BEST_SCORE) {
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(180.f, 270.f), 0.f, MenuOptions::SELECT_CHARACTER));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(220.f, 270.f), 0.f, MenuOptions::SELECT_CHARACTER));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(260.f, 270.f), 0.f, MenuOptions::SELECT_CHARACTER));
+
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(350.f, 270.f), 0.f, MenuOptions::TO_BEST_SCORES, "ADD NEW SCORE"));
     }
 
     return entityId;
 }
 
 
-int EntityManager::createMenuOption(GameEngine& gameContext, Vector2 position, float r, MenuOptions menuOpt) {
+int EntityManager::createMenuOption(GameEngine& gameContext, Vector2 position, float r, MenuOptions menuOpt, string text) {
     int entityId = Entity::getCurrentId();
 
     SituationComponent& situation   = createComponent<SituationComponent>(entityId);
@@ -1441,6 +1448,26 @@ int EntityManager::createMenuOption(GameEngine& gameContext, Vector2 position, f
 
     case MenuOptions::MAIN_MENU:
         textComp.text = "MAIN MENU";
+
+        break;
+
+    case MenuOptions::TO_BEST_SCORES:
+        if (text != "") {
+            textComp.text = text;
+        }
+        else {
+            textComp.text = "BEST SCORES";
+        }
+
+        break;
+
+    case MenuOptions::NEW_BEST_SCORE:
+        textComp.text = "BEST SCORES";
+
+        break;
+
+    case MenuOptions::SELECT_CHARACTER:
+        textComp.text = "A";
 
         break;
 

@@ -60,6 +60,8 @@ public:
 
     static float normalizeValues(float minNormalized, float maxNormalized, float minRange, float maxRange, float value);
 
+    static int getNewPlayerScorePosition(); // Devuelve la posicion en la que está esta nueva puntuacion (-1 si no entra en la lista)
+
 private:
 
     static inline const std::map<uint8_t, std::string> keyNameMap {

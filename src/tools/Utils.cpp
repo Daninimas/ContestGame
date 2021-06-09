@@ -326,7 +326,7 @@ void Utils::resetPlayerPosition(GameEngine& gameContext) {
         ColliderComponent& playerColl = gameContext.entityMan.getComponent<ColliderComponent>(WorldElementsData::playerId);
 
         playerSituation.position.x = closesWall->position.x;
-        playerSituation.position.y = closesWall->position.y - (playerColl.boundingRoot.bounding.yDown - playerColl.boundingRoot.bounding.yUp) - 100.f;
+        playerSituation.position.y = closesWall->position.y - (playerColl.boundingRoot.bounding.yDown - playerColl.boundingRoot.bounding.yUp) - 1.f;
     }
     else {
         gameContext.pushGameState(GameState::GAMEOVER);
@@ -396,4 +396,18 @@ void Utils::updateControlsJSON(InputComponent& inputComp) {
 float Utils::normalizeValues(float minNormalized, float maxNormalized, float minRange, float maxRange, float value) {
     float normalizedValue = (maxNormalized - minNormalized) * ((value - minRange) / (maxRange - minRange)) + minNormalized;
     return normalizedValue;
+}
+
+
+int Utils::getNewPlayerScorePosition() {
+    auto& best_score_list = WorldElementsData::best_score_list;
+    int pos = -1;
+    for (std::size_t i = 0; i < best_score_list.size(); ++i) {
+        if (WorldElementsData::playerScore > best_score_list[i].score) {
+            pos = i;
+            break;
+        }
+    }
+
+    return pos;
 }

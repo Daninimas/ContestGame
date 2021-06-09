@@ -6,6 +6,9 @@ enum class MenuOptions {
     PLAY,
     CONTROLS,
     MAIN_MENU,
+    TO_BEST_SCORES,
+    NEW_BEST_SCORE,
+    SELECT_CHARACTER,
 
     // set controls, keys
     SET_KEY_ATTACK,

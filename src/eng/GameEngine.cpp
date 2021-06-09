@@ -15,7 +15,6 @@
 
 const bool SHOW_TIMERS      = false;
 const bool CHECK_SYSTEMS    = false;
-const float DELTA_TO_UPDATE = 1.f / 60.f;
 
 GameEngine::GameEngine()
     : windowFacade(800, 600, false), soundFacade(), gameStateStack(){
@@ -46,6 +45,9 @@ void GameEngine::reset() {
     //ResetGame
     systems.clear();
     systemsLate.clear();
+
+    // Delete all entities
+    
     init();
 
 }
@@ -55,11 +57,11 @@ void GameEngine::init() {
 
     StaticEntitiesSystem staticSystem{};
     staticSystem.init(*this);
-
-    //setPlayingSystems();
 }
 
 void GameEngine::setPlayingSystems() {
+    float DELTA_TO_UPDATE = 1.f / 60.f; // Ponemos el juego a 60 fps
+
     systems.emplace_back(std::make_unique<AutodeleteSystem>());         // 00
     systems.emplace_back(std::make_unique<SensorSystem>());             // 01
     systems.emplace_back(std::make_unique<AIDroneSystem>());            // 02
@@ -99,6 +101,8 @@ void GameEngine::setPlayingSystems() {
 }
 
 void GameEngine::setMenuSystems(GameObjectType const menu) {
+    float DELTA_TO_UPDATE = 1.f / 20.f; // Ponemos el juego a 20 FPS
+
     std::cout << "EN PAUSA...\n";
     entityMan.createMenu(*this, menu);
 
@@ -144,6 +148,10 @@ void GameEngine::run() {
 
             case GameState::BEST_SCORES:
                 setMenuSystems(GameObjectType::BEST_SCORES);
+                break;
+
+            case GameState::NEW_BEST_SCORE:
+                setMenuSystems(GameObjectType::NEW_BEST_SCORE);
                 break;
 
             case GameState::WAIT_INPUT:
@@ -404,6 +412,7 @@ Entity &GameEngine::getEntity(int id) {
 
 
 void GameEngine::eraseEntityByID(int id) {
+    if(entityMan.existEntity)
     EntityType entityType = entityMan.getEntity(id).getType();
     GameObjectType gameObjectType = entityMan.getEntity(id).getGameObjectType();
 
