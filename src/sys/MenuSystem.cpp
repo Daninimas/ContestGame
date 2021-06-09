@@ -87,6 +87,7 @@ void MenuSystem::acceptOption(GameEngine& gameContext, MenuComponent& menuComp) 
 	case MenuOptions::MAIN_MENU:
 		std::cout << "Vuelvo a MENU PRINCIPAL\n";
 		gameContext.clearGameStateStack();
+		gameContext.reset();
 		gameContext.pushGameState(GameState::PAUSE);
 		break;
 

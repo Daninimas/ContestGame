@@ -74,6 +74,7 @@ public:
     //////////////////////////////////////////////////
     Entity &getEntity(int id);
     std::unordered_map<int, Entity> &getEntities();
+    bool existEntity(int id) const;
 
 
     //////////////////////////////////////////////////

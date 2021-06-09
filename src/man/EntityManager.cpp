@@ -32,6 +32,13 @@ Entity &EntityManager::getEntity(int id) {
     return entityMap.at(id);
 }
 
+bool EntityManager::existEntity(int id) const{
+    if (entityMap.find(id) == entityMap.end())
+        return false;
+
+    return true;
+}
+
 
 void EntityManager::eraseEntityByID(int id) {
     // TODO Modify this to not add new components all times

@@ -47,7 +47,11 @@ void GameEngine::reset() {
     systemsLate.clear();
 
     // Delete all entities
-    
+    /*while (entityMan.getEntities().size())
+    {
+        eraseEntityByID(entityMan.getEntities().begin()->second.getId());
+    }*/
+
     init();
 
 }
@@ -412,78 +416,92 @@ Entity &GameEngine::getEntity(int id) {
 
 
 void GameEngine::eraseEntityByID(int id) {
-    if(entityMan.existEntity)
-    EntityType entityType = entityMan.getEntity(id).getType();
-    GameObjectType gameObjectType = entityMan.getEntity(id).getGameObjectType();
+    if (entityMan.existEntity(id)) {
 
-    entityMan.removeEntityToUpdate(id);
-    windowFacade.eraseEntity(id);
+        EntityType entityType = entityMan.getEntity(id).getType();
+        GameObjectType gameObjectType = entityMan.getEntity(id).getGameObjectType();
 
-    // Remove the render sons of the entity
-    if (entityMan.existsComponent<SituationComponent>(id)) {
-        auto& renderSons = entityMan.getComponent<SituationComponent>(id).sons;
-        for (int son : renderSons) {
-            eraseEntityByID(son);
-        }
-    }
+        entityMan.removeEntityToUpdate(id);
+        windowFacade.eraseEntity(id);
 
-    // Removing the entity ID on Components
-    if (entityMan.existsComponent<ColliderComponent>(id)) {
-        auto& colliders = entityMan.getComponents<ColliderComponent>();
-        for (ColliderComponent& collider : colliders) {
-            Utils::deleteCollidingWithObjective(collider.boundingRoot, id); // deletes the id from the colliding entities
-        }
-    }
-
-    if (entityMan.existsComponent<SensorComponent>(id)) {
-        auto& sensors = entityMan.getComponents<SensorComponent>();
-        for (SensorComponent& sensor : sensors) {
-            sensor.entitiesSensoring.erase(std::remove(sensor.entitiesSensoring.begin(), sensor.entitiesSensoring.end(), id), sensor.entitiesSensoring.end());
-        }
-    }
-
-    if (entityMan.existsComponent<SpawnerComponent>(id)) {
-        auto& spawners = entityMan.getComponents<SpawnerComponent>();
-        for (SpawnerComponent& spawnComp : spawners) {
-            spawnComp.spawnedObjsAlive.erase(std::remove(spawnComp.spawnedObjsAlive.begin(), spawnComp.spawnedObjsAlive.end(), id), spawnComp.spawnedObjsAlive.end());
-        }
-    }
-
-    // Erase all options from the Menu Component
-    if (entityMan.existsComponent<MenuComponent>(id)) {
-        MenuComponent& menuComp = entityMan.getComponent<MenuComponent>(id);
-        std::vector<int>& menuOptions = entityMan.getComponent<MenuComponent>(id).optionsId;
-
-        for (size_t i = 0; i < menuOptions.size(); ++i) {
-            eraseEntityByID(menuOptions[i]);
+        // Remove the render sons of the entity
+        if (entityMan.existsComponent<SituationComponent>(id)) {
+            auto& renderSons = entityMan.getComponent<SituationComponent>(id).sons;
+            for (int son : renderSons) {
+                eraseEntityByID(son);
+            }
         }
 
-        for (size_t i = 0; i < menuComp.textsId.size(); ++i) {
-            eraseEntityByID(menuComp.textsId[i]);
+        // Removing the entity ID on Components
+        if (entityMan.existsComponent<ColliderComponent>(id)) {
+            auto& colliders = entityMan.getComponents<ColliderComponent>();
+            for (ColliderComponent& collider : colliders) {
+                Utils::deleteCollidingWithObjective(collider.boundingRoot, id); // deletes the id from the colliding entities
+            }
         }
-    }
-    //getSoundFacadeRef().setParameterEventByID(id, STOP_SOUND);
 
-    // Erase canon and text on turret (NUNCA DESTRUIR UNA TORRETA A MANO)
-    if (entityMan.existsComponent<TurretComponent>(id)) {
-        eraseEntityByID(entityMan.getComponent<TurretComponent>(id).turretGunID);
-        eraseEntityByID(entityMan.getComponent<TurretComponent>(id).textID);
-
-        TurretComponent& turretComp = entityMan.getComponent<TurretComponent>(id);
-        if (turretComp.inUse) {
-            entityMan.getComponent<InputComponent>(turretComp.userID).usingTurret = false;
+        if (entityMan.existsComponent<SensorComponent>(id)) {
+            auto& sensors = entityMan.getComponents<SensorComponent>();
+            for (SensorComponent& sensor : sensors) {
+                sensor.entitiesSensoring.erase(std::remove(sensor.entitiesSensoring.begin(), sensor.entitiesSensoring.end(), id), sensor.entitiesSensoring.end());
+            }
         }
-    }
 
-    // Subtract enemy from world 
-    if (entityType == EntityType::ENEMY || entityType == EntityType::SPAWNER || gameObjectType == GameObjectType::DRONE_ENEMY) {
-        --WorldElementsData::enemiesInWorld;
-    }
-    else if(gameObjectType == GameObjectType::DRONE_FRIEND) {
-        WorldElementsData::playerDroneId = std::numeric_limits<int>::max();
-    }
+        if (entityMan.existsComponent<SpawnerComponent>(id)) {
+            auto& spawners = entityMan.getComponents<SpawnerComponent>();
+            for (SpawnerComponent& spawnComp : spawners) {
+                spawnComp.spawnedObjsAlive.erase(std::remove(spawnComp.spawnedObjsAlive.begin(), spawnComp.spawnedObjsAlive.end(), id), spawnComp.spawnedObjsAlive.end());
+            }
+        }
 
-    entityMan.eraseEntityByID(id);
+        // Erase all options from the Menu Component
+        if (entityMan.existsComponent<MenuComponent>(id)) {
+            MenuComponent& menuComp = entityMan.getComponent<MenuComponent>(id);
+            std::vector<int>& menuOptions = entityMan.getComponent<MenuComponent>(id).optionsId;
+
+            for (size_t i = 0; i < menuOptions.size(); ++i) {
+                eraseEntityByID(menuOptions[i]);
+            }
+
+            for (size_t i = 0; i < menuComp.textsId.size(); ++i) {
+                eraseEntityByID(menuComp.textsId[i]);
+            }
+        }
+        //getSoundFacadeRef().setParameterEventByID(id, STOP_SOUND);
+
+        // Erase canon and text on turret (NUNCA DESTRUIR UNA TORRETA A MANO)
+        if (entityMan.existsComponent<TurretComponent>(id)) {
+            eraseEntityByID(entityMan.getComponent<TurretComponent>(id).turretGunID);
+            eraseEntityByID(entityMan.getComponent<TurretComponent>(id).textID);
+
+            TurretComponent& turretComp = entityMan.getComponent<TurretComponent>(id);
+            if (turretComp.inUse) {
+                entityMan.getComponent<InputComponent>(turretComp.userID).usingTurret = false;
+            }
+        }
+
+        // Substract from world weapons
+        for (int idWeapon : WorldElementsData::worldMeleeWeapons) {
+            if (idWeapon == id) {
+                WorldElementsData::worldMeleeWeapons.erase(std::remove(WorldElementsData::worldMeleeWeapons.begin(), WorldElementsData::worldMeleeWeapons.end(), id), WorldElementsData::worldMeleeWeapons.end());
+            }
+        }
+        for (int idWeapon : WorldElementsData::worldDistanceWeapons) {
+            if (idWeapon == id) {
+                WorldElementsData::worldDistanceWeapons.erase(std::remove(WorldElementsData::worldDistanceWeapons.begin(), WorldElementsData::worldDistanceWeapons.end(), id), WorldElementsData::worldDistanceWeapons.end());
+            }
+        }
+
+        // Subtract enemy from world 
+        if (entityType == EntityType::ENEMY || entityType == EntityType::SPAWNER || gameObjectType == GameObjectType::DRONE_ENEMY) {
+            --WorldElementsData::enemiesInWorld;
+        }
+        else if (gameObjectType == GameObjectType::DRONE_FRIEND) {
+            WorldElementsData::playerDroneId = std::numeric_limits<int>::max();
+        }
+
+        entityMan.eraseEntityByID(id);
+    }
 }
 
 
