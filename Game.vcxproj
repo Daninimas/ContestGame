@@ -156,6 +156,7 @@
   <ItemGroup>
     <ClCompile Include="src\com\AI\AIOrbitalAtkComponent.cpp" />
     <ClCompile Include="src\com\AutodeleteComponent.cpp" />
+    <ClCompile Include="src\com\CheckpointComponent.cpp" />
     <ClCompile Include="src\com\GunTurretComponent.cpp" />
     <ClCompile Include="src\com\OrbitalWeaponComponent.cpp" />
     <ClCompile Include="src\sys\AI\AIDroneSystem.cpp" />
@@ -165,6 +166,7 @@
     <ClCompile Include="src\com\MenuOptionComponent.cpp" />
     <ClCompile Include="src\com\TriggerComponent.cpp" />
     <ClCompile Include="src\sys\AutodeleteSystem.cpp" />
+    <ClCompile Include="src\sys\CheckpointSystem.cpp" />
     <ClCompile Include="src\sys\OrbitalWeaponSystem.cpp" />
     <ClCompile Include="src\sys\TimeSystem.cpp" />
     <ClCompile Include="src\sys\WaitAfterLoseLifeSystem.cpp" />
@@ -241,6 +243,7 @@
   <ItemGroup>
     <ClInclude Include="src\com\AI\AIOrbitalAtkComponent.hpp" />
     <ClInclude Include="src\com\AutodeleteComponent.hpp" />
+    <ClInclude Include="src\com\CheckpointComponent.hpp" />
     <ClInclude Include="src\com\GunTurretComponent.hpp" />
     <ClInclude Include="src\com\OrbitalWeaponComponent.hpp" />
     <ClInclude Include="src\sys\AI\AIDroneSystem.hpp" />
@@ -250,6 +253,7 @@
     <ClInclude Include="src\com\MenuOptionComponent.hpp" />
     <ClInclude Include="src\com\TriggerComponent.hpp" />
     <ClInclude Include="src\sys\AutodeleteSystem.hpp" />
+    <ClInclude Include="src\sys\CheckpointSystem.hpp" />
     <ClInclude Include="src\sys\OrbitalWeaponSystem.hpp" />
     <ClInclude Include="src\sys\TimeSystem.hpp" />
     <ClInclude Include="src\sys\WaitAfterLoseLifeSystem.hpp" />

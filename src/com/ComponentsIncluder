@@ -30,6 +30,7 @@
 #include <com/AutodeleteComponent.hpp>
 #include <com/TurretComponent.hpp>
 #include <com/GunTurretComponent.hpp>
+#include <com/CheckpointComponent.hpp>
 
 // AI
 #include <com/AI/AIChaseComponent.hpp>

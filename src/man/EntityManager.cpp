@@ -57,6 +57,7 @@ EntityManager::~EntityManager() {
     getComponents<AutodeleteComponent>().clear();
     getComponents<TurretComponent>().clear();
     getComponents<GunTurretComponent>().clear();
+    getComponents<CheckpointComponent>().clear();
 
     // AI
     getComponents<AIChaseComponent>().clear();
@@ -114,6 +115,7 @@ void EntityManager::eraseEntityByID(int id) {
     eraseComponent<AutodeleteComponent>(id);
     eraseComponent<TurretComponent>(id);
     eraseComponent<GunTurretComponent>(id);
+    eraseComponent<CheckpointComponent>(id);
 
     // AI
     eraseComponent<AIChaseComponent>(id);

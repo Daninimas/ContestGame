@@ -51,13 +51,21 @@
   </objectgroup>
   <objectgroup id="4" name="SPAWNER"/>
   <objectgroup color="#0055ff" id="2" name="WALL">
-   <object id="142" type="WALL" x="120" y="588.433" width="1499.31" height="56.2522"/>
+   <object id="142" type="WALL" x="120" y="588.433" width="1499.31" height="56.2522">
+    <properties>
+     <property name="isCheckpoint" type="bool" value="true"/>
+    </properties>
+   </object>
    <object id="147" type="PLATFORM" x="584.276" y="478.595" width="295.549" height="100.823"/>
    <object id="148" type="WALL" x="1825.38" y="588.433" width="787.624" height="56.2522"/>
    <object id="149" type="WALL" x="2611.19" y="566.814" width="385.625" height="77.4212"/>
    <object id="150" type="PLATFORM" x="802.531" y="433.684" width="295.549" height="153.761"/>
    <object id="151" type="PLATFORM" x="1244.94" y="413.076" width="89.9497" height="32.7713"/>
-   <object id="154" type="WALL" x="726.508" y="548.445" width="119.426" height="48.3445"/>
+   <object id="154" type="WALL" x="726.508" y="548.445" width="119.426" height="48.3445">
+    <properties>
+     <property name="isCheckpoint" type="bool" value="true"/>
+    </properties>
+   </object>
    <object id="203" type="WALL" x="982.711" y="558.858" width="46.6987" height="33.193"/>
   </objectgroup>
  </group>
@@ -105,18 +113,30 @@
    </object>
   </objectgroup>
   <objectgroup color="#0055ff" id="33" name="WALL">
-   <object id="176" type="WALL" x="2992" y="568.433" width="435.31" height="88.2522"/>
+   <object id="176" type="WALL" x="2992" y="568.433" width="435.31" height="88.2522">
+    <properties>
+     <property name="isCheckpoint" type="bool" value="true"/>
+    </properties>
+   </object>
    <object id="188" type="PLATFORM" x="3250.34" y="499.207" width="191.31" height="72.9189"/>
    <object id="189" type="PLATFORM" x="3063.01" y="444.541" width="191.31" height="56.2522"/>
    <object id="190" type="PLATFORM" x="3001.68" y="396.541" width="127.31" height="56.2522"/>
    <object id="191" type="PLATFORM" x="3129.68" y="344.541" width="131.31" height="56.2522"/>
    <object id="192" type="WALL" x="3715.68" y="336.541" width="99.31" height="72.2522"/>
    <object id="194" type="PLATFORM" x="3386.34" y="340.541" width="131.31" height="56.2522"/>
-   <object id="195" type="WALL" x="3925.01" y="504.298" width="302.34" height="72.2522"/>
+   <object id="195" type="WALL" x="3925.01" y="504.298" width="302.34" height="72.2522">
+    <properties>
+     <property name="isCheckpoint" type="bool" value="true"/>
+    </properties>
+   </object>
    <object id="196" type="PLATFORM" x="4166.59" y="473.389" width="55.5524" height="37.5855"/>
    <object id="197" type="PLATFORM" x="4352.95" y="357.753" width="55.5524" height="56.2522"/>
    <object id="198" type="WALL" x="4293.19" y="564.904" width="402.34" height="72.2522"/>
-   <object id="199" type="WALL" x="4817.44" y="410.359" width="635.673" height="72.2522"/>
+   <object id="199" type="WALL" x="4817.44" y="410.359" width="635.673" height="72.2522">
+    <properties>
+     <property name="isCheckpoint" type="bool" value="true"/>
+    </properties>
+   </object>
    <object id="200" type="PLATFORM" x="4580.22" y="509.268" width="110.098" height="56.2522"/>
    <object id="201" type="PLATFORM" x="4462.04" y="463.813" width="137.371" height="56.2522"/>
    <object id="202" type="PLATFORM" x="4572.65" y="406.238" width="134.341" height="25.9492"/>
@@ -138,7 +158,11 @@
    </object>
   </objectgroup>
   <objectgroup color="#0055ff" id="48" name="WALL">
-   <object id="239" type="WALL" x="5450.77" y="410.359" width="1163.67" height="72.2522"/>
+   <object id="239" type="WALL" x="5450.77" y="410.359" width="1163.67" height="72.2522">
+    <properties>
+     <property name="isCheckpoint" type="bool" value="true"/>
+    </properties>
+   </object>
   </objectgroup>
   <objectgroup id="43" name="TURRET">
    <object id="243" type="NONE" x="5660" y="356">
@@ -201,7 +225,11 @@
    <object id="252" x="6332" y="646.53" width="1527.68" height="1694.94"/>
   </objectgroup>
   <objectgroup color="#0055ff" id="51" name="WALL">
-   <object id="253" type="WALL" x="6362.77" y="2114.36" width="1499.67" height="72.2522"/>
+   <object id="253" type="WALL" x="6362.77" y="2114.36" width="1499.67" height="72.2522">
+    <properties>
+     <property name="isCheckpoint" type="bool" value="true"/>
+    </properties>
+   </object>
   </objectgroup>
  </group>
 </map>

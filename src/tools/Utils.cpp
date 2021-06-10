@@ -321,12 +321,12 @@ std::string Utils::getKeyName(uint8_t keyCode) {
 void Utils::resetPlayerPosition(GameEngine& gameContext) {
     SituationComponent& playerSituation = gameContext.entityMan->getComponent<SituationComponent>(WorldElementsData::playerId);
 
-    SituationComponent* closesWall = getClosestWallXToObjetive(gameContext, playerSituation);
-    if (closesWall != nullptr) {
+    SituationComponent* closestCheckpoint = getClosestCheckpointXToObjetive(gameContext, playerSituation);
+    if (closestCheckpoint != nullptr) {
         ColliderComponent& playerColl = gameContext.entityMan->getComponent<ColliderComponent>(WorldElementsData::playerId);
 
-        playerSituation.position.x = closesWall->position.x;
-        playerSituation.position.y = closesWall->position.y - (playerColl.boundingRoot.bounding.yDown - playerColl.boundingRoot.bounding.yUp) - 1.f;
+        playerSituation.position.x = closestCheckpoint->position.x;
+        playerSituation.position.y = closestCheckpoint->position.y - (playerColl.boundingRoot.bounding.yDown - playerColl.boundingRoot.bounding.yUp) - 1.f;
     }
     else {
         gameContext.pushGameState(GameState::GAMEOVER);
@@ -358,6 +358,32 @@ SituationComponent* Utils::getClosestWallXToObjetive(GameEngine& gameContext, Si
     }
 
     return closesWall;
+}
+
+SituationComponent* Utils::getClosestCheckpointXToObjetive(GameEngine& gameContext, SituationComponent& objetiveSituation) {
+    auto& allCheckpoints = gameContext.entityMan->getComponents<CheckpointComponent>();
+    SituationComponent* closesCheckpoint = nullptr;
+    float closestDistance = std::numeric_limits<float>::max();
+
+    // This should be the right corner of the objective bounding
+    float objectivePositionX = objetiveSituation.position.x;
+    if (gameContext.entityMan->existsComponent<ColliderComponent>(objetiveSituation.id)) {
+        objectivePositionX += gameContext.entityMan->getComponent<ColliderComponent>(objetiveSituation.id).boundingRoot.bounding.xRight;
+    }
+
+    for (CheckpointComponent& checkpoint : allCheckpoints) {
+        if (checkpoint.active) {
+            SituationComponent& checkpointSit = gameContext.entityMan->getComponent<SituationComponent>(checkpoint.id);
+
+            float distance = objectivePositionX - checkpointSit.position.x;
+            if (checkpointSit.position.x < objectivePositionX && distance < closestDistance) {
+                closestDistance = distance;
+                closesCheckpoint = &checkpointSit;
+            }
+        }
+    }
+
+    return closesCheckpoint;
 }
 
 float Utils::getVectorMagnitude(Vector2& vec) {

@@ -227,6 +227,12 @@
                          "height":56.2522,
                          "id":142,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"isCheckpoint",
+                                 "type":"bool",
+                                 "value":true
+                                }],
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,

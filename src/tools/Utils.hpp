@@ -50,6 +50,7 @@ public:
     static void resetPlayerPosition(GameEngine& gameContext);
 
     static SituationComponent* getClosestWallXToObjetive(GameEngine& gameContext, SituationComponent& objetiveSituation, bool onlyWALLGameObject = false); // The bool is for not picking a platform
+    static SituationComponent* getClosestCheckpointXToObjetive(GameEngine& gameContext, SituationComponent& objetiveSituation); // The bool is for not picking a platform
 
     template <typename T> 
     static int sign(T val) {

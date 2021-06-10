@@ -107,19 +107,20 @@ void GameEngine::setPlayingSystems() {
     systems.emplace_back(std::make_unique<FurySystem>());               // 20
     systems.emplace_back(std::make_unique<PhaseSystem>());              // 21
     systems.emplace_back(std::make_unique<TriggerSystem>());            // 22
+    systems.emplace_back(std::make_unique<CheckpointSystem>());         // 23
                                                                         
                                                                         
-    systemsLate.emplace_back(std::make_unique<ShieldSystem>());         // 23
-    systemsLate.emplace_back(std::make_unique<CollisionSystem>());      // 24            // Collision 2 veces, esto es lo mejor para que todo funcione, pero sera mejor hacer lo de los hilos para resolver las colisiones
-    systemsLate.emplace_back(std::make_unique<PhysicsSystem>());        // 25
-    systemsLate.emplace_back(std::make_unique<CollisionSystem>());      // 26
-    systemsLate.emplace_back(std::make_unique<AnimationSystem>());      // 27
-    systemsLate.emplace_back(std::make_unique<CameraSystem>());         // 28
-    systemsLate.emplace_back(std::make_unique<HealthSystem>());         // 29
-    systemsLate.emplace_back(std::make_unique<DeathSystem>());          // 30
-    systemsLate.emplace_back(std::make_unique<HUDSystem>());            // 31
-    systemsLate.emplace_back(std::make_unique<WorldSystem>());          // 32
-    systemsLate.emplace_back(std::make_unique<TimeSystem>());            // 33
+    systemsLate.emplace_back(std::make_unique<ShieldSystem>());         // 24
+    systemsLate.emplace_back(std::make_unique<CollisionSystem>());      // 25            // Collision 2 veces, esto es lo mejor para que todo funcione, pero sera mejor hacer lo de los hilos para resolver las colisiones
+    systemsLate.emplace_back(std::make_unique<PhysicsSystem>());        // 26
+    systemsLate.emplace_back(std::make_unique<CollisionSystem>());      // 27
+    systemsLate.emplace_back(std::make_unique<AnimationSystem>());      // 28
+    systemsLate.emplace_back(std::make_unique<CameraSystem>());         // 29
+    systemsLate.emplace_back(std::make_unique<HealthSystem>());         // 30
+    systemsLate.emplace_back(std::make_unique<DeathSystem>());          // 31
+    systemsLate.emplace_back(std::make_unique<HUDSystem>());            // 32
+    systemsLate.emplace_back(std::make_unique<WorldSystem>());          // 33
+    systemsLate.emplace_back(std::make_unique<TimeSystem>());           // 34
 }
 
 void GameEngine::setMenuSystems(GameObjectType const menu) {

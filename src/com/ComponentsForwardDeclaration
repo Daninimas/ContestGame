@@ -36,3 +36,4 @@ class AutodeleteComponent;
 class AIOrbitalAtkComponent;
 class TurretComponent;
 class GunTurretComponent;
+class CheckpointComponent;
