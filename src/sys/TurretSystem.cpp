@@ -181,9 +181,11 @@ void TurretSystem::showText(GameEngine& gameContext, TextComponent& textComp, Tu
 	textComp.color.a = 255;
 
 
-	BoundingBox cameraView = Utils::getCameraViewBoundig(gameContext.entityMan->getComponent<CameraComponent>(WorldElementsData::activeCameraId));
+	/*BoundingBox cameraView = Utils::getCameraViewBoundig(gameContext.entityMan->getComponent<CameraComponent>(WorldElementsData::activeCameraId));
 	BoundingBox cameraViewWorld = Utils::moveToWorldCoords(cameraView, gameContext.entityMan->getComponent<SituationComponent>(WorldElementsData::activeCameraId));
-	textSit.position = { turretSit.position.x - cameraViewWorld.xLeft, turretSit.position.y - cameraViewWorld.yUp };
+	textSit.position = { turretSit.position.x - cameraViewWorld.xLeft, turretSit.position.y - cameraViewWorld.yUp };*/
+	textSit.position.x = turretSit.position.x;
+	textSit.position.y = turretSit.position.y - 20.f;
 
 	// Update text in render
 	gameContext.entityMan->addEntityToUpdate(textComp.id);

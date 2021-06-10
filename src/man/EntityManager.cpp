@@ -1212,7 +1212,7 @@ int EntityManager::createOrbitalStrikerEnemy(GameEngine& gameContext, GameObject
 
 void EntityManager::createTurret(GameEngine& gameContext, Vector2 position, uint8_t facing) {
     int turretGun = createTurretGun(gameContext, position, facing, GameObjectType::TURRET_GUN);
-    int turretText = createText(gameContext, { 0.f, 0.f }, 0.f, "Press ACTION to use turret", { 0, 0, 0, 0 }, true, 10);
+    int turretText = createText(gameContext, { 0.f, 0.f }, 0.f, "Press ACTION to use turret", { 0, 0, 0, 0 }, false, 10);
     createTurretPlatform(gameContext, position, facing, turretGun, turretText, GameObjectType::TURRET_PLATFORM);
 }
 
@@ -1675,7 +1675,7 @@ int EntityManager::createText(GameEngine& gameContext, Vector2 position, float r
     situation.position = position;
     situation.rotation = r;
 
-    if(isHUDElement)
+    //if(isHUDElement)
         situation.noWorldDelete = true;
 
     textComp.color = color;
