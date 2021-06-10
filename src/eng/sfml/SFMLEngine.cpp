@@ -107,6 +107,10 @@ void SFMLEngine::drawScene(GameEngine& gameContext) const {
 	{
 		device.get()->draw(node.second);
 	}
+	for (auto& text : textMap)
+	{
+		device.get()->draw(text.second);
+	}
 
 	// Render collidables
 	if (renderCollidables) {
@@ -124,13 +128,13 @@ void SFMLEngine::renderColliders(GameEngine& gameContext) const {
 	for (ColliderComponent& c : colliders) {
 
 		// TODO QUITAR
-		EntityType type = gameContext.entityMan->getEntity(c.id).getType();
-		if (type == EntityType::WALL || type == EntityType::ATTACK || type == EntityType::BOMB) {
+		//EntityType type = gameContext.entityMan->getEntity(c.id).getType();
+		//if (type == EntityType::WALL || type == EntityType::ATTACK || type == EntityType::BOMB) {
 
 			SituationComponent& sit = gameContext.entityMan->getComponent<SituationComponent>(c.id);
 			BoundingBoxNode& b = c.boundingRoot;
 			drawBoundingTree(b, sit);
-		}
+		//}
 	}
 }
 
@@ -219,6 +223,9 @@ void SFMLEngine::updateEntities(GameEngine& gameContext, std::vector<int> entiti
 		}
 		else if (existsHUDText(id)) {
 			updateText(gameContext, HUDTextMap[id], id);
+		}
+		else if (existsText(id)) {
+			updateText(gameContext, textMap[id], id);
 		}
 		else if (existsCamera(id)) {
 			updateCamera(gameContext, id);
@@ -351,6 +358,10 @@ void SFMLEngine::createText(GameEngine& gameContext, int id) {
 		HUDTextMap.emplace(std::piecewise_construct, std::forward_as_tuple(id), std::forward_as_tuple());
 		textNode = &HUDTextMap[id];
 	}
+	else {
+		textMap.emplace(std::piecewise_construct, std::forward_as_tuple(id), std::forward_as_tuple());
+		textNode = &textMap[id];
+	}
 
 	if (textNode != nullptr) {
 		// Set the position and data
@@ -410,6 +421,7 @@ void SFMLEngine::eraseEntity(int id) {
 	HUDNodeMap.erase(id);
 	cameraMap.erase(id);
 	HUDTextMap.erase(id);
+	textMap.erase(id);
 
 	// Delete the texture and image?
 }
@@ -419,6 +431,7 @@ void SFMLEngine::eraseAllEntities() {
 	HUDNodeMap.clear();
 	cameraMap.clear();
 	HUDTextMap.clear();
+	textMap.clear();
 }
 
 
@@ -428,6 +441,12 @@ size_t SFMLEngine::countRenderNodes() const {
 
 bool SFMLEngine::existsNode(int id) const {
 	if (nodeMap.find(id) == nodeMap.end())
+		return false;
+	return true;
+}
+
+bool SFMLEngine::existsText(int id) const {
+	if (textMap.find(id) == textMap.end())
 		return false;
 	return true;
 }

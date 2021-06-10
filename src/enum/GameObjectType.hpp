@@ -73,6 +73,7 @@ enum class GameObjectType {
     PLAYER_SHIELD,
     POWERUP_SHIELD,
     POWERUP_FURY,
+    POWERUP_EXTRA_LIFE,
 
     //HUD elements
     HUD_PLAYER_HEALTH,

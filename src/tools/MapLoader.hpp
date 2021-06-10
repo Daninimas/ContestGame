@@ -60,6 +60,7 @@ private:
         // Power ups
         { "POWERUP_SHIELD", GameObjectType::POWERUP_SHIELD },
         { "POWERUP_FURY", GameObjectType::POWERUP_FURY },
+        { "POWERUP_EXTRA_LIFE", GameObjectType::POWERUP_EXTRA_LIFE },
 
         // Triggers
         { "TRIGGER", GameObjectType::TRIGGER },

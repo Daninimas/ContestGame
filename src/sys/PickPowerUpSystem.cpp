@@ -63,6 +63,10 @@ void PickPowerUpSystem::setPowerUpToEntity(GameEngine& gameContext, PowerUpCompo
 	case PowerUpComponent::Fury:
 		setFuryToEntity(gameContext, powerUp, entityColliding);
 		break;
+
+	case PowerUpComponent::ExtraLife:
+		gameContext.entityMan->getComponent<HealthComponent>(WorldElementsData::playerId).extraLifes++;
+		break;
 	}
 
 	powerUpsToDelete.emplace_back(powerUp.id);

@@ -76,6 +76,29 @@
                 }, 
                 {
                  "draworder":"topdown",
+                 "id":53,
+                 "name":"POWERUP",
+                 "objects":[
+                        {
+                         "height":0,
+                         "id":255,
+                         "name":"",
+                         "point":true,
+                         "rotation":0,
+                         "type":"POWERUP_EXTRA_LIFE",
+                         "visible":true,
+                         "width":0,
+                         "x":488,
+                         "y":528
+                        }],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
+                }, 
+                {
+                 "draworder":"topdown",
                  "id":52,
                  "name":"CHILD",
                  "objects":[
@@ -299,6 +322,12 @@
                          "height":48.3445,
                          "id":154,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"isCheckpoint",
+                                 "type":"bool",
+                                 "value":true
+                                }],
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,
@@ -547,6 +576,12 @@
                          "height":88.2522,
                          "id":176,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"isCheckpoint",
+                                 "type":"bool",
+                                 "value":true
+                                }],
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,
@@ -624,6 +659,12 @@
                          "height":72.2522,
                          "id":195,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"isCheckpoint",
+                                 "type":"bool",
+                                 "value":true
+                                }],
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,
@@ -668,6 +709,12 @@
                          "height":72.2522,
                          "id":199,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"isCheckpoint",
+                                 "type":"bool",
+                                 "value":true
+                                }],
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,
@@ -806,6 +853,12 @@
                          "height":72.2522,
                          "id":239,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"isCheckpoint",
+                                 "type":"bool",
+                                 "value":true
+                                }],
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,
@@ -1082,6 +1135,12 @@
                          "height":72.2522,
                          "id":253,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"isCheckpoint",
+                                 "type":"bool",
+                                 "value":true
+                                }],
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,
@@ -1118,8 +1177,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":53,
- "nextobjectid":255,
+ "nextlayerid":54,
+ "nextobjectid":256,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.4.3",

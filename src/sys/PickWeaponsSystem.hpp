@@ -2,6 +2,7 @@
 
 #include "System.hpp"
 #include <com/ComponentsIncluder>
+#include <unordered_map>
 
 class PickWeaponsSystem : public System {
 public:
@@ -17,4 +18,16 @@ private:
 
     void setDistanceWeaponToPlayer(GameEngine& gameContext, int distanceWeapId) const;
     void setMeleeWeaponToPlayer(GameEngine& gameContext, int meleeWeapId) const;
+
+    void displayWeaponNameText(GameEngine& gameContext, int weaponId) const;
+
+    const std::map<GameObjectType, std::string> weaponTextMap{
+        // Miscellaneous
+        { GameObjectType::M4, "MACHINEGUN" },
+        { GameObjectType::KNIFE, "KNIFE" },
+        { GameObjectType::GRENADE_LAUNCHER, "GRENADE_LAUNCHER" },
+        { GameObjectType::LASER_GUN, "LASER" },
+        { GameObjectType::SHOTGUN, "SHOTGUN" }
+
+    };
 };

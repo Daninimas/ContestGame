@@ -28,6 +28,7 @@ public:
     void eraseAllEntities() override;
     size_t countRenderNodes() const override;
     bool existsNode(int id) const override;
+    bool existsText(int id) const override;
     bool existsHUDNode(int id) const override;
     bool existsHUDText(int id) const override;
     bool existsImage(std::string path) const override;
@@ -60,6 +61,7 @@ private:
 
     std::unique_ptr<sf::RenderWindow> device;
     std::unordered_map<int, sf::Sprite> nodeMap;
+    std::unordered_map<int, sf::Text> textMap;
     std::unordered_map<int, sf::Sprite> HUDNodeMap; // nodes that render on hud 
     std::unordered_map<int, sf::Text> HUDTextMap;
     std::unordered_map<std::string, sf::Image> imageMap;

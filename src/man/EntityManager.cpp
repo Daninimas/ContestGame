@@ -1100,6 +1100,10 @@ int EntityManager::createPowerUp(GameEngine& gameContext, Vector2 position, floa
         powerUpComp.furySpeedIncFactor = 1.5f;
         powerUpComp.furyTotalLifeTime = 3.f;
         break;
+
+    case GameObjectType::POWERUP_EXTRA_LIFE:
+        powerUpComp.type = PowerUpComponent::ExtraLife;
+        break;
     }
 
 
@@ -1334,6 +1338,22 @@ int EntityManager::createChild(GameEngine& gameContext, Vector2 position, float 
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::CHILD, GameObjectType::CHILD));
 
+    return entityId;
+}
+
+int EntityManager::createFloatingText(GameEngine& gameContext, Vector2 position, float r, string text, Color color, bool isHUDElement, uint16_t size, float lifetime, float velocity) {
+    int entityId = createText(gameContext, position, r, text, color, isHUDElement, size);
+
+    VelocityComponent& velocityComp     = createComponent<VelocityComponent>(entityId);
+    AutodeleteComponent& autodeleteComp = createComponent<AutodeleteComponent>(entityId);
+
+    // Velocity
+    velocityComp.gravity = 0.f;
+    velocityComp.velocity.y = velocity;
+
+    // Autodelete
+    autodeleteComp.timeToDelete = lifetime;
+    
     return entityId;
 }
 

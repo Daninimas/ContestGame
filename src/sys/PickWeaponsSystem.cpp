@@ -61,6 +61,7 @@ bool PickWeaponsSystem::checkWeaponCollidesWithPlayer(BoundingBoxNode& weaponBou
 
 
 void PickWeaponsSystem::setDistanceWeaponToPlayer(GameEngine& gameContext, int distanceWeapId) const {
+	displayWeaponNameText(gameContext, distanceWeapId);
 	//DELETE previous distance component
 	gameContext.entityMan->eraseComponent<DistanceWeaponComponent>(WorldElementsData::playerId);
 
@@ -79,7 +80,7 @@ void PickWeaponsSystem::setDistanceWeaponToPlayer(GameEngine& gameContext, int d
 }
 
 void PickWeaponsSystem::setMeleeWeaponToPlayer(GameEngine& gameContext, int meleeWeapId) const {
-
+	displayWeaponNameText(gameContext, meleeWeapId);
 	//DELETE previous distance component
 	gameContext.entityMan->eraseComponent<MeleeWeaponComponent>(WorldElementsData::playerId);
 	
@@ -95,4 +96,12 @@ void PickWeaponsSystem::setMeleeWeaponToPlayer(GameEngine& gameContext, int mele
 
 	// Delete id from world data
 	WorldElementsData::worldMeleeWeapons.erase(std::remove(WorldElementsData::worldMeleeWeapons.begin(), WorldElementsData::worldMeleeWeapons.end(), meleeWeapId), WorldElementsData::worldMeleeWeapons.end());
+}
+
+void PickWeaponsSystem::displayWeaponNameText(GameEngine& gameContext, int weaponId) const {
+	SituationComponent& weaponSit = gameContext.entityMan->getComponent<SituationComponent>(weaponId);
+
+	string text = weaponTextMap.at(gameContext.entityMan->getEntity(weaponId).getGameObjectType());
+
+	gameContext.entityMan->createFloatingText(gameContext, weaponSit.position, 0.f, text, {255, 0, 0, 255}, false, 20, 2.5f, -40.f);
 }

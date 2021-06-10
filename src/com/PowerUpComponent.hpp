@@ -12,7 +12,8 @@ public:
 	enum 
 	{
 		Shield,
-		Fury
+		Fury,
+		ExtraLife
 	};
 	uint8_t type;
 

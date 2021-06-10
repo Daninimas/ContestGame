@@ -28,6 +28,7 @@ public:
     virtual void eraseAllEntities() = 0;
     virtual size_t countRenderNodes() const = 0;
     virtual bool existsNode(int id) const = 0;
+    virtual bool existsText(int id) const = 0;
     virtual bool existsHUDNode(int id) const = 0;
     virtual bool existsHUDText(int id) const = 0;
     virtual bool existsImage(std::string path) const = 0;
