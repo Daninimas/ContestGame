@@ -67,6 +67,14 @@ void DeathSystem::managePlayerLifes(GameEngine& gameContext, int playerId) const
 
         gameContext.entityMan->getComponent<InputComponent>(playerId).usingTurret = false;
 
+        // Separar aranas del jugador
+        auto& pounceComponents = gameContext.entityMan->getComponents<AIPounceComponent>();
+        for (AIPounceComponent& pounce : pounceComponents) {
+            if (pounce.sticked && pounce.isStickyPouncer && pounce.objectiveId == playerId) {
+                pounce.sticked = false;
+            }
+        }
+
         Utils::resetPlayerPosition(gameContext);
         gameContext.pushGameState(GameState::WAIT_AFTER_LOSE_LIFE);
     }

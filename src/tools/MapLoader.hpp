@@ -52,6 +52,7 @@ private:
         { "CHASER", GameObjectType::CHASER },
         { "CHASERJUMPER", GameObjectType::CHASERJUMPER },
         { "DISTANCE_ENEMY", GameObjectType::DISTANCE_ENEMY },
+        { "DISTANCE_WALKING_ENEMY", GameObjectType::DISTANCE_WALKING_ENEMY },
         { "TRANSFORM_ENEMY", GameObjectType::TRANSFORM_ENEMY },
         { "BOMBER_ENEMY", GameObjectType::BOMBER_ENEMY },
         { "POUNCER_ENEMY", GameObjectType::POUNCER_ENEMY },

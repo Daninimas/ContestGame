@@ -214,14 +214,14 @@
                         {
                          "gid":8,
                          "height":512,
-                         "id":159,
+                         "id":256,
                          "name":"",
                          "rotation":0,
-                         "type":"CHASERJUMPER",
+                         "type":"DISTANCE_WALKING_ENEMY",
                          "visible":true,
                          "width":512,
-                         "x":1426.61,
-                         "y":464.424
+                         "x":1160,
+                         "y":448
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -352,7 +352,7 @@
                  "x":0,
                  "y":0
                 }],
-         "name":"Phase112",
+         "name":"Phase1213",
          "opacity":1,
          "properties":[
                 {
@@ -1178,7 +1178,7 @@
          "y":0
         }],
  "nextlayerid":54,
- "nextobjectid":256,
+ "nextobjectid":257,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.4.3",

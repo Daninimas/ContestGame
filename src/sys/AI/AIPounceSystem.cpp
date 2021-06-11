@@ -92,6 +92,13 @@ void AIPounceSystem::stickToObjective(GameEngine& gameContext, AIPounceComponent
 	SituationComponent& objectiveSit = gameContext.entityMan->getComponent<SituationComponent>(pounceComp.objectiveId);
 	SituationComponent& pouncerSit   = gameContext.entityMan->getComponent<SituationComponent>(pounceComp.id);
 
+	// Si está muy alejado de su objetivo, se separa
+	Vector2 distance = { abs(pouncerSit.position.x - objectiveSit.position.x), abs(pouncerSit.position.y - objectiveSit.position.y) };
+	if (distance.x > 700.f || distance.y > 700.f) {
+		pounceComp.sticked = false;
+		return;
+	}
+
 	if (objectiveSit.facing == SituationComponent::Left) {
 		ColliderComponent& pouncerColl = gameContext.entityMan->getComponent<ColliderComponent>(pounceComp.id);
 

@@ -506,6 +506,45 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         colliderComp.weight = 3.f;
     }
 
+    else if (goType == GameObjectType::DISTANCE_WALKING_ENEMY) {
+        velocityComp.speedX = 50.f;
+
+        // Render component
+        renderComp.sprite = "Media/Images/Enemy.png";
+        renderComp.spriteRect = { 0, 248, 0, 360 };
+
+        healthComp.maxHealth = 5;
+
+        AIDistanceAtkComponent& distanceAIComp = createComponent<AIDistanceAtkComponent>(entityId);
+        distanceAIComp.range.x = 200.f;
+        distanceAIComp.range.y = 200.f;
+
+        DistanceWeaponComponent& distanceWeaponComp = createComponent<DistanceWeaponComponent>(entityId);
+        // Distance
+        distanceWeaponComp.attackBounding = { 0.f, 5.f, 0.f, 5.f };
+        distanceWeaponComp.damage = 1;
+        distanceWeaponComp.attackGeneralVelociy = 300.f;
+        distanceWeaponComp.attackGravity = 100.f;
+        distanceWeaponComp.maxCooldown = 1.f;
+        distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BULLET;
+        distanceWeaponComp.attackLifetime = 1.f;
+        distanceWeaponComp.bulletSpreadAngle = 5.f;
+        distanceWeaponComp.infiniteAmmo = true;
+
+        colliderComp.weight = 3.f;
+
+        AIChaseComponent& chaseComp = createComponent<AIChaseComponent>(entityId);
+        JumpComponent& jumpComp = createComponent<JumpComponent>(entityId);
+        SensorComponent& sensorComp = createComponent<SensorComponent>(entityId);
+
+        sensorComp.sensorLayerMasc = ColliderComponent::Wall;
+        sensorComp.sensorBounding = { 25.f, 60.f, 2.f, 48.f };
+
+        jumpComp.impulse = -150.f;
+
+        chaseComp.minDistanceX = rand() % (190 - 100) + 100; // Entre 65 y 46
+    }
+
     else if (goType == GameObjectType::TRANSFORM_ENEMY) {
         velocityComp.speedX = 100.f;
 
