@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.4" tiledversion="1.4.3" name="PLAYER_pat" tilewidth="512" tileheight="512" tilecount="1" columns="0">
+<tileset version="1.5" tiledversion="1.7.0" name="PLAYER_pat" tilewidth="300" tileheight="440" tilecount="1" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
- <tile id="0" type="PLAYER_GENERAL">
-  <image width="512" height="512" source="Sprites/PLAYER.png"/>
+ <tile id="2" type="PLAYER_GENERAL">
+  <image width="300" height="440" source="../../Images/Player.png"/>
  </tile>
 </tileset>

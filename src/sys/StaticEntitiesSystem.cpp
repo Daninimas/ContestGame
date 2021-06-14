@@ -14,7 +14,7 @@ void StaticEntitiesSystem::update(GameEngine& gameContext) const {}
 
 
 void StaticEntitiesSystem::init(GameEngine& gameContext) const {
-    createPlayer(gameContext);
+    //createPlayer(gameContext);
     createWorld(gameContext);
 
 
