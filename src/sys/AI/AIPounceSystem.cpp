@@ -82,7 +82,7 @@ void AIPounceSystem::checkStickedToObjective(GameEngine& gameContext, AIPounceCo
 	ColliderComponent& colliderComp = gameContext.entityMan->getComponent<ColliderComponent>(pounceComp.id);
 
 	if (Utils::checkCollidingWithEntity(colliderComp.boundingRoot, pounceComp.objectiveId)) {
-		pounceComp.sticked = true;
+		pounceComp.sticked = true;		
 	}
 }
 
@@ -111,6 +111,14 @@ void AIPounceSystem::stickToObjective(GameEngine& gameContext, AIPounceComponent
 
 		pouncerSit.facing = SituationComponent::Left;
 		pouncerSit.position = objectiveSit.position;
-		pouncerSit.position.x += objectiveColl.boundingRoot.bounding.xRight - objectiveColl.boundingRoot.bounding.xLeft;
+		pouncerSit.position.x += objectiveColl.boundingRoot.bounding.xRight + 0.1f;
 	}
+
+	// Set the x velocity to 0
+	gameContext.entityMan->getComponent<VelocityComponent>(pounceComp.id).velocity = { 0.f, 0.f };
+
+	// Reduce mucho la velocidad del objetivo
+	float velocityReduction = 0.05f;
+	gameContext.entityMan->getComponent<VelocityComponent>(pounceComp.objectiveId).velocity.x = gameContext.entityMan->getComponent<VelocityComponent>(pounceComp.objectiveId).velocity.x * velocityReduction;
+	gameContext.entityMan->getComponent<VelocityComponent>(pounceComp.objectiveId).velocity.y = gameContext.entityMan->getComponent<VelocityComponent>(pounceComp.objectiveId).velocity.y * velocityReduction;
 }

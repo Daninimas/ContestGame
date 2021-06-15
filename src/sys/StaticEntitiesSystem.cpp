@@ -93,5 +93,5 @@ void StaticEntitiesSystem::createPlayer(GameEngine &gameContext) const {
 }
 
 void StaticEntitiesSystem::createWorld(GameEngine& gameContext) const {
-    gameContext.entityMan->createWorld(gameContext, GameObjectType::WORLD_1);
+    gameContext.entityMan->createWorld(gameContext, GameObjectType::WORLD_DEBUG);
 }

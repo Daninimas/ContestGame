@@ -27,7 +27,6 @@ SFMLEngine::SFMLEngine(int width, int height, bool fullscreen) {
 	FPSTextNode.setFont(font);
 	FPSTextNode.setCharacterSize(20);
 	renderFPS = false;
-
 }
 SFMLEngine::~SFMLEngine() {
 	device.get()->close();
@@ -144,7 +143,7 @@ void SFMLEngine::drawBoundingTree(BoundingBoxNode boundingNode, SituationCompone
 	if (boundingNode.bounding.entitiesColliding.size() != 0) {
 		rectangle.setFillColor(sf::Color(255, 0, 0, 100));
 	}
-	rectangle.setOutlineThickness(5);
+	rectangle.setOutlineThickness(2);
 	rectangle.setOutlineColor(sf::Color(250, 150, 100));
 	rectangle.setPosition(sit.position.x + boundingNode.bounding.xLeft, sit.position.y + boundingNode.bounding.yUp);
 	device.get()->draw(rectangle);
@@ -167,7 +166,7 @@ void SFMLEngine::renderAllSensors(GameEngine& gameContext) const {
 		sf::RectangleShape rectangle(sf::Vector2f(b.xRight - b.xLeft, b.yDown - b.yUp));
 
 		rectangle.setFillColor(sf::Color(0, 0, 0, 0));
-		rectangle.setOutlineThickness(4);
+		rectangle.setOutlineThickness(1);
 		rectangle.setOutlineColor(sf::Color(0, 255, 0));
 
 		if (sit.facing == SituationComponent::Right) {

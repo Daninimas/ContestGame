@@ -31,29 +31,6 @@
          "layers":[
                 {
                  "draworder":"topdown",
-                 "id":17,
-                 "name":"PLAYER",
-                 "objects":[
-                        {
-                         "gid":6,
-                         "height":440,
-                         "id":261,
-                         "name":"",
-                         "rotation":0,
-                         "type":"PLAYER_GENERAL",
-                         "visible":true,
-                         "width":300,
-                         "x":140,
-                         "y":228
-                        }],
-                 "opacity":1,
-                 "type":"objectgroup",
-                 "visible":true,
-                 "x":0,
-                 "y":0
-                }, 
-                {
-                 "draworder":"topdown",
                  "id":5,
                  "name":"phase_size",
                  "objects":[
@@ -67,6 +44,29 @@
                          "width":2861.26,
                          "x":120,
                          "y":-961.47
+                        }],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
+                }, 
+                {
+                 "draworder":"topdown",
+                 "id":17,
+                 "name":"PLAYER",
+                 "objects":[
+                        {
+                         "gid":8,
+                         "height":80,
+                         "id":262,
+                         "name":"",
+                         "rotation":0,
+                         "type":"PLAYER_GENERAL",
+                         "visible":true,
+                         "width":54,
+                         "x":145,
+                         "y":502
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -103,16 +103,16 @@
                  "name":"CHILD",
                  "objects":[
                         {
-                         "height":0,
-                         "id":254,
+                         "gid":19,
+                         "height":50,
+                         "id":266,
                          "name":"",
-                         "point":true,
                          "rotation":0,
                          "type":"CHILD",
                          "visible":true,
-                         "width":0,
-                         "x":261.818,
-                         "y":528.485
+                         "width":21,
+                         "x":259,
+                         "y":535.272727272727
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -126,7 +126,7 @@
                  "name":"WEAPON",
                  "objects":[
                         {
-                         "gid":9,
+                         "gid":11,
                          "height":65,
                          "id":152,
                          "name":"",
@@ -212,28 +212,52 @@
                  "name":"ENEMY",
                  "objects":[
                         {
-                         "gid":11,
-                         "height":512,
-                         "id":159,
+                         "gid":17,
+                         "height":65,
+                         "id":263,
                          "name":"",
                          "rotation":0,
                          "type":"CHASERJUMPER",
                          "visible":true,
-                         "width":512,
-                         "x":1426.61,
-                         "y":464.424
+                         "width":45,
+                         "x":1442,
+                         "y":489
                         }, 
                         {
-                         "gid":11,
-                         "height":512,
-                         "id":256,
+                         "gid":17,
+                         "height":65,
+                         "id":264,
                          "name":"",
                          "rotation":0,
                          "type":"DISTANCE_WALKING_ENEMY",
                          "visible":true,
-                         "width":512,
-                         "x":1160,
-                         "y":448
+                         "width":45,
+                         "x":1190,
+                         "y":453
+                        }, 
+                        {
+                         "gid":19,
+                         "height":50,
+                         "id":267,
+                         "name":"",
+                         "rotation":0,
+                         "type":"TRANSFORM_ENEMY",
+                         "visible":true,
+                         "width":21,
+                         "x":1353.63636363636,
+                         "y":503.787878787879
+                        }, 
+                        {
+                         "gid":18,
+                         "height":69,
+                         "id":270,
+                         "name":"",
+                         "rotation":0,
+                         "type":"ENEMY_SPIDER",
+                         "visible":true,
+                         "width":54,
+                         "x":430.575757575758,
+                         "y":553.181818181818
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -441,7 +465,7 @@
                  "name":"WEAPON",
                  "objects":[
                         {
-                         "gid":8,
+                         "gid":10,
                          "height":65,
                          "id":193,
                          "name":"",
@@ -493,18 +517,6 @@
                  "name":"ENEMY",
                  "objects":[
                         {
-                         "gid":11,
-                         "height":512,
-                         "id":204,
-                         "name":"",
-                         "rotation":0,
-                         "type":"BOMBER_ENEMY",
-                         "visible":true,
-                         "width":512,
-                         "x":4175.88,
-                         "y":116.606
-                        }, 
-                        {
                          "height":0,
                          "id":208,
                          "name":"",
@@ -527,6 +539,18 @@
                          "width":0,
                          "x":4360.61,
                          "y":293.939
+                        }, 
+                        {
+                         "gid":21,
+                         "height":84,
+                         "id":265,
+                         "name":"",
+                         "rotation":0,
+                         "type":"BOMBER_ENEMY",
+                         "visible":true,
+                         "width":72,
+                         "x":4236,
+                         "y":158
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -1190,7 +1214,7 @@
          "y":0
         }],
  "nextlayerid":54,
- "nextobjectid":262,
+ "nextobjectid":271,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.0",
@@ -1205,15 +1229,15 @@
          "source":"Patters\/SPAWNER_pat.tsx"
         }, 
         {
-         "firstgid":4,
+         "firstgid":5,
          "source":"Patters\/PLAYER_pat.tsx"
         }, 
         {
-         "firstgid":7,
+         "firstgid":9,
          "source":"Patters\/WEAPON_pat.tsx"
         }, 
         {
-         "firstgid":10,
+         "firstgid":12,
          "source":"Patters\/ENEMY_pat.tsx"
         }],
  "tilewidth":100,

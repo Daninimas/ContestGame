@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="100" tileheight="100" infinite="1" nextlayerid="54" nextobjectid="262">
+<map version="1.5" tiledversion="1.7.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="100" tileheight="100" infinite="1" nextlayerid="54" nextobjectid="271">
  <editorsettings>
   <export target="../debug.json" format="json"/>
  </editorsettings>
  <tileset firstgid="1" source="../Patters/WALL_pat.tsx"/>
  <tileset firstgid="2" source="../Patters/SPAWNER_pat.tsx"/>
- <tileset firstgid="4" source="../Patters/PLAYER_pat.tsx"/>
- <tileset firstgid="7" source="../Patters/WEAPON_pat.tsx"/>
- <tileset firstgid="10" source="../Patters/ENEMY_pat.tsx"/>
+ <tileset firstgid="5" source="../Patters/PLAYER_pat.tsx"/>
+ <tileset firstgid="9" source="../Patters/WEAPON_pat.tsx"/>
+ <tileset firstgid="12" source="../Patters/ENEMY_pat.tsx"/>
  <layer id="1" name="Capa de patrones 1" width="100" height="100">
   <data encoding="base64"/>
  </layer>
@@ -17,11 +17,11 @@
    <property name="maxPhaseTime" type="float" value="25"/>
    <property name="minPhaseTime" type="float" value="10"/>
   </properties>
-  <objectgroup id="17" name="PLAYER">
-   <object id="261" type="PLAYER_GENERAL" gid="6" x="140" y="228" width="300" height="440"/>
-  </objectgroup>
   <objectgroup id="5" name="phase_size">
    <object id="71" x="120" y="-961.47" width="2861.26" height="1974.94"/>
+  </objectgroup>
+  <objectgroup id="17" name="PLAYER">
+   <object id="262" type="PLAYER_GENERAL" gid="8" x="145" y="502" width="54" height="80"/>
   </objectgroup>
   <objectgroup id="53" name="POWERUP">
    <object id="255" type="POWERUP_EXTRA_LIFE" x="488" y="528">
@@ -29,12 +29,10 @@
    </object>
   </objectgroup>
   <objectgroup id="52" name="CHILD">
-   <object id="254" type="CHILD" x="261.818" y="528.485">
-    <point/>
-   </object>
+   <object id="266" type="CHILD" gid="19" x="259" y="535.273" width="21" height="50"/>
   </objectgroup>
   <objectgroup id="18" name="WEAPON">
-   <object id="152" type="SHOTGUN" gid="9" x="1287.33" y="381" width="152" height="65"/>
+   <object id="152" type="SHOTGUN" gid="11" x="1287.33" y="381" width="152" height="65"/>
   </objectgroup>
   <objectgroup color="#ff0000" id="15" name="DAMAGE_PLATFORM">
    <object id="141" type="DAMAGE_PLATFORM" x="159.179" y="888.924" width="2799.08" height="84.1989">
@@ -52,8 +50,10 @@
    </object>
   </objectgroup>
   <objectgroup id="19" name="ENEMY">
-   <object id="159" type="CHASERJUMPER" gid="11" x="1426.61" y="464.424" width="512" height="512"/>
-   <object id="256" type="DISTANCE_WALKING_ENEMY" gid="11" x="1160" y="448" width="512" height="512"/>
+   <object id="263" type="CHASERJUMPER" gid="17" x="1442" y="489" width="45" height="65"/>
+   <object id="264" type="DISTANCE_WALKING_ENEMY" gid="17" x="1190" y="453" width="45" height="65"/>
+   <object id="267" type="TRANSFORM_ENEMY" gid="19" x="1353.64" y="503.788" width="21" height="50"/>
+   <object id="270" type="ENEMY_SPIDER" gid="18" x="430.576" y="553.182" width="54" height="69"/>
   </objectgroup>
   <objectgroup id="4" name="SPAWNER"/>
   <objectgroup color="#0055ff" id="2" name="WALL">
@@ -90,7 +90,7 @@
    </object>
   </objectgroup>
   <objectgroup id="37" name="WEAPON">
-   <object id="193" type="LASER_GUN" gid="8" x="3749.33" y="319" width="152" height="65"/>
+   <object id="193" type="LASER_GUN" gid="10" x="3749.33" y="319" width="152" height="65"/>
   </objectgroup>
   <objectgroup color="#ff0000" id="36" name="DAMAGE_PLATFORM">
    <object id="185" type="DAMAGE_PLATFORM" x="2959.18" y="888.924" width="2485.14" height="84.1989">
@@ -100,13 +100,13 @@
    </object>
   </objectgroup>
   <objectgroup id="35" name="ENEMY">
-   <object id="204" type="BOMBER_ENEMY" gid="11" x="4175.88" y="116.606" width="512" height="512"/>
    <object id="208" type="DISTANCE_ENEMY" x="4184.85" y="438.667">
     <point/>
    </object>
    <object id="209" type="DISTANCE_ENEMY" x="4360.61" y="293.939">
     <point/>
    </object>
+   <object id="265" type="BOMBER_ENEMY" gid="21" x="4236" y="158" width="72" height="84"/>
   </objectgroup>
   <objectgroup id="34" name="SPAWNER">
    <object id="183" type="ENEMY_SPIDER" gid="2" x="5250.91" y="354.965" width="20" height="20">

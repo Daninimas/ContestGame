@@ -143,18 +143,6 @@
                  "name":"ENEMY",
                  "objects":[
                         {
-                         "gid":13,
-                         "height":274,
-                         "id":271,
-                         "name":"",
-                         "rotation":0,
-                         "type":"ENEMY_SPIDER",
-                         "visible":true,
-                         "width":116,
-                         "x":2526,
-                         "y":2521
-                        }, 
-                        {
                          "gid":12,
                          "height":464,
                          "id":272,
@@ -172,11 +160,11 @@
                          "id":273,
                          "name":"",
                          "rotation":0,
-                         "type":"POUNCER_ENEMY",
+                         "type":"ENEMY_SPIDER",
                          "visible":true,
                          "width":297,
                          "x":2100,
-                         "y":2623
+                         "y":2431
                         }],
                  "opacity":1,
                  "type":"objectgroup",

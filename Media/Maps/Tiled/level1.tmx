@@ -39,9 +39,8 @@
    </object>
   </objectgroup>
   <objectgroup id="19" name="ENEMY">
-   <object id="271" type="ENEMY_SPIDER" gid="13" x="2526" y="2521" width="116" height="274"/>
    <object id="272" type="BOMBER_ENEMY" gid="12" x="873" y="2232" width="399" height="464"/>
-   <object id="273" type="POUNCER_ENEMY" gid="14" x="2100" y="2623" width="297" height="381"/>
+   <object id="273" type="ENEMY_SPIDER" gid="14" x="2100" y="2431" width="297" height="381"/>
   </objectgroup>
   <objectgroup color="#0055ff" id="2" name="WALL">
    <object id="262" type="WALL" x="24" y="2752" width="1928" height="144">

@@ -179,6 +179,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
     situation.position = position;
     situation.rotation = r;
     situation.noWorldDelete = true;
+    situation.scale = Vector2(0.18f, 0.18f);
 
     velocityComp.speedX = 100.f;
     velocityComp.gravity = 250.f;
@@ -189,11 +190,11 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
     colliderComp.collisionLayer = ColliderComponent::Player;
     colliderComp.type = ColliderType::DYNAMIC;
     colliderComp.layerMasc = 0xFFF - ColliderComponent::PlayerAttack - ColliderComponent::PlayerShield; //Collides with everything except PlayerAttacks
-    colliderComp.boundingRoot.bounding = { 30.f, 280.f, 30.f, 425.f };
+    colliderComp.boundingRoot.bounding = { 5.f, 45.f, 0.f, 78.f };
     colliderComp.weight = 2.f; // if changed, check turret system, to reset the same
 
     // Melee
-    meleeWeaponComp.attackBounding = { 0.f, 140.f, 30.f, 300.f };
+    meleeWeaponComp.attackBounding = { 0.f, 28.f, 20.f, 58.f };
     meleeWeaponComp.damage = 2;
     meleeWeaponComp.attackLifetime = 0.15f;
 
@@ -207,7 +208,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
     //jumpComp.jumptable = { 500.f, 500.f, 400.f, 400.f, 300.f, 300.f, 200.f, 100.f };
     
     // Sensor
-    sensorComp.sensorBounding = {0.f, 280.f, 35.f, 420.f};
+    sensorComp.sensorBounding = {0.f, 50.f, 2.f, 76.f};
     sensorComp.sensorLayerMasc = ColliderComponent::Enemy + ColliderComponent::Turret; // Sensors enemies and turrets
 
     // Dodge
@@ -407,11 +408,11 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
     //######### DATA ########//
     situation.position = position;
     situation.rotation = r;
+    situation.scale = { 0.18f, 0.18f };
 
     // Collider
     colliderComp.collisionLayer = ColliderComponent::Enemy;
     colliderComp.layerMasc = ColliderComponent::Player + ColliderComponent::PlayerAttack + ColliderComponent::Wall + ColliderComponent::PlayerShield + ColliderComponent::Platform; //Collides with player and enemy
-    colliderComp.boundingRoot.bounding = { 0.f, 50.f, 0.f, 50.f };
     colliderComp.type = ColliderType::DYNAMIC;
 
     // Velocity
@@ -427,6 +428,9 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
     if (goType == GameObjectType::FIRST_ENEMY) {
         healthComp.maxHealth = 1;
 
+        // Collider
+        colliderComp.boundingRoot.bounding = { 0.f, 44.f, 0.f, 63.f };
+
         // Render component
         renderComp.sprite = "Media/Images/Enemy.png";
         renderComp.spriteRect = { 0, 512, 0, 512 };
@@ -436,13 +440,13 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
     else if (goType == GameObjectType::CHASER) {
         velocityComp.speedX = 70.f;
 
+        // Collider
+        colliderComp.boundingRoot.bounding = { 0.f, 44.f, 0.f, 63.f };
+
         // Render component
         renderComp.sprite = "Media/Images/Enemy.png";
         renderComp.spriteRect = { 0, 248, 0, 360 };
         renderComp.color = { 10, 20, 255, 255 };
-
-        // Collider
-        colliderComp.boundingRoot.bounding = { 15.f, 230.f, 0.f, 360.f };
 
         healthComp.maxHealth = 3;
 
@@ -452,14 +456,14 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
     else if (goType == GameObjectType::CHASERJUMPER) {
         velocityComp.speedX = 50.f;
 
+        // Collider
+        colliderComp.boundingRoot.bounding = { 0.f, 44.f, 0.f, 63.f };
+
         // Render component
         renderComp.sprite = "Media/Images/Enemy.png";
         renderComp.spriteRect = { 0, 248, 0, 360 };
 
         healthComp.maxHealth = 3;
-
-        // Collider
-        colliderComp.boundingRoot.bounding = { 15.f, 230.f, 0.f, 360.f };
 
         AIChaseComponent& chaseComp = createComponent<AIChaseComponent>(entityId);
         createComponent<AIMeleeAtkComponent>(entityId);
@@ -467,46 +471,45 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         SensorComponent& sensorComp = createComponent<SensorComponent>(entityId);
 
         sensorComp.sensorLayerMasc = ColliderComponent::Player + ColliderComponent::Wall;
-        sensorComp.sensorBounding = { 0.f, 260.f, 5.f, 355.f };
+        sensorComp.sensorBounding = { 25.f, 55.f, 2.f, 60.f };
 
         jumpComp.impulse = -150.f;
 
-        chaseComp.minDistanceX = rand() % (460 - 240) + 240; // Entre 100 y 240
+        chaseComp.minDistanceX = rand() % (65 - 46) + 46; // Entre 65 y 46
 
         MeleeWeaponComponent& meleeWeaponComp = createComponent<MeleeWeaponComponent>(entityId);
-        meleeWeaponComp.attackBounding = { 0.f, 135.f, 20.f, 300.f };
+        meleeWeaponComp.attackBounding = { 0.f, 34.f, 10.f, 40.f };
         meleeWeaponComp.damage = 2;
         meleeWeaponComp.maxCooldown = 1.5f;
-        meleeWeaponComp.attackLifetime = 0.15f;
 
         colliderComp.weight = 3.f;
     }
     
     else if(goType == GameObjectType::DISTANCE_ENEMY) {
         velocityComp.speedX = 0.f;
+
+        // Collider
+        colliderComp.boundingRoot.bounding = { 0.f, 44.f, 0.f, 63.f };
         
         // Render component
         renderComp.sprite = "Media/Images/Enemy.png";
         renderComp.spriteRect = { 0, 248, 0, 360 };
 
-        // Collider
-        colliderComp.boundingRoot.bounding = { 15.f, 230.f, 0.f, 360.f };
-
         healthComp.maxHealth = 7;
 
         AIDistanceAtkComponent& distanceAIComp = createComponent<AIDistanceAtkComponent>(entityId);
-        distanceAIComp.range.x = 2500.f;
-        distanceAIComp.range.y = 2500.f;
+        distanceAIComp.range.x = 300.f;
+        distanceAIComp.range.y = 300.f;
 
         DistanceWeaponComponent& distanceWeaponComp = createComponent<DistanceWeaponComponent>(entityId);
         // Distance
-        distanceWeaponComp.attackBounding = { 0.f, 20.f, 0.f, 20.f };
+        distanceWeaponComp.attackBounding = { 0.f, 5.f, 0.f, 5.f };
         distanceWeaponComp.damage = 1;
-        distanceWeaponComp.attackGeneralVelociy = 1800.f;
-        distanceWeaponComp.attackGravity = 130.f;
+        distanceWeaponComp.attackGeneralVelociy = 300.f;
+        distanceWeaponComp.attackGravity = 100.f;
         distanceWeaponComp.maxCooldown = 1.f;
         distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BULLET;
-        distanceWeaponComp.attackLifetime = 3.f;
+        distanceWeaponComp.attackLifetime = 1.f;
         distanceWeaponComp.bulletSpreadAngle = 5.f;
         distanceWeaponComp.infiniteAmmo = true;
 
@@ -517,25 +520,25 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         velocityComp.speedX = 50.f;
 
         // Collider
-        colliderComp.boundingRoot.bounding = { 15.f, 230.f, 0.f, 360.f };
+        colliderComp.boundingRoot.bounding = { 0.f, 44.f, 0.f, 63.f };
 
         // Render component
         renderComp.sprite = "Media/Images/Enemy.png";
         renderComp.spriteRect = { 0, 248, 0, 360 };
 
-        healthComp.maxHealth = 5;
+        healthComp.maxHealth = 4;
 
         AIDistanceAtkComponent& distanceAIComp = createComponent<AIDistanceAtkComponent>(entityId);
-        distanceAIComp.range.x = 1500.f;
-        distanceAIComp.range.y = 1500.f;
+        distanceAIComp.range.x = 240.f;
+        distanceAIComp.range.y = 240.f;
 
         DistanceWeaponComponent& distanceWeaponComp = createComponent<DistanceWeaponComponent>(entityId);
         // Distance
-        distanceWeaponComp.attackBounding = { 0.f, 20.f, 0.f, 20.f };
+        distanceWeaponComp.attackBounding = { 0.f, 5.f, 0.f, 5.f };
         distanceWeaponComp.damage = 1;
-        distanceWeaponComp.attackGeneralVelociy = 1800.f;
-        distanceWeaponComp.attackGravity = 130.f;
-        distanceWeaponComp.maxCooldown = 1.5f;
+        distanceWeaponComp.attackGeneralVelociy = 300.f;
+        distanceWeaponComp.attackGravity = 100.f;
+        distanceWeaponComp.maxCooldown = 1.f;
         distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BULLET;
         distanceWeaponComp.attackLifetime = 1.f;
         distanceWeaponComp.bulletSpreadAngle = 5.f;
@@ -548,18 +551,18 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         SensorComponent& sensorComp = createComponent<SensorComponent>(entityId);
 
         sensorComp.sensorLayerMasc = ColliderComponent::Wall;
-        sensorComp.sensorBounding = { 0.f, 260.f, 5.f, 355.f };
+        sensorComp.sensorBounding = { 25.f, 55.f, 2.f, 60.f };
 
         jumpComp.impulse = -150.f;
 
-        chaseComp.minDistanceX = rand() % (1200 - 500) + 500; // Entre 500 y 1200
+        chaseComp.minDistanceX = rand() % (230 - 100) + 100; // Entre 100 y 230
     }
 
     else if (goType == GameObjectType::TRANSFORM_ENEMY) {
         velocityComp.speedX = 100.f;
 
         // Collider
-        colliderComp.boundingRoot.bounding = { 0.f, 116.f, 0.f, 274.f };
+        colliderComp.boundingRoot.bounding = { 0.f, 18.f, 0.f, 49.f };
 
         // Render component
         renderComp.sprite = "Media/Images/Personajes/Alien camuflado/Nino.png";
@@ -567,26 +570,26 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
 
         healthComp.maxHealth = 5;
 
-        AITransformationComponent& transformComp = createComponent<AITransformationComponent>(entityId);
-        transformComp.newBoundingRoot.bounding = { 0.f, 520.f, 0.f, 1016.f };
-        transformComp.newColor = { 255, 255, 255, 255 };
-        transformComp.newScale = { 1.f, 1.f };
-        transformComp.newSprite = "Media/Images/Personajes/Alien camuflado/AlienTransformado.png";
-        transformComp.newSpriteRect = { 0, 520, 0, 1016 };
-        transformComp.range = { 600.f, 600.f };
-
         JumpComponent& jumpComp = createComponent<JumpComponent>(entityId);
         SensorComponent& sensorComp = createComponent<SensorComponent>(entityId);
 
         sensorComp.sensorLayerMasc = ColliderComponent::Player + ColliderComponent::Wall;
-        sensorComp.sensorBounding = { 0.f, 550.f, 5.f, 1010.f };
+        sensorComp.sensorBounding = { 25.f, 75.f, 2.f, 48.f };
 
         jumpComp.impulse = -150.f;
 
         MeleeWeaponComponent& meleeWeaponComp = createComponent<MeleeWeaponComponent>(entityId);
-        meleeWeaponComp.attackBounding = { 0.f, 270.f, 200.f, 800.f };
+        meleeWeaponComp.attackBounding = { 0.f, 50.f, 70.f, 175.f };
         meleeWeaponComp.damage = 2;
         meleeWeaponComp.maxCooldown = 1.f;
+
+        AITransformationComponent& transformComp = createComponent<AITransformationComponent>(entityId);
+        transformComp.newBoundingRoot.bounding = { 2.f, 90.f, 0.f, 180.f };
+        transformComp.newColor = { 255, 255, 255, 255 };
+        transformComp.newScale = { 0.18f, 0.18f };
+        transformComp.newSprite = "Media/Images/Personajes/Alien camuflado/AlienTransformado.png";
+        transformComp.newSpriteRect = { 0, 520, 0, 1016 };
+        transformComp.range = { 150.f, 150.f };
     }
 
     else if (goType == GameObjectType::BOMBER_ENEMY) {
@@ -594,47 +597,48 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         velocityComp.gravity = 0.f;
 
         // Collider
-        colliderComp.boundingRoot.bounding = { 12.f, 399.f, 0.f, 464.f };
+        colliderComp.boundingRoot.bounding = { 2.f, 71.f, 2.f, 80.f };
 
         // Render component
         renderComp.sprite = "Media/Images/Personajes/alien volador/AlienVolador.png";
         renderComp.spriteRect = { 0, 399, 0, 464 };
 
-        healthComp.maxHealth = 10;
+        healthComp.maxHealth = 8;
 
         AIFlyingChaseComponent& flyingChaseComp = createComponent<AIFlyingChaseComponent>(entityId);
 
-        flyingChaseComp.maxHeigtht = 1300.f;
-        flyingChaseComp.minHeigtht = 1000.f;
-        flyingChaseComp.minDistanceX = rand() % (100 - 10) + 10; // Entre 65 y 46
+        flyingChaseComp.maxHeigtht = 230.f;
+        flyingChaseComp.minHeigtht = 200.f;
+        flyingChaseComp.minDistanceX = rand() % (38 - 6) + 6; // Entre 65 y 46
 
 
         DistanceWeaponComponent& distanceWeaponComp = createComponent<DistanceWeaponComponent>(entityId);
 
-        distanceWeaponComp.attackBounding = { 0.f, 70.f, 0.f, 70.f };
+        distanceWeaponComp.attackBounding = { 0.f, 20.f, 0.f, 20.f };
         distanceWeaponComp.damage = 3;
         distanceWeaponComp.attackGeneralVelociy = 0.f;
         distanceWeaponComp.attackGravity = 100.f;
         distanceWeaponComp.maxCooldown = 0.5f;
         distanceWeaponComp.attackLifetime = 0.3f;
         distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BOMB;
-        distanceWeaponComp.spawnAttackPos = { 200.f, 250.f };
 
         distanceWeaponComp.attackSound.soundPath = "Media/Sound/Weapons/silbidoBombaCayendo.wav";
 
         distanceWeaponComp.explosionExpansion = 1.3f;
         distanceWeaponComp.explosionTime = 0.5f;
         distanceWeaponComp.startActivated = false;
+        distanceWeaponComp.spawnAttackPos = { 26.f, 40.f };
 
         AIDropBombComponent& dropBombComp = createComponent<AIDropBombComponent>(entityId);
         dropBombComp.maxCooldown = 2.f;
+
     }
 
     else if (goType == GameObjectType::POUNCER_ENEMY) {
         velocityComp.speedX = 45.f;
 
         // Collider
-        colliderComp.boundingRoot.bounding = { 0.f, 297.f, 0.f, 381.f };
+        colliderComp.boundingRoot.bounding = { 0.f, 52.f, 0.f, 67.f };
 
         // Render component
         renderComp.sprite = "Media/Images/Personajes/Alien araña/AlienArana.png";
@@ -650,20 +654,20 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         AIPounceComponent& pounceComp = createComponent<AIPounceComponent>(entityId);
 
         sensorComp.sensorLayerMasc = ColliderComponent::Player + ColliderComponent::Wall;
-        sensorComp.sensorBounding = { 0, 320, 5.f, 376.f };
+        sensorComp.sensorBounding = { 25.f, 60.f, 2.f, 65.f };
 
         jumpComp.impulse = -100.f;
         jumpComp.maxCooldown = 1.f;
 
 
         MeleeWeaponComponent& meleeWeaponComp = createComponent<MeleeWeaponComponent>(entityId);
-        meleeWeaponComp.attackBounding = { 0.f, 150.f, 100.f, 300.f };
+        meleeWeaponComp.attackBounding = { 0.f, 20.f, 10.f, 40.f };
         meleeWeaponComp.damage = 2;
         meleeWeaponComp.maxCooldown = 1.5f;
 
 
-        pounceComp.range.x = 500.f;
-        pounceComp.range.y = 500.f;
+        pounceComp.range.x = 200.f;
+        pounceComp.range.y = 30.f;
         pounceComp.velocityIncFactor = 4.7f;
         pounceComp.maxCooldown = 2.f;
     }
@@ -672,7 +676,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         velocityComp.speedX = 45.f;
 
         // Collider
-        colliderComp.boundingRoot.bounding = { 0.f, 297.f, 0.f, 381.f };
+        colliderComp.boundingRoot.bounding = { 0.f, 52.f, 0.f, 67.f };
         
         // Render component
         renderComp.sprite = "Media/Images/Personajes/Alien araña/AlienArana.png";
@@ -687,18 +691,18 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         AIPounceComponent& pounceComp = createComponent<AIPounceComponent>(entityId);
 
         sensorComp.sensorLayerMasc = ColliderComponent::Player + ColliderComponent::Wall;
-        sensorComp.sensorBounding = { 0, 320, 5.f, 376.f };
+        sensorComp.sensorBounding = { 25.f, 60.f, 2.f, 65.f };
 
         jumpComp.impulse = -100.f;
         jumpComp.maxCooldown = 1.f;
 
         MeleeWeaponComponent& meleeWeaponComp = createComponent<MeleeWeaponComponent>(entityId);
-        meleeWeaponComp.attackBounding = { 0.f, 150.f, 100.f, 300.f };
+        meleeWeaponComp.attackBounding = { 0.f, 20.f, 10.f, 40.f };
         meleeWeaponComp.damage = 1;
         meleeWeaponComp.maxCooldown = 1.2f;
 
-        pounceComp.range.x = 500.f;
-        pounceComp.range.y = 500.f;
+        pounceComp.range.x = 200.f;
+        pounceComp.range.y = 30.f;
         pounceComp.velocityIncFactor = 4.7f;
         pounceComp.maxCooldown = 1.2f;
         pounceComp.isStickyPouncer = true;
@@ -734,7 +738,7 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
     // Collider
     colliderComp.collisionLayer = ColliderComponent::Weapon;
     colliderComp.layerMasc = ColliderComponent::Player + ColliderComponent::Wall + ColliderComponent::Platform; //Collides with player and wall
-    colliderComp.boundingRoot.bounding = { 0.f, 100.0f, 0.f, 100.f };
+    colliderComp.boundingRoot.bounding = { 0.f, 45.6f, 0.f, 19.5f };
     colliderComp.type = ColliderType::DYNAMIC;
 
     // Render component
@@ -878,10 +882,10 @@ int EntityManager::createCamera(GameEngine& gameContext, Vector2 position, float
     situation.noWorldDelete = true;
 
     // Camera
-    cameraComp.viewRect = {800, 600 };
-    cameraComp.zoom = 3.7f;
+    cameraComp.viewRect = {600, 400 };
+    cameraComp.zoom = 1.4f;
     cameraComp.offset = { 10.f, 70.f};
-    cameraComp.cameraAdvancement = 300.f;
+    cameraComp.cameraAdvancement = 150.f;
 
     // Velocity
     velocityComp.gravity = 0.f;
@@ -1373,6 +1377,7 @@ int EntityManager::createChild(GameEngine& gameContext, Vector2 position, float 
     //######### DATA ########//
     situation.position = position;
     situation.rotation = rotation;
+    situation.scale = { 0.18f, 0.18f };
 
     // Render component
     renderComp.sprite = "Media/Images/Personajes/Alien camuflado/Nino.png";
@@ -1382,7 +1387,7 @@ int EntityManager::createChild(GameEngine& gameContext, Vector2 position, float 
     colliderComp.collisionLayer = ColliderComponent::Child;
     colliderComp.layerMasc = ColliderComponent::PlayerAttack + ColliderComponent::Player;
     colliderComp.type = ColliderType::STATIC;
-    colliderComp.boundingRoot.bounding = { 0.f, 30.f, 0.f, 20.f };
+    colliderComp.boundingRoot.bounding = { 0.f, 18.f, 0.f, 49.f };
 
     // Health
     healthComp.maxHealth = 1;
@@ -1451,7 +1456,7 @@ int EntityManager::createWorld(GameEngine& gameContext, GameObjectType worldName
         worldComp.worldPath = "Media/Maps/level1.json";
         worldComp.backgroundSize = 0.75f;
 
-        worldComp.backgroundLayers.clear(); // Delete previous layers
+        worldComp.backgroundLayers.clear();// Delete previous layers
         worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/10_Sky.png"));
         worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/09_Forest.png"));
         worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/08_Forest.png"));
