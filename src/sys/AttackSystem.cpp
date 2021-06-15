@@ -302,7 +302,12 @@ void AttackSystem::createBombEntity(GameEngine& gameContext, DistanceWeaponCompo
 		attackGOtype = GameObjectType::PLAYER_BOMB;
 	}
 
-	int bombId = gameContext.entityMan->createBomb(gameContext, attackerSit.position, 0.f, attackGOtype);
+	// Add attack spawn threshold
+	Vector2 attackPos = attackerSit.position;
+	attackPos.x += distanceWeaponAttacker.spawnAttackPos.x;
+	attackPos.y += distanceWeaponAttacker.spawnAttackPos.y;
+
+	int bombId = gameContext.entityMan->createBomb(gameContext, attackPos, 0.f, attackGOtype);
 
 	ColliderComponent& colliderComp = gameContext.entityMan->getComponent<ColliderComponent>(bombId);
 	VelocityComponent& bombVel = gameContext.entityMan->getComponent<VelocityComponent>(bombId);

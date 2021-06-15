@@ -84,6 +84,7 @@ enum class GameObjectType {
 
     // World
     WORLD_DEBUG,
+    WORLD_1,
 
     // Damage platforms
     DAMAGE_PLATFORM,

@@ -163,17 +163,18 @@ void Utils::deleteCollidingWithObjective(BoundingBoxNode& boundingNode, int objI
 void Utils::setNormalPistolToEntity(GameEngine& gameContext, int entityId) {
     DistanceWeaponComponent& distanceWeaponComp = gameContext.entityMan->createComponent<DistanceWeaponComponent>(entityId);
 
-    distanceWeaponComp.attackBounding = { 0.f, 2.f, 0.f, 2.f };
+    distanceWeaponComp.attackBounding = { 0.f, 20.f, 0.f, 20.f };
     distanceWeaponComp.damage = 1;
-    distanceWeaponComp.attackGeneralVelociy = 500.f;
-    distanceWeaponComp.attackGravity = 100.f;
+    distanceWeaponComp.attackGeneralVelociy = 2000.f;
+    distanceWeaponComp.attackGravity = 200.f;
     distanceWeaponComp.maxCooldown = 0.5f;
     distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BULLET;
     distanceWeaponComp.attackSound.soundPath = "Media/Sound/Weapons/gunFire.wav";
     distanceWeaponComp.ammo = 0;
     distanceWeaponComp.infiniteAmmo = true;
     distanceWeaponComp.bulletSpreadAngle = 5.f;
-    distanceWeaponComp.spawnAttackPos = { 20.f, 39.f };
+    distanceWeaponComp.spawnAttackPos = { 120.f, 200.f };
+    distanceWeaponComp.attackLifetime = 2.f;
 }
 
 
@@ -326,7 +327,7 @@ void Utils::resetPlayerPosition(GameEngine& gameContext) {
         ColliderComponent& playerColl = gameContext.entityMan->getComponent<ColliderComponent>(WorldElementsData::playerId);
 
         playerSituation.position.x = closestCheckpoint->position.x;
-        playerSituation.position.y = closestCheckpoint->position.y - (playerColl.boundingRoot.bounding.yDown - playerColl.boundingRoot.bounding.yUp) - 1.f;
+        playerSituation.position.y = closestCheckpoint->position.y - (playerColl.boundingRoot.bounding.yDown) - 1.f;
     }
     else {
         gameContext.pushGameState(GameState::GAMEOVER);
