@@ -5,6 +5,7 @@
 #include <tools/WorldElementsData.hpp>
 #include <tools/MapLoader.hpp>
 #include <tools/BackgroundLayer.hpp>
+#include <tools/AnimationManager.hpp>
 
 #include <math.h>
 #include <random>
@@ -1490,7 +1491,18 @@ int EntityManager::createWorld(GameEngine& gameContext, GameObjectType worldName
 int EntityManager::createMenu(GameEngine& gameContext, GameObjectType menuType) {
     int entityId = Entity::getCurrentId();
 
-    MenuComponent& menuComp = createComponent<MenuComponent>(entityId);    
+    MenuComponent& menuComp = createComponent<MenuComponent>(entityId);
+    RenderComponent& renderComp = createComponent<RenderComponent>(entityId);
+    SituationComponent& sitComp = createComponent<SituationComponent>(entityId);
+
+    //Situation
+    sitComp.position = { 0.f, 0.f };
+    sitComp.noWorldDelete = true;
+
+    // Render
+    renderComp.color = {255, 255, 255, 255};
+    renderComp.isHUDElement = true;
+    renderComp.spriteRect = { 0, 800, 0, 600 };
 
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::MENU, menuType));
@@ -1502,6 +1514,7 @@ int EntityManager::createMenu(GameEngine& gameContext, GameObjectType menuType) 
         menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 260.f), 0.f, MenuOptions::CONTROLS));
         menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 350.f), 0.f, MenuOptions::EXIT));
 
+        renderComp.sprite = "Media/Images/Menu/NewHighscore.png";
 
     }
     else if (menuType == GameObjectType::CONTROLS_KEYBOARD) {
@@ -1515,6 +1528,7 @@ int EntityManager::createMenu(GameEngine& gameContext, GameObjectType menuType) 
 
         Utils::setControlKeyToMenuOptions(gameContext, menuComp);
 
+        renderComp.sprite = "Media/Images/Menu/NewHighscore.png";
     }
     else if (menuType == GameObjectType::CONTROLS_JOYSTICK) {
         menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 170.f), 0.f, MenuOptions::SET_KEY_ATTACK));
@@ -1531,6 +1545,7 @@ int EntityManager::createMenu(GameEngine& gameContext, GameObjectType menuType) 
 
         Utils::setControlKeyToMenuOptions(gameContext, menuComp);
 
+        renderComp.sprite = "Media/Images/Menu/NewHighscore.png";
     }
     else if (menuType == GameObjectType::BEST_SCORES) {
         gameContext.entityMan->readBestScore();
@@ -1546,18 +1561,40 @@ int EntityManager::createMenu(GameEngine& gameContext, GameObjectType menuType) 
         }
 
         menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 470.f), 0.f, MenuOptions::MAIN_MENU));
+
+        renderComp.sprite = "Media/Images/Menu/NewHighscore.png";
     }
     else if( menuType == GameObjectType::GAME_OVER_MENU){
-
         menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 400.f), 0.f, MenuOptions::NEW_BEST_SCORE));
+
+        renderComp.sprite = "Media/Images/Menu/NewHighscore.png";
     }
     else if(menuType == GameObjectType::NEW_BEST_SCORE) {
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(180.f, 270.f), 0.f, MenuOptions::SELECT_CHARACTER));
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(220.f, 270.f), 0.f, MenuOptions::SELECT_CHARACTER));
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(260.f, 270.f), 0.f, MenuOptions::SELECT_CHARACTER));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(180.f, 306.f), 0.f, MenuOptions::SELECT_CHARACTER));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(220.f, 306.f), 0.f, MenuOptions::SELECT_CHARACTER));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(260.f, 306.f), 0.f, MenuOptions::SELECT_CHARACTER));
 
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(350.f, 270.f), 0.f, MenuOptions::TO_BEST_SCORES, "ADD NEW SCORE"));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(350.f, 306.f), 0.f, MenuOptions::TO_BEST_SCORES, "ADD NEW SCORE"));
+
+        renderComp.sprite = "Media/Images/Menu/NewHighscore.png";
     }
+    else if (menuType == GameObjectType::MAINMENU) {
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 170.f), 0.f, MenuOptions::PLAY));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(350.f, 270.f), 0.f, MenuOptions::TO_BEST_SCORES, "BEST SCORES"));
+
+        renderComp.sprite = "Media/Images/Menu/MainMenu.png";
+
+        // Animation
+        AnimationComponent& animComp = createComponent<AnimationComponent>(entityId);
+        AnimationManager::setAnimationToEntity(gameContext, Animation::IDLE, animComp);
+        // Music
+        menuComp.menuMusic.soundPath = "./Media/Sound/Music/arthur-vyncke-a-few-jumps-away.wav";
+        menuComp.menuMusic.repeat = true;
+    }
+
+
+    //######### RENDER ########//
+    gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
 
     return entityId;
 }

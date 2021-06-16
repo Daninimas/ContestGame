@@ -88,7 +88,7 @@ void MenuSystem::acceptOption(GameEngine& gameContext, MenuComponent& menuComp) 
 		std::cout << "Vuelvo a MENU PRINCIPAL\n";
 		gameContext.clearGameStateStack();
 		gameContext.resetFlag = true;
-		gameContext.pushGameState(GameState::PAUSE);
+		gameContext.pushGameState(GameState::MAIN_MENU);
 		break;
 
 	case MenuOptions::TO_BEST_SCORES:
@@ -152,6 +152,10 @@ void MenuSystem::acceptOption(GameEngine& gameContext, MenuComponent& menuComp) 
 		gameContext.entityMan->getComponent<InputComponent>(WorldElementsData::playerId).controlToChange = Controls::JOYSTICK_JUMP;
 		gameContext.pushGameState(GameState::WAIT_INPUT);
 		break;
+	}
+
+	if (GameObjectType::MAINMENU == gameContext.entityMan->getEntity(menuComp.id).getGameObjectType()) {
+		gameContext.getSoundFacadeRef().stopAllMusic();
 	}
 
 	gameContext.eraseEntityByID(menuComp.id);

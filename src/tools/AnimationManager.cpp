@@ -56,6 +56,15 @@ void AnimationManager::setIdleAnimation(GameEngine& gameContext, const Animation
 		animationComp.totalFrames = 1;
 		animationComp.nextFrameAdvance = 512;
 		break;
+
+	case GameObjectType::MAINMENU:
+		animationComp.animation = animation;
+		animationComp.framerate = 0.5f;
+		animationComp.repeat = true;
+		animationComp.startSpriteRect = { 0, 800, 0, 600 };
+		animationComp.totalFrames = 10;
+		animationComp.nextFrameAdvance = 600;
+		break;
 	}
 }
 

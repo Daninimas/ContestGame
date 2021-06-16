@@ -3,6 +3,7 @@
 #include "Component.hpp"
 #include <vector>
 #include <enum/MenuOptions.hpp>
+#include <tools/Sound.hpp>
 
 class MenuComponent : public Component {
 public:
@@ -16,5 +17,7 @@ public:
     // For the text in menu
     std::vector<int> textsId;
 
+    // For the music 
+    Sound menuMusic{};
 };
 

@@ -75,7 +75,7 @@ void GameEngine::reset() {
 }
 
 void GameEngine::init() {
-    pushGameState(GameState::PAUSE);
+    pushGameState(GameState::MAIN_MENU);
 
     StaticEntitiesSystem staticSystem{};
     staticSystem.init(*this);
@@ -127,11 +127,20 @@ void GameEngine::setMenuSystems(GameObjectType const menu) {
     float DELTA_TO_UPDATE = 1.f / 20.f; // Ponemos el juego a 20 FPS
 
     std::cout << "EN PAUSA...\n";
-    entityMan->createMenu(*this, menu);
+    int menuId = entityMan->createMenu(*this, menu);
 
     systems.emplace_back(std::make_unique<InputSystem>());
     systems.emplace_back(std::make_unique<InputJoystickSystem>());
     systems.emplace_back(std::make_unique<MenuSystem>());
+
+
+    if (menu == GameObjectType::MAINMENU) {
+        MenuComponent menuComp = entityMan->getComponent<MenuComponent>(menuId);
+        getSoundFacadeRef().loadMusic(menuComp.menuMusic.soundPath);
+        getSoundFacadeRef().playMusic(menuComp.menuMusic);
+
+        systems.emplace_back(std::make_unique<AnimationSystem>());
+    }
 }
 
 
@@ -177,6 +186,10 @@ void GameEngine::run() {
 
             case GameState::NEW_BEST_SCORE:
                 setMenuSystems(GameObjectType::NEW_BEST_SCORE);
+                break;
+
+            case GameState::MAIN_MENU:
+                setMenuSystems(GameObjectType::MAINMENU);
                 break;
 
             case GameState::WAIT_INPUT:
