@@ -590,7 +590,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         transformComp.newScale = { 0.18f, 0.18f };
         transformComp.newSprite = "Media/Images/Personajes/Alien camuflado/AlienTransformado.png";
         transformComp.newSpriteRect = { 0, 520, 0, 1016 };
-        transformComp.range = { 150.f, 150.f };
+        transformComp.range = { 120.f, 100.f };
     }
 
     else if (goType == GameObjectType::BOMBER_ENEMY) {

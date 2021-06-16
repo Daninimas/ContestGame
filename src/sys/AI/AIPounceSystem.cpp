@@ -120,5 +120,11 @@ void AIPounceSystem::stickToObjective(GameEngine& gameContext, AIPounceComponent
 	// Reduce mucho la velocidad del objetivo
 	float velocityReduction = 0.05f;
 	gameContext.entityMan->getComponent<VelocityComponent>(pounceComp.objectiveId).velocity.x = gameContext.entityMan->getComponent<VelocityComponent>(pounceComp.objectiveId).velocity.x * velocityReduction;
-	gameContext.entityMan->getComponent<VelocityComponent>(pounceComp.objectiveId).velocity.y = gameContext.entityMan->getComponent<VelocityComponent>(pounceComp.objectiveId).velocity.y * velocityReduction;
+
+	// Impedir que saltes
+	if (gameContext.entityMan->existsComponent<JumpComponent>(pounceComp.objectiveId)) {
+		JumpComponent& jumpComp = gameContext.entityMan->getComponent<JumpComponent>(pounceComp.objectiveId);
+
+		jumpComp.cooldown = 0.f;
+	}
 }
