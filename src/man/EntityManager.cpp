@@ -1510,11 +1510,11 @@ int EntityManager::createMenu(GameEngine& gameContext, GameObjectType menuType) 
 
     // After creating the menu entity, create the menu Options
     if (menuType == GameObjectType::PAUSE) {
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 170.f), 0.f, MenuOptions::PLAY));
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 260.f), 0.f, MenuOptions::CONTROLS));
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 350.f), 0.f, MenuOptions::EXIT));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 260.f), 0.f, MenuOptions::PLAY));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 350.f), 0.f, MenuOptions::CONTROLS));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 440.f), 0.f, MenuOptions::EXIT));
 
-        renderComp.sprite = "Media/Images/Menu/NewHighscore.png";
+        renderComp.sprite = "Media/Images/Menu/Pause.png";
 
     }
     else if (menuType == GameObjectType::CONTROLS_KEYBOARD) {
@@ -1579,8 +1579,9 @@ int EntityManager::createMenu(GameEngine& gameContext, GameObjectType menuType) 
         renderComp.sprite = "Media/Images/Menu/NewHighscore.png";
     }
     else if (menuType == GameObjectType::MAINMENU) {
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 170.f), 0.f, MenuOptions::PLAY));
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(350.f, 270.f), 0.f, MenuOptions::TO_BEST_SCORES, "BEST SCORES"));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(30.f, 350.f), 0.f, MenuOptions::PLAY));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(30.f, 440.f), 0.f, MenuOptions::TO_BEST_SCORES, "BEST SCORES"));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(30.f, 530.f), 0.f, MenuOptions::EXIT));
 
         renderComp.sprite = "Media/Images/Menu/MainMenu.png";
 
