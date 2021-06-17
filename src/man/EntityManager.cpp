@@ -198,6 +198,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
     meleeWeaponComp.attackBounding = { 0.f, 28.f, 20.f, 58.f };
     meleeWeaponComp.damage = 2;
     meleeWeaponComp.attackLifetime = 0.15f;
+    meleeWeaponComp.attackSound.soundPath = "./Media/Sound/Weapons/slaphit.wav"; 
 
 
     // Render component
@@ -306,6 +307,8 @@ int EntityManager::createAttack(GameEngine& gameContext, Vector2 position, float
         collider.layerMasc = ColliderComponent::Player + ColliderComponent::Wall + ColliderComponent::PlayerShield;  // Collides with player and walls
 
         attack.type = AttackType::DISTANCE;
+        // Sound
+        attack.hitSound.soundPath = "./Media/Sound/Weapons/BulletHit1.wav";
         break;
 
     case GameObjectType::PLAYER_MELEE_ATTACK:
@@ -322,6 +325,8 @@ int EntityManager::createAttack(GameEngine& gameContext, Vector2 position, float
         collider.layerMasc = ColliderComponent::Enemy + ColliderComponent::Wall + ColliderComponent::Shield + ColliderComponent::Child;  // Collides with enemies and walls
 
         attack.type = AttackType::DISTANCE;
+        // Sound
+        attack.hitSound.soundPath = "./Media/Sound/Weapons/BulletHit2.wav";
         break;
 
     case GameObjectType::EXPLOSION:
@@ -482,6 +487,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         meleeWeaponComp.attackBounding = { 0.f, 34.f, 10.f, 40.f };
         meleeWeaponComp.damage = 2;
         meleeWeaponComp.maxCooldown = 1.5f;
+        meleeWeaponComp.attackSound.soundPath = "./Media/Sound/Weapons/knifeSwing.wav";
 
         colliderComp.weight = 3.f;
     }
@@ -583,6 +589,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         meleeWeaponComp.attackBounding = { 0.f, 50.f, 70.f, 175.f };
         meleeWeaponComp.damage = 2;
         meleeWeaponComp.maxCooldown = 1.f;
+        meleeWeaponComp.attackSound.soundPath = "./Media/Sound/Enemies/MonsterRoar.wav";
 
         AITransformationComponent& transformComp = createComponent<AITransformationComponent>(entityId);
         transformComp.newBoundingRoot.bounding = { 2.f, 90.f, 0.f, 180.f };
@@ -591,6 +598,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         transformComp.newSprite = "Media/Images/Personajes/Alien camuflado/AlienTransformado.png";
         transformComp.newSpriteRect = { 0, 520, 0, 1016 };
         transformComp.range = { 120.f, 100.f };
+        transformComp.transformationSound.soundPath = "./Media/Sound/Enemies/dinosaur-monster-roar-1976.wav";
     }
 
     else if (goType == GameObjectType::BOMBER_ENEMY) {
@@ -659,12 +667,14 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
 
         jumpComp.impulse = -100.f;
         jumpComp.maxCooldown = 1.f;
+        jumpComp.jumpSound.soundPath = "./Media/Sound/Enemies/spiderJump.wav";
 
 
         MeleeWeaponComponent& meleeWeaponComp = createComponent<MeleeWeaponComponent>(entityId);
         meleeWeaponComp.attackBounding = { 0.f, 20.f, 10.f, 40.f };
         meleeWeaponComp.damage = 2;
         meleeWeaponComp.maxCooldown = 1.5f;
+        meleeWeaponComp.attackSound.soundPath = "./Media/Sound/Enemies/spiderAttackShort.wav";
 
 
         pounceComp.range.x = 200.f;
@@ -696,11 +706,13 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
 
         jumpComp.impulse = -100.f;
         jumpComp.maxCooldown = 1.f;
+        jumpComp.jumpSound.soundPath = "./Media/Sound/Enemies/spiderJump.wav";
 
         MeleeWeaponComponent& meleeWeaponComp = createComponent<MeleeWeaponComponent>(entityId);
         meleeWeaponComp.attackBounding = { 0.f, 20.f, 10.f, 40.f };
         meleeWeaponComp.damage = 1;
         meleeWeaponComp.maxCooldown = 1.2f;
+        meleeWeaponComp.attackSound.soundPath = "./Media/Sound/Enemies/spiderAttackShort.wav";
 
         pounceComp.range.x = 200.f;
         pounceComp.range.y = 30.f;

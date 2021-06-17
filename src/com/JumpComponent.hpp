@@ -2,6 +2,8 @@
 
 #include "Component.hpp"
 
+#include <tools/Sound.hpp>
+
 class JumpComponent : public Component {
 public:
     explicit JumpComponent(const int id);
@@ -17,5 +19,7 @@ public:
     float cooldown{ 0.f };
 
     float impulse{ -50.f };
+
+    Sound jumpSound;
 };
 

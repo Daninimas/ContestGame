@@ -90,6 +90,10 @@ void AITransformationSystem::transform(GameEngine& gameContext, AITransformation
 	AIchaseComp.objectiveId = transformComp.objectiveId;
 			// AIMeleeAtkComponent
 	AImeleeComp.objectiveId = transformComp.objectiveId;
+
+	// Play transformation sound
+	gameContext.getSoundFacadeRef().loadSound(transformComp.transformationSound.soundPath);
+	gameContext.getSoundFacadeRef().playSound(transformComp.transformationSound);
 	
 
 	// Delete this component

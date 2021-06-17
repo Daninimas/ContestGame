@@ -71,6 +71,10 @@ void AIPounceSystem::chaseObjective(GameEngine& gameContext, AIPounceComponent& 
 
 		if (pouncerJump.cooldown > pouncerJump.maxCooldown) { // if has cooldown on floor
 			chaserVel.velocity.y = pouncerJump.impulse;
+
+			// Play jump sound
+			gameContext.getSoundFacadeRef().loadSound(pouncerJump.jumpSound.soundPath);
+			gameContext.getSoundFacadeRef().playSound(pouncerJump.jumpSound);
 		}
 
 		pounceComp.cooldown = 0.f;

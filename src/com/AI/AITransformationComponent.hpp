@@ -4,6 +4,7 @@
 #include <tools/BoundingBox.hpp>
 #include <tools/Vector2.hpp>
 #include <tools/Color.hpp>
+#include <tools/Sound.hpp>
 #include <string>
 #include <array>
 
@@ -27,4 +28,6 @@ public:
 
         // new situation
     Vector2 newScale{ 1.f, 1.f };
+
+    Sound transformationSound;
 };

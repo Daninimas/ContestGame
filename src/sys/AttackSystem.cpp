@@ -449,6 +449,10 @@ void AttackSystem::checkAttacksHits(GameEngine& gameContext) const{
 		
 		if (attackCol.collide) {
 			resolveAttackHit(gameContext, attackCol, attack, attacksToDelete);
+
+			// Play transformation sound
+			gameContext.getSoundFacadeRef().loadSound(attack.hitSound.soundPath);
+			gameContext.getSoundFacadeRef().playSound(attack.hitSound);
 		}
 	}
 

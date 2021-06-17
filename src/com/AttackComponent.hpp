@@ -2,6 +2,7 @@
 
 #include "Component.hpp"
 #include <enum/AttackType.hpp>
+#include <tools/Sound.hpp>
 #include <vector>
 
 class AttackComponent : public Component {
@@ -21,5 +22,8 @@ public:
     // For the damage platforms
     float resetDamagedEntTime{ 1.f };
     float resetDamagedEntTimeCounter{ 0.f };
+
+    // Sound
+    Sound hitSound;
 };
 
