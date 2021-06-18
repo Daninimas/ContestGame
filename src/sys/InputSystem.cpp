@@ -81,6 +81,10 @@ void InputSystem::inputPlaying(GameEngine& gameContext) const {
         auto& jumpComp = gameContext.entityMan->getComponent<JumpComponent>(WorldElementsData::playerId);
         if (jumpComp.cooldown > jumpComp.maxCooldown) { // if has cooldown on floor
             playerVel.velocity.y = jumpComp.impulse;
+
+            // Play jump sound
+            gameContext.getSoundFacadeRef().loadSound(jumpComp.jumpSound.soundPath);
+            gameContext.getSoundFacadeRef().playSound(jumpComp.jumpSound);
         }
         playerInput.movedWithKeyboard = true;
         playerInput.jumping = true;

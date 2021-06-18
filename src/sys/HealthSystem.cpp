@@ -54,6 +54,10 @@ void HealthSystem::manageHeatlths(GameEngine& gameContext) const {
                 health.currentHealth -= health.damageReceived;
 
                 health.hitColorCounter = health.hitColorMaxTime;
+
+                // Play damage sound
+                gameContext.getSoundFacadeRef().loadSound(health.damageSound.soundPath);
+                gameContext.getSoundFacadeRef().playSound(health.damageSound);
             }
 
 

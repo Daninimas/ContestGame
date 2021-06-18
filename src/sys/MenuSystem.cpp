@@ -54,7 +54,13 @@ void MenuSystem::update(GameEngine& gameContext) const {
 
 
 void MenuSystem::selectOption(GameEngine& gameContext, MenuComponent& menuComp, std::size_t lastSelected) const {
-	
+	// Play select option
+	Sound selectSound;
+	selectSound.soundPath = "./Media/Sound/UI/cursor_style_4.wav";
+	gameContext.getSoundFacadeRef().loadSound(selectSound.soundPath);
+	gameContext.getSoundFacadeRef().playSound(selectSound);
+
+
 	// Deselect last
 	gameContext.entityMan->getComponent<MenuOptionComponent>(menuComp.optionsId[lastSelected]).active = false;
 	gameContext.entityMan->getComponent<TextComponent>(menuComp.optionsId[lastSelected]).color = { 255, 255, 255, 255 };
@@ -66,8 +72,9 @@ void MenuSystem::selectOption(GameEngine& gameContext, MenuComponent& menuComp, 
 }
 
 void MenuSystem::acceptOption(GameEngine& gameContext, MenuComponent& menuComp) const {
+	MenuOptionComponent& menuOption = gameContext.entityMan->getComponent<MenuOptionComponent>(menuComp.optionsId[menuComp.selectedOption]);
 
-	switch ( gameContext.entityMan->getComponent<MenuOptionComponent>(menuComp.optionsId[menuComp.selectedOption]).option )
+	switch (menuOption.option )
 	{
 	case MenuOptions::BACK:
 		gameContext.popGameState();
@@ -157,6 +164,10 @@ void MenuSystem::acceptOption(GameEngine& gameContext, MenuComponent& menuComp) 
 	if (GameObjectType::MAINMENU == gameContext.entityMan->getEntity(menuComp.id).getGameObjectType()) {
 		gameContext.getSoundFacadeRef().stopAllMusic();
 	}
+
+	// Play select sound
+	gameContext.getSoundFacadeRef().loadSound(menuOption.acceptSound.soundPath);
+	gameContext.getSoundFacadeRef().playSound(menuOption.acceptSound);
 
 	gameContext.eraseEntityByID(menuComp.id);
 }

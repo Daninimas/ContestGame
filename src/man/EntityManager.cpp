@@ -207,6 +207,8 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
 
     // Jump
     jumpComp.impulse = -200.f;
+    jumpComp.jumpSound.soundPath = "./Media/Sound/Player/jump.wav";
+    jumpComp.jumpSound.volume = 60.f;
     //jumpComp.jumptable = { 500.f, 500.f, 400.f, 400.f, 300.f, 300.f, 200.f, 100.f };
     
     // Sensor
@@ -223,6 +225,9 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
     // Health
     heathComp.extraLifes = 1;
     heathComp.recoverTime = 2.f;
+    heathComp.damageSound.soundPath = "./Media/Sound/Player/damage_6_sean.wav";
+    heathComp.damageSound.volume = 60.f;
+    heathComp.deathSound.soundPath = "./Media/Sound/Player/death_10_sean(modified).wav";
     //heathComp.recoverTimeCounter = heathComp.recoverTime;
 
 
@@ -1627,6 +1632,7 @@ int EntityManager::createMenuOption(GameEngine& gameContext, Vector2 position, f
     situation.noWorldDelete = true;
 
     optionComp.option = menuOpt;
+    optionComp.acceptSound.soundPath = "./Media/Sound/UI/confirm_style_4_001.wav";
 
     textComp.isHUDElement = true;
     textComp.size = 40;
@@ -1645,6 +1651,7 @@ int EntityManager::createMenuOption(GameEngine& gameContext, Vector2 position, f
 
     case MenuOptions::BACK:
         textComp.text = "BACK";
+        optionComp.acceptSound.soundPath = "./Media/Sound/UI/back_style_4_001.wav";
 
         break;
 

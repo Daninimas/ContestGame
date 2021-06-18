@@ -3,6 +3,7 @@
 #include "Component.hpp"
 #include <enum/GameObjectType.hpp>
 #include <tools/Color.hpp>
+#include <tools/Sound.hpp>
 
 class HealthComponent : public Component {
 public:
@@ -37,4 +38,8 @@ public:
 
     // For the score system
     int score{ 100 };  // The score that gives to the player when this entity dies
+
+    // Sound
+    Sound damageSound;
+    Sound deathSound;
 };

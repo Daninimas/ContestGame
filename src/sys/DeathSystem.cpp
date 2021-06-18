@@ -24,10 +24,13 @@ std::vector<int> DeathSystem::getDeadEntities(GameEngine& gameContext) const {
 
     for (auto& health : allHealths) {
         auto entityId{ health.id };
-        auto& healthComp{ health };
 
-        if (healthComp.currentHealth == 0) {
+        if (health.currentHealth == 0) {
             deadEntities.emplace_back(entityId);
+
+            // Play death sound
+            gameContext.getSoundFacadeRef().loadSound(health.deathSound.soundPath);
+            gameContext.getSoundFacadeRef().playSound(health.deathSound);
         }
     }
     return deadEntities;
