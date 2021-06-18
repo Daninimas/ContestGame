@@ -23,6 +23,9 @@ void DodgeSystem::update(GameEngine& gameContext) const {
 		else if (dodgeComp.activateDodge && dodgeComp.cooldown > dodgeComp.maxCooldown && gameContext.entityMan->existsComponent<VelocityComponent>(dodgeComp.id)) {
 			dodgeComp.dodgeDuration = 0.f;
 			
+			// Play dodge sound
+			gameContext.getSoundFacadeRef().loadSound(dodgeComp.dodgeSound.soundPath);
+			gameContext.getSoundFacadeRef().playSound(dodgeComp.dodgeSound);
 		}
 
 		dodgeComp.activateDodge = false;

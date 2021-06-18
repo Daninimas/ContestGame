@@ -1,5 +1,6 @@
 #pragma once
 #include "Component.hpp"
+#include <tools/Sound.hpp>
 
 class DodgeComponent : public Component {
 public:
@@ -16,6 +17,9 @@ public:
 
     float dodgeDuration{ 0.f };
     float dodgeMaxDuration{ 0.7f };
+
+    // Sound
+    Sound dodgeSound;
 
 
     // ---------------------- SOLO SI SE TIENE UN INPUT COMPONENT

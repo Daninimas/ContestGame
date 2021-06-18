@@ -172,7 +172,6 @@ void MenuSystem::acceptOption(GameEngine& gameContext, MenuComponent& menuComp) 
 	gameContext.eraseEntityByID(menuComp.id);
 }
 
-
 void MenuSystem::updateNewBestScore(GameEngine& gameContext, MenuComponent& menuComp) const {
 	InputComponent& playerInput = gameContext.entityMan->getComponent<InputComponent>(WorldElementsData::playerId);
 

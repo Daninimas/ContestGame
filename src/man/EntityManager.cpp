@@ -220,6 +220,8 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
     dodgeComp.dodgeTime = 0.2f;
     dodgeComp.maxCooldown = 1.f;
     dodgeComp.velocityIncrementFactor = 4.f;
+    dodgeComp.dodgeSound.soundPath = "./Media/Sound/Player/grunting_8_sean.wav";
+    dodgeComp.dodgeSound.volume = 60.f;
     dodgeComp.initDodgeComponent();
 
     // Health

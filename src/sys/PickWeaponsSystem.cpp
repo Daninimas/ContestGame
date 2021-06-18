@@ -26,6 +26,12 @@ void PickWeaponsSystem::checkPlayerPickingWeapons(GameEngine& gameContext) const
 			if (Utils::checkCollidingWithEntity(weaponCollider.boundingRoot, WorldElementsData::playerId)/*checkWeaponCollidesWithPlayer(weaponCollider.boundingRoot)*/) {
 				setDistanceWeaponToPlayer(gameContext, distanceWeapId);
 
+				// Play equip weapon sound
+				Sound equipSound;
+				equipSound.soundPath = "./Media/Sound/Weapons/equipWeapon.wav";
+				gameContext.getSoundFacadeRef().loadSound(equipSound.soundPath);
+				gameContext.getSoundFacadeRef().playSound(equipSound);
+
 				break;
 			}
 		}
