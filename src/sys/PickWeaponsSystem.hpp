@@ -28,6 +28,5 @@ private:
         { GameObjectType::GRENADE_LAUNCHER, "GRENADE_LAUNCHER" },
         { GameObjectType::LASER_GUN, "LASER" },
         { GameObjectType::SHOTGUN, "SHOTGUN" }
-
     };
 };

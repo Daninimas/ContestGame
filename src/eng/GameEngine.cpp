@@ -133,7 +133,6 @@ void GameEngine::setMenuSystems(GameObjectType const menu) {
     systems.emplace_back(std::make_unique<InputJoystickSystem>());
     systems.emplace_back(std::make_unique<MenuSystem>());
 
-
     if (menu == GameObjectType::MAINMENU) {
         MenuComponent menuComp = entityMan->getComponent<MenuComponent>(menuId);
         getSoundFacadeRef().loadMusic(menuComp.menuMusic.soundPath);
@@ -160,14 +159,21 @@ void GameEngine::run() {
 
             switch (getGameState()) {
             case GameState::GAMEOVER:
+                // Pause playing music
+                //soundFacade.pauseAllMusic();
+
                 setMenuSystems(GameObjectType::GAME_OVER_MENU);
                 break;
 
             case GameState::PLAYING:
+                //soundFacade.playAllMusic();
                 setPlayingSystems();
                 break;
 
             case GameState::PAUSE:
+                // Pause playing music
+                //soundFacade.pauseAllMusic();
+
                 setMenuSystems(GameObjectType::PAUSE);
                 break;
 

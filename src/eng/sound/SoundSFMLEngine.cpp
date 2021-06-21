@@ -41,6 +41,19 @@ void SoundSFMLEngine::stopAllMusic() {
 	}
 }
 
+void SoundSFMLEngine::pauseAllMusic() {
+	for (auto& music : musicMap) {
+		music.second.pause();
+	}
+}
+
+void SoundSFMLEngine::playAllMusic() {
+	for (auto& music : musicMap) {
+		music.second.play();
+	}
+}
+
+
 
 
 void SoundSFMLEngine::loadSound(std::string soundPath) {

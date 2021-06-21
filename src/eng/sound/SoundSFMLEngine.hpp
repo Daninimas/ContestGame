@@ -16,7 +16,9 @@ public:
 	void playMusic(Sound& musicPath) override;
 
 	void stopAllMusic() override;
-
+	void pauseAllMusic() override;
+	void playAllMusic() override;
+	//void updateMusic(Sound musica, nuevo estado (pausa, play, stop)) override;
 
 	void loadSound(std::string soundPath) override;
 	void loadSoundBuffer(std::string soundBufferPath) override;

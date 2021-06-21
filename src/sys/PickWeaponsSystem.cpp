@@ -109,5 +109,5 @@ void PickWeaponsSystem::displayWeaponNameText(GameEngine& gameContext, int weapo
 
 	string text = weaponTextMap.at(gameContext.entityMan->getEntity(weaponId).getGameObjectType());
 
-	gameContext.entityMan->createFloatingText(gameContext, weaponSit.position, 0.f, text, {255, 0, 0, 255}, false, 20, 2.5f, -40.f);
+	gameContext.entityMan->createFloatingText(gameContext, weaponSit.position, 0.f, text, { 249, 207, 19, 255}, false, 20, 2.5f, -40.f);
 }

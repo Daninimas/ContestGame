@@ -69,6 +69,8 @@ void PickPowerUpSystem::setPowerUpToEntity(GameEngine& gameContext, PowerUpCompo
 		break;
 	}
 
+	displayPowerUpNameText(gameContext, powerUp);
+
 	powerUpsToDelete.emplace_back(powerUp.id);
 }
 
@@ -104,4 +106,13 @@ void PickPowerUpSystem::setFuryToEntity(GameEngine& gameContext, PowerUpComponen
 	furyComp.speedIncFactor = powerUp.furySpeedIncFactor;
 	furyComp.totalLifeTime = powerUp.furyTotalLifeTime;
 	furyComp.furyColor = powerUp.furyColor;
+}
+
+
+void PickPowerUpSystem::displayPowerUpNameText(GameEngine& gameContext, PowerUpComponent& powerUp) const {
+	SituationComponent& powerUpSit = gameContext.entityMan->getComponent<SituationComponent>(powerUp.id);
+
+	string text = powerUpTextMap.at(powerUp.type);
+
+	gameContext.entityMan->createFloatingText(gameContext, powerUpSit.position, 0.f, text, { 255, 0, 0, 255 }, false, 20, 2.5f, -40.f);
 }
