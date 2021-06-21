@@ -1325,7 +1325,7 @@ int EntityManager::createTurretGun(GameEngine& gameContext, Vector2 position, ui
     distanceWeaponComp.attackGeneralVelociy = 900.f;
     distanceWeaponComp.attackGravity = 0.f;
     distanceWeaponComp.maxCooldown = 0.13f;
-    distanceWeaponComp.attackLifetime = 1.5f;
+    distanceWeaponComp.attackLifetime = 0.7f;
     distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BULLET;
     distanceWeaponComp.infiniteAmmo = true;
     distanceWeaponComp.bulletSpreadAngle = 5.f;
