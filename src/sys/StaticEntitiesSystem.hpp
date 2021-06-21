@@ -2,6 +2,7 @@
 
 #include "System.hpp"
 #include <com/ComponentsIncluder>
+#include <array>
 
 class StaticEntitiesSystem : public System {
 public:
@@ -14,4 +15,7 @@ public:
 private:
     void    createPlayer(GameEngine& gameContext) const;
     void    createWorld(GameEngine &gameContext) const;
+
+
+    std::array<GameObjectType, 2> worldGameObjets {GameObjectType::WORLD_DEBUG, GameObjectType::WORLD_1};
 };

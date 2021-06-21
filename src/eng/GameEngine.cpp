@@ -66,7 +66,7 @@ void GameEngine::reset() {
     WorldElementsData::worldMeleeWeapons.clear();
     WorldElementsData::enemiesInWorld = 0;
     WorldElementsData::playerScore = 0;
-
+    WorldElementsData::currentWorld = 0;
 
     // Restart game
     init();
@@ -205,6 +205,10 @@ void GameEngine::run() {
                 systems.emplace_back(std::make_unique<WaitAfterLoseLifeSystem>());
                 systemsLate.emplace_back(std::make_unique<CameraSystem>());
                 systemsLate.emplace_back(std::make_unique<WorldSystem>());
+                break;
+
+            case GameState::NEXT_LEVEL:
+                loadNextLevel();
                 break;
             }
 
@@ -583,4 +587,34 @@ void GameEngine::pushGameState(const GameState gs) {
 void GameEngine::clearGameStateStack() {
     stack<GameState>().swap(gameStateStack);
     gameStateChanged = true;
+}
+
+
+
+void GameEngine::loadNextLevel() {
+    // Delete all entities from engine
+    windowFacade.eraseAllEntities();
+
+    // Stop all music
+    soundFacade.stopAllMusic();
+
+    // Delete previous entity manager
+    entityMan.reset();
+    entityMan = std::make_unique<EntityManager>();
+
+    // Reset world elements data
+    WorldElementsData::worldId = 0;
+    WorldElementsData::playerId = std::numeric_limits<int>::max();
+    WorldElementsData::activeCameraId = 0;
+    WorldElementsData::playerDroneId = std::numeric_limits<int>::max();
+    WorldElementsData::worldDistanceWeapons.clear();
+    WorldElementsData::worldMeleeWeapons.clear();
+    WorldElementsData::enemiesInWorld = 0;
+    ++WorldElementsData::currentWorld; // poner siguiente mapa
+
+    StaticEntitiesSystem staticSystem{};
+    staticSystem.init(*this);
+
+    popGameState(); // Set playing again
+    setPlayingSystems();
 }

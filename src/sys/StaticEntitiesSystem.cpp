@@ -93,5 +93,28 @@ void StaticEntitiesSystem::createPlayer(GameEngine &gameContext) const {
 }
 
 void StaticEntitiesSystem::createWorld(GameEngine& gameContext) const {
-    gameContext.entityMan->createWorld(gameContext, GameObjectType::WORLD_DEBUG);
+    gameContext.entityMan->createWorld(gameContext, worldGameObjets[WorldElementsData::currentWorld]);
+
+    std::string text = "";
+    Vector2 position = gameContext.entityMan->getComponent<SituationComponent>(WorldElementsData::playerId).position;
+    position.x += 200.f;
+    switch (worldGameObjets[WorldElementsData::currentWorld])
+    {
+    case GameObjectType::WORLD_DEBUG:
+        text = "STAGE 0: Debug world";
+        break;
+
+    case GameObjectType::WORLD_1:
+        text = "STAGE 1: Dying city";
+        break;
+
+    case GameObjectType::WORLD_2:
+        text = "STAGE 2:  The forest";
+        break;
+
+    case GameObjectType::WORLD_3:
+        text = "STAGE 3: Secret base";
+        break;
+    }
+    gameContext.entityMan->createFloatingText(gameContext, position, 0, text, { 255, 153, 0, 255 }, false, 30, 4.f, -30);
 }

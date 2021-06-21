@@ -60,6 +60,8 @@ private:
     void updateSound();
     void render();
 
+    void loadNextLevel();
+
     void setMenuSystems(GameObjectType const menu);
     void setPlayingSystems();
 

@@ -10,5 +10,6 @@ enum class GameState {
     WAIT_AFTER_LOSE_LIFE,
     BEST_SCORES,
     NEW_BEST_SCORE,
-    MAIN_MENU
+    MAIN_MENU,
+    NEXT_LEVEL
 };
