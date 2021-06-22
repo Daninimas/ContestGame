@@ -58,6 +58,7 @@ private:
         { "BOMBER_ENEMY", GameObjectType::BOMBER_ENEMY },
         { "POUNCER_ENEMY", GameObjectType::POUNCER_ENEMY },
         { "ENEMY_SPIDER", GameObjectType::ENEMY_SPIDER },
+        { "FLYING_SHOOTER_ENEMY", GameObjectType::FLYING_SHOOTER_ENEMY },
         { "FIRST_ENEMY", GameObjectType::FIRST_ENEMY },
         
 

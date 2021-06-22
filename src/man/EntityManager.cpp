@@ -174,9 +174,9 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
     DodgeComponent& dodgeComp = createComponent<DodgeComponent>(entityId);
     AnimationComponent& animComp = createComponent<AnimationComponent>(entityId);
     // Create the distance weapon
-    //if(WorldElementsData::currentWorld != 0)
+    if(WorldElementsData::currentWorld != 0)
         Utils::setNormalPistolToEntity(gameContext, entityId);
-    /*else {
+    else {
         DistanceWeaponComponent& distanceWeaponComp = gameContext.entityMan->createComponent<DistanceWeaponComponent>(entityId);
 
         distanceWeaponComp.attackBounding = { 0.f, 0.f, 0.f, 0.f };
@@ -190,7 +190,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
         distanceWeaponComp.bulletSpreadAngle = 1.f;
         distanceWeaponComp.spawnAttackPos = { 0.f, 0.f };
 
-    }*/
+    }
 
     //######### DATA ########//
     situation.position = position;
@@ -222,9 +222,10 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
     renderComp.spriteRect = { 100, 400, 60, 500 };
 
     // Jump
-    jumpComp.impulse = -320.f;
+    jumpComp.impulse = -310.f;
     jumpComp.jumpSound.soundPath = "./Media/Sound/Player/jump.wav";
     jumpComp.jumpSound.volume = 60.f;
+    jumpComp.maxCooldown = 0.5f;
     //jumpComp.jumptable = { 500.f, 500.f, 400.f, 400.f, 300.f, 300.f, 200.f, 100.f };
     
     // Sensor
@@ -486,7 +487,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
     }
 
     else if (goType == GameObjectType::CHASERJUMPER) {
-        velocityComp.speedX = 50.f;
+        velocityComp.speedX = 65.f;
 
         // Collider
         colliderComp.boundingRoot.bounding = { 0.f, 44.f, 0.f, 63.f };
@@ -495,7 +496,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         renderComp.sprite = "Media/Images/Enemy.png";
         renderComp.spriteRect = { 0, 248, 0, 360 };
 
-        healthComp.maxHealth = 3;
+        healthComp.maxHealth = 5;
 
         AIChaseComponent& chaseComp = createComponent<AIChaseComponent>(entityId);
         createComponent<AIMeleeAtkComponent>(entityId);
@@ -550,7 +551,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
     }
 
     else if (goType == GameObjectType::DISTANCE_WALKING_ENEMY) {
-        velocityComp.speedX = 50.f;
+        velocityComp.speedX = 55.f;
 
         // Collider
         colliderComp.boundingRoot.bounding = { 0.f, 44.f, 0.f, 63.f };
@@ -638,7 +639,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         renderComp.sprite = "Media/Images/Personajes/alien volador/AlienVolador.png";
         renderComp.spriteRect = { 0, 399, 0, 464 };
 
-        healthComp.maxHealth = 8;
+        healthComp.maxHealth = 9;
 
         AIFlyingChaseComponent& flyingChaseComp = createComponent<AIFlyingChaseComponent>(entityId);
 
@@ -659,18 +660,53 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
 
         distanceWeaponComp.attackSound.soundPath = "Media/Sound/Weapons/silbidoBombaCayendo.wav";
 
-        distanceWeaponComp.explosionExpansion = 1.3f;
+        distanceWeaponComp.explosionExpansion = 2.f;
         distanceWeaponComp.explosionTime = 0.5f;
         distanceWeaponComp.startActivated = false;
         distanceWeaponComp.spawnAttackPos = { 26.f, 40.f };
 
         AIDropBombComponent& dropBombComp = createComponent<AIDropBombComponent>(entityId);
         dropBombComp.maxCooldown = 2.f;
+    }
 
+    else if (goType == GameObjectType::FLYING_SHOOTER_ENEMY) {
+    velocityComp.speedX = 65.f;
+    velocityComp.gravity = 0.f;
+
+    // Collider
+    colliderComp.boundingRoot.bounding = { 2.f, 71.f, 2.f, 80.f };
+
+    // Render component
+    renderComp.sprite = "Media/Images/Personajes/alien volador/AlienVolador.png";
+    renderComp.spriteRect = { 0, 399, 0, 464 };
+
+    healthComp.maxHealth = 5;
+
+    AIFlyingChaseComponent& flyingChaseComp = createComponent<AIFlyingChaseComponent>(entityId);
+
+    flyingChaseComp.maxHeigtht = 230.f;
+    flyingChaseComp.minHeigtht = 200.f;
+    flyingChaseComp.minDistanceX = rand() % (38 - 6) + 6; // Entre 65 y 46
+
+    AIDistanceAtkComponent& distanceAIComp = createComponent<AIDistanceAtkComponent>(entityId);
+    distanceAIComp.range.x = 175.f;
+    distanceAIComp.range.y = 235.f;
+
+    DistanceWeaponComponent& distanceWeaponComp = createComponent<DistanceWeaponComponent>(entityId);
+    // Distance
+    distanceWeaponComp.attackBounding = { 0.f, 5.f, 0.f, 5.f };
+    distanceWeaponComp.damage = 1;
+    distanceWeaponComp.attackGeneralVelociy = 270.f;
+    distanceWeaponComp.attackGravity = 10.f;
+    distanceWeaponComp.maxCooldown = 1.f;
+    distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BULLET;
+    distanceWeaponComp.attackLifetime = 1.f;
+    distanceWeaponComp.bulletSpreadAngle = 15.f;
+    distanceWeaponComp.infiniteAmmo = true;
     }
 
     else if (goType == GameObjectType::POUNCER_ENEMY) {
-        velocityComp.speedX = 45.f;
+        velocityComp.speedX = 70.f;
 
         // Collider
         colliderComp.boundingRoot.bounding = { 0.f, 52.f, 0.f, 67.f };
@@ -710,7 +746,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
     }
 
     else if (goType == GameObjectType::ENEMY_SPIDER) {
-        velocityComp.speedX = 45.f;
+        velocityComp.speedX = 70.f;
 
         // Collider
         colliderComp.boundingRoot.bounding = { 0.f, 52.f, 0.f, 67.f };
@@ -851,7 +887,7 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
     else if (goType == GameObjectType::LASER_GUN) {
         DistanceWeaponComponent& distanceWeaponComp = createComponent<DistanceWeaponComponent>(entityId);
 
-        distanceWeaponComp.attackBounding = { 0.f, 5000.f, 0.f, 5.f };
+        distanceWeaponComp.attackBounding = { 0.f, 500.f, 0.f, 5.f };
         distanceWeaponComp.damage = 2;
         distanceWeaponComp.attackGeneralVelociy = 0.f;
         distanceWeaponComp.attackGravity = 0.f;
