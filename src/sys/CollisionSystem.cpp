@@ -254,7 +254,7 @@ void CollisionSystem::clearCollisions(ColliderComponent& collider) const {
 
 bool CollisionSystem::checkCollisionWithPlatform(GameEngine& gameContext, ColliderComponent& platformColl, ColliderComponent& entityColl, SituationComponent& platformSit, SituationComponent& entitySit, float overlapY) const {
     //std::cout << "platformSit y: " << platformSit.position.y << " entitySit y: " << entitySit.position.y << " entityColl yDown: " << entityColl.boundingRoot.bounding.yDown << " overlapY: " << abs(overlapY) << "\n";
-    float bias = 2.9f; // This bias is for solving when you press down, cuanto más grande, el jugador tiene que pulsar durante más tiempo hacia abajo, pero si hay pocos fps o va muy rápido, puede que no coja al jugador cuando está encima de la plataforma
+    float bias = 5.f; // This bias is for solving when you press down, cuanto más grande, el jugador tiene que pulsar durante más tiempo hacia abajo, pero si hay pocos fps o va muy rápido, puede que no coja al jugador cuando está encima de la plataforma
     if (abs(overlapY) > bias) {
         overlapY = bias;
     }

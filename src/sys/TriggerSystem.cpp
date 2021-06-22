@@ -54,6 +54,23 @@ void TriggerSystem::activateFunction(GameEngine& gameContext, TriggerComponent& 
 		case TriggerFunction::GIVE_CHILD_POINTS:
 			WorldElementsData::playerScore += -(gameContext.entityMan->getComponent<HealthComponent>(trigger.id).score);
 			break;
+
+		case TriggerFunction::SPAWN_CITY_1:
+			int spawnId = gameContext.entityMan->createSpawner(gameContext, Vector2(7200.f, 520.f), 0, GameObjectType::CHASERJUMPER);
+			SpawnerComponent& spawnerComp = gameContext.entityMan->getComponent<SpawnerComponent>(spawnId);
+			spawnerComp.objectiveId = WorldElementsData::playerId;
+			spawnerComp.maxCooldown = 2.5f;
+			spawnerComp.numObjectsToSpawn = 7;
+			spawnerComp.range = { 10000 , 1000 };
+
+			int spawn2Id = gameContext.entityMan->createSpawner(gameContext, Vector2(6300.f, 520.f), 0, GameObjectType::POUNCER_ENEMY);
+			SpawnerComponent& spawner2Comp = gameContext.entityMan->getComponent<SpawnerComponent>(spawn2Id);
+			spawner2Comp.objectiveId = WorldElementsData::playerId;
+			spawner2Comp.maxCooldown = 2.f;
+			spawner2Comp.numObjectsToSpawn = 7;
+			spawner2Comp.range = { 10000 , 1000 };
+
+			break;
 		}
 	}
 }

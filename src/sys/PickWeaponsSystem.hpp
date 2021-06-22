@@ -27,6 +27,7 @@ private:
         { GameObjectType::KNIFE, "KNIFE" },
         { GameObjectType::GRENADE_LAUNCHER, "GRENADE_LAUNCHER" },
         { GameObjectType::LASER_GUN, "LASER" },
+        { GameObjectType::PISTOL, "PISTOL" },
         { GameObjectType::SHOTGUN, "SHOTGUN" }
     };
 };

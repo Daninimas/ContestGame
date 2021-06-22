@@ -47,6 +47,7 @@ private:
         { "GRENADE_LAUNCHER", GameObjectType::GRENADE_LAUNCHER },
         { "LASER_GUN", GameObjectType::LASER_GUN },
         { "SHOTGUN", GameObjectType::SHOTGUN },
+        { "PISTOL", GameObjectType::PISTOL },
 
         // Enemy types
         { "CHASER", GameObjectType::CHASER },
@@ -57,6 +58,8 @@ private:
         { "BOMBER_ENEMY", GameObjectType::BOMBER_ENEMY },
         { "POUNCER_ENEMY", GameObjectType::POUNCER_ENEMY },
         { "ENEMY_SPIDER", GameObjectType::ENEMY_SPIDER },
+        { "FIRST_ENEMY", GameObjectType::FIRST_ENEMY },
+        
 
         // Power ups
         { "POWERUP_SHIELD", GameObjectType::POWERUP_SHIELD },
@@ -86,7 +89,9 @@ private:
     static inline std::map<std::string, TriggerFunction> triggerFuncMap{    // Este mapa sirve para coger la funcion de trigger que se esta generando y pasarlo a enum 
         { "PLAY_MUSIC", TriggerFunction::PLAY_MUSIC },
         { "PLAY_SOUND", TriggerFunction::PLAY_SOUND },
-        { "CREATE_ENTITY", TriggerFunction::CREATE_ENTITY }
+        { "CREATE_ENTITY", TriggerFunction::CREATE_ENTITY },
+
+        { "SPAWN_CITY_1", TriggerFunction::SPAWN_CITY_1 }
     };
 
     static inline std::map<std::string, uint8_t> facingMap {    // Este mapa sirve para saber desde un string el facing 

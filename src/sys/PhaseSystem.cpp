@@ -55,7 +55,7 @@ void PhaseSystem::changeToNextPhase(GameEngine& gameContext, WorldComponent& wor
 		gameContext.getSoundFacadeRef().playMusic(worldComp.currentPhase.phaseMusic);
 	}*/
 
-	Utils::setPhaseStartToView(gameContext, previousPhaseDirection);
+	//Utils::setPhaseStartToView(gameContext, previousPhaseDirection);
 }
 
 

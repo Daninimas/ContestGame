@@ -17,5 +17,5 @@ private:
     void    createWorld(GameEngine &gameContext) const;
 
 
-    std::array<GameObjectType, 2> worldGameObjets {GameObjectType::WORLD_DEBUG, GameObjectType::WORLD_1};
+    std::array<GameObjectType, 2> worldGameObjets {GameObjectType::WORLD_1, GameObjectType::WORLD_DEBUG};
 };

@@ -27,7 +27,7 @@ public:
     // if we want the spawner to spawn a certain number ob objects and die
     uint16_t numObjectsToSpawn{ std::numeric_limits<uint16_t>::max() }; // if we want it to be unlimited, with this number it is ok
 
-    uint8_t maxSpawnedObjsAlive{ 5 }; // the number of object that are in the world simustaneously (for optimization)
+    uint8_t maxSpawnedObjsAlive{ 25 }; // the number of object that are in the world simustaneously (for optimization)
 
     std::vector<int> spawnedObjsAlive;
 };

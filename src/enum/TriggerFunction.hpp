@@ -10,6 +10,8 @@ enum class TriggerFunction
     // Especific
     GIVE_CHILD_POINTS,
 
+    // Especific generation
+    SPAWN_CITY_1,
 
 
     // ERROR

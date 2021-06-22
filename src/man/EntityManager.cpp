@@ -174,7 +174,23 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
     DodgeComponent& dodgeComp = createComponent<DodgeComponent>(entityId);
     AnimationComponent& animComp = createComponent<AnimationComponent>(entityId);
     // Create the distance weapon
-    Utils::setNormalPistolToEntity(gameContext, entityId);
+    if(WorldElementsData::currentWorld != 0)
+        Utils::setNormalPistolToEntity(gameContext, entityId);
+    else {
+        DistanceWeaponComponent& distanceWeaponComp = gameContext.entityMan->createComponent<DistanceWeaponComponent>(entityId);
+
+        distanceWeaponComp.attackBounding = { 0.f, 0.f, 0.f, 0.f };
+        distanceWeaponComp.damage = 0;
+        distanceWeaponComp.attackGeneralVelociy = 0.f;
+        distanceWeaponComp.attackGravity = 0.f;
+        distanceWeaponComp.maxCooldown = 4000.f;
+        distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BULLET;
+        distanceWeaponComp.ammo = 0;
+        distanceWeaponComp.infiniteAmmo = true;
+        distanceWeaponComp.bulletSpreadAngle = 1.f;
+        distanceWeaponComp.spawnAttackPos = { 0.f, 0.f };
+
+    }
 
     //######### DATA ########//
     situation.position = position;
@@ -183,7 +199,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
     situation.scale = Vector2(0.18f, 0.18f);
 
     velocityComp.speedX = 100.f;
-    velocityComp.gravity = 250.f;
+    velocityComp.gravity = 500.f;
 
     WorldElementsData::playerId = entityId;
 
@@ -206,7 +222,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
     renderComp.spriteRect = { 100, 400, 60, 500 };
 
     // Jump
-    jumpComp.impulse = -200.f;
+    jumpComp.impulse = -300.f;
     jumpComp.jumpSound.soundPath = "./Media/Sound/Player/jump.wav";
     jumpComp.jumpSound.volume = 60.f;
     //jumpComp.jumptable = { 500.f, 500.f, 400.f, 400.f, 300.f, 300.f, 200.f, 100.f };
@@ -221,7 +237,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
     dodgeComp.maxCooldown = 1.f;
     dodgeComp.velocityIncrementFactor = 4.f;
     dodgeComp.dodgeSound.soundPath = "./Media/Sound/Player/grunting_8_sean.wav";
-    dodgeComp.dodgeSound.volume = 60.f;
+    dodgeComp.dodgeSound.volume = 40.f;
     dodgeComp.initDodgeComponent();
 
     // Health
@@ -441,11 +457,14 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
     if (goType == GameObjectType::FIRST_ENEMY) {
         healthComp.maxHealth = 1;
 
+        situation.facing = SituationComponent::Right;
+
         // Collider
         colliderComp.boundingRoot.bounding = { 0.f, 44.f, 0.f, 63.f };
+        colliderComp.weight = 4;
 
         // Render component
-        renderComp.sprite = "Media/Images/Enemy.png";
+        renderComp.sprite = "Media/Images/FirstEnemy.png";
         renderComp.spriteRect = { 0, 512, 0, 512 };
 
         situation.facing = SituationComponent::Right;
@@ -862,9 +881,9 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
         distanceWeaponComp.maxCooldown = 1.f;
         distanceWeaponComp.attackLifetime = 0.2f;
         distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BULLET;
-        distanceWeaponComp.ammo = 10;
+        distanceWeaponComp.ammo = 7;
         distanceWeaponComp.infiniteAmmo = false;
-        distanceWeaponComp.numberOfShells = 5;
+        distanceWeaponComp.numberOfShells = 3;
         distanceWeaponComp.bulletSpreadAngle = 12.f;
         distanceWeaponComp.spawnAttackPos = { 20.f, 39.f };
         distanceWeaponComp.attackSound.soundPath = "Media/Sound/Weapons/shotgunShot.wav";
@@ -875,6 +894,16 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
         situation.scale = {0.3f, 0.3f};
 
         WorldElementsData::worldDistanceWeapons.push_back(entityId);
+    } 
+    else if (goType == GameObjectType::PISTOL) {
+    Utils::setNormalPistolToEntity(gameContext, entityId);
+
+    renderComp.sprite = "Media/Images/shotgun.png";
+    renderComp.spriteRect = { 0, 1, 0, 1 };
+
+    situation.scale = { 0.3f, 0.3f };
+
+    WorldElementsData::worldDistanceWeapons.push_back(entityId);
     }
 
     //######### RENDER ########//
@@ -980,7 +1009,7 @@ int EntityManager::createSpawner(GameEngine& gameContext, Vector2 position, floa
     // Collider
     colliderComp.collisionLayer = ColliderComponent::Enemy; // temporal
     colliderComp.layerMasc = ColliderComponent::Player + ColliderComponent::PlayerAttack + ColliderComponent::Wall + ColliderComponent::PlayerShield + ColliderComponent::Platform; //Collides with player and enemy
-    colliderComp.boundingRoot.bounding = { 0.f, 20.f, 0.f, 20.f };
+    colliderComp.boundingRoot.bounding = { 0.f, 30.f, 0.f, 70.f };
     colliderComp.type = ColliderType::STATIC;
     
 

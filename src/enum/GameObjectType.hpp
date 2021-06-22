@@ -38,6 +38,7 @@ enum class GameObjectType {
     GRENADE_LAUNCHER,
     LASER_GUN,
     SHOTGUN,
+    PISTOL,
 
 
     // Menu types
