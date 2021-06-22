@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="100" tileheight="100" infinite="1" nextlayerid="126" nextobjectid="601">
+ <editorsettings>
+  <export target="../level2.json" format="json"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../Patters/WALL_pat.tsx"/>
+ <tileset firstgid="2" source="../Patters/SPAWNER_pat.tsx"/>
+ <tileset firstgid="5" source="../Patters/PLAYER_pat.tsx"/>
+ <tileset firstgid="9" source="../Patters/WEAPON_pat.tsx"/>
+ <tileset firstgid="12" source="../Patters/ENEMY_pat.tsx"/>
+ <layer id="1" name="Capa de patrones 1" width="100" height="100">
+  <data encoding="base64"/>
+ </layer>
+ <group id="3" name="Phase1">
+  <properties>
+   <property name="Direction" value="Right"/>
+   <property name="maxPhaseTime" type="float" value="25"/>
+   <property name="minPhaseTime" type="float" value="10"/>
+  </properties>
+  <objectgroup id="5" name="phase_size">
+   <object id="71" x="120" y="-106.925" width="1546.71" height="1120.39"/>
+  </objectgroup>
+  <objectgroup id="17" name="PLAYER">
+   <object id="262" type="PLAYER_GENERAL" gid="8" x="157.121" y="492.909" width="54" height="80"/>
+  </objectgroup>
+  <objectgroup color="#ff0000" id="15" name="DAMAGE_PLATFORM">
+   <object id="141" type="DAMAGE_PLATFORM" x="698.573" y="758.621" width="211.205" height="84.1989">
+    <properties>
+     <property name="Damage" type="int" value="100"/>
+    </properties>
+   </object>
+  </objectgroup>
+  <objectgroup color="#00aa00" id="13" name="TRIGGER">
+   <object id="139" type="TRIGGER" x="223.528" y="259.657" width="81.2335" height="328.308">
+    <properties>
+     <property name="Function" value="PLAY_MUSIC"/>
+     <property name="soundPath" value="./Media/Sound/Music/darren-curtis-intruder-aboard.wav"/>
+    </properties>
+   </object>
+  </objectgroup>
+  <objectgroup id="19" name="ENEMY">
+   <object id="509" type="CHASERJUMPER" gid="17" x="635.576" y="511.788" width="45" height="65"/>
+   <object id="514" type="DISTANCE_ENEMY" gid="17" x="1110" y="353" width="45" height="65"/>
+  </objectgroup>
+  <objectgroup id="107" name="SPAWNER">
+   <object id="515" type="CHASERJUMPER" gid="4" x="1512" y="502" width="20" height="20">
+    <properties>
+     <property name="maxCooldown" type="float" value="2"/>
+     <property name="numObjectsToSpawn" type="int" value="4"/>
+     <property name="range.x" type="float" value="470"/>
+     <property name="range.y" type="float" value="400"/>
+    </properties>
+   </object>
+  </objectgroup>
+  <objectgroup color="#0055ff" id="2" name="WALL">
+   <object id="142" type="WALL" x="120" y="588.433" width="581.128" height="171.404">
+    <properties>
+     <property name="isCheckpoint" type="bool" value="true"/>
+    </properties>
+   </object>
+   <object id="147" type="PLATFORM" x="1174.7" y="358.352" width="25.9733" height="224.823"/>
+   <object id="273" type="PLATFORM" x="1080.96" y="555.346" width="31.4278" height="32.9443"/>
+   <object id="274" type="PLATFORM" x="1101.32" y="425.043" width="80.6399" height="14.8837"/>
+   <object id="275" type="WALL" x="501.855" y="564.601" width="38.7088" height="24.1309">
+    <properties>
+     <property name="isCheckpoint" type="bool" value="false"/>
+    </properties>
+   </object>
+   <object id="511" type="WALL" x="344.282" y="551.147" width="32.6482" height="37.5854">
+    <properties>
+     <property name="isCheckpoint" type="bool" value="false"/>
+    </properties>
+   </object>
+   <object id="512" type="WALL" x="900.345" y="587.025" width="755.431" height="171.404">
+    <properties>
+     <property name="isCheckpoint" type="bool" value="true"/>
+    </properties>
+   </object>
+   <object id="513" type="PLATFORM" x="1197.01" y="395.225" width="105.973" height="14.8837"/>
+  </objectgroup>
+ </group>
+ <group id="108" name="Phase2">
+  <properties>
+   <property name="Direction" value="Right"/>
+   <property name="maxPhaseTime" type="float" value="25"/>
+   <property name="minPhaseTime" type="float" value="10"/>
+  </properties>
+  <objectgroup id="109" name="phase_size">
+   <object id="517" x="1656.36" y="-109.955" width="2346.71" height="1120.39"/>
+  </objectgroup>
+  <objectgroup color="#ff0000" id="111" name="DAMAGE_PLATFORM">
+   <object id="519" type="DAMAGE_PLATFORM" x="2001.6" y="779.833" width="1708.18" height="84.1989">
+    <properties>
+     <property name="Damage" type="int" value="100"/>
+    </properties>
+   </object>
+  </objectgroup>
+  <objectgroup id="113" name="ENEMY">
+   <object id="539" type="BOMBER_ENEMY" gid="21" x="3470.06" y="211.697" width="72" height="84"/>
+   <object id="540" type="FLYING_SHOOTER_ENEMY" gid="21" x="3879.15" y="432.909" width="72" height="84"/>
+   <object id="546" type="DISTANCE_ENEMY" gid="17" x="3020.42" y="217.848" width="45" height="65"/>
+   <object id="600" type="ENEMY_SPIDER" gid="17" x="1950.23" y="509.924" width="45" height="65"/>
+  </objectgroup>
+  <objectgroup id="114" name="SPAWNER">
+   <object id="523" type="BOMBER_ENEMY" gid="4" x="3921.09" y="186.848" width="20" height="20">
+    <properties>
+     <property name="maxCooldown" type="float" value="7"/>
+     <property name="numObjectsToSpawn" type="int" value="4"/>
+     <property name="range.x" type="float" value="1530"/>
+     <property name="range.y" type="float" value="10000"/>
+    </properties>
+   </object>
+   <object id="533" type="ENEMY_SPIDER" gid="4" x="1983.94" y="511.212" width="20" height="20">
+    <properties>
+     <property name="maxCooldown" type="float" value="2"/>
+     <property name="numObjectsToSpawn" type="int" value="4"/>
+     <property name="range.x" type="float" value="470"/>
+     <property name="range.y" type="float" value="400"/>
+    </properties>
+   </object>
+   <object id="552" type="FLYING_SHOOTER_ENEMY" gid="4" x="3917.27" y="-16.0606" width="20" height="20">
+    <properties>
+     <property name="maxCooldown" type="float" value="14"/>
+     <property name="numObjectsToSpawn" type="int" value="2"/>
+     <property name="range.x" type="float" value="1530"/>
+     <property name="range.y" type="float" value="10000"/>
+    </properties>
+   </object>
+  </objectgroup>
+  <objectgroup id="116" name="WEAPON">
+   <object id="553" type="LASER_GUN" gid="10" x="2199.76" y="326.939" width="152" height="65"/>
+  </objectgroup>
+  <objectgroup color="#0055ff" id="115" name="WALL">
+   <object id="524" type="WALL" x="1656.36" y="585.403" width="384.158" height="62.3128">
+    <properties>
+     <property name="isCheckpoint" type="bool" value="true"/>
+    </properties>
+   </object>
+   <object id="525" type="PLATFORM" x="2141.37" y="361.383" width="25.9733" height="173.308"/>
+   <object id="527" type="PLATFORM" x="2067.98" y="452.073" width="80.6399" height="14.8837"/>
+   <object id="531" type="WALL" x="2163.68" y="398.255" width="105.973" height="14.8837"/>
+   <object id="532" type="WALL" x="2032.16" y="532.48" width="129.613" height="113.828">
+    <properties>
+     <property name="isCheckpoint" type="bool" value="true"/>
+    </properties>
+   </object>
+   <object id="534" type="PLATFORM" x="2473.89" y="210.316" width="38.0945" height="585.429"/>
+   <object id="535" type="WALL" x="2364.13" y="470.945" width="104.882" height="14.8837"/>
+   <object id="536" type="PLATFORM" x="2508.32" y="413.854" width="160.518" height="14.8837"/>
+   <object id="537" type="PLATFORM" x="2398.53" y="319.831" width="72.6392" height="14.8837"/>
+   <object id="538" type="PLATFORM" x="2518.23" y="283.467" width="202.942" height="14.8837"/>
+   <object id="541" type="PLATFORM" x="3016.08" y="304.255" width="38.0945" height="503.611"/>
+   <object id="542" type="PLATFORM" x="2930.57" y="483.066" width="80.6399" height="14.8837"/>
+   <object id="543" type="WALL" x="3050.51" y="425.975" width="160.518" height="14.8837"/>
+   <object id="544" type="WALL" x="2883.15" y="331.952" width="130.215" height="14.8837"/>
+   <object id="547" type="PLATFORM" x="3487.17" y="275.467" width="38.0945" height="503.611"/>
+   <object id="548" type="WALL" x="3365.3" y="454.278" width="117.004" height="14.8837"/>
+   <object id="549" type="PLATFORM" x="3521.6" y="397.187" width="160.518" height="14.8837"/>
+   <object id="551" type="WALL" x="3710.95" y="571.874" width="287.188" height="286.555">
+    <properties>
+     <property name="isCheckpoint" type="bool" value="true"/>
+    </properties>
+   </object>
+  </objectgroup>
+ </group>
+ <group id="117" name="Phase3">
+  <properties>
+   <property name="Direction" value="Right"/>
+   <property name="maxPhaseTime" type="float" value="25"/>
+   <property name="minPhaseTime" type="float" value="10"/>
+  </properties>
+  <objectgroup id="118" name="phase_size">
+   <object id="555" x="3980.61" y="-119.046" width="2352.77" height="1120.39"/>
+  </objectgroup>
+  <objectgroup color="#ff0000" id="119" name="DAMAGE_PLATFORM">
+   <object id="556" type="DAMAGE_PLATFORM" x="3998.57" y="904.076" width="2317.27" height="84.1989">
+    <properties>
+     <property name="Damage" type="int" value="100"/>
+    </properties>
+   </object>
+  </objectgroup>
+  <objectgroup id="124" name="POWERUP">
+   <object id="596" type="POWERUP_EXTRA_LIFE" x="4303.03" y="472.727">
+    <point/>
+   </object>
+  </objectgroup>
+  <objectgroup id="120" name="ENEMY">
+   <object id="559" type="DISTANCE_ENEMY" gid="17" x="4617.39" y="342.091" width="45" height="65"/>
+   <object id="587" type="CHASERJUMPER" gid="17" x="5750.23" y="534.167" width="45" height="65"/>
+  </objectgroup>
+  <objectgroup id="121" name="SPAWNER">
+   <object id="560" type="ENEMY_SPIDER" gid="4" x="6163.52" y="353.515" width="20" height="20">
+    <properties>
+     <property name="maxCooldown" type="float" value="3"/>
+     <property name="numObjectsToSpawn" type="int" value="8"/>
+     <property name="range.x" type="float" value="1300"/>
+     <property name="range.y" type="float" value="10000"/>
+    </properties>
+   </object>
+   <object id="561" type="ENEMY_SPIDER" gid="4" x="6193.03" y="583.939" width="20" height="20">
+    <properties>
+     <property name="maxCooldown" type="float" value="3"/>
+     <property name="numObjectsToSpawn" type="int" value="-1"/>
+     <property name="range.x" type="float" value="1000"/>
+     <property name="range.y" type="float" value="1000"/>
+    </properties>
+   </object>
+  </objectgroup>
+  <objectgroup id="122" name="WEAPON">
+   <object id="586" type="GRENADE_LAUNCHER" gid="9" x="4869.45" y="584.515" width="152" height="65"/>
+  </objectgroup>
+  <objectgroup id="125" name="CHILD">
+   <object id="597" type="CHILD" gid="19" x="4214.24" y="521.97" width="21" height="50"/>
+   <object id="598" type="CHILD" gid="19" x="4138.48" y="521.848" width="21" height="50"/>
+   <object id="599" type="CHILD" gid="19" x="4086.97" y="520.788" width="21" height="50"/>
+  </objectgroup>
+  <objectgroup color="#0055ff" id="123" name="WALL">
+   <object id="564" type="WALL" x="3980.61" y="576.312" width="384.158" height="174.434">
+    <properties>
+     <property name="isCheckpoint" type="bool" value="true"/>
+    </properties>
+   </object>
+   <object id="570" type="PLATFORM" x="4288.38" y="528.521" width="47.3066" height="51.2473"/>
+   <object id="582" type="WALL" x="4359.44" y="664.298" width="1962.95" height="86.5552">
+    <properties>
+     <property name="isCheckpoint" type="bool" value="true"/>
+    </properties>
+   </object>
+   <object id="583" type="PLATFORM" x="4546.04" y="380.437" width="29.1248" height="290.641"/>
+   <object id="584" type="PLATFORM" x="4433.92" y="487.225" width="113.973" height="23.9743"/>
+   <object id="585" type="PLATFORM" x="4567.26" y="427.407" width="113.973" height="23.9743"/>
+   <object id="588" type="PLATFORM" x="5094.52" y="178.922" width="29.1248" height="478.52"/>
+   <object id="589" type="PLATFORM" x="4982.4" y="407.71" width="113.973" height="23.9743"/>
+   <object id="590" type="PLATFORM" x="5121.8" y="316.801" width="229.125" height="23.9743"/>
+   <object id="591" type="PLATFORM" x="4924.83" y="224.376" width="177.61" height="23.9743"/>
+   <object id="592" type="PLATFORM" x="6043.01" y="345.588" width="29.1248" height="317.914"/>
+   <object id="593" type="PLATFORM" x="5930.9" y="391.042" width="117.004" height="23.9743"/>
+   <object id="594" type="PLATFORM" x="5971.8" y="518.316" width="74.5798" height="23.9743"/>
+   <object id="595" type="PLATFORM" x="6077.86" y="418.316" width="147.307" height="23.9743"/>
+  </objectgroup>
+ </group>
+</map>

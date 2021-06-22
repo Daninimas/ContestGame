@@ -212,7 +212,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
 
     // Melee
     meleeWeaponComp.attackBounding = { 0.f, 28.f, 20.f, 58.f };
-    meleeWeaponComp.damage = 4;
+    meleeWeaponComp.damage = 3;
     meleeWeaponComp.attackLifetime = 0.15f;
     meleeWeaponComp.attackSound.soundPath = "./Media/Sound/Weapons/slaphit.wav"; 
 
@@ -679,6 +679,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
     // Render component
     renderComp.sprite = "Media/Images/Personajes/alien volador/AlienVolador.png";
     renderComp.spriteRect = { 0, 399, 0, 464 };
+    renderComp.color = { 0, 119, 21, 255 };
 
     healthComp.maxHealth = 5;
 
@@ -700,7 +701,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
     distanceWeaponComp.attackGravity = 10.f;
     distanceWeaponComp.maxCooldown = 1.f;
     distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BULLET;
-    distanceWeaponComp.attackLifetime = 1.f;
+    distanceWeaponComp.attackLifetime = 1.5f;
     distanceWeaponComp.bulletSpreadAngle = 15.f;
     distanceWeaponComp.infiniteAmmo = true;
     }
@@ -746,7 +747,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
     }
 
     else if (goType == GameObjectType::ENEMY_SPIDER) {
-        velocityComp.speedX = 70.f;
+        velocityComp.speedX = 80.f;
 
         // Collider
         colliderComp.boundingRoot.bounding = { 0.f, 52.f, 0.f, 67.f };
@@ -755,7 +756,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         renderComp.sprite = "Media/Images/Personajes/Alien araña/AlienArana.png";
         renderComp.spriteRect = { 0, 297, 0, 381 };
 
-        healthComp.maxHealth = 4;
+        healthComp.maxHealth = 8;
 
 
         createComponent<AIMeleeAtkComponent>(entityId);
@@ -767,7 +768,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         sensorComp.sensorBounding = { 25.f, 60.f, 2.f, 65.f };
 
         jumpComp.impulse = -100.f;
-        jumpComp.maxCooldown = 1.f;
+        jumpComp.maxCooldown = 2.f;
         jumpComp.jumpSound.soundPath = "./Media/Sound/Enemies/spiderJump.wav";
 
         MeleeWeaponComponent& meleeWeaponComp = createComponent<MeleeWeaponComponent>(entityId);
@@ -866,12 +867,12 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
 
         distanceWeaponComp.attackBounding = { 0.f, 20.f, 0.f, 20.f };
         distanceWeaponComp.damage = 10;
-        distanceWeaponComp.attackGeneralVelociy = 100.f;
+        distanceWeaponComp.attackGeneralVelociy = 650.f;
         distanceWeaponComp.attackGravity = 100.f;
-        distanceWeaponComp.maxCooldown = 0.5f;
-        distanceWeaponComp.attackLifetime = 0.5f;
+        distanceWeaponComp.maxCooldown = 1.f;
+        distanceWeaponComp.attackLifetime = 0.75f;
         distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BOMB;
-        distanceWeaponComp.ammo = 10;
+        distanceWeaponComp.ammo = 8;
         distanceWeaponComp.infiniteAmmo = false;
         distanceWeaponComp.spawnAttackPos = { 20.f, 39.f };
 
@@ -1011,7 +1012,7 @@ int EntityManager::createBomb(GameEngine& gameContext, Vector2 position, float r
 
         case GameObjectType::PLAYER_BOMB:
             colliderComp.collisionLayer = ColliderComponent::PlayerAttack;
-            colliderComp.layerMasc = ColliderComponent::Enemy + ColliderComponent::Wall + ColliderComponent::Shield + ColliderComponent::Platform + ColliderComponent::Child;
+            colliderComp.layerMasc = ColliderComponent::Enemy + ColliderComponent::Wall + ColliderComponent::Shield + /*ColliderComponent::Platform +*/ ColliderComponent::Child;
             bombComp.explosionSound.soundPath = "Media/Sound/Weapons/explosion.wav";
             break;
     }
@@ -1539,6 +1540,24 @@ int EntityManager::createWorld(GameEngine& gameContext, GameObjectType worldName
 
     case GameObjectType::WORLD_1:
         worldComp.worldPath = "Media/Maps/level1.json";
+        worldComp.backgroundSize = 0.75f;
+
+        worldComp.backgroundLayers.clear();// Delete previous layers
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/10_Sky.png"));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/09_Forest.png"));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/08_Forest.png"));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/07_Forest.png"));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/06_Forest.png"));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/05_Particles.png"));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/04_Forest.png"));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/03_Particles.png"));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/02_Bushes.png"));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/01_Mist.png", { 255, 255, 255, 140 }));
+
+        break;
+
+    case GameObjectType::WORLD_2:
+        worldComp.worldPath = "Media/Maps/level2.json";
         worldComp.backgroundSize = 0.75f;
 
         worldComp.backgroundLayers.clear();// Delete previous layers
