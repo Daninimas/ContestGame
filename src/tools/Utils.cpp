@@ -164,7 +164,7 @@ void Utils::setNormalPistolToEntity(GameEngine& gameContext, int entityId) {
     DistanceWeaponComponent& distanceWeaponComp = gameContext.entityMan->createComponent<DistanceWeaponComponent>(entityId);
 
     distanceWeaponComp.attackBounding = { 0.f, 2.f, 0.f, 2.f };
-    distanceWeaponComp.damage = 1;
+    distanceWeaponComp.damage = 2;
     distanceWeaponComp.attackGeneralVelociy = 500.f;
     distanceWeaponComp.attackGravity = 100.f;
     distanceWeaponComp.maxCooldown = 0.5f;
@@ -174,6 +174,7 @@ void Utils::setNormalPistolToEntity(GameEngine& gameContext, int entityId) {
     distanceWeaponComp.infiniteAmmo = true;
     distanceWeaponComp.bulletSpreadAngle = 5.f;
     distanceWeaponComp.spawnAttackPos = { 20.f, 39.f };
+    distanceWeaponComp.attackLifetime = 0.7f;
 }
 
 

@@ -174,9 +174,9 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
     DodgeComponent& dodgeComp = createComponent<DodgeComponent>(entityId);
     AnimationComponent& animComp = createComponent<AnimationComponent>(entityId);
     // Create the distance weapon
-    if(WorldElementsData::currentWorld != 0)
+    //if(WorldElementsData::currentWorld != 0)
         Utils::setNormalPistolToEntity(gameContext, entityId);
-    else {
+    /*else {
         DistanceWeaponComponent& distanceWeaponComp = gameContext.entityMan->createComponent<DistanceWeaponComponent>(entityId);
 
         distanceWeaponComp.attackBounding = { 0.f, 0.f, 0.f, 0.f };
@@ -190,7 +190,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
         distanceWeaponComp.bulletSpreadAngle = 1.f;
         distanceWeaponComp.spawnAttackPos = { 0.f, 0.f };
 
-    }
+    }*/
 
     //######### DATA ########//
     situation.position = position;
@@ -198,7 +198,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
     situation.noWorldDelete = true;
     situation.scale = Vector2(0.18f, 0.18f);
 
-    velocityComp.speedX = 100.f;
+    velocityComp.speedX = 120.f;
     velocityComp.gravity = 500.f;
 
     WorldElementsData::playerId = entityId;
@@ -212,7 +212,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
 
     // Melee
     meleeWeaponComp.attackBounding = { 0.f, 28.f, 20.f, 58.f };
-    meleeWeaponComp.damage = 2;
+    meleeWeaponComp.damage = 4;
     meleeWeaponComp.attackLifetime = 0.15f;
     meleeWeaponComp.attackSound.soundPath = "./Media/Sound/Weapons/slaphit.wav"; 
 
@@ -222,7 +222,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
     renderComp.spriteRect = { 100, 400, 60, 500 };
 
     // Jump
-    jumpComp.impulse = -300.f;
+    jumpComp.impulse = -320.f;
     jumpComp.jumpSound.soundPath = "./Media/Sound/Player/jump.wav";
     jumpComp.jumpSound.volume = 60.f;
     //jumpComp.jumptable = { 500.f, 500.f, 400.f, 400.f, 300.f, 300.f, 200.f, 100.f };
@@ -528,11 +528,11 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         renderComp.sprite = "Media/Images/Enemy.png";
         renderComp.spriteRect = { 0, 248, 0, 360 };
 
-        healthComp.maxHealth = 7;
+        healthComp.maxHealth = 5;
 
         AIDistanceAtkComponent& distanceAIComp = createComponent<AIDistanceAtkComponent>(entityId);
-        distanceAIComp.range.x = 300.f;
-        distanceAIComp.range.y = 300.f;
+        distanceAIComp.range.x = 400.f;
+        distanceAIComp.range.y = 400.f;
 
         DistanceWeaponComponent& distanceWeaponComp = createComponent<DistanceWeaponComponent>(entityId);
         // Distance
@@ -540,7 +540,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         distanceWeaponComp.damage = 1;
         distanceWeaponComp.attackGeneralVelociy = 300.f;
         distanceWeaponComp.attackGravity = 100.f;
-        distanceWeaponComp.maxCooldown = 1.f;
+        distanceWeaponComp.maxCooldown = 1.5f;
         distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BULLET;
         distanceWeaponComp.attackLifetime = 1.f;
         distanceWeaponComp.bulletSpreadAngle = 5.f;
@@ -797,10 +797,10 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
         distanceWeaponComp.damage = 1;
         distanceWeaponComp.attackGeneralVelociy = 900.f;
         distanceWeaponComp.attackGravity = 0.f;
-        distanceWeaponComp.maxCooldown = 0.2f;
+        distanceWeaponComp.maxCooldown = 0.3f;
         distanceWeaponComp.attackLifetime = 1.5f;
         distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BULLET;
-        distanceWeaponComp.ammo = 100;
+        distanceWeaponComp.ammo = 20;
         distanceWeaponComp.infiniteAmmo = false;
         distanceWeaponComp.bulletSpreadAngle = 5.f;
         distanceWeaponComp.spawnAttackPos = { 20.f, 39.f };
@@ -1091,7 +1091,7 @@ int EntityManager::createShield(GameEngine& gameContext, Vector2 position, float
         meleeComp.attackSound.soundPath = "Media/Sound/Weapons/shieldZap.wav";
         meleeComp.maxCooldown = 1.5f;
         meleeComp.damage = 1;
-        healthComp.maxHealth = 3;
+        healthComp.maxHealth = 5;
         healthComp.resetHealth();
         situation.noWorldDelete = true;
 

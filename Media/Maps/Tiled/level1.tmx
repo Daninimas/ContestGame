@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="100" tileheight="100" infinite="1" nextlayerid="80" nextobjectid="340">
+<map version="1.5" tiledversion="1.7.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="100" tileheight="100" infinite="1" nextlayerid="90" nextobjectid="404">
  <editorsettings>
   <export target="../level1.json" format="json"/>
  </editorsettings>
@@ -193,10 +193,10 @@
    <property name="minPhaseTime" type="float" value="10"/>
   </properties>
   <objectgroup id="71" name="phase_size">
-   <object id="315" x="5653.45" y="-959.652" width="2506.71" height="1974.94"/>
+   <object id="315" x="5653.45" y="-959.652" width="1837.02" height="1974.94"/>
   </objectgroup>
   <objectgroup color="#ff0000" id="72" name="DAMAGE_PLATFORM">
-   <object id="316" type="DAMAGE_PLATFORM" x="5704.51" y="890.742" width="2406.47" height="84.1989">
+   <object id="316" type="DAMAGE_PLATFORM" x="5704.51" y="890.742" width="1742.84" height="84.1989">
     <properties>
      <property name="Damage" type="int" value="100"/>
     </properties>
@@ -228,6 +228,103 @@
   </objectgroup>
   <objectgroup id="79" name="WEAPON">
    <object id="339" type="SHOTGUN" gid="11" x="6384.61" y="540.227" width="152" height="65"/>
+  </objectgroup>
+ </group>
+ <group id="80" name="Phase5">
+  <properties>
+   <property name="Direction" value="Right"/>
+   <property name="maxPhaseTime" type="float" value="25"/>
+   <property name="minPhaseTime" type="float" value="10"/>
+  </properties>
+  <objectgroup id="81" name="phase_size">
+   <object id="340" x="7493.45" y="-900.015" width="1837.02" height="1911.3"/>
+  </objectgroup>
+  <objectgroup color="#ff0000" id="82" name="DAMAGE_PLATFORM">
+   <object id="341" type="DAMAGE_PLATFORM" x="7544.51" y="886.742" width="1742.84" height="84.1989">
+    <properties>
+     <property name="Damage" type="int" value="100"/>
+    </properties>
+   </object>
+  </objectgroup>
+  <objectgroup color="#0055ff" id="83" name="WALL">
+   <object id="342" type="WALL" x="7502.55" y="586.251" width="1815.67" height="56.2522">
+    <properties>
+     <property name="isCheckpoint" type="bool" value="true"/>
+    </properties>
+   </object>
+   <object id="345" type="WALL" x="8243.5" y="246.279" width="241.004" height="38.0352">
+    <properties>
+     <property name="isCheckpoint" type="bool" value="false"/>
+    </properties>
+   </object>
+   <object id="346" type="PLATFORM" x="7886.29" y="455.285" width="41.0036" height="74.3988"/>
+   <object id="351" type="WALL" x="9228.17" y="283.874" width="99.67" height="304.252"/>
+   <object id="352" type="WALL" x="9120.17" y="199.874" width="207.67" height="80.252"/>
+   <object id="353" type="WALL" x="9168.17" y="287.874" width="143.67" height="80.252"/>
+   <object id="354" type="PLATFORM" x="8576.35" y="298.801" width="339.307" height="286.399"/>
+   <object id="356" type="PLATFORM" x="8644.35" y="470.801" width="55.307" height="20.399"/>
+   <object id="357" type="PLATFORM" x="8644.35" y="416.8" width="55.307" height="20.399"/>
+   <object id="358" type="PLATFORM" x="8644.35" y="361.8" width="55.307" height="20.399"/>
+   <object id="359" type="PLATFORM" x="8644.35" y="530" width="55.307" height="20.399"/>
+   <object id="360" type="WALL" x="7801.26" y="502.177" width="121.731" height="80.4946">
+    <properties>
+     <property name="isCheckpoint" type="bool" value="false"/>
+    </properties>
+   </object>
+   <object id="361" type="WALL" x="7843.13" y="105.225" width="219.792" height="38.0352">
+    <properties>
+     <property name="isCheckpoint" type="bool" value="true"/>
+    </properties>
+   </object>
+   <object id="363" type="PLATFORM" x="7875.38" y="-3.48032" width="55.307" height="20.399"/>
+   <object id="364" type="PLATFORM" x="7875.38" y="-57.4813" width="55.307" height="20.399"/>
+   <object id="365" type="PLATFORM" x="7875.38" y="-112.481" width="55.307" height="20.399"/>
+   <object id="366" type="PLATFORM" x="7875.38" y="55.7187" width="55.307" height="20.399"/>
+   <object id="367" type="WALL" x="7997.01" y="-185.624" width="93.8525" height="40.9445"/>
+   <object id="368" type="WALL" x="8253.07" y="-184.109" width="145.368" height="40.9445"/>
+   <object id="369" type="WALL" x="8550.04" y="-229.563" width="254.459" height="40.9445">
+    <properties>
+     <property name="isCheckpoint" type="bool" value="true"/>
+    </properties>
+   </object>
+   <object id="370" type="PLATFORM" x="8745.07" y="-316.26" width="61.3676" height="84.0354"/>
+   <object id="371" type="PLATFORM" x="8463.26" y="-389.715" width="182.58" height="26.4596"/>
+   <object id="372" type="WALL" x="8554.59" y="-717.442" width="769.611" height="40.9445"/>
+   <object id="373" type="PLATFORM" x="8145.07" y="-530.753" width="55.307" height="20.399"/>
+   <object id="374" type="PLATFORM" x="8145.07" y="-584.754" width="55.307" height="20.399"/>
+   <object id="375" type="PLATFORM" x="8145.07" y="-639.754" width="55.307" height="20.399"/>
+   <object id="376" type="PLATFORM" x="8145.07" y="-471.554" width="55.307" height="20.399"/>
+   <object id="385" type="WALL" x="8044.65" y="168.861" width="77.3678" height="38.0352">
+    <properties>
+     <property name="isCheckpoint" type="bool" value="false"/>
+    </properties>
+   </object>
+   <object id="386" type="WALL" x="8102.65" y="-419.29" width="237.125" height="26.4596"/>
+   <object id="402" type="WALL" x="8254.59" y="-717.442" width="215.066" height="40.9445"/>
+   <object id="403" type="PLATFORM" x="8672.77" y="-787.139" width="136.278" height="65.1869"/>
+  </objectgroup>
+  <objectgroup id="88" name="POWERUP">
+   <object id="399" type="POWERUP_EXTRA_LIFE" x="8824.24" y="263.636">
+    <point/>
+   </object>
+   <object id="401" type="POWERUP_SHIELD" x="8045.45" y="-203.03">
+    <point/>
+   </object>
+  </objectgroup>
+  <objectgroup id="87" name="ENEMY">
+   <object id="391" type="CHASERJUMPER" gid="17" x="8132.55" y="520.879" width="45" height="65"/>
+   <object id="392" type="CHASERJUMPER" gid="17" x="8517.39" y="533" width="45" height="65"/>
+   <object id="393" type="CHASERJUMPER" gid="17" x="9150.73" y="514.818" width="45" height="65"/>
+   <object id="394" type="DISTANCE_ENEMY" gid="17" x="8317.39" y="157.242" width="45" height="65"/>
+   <object id="395" type="DISTANCE_ENEMY" gid="17" x="7950.73" y="26.9394" width="45" height="65"/>
+   <object id="396" type="DISTANCE_ENEMY" gid="17" x="8623.45" y="-282.152" width="45" height="65"/>
+   <object id="397" type="DISTANCE_ENEMY" gid="17" x="8356.79" y="-282.152" width="45" height="65"/>
+   <object id="398" type="DISTANCE_ENEMY" gid="17" x="8253.76" y="-497.303" width="45" height="65"/>
+  </objectgroup>
+  <objectgroup id="86" name="CHILD">
+   <object id="387" type="CHILD" gid="19" x="8225.86" y="538.636" width="21" height="50"/>
+   <object id="388" type="CHILD" gid="19" x="8328.89" y="535.606" width="21" height="50"/>
+   <object id="389" type="CHILD" gid="19" x="9053.14" y="537.667" width="21" height="50"/>
   </objectgroup>
  </group>
 </map>

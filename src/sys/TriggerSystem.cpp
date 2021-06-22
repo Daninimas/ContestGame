@@ -63,7 +63,7 @@ void TriggerSystem::activateFunction(GameEngine& gameContext, TriggerComponent& 
 			spawnerComp.numObjectsToSpawn = 7;
 			spawnerComp.range = { 10000 , 1000 };
 
-			int spawn2Id = gameContext.entityMan->createSpawner(gameContext, Vector2(6300.f, 520.f), 0, GameObjectType::POUNCER_ENEMY);
+			int spawn2Id = gameContext.entityMan->createSpawner(gameContext, Vector2(6250.f, 520.f), 0, GameObjectType::POUNCER_ENEMY);
 			SpawnerComponent& spawner2Comp = gameContext.entityMan->getComponent<SpawnerComponent>(spawn2Id);
 			spawner2Comp.objectiveId = WorldElementsData::playerId;
 			spawner2Comp.maxCooldown = 2.f;
