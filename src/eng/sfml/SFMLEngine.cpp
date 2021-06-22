@@ -27,6 +27,8 @@ SFMLEngine::SFMLEngine(int width, int height, bool fullscreen) {
 	FPSTextNode.setFont(font);
 	FPSTextNode.setCharacterSize(20);
 	renderFPS = false;
+	//renderCollidables = false;
+	//renderSensors = false;
 }
 SFMLEngine::~SFMLEngine() {
 	device.get()->close();
@@ -499,6 +501,8 @@ void SFMLEngine::addTexture(std::string path) {
 		std::cout << "Error loading texture " << path << "\n";
 		textureMap.erase( prev(textureMap.end()) ); // IF error creating, delete the node
 	}
+
+	//textureMap[path].setSmooth(true);
 }
 
 

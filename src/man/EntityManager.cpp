@@ -457,11 +457,12 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
 
     if (goType == GameObjectType::FIRST_ENEMY) {
         healthComp.maxHealth = 1;
+        situation.scale = { 0.27f, 0.27f };
 
         situation.facing = SituationComponent::Right;
 
         // Collider
-        colliderComp.boundingRoot.bounding = { 0.f, 44.f, 0.f, 63.f };
+        colliderComp.boundingRoot.bounding = { 0.f, 57.f, 0.f, 90.f };
         colliderComp.weight = 4;
 
         // Render component
@@ -473,8 +474,9 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
     else if (goType == GameObjectType::CHASER) {
         velocityComp.speedX = 70.f;
 
+        situation.scale = { 0.27f, 0.27f };
         // Collider
-        colliderComp.boundingRoot.bounding = { 0.f, 44.f, 0.f, 63.f };
+        colliderComp.boundingRoot.bounding = { 0.f, 57.f, 0.f, 90.f };
 
         // Render component
         renderComp.sprite = "Media/Images/Enemy.png";
@@ -489,8 +491,9 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
     else if (goType == GameObjectType::CHASERJUMPER) {
         velocityComp.speedX = 65.f;
 
+        situation.scale = { 0.27f, 0.27f };
         // Collider
-        colliderComp.boundingRoot.bounding = { 0.f, 44.f, 0.f, 63.f };
+        colliderComp.boundingRoot.bounding = { 0.f, 57.f, 0.f, 90.f };
 
         // Render component
         renderComp.sprite = "Media/Images/Enemy.png";
@@ -522,8 +525,9 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
     else if(goType == GameObjectType::DISTANCE_ENEMY) {
         velocityComp.speedX = 0.f;
 
+        situation.scale = { 0.27f, 0.27f };
         // Collider
-        colliderComp.boundingRoot.bounding = { 0.f, 44.f, 0.f, 63.f };
+        colliderComp.boundingRoot.bounding = { 0.f, 57.f, 0.f, 90.f };
         
         // Render component
         renderComp.sprite = "Media/Images/Enemy.png";
@@ -553,8 +557,9 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
     else if (goType == GameObjectType::DISTANCE_WALKING_ENEMY) {
         velocityComp.speedX = 55.f;
 
+        situation.scale = { 0.27f, 0.27f };
         // Collider
-        colliderComp.boundingRoot.bounding = { 0.f, 44.f, 0.f, 63.f };
+        colliderComp.boundingRoot.bounding = { 0.f, 57.f, 0.f, 90.f };
 
         // Render component
         renderComp.sprite = "Media/Images/Enemy.png";
