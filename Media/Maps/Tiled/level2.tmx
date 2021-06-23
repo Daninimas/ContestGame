@@ -522,7 +522,7 @@
      <property name="isCheckpoint" type="bool" value="false"/>
     </properties>
    </object>
-   <object id="736" type="WALL" x="12683.6" y="655.04" width="278.337" height="56.2522">
+   <object id="736" type="FALLING_WALL" x="12683.6" y="655.04" width="278.337" height="56.2522">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
     </properties>

@@ -59,6 +59,7 @@ EntityManager::~EntityManager() {
     getComponents<TurretComponent>().clear();
     getComponents<GunTurretComponent>().clear();
     getComponents<CheckpointComponent>().clear();
+    getComponents<FallWhenTouchedComponent>().clear();
 
     // AI
     getComponents<AIChaseComponent>().clear();
@@ -117,6 +118,7 @@ void EntityManager::eraseEntityByID(int id) {
     eraseComponent<TurretComponent>(id);
     eraseComponent<GunTurretComponent>(id);
     eraseComponent<CheckpointComponent>(id);
+    eraseComponent<FallWhenTouchedComponent>(id);
 
     // AI
     eraseComponent<AIChaseComponent>(id);
@@ -412,6 +414,15 @@ int EntityManager::createWall(GameEngine& gameContext, Vector2 position, Vector2
     case GameObjectType::WALL:
         colliderComp.collisionLayer = ColliderComponent::Wall;
         colliderComp.layerMasc = ColliderComponent::Enemy + ColliderComponent::Player + ColliderComponent::PlayerAttack + ColliderComponent::Weapon + ColliderComponent::Attack; //Collides with player and enemy
+        break;
+
+    case GameObjectType::FALLING_WALL:
+        colliderComp.collisionLayer = ColliderComponent::Wall;
+        colliderComp.layerMasc = ColliderComponent::Enemy + ColliderComponent::Player + ColliderComponent::PlayerAttack + ColliderComponent::Weapon + ColliderComponent::Attack; //Collides with player and enemy
+
+        FallWhenTouchedComponent& fallComp = createComponent<FallWhenTouchedComponent>(entityId);
+        fallComp.gravity = 520.f;
+        fallComp.objectiveId = WorldElementsData::playerId;
         break;
     }
 

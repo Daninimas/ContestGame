@@ -30,6 +30,7 @@
 #include <sys/TurretSystem.hpp>
 #include <sys/TimeSystem.hpp>
 #include <sys/CheckpointSystem.hpp>
+#include <sys/FallWhenTouchedSystem.hpp>
 
 
 #include <sys/AI/AIChaseSystem.hpp>

@@ -30,6 +30,7 @@ enum class GameObjectType {
     // Obstacles
     PLATFORM,
     WALL,
+    FALLING_WALL,
 
 
     // Weapons

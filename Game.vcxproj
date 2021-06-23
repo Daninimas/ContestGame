@@ -154,6 +154,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\com\FallWhenTouchedComponent.cpp" />
     <ClCompile Include="src\com\AI\AIOrbitalAtkComponent.cpp" />
     <ClCompile Include="src\com\AutodeleteComponent.cpp" />
     <ClCompile Include="src\com\CheckpointComponent.cpp" />
@@ -167,6 +168,7 @@
     <ClCompile Include="src\com\TriggerComponent.cpp" />
     <ClCompile Include="src\sys\AutodeleteSystem.cpp" />
     <ClCompile Include="src\sys\CheckpointSystem.cpp" />
+    <ClCompile Include="src\sys\FallWhenTouchedSystem.cpp" />
     <ClCompile Include="src\sys\OrbitalWeaponSystem.cpp" />
     <ClCompile Include="src\sys\TimeSystem.cpp" />
     <ClCompile Include="src\sys\WaitAfterLoseLifeSystem.cpp" />
@@ -241,6 +243,7 @@
     <ClCompile Include="src\sys\TurretSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\com\FallWhenTouchedComponent.hpp" />
     <ClInclude Include="src\com\AI\AIOrbitalAtkComponent.hpp" />
     <ClInclude Include="src\com\AutodeleteComponent.hpp" />
     <ClInclude Include="src\com\CheckpointComponent.hpp" />
@@ -254,6 +257,7 @@
     <ClInclude Include="src\com\TriggerComponent.hpp" />
     <ClInclude Include="src\sys\AutodeleteSystem.hpp" />
     <ClInclude Include="src\sys\CheckpointSystem.hpp" />
+    <ClInclude Include="src\sys\FallWhenTouchedSystem.hpp" />
     <ClInclude Include="src\sys\OrbitalWeaponSystem.hpp" />
     <ClInclude Include="src\sys\TimeSystem.hpp" />
     <ClInclude Include="src\sys\WaitAfterLoseLifeSystem.hpp" />

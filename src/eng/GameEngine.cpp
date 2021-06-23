@@ -108,6 +108,7 @@ void GameEngine::setPlayingSystems() {
     systems.emplace_back(std::make_unique<PhaseSystem>());              // 21
     systems.emplace_back(std::make_unique<TriggerSystem>());            // 22
     systems.emplace_back(std::make_unique<CheckpointSystem>());         // 23
+    systems.emplace_back(std::make_unique<FallWhenTouchedSystem>()); // 24
                                                                         
                                                                         
     systemsLate.emplace_back(std::make_unique<ShieldSystem>());         // 00

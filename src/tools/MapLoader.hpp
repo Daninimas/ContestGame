@@ -40,6 +40,7 @@ private:
         // Obstacles
         { "WALL", GameObjectType::WALL },
         { "PLATFORM", GameObjectType::PLATFORM },
+        { "FALLING_WALL", GameObjectType::FALLING_WALL },
 
         // Weapons
         { "M4", GameObjectType::M4 },
