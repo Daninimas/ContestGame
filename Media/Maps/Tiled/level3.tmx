@@ -470,8 +470,8 @@
  <group id="195" name="Phase6">
   <properties>
    <property name="Direction" value="Down"/>
-   <property name="maxPhaseTime" type="float" value="55"/>
-   <property name="minPhaseTime" type="float" value="100"/>
+   <property name="maxPhaseTime" type="float" value="100"/>
+   <property name="minPhaseTime" type="float" value="55"/>
   </properties>
   <objectgroup id="196" name="phase_size">
    <object id="882" x="8626.36" y="-1033.11" width="1521.44" height="1630.57"/>

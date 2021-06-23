@@ -273,12 +273,12 @@
                 {
                  "name":"maxPhaseTime",
                  "type":"float",
-                 "value":25
+                 "value":30
                 }, 
                 {
                  "name":"minPhaseTime",
                  "type":"float",
-                 "value":10
+                 "value":5
                 }],
          "type":"group",
          "visible":true,
@@ -535,12 +535,12 @@
                 {
                  "name":"maxPhaseTime",
                  "type":"float",
-                 "value":25
+                 "value":40
                 }, 
                 {
                  "name":"minPhaseTime",
                  "type":"float",
-                 "value":10
+                 "value":18
                 }],
          "type":"group",
          "visible":true,
@@ -916,12 +916,12 @@
                 {
                  "name":"maxPhaseTime",
                  "type":"float",
-                 "value":25
+                 "value":50
                 }, 
                 {
                  "name":"minPhaseTime",
                  "type":"float",
-                 "value":10
+                 "value":20
                 }],
          "type":"group",
          "visible":true,
@@ -1146,12 +1146,12 @@
                 {
                  "name":"maxPhaseTime",
                  "type":"float",
-                 "value":25
+                 "value":80
                 }, 
                 {
                  "name":"minPhaseTime",
                  "type":"float",
-                 "value":10
+                 "value":30
                 }],
          "type":"group",
          "visible":true,
@@ -1801,12 +1801,12 @@
                 {
                  "name":"maxPhaseTime",
                  "type":"float",
-                 "value":25
+                 "value":120
                 }, 
                 {
                  "name":"minPhaseTime",
                  "type":"float",
-                 "value":10
+                 "value":60
                 }],
          "type":"group",
          "visible":true,
@@ -2207,7 +2207,7 @@
                          "visible":true,
                          "width":45,
                          "x":10162.8,
-                         "y":-560.939
+                         "y":-603.363242424242
                         }, 
                         {
                          "gid":17,
@@ -2297,12 +2297,12 @@
                 {
                  "name":"maxPhaseTime",
                  "type":"float",
-                 "value":25
+                 "value":65
                 }, 
                 {
                  "name":"minPhaseTime",
                  "type":"float",
-                 "value":10
+                 "value":30
                 }],
          "type":"group",
          "visible":true,
@@ -2730,12 +2730,12 @@
                 {
                  "name":"maxPhaseTime",
                  "type":"float",
-                 "value":25
+                 "value":120
                 }, 
                 {
                  "name":"minPhaseTime",
                  "type":"float",
-                 "value":10
+                 "value":70
                 }],
          "type":"group",
          "visible":true,

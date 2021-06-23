@@ -2606,12 +2606,12 @@
                 {
                  "name":"maxPhaseTime",
                  "type":"float",
-                 "value":55
+                 "value":100
                 }, 
                 {
                  "name":"minPhaseTime",
                  "type":"float",
-                 "value":100
+                 "value":55
                 }],
          "type":"group",
          "visible":true,

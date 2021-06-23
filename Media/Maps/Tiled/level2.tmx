@@ -14,8 +14,8 @@
  <group id="3" name="Phase1">
   <properties>
    <property name="Direction" value="Right"/>
-   <property name="maxPhaseTime" type="float" value="25"/>
-   <property name="minPhaseTime" type="float" value="10"/>
+   <property name="maxPhaseTime" type="float" value="60"/>
+   <property name="minPhaseTime" type="float" value="20"/>
   </properties>
   <objectgroup id="5" name="phase_size">
    <object id="71" x="120" y="-106.925" width="1546.71" height="1120.39"/>
@@ -40,7 +40,7 @@
   </objectgroup>
   <objectgroup id="19" name="ENEMY">
    <object id="509" type="CHASERJUMPER" gid="17" x="635.576" y="511.788" width="45" height="65"/>
-   <object id="514" type="DISTANCE_ENEMY" gid="17" x="1110" y="353" width="45" height="65"/>
+   <object id="514" type="DISTANCE_ENEMY" gid="17" x="1103.94" y="319.667" width="45" height="65"/>
   </objectgroup>
   <objectgroup id="107" name="SPAWNER">
    <object id="515" type="CHASERJUMPER" gid="4" x="1512" y="502" width="20" height="20">
@@ -77,8 +77,8 @@
  <group id="108" name="Phase2">
   <properties>
    <property name="Direction" value="Right"/>
-   <property name="maxPhaseTime" type="float" value="25"/>
-   <property name="minPhaseTime" type="float" value="10"/>
+   <property name="maxPhaseTime" type="float" value="90"/>
+   <property name="minPhaseTime" type="float" value="50"/>
   </properties>
   <objectgroup id="109" name="phase_size">
    <object id="517" x="1656.36" y="-109.955" width="2346.71" height="1120.39"/>
@@ -166,8 +166,8 @@
  <group id="117" name="Phase3">
   <properties>
    <property name="Direction" value="Right"/>
-   <property name="maxPhaseTime" type="float" value="25"/>
-   <property name="minPhaseTime" type="float" value="10"/>
+   <property name="maxPhaseTime" type="float" value="90"/>
+   <property name="minPhaseTime" type="float" value="55"/>
   </properties>
   <objectgroup id="118" name="phase_size">
    <object id="555" x="3980.61" y="-119.046" width="2352.77" height="1120.39"/>
@@ -242,8 +242,8 @@
  <group id="126" name="Phase4">
   <properties>
    <property name="Direction" value="Right"/>
-   <property name="maxPhaseTime" type="float" value="25"/>
-   <property name="minPhaseTime" type="float" value="10"/>
+   <property name="maxPhaseTime" type="float" value="200"/>
+   <property name="minPhaseTime" type="float" value="100"/>
   </properties>
   <objectgroup id="127" name="phase_size">
    <object id="601" x="6320" y="-116.015" width="2473.98" height="1390.09"/>
@@ -285,9 +285,9 @@
    </object>
   </objectgroup>
   <objectgroup id="133" name="CHILD">
-   <object id="611" type="CHILD" gid="19" x="7159.69" y="532.909" width="21" height="50"/>
-   <object id="637" type="CHILD" gid="19" x="8204.65" y="126.515" width="21" height="50"/>
-   <object id="638" type="CHILD" gid="19" x="8701.62" y="581.061" width="21" height="50"/>
+   <object id="611" type="CHILD" gid="19" x="7159.69" y="551.091" width="21" height="50"/>
+   <object id="637" type="CHILD" gid="19" x="8204.65" y="144.697" width="21" height="50"/>
+   <object id="638" type="CHILD" gid="19" x="8704.65" y="599.243" width="21" height="50"/>
   </objectgroup>
   <objectgroup color="#0055ff" id="134" name="WALL">
    <object id="612" type="WALL" x="6320" y="658.13" width="259.916" height="253.222">
@@ -330,8 +330,8 @@
  <group id="135" name="Phase5">
   <properties>
    <property name="Direction" value="Right"/>
-   <property name="maxPhaseTime" type="float" value="25"/>
-   <property name="minPhaseTime" type="float" value="10"/>
+   <property name="maxPhaseTime" type="float" value="120"/>
+   <property name="minPhaseTime" type="float" value="70"/>
   </properties>
   <objectgroup id="136" name="phase_size">
    <object id="639" x="8771.52" y="-119.046" width="2228.53" height="1390.09"/>
@@ -434,8 +434,8 @@
  <group id="144" name="Phase6">
   <properties>
    <property name="Direction" value="Down"/>
-   <property name="maxPhaseTime" type="float" value="25"/>
-   <property name="minPhaseTime" type="float" value="10"/>
+   <property name="maxPhaseTime" type="float" value="140"/>
+   <property name="minPhaseTime" type="float" value="60"/>
   </properties>
   <objectgroup id="145" name="phase_size">
    <object id="691" x="10974.4" y="-119.106" width="2225.5" height="1390.09"/>

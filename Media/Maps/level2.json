@@ -163,8 +163,8 @@
                          "type":"DISTANCE_ENEMY",
                          "visible":true,
                          "width":45,
-                         "x":1110,
-                         "y":353
+                         "x":1103.93939393939,
+                         "y":319.666666666667
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -334,12 +334,12 @@
                 {
                  "name":"maxPhaseTime",
                  "type":"float",
-                 "value":25
+                 "value":60
                 }, 
                 {
                  "name":"minPhaseTime",
                  "type":"float",
-                 "value":10
+                 "value":20
                 }],
          "type":"group",
          "visible":true,
@@ -854,12 +854,12 @@
                 {
                  "name":"maxPhaseTime",
                  "type":"float",
-                 "value":25
+                 "value":90
                 }, 
                 {
                  "name":"minPhaseTime",
                  "type":"float",
-                 "value":10
+                 "value":50
                 }],
          "type":"group",
          "visible":true,
@@ -1314,12 +1314,12 @@
                 {
                  "name":"maxPhaseTime",
                  "type":"float",
-                 "value":25
+                 "value":90
                 }, 
                 {
                  "name":"minPhaseTime",
                  "type":"float",
-                 "value":10
+                 "value":55
                 }],
          "type":"group",
          "visible":true,
@@ -1535,7 +1535,7 @@
                          "visible":true,
                          "width":21,
                          "x":7159.69303030303,
-                         "y":532.908818181818
+                         "y":551.090636363636
                         }, 
                         {
                          "gid":19,
@@ -1547,7 +1547,7 @@
                          "visible":true,
                          "width":21,
                          "x":8204.65,
-                         "y":126.515
+                         "y":144.696818181818
                         }, 
                         {
                          "gid":19,
@@ -1558,8 +1558,8 @@
                          "type":"CHILD",
                          "visible":true,
                          "width":21,
-                         "x":8701.62,
-                         "y":581.061
+                         "x":8704.6503030303,
+                         "y":599.242818181818
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -1823,12 +1823,12 @@
                 {
                  "name":"maxPhaseTime",
                  "type":"float",
-                 "value":25
+                 "value":200
                 }, 
                 {
                  "name":"minPhaseTime",
                  "type":"float",
-                 "value":10
+                 "value":100
                 }],
          "type":"group",
          "visible":true,
@@ -2463,12 +2463,12 @@
                 {
                  "name":"maxPhaseTime",
                  "type":"float",
-                 "value":25
+                 "value":120
                 }, 
                 {
                  "name":"minPhaseTime",
                  "type":"float",
-                 "value":10
+                 "value":70
                 }],
          "type":"group",
          "visible":true,
@@ -2926,12 +2926,12 @@
                 {
                  "name":"maxPhaseTime",
                  "type":"float",
-                 "value":25
+                 "value":140
                 }, 
                 {
                  "name":"minPhaseTime",
                  "type":"float",
-                 "value":10
+                 "value":60
                 }],
          "type":"group",
          "visible":true,
