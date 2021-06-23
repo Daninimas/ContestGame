@@ -227,7 +227,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
     jumpComp.impulse = -310.f;
     jumpComp.jumpSound.soundPath = "./Media/Sound/Player/jump.wav";
     jumpComp.jumpSound.volume = 60.f;
-    jumpComp.maxCooldown = 0.5f;
+    jumpComp.maxCooldown = 0.32f;
     //jumpComp.jumptable = { 500.f, 500.f, 400.f, 400.f, 300.f, 300.f, 200.f, 100.f };
     
     // Sensor
@@ -575,6 +575,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         // Render component
         renderComp.sprite = "Media/Images/Enemy.png";
         renderComp.spriteRect = { 0, 248, 0, 360 };
+        renderComp.color = { 0, 119, 21, 255 };
 
         healthComp.maxHealth = 4;
 
@@ -618,7 +619,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         renderComp.sprite = "Media/Images/Personajes/Alien camuflado/Nino.png";
         renderComp.spriteRect = { 0, 116, 0, 274 };
 
-        healthComp.maxHealth = 5;
+        healthComp.maxHealth = 10;
 
         JumpComponent& jumpComp = createComponent<JumpComponent>(entityId);
         SensorComponent& sensorComp = createComponent<SensorComponent>(entityId);
@@ -783,7 +784,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         sensorComp.sensorLayerMasc = ColliderComponent::Player + ColliderComponent::Wall;
         sensorComp.sensorBounding = { 25.f, 60.f, 2.f, 65.f };
 
-        jumpComp.impulse = -100.f;
+        jumpComp.impulse = -150.f;
         jumpComp.maxCooldown = 2.f;
         jumpComp.cooldown = 2.f;
         jumpComp.jumpSound.soundPath = "./Media/Sound/Enemies/spiderJump.wav";
@@ -933,12 +934,12 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
         distanceWeaponComp.damage = 1;
         distanceWeaponComp.attackGeneralVelociy = 900.f;
         distanceWeaponComp.attackGravity = 0.f;
-        distanceWeaponComp.maxCooldown = 1.f;
-        distanceWeaponComp.attackLifetime = 0.2f;
+        distanceWeaponComp.maxCooldown = 0.7f;
+        distanceWeaponComp.attackLifetime = 0.3f;
         distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BULLET;
         distanceWeaponComp.ammo = 7;
         distanceWeaponComp.infiniteAmmo = false;
-        distanceWeaponComp.numberOfShells = 3;
+        distanceWeaponComp.numberOfShells = 4;
         distanceWeaponComp.bulletSpreadAngle = 12.f;
         distanceWeaponComp.spawnAttackPos = { 20.f, 39.f };
         distanceWeaponComp.attackSound.soundPath = "Media/Sound/Weapons/shotgunShot.wav";
@@ -1408,8 +1409,8 @@ int EntityManager::createTurretGun(GameEngine& gameContext, Vector2 position, ui
     distanceWeaponComp.damage = 1;
     distanceWeaponComp.attackGeneralVelociy = 900.f;
     distanceWeaponComp.attackGravity = 0.f;
-    distanceWeaponComp.maxCooldown = 0.13f;
-    distanceWeaponComp.attackLifetime = 0.7f;
+    distanceWeaponComp.maxCooldown = 0.10f;
+    distanceWeaponComp.attackLifetime = 0.65f;
     distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BULLET;
     distanceWeaponComp.infiniteAmmo = true;
     distanceWeaponComp.bulletSpreadAngle = 5.f;
@@ -1422,7 +1423,7 @@ int EntityManager::createTurretGun(GameEngine& gameContext, Vector2 position, ui
     if (facing == SituationComponent::Left) {
         gunTurretComp.currentRotation = 180.f;
     }
-    gunTurretComp.gunRotationSpeed = 50.f;
+    gunTurretComp.gunRotationSpeed = 80.f;
     gunTurretComp.maxRotation = 90.f;
     gunTurretComp.minRotation = -10.f;
 
@@ -1576,6 +1577,24 @@ int EntityManager::createWorld(GameEngine& gameContext, GameObjectType worldName
 
     case GameObjectType::WORLD_2:
         worldComp.worldPath = "Media/Maps/level2.json";
+        worldComp.backgroundSize = 0.75f;
+
+        worldComp.backgroundLayers.clear();// Delete previous layers
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/10_Sky.png"));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/09_Forest.png"));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/08_Forest.png"));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/07_Forest.png"));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/06_Forest.png"));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/05_Particles.png"));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/04_Forest.png"));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/03_Particles.png"));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/02_Bushes.png"));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/01_Mist.png", { 255, 255, 255, 140 }));
+
+        break;
+
+    case GameObjectType::WORLD_3:
+        worldComp.worldPath = "Media/Maps/level3.json";
         worldComp.backgroundSize = 0.75f;
 
         worldComp.backgroundLayers.clear();// Delete previous layers

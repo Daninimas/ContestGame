@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="100" tileheight="100" infinite="1" nextlayerid="154" nextobjectid="739">
+<map version="1.5" tiledversion="1.7.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="100" tileheight="100" infinite="1" nextlayerid="155" nextobjectid="740">
  <editorsettings>
   <export target="../level2.json" format="json"/>
  </editorsettings>
@@ -61,11 +61,6 @@
    <object id="147" type="PLATFORM" x="1174.7" y="358.352" width="25.9733" height="224.823"/>
    <object id="273" type="PLATFORM" x="1080.96" y="555.346" width="31.4278" height="32.9443"/>
    <object id="274" type="PLATFORM" x="1101.32" y="425.043" width="80.6399" height="14.8837"/>
-   <object id="275" type="WALL" x="501.855" y="564.601" width="38.7088" height="24.1309">
-    <properties>
-     <property name="isCheckpoint" type="bool" value="false"/>
-    </properties>
-   </object>
    <object id="511" type="WALL" x="344.282" y="551.147" width="32.6482" height="37.5854">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
@@ -129,6 +124,11 @@
   </objectgroup>
   <objectgroup id="116" name="WEAPON">
    <object id="553" type="LASER_GUN" gid="10" x="2199.76" y="326.939" width="152" height="65"/>
+  </objectgroup>
+  <objectgroup id="154" name="POWERUP">
+   <object id="739" type="POWERUP_EXTRA_LIFE" x="2490.91" y="157.576">
+    <point/>
+   </object>
   </objectgroup>
   <objectgroup color="#0055ff" id="115" name="WALL">
    <object id="524" type="WALL" x="1656.36" y="585.403" width="384.158" height="62.3128">

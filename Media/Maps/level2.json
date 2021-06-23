@@ -52,6 +52,29 @@
                  "y":0
                 }, 
                 {
+                 "draworder":"topdown",
+                 "id":17,
+                 "name":"PLAYER",
+                 "objects":[
+                        {
+                         "gid":8,
+                         "height":80,
+                         "id":262,
+                         "name":"",
+                         "rotation":0,
+                         "type":"PLAYER_GENERAL",
+                         "visible":true,
+                         "width":54,
+                         "x":157.121,
+                         "y":492.909
+                        }],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
+                }, 
+                {
                  "color":"#ff0000",
                  "draworder":"topdown",
                  "id":15,
@@ -250,23 +273,6 @@
                          "y":425.043
                         }, 
                         {
-                         "height":24.1309,
-                         "id":275,
-                         "name":"",
-                         "properties":[
-                                {
-                                 "name":"isCheckpoint",
-                                 "type":"bool",
-                                 "value":false
-                                }],
-                         "rotation":0,
-                         "type":"WALL",
-                         "visible":true,
-                         "width":38.7088,
-                         "x":501.855,
-                         "y":564.601
-                        }, 
-                        {
                          "height":37.5854,
                          "id":511,
                          "name":"",
@@ -317,7 +323,7 @@
                  "x":0,
                  "y":0
                 }],
-         "name":"Phase12",
+         "name":"Phase1",
          "opacity":1,
          "properties":[
                 {
@@ -579,6 +585,29 @@
                          "width":152,
                          "x":2199.76,
                          "y":326.939
+                        }],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
+                }, 
+                {
+                 "draworder":"topdown",
+                 "id":154,
+                 "name":"POWERUP",
+                 "objects":[
+                        {
+                         "height":0,
+                         "id":739,
+                         "name":"",
+                         "point":true,
+                         "rotation":0,
+                         "type":"POWERUP_EXTRA_LIFE",
+                         "visible":true,
+                         "width":0,
+                         "x":2490.90909090909,
+                         "y":157.575757575758
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -2444,29 +2473,6 @@
                  "y":0
                 }, 
                 {
-                 "draworder":"topdown",
-                 "id":17,
-                 "name":"PLAYER",
-                 "objects":[
-                        {
-                         "gid":8,
-                         "height":80,
-                         "id":262,
-                         "name":"",
-                         "rotation":0,
-                         "type":"PLAYER_GENERAL",
-                         "visible":true,
-                         "width":54,
-                         "x":157.121,
-                         "y":492.909
-                        }],
-                 "opacity":1,
-                 "type":"objectgroup",
-                 "visible":true,
-                 "x":0,
-                 "y":0
-                }, 
-                {
                  "color":"#ff0000",
                  "draworder":"topdown",
                  "id":146,
@@ -2881,7 +2887,7 @@
                  "x":0,
                  "y":0
                 }],
-         "name":"Phase1",
+         "name":"Phase6",
          "opacity":1,
          "properties":[
                 {
@@ -2904,8 +2910,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":154,
- "nextobjectid":739,
+ "nextlayerid":155,
+ "nextobjectid":740,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.0",
