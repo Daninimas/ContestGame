@@ -615,8 +615,8 @@
                          "type":"CHASERJUMPER",
                          "visible":true,
                          "width":45,
-                         "x":3593.27,
-                         "y":559.424
+                         "x":3591.27,
+                         "y":505.424
                         }, 
                         {
                          "gid":17,
@@ -627,8 +627,8 @@
                          "type":"CHASERJUMPER",
                          "visible":true,
                          "width":45,
-                         "x":4032.05,
-                         "y":419.015
+                         "x":4030.05,
+                         "y":365.015
                         }, 
                         {
                          "gid":17,
@@ -639,8 +639,8 @@
                          "type":"CHASERJUMPER",
                          "visible":true,
                          "width":45,
-                         "x":3844.17,
-                         "y":488.712
+                         "x":3842.17,
+                         "y":434.712
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -864,7 +864,7 @@
                          "visible":true,
                          "width":20,
                          "x":4747.58,
-                         "y":346.606
+                         "y":336.606
                         }, 
                         {
                          "gid":4,

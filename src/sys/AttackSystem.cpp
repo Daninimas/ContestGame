@@ -115,6 +115,11 @@ void AttackSystem::checkPlayerAttacking(GameEngine& gameContext) const {
 			}
 		}
 
+		// Solo para la parte en la que no tienes arma
+		if (gameContext.entityMan->getComponent<DistanceWeaponComponent>(WorldElementsData::playerId).damage == 0) {
+			createMelee = true;
+		}
+
 		if (createMelee) {
 			createMeleeAttack(gameContext, gameContext.entityMan->getComponent<MeleeWeaponComponent>(WorldElementsData::playerId));
 

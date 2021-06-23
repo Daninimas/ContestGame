@@ -216,7 +216,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
     meleeWeaponComp.attackBounding = { 0.f, 28.f, 20.f, 58.f };
     meleeWeaponComp.damage = 3;
     meleeWeaponComp.attackLifetime = 0.15f;
-    meleeWeaponComp.attackSound.soundPath = "./Media/Sound/Weapons/slaphit.wav"; 
+    meleeWeaponComp.attackSound.soundPath = "./Media/Sound/Weapons/knifeSwing.wav";
 
 
     // Render component
@@ -528,7 +528,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         meleeWeaponComp.attackBounding = { 0.f, 34.f, 10.f, 40.f };
         meleeWeaponComp.damage = 2;
         meleeWeaponComp.maxCooldown = 1.5f;
-        meleeWeaponComp.attackSound.soundPath = "./Media/Sound/Weapons/knifeSwing.wav";
+        meleeWeaponComp.attackSound.soundPath = "./Media/Sound/Weapons/slaphit.wav"; ;
 
         colliderComp.weight = 3.f;
     }
@@ -1409,8 +1409,8 @@ int EntityManager::createTurretGun(GameEngine& gameContext, Vector2 position, ui
     distanceWeaponComp.damage = 1;
     distanceWeaponComp.attackGeneralVelociy = 900.f;
     distanceWeaponComp.attackGravity = 0.f;
-    distanceWeaponComp.maxCooldown = 0.10f;
-    distanceWeaponComp.attackLifetime = 0.65f;
+    distanceWeaponComp.maxCooldown = 0.11f;
+    distanceWeaponComp.attackLifetime = 0.5f;
     distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BULLET;
     distanceWeaponComp.infiniteAmmo = true;
     distanceWeaponComp.bulletSpreadAngle = 5.f;

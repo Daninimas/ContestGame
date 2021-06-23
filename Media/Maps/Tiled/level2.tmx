@@ -199,8 +199,8 @@
    </object>
    <object id="561" type="ENEMY_SPIDER" gid="4" x="6193.03" y="583.939" width="20" height="20">
     <properties>
-     <property name="maxCooldown" type="float" value="3"/>
-     <property name="numObjectsToSpawn" type="int" value="-1"/>
+     <property name="maxCooldown" type="float" value="3.5"/>
+     <property name="numObjectsToSpawn" type="int" value="7"/>
      <property name="range.x" type="float" value="1000"/>
      <property name="range.y" type="float" value="1000"/>
     </properties>

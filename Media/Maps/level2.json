@@ -52,29 +52,6 @@
                  "y":0
                 }, 
                 {
-                 "draworder":"topdown",
-                 "id":17,
-                 "name":"PLAYER",
-                 "objects":[
-                        {
-                         "gid":8,
-                         "height":80,
-                         "id":262,
-                         "name":"",
-                         "rotation":0,
-                         "type":"PLAYER_GENERAL",
-                         "visible":true,
-                         "width":54,
-                         "x":157.121,
-                         "y":492.909
-                        }],
-                 "opacity":1,
-                 "type":"objectgroup",
-                 "visible":true,
-                 "x":0,
-                 "y":0
-                }, 
-                {
                  "color":"#ff0000",
                  "draworder":"topdown",
                  "id":15,
@@ -323,7 +300,7 @@
                  "x":0,
                  "y":0
                 }],
-         "name":"Phase1",
+         "name":"Phase12",
          "opacity":1,
          "properties":[
                 {
@@ -2473,6 +2450,29 @@
                  "y":0
                 }, 
                 {
+                 "draworder":"topdown",
+                 "id":17,
+                 "name":"PLAYER",
+                 "objects":[
+                        {
+                         "gid":8,
+                         "height":80,
+                         "id":262,
+                         "name":"",
+                         "rotation":0,
+                         "type":"PLAYER_GENERAL",
+                         "visible":true,
+                         "width":54,
+                         "x":11021.121,
+                         "y":556.909
+                        }],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
+                }, 
+                {
                  "color":"#ff0000",
                  "draworder":"topdown",
                  "id":146,
@@ -2887,7 +2887,7 @@
                  "x":0,
                  "y":0
                 }],
-         "name":"Phase6",
+         "name":"Phase1",
          "opacity":1,
          "properties":[
                 {
