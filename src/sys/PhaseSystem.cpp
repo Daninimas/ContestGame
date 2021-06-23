@@ -33,8 +33,8 @@ void PhaseSystem::checkIfChangePhase(GameEngine& gameContext) const {
 					gameContext.pushGameState(GameState::NEXT_LEVEL_MENU);
 				}
 				else {
-					// WIN TODO
-					std::cout << "You Win!!\n";
+					// WIN
+					gameContext.pushGameState(GameState::WIN);
 				}
 			}
 		}

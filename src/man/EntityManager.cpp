@@ -1672,41 +1672,41 @@ int EntityManager::createMenu(GameEngine& gameContext, GameObjectType menuType) 
 
     }
     else if (menuType == GameObjectType::CONTROLS_KEYBOARD) {
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 170.f), 0.f, MenuOptions::SET_KEY_ATTACK));
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 200.f), 0.f, MenuOptions::SET_KEY_JUMP));
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 230.f), 0.f, MenuOptions::SET_KEY_LEFT));
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 260.f), 0.f, MenuOptions::SET_KEY_RIGHT));
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 290.f), 0.f, MenuOptions::SET_KEY_UP));
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 320.f), 0.f, MenuOptions::SET_KEY_DOWN));
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 400.f), 0.f, MenuOptions::BACK));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 220.f), 0.f, MenuOptions::SET_KEY_ATTACK));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 250.f), 0.f, MenuOptions::SET_KEY_JUMP));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 280.f), 0.f, MenuOptions::SET_KEY_LEFT));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 310.f), 0.f, MenuOptions::SET_KEY_RIGHT));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 340.f), 0.f, MenuOptions::SET_KEY_UP));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 370.f), 0.f, MenuOptions::SET_KEY_DOWN));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 450.f), 0.f, MenuOptions::BACK));
 
         Utils::setControlKeyToMenuOptions(gameContext, menuComp);
 
         renderComp.sprite = "Media/Images/Menu/NewHighscore.png";
     }
     else if (menuType == GameObjectType::CONTROLS_JOYSTICK) {
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 170.f), 0.f, MenuOptions::SET_KEY_ATTACK));
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 200.f), 0.f, MenuOptions::SET_KEY_JUMP));
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 230.f), 0.f, MenuOptions::SET_KEY_LEFT));
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 260.f), 0.f, MenuOptions::SET_KEY_RIGHT));
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 290.f), 0.f, MenuOptions::SET_KEY_UP));
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 320.f), 0.f, MenuOptions::SET_KEY_DOWN));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 220.f), 0.f, MenuOptions::SET_KEY_ATTACK));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 250.f), 0.f, MenuOptions::SET_KEY_JUMP));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 280.f), 0.f, MenuOptions::SET_KEY_LEFT));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 310.f), 0.f, MenuOptions::SET_KEY_RIGHT));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 340.f), 0.f, MenuOptions::SET_KEY_UP));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 370.f), 0.f, MenuOptions::SET_KEY_DOWN));
 
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(500.f, 170.f), 0.f, MenuOptions::SET_JOYSTICK_ATTACK));
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(500.f, 200.f), 0.f, MenuOptions::SET_JOYSTICK_JUMP));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(500.f, 220.f), 0.f, MenuOptions::SET_JOYSTICK_ATTACK));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(500.f, 250.f), 0.f, MenuOptions::SET_JOYSTICK_JUMP));
 
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 400.f), 0.f, MenuOptions::BACK));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 450.f), 0.f, MenuOptions::BACK));
 
         Utils::setControlKeyToMenuOptions(gameContext, menuComp);
 
-        renderComp.sprite = "Media/Images/Menu/NewHighscore.png";
+        renderComp.sprite = "Media/Images/Menu/ControlsJoystick.png";
     }
     else if (menuType == GameObjectType::BEST_SCORES) {
         gameContext.entityMan->readBestScore();
 
         // Create the text of the best scores
         auto& best_score_list = WorldElementsData::best_score_list;
-        Vector2 pos = { 230.f, 0.f };
+        Vector2 pos = { 230.f, 80.f };
 
         for (std::size_t i = 0; i < best_score_list.size(); ++i) {
             std::string text = best_score_list[i].name + " __________________ " + to_string(best_score_list[i].score);
@@ -1714,7 +1714,7 @@ int EntityManager::createMenu(GameEngine& gameContext, GameObjectType menuType) 
             menuComp.textsId.emplace_back(createText(gameContext, pos, 0.f, text, { 239, 184, 4, 255 }, true, 20));
         }
 
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 470.f), 0.f, MenuOptions::MAIN_MENU));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 530.f), 0.f, MenuOptions::MAIN_MENU));
 
         renderComp.sprite = "Media/Images/Menu/NewHighscore.png";
     }
@@ -1748,6 +1748,11 @@ int EntityManager::createMenu(GameEngine& gameContext, GameObjectType menuType) 
     }
     else if (menuType == GameObjectType::NEXT_LEVEL_MENU) {
         menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 400.f), 0.f, MenuOptions::TO_NEXT_LEVEL));
+
+        renderComp.sprite = "Media/Images/Menu/NextLevel.png";
+    }
+    else if (menuType == GameObjectType::WIN_MENU) {
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 400.f), 0.f, MenuOptions::NEW_BEST_SCORE));
 
         renderComp.sprite = "Media/Images/Menu/NextLevel.png";
     }

@@ -213,6 +213,10 @@ void GameEngine::run() {
                 setMenuSystems(GameObjectType::NEXT_LEVEL_MENU);
                 break;
 
+            case GameState::WIN:
+                setMenuSystems(GameObjectType::WIN_MENU);
+                break;
+
             case GameState::NEXT_LEVEL:
                 loadNextLevel();
                 break;

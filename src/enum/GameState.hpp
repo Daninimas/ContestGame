@@ -12,5 +12,6 @@ enum class GameState {
     NEW_BEST_SCORE,
     MAIN_MENU,
     NEXT_LEVEL,
-    NEXT_LEVEL_MENU
+    NEXT_LEVEL_MENU,
+    WIN
 };

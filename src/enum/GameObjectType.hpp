@@ -51,6 +51,7 @@ enum class GameObjectType {
     BEST_SCORES,
     NEW_BEST_SCORE,
     NEXT_LEVEL_MENU,
+    WIN_MENU,
 
 
     // Enemy types
