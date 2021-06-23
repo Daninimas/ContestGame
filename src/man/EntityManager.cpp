@@ -1746,6 +1746,11 @@ int EntityManager::createMenu(GameEngine& gameContext, GameObjectType menuType) 
         menuComp.menuMusic.soundPath = "./Media/Sound/Music/arthur-vyncke-a-few-jumps-away.wav";
         menuComp.menuMusic.repeat = true;
     }
+    else if (menuType == GameObjectType::NEXT_LEVEL_MENU) {
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 400.f), 0.f, MenuOptions::TO_NEXT_LEVEL));
+
+        renderComp.sprite = "Media/Images/Menu/NextLevel.png";
+    }
 
 
     //######### RENDER ########//
@@ -1799,6 +1804,11 @@ int EntityManager::createMenuOption(GameEngine& gameContext, Vector2 position, f
 
     case MenuOptions::MAIN_MENU:
         textComp.text = "MAIN MENU";
+
+        break;
+
+    case MenuOptions::TO_NEXT_LEVEL:
+        textComp.text = "LET'S GO!";
 
         break;
 

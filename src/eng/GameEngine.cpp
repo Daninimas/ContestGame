@@ -66,6 +66,7 @@ void GameEngine::reset() {
     WorldElementsData::worldMeleeWeapons.clear();
     WorldElementsData::enemiesInWorld = 0;
     WorldElementsData::playerScore = 0;
+    WorldElementsData::lastPlayerScore = 0;
     WorldElementsData::currentWorld = 0;
 
     // Restart game
@@ -206,6 +207,10 @@ void GameEngine::run() {
                 systems.emplace_back(std::make_unique<WaitAfterLoseLifeSystem>());
                 systemsLate.emplace_back(std::make_unique<CameraSystem>());
                 systemsLate.emplace_back(std::make_unique<WorldSystem>());
+                break;
+
+            case GameState::NEXT_LEVEL_MENU:
+                setMenuSystems(GameObjectType::NEXT_LEVEL_MENU);
                 break;
 
             case GameState::NEXT_LEVEL:

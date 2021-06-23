@@ -88,6 +88,7 @@ void StaticEntitiesSystem::init(GameEngine& gameContext) const {
 
 void StaticEntitiesSystem::createPlayer(GameEngine &gameContext) const {
     WorldElementsData::playerScore = 0;
+    WorldElementsData::lastPlayerScore = 0;
 
     gameContext.entityMan->createPlayer(gameContext, Vector2(0.f, 200.f), 0.f, GameObjectType::PLAYER_GENERAL);
 }

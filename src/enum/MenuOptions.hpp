@@ -9,6 +9,7 @@ enum class MenuOptions {
     TO_BEST_SCORES,
     NEW_BEST_SCORE,
     SELECT_CHARACTER,
+    TO_NEXT_LEVEL,
 
     // set controls, keys
     SET_KEY_ATTACK,

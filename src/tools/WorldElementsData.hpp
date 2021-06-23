@@ -20,10 +20,11 @@ public:
     static inline uint16_t enemiesInWorld{ 0 };
 
     // World that we are
-    static inline uint8_t currentWorld{ 1 };
+    static inline uint8_t currentWorld{ 0 };
 
     // Score of the player
     static inline int playerScore{ 0 };
+    static inline int lastPlayerScore{ 0 };
 
     // Counter for wait after lose Live
     static inline float waitLoseLifeTime{ 1.f };
