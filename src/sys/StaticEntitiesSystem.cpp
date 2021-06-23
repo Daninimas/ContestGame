@@ -49,7 +49,7 @@ void StaticEntitiesSystem::init(GameEngine& gameContext) const {
     /*int drone = gameContext.entityMan->createDrone(gameContext, Vector2(100.f, 200.f), 0.f, GameObjectType::DRONE_FRIEND);
     gameContext.entityMan->getComponent<AIFlyingChaseComponent>(drone).objectiveId = WorldElementsData::playerId;*/
 
-    /*int orbitalStrikerID = gameContext.entityMan->createOrbitalStrikerEnemy(gameContext, GameObjectType::ORBITAL_STRIKER);
+    /*int orbitalStrikerID = gameContext.entityMan->createOrbitalStrikerEnemy(gameContext, { 9912.12f, 1178}, GameObjectType::ORBITAL_STRIKER);
     gameContext.entityMan->getComponent<AIOrbitalAtkComponent>(orbitalStrikerID).objectiveId = WorldElementsData::playerId;*/
 
     /*int pouncerId = gameContext.entityMan->createEnemy(gameContext, 300.f, 300.f, 0.f, GameObjectType::POUNCER_ENEMY);
@@ -116,5 +116,5 @@ void StaticEntitiesSystem::createWorld(GameEngine& gameContext) const {
         text = "STAGE 3: Secret base";
         break;
     }
-    gameContext.entityMan->createFloatingText(gameContext, position, 0, text, { 255, 153, 0, 255 }, false, 30, 4.f, -30);
+    gameContext.entityMan->createFloatingText(gameContext, position, 0, text, { 255, 153, 0, 255 }, false, 30, 5.f, -30);
 }

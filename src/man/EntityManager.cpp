@@ -852,11 +852,11 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
         distanceWeaponComp.attackBounding = { 0.f, 5.f, 0.f, 5.f };
         distanceWeaponComp.damage = 1;
         distanceWeaponComp.attackGeneralVelociy = 900.f;
-        distanceWeaponComp.attackGravity = 0.f;
-        distanceWeaponComp.maxCooldown = 0.3f;
+        distanceWeaponComp.attackGravity = 100.f;
+        distanceWeaponComp.maxCooldown = 0.15f;
         distanceWeaponComp.attackLifetime = 1.5f;
         distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BULLET;
-        distanceWeaponComp.ammo = 20;
+        distanceWeaponComp.ammo = 70;
         distanceWeaponComp.infiniteAmmo = false;
         distanceWeaponComp.bulletSpreadAngle = 5.f;
         distanceWeaponComp.spawnAttackPos = { 20.f, 39.f };
@@ -1184,9 +1184,13 @@ int EntityManager::createDrone(GameEngine& gameContext, Vector2 position, float 
     flyingChaseComp.minHeigtht = 50.f;
     flyingChaseComp.minDistanceX = 1.f;
 
+    AutodeleteComponent& deleteComp = createComponent<AutodeleteComponent>(entityId);
+    deleteComp.timeToDelete = 50.f;
 
     switch (goType) {
     case GameObjectType::DRONE_FRIEND:
+        
+
         situation.noWorldDelete = true;
 
         colliderComp.collisionLayer = ColliderComponent::Player;
@@ -1206,8 +1210,8 @@ int EntityManager::createDrone(GameEngine& gameContext, Vector2 position, float 
         distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BULLET;
         distanceWeaponComp.attackSound.soundPath = "Media/Sound/GE_KF7_Soviet.wav";
 
-        distanceAIComp.range.x = 350.f;
-        distanceAIComp.range.y = 350.f;
+        distanceAIComp.range.x = 270.f;
+        distanceAIComp.range.y = 270.f;
 
         sensorComp.sensorBounding = {-distanceAIComp.range.x, distanceAIComp.range.x, -distanceAIComp.range.y, distanceAIComp.range.y };  // The same bounding as the distanceAIComp
         sensorComp.sensorLayerMasc = ColliderComponent::Enemy;
@@ -1273,6 +1277,10 @@ int EntityManager::createPowerUp(GameEngine& gameContext, Vector2 position, floa
 
     case GameObjectType::POWERUP_EXTRA_LIFE:
         powerUpComp.type = PowerUpComponent::ExtraLife;
+        break;
+
+    case GameObjectType::POWERUP_DRONE:
+        powerUpComp.type = PowerUpComponent::Drone;
         break;
     }
 
@@ -1357,11 +1365,16 @@ int EntityManager::createOrbitalMarker(GameEngine& gameContext, Vector2 position
 }
 
 
-int EntityManager::createOrbitalStrikerEnemy(GameEngine& gameContext, GameObjectType goType) {
+int EntityManager::createOrbitalStrikerEnemy(GameEngine& gameContext, Vector2 position, GameObjectType goType) {
     int entityId = Entity::getCurrentId();
 
     createComponent<AIOrbitalAtkComponent>(entityId);
     OrbitalWeaponComponent& orbitalWeapon = createComponent<OrbitalWeaponComponent>(entityId);
+    SituationComponent& situation = createComponent<SituationComponent>(entityId);
+
+    //######### DATA ########//
+    situation.position = position;
+    situation.noWorldDelete = false;
 
     orbitalWeapon.attackBounding = { 0.f, 50.f, 0.f, 0.f };
     orbitalWeapon.markerBounding = { 0.f, 30.f, 0.f, 0.f };
@@ -1410,7 +1423,7 @@ int EntityManager::createTurretGun(GameEngine& gameContext, Vector2 position, ui
     distanceWeaponComp.attackGeneralVelociy = 900.f;
     distanceWeaponComp.attackGravity = 0.f;
     distanceWeaponComp.maxCooldown = 0.11f;
-    distanceWeaponComp.attackLifetime = 0.5f;
+    distanceWeaponComp.attackLifetime = 0.65f;
     distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BULLET;
     distanceWeaponComp.infiniteAmmo = true;
     distanceWeaponComp.bulletSpreadAngle = 5.f;

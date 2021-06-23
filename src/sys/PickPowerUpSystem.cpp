@@ -67,6 +67,11 @@ void PickPowerUpSystem::setPowerUpToEntity(GameEngine& gameContext, PowerUpCompo
 	case PowerUpComponent::ExtraLife:
 		gameContext.entityMan->getComponent<HealthComponent>(WorldElementsData::playerId).extraLifes++;
 		break;
+
+	case PowerUpComponent::Drone:
+		SituationComponent& powerSit = gameContext.entityMan->getComponent<SituationComponent>(powerUp.id);
+		gameContext.entityMan->createDrone(gameContext, Vector2(powerSit.position.x, powerSit.position.y - 230.f), 0, GameObjectType::DRONE_FRIEND);
+		break;
 	}
 
 	displayPowerUpNameText(gameContext, powerUp);
@@ -114,5 +119,5 @@ void PickPowerUpSystem::displayPowerUpNameText(GameEngine& gameContext, PowerUpC
 
 	string text = powerUpTextMap.at(powerUp.type);
 
-	gameContext.entityMan->createFloatingText(gameContext, powerUpSit.position, 0.f, text, { 255, 0, 0, 255 }, false, 20, 2.5f, -40.f);
+	gameContext.entityMan->createFloatingText(gameContext, powerUpSit.position, 0.f, text, { 255, 0, 0, 255 }, false, 20, 3.f, -40.f);
 }

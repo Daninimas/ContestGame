@@ -12,6 +12,8 @@ enum class TriggerFunction
 
     // Especific generation
     SPAWN_CITY_1,
+    SPAWN_BASE_1,
+    SPAWN_ORBITAL_LASER,
 
 
     // ERROR

@@ -34,7 +34,7 @@ void OrbitalWeaponSystem::checkEnemiesAttacking(GameEngine& gameContext) const {
 		OrbitalWeaponComponent& orbitalWeapon = gameContext.entityMan->getComponent<OrbitalWeaponComponent>(AIOrbitalStriker.id);
 
 		if (orbitalWeapon.cooldown > orbitalWeapon.maxCooldown && gameContext.entityMan->existsComponent<SituationComponent>(AIOrbitalStriker.objectiveId)) {
-			generateOrbitalMarker(gameContext, orbitalWeapon, gameContext.entityMan->getComponent<SituationComponent>(AIOrbitalStriker.id));
+			generateOrbitalMarker(gameContext, orbitalWeapon, gameContext.entityMan->getComponent<SituationComponent>(AIOrbitalStriker.objectiveId));
 		}
 	}
 }
@@ -45,6 +45,9 @@ void OrbitalWeaponSystem::generateOrbitalMarker(GameEngine& gameContext, Orbital
 	Vector2 markerCenter = Utils::getCenterOfBounding(orbitalWeapon.markerBounding);
 	orbitalWeapon.attackPosition.x = objectiveSituation.position.x + objectiveCenter.x;
 	orbitalWeapon.attackPosition.y = 0.f;
+
+	//std::cout << "Pos: ( " << (orbitalWeapon.attackPosition.x - markerCenter.x) << ", " << orbitalWeapon.attackPosition.y << ")\n";
+	//std::cout << "Objective Pos: ( " << objectiveSituation.position.x << ", " << objectiveSituation.position.y << ") id: " << objectiveSituation.id << " playerID: " << WorldElementsData::playerId <<"\n";
 
 	int markerID = gameContext.entityMan->createOrbitalMarker(gameContext, { orbitalWeapon.attackPosition.x-markerCenter.x, orbitalWeapon.attackPosition.y }, GameObjectType::ORBITAL_MARKER);
 
