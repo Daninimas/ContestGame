@@ -20,7 +20,7 @@ public:
     static inline uint16_t enemiesInWorld{ 0 };
 
     // World that we are
-    static inline uint8_t currentWorld{ 0 };
+    static inline uint8_t currentWorld{ 1 };
 
     // Score of the player
     static inline int playerScore{ 0 };

@@ -288,7 +288,7 @@
     </properties>
    </object>
    <object id="370" type="PLATFORM" x="8745.07" y="-316.26" width="61.3676" height="84.0354"/>
-   <object id="371" type="PLATFORM" x="8463.26" y="-389.715" width="182.58" height="26.4596"/>
+   <object id="371" type="WALL" x="8463.26" y="-389.715" width="182.58" height="26.4596"/>
    <object id="372" type="WALL" x="8554.59" y="-717.442" width="769.611" height="40.9445"/>
    <object id="373" type="PLATFORM" x="8145.07" y="-530.753" width="55.307" height="20.399"/>
    <object id="374" type="PLATFORM" x="8145.07" y="-584.754" width="55.307" height="20.399"/>

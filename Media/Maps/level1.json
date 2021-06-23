@@ -1484,7 +1484,7 @@
                          "id":371,
                          "name":"",
                          "rotation":0,
-                         "type":"PLATFORM",
+                         "type":"WALL",
                          "visible":true,
                          "width":182.58,
                          "x":8463.26,
@@ -2743,7 +2743,7 @@
          "y":0
         }],
  "nextlayerid":107,
- "nextobjectid":509,
+ "nextobjectid":508,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.0",

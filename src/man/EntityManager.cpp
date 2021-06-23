@@ -774,6 +774,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
 
         jumpComp.impulse = -100.f;
         jumpComp.maxCooldown = 2.f;
+        jumpComp.cooldown = 2.f;
         jumpComp.jumpSound.soundPath = "./Media/Sound/Enemies/spiderJump.wav";
 
         MeleeWeaponComponent& meleeWeaponComp = createComponent<MeleeWeaponComponent>(entityId);
@@ -786,6 +787,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         pounceComp.range.y = 30.f;
         pounceComp.velocityIncFactor = 4.7f;
         pounceComp.maxCooldown = 1.2f;
+        pounceComp.cooldown = 1.2f;
         pounceComp.isStickyPouncer = true;
 
         colliderComp.weight = 3.f;
@@ -1254,7 +1256,7 @@ int EntityManager::createPowerUp(GameEngine& gameContext, Vector2 position, floa
         powerUpComp.furyColor = { 255, 0, 0, 255 };
         powerUpComp.furyTimersSpeedIncFactor = 0.7f;
         powerUpComp.furySpeedIncFactor = 1.5f;
-        powerUpComp.furyTotalLifeTime = 3.f;
+        powerUpComp.furyTotalLifeTime = 10.f;
         break;
 
     case GameObjectType::POWERUP_EXTRA_LIFE:
