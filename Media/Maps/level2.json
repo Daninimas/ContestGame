@@ -52,6 +52,29 @@
                  "y":0
                 }, 
                 {
+                 "draworder":"topdown",
+                 "id":17,
+                 "name":"PLAYER",
+                 "objects":[
+                        {
+                         "gid":8,
+                         "height":80,
+                         "id":262,
+                         "name":"",
+                         "rotation":0,
+                         "type":"PLAYER_GENERAL",
+                         "visible":true,
+                         "width":54,
+                         "x":157.121,
+                         "y":492.909
+                        }],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
+                }, 
+                {
                  "color":"#ff0000",
                  "draworder":"topdown",
                  "id":15,
@@ -300,7 +323,7 @@
                  "x":0,
                  "y":0
                 }],
-         "name":"Phase12",
+         "name":"Phase1",
          "opacity":1,
          "properties":[
                 {
@@ -1002,12 +1025,12 @@
                                 {
                                  "name":"maxCooldown",
                                  "type":"float",
-                                 "value":3
+                                 "value":3.5
                                 }, 
                                 {
                                  "name":"numObjectsToSpawn",
                                  "type":"int",
-                                 "value":-1
+                                 "value":7
                                 }, 
                                 {
                                  "name":"range.x",
@@ -1359,6 +1382,34 @@
                 }, 
                 {
                  "draworder":"topdown",
+                 "id":155,
+                 "name":"TRIGGER",
+                 "objects":[
+                        {
+                         "height":246.49,
+                         "id":740,
+                         "name":"",
+                         "properties":[
+                                {
+                                 "name":"Function",
+                                 "type":"string",
+                                 "value":"SPAWN_ORBITAL_LASER"
+                                }],
+                         "rotation":0,
+                         "type":"TRIGGER",
+                         "visible":true,
+                         "width":84.2636969696969,
+                         "x":6897.26209090909,
+                         "y":422.209545454546
+                        }],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
+                }, 
+                {
+                 "draworder":"topdown",
                  "id":130,
                  "name":"ENEMY",
                  "objects":[
@@ -1483,8 +1534,8 @@
                          "type":"CHILD",
                          "visible":true,
                          "width":21,
-                         "x":6929.39,
-                         "y":614.727
+                         "x":7159.69303030303,
+                         "y":532.908818181818
                         }, 
                         {
                          "gid":19,
@@ -2450,29 +2501,6 @@
                  "y":0
                 }, 
                 {
-                 "draworder":"topdown",
-                 "id":17,
-                 "name":"PLAYER",
-                 "objects":[
-                        {
-                         "gid":8,
-                         "height":80,
-                         "id":262,
-                         "name":"",
-                         "rotation":0,
-                         "type":"PLAYER_GENERAL",
-                         "visible":true,
-                         "width":54,
-                         "x":11021.121,
-                         "y":556.909
-                        }],
-                 "opacity":1,
-                 "type":"objectgroup",
-                 "visible":true,
-                 "x":0,
-                 "y":0
-                }, 
-                {
                  "color":"#ff0000",
                  "draworder":"topdown",
                  "id":146,
@@ -2887,7 +2915,7 @@
                  "x":0,
                  "y":0
                 }],
-         "name":"Phase1",
+         "name":"Phase6",
          "opacity":1,
          "properties":[
                 {
@@ -2910,8 +2938,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":155,
- "nextobjectid":740,
+ "nextlayerid":156,
+ "nextobjectid":741,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.0",

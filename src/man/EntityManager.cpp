@@ -575,7 +575,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         // Render component
         renderComp.sprite = "Media/Images/Enemy.png";
         renderComp.spriteRect = { 0, 248, 0, 360 };
-        renderComp.color = { 0, 119, 21, 255 };
+        renderComp.color = { 238, 249, 14, 255 };
 
         healthComp.maxHealth = 4;
 
@@ -632,7 +632,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         MeleeWeaponComponent& meleeWeaponComp = createComponent<MeleeWeaponComponent>(entityId);
         meleeWeaponComp.attackBounding = { 0.f, 50.f, 70.f, 175.f };
         meleeWeaponComp.damage = 2;
-        meleeWeaponComp.maxCooldown = 1.f;
+        meleeWeaponComp.maxCooldown = 1.2f;
         meleeWeaponComp.attackSound.soundPath = "./Media/Sound/Enemies/MonsterRoar.wav";
 
         AITransformationComponent& transformComp = createComponent<AITransformationComponent>(entityId);
@@ -662,7 +662,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
 
         flyingChaseComp.maxHeigtht = 230.f;
         flyingChaseComp.minHeigtht = 200.f;
-        flyingChaseComp.minDistanceX = rand() % (38 - 6) + 6; // Entre 65 y 46
+        flyingChaseComp.minDistanceX = rand() % (38 - 10) + 10; // Entre 65 y 46
 
 
         DistanceWeaponComponent& distanceWeaponComp = createComponent<DistanceWeaponComponent>(entityId);
@@ -677,7 +677,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
 
         distanceWeaponComp.attackSound.soundPath = "Media/Sound/Weapons/silbidoBombaCayendo.wav";
 
-        distanceWeaponComp.explosionExpansion = 2.f;
+        distanceWeaponComp.explosionExpansion = 90.f;
         distanceWeaponComp.explosionTime = 0.5f;
         distanceWeaponComp.startActivated = false;
         distanceWeaponComp.spawnAttackPos = { 26.f, 40.f };
@@ -696,7 +696,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
     // Render component
     renderComp.sprite = "Media/Images/Personajes/alien volador/AlienVolador.png";
     renderComp.spriteRect = { 0, 399, 0, 464 };
-    renderComp.color = { 0, 119, 21, 255 };
+    renderComp.color = { 238, 249, 14, 255 };
 
     healthComp.maxHealth = 5;
 
@@ -704,7 +704,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
 
     flyingChaseComp.maxHeigtht = 230.f;
     flyingChaseComp.minHeigtht = 200.f;
-    flyingChaseComp.minDistanceX = rand() % (38 - 6) + 6; // Entre 65 y 46
+    flyingChaseComp.minDistanceX = rand() % (38 - 10) + 10; // Entre 65 y 46
 
     AIDistanceAtkComponent& distanceAIComp = createComponent<AIDistanceAtkComponent>(entityId);
     distanceAIComp.range.x = 175.f;
@@ -714,7 +714,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
     // Distance
     distanceWeaponComp.attackBounding = { 0.f, 5.f, 0.f, 5.f };
     distanceWeaponComp.damage = 1;
-    distanceWeaponComp.attackGeneralVelociy = 270.f;
+    distanceWeaponComp.attackGeneralVelociy = 253.f;
     distanceWeaponComp.attackGravity = 10.f;
     distanceWeaponComp.maxCooldown = 1.f;
     distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BULLET;
@@ -889,7 +889,7 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
         distanceWeaponComp.attackGeneralVelociy = 650.f;
         distanceWeaponComp.attackGravity = 100.f;
         distanceWeaponComp.maxCooldown = 1.f;
-        distanceWeaponComp.attackLifetime = 0.75f;
+        distanceWeaponComp.attackLifetime = 0.5f;
         distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BOMB;
         distanceWeaponComp.ammo = 8;
         distanceWeaponComp.infiniteAmmo = false;
@@ -897,7 +897,7 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
 
         distanceWeaponComp.attackSound.soundPath = "Media/Sound/Weapons/grenadeLauncherSound.wav";
 
-        distanceWeaponComp.explosionExpansion = 2.f;
+        distanceWeaponComp.explosionExpansion = 90.f;
         distanceWeaponComp.explosionTime = 0.2f;
         distanceWeaponComp.startActivated = false;
 
@@ -1182,7 +1182,7 @@ int EntityManager::createDrone(GameEngine& gameContext, Vector2 position, float 
 
     flyingChaseComp.maxHeigtht = 55.f;
     flyingChaseComp.minHeigtht = 50.f;
-    flyingChaseComp.minDistanceX = 1.f;
+    flyingChaseComp.minDistanceX = 10.f;
 
     AutodeleteComponent& deleteComp = createComponent<AutodeleteComponent>(entityId);
     deleteComp.timeToDelete = 50.f;
@@ -1191,10 +1191,10 @@ int EntityManager::createDrone(GameEngine& gameContext, Vector2 position, float 
     case GameObjectType::DRONE_FRIEND:
         
 
-        situation.noWorldDelete = true;
+        situation.noWorldDelete = false;
 
         colliderComp.collisionLayer = ColliderComponent::Player;
-        colliderComp.layerMasc = ColliderComponent::Attack + ColliderComponent::Enemy + ColliderComponent::Wall;
+        colliderComp.layerMasc = ColliderComponent::Attack + ColliderComponent::Enemy;
 
         velocityComp.speedX = 80.f;
         velocityComp.gravity = 0.f;
@@ -1382,6 +1382,7 @@ int EntityManager::createOrbitalStrikerEnemy(GameEngine& gameContext, Vector2 po
     orbitalWeapon.damage = 2;
     orbitalWeapon.generateAttackTime = 1.3f;
     orbitalWeapon.maxCooldown = 4.f;
+    orbitalWeapon.cooldown = orbitalWeapon.maxCooldown;
 
     orbitalWeapon.markerSound.soundPath = "Media/Sound/Weapons/loadLaser.wav";
     orbitalWeapon.attackSound.soundPath = "Media/Sound/Weapons/alienExplosion.wav";

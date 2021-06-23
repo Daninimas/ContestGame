@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="100" tileheight="100" infinite="1" nextlayerid="155" nextobjectid="740">
+<map version="1.5" tiledversion="1.7.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="100" tileheight="100" infinite="1" nextlayerid="156" nextobjectid="741">
  <editorsettings>
   <export target="../level2.json" format="json"/>
  </editorsettings>
@@ -255,6 +255,13 @@
     </properties>
    </object>
   </objectgroup>
+  <objectgroup id="155" name="TRIGGER">
+   <object id="740" type="TRIGGER" x="6897.26" y="422.21" width="84.2637" height="246.49">
+    <properties>
+     <property name="Function" value="SPAWN_ORBITAL_LASER"/>
+    </properties>
+   </object>
+  </objectgroup>
   <objectgroup id="130" name="ENEMY">
    <object id="604" type="DISTANCE_ENEMY" gid="17" x="6817.39" y="605.727" width="45" height="65"/>
    <object id="634" type="DISTANCE_ENEMY" gid="17" x="7301.74" y="246.288" width="45" height="65"/>
@@ -278,7 +285,7 @@
    </object>
   </objectgroup>
   <objectgroup id="133" name="CHILD">
-   <object id="611" type="CHILD" gid="19" x="6929.39" y="614.727" width="21" height="50"/>
+   <object id="611" type="CHILD" gid="19" x="7159.69" y="532.909" width="21" height="50"/>
    <object id="637" type="CHILD" gid="19" x="8204.65" y="126.515" width="21" height="50"/>
    <object id="638" type="CHILD" gid="19" x="8701.62" y="581.061" width="21" height="50"/>
   </objectgroup>

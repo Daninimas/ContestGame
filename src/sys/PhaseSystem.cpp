@@ -34,6 +34,7 @@ void PhaseSystem::checkIfChangePhase(GameEngine& gameContext) const {
 				}
 				else {
 					// WIN TODO
+					std::cout << "You Win!!\n";
 				}
 			}
 		}

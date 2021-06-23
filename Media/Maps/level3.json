@@ -52,6 +52,29 @@
                  "y":0
                 }, 
                 {
+                 "draworder":"topdown",
+                 "id":17,
+                 "name":"PLAYER",
+                 "objects":[
+                        {
+                         "gid":8,
+                         "height":80,
+                         "id":262,
+                         "name":"",
+                         "rotation":0,
+                         "type":"PLAYER_GENERAL",
+                         "visible":true,
+                         "width":54,
+                         "x":145.121,
+                         "y":96.909
+                        }],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
+                }, 
+                {
                  "color":"#ff0000",
                  "draworder":"topdown",
                  "id":15,
@@ -375,8 +398,8 @@
                          "type":"CHILD",
                          "visible":true,
                          "width":21,
-                         "x":2112.28787878788,
-                         "y":548.151515151515
+                         "x":2115.31818181818,
+                         "y":539.060606060606
                         }, 
                         {
                          "gid":19,
@@ -419,7 +442,7 @@
                  "x":0,
                  "y":0
                 }],
-         "name":"Phase12",
+         "name":"Phase1",
          "opacity":1,
          "properties":[
                 {
@@ -430,12 +453,12 @@
                 {
                  "name":"maxPhaseTime",
                  "type":"float",
-                 "value":25
+                 "value":120
                 }, 
                 {
                  "name":"minPhaseTime",
                  "type":"float",
-                 "value":10
+                 "value":40
                 }],
          "type":"group",
          "visible":true,
@@ -873,7 +896,7 @@
                          "visible":true,
                          "width":144.103,
                          "x":3276.9485,
-                         "y":-184.42885
+                         "y":-143.42885
                         }, 
                         {
                          "height":24.8577,
@@ -985,7 +1008,7 @@
                          "visible":true,
                          "width":21,
                          "x":2420.5303030303,
-                         "y":545.121212121212
+                         "y":539.060606060606
                         }, 
                         {
                          "gid":19,
@@ -996,8 +1019,8 @@
                          "type":"CHILD",
                          "visible":true,
                          "width":21,
-                         "x":3371.13636363636,
-                         "y":-435.606060606061
+                         "x":3368.10606060606,
+                         "y":-444.69696969697
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -1016,12 +1039,12 @@
                 {
                  "name":"maxPhaseTime",
                  "type":"float",
-                 "value":25
+                 "value":130
                 }, 
                 {
                  "name":"minPhaseTime",
                  "type":"float",
-                 "value":10
+                 "value":65
                 }],
          "type":"group",
          "visible":true,
@@ -1119,12 +1142,12 @@
                                 {
                                  "name":"maxCooldown",
                                  "type":"float",
-                                 "value":5
+                                 "value":7
                                 }, 
                                 {
                                  "name":"numObjectsToSpawn",
                                  "type":"int",
-                                 "value":3
+                                 "value":1
                                 }, 
                                 {
                                  "name":"range.x",
@@ -1162,7 +1185,7 @@
                                 {
                                  "name":"range.x",
                                  "type":"float",
-                                 "value":550
+                                 "value":535
                                 }, 
                                 {
                                  "name":"range.y",
@@ -1195,7 +1218,7 @@
                                 {
                                  "name":"range.x",
                                  "type":"float",
-                                 "value":550
+                                 "value":535
                                 }, 
                                 {
                                  "name":"range.y",
@@ -1355,8 +1378,8 @@
                          "type":"POWERUP_FURY",
                          "visible":true,
                          "width":0,
-                         "x":4603.0303030303,
-                         "y":-445.454545454545
+                         "x":4572.72727272727,
+                         "y":-642.424242424242
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -1410,12 +1433,12 @@
                 {
                  "name":"maxPhaseTime",
                  "type":"float",
-                 "value":25
+                 "value":120
                 }, 
                 {
                  "name":"minPhaseTime",
                  "type":"float",
-                 "value":10
+                 "value":60
                 }],
          "type":"group",
          "visible":true,
@@ -1704,12 +1727,12 @@
                 {
                  "name":"maxPhaseTime",
                  "type":"float",
-                 "value":25
+                 "value":105
                 }, 
                 {
                  "name":"minPhaseTime",
                  "type":"float",
-                 "value":10
+                 "value":60
                 }],
          "type":"group",
          "visible":true,
@@ -2022,12 +2045,12 @@
                 {
                  "name":"maxPhaseTime",
                  "type":"float",
-                 "value":25
+                 "value":90
                 }, 
                 {
                  "name":"minPhaseTime",
                  "type":"float",
-                 "value":10
+                 "value":40
                 }],
          "type":"group",
          "visible":true,
@@ -2352,7 +2375,7 @@
                                 {
                                  "name":"maxCooldown",
                                  "type":"float",
-                                 "value":4
+                                 "value":2.5
                                 }, 
                                 {
                                  "name":"numObjectsToSpawn",
@@ -2528,8 +2551,8 @@
                          "type":"POWERUP_DRONE",
                          "visible":true,
                          "width":0,
-                         "x":9834,
-                         "y":-294
+                         "x":9015.81818181818,
+                         "y":-100.060606060606
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -2583,12 +2606,12 @@
                 {
                  "name":"maxPhaseTime",
                  "type":"float",
-                 "value":25
+                 "value":55
                 }, 
                 {
                  "name":"minPhaseTime",
                  "type":"float",
-                 "value":10
+                 "value":100
                 }],
          "type":"group",
          "visible":true,
@@ -2621,29 +2644,6 @@
                  "y":0
                 }, 
                 {
-                 "draworder":"topdown",
-                 "id":17,
-                 "name":"PLAYER",
-                 "objects":[
-                        {
-                         "gid":8,
-                         "height":80,
-                         "id":262,
-                         "name":"",
-                         "rotation":0,
-                         "type":"PLAYER_GENERAL",
-                         "visible":true,
-                         "width":54,
-                         "x":145.121,
-                         "y":96.909
-                        }],
-                 "opacity":1,
-                 "type":"objectgroup",
-                 "visible":true,
-                 "x":0,
-                 "y":0
-                }, 
-                {
                  "color":"#ff0000",
                  "draworder":"topdown",
                  "id":205,
@@ -2662,8 +2662,8 @@
                          "rotation":0,
                          "type":"DAMAGE_PLATFORM",
                          "visible":true,
-                         "width":3530.41712121212,
-                         "x":9777.66390909091,
+                         "width":3534.41712121212,
+                         "x":9773.66390909091,
                          "y":1365.6513030303
                         }],
                  "opacity":1,
@@ -2736,7 +2736,7 @@
                          "y":1218.29924242424
                         }, 
                         {
-                         "height":160.007593939394,
+                         "height":129.704563636364,
                          "id":952,
                          "name":"",
                          "properties":[
@@ -2750,7 +2750,7 @@
                          "visible":true,
                          "width":111.923030303029,
                          "x":11448.5839393939,
-                         "y":1054.84468787879
+                         "y":1085.14771818182
                         }, 
                         {
                          "height":74.6136545454545,
@@ -2845,7 +2845,7 @@
                                 {
                                  "name":"isCheckpoint",
                                  "type":"bool",
-                                 "value":false
+                                 "value":true
                                 }],
                          "rotation":0,
                          "type":"WALL",
@@ -2865,7 +2865,7 @@
                                  "value":false
                                 }],
                          "rotation":0,
-                         "type":"WALL",
+                         "type":"PLATFORM",
                          "visible":true,
                          "width":836.041257575758,
                          "x":12257.7369469697,
@@ -2882,7 +2882,7 @@
                                  "value":false
                                 }],
                          "rotation":0,
-                         "type":"WALL",
+                         "type":"PLATFORM",
                          "visible":true,
                          "width":48.162212121213,
                          "x":13185.0098030303,
@@ -2899,7 +2899,7 @@
                                  "value":false
                                 }],
                          "rotation":0,
-                         "type":"WALL",
+                         "type":"PLATFORM",
                          "visible":true,
                          "width":48.1622,
                          "x":13185.9189,
@@ -2916,7 +2916,7 @@
                                  "value":false
                                 }],
                          "rotation":0,
-                         "type":"WALL",
+                         "type":"PLATFORM",
                          "visible":true,
                          "width":48.1622,
                          "x":13183.9189,
@@ -2933,7 +2933,7 @@
                                  "value":false
                                 }],
                          "rotation":0,
-                         "type":"WALL",
+                         "type":"PLATFORM",
                          "visible":true,
                          "width":48.1622,
                          "x":13183.9189,
@@ -3246,12 +3246,12 @@
                                 {
                                  "name":"maxCooldown",
                                  "type":"float",
-                                 "value":6
+                                 "value":1
                                 }, 
                                 {
                                  "name":"numObjectsToSpawn",
                                  "type":"int",
-                                 "value":3
+                                 "value":1
                                 }, 
                                 {
                                  "name":"range.x",
@@ -3326,7 +3326,7 @@
                          "visible":true,
                          "width":21,
                          "x":13183.9393939394,
-                         "y":1088.63636363636
+                         "y":1071.63636363636
                         }, 
                         {
                          "gid":19,
@@ -3338,7 +3338,7 @@
                          "visible":true,
                          "width":21,
                          "x":13232.4242424242,
-                         "y":1088.63636363636
+                         "y":1071.63636363636
                         }, 
                         {
                          "gid":19,
@@ -3350,7 +3350,7 @@
                          "visible":true,
                          "width":21,
                          "x":13280.9090909091,
-                         "y":1085.60606060606
+                         "y":1068.60606060606
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -3384,20 +3384,8 @@
                          "type":"TRANSFORM_ENEMY",
                          "visible":true,
                          "width":21,
-                         "x":11829.3939393939,
-                         "y":1137.12121212121
-                        }, 
-                        {
-                         "gid":17,
-                         "height":65,
-                         "id":967,
-                         "name":"",
-                         "rotation":0,
-                         "type":"DISTANCE_ENEMY",
-                         "visible":true,
-                         "width":45,
-                         "x":12583.5606060606,
-                         "y":764.469696969697
+                         "x":11899.3939393939,
+                         "y":1135.12121212121
                         }, 
                         {
                          "gid":17,
@@ -3408,20 +3396,8 @@
                          "type":"DISTANCE_ENEMY",
                          "visible":true,
                          "width":45,
-                         "x":12829.0151515152,
+                         "x":12743.6818181818,
                          "y":752.348484848485
-                        }, 
-                        {
-                         "gid":17,
-                         "height":65,
-                         "id":969,
-                         "name":"",
-                         "rotation":0,
-                         "type":"DISTANCE_ENEMY",
-                         "visible":true,
-                         "width":45,
-                         "x":12989.6212121212,
-                         "y":770.530303030303
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -3458,23 +3434,23 @@
                  "x":0,
                  "y":0
                 }],
-         "name":"Phase1",
+         "name":"Phase7",
          "opacity":1,
          "properties":[
                 {
                  "name":"Direction",
                  "type":"string",
-                 "value":"Down"
+                 "value":"Right"
                 }, 
                 {
                  "name":"maxPhaseTime",
                  "type":"float",
-                 "value":25
+                 "value":180
                 }, 
                 {
                  "name":"minPhaseTime",
                  "type":"float",
-                 "value":10
+                 "value":90
                 }],
          "type":"group",
          "visible":true,
