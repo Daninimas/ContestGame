@@ -1244,7 +1244,7 @@ int EntityManager::createPowerUp(GameEngine& gameContext, Vector2 position, floa
     SituationComponent& situation = createComponent<SituationComponent>(entityId);
     ColliderComponent& colliderComp = createComponent<ColliderComponent>(entityId);
     PowerUpComponent& powerUpComp = createComponent<PowerUpComponent>(entityId);
-    //RenderComponent& renderComp = createComponent<RenderComponent>(entityId);
+    RenderComponent& renderComp = createComponent<RenderComponent>(entityId);
 
     //######### DATA ########//
     situation.position = position;
@@ -1253,18 +1253,18 @@ int EntityManager::createPowerUp(GameEngine& gameContext, Vector2 position, floa
     // Collider
     colliderComp.collisionLayer = ColliderComponent::Weapon;
     colliderComp.layerMasc = ColliderComponent::Player; //Collides with player and wall
-    colliderComp.boundingRoot.bounding = { 0.f, 10.f, 0.f, 10.f };
+    colliderComp.boundingRoot.bounding = { 0.f, 30.f, 0.f, 30.f };
     colliderComp.type = ColliderType::NO_SOLID;
-
-    // Render component
-    //renderComp.sprite = "Media/Images/TaOmA.png";
-    //renderComp.spriteRect = { 400, 450, 200, 250 };
 
 
     switch (goType) {
     case GameObjectType::POWERUP_SHIELD:
         powerUpComp.type = PowerUpComponent::Shield;
         powerUpComp.shieldColliderIncFactor = 1.4f;
+
+        // Render component
+        renderComp.sprite = "Media/Images/Powerups/Shield.png";
+        renderComp.spriteRect = { 0, 30, 0, 30 };
         break;
 
     case GameObjectType::POWERUP_FURY:
@@ -1273,17 +1273,31 @@ int EntityManager::createPowerUp(GameEngine& gameContext, Vector2 position, floa
         powerUpComp.furyTimersSpeedIncFactor = 0.7f;
         powerUpComp.furySpeedIncFactor = 1.5f;
         powerUpComp.furyTotalLifeTime = 10.f;
+
+        // Render component
+        renderComp.sprite = "Media/Images/Powerups/Fury.png";
+        renderComp.spriteRect = { 0, 30, 0, 30 };
         break;
 
     case GameObjectType::POWERUP_EXTRA_LIFE:
         powerUpComp.type = PowerUpComponent::ExtraLife;
+
+        // Render component
+        renderComp.sprite = "Media/Images/Powerups/ExtraLife.png";
+        renderComp.spriteRect = { 0, 30, 0, 30 };
         break;
 
     case GameObjectType::POWERUP_DRONE:
         powerUpComp.type = PowerUpComponent::Drone;
+
+        // Render component
+        renderComp.sprite = "Media/Images/Powerups/Drone.png";
+        renderComp.spriteRect = { 0, 30, 0, 30 };
         break;
     }
 
+    //######### RENDER ########//
+    gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
 
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::POWERUP, goType));
@@ -1752,9 +1766,9 @@ int EntityManager::createMenu(GameEngine& gameContext, GameObjectType menuType) 
         renderComp.sprite = "Media/Images/Menu/NextLevel.png";
     }
     else if (menuType == GameObjectType::WIN_MENU) {
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 400.f), 0.f, MenuOptions::NEW_BEST_SCORE));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 510.f), 0.f, MenuOptions::NEW_BEST_SCORE));
 
-        renderComp.sprite = "Media/Images/Menu/NextLevel.png";
+        renderComp.sprite = "Media/Images/Menu/Win.png";
     }
 
 
@@ -1913,7 +1927,7 @@ int EntityManager::createHUDElement(GameEngine& gameContext, Vector2 position, f
 
         textComp.color = { 255, 20, 30, 255 };
         textComp.isHUDElement = true;
-        textComp.size = 24;
+        textComp.size = 30;
         textComp.text = "";
 
         //######### RENDER ########//
@@ -1922,7 +1936,7 @@ int EntityManager::createHUDElement(GameEngine& gameContext, Vector2 position, f
     else if (objType == GameObjectType::HUD_PLAYER_AMMO) {
         TextComponent& textComp = createComponent<TextComponent>(entityId);
 
-        textComp.color = { 255, 255, 30, 255 };
+        textComp.color = { 0, 0, 0, 255 };
         textComp.isHUDElement = true;
         textComp.size = 24;
         textComp.text = "";
@@ -1933,7 +1947,7 @@ int EntityManager::createHUDElement(GameEngine& gameContext, Vector2 position, f
     else if (objType == GameObjectType::HUD_PLAYER_LIFES) {
         TextComponent& textComp = createComponent<TextComponent>(entityId);
 
-        textComp.color = { 255, 255, 30, 255 };
+        textComp.color = { 0, 0, 0, 255 };
         textComp.isHUDElement = true;
         textComp.size = 24;
         textComp.text = "";
@@ -1944,9 +1958,9 @@ int EntityManager::createHUDElement(GameEngine& gameContext, Vector2 position, f
     else if (objType == GameObjectType::HUD_PLAYER_SCORE) {
         TextComponent& textComp = createComponent<TextComponent>(entityId);
 
-        textComp.color = { 61, 81, 255, 255 };
+        textComp.color = { 249, 207, 19, 255 };
         textComp.isHUDElement = true;
-        textComp.size = 24;
+        textComp.size = 30;
         textComp.text = "";
 
         //######### RENDER ########//
