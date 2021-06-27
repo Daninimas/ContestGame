@@ -265,11 +265,11 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
     inputComp.keyboardControlsMap[Controls::JOYSTICK_JUMP]   = jf["JOYSTICK_JUMP"].get<uint8_t>();
     i.close();
 
-    //######### RENDER ########//
-    gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
-
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::PLAYER, goType));
+
+    //######### RENDER ########//
+    gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
 
     //situation.sons.emplace_back(createPlayerHand(gameContext, entityId));
 
@@ -294,12 +294,11 @@ int EntityManager::createPlayerHand(GameEngine& gameContext, int playerId) {
     renderComp.sprite = "Media/Images/spawnerSprite.png";
     renderComp.spriteRect = { 0, 20, 0, 20 };
 
+    //######### CREATE ########//
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::PLAYER, GameObjectType::PLAYER_HAND));
 
     //######### RENDER ########//
     gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
-
-    //######### CREATE ########//
-    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::PLAYER, GameObjectType::PLAYER_HAND));
 
     return entityId;
 }
@@ -385,6 +384,20 @@ int EntityManager::createAttack(GameEngine& gameContext, Vector2 position, float
 
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::ATTACK, goType));
+
+    if (goType == GameObjectType::EXPLOSION || goType == GameObjectType::PLAYER_EXPLOSION) {
+        situation.scale = {0.7f, 0.7f};
+        RenderComponent& renderComp = createComponent<RenderComponent>(entityId);
+        // Render component
+        renderComp.sprite = "Media/Images/explosion.png";
+        renderComp.spriteRect = { 3655, 3761, 64, 180 };
+        // Animation
+        AnimationComponent& animComp = createComponent<AnimationComponent>(entityId);
+        AnimationManager::setAnimationToEntity(gameContext, Animation::IDLE, animComp);
+        //######### RENDER ########//
+        gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
+    }
+
     return entityId;
 }
 
@@ -394,12 +407,18 @@ int EntityManager::createWall(GameEngine& gameContext, Vector2 position, Vector2
 
     SituationComponent& situation = createComponent<SituationComponent>(entityId);
     ColliderComponent& colliderComp = createComponent<ColliderComponent>(entityId);
-    //RenderComponent& renderComp = createComponent<RenderComponent>(entityId);
+    RenderComponent& renderComp = createComponent<RenderComponent>(entityId);
 
 
     //######### DATA ########//
     situation.position = position;
     situation.rotation = r;
+
+    // Render
+    renderComp.color = { 255, 255, 255, 255 };
+    renderComp.sprite = "./Media/Images/Textures/Textures.png";
+    renderComp.spriteRect = {0, size.x, 0, size.y};
+    renderComp.isRepeated = true;
 
     // Collider
     colliderComp.boundingRoot.bounding = { 0.f, size.x, 0.f, size.y };
@@ -426,11 +445,12 @@ int EntityManager::createWall(GameEngine& gameContext, Vector2 position, Vector2
         break;
     }
 
-    //######### RENDER ########//
-    //gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
-
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::WALL, goType));
+
+    //######### RENDER ########//
+    gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
+
     return entityId;
 }
 
@@ -807,11 +827,13 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
 
     healthComp.resetHealth(); // Reset health to set the current health the same as maxHealth
 
-    //######### RENDER ########//
-    gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
 
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::ENEMY, goType));
+
+    //######### RENDER ########//
+    gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
+
     return entityId;
 }
 
@@ -962,11 +984,12 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
     WorldElementsData::worldDistanceWeapons.push_back(entityId);
     }
 
+    //######### CREATE ########//
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::WEAPON, goType));
+
     //######### RENDER ########//
     gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
 
-    //######### CREATE ########//
-    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::WEAPON, goType));
     return entityId;
 }
 
@@ -999,11 +1022,12 @@ int EntityManager::createCamera(GameEngine& gameContext, Vector2 position, float
     velocityComp.speedX = 1000.f;
 
 
+    //######### CREATE ########//
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::CAMERA, goType));
+
     //######### RENDER ########//
     gameContext.getWindowFacadeRef().createCamera(gameContext, entityId);
 
-    //######### CREATE ########//
-    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::CAMERA, goType));
     return entityId;
 }
 
@@ -1055,8 +1079,9 @@ int EntityManager::createSpawner(GameEngine& gameContext, Vector2 position, floa
 
     //######### DATA ########//
     situation.position = position;
+    situation.position.y -= 30;
     situation.rotation = r;
-    situation.scale = { 0.1f, 0.1f };
+    situation.scale = { 0.25f, 0.5f };
 
     // Render component
     renderComp.sprite = "Media/Images/spawner.png";
@@ -1065,7 +1090,7 @@ int EntityManager::createSpawner(GameEngine& gameContext, Vector2 position, floa
     // Collider
     colliderComp.collisionLayer = ColliderComponent::Enemy; // temporal
     colliderComp.layerMasc = ColliderComponent::Player + ColliderComponent::PlayerAttack + ColliderComponent::Wall + ColliderComponent::PlayerShield + ColliderComponent::Platform; //Collides with player and enemy
-    colliderComp.boundingRoot.bounding = { 0.f, 30.f, 0.f, 70.f };
+    colliderComp.boundingRoot.bounding = { 0.f, 50.f, 0.f, 100.f };
     colliderComp.type = ColliderType::STATIC;
     
 
@@ -1107,12 +1132,14 @@ int EntityManager::createSpawner(GameEngine& gameContext, Vector2 position, floa
 
     // Init health
     healthComp.resetHealth();
+    
+
+    //######### CREATE ########//
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::SPAWNER, GameObjectType::SPAWNER));
 
     //######### RENDER ########//
     gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
 
-    //######### CREATE ########//
-    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::SPAWNER, GameObjectType::SPAWNER));
     return entityId;
 }
 
@@ -1296,11 +1323,12 @@ int EntityManager::createPowerUp(GameEngine& gameContext, Vector2 position, floa
         break;
     }
 
-    //######### RENDER ########//
-    gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
-
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::POWERUP, goType));
+
+    //######### RENDER ########//
+    gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
+    
     return entityId;
 }
 
@@ -1370,11 +1398,12 @@ int EntityManager::createOrbitalMarker(GameEngine& gameContext, Vector2 position
     renderComp.sprite = "Media/Images/OrbitalMarker.png";
 
 
+    //######### CREATE ########//
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::ORBITAL_MARKER, GameObjectType::ORBITAL_MARKER));
+
     //######### RENDER ########//
     gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
 
-    //######### CREATE ########//
-    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::ORBITAL_MARKER, GameObjectType::ORBITAL_MARKER));
     return entityId;
 }
 
@@ -1455,11 +1484,12 @@ int EntityManager::createTurretGun(GameEngine& gameContext, Vector2 position, ui
     gunTurretComp.maxRotation = 90.f;
     gunTurretComp.minRotation = -10.f;
 
+    //######### CREATE ########//
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::TURRET, GameObjectType::TURRET_GUN));
+
     //######### RENDER ########//
     gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
 
-    //######### CREATE ########//
-    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::TURRET, GameObjectType::TURRET_GUN));
     return entityId;
 }
 
@@ -1531,11 +1561,11 @@ int EntityManager::createChild(GameEngine& gameContext, Vector2 position, float 
     triggerComp.functions.push_back(TriggerFunction::GIVE_CHILD_POINTS);
 
 
-    //######### RENDER ########//
-    gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
-
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::CHILD, GameObjectType::CHILD));
+
+    //######### RENDER ########//
+    gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
 
     return entityId;
 }
@@ -1640,12 +1670,13 @@ int EntityManager::createWorld(GameEngine& gameContext, GameObjectType worldName
         break;
     }
 
-    //######### RENDER ########//
-    gameContext.getWindowFacadeRef().setBackgroundLayers(worldComp.backgroundLayers, worldComp.backgroundSize);
-
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::WORLD, worldName));
 
+    //######### RENDER ########//
+    gameContext.getWindowFacadeRef().setBackgroundLayers(worldComp.backgroundLayers, worldComp.backgroundSize);
+
+    
     // Create the entities of the world
     MapLoader::loadMapPhase(gameContext, worldComp.worldPath, "Phase1");
     worldComp.numberOfPhases = MapLoader::getNumberOfPhases(worldComp.worldPath);
@@ -1929,9 +1960,6 @@ int EntityManager::createHUDElement(GameEngine& gameContext, Vector2 position, f
         textComp.isHUDElement = true;
         textComp.size = 30;
         textComp.text = "";
-
-        //######### RENDER ########//
-        gameContext.getWindowFacadeRef().createText(gameContext, entityId);
     }
     else if (objType == GameObjectType::HUD_PLAYER_AMMO) {
         TextComponent& textComp = createComponent<TextComponent>(entityId);
@@ -1940,9 +1968,6 @@ int EntityManager::createHUDElement(GameEngine& gameContext, Vector2 position, f
         textComp.isHUDElement = true;
         textComp.size = 24;
         textComp.text = "";
-
-        //######### RENDER ########//
-        gameContext.getWindowFacadeRef().createText(gameContext, entityId);
     }
     else if (objType == GameObjectType::HUD_PLAYER_LIFES) {
         TextComponent& textComp = createComponent<TextComponent>(entityId);
@@ -1951,9 +1976,6 @@ int EntityManager::createHUDElement(GameEngine& gameContext, Vector2 position, f
         textComp.isHUDElement = true;
         textComp.size = 24;
         textComp.text = "";
-
-        //######### RENDER ########//
-        gameContext.getWindowFacadeRef().createText(gameContext, entityId);
     }
     else if (objType == GameObjectType::HUD_PLAYER_SCORE) {
         TextComponent& textComp = createComponent<TextComponent>(entityId);
@@ -1962,13 +1984,14 @@ int EntityManager::createHUDElement(GameEngine& gameContext, Vector2 position, f
         textComp.isHUDElement = true;
         textComp.size = 30;
         textComp.text = "";
-
-        //######### RENDER ########//
-        gameContext.getWindowFacadeRef().createText(gameContext, entityId);
     }
 
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::HUD_ELEMENT, objType));
+
+    //######### RENDER ########//
+    gameContext.getWindowFacadeRef().createText(gameContext, entityId);
+
     return entityId;
 }
 
@@ -1990,13 +2013,14 @@ int EntityManager::createText(GameEngine& gameContext, Vector2 position, float r
     textComp.isHUDElement = isHUDElement;
     textComp.size = size;
     textComp.text = text;
-
-    //######### RENDER ########//
-    gameContext.getWindowFacadeRef().createText(gameContext, entityId);
-    
+       
 
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::TEXT, GameObjectType::TEXT));
+
+
+    //######### RENDER ########//
+    gameContext.getWindowFacadeRef().createText(gameContext, entityId);
     return entityId;
 }
 

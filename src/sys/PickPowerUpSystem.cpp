@@ -28,6 +28,12 @@ void PickPowerUpSystem::update(GameEngine& gameContext) const {
 			// Supongo que el arma solo tiene un collidable sin bounding hijos
 			if (entityColliding != std::numeric_limits<int>::max() ) {
 				setPowerUpToEntity(gameContext, powerUp, entityColliding, powerUpsToDelete);
+
+				// Play pick powerup sound
+				Sound pickPowerSound;
+				pickPowerSound.soundPath = "./Media/Sound/UI/powerUp.wav";
+				gameContext.getSoundFacadeRef().loadSound(pickPowerSound.soundPath);
+				gameContext.getSoundFacadeRef().playSound(pickPowerSound);
 			}
 		}
 	}

@@ -90,6 +90,18 @@
                          "width":152,
                          "x":464,
                          "y":515
+                        }, 
+                        {
+                         "gid":9,
+                         "height":65,
+                         "id":510,
+                         "name":"",
+                         "rotation":0,
+                         "type":"GRENADE_LAUNCHER",
+                         "visible":true,
+                         "width":152,
+                         "x":644,
+                         "y":519.5
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -255,6 +267,23 @@
                          "width":38.7088,
                          "x":1156.4,
                          "y":453.692
+                        }, 
+                        {
+                         "height":48.3733333333333,
+                         "id":508,
+                         "name":"",
+                         "properties":[
+                                {
+                                 "name":"isCheckpoint",
+                                 "type":"bool",
+                                 "value":false
+                                }],
+                         "rotation":0,
+                         "type":"WALL",
+                         "visible":true,
+                         "width":52.0421333333334,
+                         "x":1197.97893333333,
+                         "y":541.813333333333
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -819,8 +848,8 @@
                          "type":"POWERUP_EXTRA_LIFE",
                          "visible":true,
                          "width":0,
-                         "x":4324.24,
-                         "y":381.818
+                         "x":4321.2096969697,
+                         "y":348.484666666667
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -2207,7 +2236,7 @@
                          "visible":true,
                          "width":45,
                          "x":10162.8,
-                         "y":-603.363242424242
+                         "y":-603.363
                         }, 
                         {
                          "gid":17,
@@ -2743,7 +2772,7 @@
          "y":0
         }],
  "nextlayerid":107,
- "nextobjectid":508,
+ "nextobjectid":511,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.0",

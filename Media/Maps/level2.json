@@ -163,8 +163,8 @@
                          "type":"DISTANCE_ENEMY",
                          "visible":true,
                          "width":45,
-                         "x":1103.93939393939,
-                         "y":319.666666666667
+                         "x":1103.94,
+                         "y":319.667
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -606,8 +606,8 @@
                          "type":"POWERUP_EXTRA_LIFE",
                          "visible":true,
                          "width":0,
-                         "x":2490.90909090909,
-                         "y":157.575757575758
+                         "x":2490.91,
+                         "y":157.576
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -1398,9 +1398,9 @@
                          "rotation":0,
                          "type":"TRIGGER",
                          "visible":true,
-                         "width":84.2636969696969,
-                         "x":6897.26209090909,
-                         "y":422.209545454546
+                         "width":84.2637,
+                         "x":6897.26,
+                         "y":422.21
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -1534,8 +1534,8 @@
                          "type":"CHILD",
                          "visible":true,
                          "width":21,
-                         "x":7159.69303030303,
-                         "y":551.090636363636
+                         "x":7159.69,
+                         "y":551.091
                         }, 
                         {
                          "gid":19,
@@ -1547,7 +1547,7 @@
                          "visible":true,
                          "width":21,
                          "x":8204.65,
-                         "y":144.696818181818
+                         "y":144.697
                         }, 
                         {
                          "gid":19,
@@ -1558,8 +1558,8 @@
                          "type":"CHILD",
                          "visible":true,
                          "width":21,
-                         "x":8704.6503030303,
-                         "y":599.242818181818
+                         "x":8704.65,
+                         "y":599.243
                         }],
                  "opacity":1,
                  "type":"objectgroup",

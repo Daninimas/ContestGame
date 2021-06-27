@@ -65,6 +65,24 @@ void AnimationManager::setIdleAnimation(GameEngine& gameContext, const Animation
 		animationComp.totalFrames = 10;
 		animationComp.nextFrameAdvance = 600;
 		break;
+
+	case GameObjectType::EXPLOSION:
+		animationComp.animation = animation;
+		animationComp.framerate = 0.01f;
+		animationComp.repeat = false;
+		animationComp.startSpriteRect = { 90, 160, 90, 180 };
+		animationComp.totalFrames = 32;
+		animationComp.nextFrameAdvance = 256;
+		break;
+
+	case GameObjectType::PLAYER_EXPLOSION:
+		animationComp.animation = animation;
+		animationComp.framerate = 0.01f;
+		animationComp.repeat = false;
+		animationComp.startSpriteRect = { 90, 160, 90, 180 };
+		animationComp.totalFrames = 32;
+		animationComp.nextFrameAdvance = 256;
+		break;
 	}
 }
 

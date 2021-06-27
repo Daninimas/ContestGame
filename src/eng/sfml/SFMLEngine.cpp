@@ -27,7 +27,7 @@ SFMLEngine::SFMLEngine(int width, int height, bool fullscreen) {
 	FPSTextNode.setFont(font);
 	FPSTextNode.setCharacterSize(20);
 	renderFPS = false;
-	//renderCollidables = false;
+	renderCollidables = false;
 	//renderSensors = false;
 }
 SFMLEngine::~SFMLEngine() {
@@ -103,6 +103,10 @@ void SFMLEngine::drawScene(GameEngine& gameContext) const {
 	}
 
 	// Draw everything here...
+	for (auto& node : nodeWorldMap)
+	{
+		device.get()->draw(node.second);
+	}
 	for (auto& node : nodeMap)
 	{
 		device.get()->draw(node.second);
@@ -218,6 +222,9 @@ void SFMLEngine::updateEntities(GameEngine& gameContext, std::vector<int> entiti
 		if (existsNode(id)) {
 			updateNode(gameContext, nodeMap[id], id);
 		}
+		else if (existsWorldNode(id)) {
+			updateNode(gameContext, nodeWorldMap[id], id);
+		}
 		else if (existsHUDNode(id)) {
 			updateNode(gameContext, HUDNodeMap[id], id);
 		}
@@ -274,6 +281,9 @@ void SFMLEngine::setColorToEntity(const int id, const Color color) {
 	if(existsNode(id))
 		nodeMap[id].setColor(sf::Color(color.r, color.g, color.b, color.a));
 
+	if (existsWorldNode(id))
+		nodeWorldMap[id].setColor(sf::Color(color.r, color.g, color.b, color.a));
+
 	if(existsHUDNode(id))
 		HUDNodeMap[id].setColor(sf::Color(color.r, color.g, color.b, color.a));
 }
@@ -283,6 +293,9 @@ void SFMLEngine::updateTextures(GameEngine& gameContext, std::vector<int> entiti
 	for (int id : entitiesId) {
 		if (existsNode(id)) {
 			updateTexture(gameContext, nodeMap[id], id);
+		}
+		else if (existsWorldNode(id)) {
+			updateTexture(gameContext, nodeWorldMap[id], id);
 		}
 		else {
 			// if dont exists, create node
@@ -300,6 +313,7 @@ void SFMLEngine::updateTexture(GameEngine& gameContext, sf::Sprite& node, int id
 	}
 
 	node.setTexture(textureMap[drawable.sprite]);
+	textureMap[drawable.sprite].setRepeated(drawable.isRepeated);
 	node.setTextureRect(sf::IntRect(drawableRect.xLeft, drawableRect.yUp, drawableRect.xRight - drawableRect.xLeft, drawableRect.yDown - drawableRect.yUp));
 }
 
@@ -335,6 +349,10 @@ void SFMLEngine::createEntity(GameEngine& gameContext, int id) {
 	if (drawable.isHUDElement) {
 		HUDNodeMap.emplace(std::piecewise_construct, std::forward_as_tuple(id), std::forward_as_tuple(textureMap[drawable.sprite]));
 		node = &HUDNodeMap[id];
+	}
+	else if (gameContext.entityMan->getEntity(id).getType() == EntityType::WALL) {
+		nodeWorldMap.emplace(std::piecewise_construct, std::forward_as_tuple(id), std::forward_as_tuple(textureMap[drawable.sprite]));
+		node = &nodeWorldMap[id];
 	}
 	else {
 		nodeMap.emplace(std::piecewise_construct, std::forward_as_tuple(id), std::forward_as_tuple(textureMap[drawable.sprite]));
@@ -418,6 +436,7 @@ void SFMLEngine::setBackgroundLayers(std::vector<BackgroundLayer>& layers, float
 
 void SFMLEngine::eraseEntity(int id) {
 	nodeMap.erase(id);
+	nodeWorldMap.erase(id);
 	HUDNodeMap.erase(id);
 	cameraMap.erase(id);
 	HUDTextMap.erase(id);
@@ -428,6 +447,7 @@ void SFMLEngine::eraseEntity(int id) {
 
 void SFMLEngine::eraseAllEntities() {
 	nodeMap.clear();
+	nodeWorldMap.clear();
 	HUDNodeMap.clear();
 	cameraMap.clear();
 	HUDTextMap.clear();
@@ -441,6 +461,12 @@ size_t SFMLEngine::countRenderNodes() const {
 
 bool SFMLEngine::existsNode(int id) const {
 	if (nodeMap.find(id) == nodeMap.end())
+		return false;
+	return true;
+}
+
+bool SFMLEngine::existsWorldNode(int id) const {
+	if (nodeWorldMap.find(id) == nodeWorldMap.end())
 		return false;
 	return true;
 }

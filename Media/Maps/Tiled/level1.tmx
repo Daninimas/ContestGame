@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="100" tileheight="100" infinite="1" nextlayerid="107" nextobjectid="508">
+<map version="1.5" tiledversion="1.7.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="100" tileheight="100" infinite="1" nextlayerid="107" nextobjectid="509">
  <editorsettings>
   <export target="../level1.json" format="json"/>
  </editorsettings>
@@ -56,6 +56,11 @@
    <object id="275" type="WALL" x="1156.4" y="453.692" width="38.7088" height="135.04">
     <properties>
      <property name="isCheckpoint" type="bool" value="true"/>
+    </properties>
+   </object>
+   <object id="508" type="WALL" x="1197.98" y="541.813" width="52.0421" height="48.3733">
+    <properties>
+     <property name="isCheckpoint" type="bool" value="false"/>
     </properties>
    </object>
   </objectgroup>
@@ -163,7 +168,7 @@
    <object id="313" type="PLATFORM" x="5112.83" y="544.825" width="71.3066" height="40.217"/>
   </objectgroup>
   <objectgroup id="69" name="POWERUP">
-   <object id="310" type="POWERUP_EXTRA_LIFE" x="4324.24" y="381.818">
+   <object id="310" type="POWERUP_EXTRA_LIFE" x="4321.21" y="348.485">
     <point/>
    </object>
   </objectgroup>
