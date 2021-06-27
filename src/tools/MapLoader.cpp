@@ -113,7 +113,7 @@ void MapLoader::createObject(GameEngine& gameContext, std::string layerName, tso
 
         // Check the object to create
         if (layerName == "WALL") {
-            int wallId = gameContext.entityMan->createWall(gameContext, Vector2(position.x, position.y), Vector2(size.x, size.y), rotation, goType);
+            int wallId = gameContext.entityMan->createWall(gameContext, Vector2(position.x, position.y), Vector2(size.x, size.y), rotation, obj.get<std::string>("texture"), goType);
 
             if (obj.get<bool>("isCheckpoint")) {
                 gameContext.entityMan->createComponent<CheckpointComponent>(wallId);

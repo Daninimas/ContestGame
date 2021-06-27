@@ -402,7 +402,7 @@ int EntityManager::createAttack(GameEngine& gameContext, Vector2 position, float
 }
 
 
-int EntityManager::createWall(GameEngine& gameContext, Vector2 position, Vector2 size, float r, GameObjectType goType) {
+int EntityManager::createWall(GameEngine& gameContext, Vector2 position, Vector2 size, float r, std::string texturePath, GameObjectType goType) {
     int entityId = Entity::getCurrentId();
 
     SituationComponent& situation = createComponent<SituationComponent>(entityId);
@@ -416,7 +416,10 @@ int EntityManager::createWall(GameEngine& gameContext, Vector2 position, Vector2
 
     // Render
     renderComp.color = { 255, 255, 255, 255 };
-    renderComp.sprite = "./Media/Images/Textures/Textures.png";
+    if (texturePath == "") {
+        texturePath = "./Media/Images/Textures/NormalBrick.png";
+    }
+    renderComp.sprite = texturePath;
     renderComp.spriteRect = {0, size.x, 0, size.y};
     renderComp.isRepeated = true;
 
