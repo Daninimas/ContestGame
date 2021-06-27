@@ -44,6 +44,8 @@ public:
     void updateFPSTextNode(uint8_t FPS) override;
 
 private:
+    bool existsWorldNode(int id) const;
+
     void drawScene(GameEngine& gameContext) const;
     void renderColliders(GameEngine& gameContext) const;
     void renderAllSensors(GameEngine& gameContext) const;
@@ -61,6 +63,7 @@ private:
 
     std::unique_ptr<sf::RenderWindow> device;
     std::unordered_map<int, sf::Sprite> nodeMap;
+    std::unordered_map<int, sf::Sprite> nodeWorldMap; // sprites of the world (WALL)
     std::unordered_map<int, sf::Text> textMap;
     std::unordered_map<int, sf::Sprite> HUDNodeMap; // nodes that render on hud 
     std::unordered_map<int, sf::Text> HUDTextMap;

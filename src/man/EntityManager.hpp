@@ -97,7 +97,7 @@ public:
     int createPlayer(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType = GameObjectType::NONE);
     int createPlayerHand(GameEngine& gameContext, int playerId);
     int createAttack(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType = GameObjectType::NONE);
-    int createWall(GameEngine& gameContext, Vector2 position, Vector2 size, float r, GameObjectType goType = GameObjectType::NONE);
+    int createWall(GameEngine& gameContext, Vector2 position, Vector2 size, float r, std::string texturePath = "", GameObjectType goType = GameObjectType::NONE);
     int createEnemy(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType = GameObjectType::NONE);
     int createDrone(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType);
     int createWeapon(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType = GameObjectType::NONE);
@@ -109,7 +109,7 @@ public:
     int createTrigger(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType = GameObjectType::NONE);
     int createDamagePlatform(GameEngine& gameContext, Vector2 position, Vector2 size, uint16_t damage, GameObjectType goType);
     int createOrbitalMarker(GameEngine& gameContext, Vector2 position, GameObjectType goType = GameObjectType::NONE);
-    int createOrbitalStrikerEnemy(GameEngine& gameContext, GameObjectType goType);
+    int createOrbitalStrikerEnemy(GameEngine& gameContext, Vector2 position, GameObjectType goType);
     int createChild(GameEngine& gameContext, Vector2 position, float rotation, GameObjectType goType);
     int createFloatingText(GameEngine& gameContext, Vector2 position, float r, string text, Color color, bool isHUDElement, uint16_t size, float lifetime, float velocity);
 

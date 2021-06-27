@@ -13,7 +13,8 @@ public:
 	{
 		Shield,
 		Fury,
-		ExtraLife
+		ExtraLife,
+		Drone
 	};
 	uint8_t type;
 

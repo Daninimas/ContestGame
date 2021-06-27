@@ -18,4 +18,8 @@ private:
     void playSoundEffect(GameEngine& gameContext, TriggerComponent& trigger) const;
     void createEntity(GameEngine& gameContext, TriggerComponent& trigger) const;
 
+    void createSpawnsCity(GameEngine& gameContext) const;
+    void createSpawnsBase(GameEngine& gameContext) const;
+    void createOrbitalStriker(GameEngine& gameContext, TriggerComponent& trigger) const;
+
 };

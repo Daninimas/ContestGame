@@ -106,6 +106,13 @@ void MenuSystem::acceptOption(GameEngine& gameContext, MenuComponent& menuComp) 
 		gameContext.pushGameState(GameState::BEST_SCORES);
 		break;
 
+	case MenuOptions::TO_NEXT_LEVEL:
+		gameContext.popGameState(); // Set playing again
+
+		std::cout << "Accedo a SIGUENTE NIVEL\n";
+		gameContext.pushGameState(GameState::NEXT_LEVEL);
+		break;
+
 	case MenuOptions::NEW_BEST_SCORE:
 		//comprobamos que esta sea una nueva mejor puntuacion
 		gameContext.entityMan->readBestScore();

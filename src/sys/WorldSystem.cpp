@@ -19,6 +19,8 @@ void WorldSystem::update(GameEngine& gameContext) const {
 
 	// Do Parallax Effect
 	moveBackgroundLayers(gameContext);
+
+	checkScoreSound(gameContext);
 }
 
 void WorldSystem::deleteEntitiesOutOfWorld(GameEngine& gameContext) const {
@@ -141,4 +143,26 @@ void WorldSystem::moveBackgroundLayers(GameEngine& gameContext) const { // move 
 	}
 	//std::cout << "\n";
 	gameContext.getWindowFacadeRef().updateBackgroundLayers(worldComp.backgroundLayers, worldComp.backgroundSize);
+}
+
+
+void WorldSystem::checkScoreSound(GameEngine& gameContext) const {
+	if (WorldElementsData::lastPlayerScore < WorldElementsData::playerScore) {
+		// Gana puntos
+		Sound selectSound;
+		selectSound.volume = 40.f;
+		selectSound.soundPath = "./Media/Sound/UI/winPoints.wav";
+		gameContext.getSoundFacadeRef().loadSound(selectSound.soundPath);
+		gameContext.getSoundFacadeRef().playSound(selectSound);
+	}
+	else if (WorldElementsData::lastPlayerScore > WorldElementsData::playerScore) {
+		// Pierde puntos
+		Sound selectSound;
+		selectSound.volume = 40.f;
+		selectSound.soundPath = "./Media/Sound/UI/mixkit-failure-arcade-alert-notification-240.wav";
+		gameContext.getSoundFacadeRef().loadSound(selectSound.soundPath);
+		gameContext.getSoundFacadeRef().playSound(selectSound);
+	}
+
+	WorldElementsData::lastPlayerScore = WorldElementsData::playerScore;
 }

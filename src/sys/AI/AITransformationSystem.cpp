@@ -66,7 +66,9 @@ void AITransformationSystem::transform(GameEngine& gameContext, AITransformation
 	SituationComponent& sitComp = gameContext.entityMan->getComponent<SituationComponent>(entityId);
 	ColliderComponent& collComp = gameContext.entityMan->getComponent<ColliderComponent>(entityId);
 	SensorComponent& sensorComp = gameContext.entityMan->getComponent<SensorComponent>(entityId);
+	MeleeWeaponComponent& meleeComp = gameContext.entityMan->getComponent<MeleeWeaponComponent>(entityId);
 
+	meleeComp.cooldown = 0.f;
 	// Transform its appearance and atacks the objective
 	sitComp.position.y -= (transformComp.newBoundingRoot.bounding.yDown - collComp.boundingRoot.bounding.yDown);
 

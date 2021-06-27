@@ -59,6 +59,7 @@ EntityManager::~EntityManager() {
     getComponents<TurretComponent>().clear();
     getComponents<GunTurretComponent>().clear();
     getComponents<CheckpointComponent>().clear();
+    getComponents<FallWhenTouchedComponent>().clear();
 
     // AI
     getComponents<AIChaseComponent>().clear();
@@ -117,6 +118,7 @@ void EntityManager::eraseEntityByID(int id) {
     eraseComponent<TurretComponent>(id);
     eraseComponent<GunTurretComponent>(id);
     eraseComponent<CheckpointComponent>(id);
+    eraseComponent<FallWhenTouchedComponent>(id);
 
     // AI
     eraseComponent<AIChaseComponent>(id);
@@ -214,7 +216,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
     meleeWeaponComp.attackBounding = { 0.f, 28.f, 20.f, 58.f };
     meleeWeaponComp.damage = 3;
     meleeWeaponComp.attackLifetime = 0.15f;
-    meleeWeaponComp.attackSound.soundPath = "./Media/Sound/Weapons/slaphit.wav"; 
+    meleeWeaponComp.attackSound.soundPath = "./Media/Sound/Weapons/knifeSwing.wav";
 
 
     // Render component
@@ -225,7 +227,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
     jumpComp.impulse = -310.f;
     jumpComp.jumpSound.soundPath = "./Media/Sound/Player/jump.wav";
     jumpComp.jumpSound.volume = 60.f;
-    jumpComp.maxCooldown = 0.5f;
+    jumpComp.maxCooldown = 0.32f;
     //jumpComp.jumptable = { 500.f, 500.f, 400.f, 400.f, 300.f, 300.f, 200.f, 100.f };
     
     // Sensor
@@ -263,11 +265,11 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
     inputComp.keyboardControlsMap[Controls::JOYSTICK_JUMP]   = jf["JOYSTICK_JUMP"].get<uint8_t>();
     i.close();
 
-    //######### RENDER ########//
-    gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
-
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::PLAYER, goType));
+
+    //######### RENDER ########//
+    gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
 
     //situation.sons.emplace_back(createPlayerHand(gameContext, entityId));
 
@@ -292,12 +294,11 @@ int EntityManager::createPlayerHand(GameEngine& gameContext, int playerId) {
     renderComp.sprite = "Media/Images/spawnerSprite.png";
     renderComp.spriteRect = { 0, 20, 0, 20 };
 
+    //######### CREATE ########//
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::PLAYER, GameObjectType::PLAYER_HAND));
 
     //######### RENDER ########//
     gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
-
-    //######### CREATE ########//
-    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::PLAYER, GameObjectType::PLAYER_HAND));
 
     return entityId;
 }
@@ -383,21 +384,44 @@ int EntityManager::createAttack(GameEngine& gameContext, Vector2 position, float
 
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::ATTACK, goType));
+
+    if (goType == GameObjectType::EXPLOSION || goType == GameObjectType::PLAYER_EXPLOSION) {
+        situation.scale = {0.7f, 0.7f};
+        RenderComponent& renderComp = createComponent<RenderComponent>(entityId);
+        // Render component
+        renderComp.sprite = "Media/Images/explosion.png";
+        renderComp.spriteRect = { 3655, 3761, 64, 180 };
+        // Animation
+        AnimationComponent& animComp = createComponent<AnimationComponent>(entityId);
+        AnimationManager::setAnimationToEntity(gameContext, Animation::IDLE, animComp);
+        //######### RENDER ########//
+        gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
+    }
+
     return entityId;
 }
 
 
-int EntityManager::createWall(GameEngine& gameContext, Vector2 position, Vector2 size, float r, GameObjectType goType) {
+int EntityManager::createWall(GameEngine& gameContext, Vector2 position, Vector2 size, float r, std::string texturePath, GameObjectType goType) {
     int entityId = Entity::getCurrentId();
 
     SituationComponent& situation = createComponent<SituationComponent>(entityId);
     ColliderComponent& colliderComp = createComponent<ColliderComponent>(entityId);
-    //RenderComponent& renderComp = createComponent<RenderComponent>(entityId);
+    RenderComponent& renderComp = createComponent<RenderComponent>(entityId);
 
 
     //######### DATA ########//
     situation.position = position;
     situation.rotation = r;
+
+    // Render
+    renderComp.color = { 255, 255, 255, 255 };
+    if (texturePath == "") {
+        texturePath = "./Media/Images/Textures/NormalBrick.png";
+    }
+    renderComp.sprite = texturePath;
+    renderComp.spriteRect = {0, size.x, 0, size.y};
+    renderComp.isRepeated = true;
 
     // Collider
     colliderComp.boundingRoot.bounding = { 0.f, size.x, 0.f, size.y };
@@ -413,13 +437,23 @@ int EntityManager::createWall(GameEngine& gameContext, Vector2 position, Vector2
         colliderComp.collisionLayer = ColliderComponent::Wall;
         colliderComp.layerMasc = ColliderComponent::Enemy + ColliderComponent::Player + ColliderComponent::PlayerAttack + ColliderComponent::Weapon + ColliderComponent::Attack; //Collides with player and enemy
         break;
-    }
 
-    //######### RENDER ########//
-    //gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
+    case GameObjectType::FALLING_WALL:
+        colliderComp.collisionLayer = ColliderComponent::Wall;
+        colliderComp.layerMasc = ColliderComponent::Enemy + ColliderComponent::Player + ColliderComponent::PlayerAttack + ColliderComponent::Weapon + ColliderComponent::Attack; //Collides with player and enemy
+
+        FallWhenTouchedComponent& fallComp = createComponent<FallWhenTouchedComponent>(entityId);
+        fallComp.gravity = 520.f;
+        fallComp.objectiveId = WorldElementsData::playerId;
+        break;
+    }
 
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::WALL, goType));
+
+    //######### RENDER ########//
+    gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
+
     return entityId;
 }
 
@@ -457,11 +491,12 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
 
     if (goType == GameObjectType::FIRST_ENEMY) {
         healthComp.maxHealth = 1;
+        situation.scale = { 0.27f, 0.27f };
 
         situation.facing = SituationComponent::Right;
 
         // Collider
-        colliderComp.boundingRoot.bounding = { 0.f, 44.f, 0.f, 63.f };
+        colliderComp.boundingRoot.bounding = { 0.f, 57.f, 0.f, 90.f };
         colliderComp.weight = 4;
 
         // Render component
@@ -473,8 +508,9 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
     else if (goType == GameObjectType::CHASER) {
         velocityComp.speedX = 70.f;
 
+        situation.scale = { 0.27f, 0.27f };
         // Collider
-        colliderComp.boundingRoot.bounding = { 0.f, 44.f, 0.f, 63.f };
+        colliderComp.boundingRoot.bounding = { 0.f, 57.f, 0.f, 90.f };
 
         // Render component
         renderComp.sprite = "Media/Images/Enemy.png";
@@ -489,8 +525,9 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
     else if (goType == GameObjectType::CHASERJUMPER) {
         velocityComp.speedX = 65.f;
 
+        situation.scale = { 0.27f, 0.27f };
         // Collider
-        colliderComp.boundingRoot.bounding = { 0.f, 44.f, 0.f, 63.f };
+        colliderComp.boundingRoot.bounding = { 0.f, 57.f, 0.f, 90.f };
 
         // Render component
         renderComp.sprite = "Media/Images/Enemy.png";
@@ -514,7 +551,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         meleeWeaponComp.attackBounding = { 0.f, 34.f, 10.f, 40.f };
         meleeWeaponComp.damage = 2;
         meleeWeaponComp.maxCooldown = 1.5f;
-        meleeWeaponComp.attackSound.soundPath = "./Media/Sound/Weapons/knifeSwing.wav";
+        meleeWeaponComp.attackSound.soundPath = "./Media/Sound/Weapons/slaphit.wav"; ;
 
         colliderComp.weight = 3.f;
     }
@@ -522,8 +559,9 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
     else if(goType == GameObjectType::DISTANCE_ENEMY) {
         velocityComp.speedX = 0.f;
 
+        situation.scale = { 0.27f, 0.27f };
         // Collider
-        colliderComp.boundingRoot.bounding = { 0.f, 44.f, 0.f, 63.f };
+        colliderComp.boundingRoot.bounding = { 0.f, 57.f, 0.f, 90.f };
         
         // Render component
         renderComp.sprite = "Media/Images/Enemy.png";
@@ -553,12 +591,14 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
     else if (goType == GameObjectType::DISTANCE_WALKING_ENEMY) {
         velocityComp.speedX = 55.f;
 
+        situation.scale = { 0.27f, 0.27f };
         // Collider
-        colliderComp.boundingRoot.bounding = { 0.f, 44.f, 0.f, 63.f };
+        colliderComp.boundingRoot.bounding = { 0.f, 57.f, 0.f, 90.f };
 
         // Render component
         renderComp.sprite = "Media/Images/Enemy.png";
         renderComp.spriteRect = { 0, 248, 0, 360 };
+        renderComp.color = { 238, 249, 14, 255 };
 
         healthComp.maxHealth = 4;
 
@@ -602,7 +642,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         renderComp.sprite = "Media/Images/Personajes/Alien camuflado/Nino.png";
         renderComp.spriteRect = { 0, 116, 0, 274 };
 
-        healthComp.maxHealth = 5;
+        healthComp.maxHealth = 10;
 
         JumpComponent& jumpComp = createComponent<JumpComponent>(entityId);
         SensorComponent& sensorComp = createComponent<SensorComponent>(entityId);
@@ -615,7 +655,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         MeleeWeaponComponent& meleeWeaponComp = createComponent<MeleeWeaponComponent>(entityId);
         meleeWeaponComp.attackBounding = { 0.f, 50.f, 70.f, 175.f };
         meleeWeaponComp.damage = 2;
-        meleeWeaponComp.maxCooldown = 1.f;
+        meleeWeaponComp.maxCooldown = 1.2f;
         meleeWeaponComp.attackSound.soundPath = "./Media/Sound/Enemies/MonsterRoar.wav";
 
         AITransformationComponent& transformComp = createComponent<AITransformationComponent>(entityId);
@@ -645,7 +685,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
 
         flyingChaseComp.maxHeigtht = 230.f;
         flyingChaseComp.minHeigtht = 200.f;
-        flyingChaseComp.minDistanceX = rand() % (38 - 6) + 6; // Entre 65 y 46
+        flyingChaseComp.minDistanceX = rand() % (38 - 10) + 10; // Entre 65 y 46
 
 
         DistanceWeaponComponent& distanceWeaponComp = createComponent<DistanceWeaponComponent>(entityId);
@@ -660,7 +700,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
 
         distanceWeaponComp.attackSound.soundPath = "Media/Sound/Weapons/silbidoBombaCayendo.wav";
 
-        distanceWeaponComp.explosionExpansion = 2.f;
+        distanceWeaponComp.explosionExpansion = 90.f;
         distanceWeaponComp.explosionTime = 0.5f;
         distanceWeaponComp.startActivated = false;
         distanceWeaponComp.spawnAttackPos = { 26.f, 40.f };
@@ -679,7 +719,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
     // Render component
     renderComp.sprite = "Media/Images/Personajes/alien volador/AlienVolador.png";
     renderComp.spriteRect = { 0, 399, 0, 464 };
-    renderComp.color = { 0, 119, 21, 255 };
+    renderComp.color = { 238, 249, 14, 255 };
 
     healthComp.maxHealth = 5;
 
@@ -687,7 +727,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
 
     flyingChaseComp.maxHeigtht = 230.f;
     flyingChaseComp.minHeigtht = 200.f;
-    flyingChaseComp.minDistanceX = rand() % (38 - 6) + 6; // Entre 65 y 46
+    flyingChaseComp.minDistanceX = rand() % (38 - 10) + 10; // Entre 65 y 46
 
     AIDistanceAtkComponent& distanceAIComp = createComponent<AIDistanceAtkComponent>(entityId);
     distanceAIComp.range.x = 175.f;
@@ -697,7 +737,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
     // Distance
     distanceWeaponComp.attackBounding = { 0.f, 5.f, 0.f, 5.f };
     distanceWeaponComp.damage = 1;
-    distanceWeaponComp.attackGeneralVelociy = 270.f;
+    distanceWeaponComp.attackGeneralVelociy = 253.f;
     distanceWeaponComp.attackGravity = 10.f;
     distanceWeaponComp.maxCooldown = 1.f;
     distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BULLET;
@@ -767,8 +807,9 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         sensorComp.sensorLayerMasc = ColliderComponent::Player + ColliderComponent::Wall;
         sensorComp.sensorBounding = { 25.f, 60.f, 2.f, 65.f };
 
-        jumpComp.impulse = -100.f;
+        jumpComp.impulse = -150.f;
         jumpComp.maxCooldown = 2.f;
+        jumpComp.cooldown = 2.f;
         jumpComp.jumpSound.soundPath = "./Media/Sound/Enemies/spiderJump.wav";
 
         MeleeWeaponComponent& meleeWeaponComp = createComponent<MeleeWeaponComponent>(entityId);
@@ -781,6 +822,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         pounceComp.range.y = 30.f;
         pounceComp.velocityIncFactor = 4.7f;
         pounceComp.maxCooldown = 1.2f;
+        pounceComp.cooldown = 1.2f;
         pounceComp.isStickyPouncer = true;
 
         colliderComp.weight = 3.f;
@@ -788,11 +830,13 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
 
     healthComp.resetHealth(); // Reset health to set the current health the same as maxHealth
 
-    //######### RENDER ########//
-    gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
 
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::ENEMY, goType));
+
+    //######### RENDER ########//
+    gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
+
     return entityId;
 }
 
@@ -833,11 +877,11 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
         distanceWeaponComp.attackBounding = { 0.f, 5.f, 0.f, 5.f };
         distanceWeaponComp.damage = 1;
         distanceWeaponComp.attackGeneralVelociy = 900.f;
-        distanceWeaponComp.attackGravity = 0.f;
-        distanceWeaponComp.maxCooldown = 0.3f;
+        distanceWeaponComp.attackGravity = 100.f;
+        distanceWeaponComp.maxCooldown = 0.15f;
         distanceWeaponComp.attackLifetime = 1.5f;
         distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BULLET;
-        distanceWeaponComp.ammo = 20;
+        distanceWeaponComp.ammo = 70;
         distanceWeaponComp.infiniteAmmo = false;
         distanceWeaponComp.bulletSpreadAngle = 5.f;
         distanceWeaponComp.spawnAttackPos = { 20.f, 39.f };
@@ -870,7 +914,7 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
         distanceWeaponComp.attackGeneralVelociy = 650.f;
         distanceWeaponComp.attackGravity = 100.f;
         distanceWeaponComp.maxCooldown = 1.f;
-        distanceWeaponComp.attackLifetime = 0.75f;
+        distanceWeaponComp.attackLifetime = 0.5f;
         distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BOMB;
         distanceWeaponComp.ammo = 8;
         distanceWeaponComp.infiniteAmmo = false;
@@ -878,7 +922,7 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
 
         distanceWeaponComp.attackSound.soundPath = "Media/Sound/Weapons/grenadeLauncherSound.wav";
 
-        distanceWeaponComp.explosionExpansion = 2.f;
+        distanceWeaponComp.explosionExpansion = 90.f;
         distanceWeaponComp.explosionTime = 0.2f;
         distanceWeaponComp.startActivated = false;
 
@@ -915,12 +959,12 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
         distanceWeaponComp.damage = 1;
         distanceWeaponComp.attackGeneralVelociy = 900.f;
         distanceWeaponComp.attackGravity = 0.f;
-        distanceWeaponComp.maxCooldown = 1.f;
-        distanceWeaponComp.attackLifetime = 0.2f;
+        distanceWeaponComp.maxCooldown = 0.7f;
+        distanceWeaponComp.attackLifetime = 0.3f;
         distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BULLET;
         distanceWeaponComp.ammo = 7;
         distanceWeaponComp.infiniteAmmo = false;
-        distanceWeaponComp.numberOfShells = 3;
+        distanceWeaponComp.numberOfShells = 4;
         distanceWeaponComp.bulletSpreadAngle = 12.f;
         distanceWeaponComp.spawnAttackPos = { 20.f, 39.f };
         distanceWeaponComp.attackSound.soundPath = "Media/Sound/Weapons/shotgunShot.wav";
@@ -943,11 +987,12 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
     WorldElementsData::worldDistanceWeapons.push_back(entityId);
     }
 
+    //######### CREATE ########//
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::WEAPON, goType));
+
     //######### RENDER ########//
     gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
 
-    //######### CREATE ########//
-    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::WEAPON, goType));
     return entityId;
 }
 
@@ -980,11 +1025,12 @@ int EntityManager::createCamera(GameEngine& gameContext, Vector2 position, float
     velocityComp.speedX = 1000.f;
 
 
+    //######### CREATE ########//
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::CAMERA, goType));
+
     //######### RENDER ########//
     gameContext.getWindowFacadeRef().createCamera(gameContext, entityId);
 
-    //######### CREATE ########//
-    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::CAMERA, goType));
     return entityId;
 }
 
@@ -1036,8 +1082,9 @@ int EntityManager::createSpawner(GameEngine& gameContext, Vector2 position, floa
 
     //######### DATA ########//
     situation.position = position;
+    situation.position.y -= 30;
     situation.rotation = r;
-    situation.scale = { 0.1f, 0.1f };
+    situation.scale = { 0.25f, 0.5f };
 
     // Render component
     renderComp.sprite = "Media/Images/spawner.png";
@@ -1046,7 +1093,7 @@ int EntityManager::createSpawner(GameEngine& gameContext, Vector2 position, floa
     // Collider
     colliderComp.collisionLayer = ColliderComponent::Enemy; // temporal
     colliderComp.layerMasc = ColliderComponent::Player + ColliderComponent::PlayerAttack + ColliderComponent::Wall + ColliderComponent::PlayerShield + ColliderComponent::Platform; //Collides with player and enemy
-    colliderComp.boundingRoot.bounding = { 0.f, 30.f, 0.f, 70.f };
+    colliderComp.boundingRoot.bounding = { 0.f, 50.f, 0.f, 100.f };
     colliderComp.type = ColliderType::STATIC;
     
 
@@ -1088,12 +1135,14 @@ int EntityManager::createSpawner(GameEngine& gameContext, Vector2 position, floa
 
     // Init health
     healthComp.resetHealth();
+    
+
+    //######### CREATE ########//
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::SPAWNER, GameObjectType::SPAWNER));
 
     //######### RENDER ########//
     gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
 
-    //######### CREATE ########//
-    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::SPAWNER, GameObjectType::SPAWNER));
     return entityId;
 }
 
@@ -1163,15 +1212,19 @@ int EntityManager::createDrone(GameEngine& gameContext, Vector2 position, float 
 
     flyingChaseComp.maxHeigtht = 55.f;
     flyingChaseComp.minHeigtht = 50.f;
-    flyingChaseComp.minDistanceX = 1.f;
+    flyingChaseComp.minDistanceX = 10.f;
 
+    AutodeleteComponent& deleteComp = createComponent<AutodeleteComponent>(entityId);
+    deleteComp.timeToDelete = 50.f;
 
     switch (goType) {
     case GameObjectType::DRONE_FRIEND:
-        situation.noWorldDelete = true;
+        
+
+        situation.noWorldDelete = false;
 
         colliderComp.collisionLayer = ColliderComponent::Player;
-        colliderComp.layerMasc = ColliderComponent::Attack + ColliderComponent::Enemy + ColliderComponent::Wall;
+        colliderComp.layerMasc = ColliderComponent::Attack + ColliderComponent::Enemy;
 
         velocityComp.speedX = 80.f;
         velocityComp.gravity = 0.f;
@@ -1187,8 +1240,8 @@ int EntityManager::createDrone(GameEngine& gameContext, Vector2 position, float 
         distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BULLET;
         distanceWeaponComp.attackSound.soundPath = "Media/Sound/GE_KF7_Soviet.wav";
 
-        distanceAIComp.range.x = 350.f;
-        distanceAIComp.range.y = 350.f;
+        distanceAIComp.range.x = 270.f;
+        distanceAIComp.range.y = 270.f;
 
         sensorComp.sensorBounding = {-distanceAIComp.range.x, distanceAIComp.range.x, -distanceAIComp.range.y, distanceAIComp.range.y };  // The same bounding as the distanceAIComp
         sensorComp.sensorLayerMasc = ColliderComponent::Enemy;
@@ -1221,7 +1274,7 @@ int EntityManager::createPowerUp(GameEngine& gameContext, Vector2 position, floa
     SituationComponent& situation = createComponent<SituationComponent>(entityId);
     ColliderComponent& colliderComp = createComponent<ColliderComponent>(entityId);
     PowerUpComponent& powerUpComp = createComponent<PowerUpComponent>(entityId);
-    //RenderComponent& renderComp = createComponent<RenderComponent>(entityId);
+    RenderComponent& renderComp = createComponent<RenderComponent>(entityId);
 
     //######### DATA ########//
     situation.position = position;
@@ -1230,18 +1283,18 @@ int EntityManager::createPowerUp(GameEngine& gameContext, Vector2 position, floa
     // Collider
     colliderComp.collisionLayer = ColliderComponent::Weapon;
     colliderComp.layerMasc = ColliderComponent::Player; //Collides with player and wall
-    colliderComp.boundingRoot.bounding = { 0.f, 10.f, 0.f, 10.f };
+    colliderComp.boundingRoot.bounding = { 0.f, 30.f, 0.f, 30.f };
     colliderComp.type = ColliderType::NO_SOLID;
-
-    // Render component
-    //renderComp.sprite = "Media/Images/TaOmA.png";
-    //renderComp.spriteRect = { 400, 450, 200, 250 };
 
 
     switch (goType) {
     case GameObjectType::POWERUP_SHIELD:
         powerUpComp.type = PowerUpComponent::Shield;
         powerUpComp.shieldColliderIncFactor = 1.4f;
+
+        // Render component
+        renderComp.sprite = "Media/Images/Powerups/Shield.png";
+        renderComp.spriteRect = { 0, 30, 0, 30 };
         break;
 
     case GameObjectType::POWERUP_FURY:
@@ -1249,17 +1302,36 @@ int EntityManager::createPowerUp(GameEngine& gameContext, Vector2 position, floa
         powerUpComp.furyColor = { 255, 0, 0, 255 };
         powerUpComp.furyTimersSpeedIncFactor = 0.7f;
         powerUpComp.furySpeedIncFactor = 1.5f;
-        powerUpComp.furyTotalLifeTime = 3.f;
+        powerUpComp.furyTotalLifeTime = 10.f;
+
+        // Render component
+        renderComp.sprite = "Media/Images/Powerups/Fury.png";
+        renderComp.spriteRect = { 0, 30, 0, 30 };
         break;
 
     case GameObjectType::POWERUP_EXTRA_LIFE:
         powerUpComp.type = PowerUpComponent::ExtraLife;
+
+        // Render component
+        renderComp.sprite = "Media/Images/Powerups/ExtraLife.png";
+        renderComp.spriteRect = { 0, 30, 0, 30 };
+        break;
+
+    case GameObjectType::POWERUP_DRONE:
+        powerUpComp.type = PowerUpComponent::Drone;
+
+        // Render component
+        renderComp.sprite = "Media/Images/Powerups/Drone.png";
+        renderComp.spriteRect = { 0, 30, 0, 30 };
         break;
     }
 
-
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::POWERUP, goType));
+
+    //######### RENDER ########//
+    gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
+    
     return entityId;
 }
 
@@ -1329,20 +1401,26 @@ int EntityManager::createOrbitalMarker(GameEngine& gameContext, Vector2 position
     renderComp.sprite = "Media/Images/OrbitalMarker.png";
 
 
+    //######### CREATE ########//
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::ORBITAL_MARKER, GameObjectType::ORBITAL_MARKER));
+
     //######### RENDER ########//
     gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
 
-    //######### CREATE ########//
-    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::ORBITAL_MARKER, GameObjectType::ORBITAL_MARKER));
     return entityId;
 }
 
 
-int EntityManager::createOrbitalStrikerEnemy(GameEngine& gameContext, GameObjectType goType) {
+int EntityManager::createOrbitalStrikerEnemy(GameEngine& gameContext, Vector2 position, GameObjectType goType) {
     int entityId = Entity::getCurrentId();
 
     createComponent<AIOrbitalAtkComponent>(entityId);
     OrbitalWeaponComponent& orbitalWeapon = createComponent<OrbitalWeaponComponent>(entityId);
+    SituationComponent& situation = createComponent<SituationComponent>(entityId);
+
+    //######### DATA ########//
+    situation.position = position;
+    situation.noWorldDelete = false;
 
     orbitalWeapon.attackBounding = { 0.f, 50.f, 0.f, 0.f };
     orbitalWeapon.markerBounding = { 0.f, 30.f, 0.f, 0.f };
@@ -1350,6 +1428,7 @@ int EntityManager::createOrbitalStrikerEnemy(GameEngine& gameContext, GameObject
     orbitalWeapon.damage = 2;
     orbitalWeapon.generateAttackTime = 1.3f;
     orbitalWeapon.maxCooldown = 4.f;
+    orbitalWeapon.cooldown = orbitalWeapon.maxCooldown;
 
     orbitalWeapon.markerSound.soundPath = "Media/Sound/Weapons/loadLaser.wav";
     orbitalWeapon.attackSound.soundPath = "Media/Sound/Weapons/alienExplosion.wav";
@@ -1390,8 +1469,8 @@ int EntityManager::createTurretGun(GameEngine& gameContext, Vector2 position, ui
     distanceWeaponComp.damage = 1;
     distanceWeaponComp.attackGeneralVelociy = 900.f;
     distanceWeaponComp.attackGravity = 0.f;
-    distanceWeaponComp.maxCooldown = 0.13f;
-    distanceWeaponComp.attackLifetime = 0.7f;
+    distanceWeaponComp.maxCooldown = 0.11f;
+    distanceWeaponComp.attackLifetime = 0.65f;
     distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BULLET;
     distanceWeaponComp.infiniteAmmo = true;
     distanceWeaponComp.bulletSpreadAngle = 5.f;
@@ -1404,15 +1483,16 @@ int EntityManager::createTurretGun(GameEngine& gameContext, Vector2 position, ui
     if (facing == SituationComponent::Left) {
         gunTurretComp.currentRotation = 180.f;
     }
-    gunTurretComp.gunRotationSpeed = 50.f;
+    gunTurretComp.gunRotationSpeed = 80.f;
     gunTurretComp.maxRotation = 90.f;
     gunTurretComp.minRotation = -10.f;
+
+    //######### CREATE ########//
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::TURRET, GameObjectType::TURRET_GUN));
 
     //######### RENDER ########//
     gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
 
-    //######### CREATE ########//
-    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::TURRET, GameObjectType::TURRET_GUN));
     return entityId;
 }
 
@@ -1484,11 +1564,11 @@ int EntityManager::createChild(GameEngine& gameContext, Vector2 position, float 
     triggerComp.functions.push_back(TriggerFunction::GIVE_CHILD_POINTS);
 
 
-    //######### RENDER ########//
-    gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
-
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::CHILD, GameObjectType::CHILD));
+
+    //######### RENDER ########//
+    gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
 
     return entityId;
 }
@@ -1573,14 +1653,33 @@ int EntityManager::createWorld(GameEngine& gameContext, GameObjectType worldName
         worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/01_Mist.png", { 255, 255, 255, 140 }));
 
         break;
-    }
 
-    //######### RENDER ########//
-    gameContext.getWindowFacadeRef().setBackgroundLayers(worldComp.backgroundLayers, worldComp.backgroundSize);
+    case GameObjectType::WORLD_3:
+        worldComp.worldPath = "Media/Maps/level3.json";
+        worldComp.backgroundSize = 0.75f;
+
+        worldComp.backgroundLayers.clear();// Delete previous layers
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/10_Sky.png"));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/09_Forest.png"));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/08_Forest.png"));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/07_Forest.png"));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/06_Forest.png"));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/05_Particles.png"));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/04_Forest.png"));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/03_Particles.png"));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/02_Bushes.png"));
+        worldComp.backgroundLayers.emplace_back(BackgroundLayer("Media/Backgrounds/Forest(Seamless)/01_Mist.png", { 255, 255, 255, 140 }));
+
+        break;
+    }
 
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::WORLD, worldName));
 
+    //######### RENDER ########//
+    gameContext.getWindowFacadeRef().setBackgroundLayers(worldComp.backgroundLayers, worldComp.backgroundSize);
+
+    
     // Create the entities of the world
     MapLoader::loadMapPhase(gameContext, worldComp.worldPath, "Phase1");
     worldComp.numberOfPhases = MapLoader::getNumberOfPhases(worldComp.worldPath);
@@ -1621,41 +1720,41 @@ int EntityManager::createMenu(GameEngine& gameContext, GameObjectType menuType) 
 
     }
     else if (menuType == GameObjectType::CONTROLS_KEYBOARD) {
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 170.f), 0.f, MenuOptions::SET_KEY_ATTACK));
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 200.f), 0.f, MenuOptions::SET_KEY_JUMP));
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 230.f), 0.f, MenuOptions::SET_KEY_LEFT));
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 260.f), 0.f, MenuOptions::SET_KEY_RIGHT));
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 290.f), 0.f, MenuOptions::SET_KEY_UP));
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 320.f), 0.f, MenuOptions::SET_KEY_DOWN));
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 400.f), 0.f, MenuOptions::BACK));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 220.f), 0.f, MenuOptions::SET_KEY_ATTACK));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 250.f), 0.f, MenuOptions::SET_KEY_JUMP));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 280.f), 0.f, MenuOptions::SET_KEY_LEFT));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 310.f), 0.f, MenuOptions::SET_KEY_RIGHT));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 340.f), 0.f, MenuOptions::SET_KEY_UP));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 370.f), 0.f, MenuOptions::SET_KEY_DOWN));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 450.f), 0.f, MenuOptions::BACK));
 
         Utils::setControlKeyToMenuOptions(gameContext, menuComp);
 
         renderComp.sprite = "Media/Images/Menu/NewHighscore.png";
     }
     else if (menuType == GameObjectType::CONTROLS_JOYSTICK) {
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 170.f), 0.f, MenuOptions::SET_KEY_ATTACK));
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 200.f), 0.f, MenuOptions::SET_KEY_JUMP));
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 230.f), 0.f, MenuOptions::SET_KEY_LEFT));
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 260.f), 0.f, MenuOptions::SET_KEY_RIGHT));
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 290.f), 0.f, MenuOptions::SET_KEY_UP));
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 320.f), 0.f, MenuOptions::SET_KEY_DOWN));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 220.f), 0.f, MenuOptions::SET_KEY_ATTACK));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 250.f), 0.f, MenuOptions::SET_KEY_JUMP));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 280.f), 0.f, MenuOptions::SET_KEY_LEFT));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 310.f), 0.f, MenuOptions::SET_KEY_RIGHT));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 340.f), 0.f, MenuOptions::SET_KEY_UP));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 370.f), 0.f, MenuOptions::SET_KEY_DOWN));
 
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(500.f, 170.f), 0.f, MenuOptions::SET_JOYSTICK_ATTACK));
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(500.f, 200.f), 0.f, MenuOptions::SET_JOYSTICK_JUMP));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(500.f, 220.f), 0.f, MenuOptions::SET_JOYSTICK_ATTACK));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(500.f, 250.f), 0.f, MenuOptions::SET_JOYSTICK_JUMP));
 
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 400.f), 0.f, MenuOptions::BACK));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 450.f), 0.f, MenuOptions::BACK));
 
         Utils::setControlKeyToMenuOptions(gameContext, menuComp);
 
-        renderComp.sprite = "Media/Images/Menu/NewHighscore.png";
+        renderComp.sprite = "Media/Images/Menu/ControlsJoystick.png";
     }
     else if (menuType == GameObjectType::BEST_SCORES) {
         gameContext.entityMan->readBestScore();
 
         // Create the text of the best scores
         auto& best_score_list = WorldElementsData::best_score_list;
-        Vector2 pos = { 230.f, 0.f };
+        Vector2 pos = { 230.f, 80.f };
 
         for (std::size_t i = 0; i < best_score_list.size(); ++i) {
             std::string text = best_score_list[i].name + " __________________ " + to_string(best_score_list[i].score);
@@ -1663,7 +1762,7 @@ int EntityManager::createMenu(GameEngine& gameContext, GameObjectType menuType) 
             menuComp.textsId.emplace_back(createText(gameContext, pos, 0.f, text, { 239, 184, 4, 255 }, true, 20));
         }
 
-        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 470.f), 0.f, MenuOptions::MAIN_MENU));
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 530.f), 0.f, MenuOptions::MAIN_MENU));
 
         renderComp.sprite = "Media/Images/Menu/NewHighscore.png";
     }
@@ -1694,6 +1793,16 @@ int EntityManager::createMenu(GameEngine& gameContext, GameObjectType menuType) 
         // Music
         menuComp.menuMusic.soundPath = "./Media/Sound/Music/arthur-vyncke-a-few-jumps-away.wav";
         menuComp.menuMusic.repeat = true;
+    }
+    else if (menuType == GameObjectType::NEXT_LEVEL_MENU) {
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 400.f), 0.f, MenuOptions::TO_NEXT_LEVEL));
+
+        renderComp.sprite = "Media/Images/Menu/NextLevel.png";
+    }
+    else if (menuType == GameObjectType::WIN_MENU) {
+        menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 510.f), 0.f, MenuOptions::NEW_BEST_SCORE));
+
+        renderComp.sprite = "Media/Images/Menu/Win.png";
     }
 
 
@@ -1748,6 +1857,11 @@ int EntityManager::createMenuOption(GameEngine& gameContext, Vector2 position, f
 
     case MenuOptions::MAIN_MENU:
         textComp.text = "MAIN MENU";
+
+        break;
+
+    case MenuOptions::TO_NEXT_LEVEL:
+        textComp.text = "LET'S GO!";
 
         break;
 
@@ -1847,48 +1961,40 @@ int EntityManager::createHUDElement(GameEngine& gameContext, Vector2 position, f
 
         textComp.color = { 255, 20, 30, 255 };
         textComp.isHUDElement = true;
-        textComp.size = 24;
+        textComp.size = 30;
         textComp.text = "";
-
-        //######### RENDER ########//
-        gameContext.getWindowFacadeRef().createText(gameContext, entityId);
     }
     else if (objType == GameObjectType::HUD_PLAYER_AMMO) {
         TextComponent& textComp = createComponent<TextComponent>(entityId);
 
-        textComp.color = { 255, 255, 30, 255 };
+        textComp.color = { 0, 0, 0, 255 };
         textComp.isHUDElement = true;
         textComp.size = 24;
         textComp.text = "";
-
-        //######### RENDER ########//
-        gameContext.getWindowFacadeRef().createText(gameContext, entityId);
     }
     else if (objType == GameObjectType::HUD_PLAYER_LIFES) {
         TextComponent& textComp = createComponent<TextComponent>(entityId);
 
-        textComp.color = { 255, 255, 30, 255 };
+        textComp.color = { 0, 0, 0, 255 };
         textComp.isHUDElement = true;
         textComp.size = 24;
         textComp.text = "";
-
-        //######### RENDER ########//
-        gameContext.getWindowFacadeRef().createText(gameContext, entityId);
     }
     else if (objType == GameObjectType::HUD_PLAYER_SCORE) {
         TextComponent& textComp = createComponent<TextComponent>(entityId);
 
-        textComp.color = { 61, 81, 255, 255 };
+        textComp.color = { 249, 207, 19, 255 };
         textComp.isHUDElement = true;
-        textComp.size = 24;
+        textComp.size = 30;
         textComp.text = "";
-
-        //######### RENDER ########//
-        gameContext.getWindowFacadeRef().createText(gameContext, entityId);
     }
 
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::HUD_ELEMENT, objType));
+
+    //######### RENDER ########//
+    gameContext.getWindowFacadeRef().createText(gameContext, entityId);
+
     return entityId;
 }
 
@@ -1910,13 +2016,14 @@ int EntityManager::createText(GameEngine& gameContext, Vector2 position, float r
     textComp.isHUDElement = isHUDElement;
     textComp.size = size;
     textComp.text = text;
-
-    //######### RENDER ########//
-    gameContext.getWindowFacadeRef().createText(gameContext, entityId);
-    
+       
 
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::TEXT, GameObjectType::TEXT));
+
+
+    //######### RENDER ########//
+    gameContext.getWindowFacadeRef().createText(gameContext, entityId);
     return entityId;
 }
 

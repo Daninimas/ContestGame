@@ -58,12 +58,13 @@ void AttackSystem::animateExplosion(GameEngine& gameContext, AttackComponent& at
 	ColliderComponent& attackCol = gameContext.entityMan->getComponent<ColliderComponent>(attack.id);
 	ExplosionAttackComponent& explosionComp = gameContext.entityMan->getComponent<ExplosionAttackComponent>(attack.id);
 	BoundingBox& attackBound = attackCol.boundingRoot.bounding;
+	float expansionVelDelta = explosionComp.expansionVelocity * gameContext.getDeltaTime();
 
 	// Do bigger the collider
-	attackBound.xLeft -= explosionComp.expansionVelocity;
-	attackBound.xRight += explosionComp.expansionVelocity;
-	attackBound.yDown += explosionComp.expansionVelocity;
-	attackBound.yUp -= explosionComp.expansionVelocity;
+	attackBound.xLeft -= expansionVelDelta;
+	attackBound.xRight += expansionVelDelta;
+	attackBound.yDown += expansionVelDelta;
+	attackBound.yUp -= expansionVelDelta;
 }
 
 void AttackSystem::manageDamagePlatform(GameEngine& gameContext, AttackComponent& attack) const {
@@ -113,6 +114,11 @@ void AttackSystem::checkPlayerAttacking(GameEngine& gameContext) const {
 			if (sensoredCollLayer == ColliderComponent::Enemy) {
 				createMelee = true;
 			}
+		}
+
+		// Solo para la parte en la que no tienes arma
+		if (gameContext.entityMan->getComponent<DistanceWeaponComponent>(WorldElementsData::playerId).damage == 0) {
+			createMelee = true;
 		}
 
 		if (createMelee) {

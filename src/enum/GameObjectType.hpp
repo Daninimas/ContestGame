@@ -30,6 +30,7 @@ enum class GameObjectType {
     // Obstacles
     PLATFORM,
     WALL,
+    FALLING_WALL,
 
 
     // Weapons
@@ -49,6 +50,8 @@ enum class GameObjectType {
     GAME_OVER_MENU,
     BEST_SCORES,
     NEW_BEST_SCORE,
+    NEXT_LEVEL_MENU,
+    WIN_MENU,
 
 
     // Enemy types
@@ -77,6 +80,7 @@ enum class GameObjectType {
     POWERUP_SHIELD,
     POWERUP_FURY,
     POWERUP_EXTRA_LIFE,
+    POWERUP_DRONE,
 
     //HUD elements
     HUD_PLAYER_HEALTH,

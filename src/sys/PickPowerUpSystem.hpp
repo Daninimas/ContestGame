@@ -21,6 +21,7 @@ private:
         // Miscellaneous
         { 0, "SHIELD" },
         { 1, "FURY" },
-        { 2, "EXTRA LIFE" }
+        { 2, "EXTRA LIFE" },
+        { 3, "DRONE" }
     };
 };

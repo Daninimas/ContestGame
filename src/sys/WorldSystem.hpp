@@ -17,4 +17,6 @@ private:
     void collideWithPhaseBounding(GameEngine& gameContext, int entityId, BoundingBox& entityBounding) const;
 
     void moveBackgroundLayers(GameEngine& gameContext) const;
+
+    void checkScoreSound(GameEngine& gameContext) const;
 };

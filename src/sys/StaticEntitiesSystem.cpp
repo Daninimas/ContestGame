@@ -49,7 +49,7 @@ void StaticEntitiesSystem::init(GameEngine& gameContext) const {
     /*int drone = gameContext.entityMan->createDrone(gameContext, Vector2(100.f, 200.f), 0.f, GameObjectType::DRONE_FRIEND);
     gameContext.entityMan->getComponent<AIFlyingChaseComponent>(drone).objectiveId = WorldElementsData::playerId;*/
 
-    /*int orbitalStrikerID = gameContext.entityMan->createOrbitalStrikerEnemy(gameContext, GameObjectType::ORBITAL_STRIKER);
+    /*int orbitalStrikerID = gameContext.entityMan->createOrbitalStrikerEnemy(gameContext, { 9912.12f, 1178}, GameObjectType::ORBITAL_STRIKER);
     gameContext.entityMan->getComponent<AIOrbitalAtkComponent>(orbitalStrikerID).objectiveId = WorldElementsData::playerId;*/
 
     /*int pouncerId = gameContext.entityMan->createEnemy(gameContext, 300.f, 300.f, 0.f, GameObjectType::POUNCER_ENEMY);
@@ -74,10 +74,10 @@ void StaticEntitiesSystem::init(GameEngine& gameContext) const {
     //gameContext.entityMan->createPowerUp(gameContext, Vector2(150.f, 300), 0.f, GameObjectType::POWERUP_SHIELD);
 
 
-    gameContext.entityMan->createHUDElement(gameContext, Vector2(10.f, 10.f), 0.f, GameObjectType::HUD_PLAYER_HEALTH);
+    gameContext.entityMan->createHUDElement(gameContext, Vector2(10.f, 5.f), 0.f, GameObjectType::HUD_PLAYER_HEALTH);
     gameContext.entityMan->createHUDElement(gameContext, Vector2(10.f, 40.f), 0.f, GameObjectType::HUD_PLAYER_AMMO);
     gameContext.entityMan->createHUDElement(gameContext, Vector2(10.f, 70.f), 0.f, GameObjectType::HUD_PLAYER_LIFES);
-    gameContext.entityMan->createHUDElement(gameContext, Vector2(280.f, 10.f), 0.f, GameObjectType::HUD_PLAYER_SCORE);
+    gameContext.entityMan->createHUDElement(gameContext, Vector2(300.f, 5.f), 0.f, GameObjectType::HUD_PLAYER_SCORE);
 
     //gameContext.entityMan->createTurret(gameContext, Vector2(50.f, 370.f), SituationComponent::Right);
 
@@ -88,6 +88,7 @@ void StaticEntitiesSystem::init(GameEngine& gameContext) const {
 
 void StaticEntitiesSystem::createPlayer(GameEngine &gameContext) const {
     WorldElementsData::playerScore = 0;
+    WorldElementsData::lastPlayerScore = 0;
 
     gameContext.entityMan->createPlayer(gameContext, Vector2(0.f, 200.f), 0.f, GameObjectType::PLAYER_GENERAL);
 }
@@ -116,5 +117,5 @@ void StaticEntitiesSystem::createWorld(GameEngine& gameContext) const {
         text = "STAGE 3: Secret base";
         break;
     }
-    gameContext.entityMan->createFloatingText(gameContext, position, 0, text, { 255, 153, 0, 255 }, false, 30, 4.f, -30);
+    gameContext.entityMan->createFloatingText(gameContext, position, 0, text, { 255, 153, 0, 255 }, false, 30, 5.f, -30);
 }

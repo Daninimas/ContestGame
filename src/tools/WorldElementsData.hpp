@@ -24,6 +24,7 @@ public:
 
     // Score of the player
     static inline int playerScore{ 0 };
+    static inline int lastPlayerScore{ 0 };
 
     // Counter for wait after lose Live
     static inline float waitLoseLifeTime{ 1.f };

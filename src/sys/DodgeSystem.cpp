@@ -21,11 +21,16 @@ void DodgeSystem::update(GameEngine& gameContext) const {
 			doDodge(gameContext, dodgeComp);			
 		}
 		else if (dodgeComp.activateDodge && dodgeComp.cooldown > dodgeComp.maxCooldown && gameContext.entityMan->existsComponent<VelocityComponent>(dodgeComp.id)) {
-			dodgeComp.dodgeDuration = 0.f;
-			
-			// Play dodge sound
-			gameContext.getSoundFacadeRef().loadSound(dodgeComp.dodgeSound.soundPath);
-			gameContext.getSoundFacadeRef().playSound(dodgeComp.dodgeSound);
+			if (gameContext.entityMan->existsComponent<InputComponent>(dodgeComp.id) && gameContext.entityMan->getComponent<InputComponent>(dodgeComp.id).usingTurret) {
+				// Si estoy en torreta
+			}
+			else {
+				dodgeComp.dodgeDuration = 0.f;
+
+				// Play dodge sound
+				gameContext.getSoundFacadeRef().loadSound(dodgeComp.dodgeSound.soundPath);
+				gameContext.getSoundFacadeRef().playSound(dodgeComp.dodgeSound);
+			}
 		}
 
 		dodgeComp.activateDodge = false;

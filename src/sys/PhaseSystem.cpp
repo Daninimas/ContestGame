@@ -30,10 +30,11 @@ void PhaseSystem::checkIfChangePhase(GameEngine& gameContext) const {
 			}
 			else { // End of the world
 				if (WorldElementsData::currentWorld < 2) {
-					gameContext.pushGameState(GameState::NEXT_LEVEL);
+					gameContext.pushGameState(GameState::NEXT_LEVEL_MENU);
 				}
 				else {
-					// WIN TODO
+					// WIN
+					gameContext.pushGameState(GameState::WIN);
 				}
 			}
 		}

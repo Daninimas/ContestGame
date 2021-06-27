@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="100" tileheight="100" infinite="1" nextlayerid="107" nextobjectid="508">
+<map version="1.5" tiledversion="1.7.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="100" tileheight="100" infinite="1" nextlayerid="107" nextobjectid="509">
  <editorsettings>
   <export target="../level1.json" format="json"/>
  </editorsettings>
@@ -14,8 +14,8 @@
  <group id="3" name="Phase1">
   <properties>
    <property name="Direction" value="Right"/>
-   <property name="maxPhaseTime" type="float" value="25"/>
-   <property name="minPhaseTime" type="float" value="10"/>
+   <property name="maxPhaseTime" type="float" value="30"/>
+   <property name="minPhaseTime" type="float" value="5"/>
   </properties>
   <objectgroup id="5" name="phase_size">
    <object id="71" x="120" y="-961.47" width="1406.71" height="1974.94"/>
@@ -58,13 +58,18 @@
      <property name="isCheckpoint" type="bool" value="true"/>
     </properties>
    </object>
+   <object id="508" type="WALL" x="1197.98" y="541.813" width="52.0421" height="48.3733">
+    <properties>
+     <property name="isCheckpoint" type="bool" value="false"/>
+    </properties>
+   </object>
   </objectgroup>
  </group>
  <group id="54" name="Phase2">
   <properties>
    <property name="Direction" value="Right"/>
-   <property name="maxPhaseTime" type="float" value="25"/>
-   <property name="minPhaseTime" type="float" value="10"/>
+   <property name="maxPhaseTime" type="float" value="40"/>
+   <property name="minPhaseTime" type="float" value="18"/>
   </properties>
   <objectgroup id="55" name="phase_size">
    <object id="276" x="1490.67" y="-960.622" width="1718.84" height="1974.94"/>
@@ -115,8 +120,8 @@
  <group id="63" name="Phase3">
   <properties>
    <property name="Direction" value="Right"/>
-   <property name="maxPhaseTime" type="float" value="25"/>
-   <property name="minPhaseTime" type="float" value="10"/>
+   <property name="maxPhaseTime" type="float" value="50"/>
+   <property name="minPhaseTime" type="float" value="20"/>
   </properties>
   <objectgroup id="64" name="phase_size">
    <object id="293" x="3169.45" y="-963.652" width="2506.71" height="1974.94"/>
@@ -129,9 +134,9 @@
    </object>
   </objectgroup>
   <objectgroup id="66" name="ENEMY">
-   <object id="295" type="CHASERJUMPER" gid="17" x="3593.27" y="559.424" width="45" height="65"/>
-   <object id="306" type="CHASERJUMPER" gid="17" x="4032.05" y="419.015" width="45" height="65"/>
-   <object id="307" type="CHASERJUMPER" gid="17" x="3844.17" y="488.712" width="45" height="65"/>
+   <object id="295" type="CHASERJUMPER" gid="17" x="3591.27" y="505.424" width="45" height="65"/>
+   <object id="306" type="CHASERJUMPER" gid="17" x="4030.05" y="365.015" width="45" height="65"/>
+   <object id="307" type="CHASERJUMPER" gid="17" x="3842.17" y="434.712" width="45" height="65"/>
   </objectgroup>
   <objectgroup color="#0055ff" id="67" name="WALL">
    <object id="296" type="WALL" x="3178.55" y="586.251" width="535.674" height="56.2522">
@@ -163,12 +168,12 @@
    <object id="313" type="PLATFORM" x="5112.83" y="544.825" width="71.3066" height="40.217"/>
   </objectgroup>
   <objectgroup id="69" name="POWERUP">
-   <object id="310" type="POWERUP_EXTRA_LIFE" x="4324.24" y="381.818">
+   <object id="310" type="POWERUP_EXTRA_LIFE" x="4321.21" y="348.485">
     <point/>
    </object>
   </objectgroup>
   <objectgroup id="68" name="SPAWNER">
-   <object id="304" type="CHASERJUMPER" gid="4" x="4747.58" y="346.606" width="20" height="20">
+   <object id="304" type="CHASERJUMPER" gid="4" x="4747.58" y="336.606" width="20" height="20">
     <properties>
      <property name="maxCooldown" type="float" value="4"/>
      <property name="numObjectsToSpawn" type="int" value="-1"/>
@@ -189,8 +194,8 @@
  <group id="70" name="Phase4">
   <properties>
    <property name="Direction" value="Right"/>
-   <property name="maxPhaseTime" type="float" value="25"/>
-   <property name="minPhaseTime" type="float" value="10"/>
+   <property name="maxPhaseTime" type="float" value="80"/>
+   <property name="minPhaseTime" type="float" value="30"/>
   </properties>
   <objectgroup id="71" name="phase_size">
    <object id="315" x="5653.45" y="-959.652" width="1837.02" height="1974.94"/>
@@ -233,8 +238,8 @@
  <group id="80" name="Phase5">
   <properties>
    <property name="Direction" value="Right"/>
-   <property name="maxPhaseTime" type="float" value="25"/>
-   <property name="minPhaseTime" type="float" value="10"/>
+   <property name="maxPhaseTime" type="float" value="120"/>
+   <property name="minPhaseTime" type="float" value="60"/>
   </properties>
   <objectgroup id="81" name="phase_size">
    <object id="340" x="7493.45" y="-900.015" width="1837.02" height="1911.3"/>
@@ -288,7 +293,7 @@
     </properties>
    </object>
    <object id="370" type="PLATFORM" x="8745.07" y="-316.26" width="61.3676" height="84.0354"/>
-   <object id="371" type="PLATFORM" x="8463.26" y="-389.715" width="182.58" height="26.4596"/>
+   <object id="371" type="WALL" x="8463.26" y="-389.715" width="182.58" height="26.4596"/>
    <object id="372" type="WALL" x="8554.59" y="-717.442" width="769.611" height="40.9445"/>
    <object id="373" type="PLATFORM" x="8145.07" y="-530.753" width="55.307" height="20.399"/>
    <object id="374" type="PLATFORM" x="8145.07" y="-584.754" width="55.307" height="20.399"/>
@@ -330,8 +335,8 @@
  <group id="90" name="Phase6">
   <properties>
    <property name="Direction" value="Right"/>
-   <property name="maxPhaseTime" type="float" value="25"/>
-   <property name="minPhaseTime" type="float" value="10"/>
+   <property name="maxPhaseTime" type="float" value="65"/>
+   <property name="minPhaseTime" type="float" value="30"/>
   </properties>
   <objectgroup id="91" name="phase_size">
    <object id="404" x="9308.61" y="-893.955" width="2327.93" height="1111.3"/>
@@ -418,7 +423,7 @@
   </objectgroup>
   <objectgroup id="95" name="ENEMY">
    <object id="439" type="CHASERJUMPER" gid="17" x="9826.48" y="-718.515" width="45" height="65"/>
-   <object id="445" type="DISTANCE_ENEMY" gid="17" x="10162.8" y="-560.939" width="45" height="65"/>
+   <object id="445" type="DISTANCE_ENEMY" gid="17" x="10162.8" y="-603.363" width="45" height="65"/>
    <object id="464" type="CHASERJUMPER" gid="17" x="9689.62" y="-726.439" width="45" height="65"/>
    <object id="465" type="DISTANCE_ENEMY" gid="17" x="10986.6" y="-359.773" width="45" height="65"/>
   </objectgroup>
@@ -431,8 +436,8 @@
  <group id="98" name="Phase7">
   <properties>
    <property name="Direction" value="Right"/>
-   <property name="maxPhaseTime" type="float" value="25"/>
-   <property name="minPhaseTime" type="float" value="10"/>
+   <property name="maxPhaseTime" type="float" value="120"/>
+   <property name="minPhaseTime" type="float" value="70"/>
   </properties>
   <objectgroup id="99" name="phase_size">
    <object id="472" x="11620.6" y="-889.955" width="1933.99" height="1111.3"/>

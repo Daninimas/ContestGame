@@ -40,6 +40,7 @@ private:
         // Obstacles
         { "WALL", GameObjectType::WALL },
         { "PLATFORM", GameObjectType::PLATFORM },
+        { "FALLING_WALL", GameObjectType::FALLING_WALL },
 
         // Weapons
         { "M4", GameObjectType::M4 },
@@ -66,6 +67,7 @@ private:
         { "POWERUP_SHIELD", GameObjectType::POWERUP_SHIELD },
         { "POWERUP_FURY", GameObjectType::POWERUP_FURY },
         { "POWERUP_EXTRA_LIFE", GameObjectType::POWERUP_EXTRA_LIFE },
+        { "POWERUP_DRONE", GameObjectType::POWERUP_DRONE },
 
         // Triggers
         { "TRIGGER", GameObjectType::TRIGGER },
@@ -92,7 +94,11 @@ private:
         { "PLAY_SOUND", TriggerFunction::PLAY_SOUND },
         { "CREATE_ENTITY", TriggerFunction::CREATE_ENTITY },
 
-        { "SPAWN_CITY_1", TriggerFunction::SPAWN_CITY_1 }
+        { "SPAWN_CITY_1", TriggerFunction::SPAWN_CITY_1 },
+        { "SPAWN_BASE_1", TriggerFunction::SPAWN_BASE_1 },
+        { "SPAWN_ORBITAL_LASER", TriggerFunction::SPAWN_ORBITAL_LASER }
+
+
     };
 
     static inline std::map<std::string, uint8_t> facingMap {    // Este mapa sirve para saber desde un string el facing 

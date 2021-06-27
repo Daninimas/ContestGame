@@ -35,7 +35,7 @@
                  "name":"phase_size",
                  "objects":[
                         {
-                         "height":1120.39454545455,
+                         "height":1120.39,
                          "id":71,
                          "name":"",
                          "rotation":0,
@@ -43,7 +43,7 @@
                          "visible":true,
                          "width":1546.71,
                          "x":120,
-                         "y":-106.924545454546
+                         "y":-106.925
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -93,9 +93,9 @@
                          "rotation":0,
                          "type":"DAMAGE_PLATFORM",
                          "visible":true,
-                         "width":211.205454545455,
-                         "x":698.572939393939,
-                         "y":758.62096969697
+                         "width":211.205,
+                         "x":698.573,
+                         "y":758.621
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -110,7 +110,7 @@
                  "name":"TRIGGER",
                  "objects":[
                         {
-                         "height":328.307939393939,
+                         "height":328.308,
                          "id":139,
                          "name":"",
                          "properties":[
@@ -128,8 +128,8 @@
                          "type":"TRIGGER",
                          "visible":true,
                          "width":81.2335,
-                         "x":223.527696969697,
-                         "y":259.656666666667
+                         "x":223.528,
+                         "y":259.657
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -151,8 +151,8 @@
                          "type":"CHASERJUMPER",
                          "visible":true,
                          "width":45,
-                         "x":635.575757575758,
-                         "y":511.787878787879
+                         "x":635.576,
+                         "y":511.788
                         }, 
                         {
                          "gid":17,
@@ -163,8 +163,8 @@
                          "type":"DISTANCE_ENEMY",
                          "visible":true,
                          "width":45,
-                         "x":1110,
-                         "y":353
+                         "x":1103.94,
+                         "y":319.667
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -223,7 +223,7 @@
                  "name":"WALL",
                  "objects":[
                         {
-                         "height":171.403715151515,
+                         "height":171.404,
                          "id":142,
                          "name":"",
                          "properties":[
@@ -235,62 +235,45 @@
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,
-                         "width":581.127878787879,
+                         "width":581.128,
                          "x":120,
                          "y":588.433
                         }, 
                         {
-                         "height":224.823033333333,
+                         "height":224.823,
                          "id":147,
                          "name":"",
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
-                         "width":25.9732666666669,
-                         "x":1174.70033333333,
-                         "y":358.352333333333
+                         "width":25.9733,
+                         "x":1174.7,
+                         "y":358.352
                         }, 
                         {
-                         "height":32.9442666666666,
+                         "height":32.9443,
                          "id":273,
                          "name":"",
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
-                         "width":31.4278333333334,
-                         "x":1080.95666666667,
-                         "y":555.346333333333
+                         "width":31.4278,
+                         "x":1080.96,
+                         "y":555.346
                         }, 
                         {
-                         "height":14.8836666666667,
+                         "height":14.8837,
                          "id":274,
                          "name":"",
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
-                         "width":80.6399333333331,
-                         "x":1101.31633333333,
+                         "width":80.6399,
+                         "x":1101.32,
                          "y":425.043
                         }, 
                         {
-                         "height":24.1309090909091,
-                         "id":275,
-                         "name":"",
-                         "properties":[
-                                {
-                                 "name":"isCheckpoint",
-                                 "type":"bool",
-                                 "value":false
-                                }],
-                         "rotation":0,
-                         "type":"WALL",
-                         "visible":true,
-                         "width":38.7088,
-                         "x":501.854545454546,
-                         "y":564.601090909091
-                        }, 
-                        {
-                         "height":37.5854454545456,
+                         "height":37.5854,
                          "id":511,
                          "name":"",
                          "properties":[
@@ -302,9 +285,9 @@
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,
-                         "width":32.6481939393939,
-                         "x":344.281963636364,
-                         "y":551.146671212121
+                         "width":32.6482,
+                         "x":344.282,
+                         "y":551.147
                         }, 
                         {
                          "height":171.404,
@@ -319,9 +302,9 @@
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,
-                         "width":755.43103030303,
-                         "x":900.345090909091,
-                         "y":587.025272727273
+                         "width":755.431,
+                         "x":900.345,
+                         "y":587.025
                         }, 
                         {
                          "height":14.8837,
@@ -330,9 +313,9 @@
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
-                         "width":105.973233333333,
-                         "x":1197.01338333333,
-                         "y":395.224816666667
+                         "width":105.973,
+                         "x":1197.01,
+                         "y":395.225
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -351,12 +334,12 @@
                 {
                  "name":"maxPhaseTime",
                  "type":"float",
-                 "value":25
+                 "value":60
                 }, 
                 {
                  "name":"minPhaseTime",
                  "type":"float",
-                 "value":10
+                 "value":20
                 }],
          "type":"group",
          "visible":true,
@@ -372,15 +355,15 @@
                  "name":"phase_size",
                  "objects":[
                         {
-                         "height":1120.39454545455,
+                         "height":1120.39,
                          "id":517,
                          "name":"",
                          "rotation":0,
                          "type":"",
                          "visible":true,
                          "width":2346.71,
-                         "x":1656.36363636364,
-                         "y":-109.954848484849
+                         "x":1656.36,
+                         "y":-109.955
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -407,9 +390,9 @@
                          "rotation":0,
                          "type":"DAMAGE_PLATFORM",
                          "visible":true,
-                         "width":1708.17515151515,
-                         "x":2001.60324242424,
-                         "y":779.833090909091
+                         "width":1708.18,
+                         "x":2001.6,
+                         "y":779.833
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -431,8 +414,8 @@
                          "type":"BOMBER_ENEMY",
                          "visible":true,
                          "width":72,
-                         "x":3470.06060606061,
-                         "y":211.69696969697
+                         "x":3470.06,
+                         "y":211.697
                         }, 
                         {
                          "gid":21,
@@ -443,8 +426,8 @@
                          "type":"FLYING_SHOOTER_ENEMY",
                          "visible":true,
                          "width":72,
-                         "x":3879.15151515152,
-                         "y":432.909090909091
+                         "x":3879.15,
+                         "y":432.909
                         }, 
                         {
                          "gid":17,
@@ -455,8 +438,8 @@
                          "type":"DISTANCE_ENEMY",
                          "visible":true,
                          "width":45,
-                         "x":3020.42424242424,
-                         "y":217.848484848485
+                         "x":3020.42,
+                         "y":217.848
                         }, 
                         {
                          "gid":17,
@@ -467,8 +450,8 @@
                          "type":"ENEMY_SPIDER",
                          "visible":true,
                          "width":45,
-                         "x":1950.22727272727,
-                         "y":509.924242424242
+                         "x":1950.23,
+                         "y":509.924
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -511,8 +494,8 @@
                          "type":"BOMBER_ENEMY",
                          "visible":true,
                          "width":20,
-                         "x":3921.09090909091,
-                         "y":186.848484848485
+                         "x":3921.09,
+                         "y":186.848
                         }, 
                         {
                          "gid":4,
@@ -544,8 +527,8 @@
                          "type":"ENEMY_SPIDER",
                          "visible":true,
                          "width":20,
-                         "x":1983.93939393939,
-                         "y":511.212121212121
+                         "x":1983.94,
+                         "y":511.212
                         }, 
                         {
                          "gid":4,
@@ -577,8 +560,8 @@
                          "type":"FLYING_SHOOTER_ENEMY",
                          "visible":true,
                          "width":20,
-                         "x":3917.27272727273,
-                         "y":-16.0606060606061
+                         "x":3917.27,
+                         "y":-16.0606
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -600,8 +583,31 @@
                          "type":"LASER_GUN",
                          "visible":true,
                          "width":152,
-                         "x":2199.75757575758,
-                         "y":326.939393939394
+                         "x":2199.76,
+                         "y":326.939
+                        }],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
+                }, 
+                {
+                 "draworder":"topdown",
+                 "id":154,
+                 "name":"POWERUP",
+                 "objects":[
+                        {
+                         "height":0,
+                         "id":739,
+                         "name":"",
+                         "point":true,
+                         "rotation":0,
+                         "type":"POWERUP_EXTRA_LIFE",
+                         "visible":true,
+                         "width":0,
+                         "x":2490.91,
+                         "y":157.576
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -616,7 +622,7 @@
                  "name":"WALL",
                  "objects":[
                         {
-                         "height":62.312806060606,
+                         "height":62.3128,
                          "id":524,
                          "name":"",
                          "properties":[
@@ -628,31 +634,31 @@
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,
-                         "width":384.158181818181,
-                         "x":1656.36363636364,
-                         "y":585.402696969697
+                         "width":384.158,
+                         "x":1656.36,
+                         "y":585.403
                         }, 
                         {
-                         "height":173.307881818182,
+                         "height":173.308,
                          "id":525,
                          "name":"",
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
-                         "width":25.9732666666669,
-                         "x":2141.367,
-                         "y":361.382636363636
+                         "width":25.9733,
+                         "x":2141.37,
+                         "y":361.383
                         }, 
                         {
-                         "height":14.8836666666667,
+                         "height":14.8837,
                          "id":527,
                          "name":"",
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
-                         "width":80.6399333333331,
-                         "x":2067.983,
-                         "y":452.073303030303
+                         "width":80.6399,
+                         "x":2067.98,
+                         "y":452.073
                         }, 
                         {
                          "height":14.8837,
@@ -661,12 +667,12 @@
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,
-                         "width":105.973233333333,
-                         "x":2163.68005,
-                         "y":398.25511969697
+                         "width":105.973,
+                         "x":2163.68,
+                         "y":398.255
                         }, 
                         {
-                         "height":113.827951515152,
+                         "height":113.828,
                          "id":532,
                          "name":"",
                          "properties":[
@@ -678,20 +684,20 @@
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,
-                         "width":129.613212121212,
-                         "x":2032.16309090909,
-                         "y":532.479963636364
+                         "width":129.613,
+                         "x":2032.16,
+                         "y":532.48
                         }, 
                         {
-                         "height":585.429212121212,
+                         "height":585.429,
                          "id":534,
                          "name":"",
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
-                         "width":38.0945121212121,
-                         "x":2473.88683333333,
-                         "y":210.315696969697
+                         "width":38.0945,
+                         "x":2473.89,
+                         "y":210.316
                         }, 
                         {
                          "height":14.8837,
@@ -700,9 +706,9 @@
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,
-                         "width":80.6399,
-                         "x":2388.37562121212,
-                         "y":470.945090909091
+                         "width":104.882,
+                         "x":2364.13,
+                         "y":470.945
                         }, 
                         {
                          "height":14.8837,
@@ -711,9 +717,9 @@
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
-                         "width":160.518454545454,
-                         "x":2508.31804545454,
-                         "y":413.854363636364
+                         "width":160.518,
+                         "x":2508.32,
+                         "y":413.854
                         }, 
                         {
                          "height":14.8837,
@@ -722,9 +728,9 @@
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
-                         "width":72.639212121212,
-                         "x":2398.52887878788,
-                         "y":319.830877272727
+                         "width":72.6392,
+                         "x":2398.53,
+                         "y":319.831
                         }, 
                         {
                          "height":14.8837,
@@ -733,20 +739,20 @@
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
-                         "width":202.94223030303,
-                         "x":2518.22585454546,
-                         "y":283.467240909091
+                         "width":202.942,
+                         "x":2518.23,
+                         "y":283.467
                         }, 
                         {
-                         "height":503.610818181818,
+                         "height":503.611,
                          "id":541,
                          "name":"",
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
                          "width":38.0945,
-                         "x":3016.0836969697,
-                         "y":304.255196969697
+                         "x":3016.08,
+                         "y":304.255
                         }, 
                         {
                          "height":14.8837,
@@ -756,8 +762,8 @@
                          "type":"PLATFORM",
                          "visible":true,
                          "width":80.6399,
-                         "x":2930.5736969697,
-                         "y":483.066015151515
+                         "x":2930.57,
+                         "y":483.066
                         }, 
                         {
                          "height":14.8837,
@@ -767,8 +773,8 @@
                          "type":"WALL",
                          "visible":true,
                          "width":160.518,
-                         "x":3050.5136969697,
-                         "y":425.975015151515
+                         "x":3050.51,
+                         "y":425.975
                         }, 
                         {
                          "height":14.8837,
@@ -777,9 +783,9 @@
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,
-                         "width":130.214957575758,
-                         "x":2883.14793939394,
-                         "y":331.952015151515
+                         "width":130.215,
+                         "x":2883.15,
+                         "y":331.952
                         }, 
                         {
                          "height":503.611,
@@ -789,8 +795,8 @@
                          "type":"PLATFORM",
                          "visible":true,
                          "width":38.0945,
-                         "x":3487.17281818182,
-                         "y":275.467227272727
+                         "x":3487.17,
+                         "y":275.467
                         }, 
                         {
                          "height":14.8837,
@@ -799,9 +805,9 @@
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,
-                         "width":117.003536363636,
-                         "x":3365.29918181818,
-                         "y":454.278227272727
+                         "width":117.004,
+                         "x":3365.3,
+                         "y":454.278
                         }, 
                         {
                          "height":14.8837,
@@ -811,11 +817,11 @@
                          "type":"PLATFORM",
                          "visible":true,
                          "width":160.518,
-                         "x":3521.60281818182,
-                         "y":397.187227272727
+                         "x":3521.6,
+                         "y":397.187
                         }, 
                         {
-                         "height":286.555224242424,
+                         "height":286.555,
                          "id":551,
                          "name":"",
                          "properties":[
@@ -827,9 +833,9 @@
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,
-                         "width":287.188303030303,
-                         "x":3710.9513030303,
-                         "y":571.873903030303
+                         "width":287.188,
+                         "x":3710.95,
+                         "y":571.874
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -848,12 +854,12 @@
                 {
                  "name":"maxPhaseTime",
                  "type":"float",
-                 "value":25
+                 "value":90
                 }, 
                 {
                  "name":"minPhaseTime",
                  "type":"float",
-                 "value":10
+                 "value":50
                 }],
          "type":"group",
          "visible":true,
@@ -869,15 +875,15 @@
                  "name":"phase_size",
                  "objects":[
                         {
-                         "height":1120.39454545455,
+                         "height":1120.39,
                          "id":555,
                          "name":"",
                          "rotation":0,
                          "type":"",
                          "visible":true,
-                         "width":2352.77060606061,
-                         "x":3980.60606060606,
-                         "y":-119.045757575758
+                         "width":2352.77,
+                         "x":3980.61,
+                         "y":-119.046
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -904,9 +910,9 @@
                          "rotation":0,
                          "type":"DAMAGE_PLATFORM",
                          "visible":true,
-                         "width":2317.26606060606,
-                         "x":3998.57293939394,
-                         "y":904.075515151515
+                         "width":2317.27,
+                         "x":3998.57,
+                         "y":904.076
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -928,8 +934,8 @@
                          "type":"POWERUP_EXTRA_LIFE",
                          "visible":true,
                          "width":0,
-                         "x":4303.0303030303,
-                         "y":472.727272727273
+                         "x":4303.03,
+                         "y":472.727
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -951,8 +957,8 @@
                          "type":"DISTANCE_ENEMY",
                          "visible":true,
                          "width":45,
-                         "x":4617.39393939394,
-                         "y":342.090909090909
+                         "x":4617.39,
+                         "y":342.091
                         }, 
                         {
                          "gid":17,
@@ -963,8 +969,8 @@
                          "type":"CHASERJUMPER",
                          "visible":true,
                          "width":45,
-                         "x":5750.22727272727,
-                         "y":534.166666666667
+                         "x":5750.23,
+                         "y":534.167
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -991,7 +997,7 @@
                                 {
                                  "name":"numObjectsToSpawn",
                                  "type":"int",
-                                 "value":12
+                                 "value":8
                                 }, 
                                 {
                                  "name":"range.x",
@@ -1007,8 +1013,8 @@
                          "type":"ENEMY_SPIDER",
                          "visible":true,
                          "width":20,
-                         "x":6163.51515151515,
-                         "y":353.515151515152
+                         "x":6163.52,
+                         "y":353.515
                         }, 
                         {
                          "gid":4,
@@ -1019,12 +1025,12 @@
                                 {
                                  "name":"maxCooldown",
                                  "type":"float",
-                                 "value":3
+                                 "value":3.5
                                 }, 
                                 {
                                  "name":"numObjectsToSpawn",
                                  "type":"int",
-                                 "value":-1
+                                 "value":7
                                 }, 
                                 {
                                  "name":"range.x",
@@ -1034,14 +1040,14 @@
                                 {
                                  "name":"range.y",
                                  "type":"float",
-                                 "value":400
+                                 "value":1000
                                 }],
                          "rotation":0,
                          "type":"ENEMY_SPIDER",
                          "visible":true,
                          "width":20,
-                         "x":6193.0303030303,
-                         "y":583.939393939394
+                         "x":6193.03,
+                         "y":583.939
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -1063,8 +1069,8 @@
                          "type":"GRENADE_LAUNCHER",
                          "visible":true,
                          "width":152,
-                         "x":4620.9696969697,
-                         "y":578.454545454545
+                         "x":4869.45,
+                         "y":584.515
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -1086,8 +1092,8 @@
                          "type":"CHILD",
                          "visible":true,
                          "width":21,
-                         "x":4214.24242424242,
-                         "y":521.969696969697
+                         "x":4214.24,
+                         "y":521.97
                         }, 
                         {
                          "gid":19,
@@ -1098,8 +1104,8 @@
                          "type":"CHILD",
                          "visible":true,
                          "width":21,
-                         "x":4138.48484848485,
-                         "y":521.848484848485
+                         "x":4138.48,
+                         "y":521.848
                         }, 
                         {
                          "gid":19,
@@ -1110,8 +1116,8 @@
                          "type":"CHILD",
                          "visible":true,
                          "width":21,
-                         "x":4086.9696969697,
-                         "y":520.787878787879
+                         "x":4086.97,
+                         "y":520.788
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -1126,7 +1132,7 @@
                  "name":"WALL",
                  "objects":[
                         {
-                         "height":174.434018181818,
+                         "height":174.434,
                          "id":564,
                          "name":"",
                          "properties":[
@@ -1138,23 +1144,23 @@
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,
-                         "width":384.158181818181,
-                         "x":3980.60606060606,
-                         "y":576.311787878788
+                         "width":384.158,
+                         "x":3980.61,
+                         "y":576.312
                         }, 
                         {
-                         "height":51.2473363636363,
+                         "height":51.2473,
                          "id":570,
                          "name":"",
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
-                         "width":47.3065666666671,
-                         "x":4288.37562121212,
-                         "y":528.520848484848
+                         "width":47.3066,
+                         "x":4288.38,
+                         "y":528.521
                         }, 
                         {
-                         "height":86.5552121212121,
+                         "height":86.5552,
                          "id":582,
                          "name":"",
                          "properties":[
@@ -1166,31 +1172,31 @@
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,
-                         "width":1962.94587878788,
-                         "x":4359.43615151515,
-                         "y":664.298151515152
+                         "width":1969.01,
+                         "x":4359.44,
+                         "y":664.298
                         }, 
                         {
-                         "height":290.641239393939,
+                         "height":290.641,
                          "id":583,
                          "name":"",
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
-                         "width":29.1247818181819,
-                         "x":4546.04366969697,
-                         "y":380.436956060606
+                         "width":29.1248,
+                         "x":4546.04,
+                         "y":380.437
                         }, 
                         {
-                         "height":23.9743333333334,
+                         "height":23.9743,
                          "id":584,
                          "name":"",
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
-                         "width":113.973284848485,
-                         "x":4433.92244848485,
-                         "y":487.224954545454
+                         "width":113.973,
+                         "x":4433.92,
+                         "y":487.225
                         }, 
                         {
                          "height":23.9743,
@@ -1200,19 +1206,19 @@
                          "type":"PLATFORM",
                          "visible":true,
                          "width":113.973,
-                         "x":4567.25592424242,
-                         "y":427.406789393939
+                         "x":4567.26,
+                         "y":427.407
                         }, 
                         {
-                         "height":478.519787878788,
+                         "height":478.52,
                          "id":588,
                          "name":"",
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
                          "width":29.1248,
-                         "x":5094.52410606061,
-                         "y":178.921924242424
+                         "x":5094.52,
+                         "y":178.922
                         }, 
                         {
                          "height":23.9743,
@@ -1222,8 +1228,8 @@
                          "type":"PLATFORM",
                          "visible":true,
                          "width":113.973,
-                         "x":4982.40410606061,
-                         "y":407.709712121212
+                         "x":4982.4,
+                         "y":407.71
                         }, 
                         {
                          "height":23.9743,
@@ -1232,9 +1238,9 @@
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
-                         "width":229.124515151515,
-                         "x":5121.80471212121,
-                         "y":316.801015151515
+                         "width":229.125,
+                         "x":5121.8,
+                         "y":316.801
                         }, 
                         {
                          "height":23.9743,
@@ -1243,20 +1249,20 @@
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
-                         "width":177.609848484849,
-                         "x":4924.83143939394,
-                         "y":224.376486363636
+                         "width":177.61,
+                         "x":4924.83,
+                         "y":224.376
                         }, 
                         {
-                         "height":317.913939393939,
+                         "height":317.914,
                          "id":592,
                          "name":"",
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
                          "width":29.1248,
-                         "x":6043.00987272727,
-                         "y":345.588484848485
+                         "x":6043.01,
+                         "y":345.588
                         }, 
                         {
                          "height":23.9743,
@@ -1265,9 +1271,9 @@
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
-                         "width":117.003939393939,
-                         "x":5930.89563030303,
-                         "y":391.042484848485
+                         "width":117.004,
+                         "x":5930.9,
+                         "y":391.042
                         }, 
                         {
                          "height":23.9743,
@@ -1276,9 +1282,9 @@
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
-                         "width":74.5797575757571,
-                         "x":5971.80103030303,
-                         "y":518.31588030303
+                         "width":74.5798,
+                         "x":5971.8,
+                         "y":518.316
                         }, 
                         {
                          "height":23.9743,
@@ -1287,9 +1293,9 @@
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
-                         "width":147.307072727272,
-                         "x":6077.86161515152,
-                         "y":418.31588030303
+                         "width":147.307,
+                         "x":6077.86,
+                         "y":418.316
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -1308,20 +1314,1632 @@
                 {
                  "name":"maxPhaseTime",
                  "type":"float",
-                 "value":25
+                 "value":90
                 }, 
                 {
                  "name":"minPhaseTime",
                  "type":"float",
-                 "value":10
+                 "value":55
+                }],
+         "type":"group",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "id":126,
+         "layers":[
+                {
+                 "draworder":"topdown",
+                 "id":127,
+                 "name":"phase_size",
+                 "objects":[
+                        {
+                         "height":1390.09,
+                         "id":601,
+                         "name":"",
+                         "rotation":0,
+                         "type":"",
+                         "visible":true,
+                         "width":2473.98,
+                         "x":6320,
+                         "y":-116.015
+                        }],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
+                }, 
+                {
+                 "color":"#ff0000",
+                 "draworder":"topdown",
+                 "id":128,
+                 "name":"DAMAGE_PLATFORM",
+                 "objects":[
+                        {
+                         "height":84.1989,
+                         "id":602,
+                         "name":"",
+                         "properties":[
+                                {
+                                 "name":"Damage",
+                                 "type":"int",
+                                 "value":100
+                                }],
+                         "rotation":0,
+                         "type":"DAMAGE_PLATFORM",
+                         "visible":true,
+                         "width":2438.48,
+                         "x":6341,
+                         "y":904.894
+                        }],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
+                }, 
+                {
+                 "draworder":"topdown",
+                 "id":155,
+                 "name":"TRIGGER",
+                 "objects":[
+                        {
+                         "height":246.49,
+                         "id":740,
+                         "name":"",
+                         "properties":[
+                                {
+                                 "name":"Function",
+                                 "type":"string",
+                                 "value":"SPAWN_ORBITAL_LASER"
+                                }],
+                         "rotation":0,
+                         "type":"TRIGGER",
+                         "visible":true,
+                         "width":84.2637,
+                         "x":6897.26,
+                         "y":422.21
+                        }],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
+                }, 
+                {
+                 "draworder":"topdown",
+                 "id":130,
+                 "name":"ENEMY",
+                 "objects":[
+                        {
+                         "gid":17,
+                         "height":65,
+                         "id":604,
+                         "name":"",
+                         "rotation":0,
+                         "type":"DISTANCE_ENEMY",
+                         "visible":true,
+                         "width":45,
+                         "x":6817.39,
+                         "y":605.727
+                        }, 
+                        {
+                         "gid":17,
+                         "height":65,
+                         "id":634,
+                         "name":"",
+                         "rotation":0,
+                         "type":"DISTANCE_ENEMY",
+                         "visible":true,
+                         "width":45,
+                         "x":7301.74,
+                         "y":246.288
+                        }],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
+                }, 
+                {
+                 "draworder":"topdown",
+                 "id":131,
+                 "name":"SPAWNER",
+                 "objects":[
+                        {
+                         "gid":4,
+                         "height":20,
+                         "id":606,
+                         "name":"",
+                         "properties":[
+                                {
+                                 "name":"maxCooldown",
+                                 "type":"float",
+                                 "value":2
+                                }, 
+                                {
+                                 "name":"numObjectsToSpawn",
+                                 "type":"int",
+                                 "value":2
+                                }, 
+                                {
+                                 "name":"range.x",
+                                 "type":"float",
+                                 "value":220
+                                }, 
+                                {
+                                 "name":"range.y",
+                                 "type":"float",
+                                 "value":100
+                                }],
+                         "rotation":0,
+                         "type":"ENEMY_SPIDER",
+                         "visible":true,
+                         "width":20,
+                         "x":7548.36,
+                         "y":289.879
+                        }, 
+                        {
+                         "gid":4,
+                         "height":20,
+                         "id":607,
+                         "name":"",
+                         "properties":[
+                                {
+                                 "name":"maxCooldown",
+                                 "type":"float",
+                                 "value":4
+                                }, 
+                                {
+                                 "name":"numObjectsToSpawn",
+                                 "type":"int",
+                                 "value":3
+                                }, 
+                                {
+                                 "name":"range.x",
+                                 "type":"float",
+                                 "value":1000
+                                }, 
+                                {
+                                 "name":"range.y",
+                                 "type":"float",
+                                 "value":10000
+                                }],
+                         "rotation":0,
+                         "type":"BOMBER_ENEMY",
+                         "visible":true,
+                         "width":20,
+                         "x":8738.48,
+                         "y":193.03
+                        }],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
+                }, 
+                {
+                 "draworder":"topdown",
+                 "id":133,
+                 "name":"CHILD",
+                 "objects":[
+                        {
+                         "gid":19,
+                         "height":50,
+                         "id":611,
+                         "name":"",
+                         "rotation":0,
+                         "type":"CHILD",
+                         "visible":true,
+                         "width":21,
+                         "x":7159.69,
+                         "y":551.091
+                        }, 
+                        {
+                         "gid":19,
+                         "height":50,
+                         "id":637,
+                         "name":"",
+                         "rotation":0,
+                         "type":"CHILD",
+                         "visible":true,
+                         "width":21,
+                         "x":8204.65,
+                         "y":144.697
+                        }, 
+                        {
+                         "gid":19,
+                         "height":50,
+                         "id":638,
+                         "name":"",
+                         "rotation":0,
+                         "type":"CHILD",
+                         "visible":true,
+                         "width":21,
+                         "x":8704.65,
+                         "y":599.243
+                        }],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
+                }, 
+                {
+                 "color":"#0055ff",
+                 "draworder":"topdown",
+                 "id":134,
+                 "name":"WALL",
+                 "objects":[
+                        {
+                         "height":253.222,
+                         "id":612,
+                         "name":"",
+                         "properties":[
+                                {
+                                 "name":"isCheckpoint",
+                                 "type":"bool",
+                                 "value":true
+                                }],
+                         "rotation":0,
+                         "type":"WALL",
+                         "visible":true,
+                         "width":259.916,
+                         "x":6320,
+                         "y":658.13
+                        }, 
+                        {
+                         "height":793.672,
+                         "id":615,
+                         "name":"",
+                         "rotation":0,
+                         "type":"PLATFORM",
+                         "visible":true,
+                         "width":50.3369,
+                         "x":7218.77,
+                         "y":110.74
+                        }, 
+                        {
+                         "height":23.9743,
+                         "id":617,
+                         "name":"",
+                         "rotation":0,
+                         "type":"WALL",
+                         "visible":true,
+                         "width":110.943,
+                         "x":7109.68,
+                         "y":600.134
+                        }, 
+                        {
+                         "height":784.58,
+                         "id":618,
+                         "name":"",
+                         "rotation":0,
+                         "type":"PLATFORM",
+                         "visible":true,
+                         "width":29.1248,
+                         "x":7718.77,
+                         "y":112.255
+                        }, 
+                        {
+                         "height":23.9743,
+                         "id":619,
+                         "name":"",
+                         "properties":[
+                                {
+                                 "name":"isCheckpoint",
+                                 "type":"bool",
+                                 "value":true
+                                }],
+                         "rotation":0,
+                         "type":"WALL",
+                         "visible":true,
+                         "width":147.306,
+                         "x":7746.04,
+                         "y":444.073
+                        }, 
+                        {
+                         "height":27.0046,
+                         "id":620,
+                         "name":"",
+                         "rotation":0,
+                         "type":"WALL",
+                         "visible":true,
+                         "width":86.7003,
+                         "x":8109.68,
+                         "y":280.437
+                        }, 
+                        {
+                         "height":23.9743,
+                         "id":621,
+                         "name":"",
+                         "rotation":0,
+                         "type":"WALL",
+                         "visible":true,
+                         "width":120.034,
+                         "x":7597.56,
+                         "y":500.134
+                        }, 
+                        {
+                         "height":714.884,
+                         "id":622,
+                         "name":"",
+                         "rotation":0,
+                         "type":"PLATFORM",
+                         "visible":true,
+                         "width":53.3672,
+                         "x":8191.49,
+                         "y":188.013
+                        }, 
+                        {
+                         "height":23.9743,
+                         "id":623,
+                         "name":"",
+                         "rotation":0,
+                         "type":"WALL",
+                         "visible":true,
+                         "width":77.61,
+                         "x":7746.05,
+                         "y":148.618
+                        }, 
+                        {
+                         "height":23.9743,
+                         "id":624,
+                         "name":"",
+                         "rotation":0,
+                         "type":"WALL",
+                         "visible":true,
+                         "width":107.913,
+                         "x":8244.53,
+                         "y":418.316
+                        }, 
+                        {
+                         "height":48.2167,
+                         "id":625,
+                         "name":"",
+                         "rotation":0,
+                         "type":"WALL",
+                         "visible":true,
+                         "width":207.913,
+                         "x":8244.53,
+                         "y":533.467
+                        }, 
+                        {
+                         "height":244.131,
+                         "id":626,
+                         "name":"",
+                         "properties":[
+                                {
+                                 "name":"isCheckpoint",
+                                 "type":"bool",
+                                 "value":false
+                                }],
+                         "rotation":0,
+                         "type":"WALL",
+                         "visible":true,
+                         "width":217.491,
+                         "x":6767.01,
+                         "y":673.389
+                        }, 
+                        {
+                         "height":23.9743,
+                         "id":627,
+                         "name":"",
+                         "rotation":0,
+                         "type":"WALL",
+                         "visible":true,
+                         "width":177.61,
+                         "x":7271.8,
+                         "y":542.558
+                        }, 
+                        {
+                         "height":23.9743,
+                         "id":628,
+                         "name":"",
+                         "rotation":0,
+                         "type":"PLATFORM",
+                         "visible":true,
+                         "width":177.61,
+                         "x":7268.77,
+                         "y":183.589
+                        }, 
+                        {
+                         "height":23.9743,
+                         "id":629,
+                         "name":"",
+                         "rotation":0,
+                         "type":"PLATFORM",
+                         "visible":true,
+                         "width":159.428,
+                         "x":7268.77,
+                         "y":280.77
+                        }, 
+                        {
+                         "height":23.9743,
+                         "id":630,
+                         "name":"",
+                         "rotation":0,
+                         "type":"PLATFORM",
+                         "visible":true,
+                         "width":141.245,
+                         "x":7738.47,
+                         "y":727.407
+                        }, 
+                        {
+                         "height":23.9743,
+                         "id":631,
+                         "name":"",
+                         "rotation":0,
+                         "type":"PLATFORM",
+                         "visible":true,
+                         "width":171.549,
+                         "x":7541.5,
+                         "y":359.558
+                        }, 
+                        {
+                         "height":23.9743,
+                         "id":632,
+                         "name":"",
+                         "rotation":0,
+                         "type":"WALL",
+                         "visible":true,
+                         "width":107.912,
+                         "x":7623.32,
+                         "y":127.407
+                        }, 
+                        {
+                         "height":244.131,
+                         "id":633,
+                         "name":"",
+                         "properties":[
+                                {
+                                 "name":"isCheckpoint",
+                                 "type":"bool",
+                                 "value":false
+                                }],
+                         "rotation":0,
+                         "type":"WALL",
+                         "visible":true,
+                         "width":244.764,
+                         "x":8542.77,
+                         "y":659.753
+                        }],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
+                }],
+         "name":"Phase4",
+         "opacity":1,
+         "properties":[
+                {
+                 "name":"Direction",
+                 "type":"string",
+                 "value":"Right"
+                }, 
+                {
+                 "name":"maxPhaseTime",
+                 "type":"float",
+                 "value":200
+                }, 
+                {
+                 "name":"minPhaseTime",
+                 "type":"float",
+                 "value":100
+                }],
+         "type":"group",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "id":135,
+         "layers":[
+                {
+                 "draworder":"topdown",
+                 "id":136,
+                 "name":"phase_size",
+                 "objects":[
+                        {
+                         "height":1390.09,
+                         "id":639,
+                         "name":"",
+                         "rotation":0,
+                         "type":"",
+                         "visible":true,
+                         "width":2228.53,
+                         "x":8771.52,
+                         "y":-119.046
+                        }],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
+                }, 
+                {
+                 "color":"#ff0000",
+                 "draworder":"topdown",
+                 "id":137,
+                 "name":"DAMAGE_PLATFORM",
+                 "objects":[
+                        {
+                         "height":84.1989,
+                         "id":640,
+                         "name":"",
+                         "properties":[
+                                {
+                                 "name":"Damage",
+                                 "type":"int",
+                                 "value":100
+                                }],
+                         "rotation":0,
+                         "type":"DAMAGE_PLATFORM",
+                         "visible":true,
+                         "width":2186.96,
+                         "x":8792.51,
+                         "y":901.863
+                        }],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
+                }, 
+                {
+                 "draworder":"topdown",
+                 "id":142,
+                 "name":"POWERUP",
+                 "objects":[
+                        {
+                         "height":0,
+                         "id":687,
+                         "name":"",
+                         "point":true,
+                         "rotation":0,
+                         "type":"POWERUP_FURY",
+                         "visible":true,
+                         "width":0,
+                         "x":9352.12,
+                         "y":614.182
+                        }, 
+                        {
+                         "height":0,
+                         "id":688,
+                         "name":"",
+                         "point":true,
+                         "rotation":0,
+                         "type":"POWERUP_SHIELD",
+                         "visible":true,
+                         "width":0,
+                         "x":9204.97,
+                         "y":618.182
+                        }],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
+                }, 
+                {
+                 "draworder":"topdown",
+                 "id":138,
+                 "name":"ENEMY",
+                 "objects":[
+                        {
+                         "gid":17,
+                         "height":65,
+                         "id":641,
+                         "name":"",
+                         "rotation":0,
+                         "type":"CHASERJUMPER",
+                         "visible":true,
+                         "width":45,
+                         "x":9341.64,
+                         "y":548.152
+                        }, 
+                        {
+                         "gid":17,
+                         "height":65,
+                         "id":642,
+                         "name":"",
+                         "rotation":0,
+                         "type":"DISTANCE_ENEMY",
+                         "visible":true,
+                         "width":45,
+                         "x":9477.5,
+                         "y":297.803
+                        }, 
+                        {
+                         "gid":17,
+                         "height":65,
+                         "id":683,
+                         "name":"",
+                         "rotation":0,
+                         "type":"DISTANCE_ENEMY",
+                         "visible":true,
+                         "width":45,
+                         "x":9332.05,
+                         "y":337.197
+                        }, 
+                        {
+                         "gid":17,
+                         "height":65,
+                         "id":684,
+                         "name":"",
+                         "rotation":0,
+                         "type":"DISTANCE_ENEMY",
+                         "visible":true,
+                         "width":45,
+                         "x":9665.38,
+                         "y":328.106
+                        }, 
+                        {
+                         "gid":17,
+                         "height":65,
+                         "id":685,
+                         "name":"",
+                         "rotation":0,
+                         "type":"DISTANCE_ENEMY",
+                         "visible":true,
+                         "width":45,
+                         "x":10156.3,
+                         "y":358.409
+                        }],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
+                }, 
+                {
+                 "draworder":"topdown",
+                 "id":139,
+                 "name":"SPAWNER",
+                 "objects":[
+                        {
+                         "gid":4,
+                         "height":20,
+                         "id":643,
+                         "name":"",
+                         "properties":[
+                                {
+                                 "name":"maxCooldown",
+                                 "type":"float",
+                                 "value":6
+                                }, 
+                                {
+                                 "name":"numObjectsToSpawn",
+                                 "type":"int",
+                                 "value":2
+                                }, 
+                                {
+                                 "name":"range.x",
+                                 "type":"float",
+                                 "value":900
+                                }, 
+                                {
+                                 "name":"range.y",
+                                 "type":"float",
+                                 "value":10000
+                                }],
+                         "rotation":0,
+                         "type":"FLYING_SHOOTER_ENEMY",
+                         "visible":true,
+                         "width":20,
+                         "x":10872.6,
+                         "y":177.758
+                        }, 
+                        {
+                         "gid":4,
+                         "height":20,
+                         "id":644,
+                         "name":"",
+                         "properties":[
+                                {
+                                 "name":"maxCooldown",
+                                 "type":"float",
+                                 "value":3.3
+                                }, 
+                                {
+                                 "name":"numObjectsToSpawn",
+                                 "type":"int",
+                                 "value":5
+                                }, 
+                                {
+                                 "name":"range.x",
+                                 "type":"float",
+                                 "value":360
+                                }, 
+                                {
+                                 "name":"range.y",
+                                 "type":"float",
+                                 "value":10000
+                                }],
+                         "rotation":0,
+                         "type":"ENEMY_SPIDER",
+                         "visible":true,
+                         "width":20,
+                         "x":10653.6,
+                         "y":441.545
+                        }, 
+                        {
+                         "gid":4,
+                         "height":20,
+                         "id":686,
+                         "name":"",
+                         "properties":[
+                                {
+                                 "name":"maxCooldown",
+                                 "type":"float",
+                                 "value":3
+                                }, 
+                                {
+                                 "name":"numObjectsToSpawn",
+                                 "type":"int",
+                                 "value":5
+                                }, 
+                                {
+                                 "name":"range.x",
+                                 "type":"float",
+                                 "value":500
+                                }, 
+                                {
+                                 "name":"range.y",
+                                 "type":"float",
+                                 "value":10000
+                                }],
+                         "rotation":0,
+                         "type":"POUNCER_ENEMY",
+                         "visible":true,
+                         "width":20,
+                         "x":10211.2,
+                         "y":408.182
+                        }, 
+                        {
+                         "gid":4,
+                         "height":20,
+                         "id":690,
+                         "name":"",
+                         "properties":[
+                                {
+                                 "name":"maxCooldown",
+                                 "type":"float",
+                                 "value":3
+                                }, 
+                                {
+                                 "name":"numObjectsToSpawn",
+                                 "type":"int",
+                                 "value":5
+                                }, 
+                                {
+                                 "name":"range.x",
+                                 "type":"float",
+                                 "value":600
+                                }, 
+                                {
+                                 "name":"range.y",
+                                 "type":"float",
+                                 "value":10000
+                                }],
+                         "rotation":0,
+                         "type":"ENEMY_SPIDER",
+                         "visible":true,
+                         "width":20,
+                         "x":9980.91,
+                         "y":377.879
+                        }],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
+                }, 
+                {
+                 "draworder":"topdown",
+                 "id":140,
+                 "name":"CHILD",
+                 "objects":[
+                        {
+                         "gid":19,
+                         "height":50,
+                         "id":645,
+                         "name":"",
+                         "rotation":0,
+                         "type":"CHILD",
+                         "visible":true,
+                         "width":21,
+                         "x":9035.45,
+                         "y":602.606
+                        }, 
+                        {
+                         "gid":19,
+                         "height":50,
+                         "id":646,
+                         "name":"",
+                         "rotation":0,
+                         "type":"CHILD",
+                         "visible":true,
+                         "width":21,
+                         "x":10568.3,
+                         "y":211.364
+                        }, 
+                        {
+                         "gid":19,
+                         "height":50,
+                         "id":647,
+                         "name":"",
+                         "rotation":0,
+                         "type":"CHILD",
+                         "visible":true,
+                         "width":21,
+                         "x":10456.2,
+                         "y":361.848
+                        }],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
+                }, 
+                {
+                 "draworder":"topdown",
+                 "id":143,
+                 "name":"WEAPON",
+                 "objects":[
+                        {
+                         "gid":10,
+                         "height":65,
+                         "id":689,
+                         "name":"",
+                         "rotation":0,
+                         "type":"LASER_GUN",
+                         "visible":true,
+                         "width":152,
+                         "x":9102.79,
+                         "y":611.788
+                        }],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
+                }, 
+                {
+                 "color":"#0055ff",
+                 "draworder":"topdown",
+                 "id":141,
+                 "name":"WALL",
+                 "objects":[
+                        {
+                         "height":104.737,
+                         "id":648,
+                         "name":"",
+                         "properties":[
+                                {
+                                 "name":"isCheckpoint",
+                                 "type":"bool",
+                                 "value":true
+                                }],
+                         "rotation":0,
+                         "type":"WALL",
+                         "visible":true,
+                         "width":2213.61,
+                         "x":8777.33,
+                         "y":655.1
+                        }, 
+                        {
+                         "height":375.49,
+                         "id":649,
+                         "name":"",
+                         "rotation":0,
+                         "type":"PLATFORM",
+                         "visible":true,
+                         "width":26.0945,
+                         "x":9403.62,
+                         "y":277.407
+                        }, 
+                        {
+                         "height":23.9743,
+                         "id":650,
+                         "name":"",
+                         "rotation":0,
+                         "type":"PLATFORM",
+                         "visible":true,
+                         "width":110.943,
+                         "x":9291.5,
+                         "y":439.528
+                        }, 
+                        {
+                         "height":399.732,
+                         "id":651,
+                         "name":"",
+                         "rotation":0,
+                         "type":"PLATFORM",
+                         "visible":true,
+                         "width":23.0642,
+                         "x":9736.95,
+                         "y":251.649
+                        }, 
+                        {
+                         "height":30.0349,
+                         "id":653,
+                         "name":"",
+                         "rotation":0,
+                         "type":"WALL",
+                         "visible":true,
+                         "width":44.276,
+                         "x":9858.17,
+                         "y":625.892
+                        }, 
+                        {
+                         "height":23.9743,
+                         "id":660,
+                         "name":"",
+                         "rotation":0,
+                         "type":"PLATFORM",
+                         "visible":true,
+                         "width":123.064,
+                         "x":9432.41,
+                         "y":403.164
+                        }, 
+                        {
+                         "height":23.9743,
+                         "id":662,
+                         "name":"",
+                         "rotation":0,
+                         "type":"PLATFORM",
+                         "visible":true,
+                         "width":129.125,
+                         "x":9611.19,
+                         "y":441.376
+                        }, 
+                        {
+                         "height":23.9743,
+                         "id":667,
+                         "name":"",
+                         "rotation":0,
+                         "type":"PLATFORM",
+                         "visible":true,
+                         "width":65.4882,
+                         "x":9426.35,
+                         "y":291.043
+                        }, 
+                        {
+                         "height":23.9743,
+                         "id":669,
+                         "name":"",
+                         "rotation":0,
+                         "type":"PLATFORM",
+                         "visible":true,
+                         "width":129.125,
+                         "x":9756.65,
+                         "y":372.861
+                        }, 
+                        {
+                         "height":42.1561,
+                         "id":670,
+                         "name":"",
+                         "properties":[
+                                {
+                                 "name":"isCheckpoint",
+                                 "type":"bool",
+                                 "value":true
+                                }],
+                         "rotation":0,
+                         "type":"WALL",
+                         "visible":true,
+                         "width":29.1245,
+                         "x":9477.86,
+                         "y":612.255
+                        }, 
+                        {
+                         "height":30.0349,
+                         "id":671,
+                         "name":"",
+                         "rotation":0,
+                         "type":"PLATFORM",
+                         "visible":true,
+                         "width":44.276,
+                         "x":10390,
+                         "y":621.346
+                        }, 
+                        {
+                         "height":348.217,
+                         "id":672,
+                         "name":"",
+                         "rotation":0,
+                         "type":"PLATFORM",
+                         "visible":true,
+                         "width":20.0918,
+                         "x":10086.9,
+                         "y":309.225
+                        }, 
+                        {
+                         "height":20.8846,
+                         "id":673,
+                         "name":"",
+                         "rotation":0,
+                         "type":"PLATFORM",
+                         "visible":true,
+                         "width":112.484,
+                         "x":9971.31,
+                         "y":426.016
+                        }, 
+                        {
+                         "height":20.8846,
+                         "id":674,
+                         "name":"",
+                         "rotation":0,
+                         "type":"PLATFORM",
+                         "visible":true,
+                         "width":112.484,
+                         "x":10104.1,
+                         "y":460.27
+                        }, 
+                        {
+                         "height":20.8846,
+                         "id":675,
+                         "name":"",
+                         "rotation":0,
+                         "type":"PLATFORM",
+                         "visible":true,
+                         "width":70.0598,
+                         "x":10013.5,
+                         "y":322.891
+                        }, 
+                        {
+                         "height":384.581,
+                         "id":676,
+                         "name":"",
+                         "rotation":0,
+                         "type":"PLATFORM",
+                         "visible":true,
+                         "width":22.1899,
+                         "x":10568.7,
+                         "y":271.346
+                        }, 
+                        {
+                         "height":23.0655,
+                         "id":677,
+                         "name":"",
+                         "rotation":0,
+                         "type":"PLATFORM",
+                         "visible":true,
+                         "width":124.23,
+                         "x":10441,
+                         "y":412.333
+                        }, 
+                        {
+                         "height":23.0655,
+                         "id":678,
+                         "name":"",
+                         "rotation":0,
+                         "type":"PLATFORM",
+                         "visible":true,
+                         "width":124.23,
+                         "x":10593.7,
+                         "y":504.68
+                        }, 
+                        {
+                         "height":23.0655,
+                         "id":679,
+                         "name":"",
+                         "rotation":0,
+                         "type":"PLATFORM",
+                         "visible":true,
+                         "width":77.376,
+                         "x":10487.6,
+                         "y":298.439
+                        }, 
+                        {
+                         "height":54.2773,
+                         "id":680,
+                         "name":"",
+                         "rotation":0,
+                         "type":"WALL",
+                         "visible":true,
+                         "width":44.276,
+                         "x":10623.3,
+                         "y":594.073
+                        }],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
+                }],
+         "name":"Phase5",
+         "opacity":1,
+         "properties":[
+                {
+                 "name":"Direction",
+                 "type":"string",
+                 "value":"Right"
+                }, 
+                {
+                 "name":"maxPhaseTime",
+                 "type":"float",
+                 "value":120
+                }, 
+                {
+                 "name":"minPhaseTime",
+                 "type":"float",
+                 "value":70
+                }],
+         "type":"group",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "id":144,
+         "layers":[
+                {
+                 "draworder":"topdown",
+                 "id":145,
+                 "name":"phase_size",
+                 "objects":[
+                        {
+                         "height":1390.09,
+                         "id":691,
+                         "name":"",
+                         "rotation":0,
+                         "type":"",
+                         "visible":true,
+                         "width":2225.5,
+                         "x":10974.4,
+                         "y":-119.106
+                        }],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
+                }, 
+                {
+                 "color":"#ff0000",
+                 "draworder":"topdown",
+                 "id":146,
+                 "name":"DAMAGE_PLATFORM",
+                 "objects":[
+                        {
+                         "height":84.1989,
+                         "id":692,
+                         "name":"",
+                         "properties":[
+                                {
+                                 "name":"Damage",
+                                 "type":"int",
+                                 "value":100
+                                }],
+                         "rotation":0,
+                         "type":"DAMAGE_PLATFORM",
+                         "visible":true,
+                         "width":1276.96,
+                         "x":10995.4,
+                         "y":901.803
+                        }],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
+                }, 
+                {
+                 "draworder":"topdown",
+                 "id":147,
+                 "name":"POWERUP",
+                 "objects":[
+                        {
+                         "height":0,
+                         "id":693,
+                         "name":"",
+                         "point":true,
+                         "rotation":0,
+                         "type":"POWERUP_EXTRA_LIFE",
+                         "visible":true,
+                         "width":0,
+                         "x":11109.6,
+                         "y":617.152
+                        }],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
+                }, 
+                {
+                 "draworder":"topdown",
+                 "id":149,
+                 "name":"SPAWNER",
+                 "objects":[
+                        {
+                         "gid":4,
+                         "height":20,
+                         "id":700,
+                         "name":"",
+                         "properties":[
+                                {
+                                 "name":"maxCooldown",
+                                 "type":"float",
+                                 "value":6
+                                }, 
+                                {
+                                 "name":"numObjectsToSpawn",
+                                 "type":"int",
+                                 "value":3
+                                }, 
+                                {
+                                 "name":"range.x",
+                                 "type":"float",
+                                 "value":4000
+                                }, 
+                                {
+                                 "name":"range.y",
+                                 "type":"float",
+                                 "value":10000
+                                }],
+                         "rotation":0,
+                         "type":"FLYING_SHOOTER_ENEMY",
+                         "visible":true,
+                         "width":20,
+                         "x":12442.2,
+                         "y":211.03
+                        }, 
+                        {
+                         "height":20,
+                         "id":730,
+                         "name":"",
+                         "properties":[
+                                {
+                                 "name":"maxCooldown",
+                                 "type":"float",
+                                 "value":7.7
+                                }, 
+                                {
+                                 "name":"numObjectsToSpawn",
+                                 "type":"int",
+                                 "value":5
+                                }, 
+                                {
+                                 "name":"range.x",
+                                 "type":"float",
+                                 "value":4000
+                                }, 
+                                {
+                                 "name":"range.y",
+                                 "type":"float",
+                                 "value":4000
+                                }],
+                         "rotation":0,
+                         "type":"ENEMY_SPIDER",
+                         "visible":true,
+                         "width":20,
+                         "x":12596.5,
+                         "y":569.818
+                        }, 
+                        {
+                         "height":20,
+                         "id":731,
+                         "name":"",
+                         "properties":[
+                                {
+                                 "name":"maxCooldown",
+                                 "type":"float",
+                                 "value":5
+                                }, 
+                                {
+                                 "name":"numObjectsToSpawn",
+                                 "type":"int",
+                                 "value":6
+                                }, 
+                                {
+                                 "name":"range.x",
+                                 "type":"float",
+                                 "value":4000
+                                }, 
+                                {
+                                 "name":"range.y",
+                                 "type":"float",
+                                 "value":4000
+                                }],
+                         "rotation":0,
+                         "type":"ENEMY_SPIDER",
+                         "visible":true,
+                         "width":20,
+                         "x":12372.5,
+                         "y":553.818
+                        }, 
+                        {
+                         "height":20,
+                         "id":732,
+                         "name":"",
+                         "properties":[
+                                {
+                                 "name":"maxCooldown",
+                                 "type":"float",
+                                 "value":6
+                                }, 
+                                {
+                                 "name":"numObjectsToSpawn",
+                                 "type":"int",
+                                 "value":8
+                                }, 
+                                {
+                                 "name":"range.x",
+                                 "type":"float",
+                                 "value":4000
+                                }, 
+                                {
+                                 "name":"range.y",
+                                 "type":"float",
+                                 "value":4000
+                                }],
+                         "rotation":0,
+                         "type":"CHASERJUMPER",
+                         "visible":true,
+                         "width":20,
+                         "x":12492.5,
+                         "y":513.818
+                        }, 
+                        {
+                         "height":20,
+                         "id":733,
+                         "name":"",
+                         "properties":[
+                                {
+                                 "name":"maxCooldown",
+                                 "type":"float",
+                                 "value":8
+                                }, 
+                                {
+                                 "name":"numObjectsToSpawn",
+                                 "type":"int",
+                                 "value":5
+                                }, 
+                                {
+                                 "name":"range.x",
+                                 "type":"float",
+                                 "value":4000
+                                }, 
+                                {
+                                 "name":"range.y",
+                                 "type":"float",
+                                 "value":4000
+                                }],
+                         "rotation":0,
+                         "type":"BOMBER_ENEMY",
+                         "visible":true,
+                         "width":20,
+                         "x":12295.2,
+                         "y":7.15152
+                        }, 
+                        {
+                         "height":20,
+                         "id":734,
+                         "name":"",
+                         "properties":[
+                                {
+                                 "name":"maxCooldown",
+                                 "type":"float",
+                                 "value":10
+                                }, 
+                                {
+                                 "name":"numObjectsToSpawn",
+                                 "type":"int",
+                                 "value":3
+                                }, 
+                                {
+                                 "name":"range.x",
+                                 "type":"float",
+                                 "value":4000
+                                }, 
+                                {
+                                 "name":"range.y",
+                                 "type":"float",
+                                 "value":4000
+                                }],
+                         "rotation":0,
+                         "type":"FLYING_SHOOTER_ENEMY",
+                         "visible":true,
+                         "width":20,
+                         "x":12483.2,
+                         "y":315.152
+                        }, 
+                        {
+                         "gid":4,
+                         "height":20,
+                         "id":735,
+                         "name":"",
+                         "properties":[
+                                {
+                                 "name":"maxCooldown",
+                                 "type":"float",
+                                 "value":2
+                                }, 
+                                {
+                                 "name":"numObjectsToSpawn",
+                                 "type":"int",
+                                 "value":3
+                                }, 
+                                {
+                                 "name":"range.x",
+                                 "type":"float",
+                                 "value":900
+                                }, 
+                                {
+                                 "name":"range.y",
+                                 "type":"float",
+                                 "value":10000
+                                }],
+                         "rotation":0,
+                         "type":"CHASERJUMPER",
+                         "visible":true,
+                         "width":20,
+                         "x":11908.2,
+                         "y":593.03
+                        }],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
+                }, 
+                {
+                 "draworder":"topdown",
+                 "id":153,
+                 "name":"TURRET",
+                 "objects":[
+                        {
+                         "height":0,
+                         "id":729,
+                         "name":"",
+                         "point":true,
+                         "properties":[
+                                {
+                                 "name":"Facing",
+                                 "type":"string",
+                                 "value":"Right"
+                                }],
+                         "rotation":0,
+                         "type":"NONE",
+                         "visible":true,
+                         "width":0,
+                         "x":11257.6,
+                         "y":609.091
+                        }],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
+                }, 
+                {
+                 "color":"#0055ff",
+                 "draworder":"topdown",
+                 "id":152,
+                 "name":"WALL",
+                 "objects":[
+                        {
+                         "height":56.2522,
+                         "id":708,
+                         "name":"",
+                         "properties":[
+                                {
+                                 "name":"isCheckpoint",
+                                 "type":"bool",
+                                 "value":true
+                                }],
+                         "rotation":0,
+                         "type":"WALL",
+                         "visible":true,
+                         "width":1705.61,
+                         "x":10980.2,
+                         "y":655.039
+                        }, 
+                        {
+                         "height":235.04,
+                         "id":728,
+                         "name":"",
+                         "properties":[
+                                {
+                                 "name":"isCheckpoint",
+                                 "type":"bool",
+                                 "value":false
+                                }],
+                         "rotation":0,
+                         "type":"WALL",
+                         "visible":true,
+                         "width":238.943,
+                         "x":12945.7,
+                         "y":417.328
+                        }, 
+                        {
+                         "height":56.2522,
+                         "id":736,
+                         "name":"",
+                         "properties":[
+                                {
+                                 "name":"isCheckpoint",
+                                 "type":"bool",
+                                 "value":false
+                                }],
+                         "rotation":0,
+                         "type":"FALLING_WALL",
+                         "visible":true,
+                         "width":278.337,
+                         "x":12683.6,
+                         "y":655.04
+                        }, 
+                        {
+                         "height":550.252,
+                         "id":737,
+                         "name":"",
+                         "properties":[
+                                {
+                                 "name":"isCheckpoint",
+                                 "type":"bool",
+                                 "value":false
+                                }],
+                         "rotation":0,
+                         "type":"WALL",
+                         "visible":true,
+                         "width":278.337,
+                         "x":12402.8,
+                         "y":715.874
+                        }, 
+                        {
+                         "height":550.252,
+                         "id":738,
+                         "name":"",
+                         "properties":[
+                                {
+                                 "name":"isCheckpoint",
+                                 "type":"bool",
+                                 "value":false
+                                }],
+                         "rotation":0,
+                         "type":"WALL",
+                         "visible":true,
+                         "width":208.337,
+                         "x":12970.8,
+                         "y":708.874
+                        }],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
+                }],
+         "name":"Phase6",
+         "opacity":1,
+         "properties":[
+                {
+                 "name":"Direction",
+                 "type":"string",
+                 "value":"Down"
+                }, 
+                {
+                 "name":"maxPhaseTime",
+                 "type":"float",
+                 "value":140
+                }, 
+                {
+                 "name":"minPhaseTime",
+                 "type":"float",
+                 "value":60
                 }],
          "type":"group",
          "visible":true,
          "x":0,
          "y":0
         }],
- "nextlayerid":126,
- "nextobjectid":601,
+ "nextlayerid":156,
+ "nextobjectid":741,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.0",
