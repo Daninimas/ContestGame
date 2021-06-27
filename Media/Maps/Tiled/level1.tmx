@@ -48,6 +48,7 @@
    <object id="142" type="WALL" x="120" y="588.433" width="1402.34" height="56.2522">
     <properties>
      <property name="isCheckpoint" type="bool" value="true"/>
+     <property name="texture" value="./Media/Images/Textures/prueba.png"/>
     </properties>
    </object>
    <object id="147" type="PLATFORM" x="993.367" y="521.019" width="71.3066" height="67.4897"/>
@@ -88,6 +89,7 @@
    <object id="282" type="WALL" x="1499.76" y="589.281" width="535.674" height="56.2522">
     <properties>
      <property name="isCheckpoint" type="bool" value="true"/>
+     <property name="texture" value="./Media/Images/Textures/cobble.png"/>
     </properties>
    </object>
    <object id="283" type="PLATFORM" x="2385.25" y="521.868" width="71.3066" height="67.4897"/>
@@ -101,6 +103,7 @@
    <object id="287" type="WALL" x="2235.19" y="589.03" width="975.067" height="56.2522">
     <properties>
      <property name="isCheckpoint" type="bool" value="true"/>
+     <property name="texture" value="./Media/Images/Textures/cobble.png"/>
     </properties>
    </object>
    <object id="288" type="PLATFORM" x="1864.35" y="490.498" width="71.3066" height="31.1261"/>
@@ -142,9 +145,10 @@
    <object id="296" type="WALL" x="3178.55" y="586.251" width="535.674" height="56.2522">
     <properties>
      <property name="isCheckpoint" type="bool" value="true"/>
+     <property name="texture" value="./Media/Images/Textures/cobble.png"/>
     </properties>
    </object>
-   <object id="297" type="PLATFORM" x="4373.12" y="355.201" width="28.8823" height="49.3078"/>
+   <object id="297" type="PLATFORM" x="4373.12" y="358.201" width="28.8823" height="49.3078"/>
    <object id="300" type="WALL" x="3754.34" y="521.207" width="165.982" height="32.0098">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
@@ -153,6 +157,7 @@
    <object id="301" type="WALL" x="4901.86" y="586" width="765.976" height="56.2522">
     <properties>
      <property name="isCheckpoint" type="bool" value="true"/>
+     <property name="texture" value="./Media/Images/Textures/cobble.png"/>
     </properties>
    </object>
    <object id="303" type="WALL" x="4264.35" y="407.164" width="544.034" height="67.4897"/>
@@ -161,8 +166,8 @@
      <property name="isCheckpoint" type="bool" value="false"/>
     </properties>
    </object>
-   <object id="308" type="PLATFORM" x="4767.38" y="326.861" width="28.8823" height="82.6411"/>
-   <object id="309" type="PLATFORM" x="4731.01" y="369.285" width="28.8823" height="49.3078"/>
+   <object id="308" type="PLATFORM" x="4767.38" y="326.861" width="28.8823" height="80.6411"/>
+   <object id="309" type="PLATFORM" x="4731.01" y="369.285" width="28.8823" height="38.3078"/>
    <object id="311" type="PLATFORM" x="5178.21" y="520.801" width="71.3066" height="67.4897"/>
    <object id="312" type="PLATFORM" x="5243.14" y="541.795" width="50.0945" height="46.2776"/>
    <object id="313" type="PLATFORM" x="5112.83" y="544.825" width="71.3066" height="40.217"/>
@@ -211,18 +216,19 @@
    <object id="320" type="WALL" x="5662.55" y="590.251" width="1815.67" height="56.2522">
     <properties>
      <property name="isCheckpoint" type="bool" value="true"/>
+     <property name="texture" value="./Media/Images/Textures/cobble.png"/>
     </properties>
    </object>
    <object id="328" type="PLATFORM" x="5942.21" y="520.801" width="71.3066" height="67.4897"/>
    <object id="329" type="PLATFORM" x="5895.14" y="541.795" width="50.0945" height="46.2776"/>
-   <object id="330" type="PLATFORM" x="6287.98" y="547.006" width="71.3066" height="56.217">
+   <object id="330" type="PLATFORM" x="6287.98" y="547.006" width="71.3066" height="45.217">
     <properties>
      <property name="isCheckpoint" type="bool" value="true"/>
     </properties>
    </object>
-   <object id="334" type="PLATFORM" x="6503.86" y="507.77" width="71.3066" height="74.3988"/>
+   <object id="334" type="PLATFORM" x="6503.86" y="507.77" width="71.3066" height="82.3988"/>
    <object id="335" type="PLATFORM" x="6012.35" y="535.649" width="71.3066" height="56.217"/>
-   <object id="336" type="PLATFORM" x="6809.8" y="538.558" width="71.3066" height="56.217"/>
+   <object id="336" type="PLATFORM" x="6809.8" y="538.558" width="71.3066" height="52.217"/>
   </objectgroup>
   <objectgroup color="#00aa00" id="77" name="TRIGGER">
    <object id="337" type="TRIGGER" x="6376.38" y="212.02" width="81.2335" height="388.914">
@@ -255,6 +261,7 @@
    <object id="342" type="WALL" x="7502.55" y="586.251" width="1815.67" height="56.2522">
     <properties>
      <property name="isCheckpoint" type="bool" value="true"/>
+     <property name="texture" value="./Media/Images/Textures/cobble.png"/>
     </properties>
    </object>
    <object id="345" type="WALL" x="8243.5" y="246.279" width="241.004" height="38.0352">
@@ -262,16 +269,16 @@
      <property name="isCheckpoint" type="bool" value="false"/>
     </properties>
    </object>
-   <object id="346" type="PLATFORM" x="7886.29" y="455.285" width="41.0036" height="74.3988"/>
-   <object id="351" type="WALL" x="9228.17" y="283.874" width="99.67" height="304.252"/>
+   <object id="346" type="PLATFORM" x="7886.29" y="455.285" width="37.0036" height="49.0655"/>
+   <object id="351" type="WALL" x="9228.17" y="278.874" width="99.67" height="309.252"/>
    <object id="352" type="WALL" x="9120.17" y="199.874" width="207.67" height="80.252"/>
-   <object id="353" type="WALL" x="9168.17" y="287.874" width="143.67" height="80.252"/>
+   <object id="353" type="WALL" x="9168.17" y="279.874" width="143.67" height="88.252"/>
    <object id="354" type="PLATFORM" x="8576.35" y="298.801" width="339.307" height="286.399"/>
    <object id="356" type="PLATFORM" x="8644.35" y="470.801" width="55.307" height="20.399"/>
    <object id="357" type="PLATFORM" x="8644.35" y="416.8" width="55.307" height="20.399"/>
    <object id="358" type="PLATFORM" x="8644.35" y="361.8" width="55.307" height="20.399"/>
    <object id="359" type="PLATFORM" x="8644.35" y="530" width="55.307" height="20.399"/>
-   <object id="360" type="WALL" x="7801.26" y="502.177" width="121.731" height="80.4946">
+   <object id="360" type="WALL" x="7801.26" y="502.177" width="121.731" height="86.4946">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
     </properties>
@@ -306,7 +313,7 @@
    </object>
    <object id="386" type="WALL" x="8102.65" y="-419.29" width="237.125" height="26.4596"/>
    <object id="402" type="WALL" x="8254.59" y="-717.442" width="215.066" height="40.9445"/>
-   <object id="403" type="PLATFORM" x="8672.77" y="-787.139" width="136.278" height="65.1869"/>
+   <object id="403" type="PLATFORM" x="8672.77" y="-787.139" width="136.278" height="71.8536"/>
   </objectgroup>
   <objectgroup id="88" name="POWERUP">
    <object id="399" type="POWERUP_EXTRA_LIFE" x="8824.24" y="263.636">
@@ -401,12 +408,12 @@
      <property name="isCheckpoint" type="bool" value="true"/>
     </properties>
    </object>
-   <object id="454" type="WALL" x="10511.2" y="-643.26" width="41.0034" height="62.2776">
+   <object id="454" type="WALL" x="10511.2" y="-643.26" width="41.0034" height="67.6109">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
     </properties>
    </object>
-   <object id="455" type="PLATFORM" x="10470.7" y="-623.836" width="49.2464" height="41.6111"/>
+   <object id="455" type="PLATFORM" x="10470.7" y="-623.836" width="49.2464" height="49.6111"/>
    <object id="456" type="WALL" x="10873.4" y="-279.624" width="353.125" height="38.0352">
     <properties>
      <property name="isCheckpoint" type="bool" value="true"/>
@@ -476,6 +483,7 @@
    <object id="478" type="WALL" x="11633.9" y="-96.8358" width="1907.67" height="65.3079">
     <properties>
      <property name="isCheckpoint" type="bool" value="true"/>
+     <property name="texture" value="./Media/Images/Textures/cobble.png"/>
     </properties>
    </object>
    <object id="487" type="PLATFORM" x="11944.8" y="-166.108" width="71.3066" height="67.4897"/>
@@ -483,8 +491,8 @@
    <object id="489" type="PLATFORM" x="11879.4" y="-142.084" width="71.3066" height="40.217"/>
    <object id="498" type="PLATFORM" x="12350.3" y="-224.872" width="56.1551" height="125.065"/>
    <object id="499" type="PLATFORM" x="12292" y="-137.963" width="71.3066" height="40.217"/>
-   <object id="500" type="PLATFORM" x="12838.6" y="-144.351" width="86.4581" height="43.2468"/>
-   <object id="501" type="PLATFORM" x="12779.5" y="-173.139" width="71.3066" height="67.4897"/>
+   <object id="500" type="PLATFORM" x="12838.6" y="-144.351" width="86.4581" height="49.9135"/>
+   <object id="501" type="PLATFORM" x="12779.5" y="-173.139" width="71.3066" height="76.823"/>
    <object id="502" type="WALL" x="12121.9" y="-209.927" width="34.9427" height="113.793">
     <properties>
      <property name="isCheckpoint" type="bool" value="true"/>

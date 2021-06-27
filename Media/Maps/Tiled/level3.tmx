@@ -73,7 +73,7 @@
      <property name="isCheckpoint" type="bool" value="true"/>
     </properties>
    </object>
-   <object id="275" type="WALL" x="462.009" y="523.178" width="94.1605" height="69.5535">
+   <object id="275" type="WALL" x="462.009" y="523.178" width="94.1605" height="64.2202">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
     </properties>
@@ -374,7 +374,7 @@
      <property name="isCheckpoint" type="bool" value="false"/>
     </properties>
    </object>
-   <object id="857" type="WALL" x="6909.98" y="-665.641" width="172.04" height="21.282">
+   <object id="857" type="WALL" x="6909.98" y="-665.641" width="160.04" height="21.282">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
     </properties>
@@ -447,7 +447,7 @@
      <property name="isCheckpoint" type="bool" value="false"/>
     </properties>
    </object>
-   <object id="877" type="PLATFORM" x="8392.77" y="-540.944" width="108.404" height="42.4941">
+   <object id="877" type="PLATFORM" x="8392.77" y="-540.944" width="104.404" height="42.4941">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
     </properties>
@@ -477,12 +477,7 @@
    <object id="882" x="8626.36" y="-1033.11" width="1521.44" height="1630.57"/>
   </objectgroup>
   <objectgroup color="#ff0000" id="197" name="DAMAGE_PLATFORM">
-   <object id="883" type="DAMAGE_PLATFORM" x="8816.69" y="493.045" width="942.053" height="84.1989">
-    <properties>
-     <property name="Damage" type="int" value="100"/>
-    </properties>
-   </object>
-   <object id="897" type="DAMAGE_PLATFORM" x="8819.88" y="-369.372" width="881.447" height="44.805">
+   <object id="897" type="DAMAGE_PLATFORM" x="8819.88" y="-369.372" width="617.447" height="44.805">
     <properties>
      <property name="Damage" type="int" value="2"/>
     </properties>

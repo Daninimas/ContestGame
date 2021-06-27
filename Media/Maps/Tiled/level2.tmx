@@ -58,7 +58,7 @@
      <property name="isCheckpoint" type="bool" value="true"/>
     </properties>
    </object>
-   <object id="147" type="PLATFORM" x="1174.7" y="358.352" width="25.9733" height="224.823"/>
+   <object id="147" type="PLATFORM" x="1174.7" y="358.352" width="25.9733" height="230.156"/>
    <object id="273" type="PLATFORM" x="1080.96" y="555.346" width="31.4278" height="32.9443"/>
    <object id="274" type="PLATFORM" x="1101.32" y="425.043" width="80.6399" height="14.8837"/>
    <object id="511" type="WALL" x="344.282" y="551.147" width="32.6482" height="37.5854">
@@ -145,7 +145,7 @@
     </properties>
    </object>
    <object id="534" type="PLATFORM" x="2473.89" y="210.316" width="38.0945" height="585.429"/>
-   <object id="535" type="WALL" x="2364.13" y="470.945" width="104.882" height="14.8837"/>
+   <object id="535" type="WALL" x="2364.13" y="470.945" width="111.549" height="14.8837"/>
    <object id="536" type="PLATFORM" x="2508.32" y="413.854" width="160.518" height="14.8837"/>
    <object id="537" type="PLATFORM" x="2398.53" y="319.831" width="72.6392" height="14.8837"/>
    <object id="538" type="PLATFORM" x="2518.23" y="283.467" width="202.942" height="14.8837"/>
@@ -529,12 +529,12 @@
      <property name="isCheckpoint" type="bool" value="false"/>
     </properties>
    </object>
-   <object id="736" type="FALLING_WALL" x="12683.6" y="655.04" width="278.337" height="56.2522">
+   <object id="736" type="FALLING_WALL" x="12683.6" y="655.04" width="289.004" height="224.252">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
     </properties>
    </object>
-   <object id="737" type="WALL" x="12402.8" y="715.874" width="278.337" height="550.252">
+   <object id="737" type="WALL" x="12402.8" y="707.874" width="278.337" height="558.252">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
     </properties>
