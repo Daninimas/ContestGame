@@ -112,6 +112,7 @@ void OrbitalWeaponSystem::generateOrbitalAttack(GameEngine& gameContext, Orbital
 	colliderComp.boundingRoot.bounding = orbitalWeapon.attackBounding;
 	attackComp.damage = orbitalWeapon.damage;
 	attackComp.maxLifetime = orbitalWeapon.attackLifetime;
+	attackComp.orbital = true;
 	attackSit.noWorldDelete = true;
 
 

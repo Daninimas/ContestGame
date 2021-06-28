@@ -313,7 +313,7 @@
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,
-                         "width":60.6482,
+                         "width":48.6482,
                          "x":344.282,
                          "y":551.147
                         }, 
@@ -768,7 +768,7 @@
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
-                         "width":38.0945,
+                         "width":34.0945000000002,
                          "x":2473.89,
                          "y":210.316
                         }, 
@@ -1828,7 +1828,7 @@
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
-                         "width":50.3369,
+                         "width":34.3369000000002,
                          "x":7218.77,
                          "y":110.74
                         }, 
@@ -2025,8 +2025,8 @@
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,
-                         "width":177.61,
-                         "x":7271.8,
+                         "width":205.61,
+                         "x":7243.8,
                          "y":542.558
                         }, 
                         {
@@ -2042,8 +2042,8 @@
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
-                         "width":177.61,
-                         "x":7268.77,
+                         "width":205.61,
+                         "x":7240.77,
                          "y":183.589
                         }, 
                         {
@@ -2059,8 +2059,8 @@
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
-                         "width":159.428,
-                         "x":7268.77,
+                         "width":175.428,
+                         "x":7252.77,
                          "y":280.77
                         }, 
                         {

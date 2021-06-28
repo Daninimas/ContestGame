@@ -25,5 +25,8 @@ public:
 
     // Sound
     Sound hitSound;
+
+
+    bool orbital{ false };
 };
 

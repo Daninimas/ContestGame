@@ -148,7 +148,7 @@ void SFMLEngine::renderLaser(GameEngine& gameContext) const {
 	auto& attacks = gameContext.entityMan->getComponents<AttackComponent>();
 
 	for (AttackComponent& a : attacks) {
-		if (a.type == AttackType::LASER) {
+		if (a.type == AttackType::LASER || (a.type == AttackType::MELEE && a.orbital)) {
 			SituationComponent& sit = gameContext.entityMan->getComponent<SituationComponent>(a.id);
 			BoundingBoxNode& b = gameContext.entityMan->getComponent<ColliderComponent>(a.id).boundingRoot;
 			drawBoundingTree(b, sit);

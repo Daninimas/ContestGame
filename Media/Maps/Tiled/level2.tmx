@@ -74,7 +74,7 @@
      <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
     </properties>
    </object>
-   <object id="511" type="WALL" x="344.282" y="551.147" width="60.6482" height="37.5854">
+   <object id="511" type="WALL" x="344.282" y="551.147" width="48.6482" height="37.5854">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
      <property name="texture" value="./Media/PNG/Assets/Rocas/2.png"/>
@@ -177,7 +177,7 @@
      <property name="texture" value="./Media/Images/Textures/Rocky_Road.png"/>
     </properties>
    </object>
-   <object id="534" type="PLATFORM" x="2473.89" y="210.316" width="38.0945" height="585.429">
+   <object id="534" type="PLATFORM" x="2473.89" y="210.316" width="34.0945" height="585.429">
     <properties>
      <property name="texture" value="./Media/Images/Textures/TrunkVertical.png"/>
     </properties>
@@ -424,7 +424,7 @@
      <property name="texture" value="./Media/Images/Textures/[32x32] Rocky Grass.png"/>
     </properties>
    </object>
-   <object id="615" type="PLATFORM" x="7218.77" y="110.74" width="50.3369" height="793.672">
+   <object id="615" type="PLATFORM" x="7218.77" y="110.74" width="34.3369" height="793.672">
     <properties>
      <property name="texture" value="./Media/Images/Textures/TrunkVertical.png"/>
     </properties>
@@ -481,17 +481,17 @@
      <property name="texture" value="./Media/Images/Textures/Rocky_Road.png"/>
     </properties>
    </object>
-   <object id="627" type="WALL" x="7271.8" y="542.558" width="177.61" height="23.9743">
+   <object id="627" type="WALL" x="7243.8" y="542.558" width="205.61" height="23.9743">
     <properties>
      <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
     </properties>
    </object>
-   <object id="628" type="PLATFORM" x="7268.77" y="183.589" width="177.61" height="23.9743">
+   <object id="628" type="PLATFORM" x="7240.77" y="183.589" width="205.61" height="23.9743">
     <properties>
      <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
     </properties>
    </object>
-   <object id="629" type="PLATFORM" x="7268.77" y="280.77" width="159.428" height="23.9743">
+   <object id="629" type="PLATFORM" x="7252.77" y="280.77" width="175.428" height="23.9743">
     <properties>
      <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
     </properties>

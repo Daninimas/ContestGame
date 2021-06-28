@@ -71,31 +71,37 @@
    <object id="142" type="WALL" x="120" y="588.433" width="2094.34" height="59.404">
     <properties>
      <property name="isCheckpoint" type="bool" value="true"/>
+     <property name="texture" value="./Media/Images/Textures/prueba.png"/>
     </properties>
    </object>
    <object id="275" type="WALL" x="462.009" y="523.178" width="94.1605" height="64.2202">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
+     <property name="texture" value="./Media/PNG/Assets/caja baja.png"/>
     </properties>
    </object>
    <object id="511" type="WALL" x="557.895" y="439.147" width="84.2143" height="147.021">
     <properties>
      <property name="isCheckpoint" type="bool" value="true"/>
+     <property name="texture" value="./Media/Images/Textures/Rocky_Road.png"/>
     </properties>
    </object>
    <object id="743" type="WALL" x="1949.13" y="424.207" width="65.3149" height="161.585">
     <properties>
      <property name="isCheckpoint" type="bool" value="true"/>
+     <property name="texture" value="./Media/PNG/Assets/caja grande.png"/>
     </properties>
    </object>
-   <object id="744" type="PLATFORM" x="1666.13" y="552.207" width="65.3149" height="37.585">
+   <object id="744" type="PLATFORM" x="1666.13" y="552.207" width="93.3149" height="37.585">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
+     <property name="texture" value="./Media/PNG/Assets/caja baja.png"/>
     </properties>
    </object>
    <object id="745" type="PLATFORM" x="1748.13" y="466.207" width="129.315" height="17.585">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
+     <property name="texture" value="./Media/PNG/Assets/caja baja.png"/>
     </properties>
    </object>
   </objectgroup>
@@ -159,26 +165,31 @@
    <object id="757" type="WALL" x="2204" y="588.433" width="1430.52" height="59.404">
     <properties>
      <property name="isCheckpoint" type="bool" value="true"/>
+     <property name="texture" value="./Media/Images/Textures/prueba.png"/>
     </properties>
    </object>
    <object id="761" type="PLATFORM" x="3080.43" y="521.904" width="344.103" height="64.8577">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
+     <property name="texture" value="./Media/PNG/Assets/caja baja.png"/>
     </properties>
    </object>
    <object id="766" type="WALL" x="3421.01" y="-392.611" width="212.52" height="982.919">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
+     <property name="texture" value="./Media/Images/Textures/Brick_Wall_Cracked.png"/>
     </properties>
    </object>
    <object id="768" type="PLATFORM" x="3152.8" y="457.753" width="272.103" height="64.8577">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
+     <property name="texture" value="./Media/PNG/Assets/caja baja.png"/>
     </properties>
    </object>
    <object id="769" type="PLATFORM" x="3231.95" y="394.238" width="193.436" height="64.8577">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
+     <property name="texture" value="./Media/PNG/Assets/caja baja.png"/>
     </properties>
    </object>
    <object id="770" type="PLATFORM" x="3287.28" y="324.904" width="136.103" height="64.8577">
@@ -189,48 +200,76 @@
    <object id="771" type="WALL" x="2980.62" y="244.904" width="118.103" height="36.8577">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
+     <property name="texture" value="./Media/Images/Textures/Green_Wall_Rock.png"/>
     </properties>
    </object>
    <object id="772" type="WALL" x="2804.95" y="185.571" width="174.103" height="56.8577">
     <properties>
      <property name="isCheckpoint" type="bool" value="true"/>
+     <property name="texture" value="./Media/Images/Textures/Green_Wall_Rock.png"/>
     </properties>
    </object>
    <object id="773" type="WALL" x="2424.95" y="113.571" width="174.103" height="34.8577">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
+     <property name="texture" value="./Media/Images/Textures/Green_Wall_Rock.png"/>
     </properties>
    </object>
    <object id="775" type="PLATFORM" x="2422.95" y="36.5711" width="58.103" height="74.8577">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
+     <property name="texture" value="./Media/PNG/Assets/caja baja.png"/>
     </properties>
    </object>
    <object id="776" type="WALL" x="2496.95" y="-67.4289" width="694.103" height="24.8577">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
+     <property name="texture" value="./Media/Images/Textures/GreyBrick.png"/>
     </properties>
    </object>
    <object id="778" type="WALL" x="3276.95" y="-143.429" width="144.103" height="24.8577">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
+     <property name="texture" value="./Media/Images/Textures/GreyBrick.png"/>
     </properties>
    </object>
    <object id="789" type="WALL" x="3211.95" y="-390.429" width="218.103" height="24.8577">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
+     <property name="texture" value="./Media/Images/Textures/Brick_Wall_Cracked.png"/>
     </properties>
    </object>
    <object id="790" type="WALL" x="2320.95" y="-42.4288" width="56.103" height="24.8577">
     <properties>
      <property name="isCheckpoint" type="bool" value="true"/>
+     <property name="texture" value="./Media/Images/Textures/GreyBrick.png"/>
     </properties>
    </object>
-   <object id="781" type="PLATFORM" x="3132.35" y="-197.298" width="55.307" height="20.399"/>
-   <object id="782" type="PLATFORM" x="3132.35" y="-251.299" width="55.307" height="20.399"/>
-   <object id="783" type="PLATFORM" x="3132.35" y="-306.299" width="55.307" height="20.399"/>
-   <object id="784" type="PLATFORM" x="3132.35" y="-138.099" width="55.307" height="20.399"/>
-   <object id="788" type="PLATFORM" x="3134.35" y="-360.099" width="55.307" height="20.399"/>
+   <object id="781" type="PLATFORM" x="3132.35" y="-197.298" width="55.307" height="20.399">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/Brick.png"/>
+    </properties>
+   </object>
+   <object id="782" type="PLATFORM" x="3132.35" y="-251.299" width="55.307" height="20.399">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/Brick.png"/>
+    </properties>
+   </object>
+   <object id="783" type="PLATFORM" x="3132.35" y="-306.299" width="55.307" height="20.399">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/Brick.png"/>
+    </properties>
+   </object>
+   <object id="784" type="PLATFORM" x="3132.35" y="-138.099" width="55.307" height="20.399">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/Brick.png"/>
+    </properties>
+   </object>
+   <object id="788" type="PLATFORM" x="3134.35" y="-360.099" width="55.307" height="20.399">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/Brick.png"/>
+    </properties>
+   </object>
   </objectgroup>
   <objectgroup id="164" name="CHILD">
    <object id="763" type="CHILD" gid="19" x="2420.53" y="539.061" width="21" height="50"/>
@@ -286,31 +325,37 @@
    <object id="809" type="PLATFORM" x="4353.25" y="-508.883" width="55.0727" height="23.3425">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
+     <property name="texture" value="./Media/PNG/Assets/caja baja.png"/>
     </properties>
    </object>
    <object id="810" type="WALL" x="3626.65" y="-391.974" width="1488.04" height="67.2819">
     <properties>
      <property name="isCheckpoint" type="bool" value="true"/>
+     <property name="texture" value="./Media/Images/Textures/Brick_Wall_Cracked.png"/>
     </properties>
    </object>
    <object id="821" type="WALL" x="4492.34" y="-603.338" width="45.6158" height="212.736">
     <properties>
      <property name="isCheckpoint" type="bool" value="true"/>
+     <property name="texture" value="./Media/PNG/Assets/caja baja.png"/>
     </properties>
    </object>
    <object id="827" type="WALL" x="4404.46" y="-427.58" width="91.0703" height="33.9481">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
+     <property name="texture" value="./Media/PNG/Assets/caja baja.png"/>
     </properties>
    </object>
    <object id="828" type="WALL" x="4477.19" y="-603.338" width="45.6158" height="212.736">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
+     <property name="texture" value="./Media/PNG/Assets/caja baja.png"/>
     </properties>
    </object>
    <object id="834" type="PLATFORM" x="4439.13" y="-572.277" width="55.0727" height="23.3425">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
+     <property name="texture" value="./Media/PNG/Assets/caja baja.png"/>
     </properties>
    </object>
   </objectgroup>
@@ -334,7 +379,11 @@
    <property name="minPhaseTime" type="float" value="60"/>
   </properties>
   <objectgroup id="176" name="phase_size">
-   <object id="835" x="5100.18" y="-1032.26" width="2145.74" height="1045.72"/>
+   <object id="835" x="5100.18" y="-1032.26" width="2145.74" height="1045.72">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/Brick.png"/>
+    </properties>
+   </object>
   </objectgroup>
   <objectgroup color="#ff0000" id="177" name="DAMAGE_PLATFORM">
    <object id="836" type="DAMAGE_PLATFORM" x="5132.94" y="-130.349" width="2096.6" height="84.1989">
@@ -347,16 +396,19 @@
    <object id="842" type="WALL" x="5104.65" y="-391.974" width="2136.04" height="67.2819">
     <properties>
      <property name="isCheckpoint" type="bool" value="true"/>
+     <property name="texture" value="./Media/Images/Textures/Brick_Wall_Cracked.png"/>
     </properties>
    </object>
    <object id="846" type="PLATFORM" x="6863.13" y="-526.277" width="85.0727" height="23.3425">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
+     <property name="texture" value="./Media/PNG/Assets/caja baja.png"/>
     </properties>
    </object>
    <object id="851" type="WALL" x="6957.98" y="-443.641" width="112.04" height="51.2819">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
+     <property name="texture" value="./Media/PNG/Assets/caja baja.png"/>
     </properties>
    </object>
    <object id="853" type="WALL" x="7067.98" y="-681.641" width="172.04" height="287.282">
@@ -367,11 +419,13 @@
    <object id="854" type="PLATFORM" x="5777.98" y="-414.641" width="112.04" height="21.2819">
     <properties>
      <property name="isCheckpoint" type="bool" value="true"/>
+     <property name="texture" value="./Media/PNG/Assets/caja baja.png"/>
     </properties>
    </object>
    <object id="855" type="PLATFORM" x="6657.46" y="-599.671" width="161.073" height="23.3425">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
+     <property name="texture" value="./Media/Images/Textures/Brick2.png"/>
     </properties>
    </object>
    <object id="857" type="WALL" x="6909.98" y="-665.641" width="160.04" height="21.282">
@@ -415,16 +469,19 @@
    <object id="863" type="WALL" x="7234.83" y="-392.823" width="1402.71" height="67.2819">
     <properties>
      <property name="isCheckpoint" type="bool" value="true"/>
+     <property name="texture" value="./Media/Images/Textures/Brick_Wall_Cracked.png"/>
     </properties>
    </object>
    <object id="864" type="WALL" x="7499.37" y="-457.429" width="85.0727" height="65.7667">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
+     <property name="texture" value="./Media/PNG/Assets/escombros.png"/>
     </properties>
    </object>
    <object id="866" type="WALL" x="7586.04" y="-537.035" width="62.9491" height="144.858">
     <properties>
      <property name="isCheckpoint" type="bool" value="true"/>
+     <property name="texture" value="./Media/PNG/Assets/caja baja.png"/>
     </properties>
    </object>
    <object id="868" type="FALLING_WALL" x="7757.34" y="-579.308" width="239.861" height="23.3425">
@@ -497,16 +554,19 @@
    <object id="890" type="PLATFORM" x="8803.92" y="-437.914" width="59.9188" height="21.282">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
+     <property name="texture" value="./Media/Images/Textures/Brick.png"/>
     </properties>
    </object>
    <object id="898" type="PLATFORM" x="8807.92" y="-519.732" width="53.8586" height="21.282">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
+     <property name="texture" value="./Media/Images/Textures/Brick.png"/>
     </properties>
    </object>
    <object id="900" type="PLATFORM" x="8804.89" y="-577.308" width="56.8889" height="21.282">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
+     <property name="texture" value="./Media/Images/Textures/Brick.png"/>
     </properties>
    </object>
    <object id="901" type="WALL" x="9070.89" y="-616.973" width="118.345" height="46.0682">
@@ -517,6 +577,7 @@
    <object id="902" type="WALL" x="9428.71" y="-644.246" width="275.678" height="261.22">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
+     <property name="texture" value="./Media/Images/Textures/Green_Wall_Rock.png"/>
     </properties>
    </object>
    <object id="903" type="PLATFORM" x="9859.25" y="-482.125" width="181.496" height="20.0682">
@@ -625,71 +686,85 @@
    <object id="930" type="WALL" x="11966.6" y="1142.36" width="193.617" height="32.1894">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
+     <property name="texture" value="./Media/Images/Textures/Green_Wall_Rock.png"/>
     </properties>
    </object>
    <object id="935" type="WALL" x="9779.74" y="1218.3" width="2163.44" height="66.0682">
     <properties>
      <property name="isCheckpoint" type="bool" value="true"/>
+     <property name="texture" value="./Media/Images/Textures/prueba.png"/>
     </properties>
    </object>
    <object id="952" type="WALL" x="11448.6" y="1085.15" width="111.923" height="129.705">
     <properties>
      <property name="isCheckpoint" type="bool" value="true"/>
+     <property name="texture" value="./Media/PNG/Assets/caja baja.png"/>
     </properties>
    </object>
-   <object id="953" type="PLATFORM" x="11378.9" y="1138.45" width="72.4051" height="74.6137">
+   <object id="953" type="PLATFORM" x="11378.9" y="1150.45" width="72.4051" height="62.6137">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
+     <property name="texture" value="./Media/PNG/Assets/escombros.png"/>
     </properties>
    </object>
    <object id="958" type="WALL" x="12342.6" y="1144.51" width="78.4655" height="32.1894">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
+     <property name="texture" value="./Media/Images/Textures/Green_Wall_Rock.png"/>
     </properties>
    </object>
    <object id="959" type="WALL" x="12494.1" y="1093" width="99.6776" height="32.1894">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
+     <property name="texture" value="./Media/Images/Textures/Green_Wall_Rock.png"/>
     </properties>
    </object>
    <object id="960" type="WALL" x="12742.6" y="1093" width="48.1625" height="32.1894">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
+     <property name="texture" value="./Media/Images/Textures/Green_Wall_Rock.png"/>
     </properties>
    </object>
    <object id="961" type="WALL" x="12885" y="1159.66" width="123.92" height="32.1894">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
+     <property name="texture" value="./Media/Images/Textures/Green_Wall_Rock.png"/>
     </properties>
    </object>
    <object id="962" type="WALL" x="13157.7" y="1126.33" width="193.617" height="226.129">
     <properties>
      <property name="isCheckpoint" type="bool" value="true"/>
+     <property name="texture" value="./Media/Images/Textures/prueba.png"/>
     </properties>
    </object>
    <object id="966" type="PLATFORM" x="12257.7" y="896.027" width="836.041" height="32.1894">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
+     <property name="texture" value="./Media/Images/Textures/Green_Wall_Rock.png"/>
     </properties>
    </object>
    <object id="970" type="PLATFORM" x="13185" y="1047.54" width="48.1622" height="14.0076">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
+     <property name="texture" value="./Media/Images/Textures/Brick.png"/>
     </properties>
    </object>
    <object id="973" type="PLATFORM" x="13185.9" y="1009" width="48.1622" height="14.0076">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
+     <property name="texture" value="./Media/Images/Textures/Brick.png"/>
     </properties>
    </object>
    <object id="974" type="PLATFORM" x="13183.9" y="960.996" width="48.1622" height="14.0076">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
+     <property name="texture" value="./Media/Images/Textures/Brick.png"/>
     </properties>
    </object>
    <object id="975" type="PLATFORM" x="13183.9" y="902.996" width="48.1622" height="14.0076">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
+     <property name="texture" value="./Media/Images/Textures/Brick.png"/>
     </properties>
    </object>
   </objectgroup>
