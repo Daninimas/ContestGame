@@ -45,6 +45,13 @@ void AttackSystem::manageAttacks(GameEngine& gameContext) const { // this method
 			else if (attack.type == AttackType::DAMAGE_PLATFORM) {
 				manageDamagePlatform(gameContext, attack);
 			}
+			else if (attack.type == AttackType::DISTANCE) {
+				VelocityComponent& attackVel = gameContext.entityMan->getComponent<VelocityComponent>(attack.id);
+				SituationComponent& attackSit = gameContext.entityMan->getComponent<SituationComponent>(attack.id);
+
+				float rotation = Utils::getRoltationFromVector2(attackVel.velocity);
+				attackSit.rotation = rotation;
+			}
 		}
 	}
 

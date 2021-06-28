@@ -310,23 +310,34 @@ int EntityManager::createAttack(GameEngine& gameContext, Vector2 position, float
     SituationComponent& situation = createComponent<SituationComponent>(entityId);
     ColliderComponent& collider = createComponent<ColliderComponent>(entityId);
     AttackComponent& attack = createComponent<AttackComponent>(entityId);
+    RenderComponent& renderComp = createComponent<RenderComponent>(entityId);
+
 
     //######### DATA ########//
     situation.position = position;
     situation.rotation = r;
 
+    // Render component
+    situation.scale = {0.6f, 0.6f};
+    renderComp.sprite = "Media/Images/bullet.png";
+    renderComp.spriteRect = { 77, 93, 0, 9 };
+
     collider.type = ColliderType::NO_SOLID;
 
-    switch (goType)
-    {
-    case GameObjectType::MELEE_ATTACK:
+    if (goType == GameObjectType::MELEE_ATTACK) {
+        renderComp.spriteRect = { 0, 0, 0, 0 };
+
         collider.collisionLayer = ColliderComponent::Attack;
         collider.layerMasc = ColliderComponent::Player + ColliderComponent::PlayerShield;  // Collides with player only
 
         attack.type = AttackType::MELEE;
-        break;
+    }
+    else if (goType == GameObjectType::DISTANCE_ATTACK) {
+        // Render component
+        situation.scale = { 0.1f, 0.1f };
+        renderComp.sprite = "Media/Images/enemyBullet.png";
+        renderComp.spriteRect = { 0, 116, 0, 114 };
 
-    case GameObjectType::DISTANCE_ATTACK:
         createComponent<VelocityComponent>(entityId);
         collider.collisionLayer = ColliderComponent::Attack;
         collider.layerMasc = ColliderComponent::Player + ColliderComponent::Wall + ColliderComponent::PlayerShield;  // Collides with player and walls
@@ -334,16 +345,18 @@ int EntityManager::createAttack(GameEngine& gameContext, Vector2 position, float
         attack.type = AttackType::DISTANCE;
         // Sound
         attack.hitSound.soundPath = "./Media/Sound/Weapons/BulletHit1.wav";
-        break;
+    }
 
-    case GameObjectType::PLAYER_MELEE_ATTACK:
+    else if (goType == GameObjectType::PLAYER_MELEE_ATTACK){
+        renderComp.spriteRect = { 0, 0, 0, 0 };
+
         collider.collisionLayer = ColliderComponent::PlayerAttack;
         collider.layerMasc = ColliderComponent::Enemy + ColliderComponent::Shield + ColliderComponent::Child;  // Collides with enemies only
 
         attack.type = AttackType::MELEE;
-        break;
+}
 
-    case GameObjectType::PLAYER_DISTANCE_ATTACK:
+    else if (goType == GameObjectType::PLAYER_DISTANCE_ATTACK){
         createComponent<VelocityComponent>(entityId);
 
         collider.collisionLayer = ColliderComponent::PlayerAttack;
@@ -352,51 +365,60 @@ int EntityManager::createAttack(GameEngine& gameContext, Vector2 position, float
         attack.type = AttackType::DISTANCE;
         // Sound
         attack.hitSound.soundPath = "./Media/Sound/Weapons/BulletHit2.wav";
-        break;
+        }
 
-    case GameObjectType::EXPLOSION:
+    else if (goType == GameObjectType::EXPLOSION){
+        // Render component
+        renderComp.sprite = "Media/Images/explosion.png";
+        renderComp.spriteRect = { 3655, 3761, 64, 180 };
+
+        situation.scale = { 0.7f, 0.7f };
+
         createComponent<ExplosionAttackComponent>(entityId);
         attack.type = AttackType::EXPLOSION;
-        break;
+        // Animation
+        AnimationComponent& animComp = createComponent<AnimationComponent>(entityId);
+        AnimationManager::setAnimationToEntity(gameContext, Animation::IDLE, animComp);
+        }
 
-    case GameObjectType::PLAYER_EXPLOSION:
+    else if (goType == GameObjectType::PLAYER_EXPLOSION){
+        // Render component
+        renderComp.sprite = "Media/Images/explosion.png";
+        renderComp.spriteRect = { 3655, 3761, 64, 180 };
+
+        situation.scale = { 0.7f, 0.7f };
+
         createComponent<ExplosionAttackComponent>(entityId);
         attack.type = AttackType::EXPLOSION;
-        break;
+        // Animation
+        AnimationComponent& animComp = createComponent<AnimationComponent>(entityId);
+        AnimationManager::setAnimationToEntity(gameContext, Animation::IDLE, animComp);
+        }
 
-    case GameObjectType::PLAYER_LASER:
-        createComponent<VelocityComponent>(entityId);
+    else if (goType == GameObjectType::PLAYER_LASER){
+    createComponent<VelocityComponent>(entityId);
 
         collider.collisionLayer = ColliderComponent::PlayerAttack;
         collider.layerMasc = ColliderComponent::Enemy + ColliderComponent::Wall + ColliderComponent::Shield + ColliderComponent::Child;  // Collides with enemies and walls
 
         attack.type = AttackType::LASER;
-        break;
+}
 
-    case GameObjectType::LASER:
+    else if (goType == GameObjectType::LASER) {
         createComponent<VelocityComponent>(entityId);
         collider.collisionLayer = ColliderComponent::Attack;
         collider.layerMasc = ColliderComponent::Player + ColliderComponent::Wall + ColliderComponent::PlayerShield;  // Collides with player and walls
 
         attack.type = AttackType::LASER;
-        break;
-    }
+        }
+    
 
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::ATTACK, goType));
 
-    if (goType == GameObjectType::EXPLOSION || goType == GameObjectType::PLAYER_EXPLOSION) {
-        situation.scale = {0.7f, 0.7f};
-        RenderComponent& renderComp = createComponent<RenderComponent>(entityId);
-        // Render component
-        renderComp.sprite = "Media/Images/explosion.png";
-        renderComp.spriteRect = { 3655, 3761, 64, 180 };
-        // Animation
-        AnimationComponent& animComp = createComponent<AnimationComponent>(entityId);
-        AnimationManager::setAnimationToEntity(gameContext, Animation::IDLE, animComp);
-        //######### RENDER ########//
-        gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
-    }
+
+    //######### RENDER ########//
+    gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
 
     return entityId;
 }
@@ -584,6 +606,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         distanceWeaponComp.attackLifetime = 1.f;
         distanceWeaponComp.bulletSpreadAngle = 5.f;
         distanceWeaponComp.infiniteAmmo = true;
+        distanceWeaponComp.spawnAttackPos = { 28.f, 25.f };
 
         colliderComp.weight = 3.f;
     }
@@ -1462,14 +1485,16 @@ int EntityManager::createTurretGun(GameEngine& gameContext, Vector2 position, ui
     GunTurretComponent& gunTurretComp = createComponent<GunTurretComponent>(entityId);
 
     //######### DATA ########//
+    position.x += 10.f;
+    position.y += 20.f;
     situation.position = position;
     situation.facing = facing;
     situation.noWorldDelete = true;
-    situation.scale = {0.3f, 0.3f};
+    situation.scale = {0.07f, 0.07f};
 
     // Render
-    renderComp.sprite = "Media/Images/TurretGun.png";
-    renderComp.spriteRect = { 0, 512, 170, 341 };
+    renderComp.sprite = "Media/PNG/Torreta/torreta.png";
+    renderComp.spriteRect = { 443, 1818, 884, 1051 };
 
     // Distance Weapon
     distanceWeaponComp.attackBounding = { 0.f, 5.f, 0.f, 5.f };
@@ -1481,7 +1506,7 @@ int EntityManager::createTurretGun(GameEngine& gameContext, Vector2 position, ui
     distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BULLET;
     distanceWeaponComp.infiniteAmmo = true;
     distanceWeaponComp.bulletSpreadAngle = 5.f;
-    distanceWeaponComp.spawnAttackPos = {40.f, 15.f};
+    distanceWeaponComp.spawnAttackPos = {0.f, 0.f};
 
     distanceWeaponComp.attackSound.soundPath = "Media/Sound/Weapons/M4A1_Single-Kibblesbob-8540445.wav";
 
@@ -1510,10 +1535,16 @@ int EntityManager::createTurretPlatform(GameEngine& gameContext, Vector2 positio
     ColliderComponent& colliderComp = createComponent<ColliderComponent>(entityId);
     TurretComponent& turretComp = createComponent<TurretComponent>(entityId);
     HealthComponent& healthComp = createComponent<HealthComponent>(entityId);
+    RenderComponent& renderComp = createComponent<RenderComponent>(entityId);
 
     //######### DATA ########//
     situation.position = position;
     situation.facing = facing;
+    situation.scale = { 0.07f, 0.07f };
+
+    // Render
+    renderComp.sprite = "Media/PNG/Torreta/apoyo y escudo.png";
+    renderComp.spriteRect = { 475, 1220, 620, 1831 };
 
     // Collider
     colliderComp.collisionLayer = ColliderComponent::Turret;
@@ -1523,7 +1554,7 @@ int EntityManager::createTurretPlatform(GameEngine& gameContext, Vector2 positio
 
     // Turret
     turretComp.rotationVelocity = 30.f;
-    turretComp.offsetX = 10.f;
+    turretComp.offsetX = 30.f;
     turretComp.turretGunID = turretGun;
     turretComp.textID = turretText;
 
@@ -1534,6 +1565,10 @@ int EntityManager::createTurretPlatform(GameEngine& gameContext, Vector2 positio
 
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::TURRET, GameObjectType::TURRET_PLATFORM));
+    
+    //######### RENDER ########//
+    gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
+
     return entityId;
 }
 

@@ -176,6 +176,18 @@
                          "width":45,
                          "x":458.97,
                          "y":488.879
+                        }, 
+                        {
+                         "gid":17,
+                         "height":65,
+                         "id":510,
+                         "name":"",
+                         "rotation":0,
+                         "type":"DISTANCE_ENEMY",
+                         "visible":true,
+                         "width":45,
+                         "x":937.5,
+                         "y":311.5
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -277,29 +289,6 @@
                          "width":52.0421,
                          "x":1197.98,
                          "y":541.813
-                        }],
-                 "opacity":1,
-                 "type":"objectgroup",
-                 "visible":true,
-                 "x":0,
-                 "y":0
-                }, 
-                {
-                 "draworder":"topdown",
-                 "id":107,
-                 "name":"POWERUP",
-                 "objects":[
-                        {
-                         "height":0,
-                         "id":510,
-                         "name":"",
-                         "point":true,
-                         "rotation":0,
-                         "type":"POWERUP_SHIELD",
-                         "visible":true,
-                         "width":0,
-                         "x":900,
-                         "y":484
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -1328,7 +1317,7 @@
                          "y":246.279
                         }, 
                         {
-                         "height":49.0654666666666,
+                         "height":49.0655,
                          "id":346,
                          "name":"",
                          "rotation":0,
@@ -2622,7 +2611,7 @@
                          "y":-137.963
                         }, 
                         {
-                         "height":49.9134666666667,
+                         "height":49.9135,
                          "id":500,
                          "name":"",
                          "rotation":0,

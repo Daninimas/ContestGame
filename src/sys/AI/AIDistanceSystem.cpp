@@ -46,8 +46,8 @@ void AIDistanceSystem::setAttackDirection(GameEngine& gameContext, SituationComp
 	Vector2 dir;
 
 	// Calculate direction vector
-	dir.x = (objectiveSit.position.x + objectiveCenter.x) - attackerSit.position.x;
-	dir.y = (objectiveSit.position.y + objectiveCenter.y) - attackerSit.position.y;
+	dir.x = (objectiveSit.position.x + objectiveCenter.x) - (attackerSit.position.x + distWeap.spawnAttackPos.x);
+	dir.y = (objectiveSit.position.y + objectiveCenter.y) - (attackerSit.position.y + distWeap.spawnAttackPos.y);
 
 	// Normalize direction vector
 	float mag = Utils::getVectorMagnitude(dir);
