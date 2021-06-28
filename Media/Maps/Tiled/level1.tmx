@@ -61,7 +61,7 @@
      <property name="texture" value="./Media/PNG/Assets/valla.png"/>
     </properties>
    </object>
-   <object id="508" type="WALL" x="1197.98" y="541.813" width="52.0421" height="48.3733">
+   <object id="508" type="WALL" x="1197.98" y="541.813" width="88.0421" height="48.3733">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
      <property name="texture" value="./Media/PNG/Assets/escombros.png"/>
@@ -101,13 +101,17 @@
      <property name="texture" value="./Media/Images/Textures/brick_wall.png"/>
     </properties>
    </object>
-   <object id="284" type="PLATFORM" x="2450.16" y="542.861" width="50.0945" height="46.2776"/>
+   <object id="284" type="PLATFORM" x="2450.16" y="542.861" width="50.0945" height="46.2776">
+    <properties>
+     <property name="texture" value="./Media/PNG/Assets/escombros.png"/>
+    </properties>
+   </object>
    <object id="285" type="WALL" x="2510.77" y="442.861" width="71.3066" height="40.217">
     <properties>
      <property name="texture" value="./Media/Images/Textures/Brick2.png"/>
     </properties>
    </object>
-   <object id="286" type="WALL" x="1787.68" y="557.571" width="62.9512" height="32.0098">
+   <object id="286" type="WALL" x="1787.68" y="557.571" width="110.951" height="32.0098">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
      <property name="texture" value="./Media/PNG/Assets/caja baja.png"/>
@@ -166,7 +170,7 @@
      <property name="texture" value="./Media/Images/Textures/prueba.png"/>
     </properties>
    </object>
-   <object id="297" type="PLATFORM" x="4373.12" y="358.201" width="28.8823" height="49.3078">
+   <object id="297" type="PLATFORM" x="4373.12" y="358.201" width="56.8823" height="49.3078">
     <properties>
      <property name="texture" value="./Media/PNG/Assets/chimenea.png"/>
     </properties>
@@ -194,12 +198,12 @@
      <property name="texture" value="./Media/Images/Textures/Brick_Wall_Cracked.png"/>
     </properties>
    </object>
-   <object id="308" type="PLATFORM" x="4767.38" y="326.861" width="28.8823" height="80.6411">
+   <object id="308" type="PLATFORM" x="4767.38" y="326.861" width="52.8823" height="80.6411">
     <properties>
      <property name="texture" value="./Media/PNG/Assets/chimenea.png"/>
     </properties>
    </object>
-   <object id="309" type="PLATFORM" x="4731.01" y="369.285" width="28.8823" height="38.3078">
+   <object id="309" type="PLATFORM" x="4731.01" y="369.285" width="48.8823" height="38.3078">
     <properties>
      <property name="texture" value="./Media/PNG/Assets/chimenea.png"/>
     </properties>
@@ -445,7 +449,7 @@
      <property name="texture" value="./Media/Images/Textures/Brick.png"/>
     </properties>
    </object>
-   <object id="403" type="PLATFORM" x="8672.77" y="-787.139" width="136.278" height="71.8536">
+   <object id="403" type="PLATFORM" x="8672.77" y="-787.139" width="124.278" height="71.8536">
     <properties>
      <property name="texture" value="./Media/PNG/Assets/aire acondicionado (2).png"/>
     </properties>
@@ -539,7 +543,7 @@
    <object id="451" type="WALL" x="9570.41" y="-719.018" width="71.3064" height="62.2776">
     <properties>
      <property name="isCheckpoint" type="bool" value="true"/>
-     <property name="texture" value="./Media/PNG/Assets/aire acondicionado (2).png"/>
+     <property name="texture" value="./Media/Images/Textures/Brick2.png"/>
     </properties>
    </object>
    <object id="452" type="WALL" x="10052.2" y="-528.109" width="265.246" height="38.0352">

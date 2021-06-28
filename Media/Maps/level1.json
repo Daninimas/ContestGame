@@ -289,7 +289,7 @@
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,
-                         "width":52.0421,
+                         "width":88.0420999999999,
                          "x":1197.98,
                          "y":541.813
                         }],
@@ -453,6 +453,12 @@
                          "height":46.2776,
                          "id":284,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/PNG\/Assets\/escombros.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
@@ -495,7 +501,7 @@
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,
-                         "width":62.9512,
+                         "width":110.9512,
                          "x":1787.68,
                          "y":557.571
                         }, 
@@ -769,7 +775,7 @@
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
-                         "width":28.8823,
+                         "width":56.8823000000002,
                          "x":4373.12,
                          "y":358.201
                         }, 
@@ -869,7 +875,7 @@
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
-                         "width":28.8823,
+                         "width":52.8823000000002,
                          "x":4767.38,
                          "y":326.861
                         }, 
@@ -886,7 +892,7 @@
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
-                         "width":28.8823,
+                         "width":48.8823000000002,
                          "x":4731.01,
                          "y":369.285
                         }, 
@@ -1889,7 +1895,7 @@
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
-                         "width":136.278,
+                         "width":124.278,
                          "x":8672.77,
                          "y":-787.139
                         }],
@@ -2360,7 +2366,7 @@
                                 {
                                  "name":"texture",
                                  "type":"string",
-                                 "value":".\/Media\/PNG\/Assets\/aire acondicionado (2).png"
+                                 "value":".\/Media\/Images\/Textures\/Brick2.png"
                                 }],
                          "rotation":0,
                          "type":"WALL",
