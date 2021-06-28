@@ -17,7 +17,7 @@ const bool SHOW_TIMERS      = false;
 const bool CHECK_SYSTEMS    = false;
 
 GameEngine::GameEngine()
-    : windowFacade(800, 600, false), soundFacade(), gameStateStack(), entityMan(std::make_unique<EntityManager>()){
+    : windowFacade(800, 600, true), soundFacade(), gameStateStack(), entityMan(std::make_unique<EntityManager>()){
 
     srand(time(NULL)); // initialize the random seed
     //init();

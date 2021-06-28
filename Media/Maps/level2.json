@@ -94,8 +94,8 @@
                          "type":"DAMAGE_PLATFORM",
                          "visible":true,
                          "width":211.205,
-                         "x":698.573,
-                         "y":758.621
+                         "x":694.573,
+                         "y":678.621
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -204,7 +204,7 @@
                                  "value":400
                                 }],
                          "rotation":0,
-                         "type":"CHASERJUMPER",
+                         "type":"ENEMY_SPIDER",
                          "visible":true,
                          "width":20,
                          "x":1512,
@@ -223,7 +223,7 @@
                  "name":"WALL",
                  "objects":[
                         {
-                         "height":171.404,
+                         "height":87.404,
                          "id":142,
                          "name":"",
                          "properties":[
@@ -231,6 +231,11 @@
                                  "name":"isCheckpoint",
                                  "type":"bool",
                                  "value":true
+                                }, 
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/[32x32] Rocky Grass.png"
                                 }],
                          "rotation":0,
                          "type":"WALL",
@@ -240,9 +245,15 @@
                          "y":588.433
                         }, 
                         {
-                         "height":230.156333333333,
+                         "height":230.156,
                          "id":147,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkVertical.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
@@ -265,6 +276,12 @@
                          "height":14.8837,
                          "id":274,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkHorizontal.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
@@ -290,7 +307,7 @@
                          "y":551.147
                         }, 
                         {
-                         "height":171.404,
+                         "height":99.404,
                          "id":512,
                          "name":"",
                          "properties":[
@@ -298,6 +315,11 @@
                                  "name":"isCheckpoint",
                                  "type":"bool",
                                  "value":true
+                                }, 
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/[32x32] Rocky Grass.png"
                                 }],
                          "rotation":0,
                          "type":"WALL",
@@ -310,6 +332,12 @@
                          "height":14.8837,
                          "id":513,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkHorizontal.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
@@ -630,6 +658,11 @@
                                  "name":"isCheckpoint",
                                  "type":"bool",
                                  "value":true
+                                }, 
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/[32x32] Rocky Grass.png"
                                 }],
                          "rotation":0,
                          "type":"WALL",
@@ -642,6 +675,12 @@
                          "height":173.308,
                          "id":525,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkVertical.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
@@ -653,6 +692,12 @@
                          "height":14.8837,
                          "id":527,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkHorizontal.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
@@ -664,6 +709,12 @@
                          "height":14.8837,
                          "id":531,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkHorizontal.png"
+                                }],
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,
@@ -680,6 +731,11 @@
                                  "name":"isCheckpoint",
                                  "type":"bool",
                                  "value":true
+                                }, 
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/Rocky_Road.png"
                                 }],
                          "rotation":0,
                          "type":"WALL",
@@ -692,6 +748,12 @@
                          "height":585.429,
                          "id":534,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkVertical.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
@@ -706,7 +768,7 @@
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,
-                         "width":111.548666666667,
+                         "width":111.549,
                          "x":2364.13,
                          "y":470.945
                         }, 
@@ -747,6 +809,12 @@
                          "height":503.611,
                          "id":541,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkVertical.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
@@ -791,6 +859,12 @@
                          "height":503.611,
                          "id":547,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkVertical.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
@@ -821,7 +895,7 @@
                          "y":397.187
                         }, 
                         {
-                         "height":286.555,
+                         "height":90.5550000000001,
                          "id":551,
                          "name":"",
                          "properties":[
@@ -829,6 +903,11 @@
                                  "name":"isCheckpoint",
                                  "type":"bool",
                                  "value":true
+                                }, 
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/[32x32] Rocky Grass.png"
                                 }],
                          "rotation":0,
                          "type":"WALL",
@@ -1132,7 +1211,7 @@
                  "name":"WALL",
                  "objects":[
                         {
-                         "height":174.434,
+                         "height":90.434,
                          "id":564,
                          "name":"",
                          "properties":[
@@ -1140,6 +1219,11 @@
                                  "name":"isCheckpoint",
                                  "type":"bool",
                                  "value":true
+                                }, 
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/[32x32] Rocky Grass.png"
                                 }],
                          "rotation":0,
                          "type":"WALL",
@@ -1180,6 +1264,12 @@
                          "height":290.641,
                          "id":583,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkVertical.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
@@ -1213,6 +1303,12 @@
                          "height":478.52,
                          "id":588,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkVertical.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
@@ -1574,7 +1670,7 @@
                  "name":"WALL",
                  "objects":[
                         {
-                         "height":253.222,
+                         "height":93.222,
                          "id":612,
                          "name":"",
                          "properties":[
@@ -1707,7 +1803,7 @@
                          "y":533.467
                         }, 
                         {
-                         "height":244.131,
+                         "height":72.131,
                          "id":626,
                          "name":"",
                          "properties":[
@@ -1790,7 +1886,7 @@
                          "y":127.407
                         }, 
                         {
-                         "height":244.131,
+                         "height":80.131,
                          "id":633,
                          "name":"",
                          "properties":[
@@ -2215,7 +2311,7 @@
                  "name":"WALL",
                  "objects":[
                         {
-                         "height":104.737,
+                         "height":76.737,
                          "id":648,
                          "name":"",
                          "properties":[
@@ -2859,7 +2955,7 @@
                          "y":417.328
                         }, 
                         {
-                         "height":224.2522,
+                         "height":224.252,
                          "id":736,
                          "name":"",
                          "properties":[
@@ -2871,7 +2967,7 @@
                          "rotation":0,
                          "type":"FALLING_WALL",
                          "visible":true,
-                         "width":289.003666666666,
+                         "width":289.004,
                          "x":12683.6,
                          "y":655.04
                         }, 

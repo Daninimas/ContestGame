@@ -1052,7 +1052,7 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
         renderComp.sprite = "Media/Images/laser_gun.png";
         renderComp.spriteRect = { 0, 152, 0, 65 };
 
-        situation.scale = { 0.0f, 0.0f };
+        situation.scale = { 0.3f, 0.3f };
 
         WorldElementsData::worldDistanceWeapons.push_back(entityId);
     }
@@ -1497,9 +1497,15 @@ int EntityManager::createDamagePlatform(GameEngine& gameContext, Vector2 positio
     SituationComponent& situation = createComponent<SituationComponent>(entityId);
     ColliderComponent& colliderComp = createComponent<ColliderComponent>(entityId);
     AttackComponent& attack = createComponent<AttackComponent>(entityId);
+    RenderComponent& renderComp = createComponent<RenderComponent>(entityId);
 
     //######### DATA ########//
     situation.position = position;
+
+    // Render component
+    renderComp.sprite = "./Media/Images/Textures/Magma_Floor.png";
+    renderComp.spriteRect = { 0, size.x, 0, size.y };
+    renderComp.isRepeated = true;
 
     // Collider
     colliderComp.collisionLayer = ColliderComponent::Wall;
@@ -1515,6 +1521,8 @@ int EntityManager::createDamagePlatform(GameEngine& gameContext, Vector2 positio
 
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::DAMAGE_PLATFORM, goType));
+    //######### RENDER ########//
+    gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
     return entityId;
 }
 
