@@ -88,6 +88,26 @@ void AnimationManager::setRunningAnimation(GameEngine& gameContext, const Animat
 		animationComp.nextFrameAdvance = 512;
 		animationComp.hasToEnd = false;
 		break;
+
+	case GameObjectType::CHASERJUMPER:
+		animationComp.animation = animation;
+		animationComp.framerate = 0.1f;
+		animationComp.repeat = true;
+		animationComp.startSpriteRect = { 0, 248, 0, 360 };
+		animationComp.totalFrames = 4;
+		animationComp.nextFrameAdvance = 248;
+		animationComp.hasToEnd = false;
+		break;
+
+	case GameObjectType::DISTANCE_WALKING_ENEMY:
+		animationComp.animation = animation;
+		animationComp.framerate = 0.1f;
+		animationComp.repeat = true;
+		animationComp.startSpriteRect = { 0, 248, 0, 360 };
+		animationComp.totalFrames = 4;
+		animationComp.nextFrameAdvance = 248;
+		animationComp.hasToEnd = false;
+		break;
 	}
 }
 
@@ -142,6 +162,46 @@ void AnimationManager::setIdleAnimation(GameEngine& gameContext, const Animation
 		animationComp.startSpriteRect = { 8, 494, 133, 316 };
 		animationComp.totalFrames = 1;
 		animationComp.nextFrameAdvance = 512;
+		animationComp.hasToEnd = false;
+		break;
+
+	case GameObjectType::BOMBER_BALLS:
+		animationComp.animation = animation;
+		animationComp.framerate = 0.15f;
+		animationComp.repeat = true;
+		animationComp.startSpriteRect = { 0, 399, 0, 464 };
+		animationComp.totalFrames = 3;
+		animationComp.nextFrameAdvance = 399;
+		animationComp.hasToEnd = false;
+		break;
+
+	case GameObjectType::ENEMY_BALLS:
+		animationComp.animation = animation;
+		animationComp.framerate = 0.15f;
+		animationComp.repeat = true;
+		animationComp.startSpriteRect = { 0, 248, 0, 360 };
+		animationComp.totalFrames = 3;
+		animationComp.nextFrameAdvance = 248;
+		animationComp.hasToEnd = false;
+		break;
+
+	case GameObjectType::CHASERJUMPER:
+		animationComp.animation = animation;
+		animationComp.framerate = 0.01f;
+		animationComp.repeat = false;
+		animationComp.startSpriteRect = { 0, 248, 0, 360 };
+		animationComp.totalFrames = 1;
+		animationComp.nextFrameAdvance = 248;
+		animationComp.hasToEnd = false;
+		break;
+
+	case GameObjectType::DISTANCE_WALKING_ENEMY:
+		animationComp.animation = animation;
+		animationComp.framerate = 0.01f;
+		animationComp.repeat = false;
+		animationComp.startSpriteRect = { 0, 248, 0, 360 };
+		animationComp.totalFrames = 1;
+		animationComp.nextFrameAdvance = 248;
 		animationComp.hasToEnd = false;
 		break;
 	}

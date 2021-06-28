@@ -535,7 +535,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
 
         // Render component
         renderComp.sprite = "Media/Images/Enemy.png";
-        renderComp.spriteRect = { 0, 248, 0, 360 };
+        renderComp.spriteRect = { 0, 988, 0, 1428 };
         renderComp.color = { 10, 20, 255, 255 };
 
         healthComp.maxHealth = 3;
@@ -551,7 +551,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         colliderComp.boundingRoot.bounding = { 0.f, 57.f, 0.f, 90.f };
 
         // Render component
-        renderComp.sprite = "Media/Images/Enemy.png";
+        renderComp.sprite = "Media/PNG/Alien Normal/enemySpritesheetSmall.png";
         renderComp.spriteRect = { 0, 248, 0, 360 };
 
         healthComp.maxHealth = 5;
@@ -560,6 +560,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         createComponent<AIMeleeAtkComponent>(entityId);
         JumpComponent& jumpComp = createComponent<JumpComponent>(entityId);
         SensorComponent& sensorComp = createComponent<SensorComponent>(entityId);
+        AnimationComponent& animComp = createComponent<AnimationComponent>(entityId);
 
         sensorComp.sensorLayerMasc = ColliderComponent::Player + ColliderComponent::Wall;
         sensorComp.sensorBounding = { 25.f, 55.f, 2.f, 60.f };
@@ -583,9 +584,9 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         situation.scale = { 0.27f, 0.27f };
         // Collider
         colliderComp.boundingRoot.bounding = { 0.f, 57.f, 0.f, 90.f };
-        
+
         // Render component
-        renderComp.sprite = "Media/Images/Enemy.png";
+        renderComp.sprite = "Media/PNG/Alien Normal/enemySpritesheetSmall.png";
         renderComp.spriteRect = { 0, 248, 0, 360 };
 
         healthComp.maxHealth = 5;
@@ -617,8 +618,9 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         // Collider
         colliderComp.boundingRoot.bounding = { 0.f, 57.f, 0.f, 90.f };
 
+        AnimationComponent& animComp = createComponent<AnimationComponent>(entityId);
         // Render component
-        renderComp.sprite = "Media/Images/Enemy.png";
+        renderComp.sprite = "Media/PNG/Alien Normal/enemySpritesheetSmall.png";
         renderComp.spriteRect = { 0, 248, 0, 360 };
         renderComp.color = { 238, 249, 14, 255 };
 
@@ -639,6 +641,7 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         distanceWeaponComp.attackLifetime = 1.f;
         distanceWeaponComp.bulletSpreadAngle = 5.f;
         distanceWeaponComp.infiniteAmmo = true;
+        distanceWeaponComp.spawnAttackPos = { 28.f, 25.f };
 
         colliderComp.weight = 3.f;
 
@@ -859,8 +862,74 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
     //######### RENDER ########//
     gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
 
+    if (goType == GameObjectType::FLYING_SHOOTER_ENEMY) {
+        situation.sons.emplace_back(createBomberBalls(gameContext, entityId));
+    }
+    else if (goType == GameObjectType::DISTANCE_ENEMY || goType == GameObjectType::DISTANCE_WALKING_ENEMY) {
+        situation.sons.emplace_back(createEnemyBalls(gameContext, entityId));
+    }
+
     return entityId;
 }
+
+int EntityManager::createBomberBalls(GameEngine& gameContext, int bomberId) {
+    int entityId = Entity::getCurrentId();
+
+    SituationComponent& situation = createComponent<SituationComponent>(entityId);
+    RenderComponent& renderComp = createComponent<RenderComponent>(entityId);
+    AnimationComponent& animComp = createComponent<AnimationComponent>(entityId);
+
+    //######### DATA ########//
+    situation.position = { 0.f, 0.f };
+    situation.rotation = 0;
+    situation.noWorldDelete = true;
+    situation.father = bomberId;
+
+
+    // Render component
+    renderComp.sprite = "Media/PNG/Alien volador/Animacion Bolas/bomberBalls.png";
+    renderComp.spriteRect = { 0, 399, 0, 464 };
+
+    //######### CREATE ########//
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::BALLS, GameObjectType::BOMBER_BALLS));
+
+    //######### RENDER ########//
+    gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
+
+    AnimationManager::setAnimationToEntity(gameContext, Animation::IDLE, animComp);
+
+    return entityId;
+}
+
+int EntityManager::createEnemyBalls(GameEngine& gameContext, int bomberId) {
+    int entityId = Entity::getCurrentId();
+
+    SituationComponent& situation = createComponent<SituationComponent>(entityId);
+    RenderComponent& renderComp = createComponent<RenderComponent>(entityId);
+    AnimationComponent& animComp = createComponent<AnimationComponent>(entityId);
+
+    //######### DATA ########//
+    situation.position = { 0.f, 0.f };
+    situation.rotation = 0;
+    situation.noWorldDelete = true;
+    situation.father = bomberId;
+
+
+    // Render component
+    renderComp.sprite = "Media/PNG/Alien que dispara/Animacion bolas/enemyBallsSpritesheet.png";
+    renderComp.spriteRect = { 0, 248, 0, 360 };
+
+    //######### CREATE ########//
+    entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::BALLS, GameObjectType::ENEMY_BALLS));
+
+    //######### RENDER ########//
+    gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
+
+    AnimationManager::setAnimationToEntity(gameContext, Animation::IDLE, animComp);
+
+    return entityId;
+}
+
 
 
 int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType) {

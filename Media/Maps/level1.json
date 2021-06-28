@@ -171,7 +171,7 @@
                          "id":264,
                          "name":"",
                          "rotation":0,
-                         "type":"FIRST_ENEMY",
+                         "type":"DISTANCE_WALKING_ENEMY",
                          "visible":true,
                          "width":45,
                          "x":458.97,
@@ -505,29 +505,6 @@
                          "width":162.216,
                          "x":2685.56,
                          "y":428.376
-                        }],
-                 "opacity":1,
-                 "type":"objectgroup",
-                 "visible":true,
-                 "x":0,
-                 "y":0
-                }, 
-                {
-                 "draworder":"topdown",
-                 "id":109,
-                 "name":"POWERUP",
-                 "objects":[
-                        {
-                         "height":0,
-                         "id":512,
-                         "name":"",
-                         "point":true,
-                         "rotation":0,
-                         "type":"POWERUP_DRONE",
-                         "visible":true,
-                         "width":0,
-                         "x":1703.0303030303,
-                         "y":530.30303030303
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -2823,7 +2800,7 @@
          "y":0
         }],
  "nextlayerid":110,
- "nextobjectid":513,
+ "nextobjectid":515,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.0",

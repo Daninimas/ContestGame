@@ -99,6 +99,8 @@ public:
     int createAttack(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType = GameObjectType::NONE);
     int createWall(GameEngine& gameContext, Vector2 position, Vector2 size, float r, std::string texturePath = "", GameObjectType goType = GameObjectType::NONE);
     int createEnemy(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType = GameObjectType::NONE);
+    int createBomberBalls(GameEngine& gameContext, int bomberId);
+    int createEnemyBalls(GameEngine& gameContext, int bomberId);
     int createDrone(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType);
     int createWeapon(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType = GameObjectType::NONE);
     int createCamera(GameEngine& gameContext, Vector2 position, float r, GameObjectType goType = GameObjectType::NONE);

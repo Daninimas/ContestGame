@@ -121,5 +121,9 @@ enum class GameObjectType {
     CHILD,
 
     // Text
-    TEXT
+    TEXT,
+
+    BOMBER_BALLS,
+    ENEMY_BALLS
+
 };

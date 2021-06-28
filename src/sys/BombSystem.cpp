@@ -94,5 +94,6 @@ void BombSystem::setRotation(GameEngine& gameContext, BombComponent& bombComp) c
 	VelocityComponent& bombVel = gameContext.entityMan->getComponent<VelocityComponent>(bombComp.id);
 	SituationComponent& bombSit = gameContext.entityMan->getComponent<SituationComponent>(bombComp.id);
 
-	bombSit.rotation = Utils::getRoltationFromVector2(bombVel.velocity);
+	if(bombVel.velocity.x != 0 || bombVel.velocity.y != 0)
+		bombSit.rotation = Utils::getRoltationFromVector2(bombVel.velocity);
 }

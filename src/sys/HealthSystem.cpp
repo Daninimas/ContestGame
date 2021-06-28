@@ -61,7 +61,7 @@ void HealthSystem::manageHeatlths(GameEngine& gameContext) const {
                 gameContext.getSoundFacadeRef().playSound(health.damageSound);
 
                 if (gameContext.entityMan->existsComponent<AnimationComponent>(health.id)) { // Damage animation
-                    AnimationComponent& animComp = gameContext.entityMan->getComponent<AnimationComponent>(WorldElementsData::playerId);
+                    AnimationComponent& animComp = gameContext.entityMan->getComponent<AnimationComponent>(health.id);
                     AnimationManager::setAnimationToEntity(gameContext, Animation::TAKING_DAMAGE, animComp);
                 }
             }

@@ -23,5 +23,6 @@ enum class EntityType {
     ORBITAL_STRIKER,
     TURRET,
     CHILD,
-    TEXT
+    TEXT,
+    BALLS
 };
