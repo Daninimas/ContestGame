@@ -262,7 +262,7 @@
                                 {
                                  "name":"texture",
                                  "type":"string",
-                                 "value":".\/Media\/Images\/Textures\/Metal_Floor.png"
+                                 "value":".\/Media\/PNG\/Assets\/valla.png"
                                 }],
                          "rotation":0,
                          "type":"WALL",
@@ -284,7 +284,7 @@
                                 {
                                  "name":"texture",
                                  "type":"string",
-                                 "value":".\/Media\/Images\/Textures\/Brick_Wall_Cracked.png"
+                                 "value":".\/Media\/PNG\/Assets\/escombros.png"
                                 }],
                          "rotation":0,
                          "type":"WALL",
@@ -486,6 +486,11 @@
                                  "name":"isCheckpoint",
                                  "type":"bool",
                                  "value":false
+                                }, 
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/PNG\/Assets\/caja baja.png"
                                 }],
                          "rotation":0,
                          "type":"WALL",
@@ -759,7 +764,7 @@
                                 {
                                  "name":"texture",
                                  "type":"string",
-                                 "value":".\/Media\/Images\/Textures\/Metal_Floor.png"
+                                 "value":".\/Media\/PNG\/Assets\/chimenea.png"
                                 }],
                          "rotation":0,
                          "type":"PLATFORM",
@@ -859,7 +864,7 @@
                                 {
                                  "name":"texture",
                                  "type":"string",
-                                 "value":".\/Media\/Images\/Textures\/Metal_Floor.png"
+                                 "value":".\/Media\/PNG\/Assets\/chimenea.png"
                                 }],
                          "rotation":0,
                          "type":"PLATFORM",
@@ -876,7 +881,7 @@
                                 {
                                  "name":"texture",
                                  "type":"string",
-                                 "value":".\/Media\/Images\/Textures\/Metal_Floor.png"
+                                 "value":".\/Media\/PNG\/Assets\/chimenea.png"
                                 }],
                          "rotation":0,
                          "type":"PLATFORM",
@@ -1879,7 +1884,7 @@
                                 {
                                  "name":"texture",
                                  "type":"string",
-                                 "value":".\/Media\/Images\/Textures\/Metal_Floor.png"
+                                 "value":".\/Media\/PNG\/Assets\/aire acondicionado (2).png"
                                 }],
                          "rotation":0,
                          "type":"PLATFORM",
@@ -2355,7 +2360,7 @@
                                 {
                                  "name":"texture",
                                  "type":"string",
-                                 "value":".\/Media\/Images\/Textures\/Brick_Wall_Cracked.png"
+                                 "value":".\/Media\/PNG\/Assets\/aire acondicionado (2).png"
                                 }],
                          "rotation":0,
                          "type":"WALL",
@@ -2948,7 +2953,7 @@
                                 {
                                  "name":"texture",
                                  "type":"string",
-                                 "value":".\/Media\/Images\/Textures\/Metal_Floor.png"
+                                 "value":".\/Media\/PNG\/Assets\/valla.png"
                                 }],
                          "rotation":0,
                          "type":"WALL",
@@ -2970,7 +2975,7 @@
                                 {
                                  "name":"texture",
                                  "type":"string",
-                                 "value":".\/Media\/Images\/Textures\/Metal_Floor.png"
+                                 "value":".\/Media\/PNG\/Assets\/valla.png"
                                 }],
                          "rotation":0,
                          "type":"WALL",
@@ -2987,7 +2992,7 @@
                                 {
                                  "name":"texture",
                                  "type":"string",
-                                 "value":".\/Media\/Images\/Textures\/Metal_Floor.png"
+                                 "value":".\/Media\/PNG\/Assets\/Rocas\/1.png"
                                 }],
                          "rotation":0,
                          "type":"PLATFORM",
