@@ -48,6 +48,7 @@ private:
 
     void drawScene(GameEngine& gameContext) const;
     void renderColliders(GameEngine& gameContext) const;
+    void renderLaser(GameEngine& gameContext) const;
     void renderAllSensors(GameEngine& gameContext) const;
     void drawBoundingTree(BoundingBoxNode boundingNode, SituationComponent& sit) const;
     void drawHudElements(GameEngine& gameContext) const;

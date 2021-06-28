@@ -34,7 +34,7 @@
    <object id="139" type="TRIGGER" x="127.528" y="255.657" width="321.234" height="328.308">
     <properties>
      <property name="Function" value="PLAY_MUSIC"/>
-     <property name="soundPath" value="./Media/Sound/Music/darren-curtis-intruder-aboard.wav"/>
+     <property name="soundPath" value="./Media/Sound/Music/darren-curtis-the-ascension.wav"/>
     </properties>
    </object>
   </objectgroup>

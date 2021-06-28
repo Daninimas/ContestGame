@@ -392,6 +392,7 @@ int EntityManager::createAttack(GameEngine& gameContext, Vector2 position, float
     else if (goType == GameObjectType::PLAYER_LASER){
     createComponent<VelocityComponent>(entityId);
 
+    renderComp.color = { 0,0,0,0 };
         collider.collisionLayer = ColliderComponent::PlayerAttack;
         collider.layerMasc = ColliderComponent::Enemy + ColliderComponent::Wall + ColliderComponent::Shield + ColliderComponent::Child;  // Collides with enemies and walls
 
@@ -1046,11 +1047,12 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
         distanceWeaponComp.infiniteAmmo = false;
         distanceWeaponComp.spawnAttackPos = { 20.f, 32.f };
         distanceWeaponComp.attackSound.soundPath = "Media/Sound/Weapons/laserShot.wav";
+        distanceWeaponComp.attackLifetime = 0.2f;
 
         renderComp.sprite = "Media/Images/laser_gun.png";
         renderComp.spriteRect = { 0, 152, 0, 65 };
 
-        situation.scale = { 0.3f, 0.3f };
+        situation.scale = { 0.0f, 0.0f };
 
         WorldElementsData::worldDistanceWeapons.push_back(entityId);
     }

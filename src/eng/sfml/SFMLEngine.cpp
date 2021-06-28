@@ -124,6 +124,8 @@ void SFMLEngine::drawScene(GameEngine& gameContext) const {
 	if (renderSensors) {
 		renderAllSensors(gameContext);
 	}
+
+	renderLaser(gameContext);
 }
 
 void SFMLEngine::renderColliders(GameEngine& gameContext) const {
@@ -142,13 +144,22 @@ void SFMLEngine::renderColliders(GameEngine& gameContext) const {
 	}
 }
 
+void SFMLEngine::renderLaser(GameEngine& gameContext) const {
+	auto& attacks = gameContext.entityMan->getComponents<AttackComponent>();
+
+	for (AttackComponent& a : attacks) {
+		if (a.type == AttackType::LASER) {
+			SituationComponent& sit = gameContext.entityMan->getComponent<SituationComponent>(a.id);
+			BoundingBoxNode& b = gameContext.entityMan->getComponent<ColliderComponent>(a.id).boundingRoot;
+			drawBoundingTree(b, sit);
+		}
+	}
+}
+
 void SFMLEngine::drawBoundingTree(BoundingBoxNode boundingNode, SituationComponent& sit) const {
 	// Draw this bounding box
 	sf::RectangleShape rectangle(sf::Vector2f(boundingNode.bounding.xRight - boundingNode.bounding.xLeft, boundingNode.bounding.yDown - boundingNode.bounding.yUp));
-	rectangle.setFillColor(sf::Color(0, 0, 0, 0));
-	if (boundingNode.bounding.entitiesColliding.size() != 0) {
 		rectangle.setFillColor(sf::Color(255, 0, 0, 100));
-	}
 	rectangle.setOutlineThickness(2);
 	rectangle.setOutlineColor(sf::Color(250, 150, 100));
 	rectangle.setPosition(sit.position.x + boundingNode.bounding.xLeft, sit.position.y + boundingNode.bounding.yUp);

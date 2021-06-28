@@ -122,7 +122,7 @@
                                 {
                                  "name":"soundPath",
                                  "type":"string",
-                                 "value":".\/Media\/Sound\/Music\/darren-curtis-intruder-aboard.wav"
+                                 "value":".\/Media\/Sound\/Music\/darren-curtis-the-ascension.wav"
                                 }],
                          "rotation":0,
                          "type":"TRIGGER",
@@ -294,7 +294,7 @@
                          "y":588.433
                         }, 
                         {
-                         "height":64.2201666666666,
+                         "height":64.2202,
                          "id":275,
                          "name":"",
                          "properties":[
