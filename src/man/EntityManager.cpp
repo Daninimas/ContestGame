@@ -376,9 +376,6 @@ int EntityManager::createAttack(GameEngine& gameContext, Vector2 position, float
 
         createComponent<ExplosionAttackComponent>(entityId);
         attack.type = AttackType::EXPLOSION;
-        // Animation
-        AnimationComponent& animComp = createComponent<AnimationComponent>(entityId);
-        AnimationManager::setAnimationToEntity(gameContext, Animation::IDLE, animComp);
         }
 
     else if (goType == GameObjectType::PLAYER_EXPLOSION){
@@ -390,9 +387,6 @@ int EntityManager::createAttack(GameEngine& gameContext, Vector2 position, float
 
         createComponent<ExplosionAttackComponent>(entityId);
         attack.type = AttackType::EXPLOSION;
-        // Animation
-        AnimationComponent& animComp = createComponent<AnimationComponent>(entityId);
-        AnimationManager::setAnimationToEntity(gameContext, Animation::IDLE, animComp);
         }
 
     else if (goType == GameObjectType::PLAYER_LASER){
@@ -416,6 +410,11 @@ int EntityManager::createAttack(GameEngine& gameContext, Vector2 position, float
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::ATTACK, goType));
 
+    if (goType == GameObjectType::EXPLOSION || goType == GameObjectType::PLAYER_EXPLOSION) {
+        // Animation
+        AnimationComponent& animComp = createComponent<AnimationComponent>(entityId);
+        AnimationManager::setAnimationToEntity(gameContext, Animation::IDLE, animComp);
+    }
 
     //######### RENDER ########//
     gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
@@ -911,6 +910,11 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
 
         distanceWeaponComp.attackSound.soundPath = "Media/Sound/Weapons/M4A1_Single-Kibblesbob-8540445.wav";
 
+        renderComp.sprite = "Media/Images/m4.png";
+        renderComp.spriteRect = { 0, 152, 0, 65 };
+
+        situation.scale = { 0.3f, 0.3f };
+
         WorldElementsData::worldDistanceWeapons.push_back(entityId);
     }
 
@@ -948,6 +952,11 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
         distanceWeaponComp.explosionExpansion = 90.f;
         distanceWeaponComp.explosionTime = 0.2f;
         distanceWeaponComp.startActivated = false;
+
+        renderComp.sprite = "Media/Images/grenade_launcher.png";
+        renderComp.spriteRect = { 0, 152, 0, 65 };
+
+        situation.scale = { 0.3f, 0.3f };
 
         WorldElementsData::worldDistanceWeapons.push_back(entityId);
     }
@@ -1064,11 +1073,17 @@ int EntityManager::createBomb(GameEngine& gameContext, Vector2 position, float r
     SituationComponent& situation = createComponent<SituationComponent>(entityId);
     ColliderComponent& colliderComp = createComponent<ColliderComponent>(entityId);
     BombComponent& bombComp = createComponent<BombComponent>(entityId);
-    createComponent<VelocityComponent>(entityId);
+    createComponent<VelocityComponent>(entityId); 
+    RenderComponent& renderComp = createComponent<RenderComponent>(entityId);
 
     //######### DATA ########//
     situation.position = position;
     situation.rotation = r;
+    situation.scale = { 0.35f, 0.35f };
+
+    // Render component
+    renderComp.sprite = "Media/Images/grenade.png";
+    renderComp.spriteRect = { 0, 144, 1, 27 };
 
     colliderComp.type = ColliderType::DYNAMIC;
 
@@ -1089,6 +1104,10 @@ int EntityManager::createBomb(GameEngine& gameContext, Vector2 position, float r
 
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::BOMB, goType));
+
+    //######### RENDER ########//
+    gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
+
     return entityId;
 }
 

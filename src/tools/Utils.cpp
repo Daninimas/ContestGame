@@ -441,5 +441,5 @@ int Utils::getNewPlayerScorePosition() {
 
 float Utils::getRoltationFromVector2(Vector2& vector) {
     float pi = 3.14159f;
-    return radToDeg(-(atan2(vector.y, vector.x)));
+    return radToDeg(-(atan2(vector.y, abs(vector.x))));
 }

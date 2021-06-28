@@ -15,4 +15,5 @@ private:
     void checkBombCollision(GameEngine& gameContext, BombComponent& bombComp) const;
     void explodeBomb(GameEngine& gameContext, int bombId) const;
 
+    void setRotation(GameEngine& gameContext, BombComponent& bombComp) const;
 };

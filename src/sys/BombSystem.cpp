@@ -2,6 +2,7 @@
 
 #include <eng/GameEngine.hpp>
 #include <iostream>
+#include <tools/Utils.hpp>
 
 BombSystem::BombSystem() {}
 
@@ -21,6 +22,9 @@ void BombSystem::update(GameEngine& gameContext) const {
 			// if not activated, check collision to activate
 			checkBombCollision(gameContext, bombComp);
 		}
+
+		if(gameContext.entityMan->existsComponent<VelocityComponent>(bombComp.id))
+			setRotation(gameContext, bombComp);
 	}
 
 	for (int bombId : bombsToExplode) {
@@ -39,6 +43,11 @@ void BombSystem::updateBombTimers(GameEngine& gameContext, BombComponent& bombCo
 
 void BombSystem::checkBombCollision(GameEngine& gameContext, BombComponent& bombComp) const {
 	ColliderComponent& collider = gameContext.entityMan->getComponent<ColliderComponent>(bombComp.id);
+
+	if (collider.collide) {
+		VelocityComponent& bombVel = gameContext.entityMan->getComponent<VelocityComponent>(bombComp.id);
+		bombVel.velocity.x = 0;
+	}
 
 	bombComp.activated = collider.collide;
 }
@@ -78,4 +87,12 @@ void BombSystem::explodeBomb(GameEngine& gameContext, int bombId) const {
 
 	// DELETE BOMB
 	gameContext.eraseEntityByID(bombId);
+}
+
+
+void BombSystem::setRotation(GameEngine& gameContext, BombComponent& bombComp) const {
+	VelocityComponent& bombVel = gameContext.entityMan->getComponent<VelocityComponent>(bombComp.id);
+	SituationComponent& bombSit = gameContext.entityMan->getComponent<SituationComponent>(bombComp.id);
+
+	bombSit.rotation = Utils::getRoltationFromVector2(bombVel.velocity);
 }
