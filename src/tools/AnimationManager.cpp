@@ -101,11 +101,31 @@ void AnimationManager::setRunningAnimation(GameEngine& gameContext, const Animat
 
 	case GameObjectType::DISTANCE_WALKING_ENEMY:
 		animationComp.animation = animation;
-		animationComp.framerate = 0.1f;
+		animationComp.framerate = 0.15f;
 		animationComp.repeat = true;
 		animationComp.startSpriteRect = { 0, 248, 0, 360 };
 		animationComp.totalFrames = 4;
 		animationComp.nextFrameAdvance = 248;
+		animationComp.hasToEnd = false;
+		break;
+
+	case GameObjectType::ENEMY_SPIDER:
+		animationComp.animation = animation;
+		animationComp.framerate = 0.1f;
+		animationComp.repeat = true;
+		animationComp.startSpriteRect = { 0, 297, 0, 381 };
+		animationComp.totalFrames = 4;
+		animationComp.nextFrameAdvance = 297;
+		animationComp.hasToEnd = false;
+		break;
+
+	case GameObjectType::POUNCER_ENEMY:
+		animationComp.animation = animation;
+		animationComp.framerate = 0.1f;
+		animationComp.repeat = true;
+		animationComp.startSpriteRect = { 0, 297, 0, 381 };
+		animationComp.totalFrames = 4;
+		animationComp.nextFrameAdvance = 297;
 		animationComp.hasToEnd = false;
 		break;
 	}
@@ -204,6 +224,26 @@ void AnimationManager::setIdleAnimation(GameEngine& gameContext, const Animation
 		animationComp.nextFrameAdvance = 248;
 		animationComp.hasToEnd = false;
 		break;
+
+	case GameObjectType::ENEMY_SPIDER:
+		animationComp.animation = animation;
+		animationComp.framerate = 0.01f;
+		animationComp.repeat = false;
+		animationComp.startSpriteRect = { 0, 297, 0, 381 };
+		animationComp.totalFrames = 1;
+		animationComp.nextFrameAdvance = 297;
+		animationComp.hasToEnd = false;
+		break;
+
+	case GameObjectType::POUNCER_ENEMY:
+		animationComp.animation = animation;
+		animationComp.framerate = 0.01f;
+		animationComp.repeat = false;
+		animationComp.startSpriteRect = { 0, 297, 0, 381 };
+		animationComp.totalFrames = 1;
+		animationComp.nextFrameAdvance = 297;
+		animationComp.hasToEnd = false;
+		break;
 	}
 }
 
@@ -219,6 +259,26 @@ void AnimationManager::setDodgeAnimation(GameEngine& gameContext, const Animatio
 		animationComp.startSpriteRect = { 100, 418, 1845, 2254 };
 		animationComp.totalFrames = 4;
 		animationComp.nextFrameAdvance = 512;
+		animationComp.hasToEnd = false;
+		break;
+
+	case GameObjectType::ENEMY_SPIDER:
+		animationComp.animation = animation;
+		animationComp.framerate = 0.01f;
+		animationComp.repeat = false;
+		animationComp.startSpriteRect = { 0, 297, 381, 762 };
+		animationComp.totalFrames = 1;
+		animationComp.nextFrameAdvance = 297;
+		animationComp.hasToEnd = false;
+		break;
+
+	case GameObjectType::POUNCER_ENEMY:
+		animationComp.animation = animation;
+		animationComp.framerate = 0.01f;
+		animationComp.repeat = false;
+		animationComp.startSpriteRect = { 0, 297, 381, 762 };
+		animationComp.totalFrames = 1;
+		animationComp.nextFrameAdvance = 297;
 		animationComp.hasToEnd = false;
 		break;
 	}

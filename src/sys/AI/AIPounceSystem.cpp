@@ -3,6 +3,7 @@
 #include <eng/GameEngine.hpp>
 #include <tools/Utils.hpp>
 #include <iostream>
+#include <tools/AnimationManager.hpp>
 
 AIPounceSystem::AIPounceSystem() {}
 
@@ -65,6 +66,17 @@ void AIPounceSystem::chaseObjective(GameEngine& gameContext, AIPounceComponent& 
 				}
 			}
 		}
+
+		if (gameContext.entityMan->existsComponent<AnimationComponent>(pounceComp.id)) {
+			AnimationComponent& animComp = gameContext.entityMan->getComponent<AnimationComponent>(pounceComp.id);
+
+			if (chaserVel.velocity.x != 0) {
+				AnimationManager::setAnimationToEntity(gameContext, Animation::RUNNING, animComp);
+			}
+			else {
+				AnimationManager::setAnimationToEntity(gameContext, Animation::IDLE, animComp);
+			}
+		}
 	}
 	else {
 		chaserVel.velocity.x *= pounceComp.velocityIncFactor;
@@ -75,6 +87,9 @@ void AIPounceSystem::chaseObjective(GameEngine& gameContext, AIPounceComponent& 
 			// Play jump sound
 			gameContext.getSoundFacadeRef().loadSound(pouncerJump.jumpSound.soundPath);
 			gameContext.getSoundFacadeRef().playSound(pouncerJump.jumpSound);
+
+			AnimationComponent& animComp = gameContext.entityMan->getComponent<AnimationComponent>(pounceComp.id);
+			AnimationManager::setAnimationToEntity(gameContext, Animation::DODGE, animComp);
 		}
 
 		pounceComp.cooldown = 0.f;

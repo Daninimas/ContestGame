@@ -778,9 +778,10 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         colliderComp.boundingRoot.bounding = { 0.f, 52.f, 0.f, 67.f };
 
         // Render component
-        renderComp.sprite = "Media/Images/Personajes/Alien araña/AlienArana.png";
+        renderComp.sprite = "Media/PNG/Alien Araña/spiderSpritesheet.png";
         renderComp.spriteRect = { 0, 297, 0, 381 };
         renderComp.color = { 20, 20, 30, 255 };
+        AnimationComponent& animComp = createComponent<AnimationComponent>(entityId);
 
         healthComp.maxHealth = 4;
 
@@ -818,8 +819,9 @@ int EntityManager::createEnemy(GameEngine& gameContext, Vector2 position, float 
         colliderComp.boundingRoot.bounding = { 0.f, 52.f, 0.f, 67.f };
         
         // Render component
-        renderComp.sprite = "Media/Images/Personajes/Alien araña/AlienArana.png";
+        renderComp.sprite = "Media/PNG/Alien Araña/spiderSpritesheet.png";
         renderComp.spriteRect = { 0, 297, 0, 381 };
+        AnimationComponent& animComp = createComponent<AnimationComponent>(entityId);
 
         healthComp.maxHealth = 8;
 

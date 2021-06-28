@@ -171,11 +171,23 @@
                          "id":264,
                          "name":"",
                          "rotation":0,
-                         "type":"DISTANCE_WALKING_ENEMY",
+                         "type":"ENEMY_SPIDER",
                          "visible":true,
                          "width":45,
                          "x":458.97,
                          "y":488.879
+                        }, 
+                        {
+                         "gid":17,
+                         "height":65,
+                         "id":515,
+                         "name":"",
+                         "rotation":0,
+                         "type":"POUNCER_ENEMY",
+                         "visible":true,
+                         "width":45,
+                         "x":1274.4696969697,
+                         "y":443.257575757576
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -2800,7 +2812,7 @@
          "y":0
         }],
  "nextlayerid":110,
- "nextobjectid":515,
+ "nextobjectid":516,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.0",
