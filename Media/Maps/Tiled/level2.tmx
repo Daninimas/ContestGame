@@ -64,15 +64,20 @@
      <property name="texture" value="./Media/Images/Textures/TrunkVertical.png"/>
     </properties>
    </object>
-   <object id="273" type="PLATFORM" x="1080.96" y="555.346" width="31.4278" height="32.9443"/>
+   <object id="273" type="PLATFORM" x="1080.96" y="555.346" width="59.4278" height="32.9443">
+    <properties>
+     <property name="texture" value="./Media/PNG/Assets/Rocas/1.png"/>
+    </properties>
+   </object>
    <object id="274" type="PLATFORM" x="1101.32" y="425.043" width="80.6399" height="14.8837">
     <properties>
      <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
     </properties>
    </object>
-   <object id="511" type="WALL" x="344.282" y="551.147" width="32.6482" height="37.5854">
+   <object id="511" type="WALL" x="344.282" y="551.147" width="60.6482" height="37.5854">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
+     <property name="texture" value="./Media/PNG/Assets/Rocas/2.png"/>
     </properties>
    </object>
    <object id="512" type="WALL" x="900.345" y="587.025" width="755.431" height="99.404">
@@ -177,25 +182,61 @@
      <property name="texture" value="./Media/Images/Textures/TrunkVertical.png"/>
     </properties>
    </object>
-   <object id="535" type="WALL" x="2364.13" y="470.945" width="111.549" height="14.8837"/>
-   <object id="536" type="PLATFORM" x="2508.32" y="413.854" width="160.518" height="14.8837"/>
-   <object id="537" type="PLATFORM" x="2398.53" y="319.831" width="72.6392" height="14.8837"/>
-   <object id="538" type="PLATFORM" x="2518.23" y="283.467" width="202.942" height="14.8837"/>
+   <object id="535" type="WALL" x="2364.13" y="470.945" width="111.549" height="14.8837">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
+    </properties>
+   </object>
+   <object id="536" type="PLATFORM" x="2508.32" y="413.854" width="160.518" height="14.8837">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
+    </properties>
+   </object>
+   <object id="537" type="PLATFORM" x="2398.53" y="319.831" width="72.6392" height="14.8837">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
+    </properties>
+   </object>
+   <object id="538" type="PLATFORM" x="2518.23" y="283.467" width="202.942" height="14.8837">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
+    </properties>
+   </object>
    <object id="541" type="PLATFORM" x="3016.08" y="304.255" width="38.0945" height="503.611">
     <properties>
      <property name="texture" value="./Media/Images/Textures/TrunkVertical.png"/>
     </properties>
    </object>
-   <object id="542" type="PLATFORM" x="2930.57" y="483.066" width="80.6399" height="14.8837"/>
-   <object id="543" type="WALL" x="3050.51" y="425.975" width="160.518" height="14.8837"/>
-   <object id="544" type="WALL" x="2883.15" y="331.952" width="130.215" height="14.8837"/>
+   <object id="542" type="PLATFORM" x="2930.57" y="483.066" width="80.6399" height="14.8837">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
+    </properties>
+   </object>
+   <object id="543" type="WALL" x="3050.51" y="425.975" width="160.518" height="14.8837">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
+    </properties>
+   </object>
+   <object id="544" type="WALL" x="2883.15" y="331.952" width="130.215" height="14.8837">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
+    </properties>
+   </object>
    <object id="547" type="PLATFORM" x="3487.17" y="275.467" width="38.0945" height="503.611">
     <properties>
      <property name="texture" value="./Media/Images/Textures/TrunkVertical.png"/>
     </properties>
    </object>
-   <object id="548" type="WALL" x="3365.3" y="454.278" width="117.004" height="14.8837"/>
-   <object id="549" type="PLATFORM" x="3521.6" y="397.187" width="160.518" height="14.8837"/>
+   <object id="548" type="WALL" x="3365.3" y="454.278" width="117.004" height="14.8837">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
+    </properties>
+   </object>
+   <object id="549" type="PLATFORM" x="3521.6" y="397.187" width="160.518" height="14.8837">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
+    </properties>
+   </object>
    <object id="551" type="WALL" x="3710.95" y="571.874" width="287.188" height="90.555">
     <properties>
      <property name="isCheckpoint" type="bool" value="true"/>
@@ -266,6 +307,7 @@
    <object id="582" type="WALL" x="4359.44" y="664.298" width="1969.01" height="86.5552">
     <properties>
      <property name="isCheckpoint" type="bool" value="true"/>
+     <property name="texture" value="./Media/Images/Textures/[32x32] Rocky Grass.png"/>
     </properties>
    </object>
    <object id="583" type="PLATFORM" x="4546.04" y="380.437" width="29.1248" height="290.641">
@@ -273,20 +315,56 @@
      <property name="texture" value="./Media/Images/Textures/TrunkVertical.png"/>
     </properties>
    </object>
-   <object id="584" type="PLATFORM" x="4433.92" y="487.225" width="113.973" height="23.9743"/>
-   <object id="585" type="PLATFORM" x="4567.26" y="427.407" width="113.973" height="23.9743"/>
+   <object id="584" type="PLATFORM" x="4433.92" y="487.225" width="113.973" height="23.9743">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
+    </properties>
+   </object>
+   <object id="585" type="PLATFORM" x="4567.26" y="427.407" width="113.973" height="23.9743">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
+    </properties>
+   </object>
    <object id="588" type="PLATFORM" x="5094.52" y="178.922" width="29.1248" height="478.52">
     <properties>
      <property name="texture" value="./Media/Images/Textures/TrunkVertical.png"/>
     </properties>
    </object>
-   <object id="589" type="PLATFORM" x="4982.4" y="407.71" width="113.973" height="23.9743"/>
-   <object id="590" type="PLATFORM" x="5121.8" y="316.801" width="229.125" height="23.9743"/>
-   <object id="591" type="PLATFORM" x="4924.83" y="224.376" width="177.61" height="23.9743"/>
-   <object id="592" type="PLATFORM" x="6043.01" y="345.588" width="29.1248" height="317.914"/>
-   <object id="593" type="PLATFORM" x="5930.9" y="391.042" width="117.004" height="23.9743"/>
-   <object id="594" type="PLATFORM" x="5971.8" y="518.316" width="74.5798" height="23.9743"/>
-   <object id="595" type="PLATFORM" x="6077.86" y="418.316" width="147.307" height="23.9743"/>
+   <object id="589" type="PLATFORM" x="4982.4" y="407.71" width="113.973" height="23.9743">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
+    </properties>
+   </object>
+   <object id="590" type="PLATFORM" x="5121.8" y="316.801" width="229.125" height="23.9743">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
+    </properties>
+   </object>
+   <object id="591" type="PLATFORM" x="4924.83" y="224.376" width="177.61" height="23.9743">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
+    </properties>
+   </object>
+   <object id="592" type="PLATFORM" x="6043.01" y="345.588" width="29.1248" height="317.914">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkVertical.png"/>
+    </properties>
+   </object>
+   <object id="593" type="PLATFORM" x="5930.9" y="391.042" width="117.004" height="23.9743">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
+    </properties>
+   </object>
+   <object id="594" type="PLATFORM" x="5971.8" y="518.316" width="74.5798" height="23.9743">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
+    </properties>
+   </object>
+   <object id="595" type="PLATFORM" x="6077.86" y="418.316" width="147.307" height="23.9743">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
+    </properties>
+   </object>
   </objectgroup>
  </group>
  <group id="126" name="Phase4">
@@ -343,36 +421,100 @@
    <object id="612" type="WALL" x="6320" y="658.13" width="259.916" height="93.222">
     <properties>
      <property name="isCheckpoint" type="bool" value="true"/>
+     <property name="texture" value="./Media/Images/Textures/[32x32] Rocky Grass.png"/>
     </properties>
    </object>
-   <object id="615" type="PLATFORM" x="7218.77" y="110.74" width="50.3369" height="793.672"/>
-   <object id="617" type="WALL" x="7109.68" y="600.134" width="110.943" height="23.9743"/>
-   <object id="618" type="PLATFORM" x="7718.77" y="112.255" width="29.1248" height="784.58"/>
+   <object id="615" type="PLATFORM" x="7218.77" y="110.74" width="50.3369" height="793.672">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkVertical.png"/>
+    </properties>
+   </object>
+   <object id="617" type="WALL" x="7109.68" y="600.134" width="110.943" height="23.9743">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
+    </properties>
+   </object>
+   <object id="618" type="PLATFORM" x="7718.77" y="112.255" width="29.1248" height="784.58">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkVertical.png"/>
+    </properties>
+   </object>
    <object id="619" type="WALL" x="7746.04" y="444.073" width="147.306" height="23.9743">
     <properties>
      <property name="isCheckpoint" type="bool" value="true"/>
+     <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
     </properties>
    </object>
-   <object id="620" type="WALL" x="8109.68" y="280.437" width="86.7003" height="27.0046"/>
-   <object id="621" type="WALL" x="7597.56" y="500.134" width="120.034" height="23.9743"/>
-   <object id="622" type="PLATFORM" x="8191.49" y="188.013" width="53.3672" height="714.884"/>
-   <object id="623" type="WALL" x="7746.05" y="148.618" width="77.61" height="23.9743"/>
-   <object id="624" type="WALL" x="8244.53" y="418.316" width="107.913" height="23.9743"/>
-   <object id="625" type="WALL" x="8244.53" y="533.467" width="207.913" height="48.2167"/>
+   <object id="620" type="WALL" x="8109.68" y="280.437" width="86.7003" height="27.0046">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
+    </properties>
+   </object>
+   <object id="621" type="WALL" x="7597.56" y="500.134" width="120.034" height="23.9743">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
+    </properties>
+   </object>
+   <object id="622" type="PLATFORM" x="8191.49" y="188.013" width="53.3672" height="714.884">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkVertical.png"/>
+    </properties>
+   </object>
+   <object id="623" type="WALL" x="7746.05" y="148.618" width="77.61" height="23.9743">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
+    </properties>
+   </object>
+   <object id="624" type="WALL" x="8244.53" y="418.316" width="107.913" height="23.9743">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
+    </properties>
+   </object>
+   <object id="625" type="WALL" x="8244.53" y="533.467" width="207.913" height="48.2167">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
+    </properties>
+   </object>
    <object id="626" type="WALL" x="6767.01" y="673.389" width="217.491" height="72.131">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
+     <property name="texture" value="./Media/Images/Textures/Rocky_Road.png"/>
     </properties>
    </object>
-   <object id="627" type="WALL" x="7271.8" y="542.558" width="177.61" height="23.9743"/>
-   <object id="628" type="PLATFORM" x="7268.77" y="183.589" width="177.61" height="23.9743"/>
-   <object id="629" type="PLATFORM" x="7268.77" y="280.77" width="159.428" height="23.9743"/>
-   <object id="630" type="PLATFORM" x="7738.47" y="727.407" width="141.245" height="23.9743"/>
-   <object id="631" type="PLATFORM" x="7541.5" y="359.558" width="171.549" height="23.9743"/>
-   <object id="632" type="WALL" x="7623.32" y="127.407" width="107.912" height="23.9743"/>
+   <object id="627" type="WALL" x="7271.8" y="542.558" width="177.61" height="23.9743">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
+    </properties>
+   </object>
+   <object id="628" type="PLATFORM" x="7268.77" y="183.589" width="177.61" height="23.9743">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
+    </properties>
+   </object>
+   <object id="629" type="PLATFORM" x="7268.77" y="280.77" width="159.428" height="23.9743">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
+    </properties>
+   </object>
+   <object id="630" type="PLATFORM" x="7738.47" y="727.407" width="141.245" height="23.9743">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
+    </properties>
+   </object>
+   <object id="631" type="PLATFORM" x="7541.5" y="359.558" width="171.549" height="23.9743">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
+    </properties>
+   </object>
+   <object id="632" type="WALL" x="7623.32" y="127.407" width="107.912" height="23.9743">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
+    </properties>
+   </object>
    <object id="633" type="WALL" x="8542.77" y="659.753" width="244.764" height="80.131">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
+     <property name="texture" value="./Media/Images/Textures/[32x32] Rocky Grass.png"/>
     </properties>
    </object>
   </objectgroup>
@@ -454,31 +596,105 @@
    <object id="648" type="WALL" x="8777.33" y="655.1" width="2213.61" height="76.737">
     <properties>
      <property name="isCheckpoint" type="bool" value="true"/>
+     <property name="texture" value="./Media/Images/Textures/[32x32] Rocky Grass.png"/>
     </properties>
    </object>
-   <object id="649" type="PLATFORM" x="9403.62" y="277.407" width="26.0945" height="375.49"/>
-   <object id="650" type="PLATFORM" x="9291.5" y="439.528" width="110.943" height="23.9743"/>
-   <object id="651" type="PLATFORM" x="9736.95" y="251.649" width="23.0642" height="399.732"/>
-   <object id="653" type="WALL" x="9858.17" y="625.892" width="44.276" height="30.0349"/>
-   <object id="660" type="PLATFORM" x="9432.41" y="403.164" width="123.064" height="23.9743"/>
-   <object id="662" type="PLATFORM" x="9611.19" y="441.376" width="129.125" height="23.9743"/>
-   <object id="667" type="PLATFORM" x="9426.35" y="291.043" width="65.4882" height="23.9743"/>
-   <object id="669" type="PLATFORM" x="9756.65" y="372.861" width="129.125" height="23.9743"/>
-   <object id="670" type="WALL" x="9477.86" y="612.255" width="29.1245" height="42.1561">
+   <object id="649" type="PLATFORM" x="9403.62" y="277.407" width="46.0945" height="375.49">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkVertical.png"/>
+    </properties>
+   </object>
+   <object id="650" type="PLATFORM" x="9291.5" y="439.528" width="110.943" height="23.9743">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
+    </properties>
+   </object>
+   <object id="651" type="PLATFORM" x="9736.95" y="251.649" width="35.0642" height="399.732">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkVertical.png"/>
+    </properties>
+   </object>
+   <object id="653" type="WALL" x="9858.17" y="625.892" width="76.276" height="30.0349">
+    <properties>
+     <property name="texture" value="./Media/PNG/Assets/Rocas/3.png"/>
+    </properties>
+   </object>
+   <object id="660" type="PLATFORM" x="9432.41" y="403.164" width="123.064" height="23.9743">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
+    </properties>
+   </object>
+   <object id="662" type="PLATFORM" x="9611.19" y="441.376" width="129.125" height="23.9743">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
+    </properties>
+   </object>
+   <object id="667" type="PLATFORM" x="9426.35" y="291.043" width="65.4882" height="23.9743">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
+    </properties>
+   </object>
+   <object id="669" type="PLATFORM" x="9756.65" y="372.861" width="129.125" height="23.9743">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
+    </properties>
+   </object>
+   <object id="670" type="WALL" x="9477.86" y="612.255" width="69.1245" height="42.1561">
     <properties>
      <property name="isCheckpoint" type="bool" value="true"/>
+     <property name="texture" value="./Media/PNG/Assets/Rocas/2.png"/>
     </properties>
    </object>
-   <object id="671" type="PLATFORM" x="10390" y="621.346" width="44.276" height="30.0349"/>
-   <object id="672" type="PLATFORM" x="10086.9" y="309.225" width="20.0918" height="348.217"/>
-   <object id="673" type="PLATFORM" x="9971.31" y="426.016" width="112.484" height="20.8846"/>
-   <object id="674" type="PLATFORM" x="10104.1" y="460.27" width="112.484" height="20.8846"/>
-   <object id="675" type="PLATFORM" x="10013.5" y="322.891" width="70.0598" height="20.8846"/>
-   <object id="676" type="PLATFORM" x="10568.7" y="271.346" width="22.1899" height="384.581"/>
-   <object id="677" type="PLATFORM" x="10441" y="412.333" width="124.23" height="23.0655"/>
-   <object id="678" type="PLATFORM" x="10593.7" y="504.68" width="124.23" height="23.0655"/>
-   <object id="679" type="PLATFORM" x="10487.6" y="298.439" width="77.376" height="23.0655"/>
-   <object id="680" type="WALL" x="10623.3" y="594.073" width="44.276" height="54.2773"/>
+   <object id="671" type="PLATFORM" x="10390" y="621.346" width="80.276" height="30.0349">
+    <properties>
+     <property name="texture" value="./Media/PNG/Assets/Rocas/1.png"/>
+    </properties>
+   </object>
+   <object id="672" type="PLATFORM" x="10086.9" y="309.225" width="36.0918" height="348.217">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkVertical.png"/>
+    </properties>
+   </object>
+   <object id="673" type="PLATFORM" x="9971.31" y="426.016" width="112.484" height="20.8846">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
+    </properties>
+   </object>
+   <object id="674" type="PLATFORM" x="10104.1" y="460.27" width="112.484" height="20.8846">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
+    </properties>
+   </object>
+   <object id="675" type="PLATFORM" x="10013.5" y="322.891" width="70.0598" height="20.8846">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
+    </properties>
+   </object>
+   <object id="676" type="PLATFORM" x="10568.7" y="271.346" width="42.1899" height="384.581">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkVertical.png"/>
+    </properties>
+   </object>
+   <object id="677" type="PLATFORM" x="10441" y="412.333" width="124.23" height="23.0655">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
+    </properties>
+   </object>
+   <object id="678" type="PLATFORM" x="10593.7" y="504.68" width="124.23" height="23.0655">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
+    </properties>
+   </object>
+   <object id="679" type="PLATFORM" x="10487.6" y="298.439" width="77.376" height="23.0655">
+    <properties>
+     <property name="texture" value="./Media/Images/Textures/TrunkHorizontal.png"/>
+    </properties>
+   </object>
+   <object id="680" type="WALL" x="10623.3" y="594.073" width="44.276" height="54.2773">
+    <properties>
+     <property name="texture" value="./Media/PNG/Assets/Rocas/3.png"/>
+    </properties>
+   </object>
   </objectgroup>
  </group>
  <group id="144" name="Phase6">
@@ -572,26 +788,31 @@
    <object id="708" type="WALL" x="10980.2" y="655.039" width="1705.61" height="56.2522">
     <properties>
      <property name="isCheckpoint" type="bool" value="true"/>
+     <property name="texture" value="./Media/Images/Textures/[32x32] Rocky Grass.png"/>
     </properties>
    </object>
    <object id="728" type="WALL" x="12945.7" y="417.328" width="238.943" height="235.04">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
+     <property name="texture" value="./Media/Images/Textures/Brick.png"/>
     </properties>
    </object>
-   <object id="736" type="FALLING_WALL" x="12683.6" y="655.04" width="289.004" height="224.252">
+   <object id="736" type="FALLING_WALL" x="12683.6" y="655.04" width="289.004" height="76.252">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
+     <property name="texture" value="./Media/Images/Textures/[32x32] Rocky Grass.png"/>
     </properties>
    </object>
    <object id="737" type="WALL" x="12402.8" y="707.874" width="278.337" height="558.252">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
+     <property name="texture" value="./Media/Images/Textures/Rocky_Road.png"/>
     </properties>
    </object>
    <object id="738" type="WALL" x="12970.8" y="708.874" width="208.337" height="550.252">
     <properties>
      <property name="isCheckpoint" type="bool" value="false"/>
+     <property name="texture" value="./Media/Images/Textures/Rocky_Road.png"/>
     </properties>
    </object>
   </objectgroup>

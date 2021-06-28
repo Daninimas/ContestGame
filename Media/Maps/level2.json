@@ -204,7 +204,7 @@
                                  "value":400
                                 }],
                          "rotation":0,
-                         "type":"ENEMY_SPIDER",
+                         "type":"CHASERJUMPER",
                          "visible":true,
                          "width":20,
                          "x":1512,
@@ -265,10 +265,16 @@
                          "height":32.9443,
                          "id":273,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/PNG\/Assets\/Rocas\/1.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
-                         "width":31.4278,
+                         "width":59.4277999999999,
                          "x":1080.96,
                          "y":555.346
                         }, 
@@ -298,11 +304,16 @@
                                  "name":"isCheckpoint",
                                  "type":"bool",
                                  "value":false
+                                }, 
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/PNG\/Assets\/Rocas\/2.png"
                                 }],
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,
-                         "width":32.6482,
+                         "width":60.6482,
                          "x":344.282,
                          "y":551.147
                         }, 
@@ -765,6 +776,12 @@
                          "height":14.8837,
                          "id":535,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkHorizontal.png"
+                                }],
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,
@@ -776,6 +793,12 @@
                          "height":14.8837,
                          "id":536,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkHorizontal.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
@@ -787,6 +810,12 @@
                          "height":14.8837,
                          "id":537,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkHorizontal.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
@@ -798,6 +827,12 @@
                          "height":14.8837,
                          "id":538,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkHorizontal.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
@@ -826,6 +861,12 @@
                          "height":14.8837,
                          "id":542,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkHorizontal.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
@@ -837,6 +878,12 @@
                          "height":14.8837,
                          "id":543,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkHorizontal.png"
+                                }],
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,
@@ -848,6 +895,12 @@
                          "height":14.8837,
                          "id":544,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkHorizontal.png"
+                                }],
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,
@@ -876,6 +929,12 @@
                          "height":14.8837,
                          "id":548,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkHorizontal.png"
+                                }],
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,
@@ -887,6 +946,12 @@
                          "height":14.8837,
                          "id":549,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkHorizontal.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
@@ -1252,6 +1317,11 @@
                                  "name":"isCheckpoint",
                                  "type":"bool",
                                  "value":true
+                                }, 
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/[32x32] Rocky Grass.png"
                                 }],
                          "rotation":0,
                          "type":"WALL",
@@ -1281,6 +1351,12 @@
                          "height":23.9743,
                          "id":584,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkHorizontal.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
@@ -1292,6 +1368,12 @@
                          "height":23.9743,
                          "id":585,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkHorizontal.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
@@ -1320,6 +1402,12 @@
                          "height":23.9743,
                          "id":589,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkHorizontal.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
@@ -1331,6 +1419,12 @@
                          "height":23.9743,
                          "id":590,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkHorizontal.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
@@ -1342,6 +1436,12 @@
                          "height":23.9743,
                          "id":591,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkHorizontal.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
@@ -1353,6 +1453,12 @@
                          "height":317.914,
                          "id":592,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkVertical.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
@@ -1364,6 +1470,12 @@
                          "height":23.9743,
                          "id":593,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkHorizontal.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
@@ -1375,6 +1487,12 @@
                          "height":23.9743,
                          "id":594,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkHorizontal.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
@@ -1386,6 +1504,12 @@
                          "height":23.9743,
                          "id":595,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkHorizontal.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
@@ -1678,6 +1802,11 @@
                                  "name":"isCheckpoint",
                                  "type":"bool",
                                  "value":true
+                                }, 
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/[32x32] Rocky Grass.png"
                                 }],
                          "rotation":0,
                          "type":"WALL",
@@ -1690,6 +1819,12 @@
                          "height":793.672,
                          "id":615,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkVertical.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
@@ -1701,6 +1836,12 @@
                          "height":23.9743,
                          "id":617,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkHorizontal.png"
+                                }],
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,
@@ -1712,6 +1853,12 @@
                          "height":784.58,
                          "id":618,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkVertical.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
@@ -1728,6 +1875,11 @@
                                  "name":"isCheckpoint",
                                  "type":"bool",
                                  "value":true
+                                }, 
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkHorizontal.png"
                                 }],
                          "rotation":0,
                          "type":"WALL",
@@ -1740,6 +1892,12 @@
                          "height":27.0046,
                          "id":620,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkHorizontal.png"
+                                }],
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,
@@ -1751,6 +1909,12 @@
                          "height":23.9743,
                          "id":621,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkHorizontal.png"
+                                }],
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,
@@ -1762,6 +1926,12 @@
                          "height":714.884,
                          "id":622,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkVertical.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
@@ -1773,6 +1943,12 @@
                          "height":23.9743,
                          "id":623,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkHorizontal.png"
+                                }],
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,
@@ -1784,6 +1960,12 @@
                          "height":23.9743,
                          "id":624,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkHorizontal.png"
+                                }],
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,
@@ -1795,6 +1977,12 @@
                          "height":48.2167,
                          "id":625,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkHorizontal.png"
+                                }],
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,
@@ -1811,6 +1999,11 @@
                                  "name":"isCheckpoint",
                                  "type":"bool",
                                  "value":false
+                                }, 
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/Rocky_Road.png"
                                 }],
                          "rotation":0,
                          "type":"WALL",
@@ -1823,6 +2016,12 @@
                          "height":23.9743,
                          "id":627,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkHorizontal.png"
+                                }],
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,
@@ -1834,6 +2033,12 @@
                          "height":23.9743,
                          "id":628,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkHorizontal.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
@@ -1845,6 +2050,12 @@
                          "height":23.9743,
                          "id":629,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkHorizontal.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
@@ -1856,6 +2067,12 @@
                          "height":23.9743,
                          "id":630,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkHorizontal.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
@@ -1867,6 +2084,12 @@
                          "height":23.9743,
                          "id":631,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkHorizontal.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
@@ -1878,6 +2101,12 @@
                          "height":23.9743,
                          "id":632,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkHorizontal.png"
+                                }],
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,
@@ -1894,6 +2123,11 @@
                                  "name":"isCheckpoint",
                                  "type":"bool",
                                  "value":false
+                                }, 
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/[32x32] Rocky Grass.png"
                                 }],
                          "rotation":0,
                          "type":"WALL",
@@ -2319,6 +2553,11 @@
                                  "name":"isCheckpoint",
                                  "type":"bool",
                                  "value":true
+                                }, 
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/[32x32] Rocky Grass.png"
                                 }],
                          "rotation":0,
                          "type":"WALL",
@@ -2331,10 +2570,16 @@
                          "height":375.49,
                          "id":649,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkVertical.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
-                         "width":26.0945,
+                         "width":46.0944999999992,
                          "x":9403.62,
                          "y":277.407
                         }, 
@@ -2342,6 +2587,12 @@
                          "height":23.9743,
                          "id":650,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkHorizontal.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
@@ -2353,10 +2604,16 @@
                          "height":399.732,
                          "id":651,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkVertical.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
-                         "width":23.0642,
+                         "width":35.0642000000007,
                          "x":9736.95,
                          "y":251.649
                         }, 
@@ -2364,10 +2621,16 @@
                          "height":30.0349,
                          "id":653,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/PNG\/Assets\/Rocas\/3.png"
+                                }],
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,
-                         "width":44.276,
+                         "width":76.2759999999998,
                          "x":9858.17,
                          "y":625.892
                         }, 
@@ -2375,6 +2638,12 @@
                          "height":23.9743,
                          "id":660,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkHorizontal.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
@@ -2386,6 +2655,12 @@
                          "height":23.9743,
                          "id":662,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkHorizontal.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
@@ -2397,6 +2672,12 @@
                          "height":23.9743,
                          "id":667,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkHorizontal.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
@@ -2408,6 +2689,12 @@
                          "height":23.9743,
                          "id":669,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkHorizontal.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
@@ -2424,11 +2711,16 @@
                                  "name":"isCheckpoint",
                                  "type":"bool",
                                  "value":true
+                                }, 
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/PNG\/Assets\/Rocas\/2.png"
                                 }],
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,
-                         "width":29.1245,
+                         "width":69.1244999999999,
                          "x":9477.86,
                          "y":612.255
                         }, 
@@ -2436,10 +2728,16 @@
                          "height":30.0349,
                          "id":671,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/PNG\/Assets\/Rocas\/1.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
-                         "width":44.276,
+                         "width":80.2759999999998,
                          "x":10390,
                          "y":621.346
                         }, 
@@ -2447,10 +2745,16 @@
                          "height":348.217,
                          "id":672,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkVertical.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
-                         "width":20.0918,
+                         "width":36.0918000000001,
                          "x":10086.9,
                          "y":309.225
                         }, 
@@ -2458,6 +2762,12 @@
                          "height":20.8846,
                          "id":673,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkHorizontal.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
@@ -2469,6 +2779,12 @@
                          "height":20.8846,
                          "id":674,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkHorizontal.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
@@ -2480,6 +2796,12 @@
                          "height":20.8846,
                          "id":675,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkHorizontal.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
@@ -2491,10 +2813,16 @@
                          "height":384.581,
                          "id":676,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkVertical.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
-                         "width":22.1899,
+                         "width":42.1898999999994,
                          "x":10568.7,
                          "y":271.346
                         }, 
@@ -2502,6 +2830,12 @@
                          "height":23.0655,
                          "id":677,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkHorizontal.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
@@ -2513,6 +2847,12 @@
                          "height":23.0655,
                          "id":678,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkHorizontal.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
@@ -2524,6 +2864,12 @@
                          "height":23.0655,
                          "id":679,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/TrunkHorizontal.png"
+                                }],
                          "rotation":0,
                          "type":"PLATFORM",
                          "visible":true,
@@ -2535,6 +2881,12 @@
                          "height":54.2773,
                          "id":680,
                          "name":"",
+                         "properties":[
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/PNG\/Assets\/Rocas\/3.png"
+                                }],
                          "rotation":0,
                          "type":"WALL",
                          "visible":true,
@@ -2929,6 +3281,11 @@
                                  "name":"isCheckpoint",
                                  "type":"bool",
                                  "value":true
+                                }, 
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/[32x32] Rocky Grass.png"
                                 }],
                          "rotation":0,
                          "type":"WALL",
@@ -2946,6 +3303,11 @@
                                  "name":"isCheckpoint",
                                  "type":"bool",
                                  "value":false
+                                }, 
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/Brick.png"
                                 }],
                          "rotation":0,
                          "type":"WALL",
@@ -2955,7 +3317,7 @@
                          "y":417.328
                         }, 
                         {
-                         "height":224.252,
+                         "height":76.252,
                          "id":736,
                          "name":"",
                          "properties":[
@@ -2963,6 +3325,11 @@
                                  "name":"isCheckpoint",
                                  "type":"bool",
                                  "value":false
+                                }, 
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/[32x32] Rocky Grass.png"
                                 }],
                          "rotation":0,
                          "type":"FALLING_WALL",
@@ -2980,6 +3347,11 @@
                                  "name":"isCheckpoint",
                                  "type":"bool",
                                  "value":false
+                                }, 
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/Rocky_Road.png"
                                 }],
                          "rotation":0,
                          "type":"WALL",
@@ -2997,6 +3369,11 @@
                                  "name":"isCheckpoint",
                                  "type":"bool",
                                  "value":false
+                                }, 
+                                {
+                                 "name":"texture",
+                                 "type":"string",
+                                 "value":".\/Media\/Images\/Textures\/Rocky_Road.png"
                                 }],
                          "rotation":0,
                          "type":"WALL",
