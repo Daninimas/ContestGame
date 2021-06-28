@@ -3,6 +3,7 @@
 #include <eng/GameEngine.hpp>
 #include <tools/Utils.hpp>
 #include <iostream>
+#include <tools/AnimationManager.hpp>
 
 AIFlyingChaseSystem::AIFlyingChaseSystem() {}
 
@@ -75,6 +76,17 @@ bool AIFlyingChaseSystem::chaseObjective(GameEngine& gameContext, AIFlyingChaseC
 	else {
 		chaserVel.velocity.y = 0.f;
 		idle = true;
+	}
+
+	if (gameContext.entityMan->existsComponent<AnimationComponent>(chaseComp.id)) { // Movement animation
+		if (chaserVel.velocity.x != 0) {
+			AnimationComponent& animComp = gameContext.entityMan->getComponent<AnimationComponent>(chaseComp.id);
+			AnimationManager::setAnimationToEntity(gameContext, Animation::RUNNING, animComp);
+		}
+		else {
+			AnimationComponent& animComp = gameContext.entityMan->getComponent<AnimationComponent>(chaseComp.id);
+			AnimationManager::setAnimationToEntity(gameContext, Animation::IDLE, animComp);
+		}
 	}
 
 	return idle;

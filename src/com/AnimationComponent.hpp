@@ -16,7 +16,7 @@ public:
     Animation lastAnimation = Animation::NONE;
 
     uint16_t totalFrames;
-    uint16_t actualFrame{ 0 };
+    int actualFrame{ 0 };
 
     BoundingBox startSpriteRect; // The spriteRect where the animation starts
     int nextFrameAdvance{ 512 }; // number of pixels that has to advance the spriteRect for the next frame
@@ -25,5 +25,8 @@ public:
     float currentTime{ 0.f }; // Actual time for changing the frame
 
     bool repeat{ true };
+
+    bool hasToEnd{ false };
+    bool ended{ false };
 };
 

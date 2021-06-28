@@ -151,4 +151,22 @@ void InputJoystickSystem::setAnimationToPlayer(GameEngine& gameContext) const {
     if (playerInput.usingTurret == true) {
         AnimationManager::setAnimationToEntity(gameContext, Animation::IDLE, animComp);
     }
+
+    // Animation look up
+    if (playerInput.actualMovement == DodgeComponent::Up) {
+        AnimationComponent& animComp = gameContext.entityMan->getComponent<AnimationComponent>(WorldElementsData::playerId);
+        AnimationManager::setAnimationToEntity(gameContext, Animation::SHOOT_UP, animComp);
+    }
+
+    if (playerInput.movingDown)
+    {
+        VelocityComponent& playerVel = gameContext.entityMan->getComponent<VelocityComponent>(WorldElementsData::playerId);
+        if (playerVel.velocity.y != 0) {
+            AnimationComponent& animComp = gameContext.entityMan->getComponent<AnimationComponent>(WorldElementsData::playerId);
+            AnimationManager::setAnimationToEntity(gameContext, Animation::SHOOT_DOWN, animComp);
+        }
+        else {
+            AnimationManager::setAnimationToEntity(gameContext, Animation::IDLE, animComp);
+        }
+    }
 }

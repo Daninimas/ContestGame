@@ -4,6 +4,7 @@
 #include <tools/Utils.hpp>
 #include <iostream>
 #include <algorithm>
+#include <tools/AnimationManager.hpp>
 
 AttackSystem::AttackSystem() {}
 
@@ -131,6 +132,8 @@ void AttackSystem::checkPlayerAttacking(GameEngine& gameContext) const {
 		if (createMelee) {
 			createMeleeAttack(gameContext, gameContext.entityMan->getComponent<MeleeWeaponComponent>(WorldElementsData::playerId));
 
+			
+
 			// Reset the distance cooldown too
 			if (gameContext.entityMan->existsComponent<DistanceWeaponComponent>(WorldElementsData::playerId)) {
 				gameContext.entityMan->getComponent<DistanceWeaponComponent>(WorldElementsData::playerId).cooldown = 0.f;
@@ -147,6 +150,7 @@ void AttackSystem::checkPlayerAttacking(GameEngine& gameContext) const {
 			{
 				playerDistanceWeap.attackVel.x = 0.f;
 				playerDistanceWeap.attackVel.y = -playerDistanceWeap.attackGeneralVelociy;
+
 			}
 			if (playerInput.movingDown)
 			{
@@ -239,6 +243,8 @@ bool AttackSystem::createMeleeAttack(GameEngine& gameContext, MeleeWeaponCompone
 		GameObjectType attackGOtype = GameObjectType::MELEE_ATTACK;
 		if (meleeAttacker.id == WorldElementsData::playerId) {
 			attackGOtype = GameObjectType::PLAYER_MELEE_ATTACK;
+			AnimationComponent& animComp = gameContext.entityMan->getComponent<AnimationComponent>(WorldElementsData::playerId);
+			AnimationManager::setAnimationToEntity(gameContext, Animation::MELEE_ATTACK, animComp);
 		}
 
 		// Calculate attack spawn situation outside of the attacker collidable

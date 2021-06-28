@@ -4,5 +4,9 @@ enum class Animation { // These are the base animations, without specifying in w
 	NONE = 0,
 	IDLE,
 	RUNNING,
-	DODGE
+	DODGE,
+	SHOOT_UP,
+	SHOOT_DOWN,
+	MELEE_ATTACK,
+	TAKING_DAMAGE
 };

@@ -198,7 +198,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
     situation.position = position;
     situation.rotation = r;
     situation.noWorldDelete = true;
-    situation.scale = Vector2(0.18f, 0.18f);
+    situation.scale = Vector2(0.2f, 0.19f);
 
     velocityComp.speedX = 120.f;
     velocityComp.gravity = 500.f;
@@ -220,7 +220,7 @@ int EntityManager::createPlayer(GameEngine& gameContext, Vector2 position, float
 
 
     // Render component
-    renderComp.sprite = "Media/Images/SpriteSheet _Completo.png";
+    renderComp.sprite = "Media/PNG/Personaje Principal/PlayerSpritesheet.png";
     renderComp.spriteRect = { 100, 400, 60, 500 };
 
     // Jump
@@ -906,7 +906,7 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
         distanceWeaponComp.ammo = 70;
         distanceWeaponComp.infiniteAmmo = false;
         distanceWeaponComp.bulletSpreadAngle = 5.f;
-        distanceWeaponComp.spawnAttackPos = { 20.f, 39.f };
+        distanceWeaponComp.spawnAttackPos = { 20.f, 32.f };
 
         distanceWeaponComp.attackSound.soundPath = "Media/Sound/Weapons/M4A1_Single-Kibblesbob-8540445.wav";
 
@@ -925,7 +925,7 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
         meleeWeaponComp.damage = 4;
         meleeWeaponComp.maxCooldown = 1.f;
         meleeWeaponComp.attackLifetime = 0.1f;
-        meleeWeaponComp.spawnAttackPos = { 20.f, 39.f };
+        meleeWeaponComp.spawnAttackPos = { 20.f, 32.f };
 
         meleeWeaponComp.attackSound.soundPath = "Media/Sound/GE_KF7_Soviet.wav";
 
@@ -945,7 +945,7 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
         distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::BOMB;
         distanceWeaponComp.ammo = 8;
         distanceWeaponComp.infiniteAmmo = false;
-        distanceWeaponComp.spawnAttackPos = { 20.f, 39.f };
+        distanceWeaponComp.spawnAttackPos = { 20.f, 32.f };
 
         distanceWeaponComp.attackSound.soundPath = "Media/Sound/Weapons/grenadeLauncherSound.wav";
 
@@ -973,7 +973,7 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
         distanceWeaponComp.attackGeneratedType = DistanceWeaponComponent::LASER;
         distanceWeaponComp.ammo = 30;
         distanceWeaponComp.infiniteAmmo = false;
-        distanceWeaponComp.spawnAttackPos = { 20.f, 39.f };
+        distanceWeaponComp.spawnAttackPos = { 20.f, 32.f };
         distanceWeaponComp.attackSound.soundPath = "Media/Sound/Weapons/laserShot.wav";
 
         renderComp.sprite = "Media/Images/laser_gun.png";
@@ -998,7 +998,7 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
         distanceWeaponComp.infiniteAmmo = false;
         distanceWeaponComp.numberOfShells = 4;
         distanceWeaponComp.bulletSpreadAngle = 12.f;
-        distanceWeaponComp.spawnAttackPos = { 20.f, 39.f };
+        distanceWeaponComp.spawnAttackPos = { 20.f, 32.f };
         distanceWeaponComp.attackSound.soundPath = "Media/Sound/Weapons/shotgunShot.wav";
 
         renderComp.sprite = "Media/Images/shotgun.png";
@@ -1013,6 +1013,7 @@ int EntityManager::createWeapon(GameEngine& gameContext, Vector2 position, float
 
     renderComp.sprite = "Media/Images/shotgun.png";
     renderComp.spriteRect = { 0, 1, 0, 1 };
+    renderComp.color = {0, 0, 0, 0};
 
     situation.scale = { 0.3f, 0.3f };
 
@@ -1251,13 +1252,19 @@ int EntityManager::createDrone(GameEngine& gameContext, Vector2 position, float 
     AIFlyingChaseComponent& flyingChaseComp = createComponent<AIFlyingChaseComponent>(entityId);
     AIDistanceAtkComponent& distanceAIComp = createComponent<AIDistanceAtkComponent>(entityId);
     SensorComponent& sensorComp = createComponent<SensorComponent>(entityId);
+    RenderComponent& renderComp = createComponent<RenderComponent>(entityId);
+    AnimationComponent& animComp = createComponent<AnimationComponent>(entityId);
 
     //######### DATA ########//
     situation.position = position;
     situation.rotation = r;
+    situation.scale = { 0.124f, 0.174f};
+
+    renderComp.sprite = "./Media/PNG/Dron/DroneSpritesheet.png";
+    renderComp.spriteRect = { 8, 494, 133, 316 };
 
     colliderComp.type = ColliderType::DYNAMIC;
-    colliderComp.boundingRoot.bounding = { 0.f, 30.f, 0.f, 16.f };
+    colliderComp.boundingRoot.bounding = { 0.f, 60.f, 0.f, 32.f };
 
     flyingChaseComp.maxHeigtht = 55.f;
     flyingChaseComp.minHeigtht = 50.f;
@@ -1268,7 +1275,7 @@ int EntityManager::createDrone(GameEngine& gameContext, Vector2 position, float 
 
     switch (goType) {
     case GameObjectType::DRONE_FRIEND:
-        
+
 
         situation.noWorldDelete = false;
 
@@ -1313,6 +1320,10 @@ int EntityManager::createDrone(GameEngine& gameContext, Vector2 position, float 
 
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::DRONE, goType));
+
+    //######### RENDER ########//
+    gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
+
     return entityId;
 }
 

@@ -2,6 +2,7 @@
 
 #include <eng/GameEngine.hpp>
 #include <enum/EntityType.hpp>
+#include <tools/AnimationManager.hpp>
 
 HealthSystem::HealthSystem() {}
 
@@ -58,6 +59,11 @@ void HealthSystem::manageHeatlths(GameEngine& gameContext) const {
                 // Play damage sound
                 gameContext.getSoundFacadeRef().loadSound(health.damageSound.soundPath);
                 gameContext.getSoundFacadeRef().playSound(health.damageSound);
+
+                if (gameContext.entityMan->existsComponent<AnimationComponent>(health.id)) { // Damage animation
+                    AnimationComponent& animComp = gameContext.entityMan->getComponent<AnimationComponent>(WorldElementsData::playerId);
+                    AnimationManager::setAnimationToEntity(gameContext, Animation::TAKING_DAMAGE, animComp);
+                }
             }
 
 

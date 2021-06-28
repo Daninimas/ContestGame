@@ -90,18 +90,6 @@
                          "width":152,
                          "x":464,
                          "y":515
-                        }, 
-                        {
-                         "gid":11,
-                         "height":65,
-                         "id":512,
-                         "name":"",
-                         "rotation":0,
-                         "type":"M4",
-                         "visible":true,
-                         "width":152,
-                         "x":756,
-                         "y":335.5
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -517,6 +505,29 @@
                          "width":162.216,
                          "x":2685.56,
                          "y":428.376
+                        }],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
+                }, 
+                {
+                 "draworder":"topdown",
+                 "id":109,
+                 "name":"POWERUP",
+                 "objects":[
+                        {
+                         "height":0,
+                         "id":512,
+                         "name":"",
+                         "point":true,
+                         "rotation":0,
+                         "type":"POWERUP_DRONE",
+                         "visible":true,
+                         "width":0,
+                         "x":1703.0303030303,
+                         "y":530.30303030303
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -2811,7 +2822,7 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":108,
+ "nextlayerid":110,
  "nextobjectid":513,
  "orientation":"orthogonal",
  "renderorder":"right-down",
