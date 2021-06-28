@@ -18,6 +18,8 @@ void ShieldSystem::update(GameEngine& gameContext) const {
 			//updateShieldCollider(gameContext, shield); 
 			setInObjectivePosition(gameContext, shield);
 			checkEnemyHits(gameContext, shield);
+
+			gameContext.entityMan->addEntityToUpdate(shield.id);
 		}
 	}
 }

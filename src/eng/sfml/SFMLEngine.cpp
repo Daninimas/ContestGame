@@ -28,7 +28,7 @@ SFMLEngine::SFMLEngine(int width, int height, bool fullscreen) {
 	FPSTextNode.setCharacterSize(20);
 	renderFPS = false;
 	renderCollidables = false;
-	//renderSensors = false;
+	renderSensors = false;
 }
 SFMLEngine::~SFMLEngine() {
 	device.get()->close();

@@ -59,11 +59,11 @@ void AnimationManager::setIdleAnimation(GameEngine& gameContext, const Animation
 
 	case GameObjectType::MAINMENU:
 		animationComp.animation = animation;
-		animationComp.framerate = 0.5f;
+		animationComp.framerate = 2.f;
 		animationComp.repeat = true;
 		animationComp.startSpriteRect = { 0, 800, 0, 600 };
-		animationComp.totalFrames = 10;
-		animationComp.nextFrameAdvance = 600;
+		animationComp.totalFrames = 16;
+		animationComp.nextFrameAdvance = 800;
 		break;
 
 	case GameObjectType::EXPLOSION:

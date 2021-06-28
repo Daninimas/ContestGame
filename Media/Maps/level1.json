@@ -283,6 +283,29 @@
                  "visible":true,
                  "x":0,
                  "y":0
+                }, 
+                {
+                 "draworder":"topdown",
+                 "id":107,
+                 "name":"POWERUP",
+                 "objects":[
+                        {
+                         "height":0,
+                         "id":510,
+                         "name":"",
+                         "point":true,
+                         "rotation":0,
+                         "type":"POWERUP_SHIELD",
+                         "visible":true,
+                         "width":0,
+                         "x":900,
+                         "y":484
+                        }],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
+                 "x":0,
+                 "y":0
                 }],
          "name":"Phase1",
          "opacity":1,
@@ -2799,8 +2822,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":107,
- "nextobjectid":509,
+ "nextlayerid":108,
+ "nextobjectid":511,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.0",

@@ -1152,7 +1152,7 @@ int EntityManager::createShield(GameEngine& gameContext, Vector2 position, float
 
     SituationComponent& situation = createComponent<SituationComponent>(entityId);
     ColliderComponent& colliderComp = createComponent<ColliderComponent>(entityId);
-    //RenderComponent& renderComp = createComponent<RenderComponent>(entityId);
+    RenderComponent& renderComp = createComponent<RenderComponent>(entityId);
     HealthComponent& healthComp = createComponent<HealthComponent>(entityId);
     MeleeWeaponComponent& meleeComp = createComponent<MeleeWeaponComponent>(entityId);
     ShieldComponent& shieldComp = createComponent<ShieldComponent>(entityId);
@@ -1160,6 +1160,10 @@ int EntityManager::createShield(GameEngine& gameContext, Vector2 position, float
     //######### DATA ########//
     situation.position = position;
     situation.rotation = r;
+
+    renderComp.sprite = "./Media/Images/shield.png";
+    renderComp.spriteRect = { 0, 56, 0, 110 };
+
 
     colliderComp.type = ColliderType::NO_SOLID;
 
@@ -1184,9 +1188,12 @@ int EntityManager::createShield(GameEngine& gameContext, Vector2 position, float
         break;
     }
 
-
     //######### CREATE ########//
     entityMap.emplace(std::piecewise_construct, std::forward_as_tuple(entityId), std::forward_as_tuple(EntityType::SHIELD, goType));
+
+    //######### RENDER ########//
+    gameContext.getWindowFacadeRef().createEntity(gameContext, entityId);
+
     return entityId;
 }
 
@@ -1730,7 +1737,7 @@ int EntityManager::createMenu(GameEngine& gameContext, GameObjectType menuType) 
 
         Utils::setControlKeyToMenuOptions(gameContext, menuComp);
 
-        renderComp.sprite = "Media/Images/Menu/NewHighscore.png";
+        renderComp.sprite = "Media/Images/Menu/ControlsKeyboard.png";
     }
     else if (menuType == GameObjectType::CONTROLS_JOYSTICK) {
         menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 220.f), 0.f, MenuOptions::SET_KEY_ATTACK));
@@ -1764,12 +1771,12 @@ int EntityManager::createMenu(GameEngine& gameContext, GameObjectType menuType) 
 
         menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 530.f), 0.f, MenuOptions::MAIN_MENU));
 
-        renderComp.sprite = "Media/Images/Menu/NewHighscore.png";
+        renderComp.sprite = "Media/Images/Menu/highScores.png";
     }
     else if( menuType == GameObjectType::GAME_OVER_MENU){
         menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(280.f, 400.f), 0.f, MenuOptions::NEW_BEST_SCORE));
 
-        renderComp.sprite = "Media/Images/Menu/NewHighscore.png";
+        renderComp.sprite = "Media/Images/Menu/GameOver.png";
     }
     else if(menuType == GameObjectType::NEW_BEST_SCORE) {
         menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(180.f, 306.f), 0.f, MenuOptions::SELECT_CHARACTER));
@@ -1785,7 +1792,7 @@ int EntityManager::createMenu(GameEngine& gameContext, GameObjectType menuType) 
         menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(30.f, 440.f), 0.f, MenuOptions::TO_BEST_SCORES, "BEST SCORES"));
         menuComp.optionsId.emplace_back(createMenuOption(gameContext, Vector2(30.f, 530.f), 0.f, MenuOptions::EXIT));
 
-        renderComp.sprite = "Media/Images/Menu/MainMenu.png";
+        renderComp.sprite = "Media/PNG/Animacion menu/animationTilesheet.png";
 
         // Animation
         AnimationComponent& animComp = createComponent<AnimationComponent>(entityId);
